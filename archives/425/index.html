@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn">
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw">
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		<link rel="pingback" href="/xmlrpc.php">
+		
+	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>LVGL库入门教程06-动画 - 冰封残烛的个人小站</title>
+	<link rel="canonical" href="/archives/425">
+	<meta property="og:locale" content="zh_CN">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="LVGL库入门教程06-动画 - 冰封残烛的个人小站">
+	<meta property="og:description" content="动画可以说是 LVGL 中的特色之一，不过在使用动画&#046;&#046;&#046;">
+	<meta property="og:url" content="/archives/425">
+	<meta property="og:site_name" content="冰封残烛的个人小站">
+	<meta property="article:published_time" content="2022-06-28T12:35:06+00:00">
+	<meta property="article:modified_time" content="2022-12-12T12:06:21+00:00">
+	<meta property="og:image" content="http://localhost:8000/wordpress/wp-content/uploads/2022/06/LVGL库入门教程06-动画.jpg">
+	<meta property="og:image:width" content="1920">
+	<meta property="og:image:height" content="1080">
+	<meta property="og:image:type" content="image/jpeg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:label1" content="作者">
+	<meta name="twitter:data1" content="Hello">
+	<meta name="twitter:label2" content="预计阅读时间">
+	<meta name="twitter:data2" content="4分">
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle's Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/archives/425#primaryimage",
+	            "url": "/wp-content/uploads/2022/06/LVGL库入门教程06-动画.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/06/LVGL库入门教程06-动画.jpg",
+	            "width": 1920,
+	            "height": 1080
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/archives/425#webpage",
+	            "url": "/archives/425",
+	            "name": "LVGL库入门教程06-动画 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/archives/425#primaryimage"
+	            },
+	            "datePublished": "2022-06-28T12:35:06+00:00",
+	            "dateModified": "2022-12-12T12:06:21+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "breadcrumb": {
+	                "@id": "/archives/425#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/archives/425"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/archives/425#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "LVGL库入门教程06-动画"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                ""
+	            ],
+	            "url": "/archives/author/hello"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed">
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; 评论Feed" href="/comments/feed">
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; LVGL库入门教程06-动画评论Feed" href="/archives/425/feed">
+<script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.2.1"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){p.clearRect(0,0,i.width,i.height),p.fillText(e,0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(t,0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(p&&p.fillText)switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s("🏳️‍⚧️","🏳️​⚧️")?!1:!s("🇺🇳","🇺​🇳")&&!s("🏴󠁧󠁢󠁥󠁮󠁧󠁿","🏴​󠁧​󠁢​󠁥​󠁮​󠁧​󠁿");case"emoji":return!s("🫱🏻‍🫲🏿","🫱🏻​🫲🏿")}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+<style type="text/css">img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}</style>
+	<link rel="stylesheet" id="wp-block-library-css" href="/wp-includes/css/dist/block-library/style.min.css?ver=6.2.1" type="text/css" media="all">
+<link rel="stylesheet" id="classic-theme-styles-css" href="/wp-includes/css/classic-themes.min.css?ver=6.2.1" type="text/css" media="all">
+<style id="global-styles-inline-css" type="text/css">body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}</style>
+<link rel="stylesheet" id="orbisius_ct_instorm_child_theme_parent_style-css" href="/wp-content/themes/instorm/style.css?ver=1.1.1" type="text/css" media="all">
+<link rel="stylesheet" id="orbisius_ct_instorm_child_theme_parent_style_child_style-css" href="/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1" type="text/css" media="all">
+<link rel="stylesheet" id="instorm-style-css" href="/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1" type="text/css" media="all">
+<style id="instorm-style-inline-css" type="text/css">body { font-family: "Roboto", Arial, sans-serif; }</style>
+<link rel="stylesheet" id="instorm-responsive-css" href="/wp-content/themes/instorm/responsive.css?ver=6.2.1" type="text/css" media="all">
+<link rel="stylesheet" id="instorm-font-awesome-css" href="/wp-content/themes/instorm/fonts/all.min.css?ver=6.2.1" type="text/css" media="all">
+<link rel="stylesheet" id="roboto-css" href="//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.2.1" type="text/css" media="all">
+<link rel="stylesheet" id="elementor-frontend-css" href="/wp-content/plugins/elementor/assets/css/frontend-lite.min.css?ver=3.6.5" type="text/css" media="all">
+<link rel="stylesheet" id="eael-general-css" href="/wp-content/plugins/essential-addons-for-elementor-lite/assets/front-end/css/view/general.min.css?ver=5.6.2" type="text/css" media="all">
+<script type="text/javascript" src="/wp-includes/js/jquery/jquery.min.js?ver=3.6.4" id="jquery-core-js"></script>
+<script type="text/javascript" src="/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.0" id="jquery-migrate-js"></script>
+<script type="text/javascript" src="/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1" id="alx-ext-sharrre-js"></script>
+<script type="text/javascript" src="/wp-content/themes/instorm/js/slick.min.js?ver=6.2.1" id="instorm-slick-js"></script>
+<link rel="https://api.w.org/" href="/wp-json/">
+<link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/425">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="/wp-includes/wlwmanifest.xml">
+<meta name="generator" content="WordPress 6.2.1">
+<link rel="shortlink" href="/?p=425">
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=%2Farchives%2F425">
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=%2Farchives%2F425#038;format=xml">
+<!-- start Simple Custom CSS and JS -->
+<style type="text/css">/* Add your CSS code here.
+
+For example:
+.example {
+    color: red;
+}
+
+For brushing up on your CSS knowledge, check out http://www.w3schools.com/css/css_syntax.asp
+
+End of comment */</style>
+<!-- end Simple Custom CSS and JS -->
+<link rel="stylesheet" href="http://blog.frozencandles.fun/static/article/css/text.css">
+<link rel="stylesheet" href="http://localhost:8000/wp-content/static/css/text.css">
+<link rel="stylesheet" href="http://localhost:8000/wp-content/static/css/note.css">
+<link rel="stylesheet" href="http://localhost:8000/wp-content/static/css/markdown@arduino.css">
+<!-- Analytics by WP Statistics v14.0.2 - https://wp-statistics.com/ -->
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32">
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192">
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg">
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg">
+<style id="kirki-inline-styles"></style>
+<style id="wpforms-css-vars-root">:root {
+					--wpforms-field-border-radius: 3px;
+--wpforms-field-background-color: #ffffff;
+--wpforms-field-border-color: rgba( 0, 0, 0, 0.25 );
+--wpforms-field-text-color: rgba( 0, 0, 0, 0.7 );
+--wpforms-label-color: rgba( 0, 0, 0, 0.85 );
+--wpforms-label-sublabel-color: rgba( 0, 0, 0, 0.55 );
+--wpforms-label-error-color: #d63637;
+--wpforms-button-border-radius: 3px;
+--wpforms-button-background-color: #066aab;
+--wpforms-button-text-color: #ffffff;
+--wpforms-field-size-input-height: 43px;
+--wpforms-field-size-input-spacing: 15px;
+--wpforms-field-size-font-size: 16px;
+--wpforms-field-size-line-height: 19px;
+--wpforms-field-size-padding-h: 14px;
+--wpforms-field-size-checkbox-size: 16px;
+--wpforms-field-size-sublabel-spacing: 5px;
+--wpforms-field-size-icon-size: 1;
+--wpforms-label-size-font-size: 16px;
+--wpforms-label-size-line-height: 19px;
+--wpforms-label-size-sublabel-font-size: 14px;
+--wpforms-label-size-sublabel-line-height: 17px;
+--wpforms-button-size-font-size: 17px;
+--wpforms-button-size-height: 41px;
+--wpforms-button-size-padding-h: 15px;
+--wpforms-button-size-margin-top: 10px;
+
+				}</style>	</head>
+
+<body class="post-template-default single single-post postid-425 single-format-standard col-2cr full-width skew-active logged-out elementor-default elementor-kit-193">
+
+<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-dark-grayscale"><fecolormatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></fecolormatrix><fecomponenttransfer color-interpolation-filters="sRGB"><fefuncr type="table" tablevalues="0 0.49803921568627"></fefuncr><fefuncg type="table" tablevalues="0 0.49803921568627"></fefuncg><fefuncb type="table" tablevalues="0 0.49803921568627"></fefuncb><fefunca type="table" tablevalues="1 1"></fefunca></fecomponenttransfer><fecomposite in2="SourceGraphic" operator="in"></fecomposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-grayscale"><fecolormatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></fecolormatrix><fecomponenttransfer color-interpolation-filters="sRGB"><fefuncr type="table" tablevalues="0 1"></fefuncr><fefuncg type="table" tablevalues="0 1"></fefuncg><fefuncb type="table" tablevalues="0 1"></fefuncb><fefunca type="table" tablevalues="1 1"></fefunca></fecomponenttransfer><fecomposite in2="SourceGraphic" operator="in"></fecomposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-purple-yellow"><fecolormatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></fecolormatrix><fecomponenttransfer color-interpolation-filters="sRGB"><fefuncr type="table" tablevalues="0.54901960784314 0.98823529411765"></fefuncr><fefuncg type="table" tablevalues="0 1"></fefuncg><fefuncb type="table" tablevalues="0.71764705882353 0.25490196078431"></fefuncb><fefunca type="table" tablevalues="1 1"></fefunca></fecomponenttransfer><fecomposite in2="SourceGraphic" operator="in"></fecomposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-blue-red"><fecolormatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></fecolormatrix><fecomponenttransfer color-interpolation-filters="sRGB"><fefuncr type="table" tablevalues="0 1"></fefuncr><fefuncg type="table" tablevalues="0 0.27843137254902"></fefuncg><fefuncb type="table" tablevalues="0.5921568627451 0.27843137254902"></fefuncb><fefunca type="table" tablevalues="1 1"></fefunca></fecomponenttransfer><fecomposite in2="SourceGraphic" operator="in"></fecomposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-midnight"><fecolormatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></fecolormatrix><fecomponenttransfer color-interpolation-filters="sRGB"><fefuncr type="table" tablevalues="0 0"></fefuncr><fefuncg type="table" tablevalues="0 0.64705882352941"></fefuncg><fefuncb type="table" tablevalues="0 1"></fefuncb><fefunca type="table" tablevalues="1 1"></fefunca></fecomponenttransfer><fecomposite in2="SourceGraphic" operator="in"></fecomposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-magenta-yellow"><fecolormatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></fecolormatrix><fecomponenttransfer color-interpolation-filters="sRGB"><fefuncr type="table" tablevalues="0.78039215686275 1"></fefuncr><fefuncg type="table" tablevalues="0 0.94901960784314"></fefuncg><fefuncb type="table" tablevalues="0.35294117647059 0.47058823529412"></fefuncb><fefunca type="table" tablevalues="1 1"></fefunca></fecomponenttransfer><fecomposite in2="SourceGraphic" operator="in"></fecomposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-purple-green"><fecolormatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></fecolormatrix><fecomponenttransfer color-interpolation-filters="sRGB"><fefuncr type="table" tablevalues="0.65098039215686 0.40392156862745"></fefuncr><fefuncg type="table" tablevalues="0 1"></fefuncg><fefuncb type="table" tablevalues="0.44705882352941 0.4"></fefuncb><fefunca type="table" tablevalues="1 1"></fefunca></fecomponenttransfer><fecomposite in2="SourceGraphic" operator="in"></fecomposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-blue-orange"><fecolormatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></fecolormatrix><fecomponenttransfer color-interpolation-filters="sRGB"><fefuncr type="table" tablevalues="0.098039215686275 1"></fefuncr><fefuncg type="table" tablevalues="0 0.66274509803922"></fefuncg><fefuncb type="table" tablevalues="0.84705882352941 0.41960784313725"></fefuncb><fefunca type="table" tablevalues="1 1"></fefunca></fecomponenttransfer><fecomposite in2="SourceGraphic" operator="in"></fecomposite></filter></defs></svg>
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewbox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewbox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="http://localhost:8000/wordpress/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter">
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon">
+<span></span><span></span><span></span>
+</div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu">
+<li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200">
+<span class="menu-item-wrapper has-arrow"><a href="/all">文章汇总</a><button onclick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewbox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline">时光轴</a></span></li>
+<li id="menu-item-73" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><span class="menu-item-wrapper"><a href="/reading">阅读计划</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div>
+<!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="http://localhost:8000/wordpress/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter">
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github"></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-425" class="post-425 post type-post status-publish format-standard has-post-thumbnail hentry category-25 tag-lvgl">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">LVGL库入门教程06-动画</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/archives/category/%e7%94%b5%e5%ad%90%e7%94%b5%e8%b7%af%e4%b8%8e%e5%b5%8c%e5%85%a5%e5%bc%8f/%e5%8d%95%e7%89%87%e6%9c%ba%e4%b8%8e%e5%ba%94%e7%94%a8" rel="category tag">单片机与应用</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年6月28日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/archives/author/hello" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+											<a class="post-comments" href="/archives/425#respond"><span>0</span></a>
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+<p>动画可以说是 LVGL 中的特色之一，不过在使用动画前，请确保单片机具有足够的性能来维持足够的帧率。</p>
+<h2>transition：过渡动画</h2>
+<p>当一个控件的状态发生改变时，可以让样式也发生变化以提醒用户。通过过渡动画(transition)可以让样式的改变更自然。例如，按钮在点击时，以及开关在切换时，都具有一小段的过渡动画。</p>
+<p>过渡动画使用 <code>lv_style_transition_dsc_t</code> 结构描述。为了要设置过渡动画，需要提供以下信息：</p>
+<ul>
+<li>哪些属性需要过渡</li>
+<li>过渡前的延时</li>
+<li>过渡持续的时间</li>
+<li>过渡动画（以回调函数的形式提供）</li>
+</ul>
+<p>这些信息和结构成员是一一对应的。除了直接给结构成员赋值外，也可以使用以下初始化函数一次性设置：</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lv_style_transition_dsc_init</span><span class="hljs-params">(
+                <span class="hljs-keyword">lv_style_transition_dsc_t</span>* tr, 
+                <span class="hljs-keyword">const</span> <span class="hljs-keyword">lv_style_prop_t</span> props[],
+                <span class="hljs-keyword">lv_anim_path_cb_t</span> path_cb, 
+                <span class="hljs-keyword">uint32_t</span> time, 
+                <span class="hljs-keyword">uint32_t</span> delay, 
+                <span class="hljs-keyword">void</span>* user_data)</span></span>;
+</pre></div>
+<p>第一个参数需要提供被初始化的过渡动画结构，第二个参数数组和字符串一样需要以 <code>0</code> 结尾。例如，假设需要实现这样一个过渡效果：点击时背景颜色发生改变并拉长，那么相应的初始化过程为：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_style_transition_dsc_t</span> trans;
+<span class="hljs-keyword">static</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">lv_style_prop_t</span> trans_props[] = {
+    LV_STYLE_WIDTH, LV_STYLE_HEIGHT, LV_STYLE_BG_COLOR, <span class="hljs-number">0</span>,
+};
+<span class="hljs-built_in">lv_style_transition_dsc_init</span>(&amp;trans, trans_props, 
+            lv_anim_path_ease_in_out, <span class="hljs-number">500</span>, <span class="hljs-number">0</span>, <span class="hljs-literal">NULL</span>);
+</pre></div>
+<p>这里使用的动画效果函数为 <code>lv_anim_path_ease_in_out()</code> ，这是一个内置的过渡效果，与之类似的过渡函数可以参考下表：</p>
+<table>
+<thead>
+<tr>
+<th>动画函数</th>
+<th>过渡效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lv_anim_path_linear</code></td>
+<td>等速过渡</td>
+</tr>
+<tr>
+<td><code>lv_anim_path_ease_in</code></td>
+<td>先慢后快的过渡</td>
+</tr>
+<tr>
+<td><code>lv_anim_path_ease_out</code></td>
+<td>先快后慢的过渡</td>
+</tr>
+<tr>
+<td><code>lv_anim_path_ease_in_out</code></td>
+<td>先慢、后快、结尾再变慢的过渡</td>
+</tr>
+<tr>
+<td><code>lv_anim_path_overshoot</code></td>
+<td>幅度会稍微过头一些再弹回的过渡</td>
+</tr>
+<tr>
+<td><code>lv_anim_path_bounce</code></td>
+<td>和上一个类似，不过会比较快地多弹几次</td>
+</tr>
+<tr>
+<td><code>lv_anim_path_step</code></td>
+<td>一步到位，和没动画的区别在于多了个延时</td>
+</tr>
+</tbody>
+</table>
+<p>过渡动画是控件样式的一部分，可以将初始化得到的过渡动画描述应用到样式上：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_style_t</span> style_trans;
+<span class="hljs-built_in">lv_style_init</span>(&amp;style_trans);
+<span class="hljs-built_in">lv_style_set_transition</span>(&amp;style_trans, &amp;trans);
+</pre></div>
+<p>过渡动画只有在两种样式切换时才会发生。例如，如果让以上样式应用在按下状态下：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_style_set_bg_color</span>(&amp;style_trans, <span class="hljs-built_in">lv_palette_main</span>(LV_PALETTE_RED));
+<span class="hljs-built_in">lv_style_set_width</span>(&amp;style_trans, <span class="hljs-number">150</span>);
+<span class="hljs-built_in">lv_style_set_height</span>(&amp;style_trans, <span class="hljs-number">60</span>);
+<span class="hljs-built_in">lv_obj_add_style</span>(obj, &amp;style_trans, LV_STATE_PRESSED);
+</pre></div>
+<p>那么只有在从其它状态变为按下时才会发生过渡：</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/06/lvgl-06-transition.gif" alt="image" width="240"></figure>
+<p>注意松开时样式是突然转变的。如果要给这部分也添加一个过渡效果，可以给默认状态下的控件添加一个包含过渡的样式。</p>
+<h2>animate：通用动画</h2>
+<p>过渡只有在状态改变时才会发生，而动画可以在任意时刻进行。除此之外，两者的区别还有：过渡只是样式的一部分，而动画和样式之间是独立的。</p>
+<p>实际上，过渡的底层也使用的是动画。</p>
+<h3>创建动画</h3>
+<p>为了创建动画，需要像样式一样声明一个动画类型并初始化：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">lv_anim_t</span> anim;
+<span class="hljs-built_in">lv_anim_init</span>(&amp;anim);
+</pre></div>
+<p>由于动画是立即执行的，因此可以使用自动变量存储。然后，需要明确该动画将作用于哪一个控件：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_anim_set_var</span>(&amp;anim, obj);
+</pre></div>
+<p>接下来，可以设置动画的各种轨迹，包括：</p>
+<ul>
+<li>动画需要改变什么属性</li>
+<li>这些属性改变的范围</li>
+<li>动画效果</li>
+<li>延时和持续时间</li>
+</ul>
+<p>动画的这些属性和过渡是类似的。例如，假设想做一个控件下落的动画，那么需要提供一个改变 y 坐标值的回调函数，这个函数可以直接使用 <code>lv_obj_set_y()</code> ，然后设定改变的始末值和运动轨迹，对应的代码为：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_anim_set_exec_cb</span>(&amp;anim, (<span class="hljs-keyword">lv_anim_exec_xcb_t</span>)lv_obj_set_y);
+<span class="hljs-built_in">lv_anim_set_values</span>(&amp;anim, <span class="hljs-number">-100</span>, <span class="hljs-number">100</span>);
+<span class="hljs-built_in">lv_anim_set_path_cb</span>(&amp;anim, lv_anim_path_bounce);
+<span class="hljs-built_in">lv_anim_set_time</span>(&amp;anim, <span class="hljs-number">1000</span>);
+<span class="hljs-built_in">lv_anim_set_delay</span>(&amp;anim, <span class="hljs-number">1000</span>);
+</pre></div>
+<p>然后，可以在必要的时候执行动画：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_anim_start</span>(&amp;anim);
+</pre></div>
+<p>效果为：</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/06/lvgl-06-animation-1.gif" alt="image" width="230"></figure>
+<blockquote>
+<p><strong>关于延迟渲染</strong></p>
+<p>之前说过，样式是延迟渲染的，因此样式变量需要使用 <code>static</code> 存储类型修饰符；而动画不是，动画从创建到执行是立即发生的。这也很好理解：样式在创建的过程中可能发生多次修改，因此需要确定最终的表现结果如何，再着手绘制，否则整个控件可能会重绘多次，占用大量无效的资源。</p>
+<p>这种特点可能会带来许多意想不到的问题。例如，假设在 <code>lv_anim_set_values()</code> 函数中去获取一个控件的位置、宽度等信息，由于它们都属于样式的一部分，此时还没有实际计算，因此得到的可能是默认值，造成动画始末效果偏离预期轨迹。</p>
+<p>要解决这个问题，要么手动设置具体的值，要么让动画等到实际渲染发生了再执行，例如将其作为事件回调函数中的一部分。</p>
+</blockquote>
+<h3>更复杂的动画</h3>
+<p>以上创建的动画是单次不重复的，LVGL 提供了许多函数，可以为动画设置更复杂的属性。</p>
+<p>这里介绍一个控件 bar ，它实质上就是没有 knob 部分的滑块，可以借用该控件来创建一个进度条(progress bar)动画。以下创建一个 bar 并将它的模式设定为 <code>LV_BAR_MODE_RANGE</code> ，这样就可以同时修改 indicator 两端的位置了：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">lv_obj_t</span>* bar = <span class="hljs-built_in">lv_bar_create</span>(<span class="hljs-built_in">lv_scr_act</span>());
+<span class="hljs-built_in">lv_bar_set_mode</span>(bar, LV_BAR_MODE_RANGE);
+</pre></div>
+<p>这里使用官方文档中提供的一个样式来使外观更好看，具体细节就无需解释了：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_style_t</span> style_bg;
+<span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_style_t</span> style_indic;
+<span class="hljs-built_in">lv_style_init</span>(&amp;style_bg);
+<span class="hljs-built_in">lv_style_set_border_color</span>(&amp;style_bg, <span class="hljs-built_in">lv_palette_main</span>(LV_PALETTE_BLUE));
+<span class="hljs-built_in">lv_style_set_border_width</span>(&amp;style_bg, <span class="hljs-number">2</span>);
+<span class="hljs-built_in">lv_style_set_pad_all</span>(&amp;style_bg, <span class="hljs-number">6</span>);
+<span class="hljs-built_in">lv_style_set_radius</span>(&amp;style_bg, <span class="hljs-number">6</span>);
+<span class="hljs-built_in">lv_style_set_anim_time</span>(&amp;style_bg, <span class="hljs-number">1000</span>);
+<span class="hljs-built_in">lv_style_init</span>(&amp;style_indic);
+<span class="hljs-built_in">lv_style_set_bg_opa</span>(&amp;style_indic, LV_OPA_COVER);
+<span class="hljs-built_in">lv_style_set_bg_color</span>(&amp;style_indic, <span class="hljs-built_in">lv_palette_main</span>(LV_PALETTE_BLUE));
+<span class="hljs-built_in">lv_style_set_radius</span>(&amp;style_indic, <span class="hljs-number">3</span>);
+<span class="hljs-built_in">lv_obj_remove_style_all</span>(bar);
+<span class="hljs-built_in">lv_obj_add_style</span>(bar, &amp;style_bg, <span class="hljs-number">0</span>);
+<span class="hljs-built_in">lv_obj_add_style</span>(bar, &amp;style_indic, LV_PART_INDICATOR);
+<span class="hljs-built_in">lv_obj_set_size</span>(bar, <span class="hljs-number">200</span>, <span class="hljs-number">20</span>);
+</pre></div>
+<p>然后就可以确定动画效果了。例如，这里期望的动画效果为：</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/06/lvgl-06-animation-2.gif" alt="image" width="250"></figure>
+<p>那么首先可以编写一个改变属性的回调函数，例如改变 indicator 的范围：</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">anim_progress_load</span><span class="hljs-params">(<span class="hljs-keyword">void</span>* obj, <span class="hljs-keyword">int32_t</span> v)</span> </span>{
+    <span class="hljs-built_in">lv_bar_set_start_value</span>(obj, v, LV_ANIM_ON);
+    <span class="hljs-built_in">lv_bar_set_value</span>(obj, <span class="hljs-number">20</span> + v, LV_ANIM_ON);
+}
+</pre></div>
+<p>这些值在 0~80 范围内等速改变，持续时间 1.5 秒，无延时，对应的代码为：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_anim_set_exec_cb</span>(&amp;anim, anim_progress_load);
+<span class="hljs-built_in">lv_anim_set_values</span>(&amp;anim, <span class="hljs-number">0</span>, <span class="hljs-number">80</span>);
+<span class="hljs-built_in">lv_anim_set_path_cb</span>(&amp;anim, lv_anim_path_linear);
+<span class="hljs-built_in">lv_anim_set_time</span>(&amp;anim, <span class="hljs-number">1500</span>);
+<span class="hljs-built_in">lv_anim_set_delay</span>(&amp;anim, <span class="hljs-number">0</span>);
+</pre></div>
+<p>然后这里为其添加一个倒退和重复效果，这样动画就能来回播放了：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_anim_set_playback_time</span>(&amp;anim, <span class="hljs-number">1500</span>);
+<span class="hljs-built_in">lv_anim_set_repeat_count</span>(&amp;anim, LV_ANIM_REPEAT_INFINITE);
+</pre></div>
+<p>实现的进度条动画就像以上 gif 展示的一样。除此之外，还可以修改更多动画的细节，例如：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>设置内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lv_anim_set_start_cb(anim, start_cb)</code></td>
+<td>在延时后、开始前执行一个函数</td>
+</tr>
+<tr>
+<td><code>lv_anim_set_playback_delay(anim, delay)</code></td>
+<td>设置动画倒退前的延时</td>
+</tr>
+<tr>
+<td><code>lv_anim_set_repeat_delay(anim, delay)</code></td>
+<td>设置动画重复前的延时</td>
+</tr>
+<tr>
+<td><code>lv_anim_set_early_apply(&amp;a, bool)</code></td>
+<td>是否将起始值应用到动画开始前，使动画执行时不会太突兀</td>
+</tr>
+</tbody>
+</table>
+<p>更多的细节可以参考官方文档。</p>
+<h3>组合动画效果</h3>
+<p>有时候需要同时播放较多动画，此时如果逐个播放的话，需要逐个为动画设计延时，不方便安排。此时，可以使用 LVGL 提供的时间线(timeline)统一安排各个动画。</p>
+<p>时间线的创建非常简单。首先，创建一系列动画，但先不调用 <code>lv_anim_start()</code> 让动画开始。</p>
+<p>其次，创建一个时间线并将各个动画添加到时间线的某一时刻处：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">lv_anim_timeline_t</span>* anim_timeline = <span class="hljs-built_in">lv_anim_timeline_create</span>();
+<span class="hljs-built_in">lv_anim_timeline_add</span>(anim_timeline, <span class="hljs-number">0</span>, &amp;anim_axis);
+<span class="hljs-built_in">lv_anim_timeline_add</span>(anim_timeline, <span class="hljs-number">100</span>, &amp;anim_obj_01);
+<span class="hljs-built_in">lv_anim_timeline_add</span>(anim_timeline, <span class="hljs-number">1100</span>, &amp;anim_obj_02);
+<span class="hljs-built_in">lv_anim_timeline_add</span>(anim_timeline, <span class="hljs-number">2100</span>, &amp;anim_obj_03);
+<span class="hljs-built_in">lv_anim_timeline_add</span>(anim_timeline, <span class="hljs-number">300</span>, &amp;anim_label_01);
+<span class="hljs-built_in">lv_anim_timeline_add</span>(anim_timeline, <span class="hljs-number">1300</span>, &amp;anim_label_02);
+<span class="hljs-built_in">lv_anim_timeline_add</span>(anim_timeline, <span class="hljs-number">2300</span>, &amp;anim_label_03);
+</pre></div>
+<p>使用时间线时，无需为动画设计延时，只需要关注动画会在什么时刻播放，延时便会自动计算。</p>
+<p>添加完毕后，再调用时间线的执行函数就可以了：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_anim_timeline_start</span>(anim_timeline);
+</pre></div>
+<p>这样就可以创建很复杂的组合动画效果了：</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/06/lvgl-06-timeline.gif" alt="image" width="230"></figure>
+<p>使用时间线可以方便管理所有动画，可以将时间线上包含的所有动画停播、倒放、跳转等。以下列出了一些常用的时间线控制函数：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lv_anim_timeline_stop(timeline)</code></td>
+<td>暂停播放当前的所有动画</td>
+</tr>
+<tr>
+<td><code>lv_anim_timeline_set_reverse(timeline, bool)</code></td>
+<td>设置接下来的播放方向</td>
+</tr>
+<tr>
+<td><code>lv_anim_timeline_set_progress(timeline, progress)</code></td>
+<td>跳转到播放进度</td>
+</tr>
+</tbody>
+</table>
+<p>如果需要倒放，在设置了播放方向后还需要调用 <code>lv_anim_timeline_start()</code> 重新播放，并且会从当前位置倒放。</p>
+<h2>scroll：滚动动画</h2>
+<h3>滚动的特点</h3>
+<p>滚动也是常见的一种动画效果。如果一个容器的尺寸不足以容纳它包含的控件，那么它就可以通过滚动来展示包含控件的所有部分。</p>
+<p>为了使一个控件是可滚动的，它需要拥有标志 <code>LV_OBJ_FLAG_SCROLLABLE</code> 。清除该标志可以隐藏子控件的溢出部分。</p>
+<p>滚动是可以冒泡的，如果一个控件已经滚动到底，再次对其尝试滚动将使滚动事件传播到父容器上。可以通过清除 <code>LV_OBJ_FLAG_SCROLL_CHAIN</code> 标志位去除这个性质。</p>
+<p>可以通过 <code>lv_obj_set_scroll_dir()</code> 限制滚动的方向。例如：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_obj_set_scroll_dir</span>(obj, LV_DIR_RIGHT);
+</pre></div>
+<p>那么就只能向右滚动到底，不能向左折回。</p>
+<p>还可以通过以下几个函数利用代码执行滚动：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_obj_scroll_to</span>(obj, x, y, anim_en);
+<span class="hljs-built_in">lv_obj_scroll_by</span>(obj, x, y, anim_en);
+<span class="hljs-built_in">lv_obj_scroll_to_view</span>(child, anim_en);
+</pre></div>
+<p>注意前两个函数的区别：前者是滚动到相应的位置，多次调用只有第一次实际有效；后者是模拟滚动的操作，实际滚动方向是相反的，并且多次调用效果可以叠加。除此之外，后者甚至可以滚动到超出子控件的范围之外。最后一个函数自动滚动到合适的位置，确保子控件可视。</p>
+<p>这几个函数都不受滚动方向的约束。它们都具有第三个参数，用于指定滚动时是否提供滚动动画。</p>
+<h3>滚动动画</h3>
+<p>滚动是有动画的，默认情况下，滚动动画的特点表现在以下几点：</p>
+<ul>
+<li>滚动是具有惯性的，意思是当输入设备停止交互时，控件还会继续向前滚动一小段距离。可以通过清除 <code>LV_OBJ_FLAG_SCROLL_MOMENTUM</code> 标志位取消这个特征</li>
+<li>滚动是具有弹性的，当滚动到底时，继续尝试滚动会使控件超出一定范围，松开后回弹。可以通过清除 <code>LV_OBJ_FLAG_SCROLL_ELASTIC</code> 标志位取消这个特征</li>
+<li>除此之外，以上介绍的两个代码实现滚动的函数，如果在第三个参数中应用滚动，那么会发生一小段 easy-out 的切换动画</li>
+</ul>
+<p>还可以设置一种特殊的滚动效果 snap ，它使滚动时可以自动对齐。为了启用这种效果，需要添加 <code>LV_OBJ_FLAG_SNAPPABLE</code> 标志位，然后设置对齐的方式：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_obj_set_scroll_snap_x</span>(cont, LV_SCROLL_SNAP_START);
+</pre></div>
+<p>这样便可以按开始位置对齐了：</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/06/lvgl-06-scroll-snap.gif" alt="image" width="220"></figure>
+<p>还可以配合 <code>LV_OBJ_FLAG_SCROLL_ONE</code> 标志位一次只滚过最多一个控件的位置。</p>
+<hr>
+<p>在滚动时，会触发 <code>LV_EVENT_SCROLL</code> 事件，可以通过在该事件回调函数中对包含的子控件做变换，实现更复杂的滚动效果。</p>
+<p>例如，以下在事件回调函数内，根据每个子控件当前位置的纵坐标对横坐标做一些变换：</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-title">scrool_widget_cb</span><span class="hljs-params">(<span class="hljs-keyword">lv_event_t</span>* e)</span> </span>{
+    <span class="hljs-keyword">lv_obj_t</span>* cont = <span class="hljs-built_in">lv_event_get_target</span>(e);
+    <span class="hljs-keyword">uint32_t</span> child_cnt = <span class="hljs-built_in">lv_obj_get_child_cnt</span>(cont);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">uint8_t</span> i = <span class="hljs-number">0</span>; i &lt; child_cnt; i++) {
+        <span class="hljs-keyword">lv_obj_t</span>* child = <span class="hljs-built_in">lv_obj_get_child</span>(cont, i);
+        <span class="hljs-built_in">lv_obj_set_style_translate_x</span>(child, child-&gt;coords.y1 * <span class="hljs-number">0.5</span> - <span class="hljs-number">60</span>, <span class="hljs-number">0</span>);
+    }
+}
+</pre></div>
+<p>然后让每次滚动时都做以上变换：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_obj_add_event_cb</span>(cont, scrool_widget_cb, LV_EVENT_SCROLL, <span class="hljs-literal">NULL</span>);
+</pre></div>
+<p>这样就能实现斜方向的滚动效果了：</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/06/lvgl-06-scroll-slope.gif" alt="image" width="210"></figure>
+<p>这里由于仅在事件中才修改按钮的水平位置，因此一开始控件的摆放不是倾斜的。要解决这个问题，可以添加以下代码：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_obj_scroll_to_view</span>(<span class="hljs-built_in">lv_obj_get_child</span>(cont, <span class="hljs-number">0</span>), LV_ANIM_OFF);
+<span class="hljs-built_in">lv_event_send</span>(cont, LV_EVENT_SCROLL, <span class="hljs-literal">NULL</span>);
+</pre></div>
+<p>前者使各个控件的坐标被计算，后者手动触发事件回调函数，利用计算出的坐标执行位置变换。</p>
+<p>LVGL 的官方文档还给出了一个示例，可以实现类似圆形的旋转滚动，效果非常不错，不过涉及的计算较多，感兴趣的可以自行阅读官方文档。</p>
+<h3>滚动条</h3>
+<p>如果一个控件可以发生滚动，那么它就具有滚动条(scrollbar)。可以通过 <code>lv_obj_set_scrollbar_mode()</code> 函数修改滚动条的模式。例如，使用 <code>LV_SCROLLBAR_MODE_OFF</code> 模式可以使滚动条完全消失，就像上一张 gif 显示的那样。</p>
+<p>滚动条是一个控件的 <code>LV_PART_SCROLLBAR</code> 部分，可以通过选择器给滚动条加上不同的样式。</p>
+<h2>参考资料/延伸阅读</h2>
+<p><a href="https://docs.lvgl.io/master/overview/animation.html">https://docs.lvgl.io/master/overview/animation.html</a></p>
+<p><a href="https://docs.lvgl.io/master/overview/scroll.html">https://docs.lvgl.io/master/overview/scroll.html</a></p>
+												<div class="clear"></div>				
+					</div>
+<!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+					<p class="post-tags"><span>Tags:</span> <a href="/archives/tag/lvgl" rel="tag">LVGL</a></p>					
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/archives/717">
+											<img width="520" height="293" src="/wp-content/uploads/2022/08/数据结构06-优先队列堆-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/08/数据结构06-优先队列堆-520x293.jpg 520w, /wp-content/uploads/2022/08/数据结构06-优先队列堆-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px">																								</a>
+			</div>
+<!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/archives/717" rel="bookmark">数据结构06-优先队列(堆)</a>
+				</h4>
+<!--/.post-title-->
+			
+			</div>
+<!--/.related-inner-->
+
+		</article>
+	</li>
+<!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/archives/842">
+											<img width="520" height="293" src="/wp-content/uploads/2022/11/XPath简单入门-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/11/XPath简单入门-520x293.jpg 520w, /wp-content/uploads/2022/11/XPath简单入门-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px">																								</a>
+			</div>
+<!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/archives/842" rel="bookmark">XPath简单入门</a>
+				</h4>
+<!--/.post-title-->
+			
+			</div>
+<!--/.related-inner-->
+
+		</article>
+	</li>
+<!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/archives/653">
+											<img width="520" height="293" src="/wp-content/uploads/2022/08/数据结构05-散列-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/08/数据结构05-散列-520x293.jpg 520w, /wp-content/uploads/2022/08/数据结构05-散列-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px">																								</a>
+			</div>
+<!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/archives/653" rel="bookmark">数据结构05-散列</a>
+				</h4>
+<!--/.post-title-->
+			
+			</div>
+<!--/.related-inner-->
+
+		</article>
+	</li>
+<!--/.related-->
+		
+</ul>
+<!--/.post-related-->
+
+					
+					
+					
+<div id="comments" class="themeform">
+	
+	
+					<!-- comments open, no comments -->
+			
+		
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">发表回复 <small><a rel="nofollow" id="cancel-comment-reply-link" href="/archives/425#respond" style="display:none;">取消回复</a></small>
+</h3>
+<form action="http://localhost:8000/wordpress/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+<p class="comment-notes"><span id="email-notes">您的电子邮箱地址不会被公开。</span> <span class="required-field-message">必填项已用<span class="required">*</span>标注</span></p>
+<p class="comment-form-comment"><label for="comment">评论 <span class="required">*</span></label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p>
+<p class="comment-form-author"><label for="author">显示名称 <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" autocomplete="name" required="required"></p>
+<p class="comment-form-email"><label for="email">电子邮箱地址 <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" maxlength="100" aria-describedby="email-notes" autocomplete="email" required="required"></p>
+<p class="comment-form-url"><label for="url">网站地址</label> <input id="url" name="url" type="text" value="" size="30" maxlength="200" autocomplete="url"></p>
+<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"> <label for="wp-comment-cookies-consent">在此浏览器中保存我的显示名称、邮箱地址和网站地址，以便下次评论时使用。</label></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="发表评论"> <input type="hidden" name="comment_post_ID" value="425" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p>
+<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="ca3ed6b05f"></p>
+<p style="display: none !important;"><label>&#916;<textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="ak_js" value="5"><script>document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );</script></p>
+</form>	</div>
+<!-- #respond -->
+	
+</div>
+<!--/#comments-->					
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div>
+<!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/archives/442" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>Python面向对象编程01-类的定义与使用</span></a></li>
+		<li class="previous"><a href="/archives/419" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>计算机网络03-域名系统：DNS</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/archives/1116">积分表(上)</a>
+											<span class="post-date">2023年5月17日</span>
+									</li>
+											<li>
+					<a href="/archives/1094">微积分-泰勒展开式</a>
+											<span class="post-date">2023年5月4日</span>
+									</li>
+											<li>
+					<a href="/archives/1081">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/archives/1059">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/archives/1054">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/archives/1048">Python数据分析-pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/archives/1041">Python数据分析-pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+					</ul>
+
+		</div>
+<div id="categories-4" class="widget widget_categories">
+<h3 class="group"><span>分类</span></h3>
+			<ul>
+					<li class="cat-item cat-item-58">
+<a href="/archives/category/%e6%95%b0%e5%ad%a6">数学</a> (2)
+<ul class="children">
+	<li class="cat-item cat-item-59">
+<a href="/archives/category/%e6%95%b0%e5%ad%a6/%e5%be%ae%e7%a7%af%e5%88%86">微积分</a> (2)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49">
+<a href="/archives/category/%e6%95%b0%e6%8d%ae%e7%a7%91%e5%ad%a6">数据科学</a> (17)
+<ul class="children">
+	<li class="cat-item cat-item-50">
+<a href="/archives/category/%e6%95%b0%e6%8d%ae%e7%a7%91%e5%ad%a6/%e6%95%b0%e6%8d%ae%e5%a4%84%e7%90%86">数据处理</a> (9)
+</li>
+	<li class="cat-item cat-item-54">
+<a href="/archives/category/%e6%95%b0%e6%8d%ae%e7%a7%91%e5%ad%a6/%e6%9c%ba%e5%99%a8%e5%ad%a6%e4%b9%a0">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24">
+<a href="/archives/category/%e7%94%b5%e5%ad%90%e7%94%b5%e8%b7%af%e4%b8%8e%e5%b5%8c%e5%85%a5%e5%bc%8f">电子电路与嵌入式</a> (11)
+<ul class="children">
+	<li class="cat-item cat-item-25">
+<a href="/archives/category/%e7%94%b5%e5%ad%90%e7%94%b5%e8%b7%af%e4%b8%8e%e5%b5%8c%e5%85%a5%e5%bc%8f/%e5%8d%95%e7%89%87%e6%9c%ba%e4%b8%8e%e5%ba%94%e7%94%a8">单片机与应用</a> (11)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-6">
+<a href="/archives/category/%e7%ab%99%e7%82%b9">站点</a> (1)
+</li>
+	<li class="cat-item cat-item-13">
+<a href="/archives/category/%e7%bc%96%e7%a8%8b%e8%af%ad%e8%a8%80">编程语言</a> (20)
+<ul class="children">
+	<li class="cat-item cat-item-14">
+<a href="/archives/category/%e7%bc%96%e7%a8%8b%e8%af%ad%e8%a8%80/python">Python</a> (18)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7">
+<a href="/archives/category/%e8%ae%a1%e7%ae%97%e6%9c%ba%e4%b8%8e%e7%bc%96%e7%a8%8b">计算机与编程</a> (16)
+<ul class="children">
+	<li class="cat-item cat-item-8">
+<a href="/archives/category/%e8%ae%a1%e7%ae%97%e6%9c%ba%e4%b8%8e%e7%bc%96%e7%a8%8b/%e5%89%8d%e7%ab%af">前端</a> (1)
+</li>
+	<li class="cat-item cat-item-43">
+<a href="/archives/category/%e8%ae%a1%e7%ae%97%e6%9c%ba%e4%b8%8e%e7%bc%96%e7%a8%8b/%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84%e4%b8%8e%e7%ae%97%e6%b3%95">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32">
+<a href="/archives/category/%e8%ae%a1%e7%ae%97%e6%9c%ba%e4%b8%8e%e7%bc%96%e7%a8%8b/%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%bd%91%e7%bb%9c">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div>
+<div id="calendar-3" class="widget widget_calendar">
+<h3 class="group"><span>活动日历</span></h3>
+<div id="calendar_wrap" class="calendar_wrap">
+<table id="wp-calendar" class="wp-calendar-table">
+	<caption>2023年 5月</caption>
+	<thead>
+	<tr>
+		<th scope="col" title="星期一">一</th>
+		<th scope="col" title="星期二">二</th>
+		<th scope="col" title="星期三">三</th>
+		<th scope="col" title="星期四">四</th>
+		<th scope="col" title="星期五">五</th>
+		<th scope="col" title="星期六">六</th>
+		<th scope="col" title="星期日">日</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td><a href="/archives/date/2023/05/04" aria-label="2023年5月4日 发布的文章">4</a></td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+	</tr>
+	<tr>
+		<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+<td>12</td>
+<td>13</td>
+<td>14</td>
+	</tr>
+	<tr>
+		<td>15</td>
+<td>16</td>
+<td><a href="/archives/date/2023/05/17" aria-label="2023年5月17日 发布的文章">17</a></td>
+<td>18</td>
+<td id="today">19</td>
+<td>20</td>
+<td>21</td>
+	</tr>
+	<tr>
+		<td>22</td>
+<td>23</td>
+<td>24</td>
+<td>25</td>
+<td>26</td>
+<td>27</td>
+<td>28</td>
+	</tr>
+	<tr>
+		<td>29</td>
+<td>30</td>
+<td>31</td>
+		<td class="pad" colspan="4">&nbsp;</td>
+	</tr>
+	</tbody>
+	</table>
+<nav aria-label="上个月及下个月" class="wp-calendar-nav">
+		<span class="wp-calendar-nav-prev"><a href="/archives/date/2023/04">&laquo; 4月</a></span>
+		<span class="pad">&nbsp;</span>
+		<span class="wp-calendar-nav-next">&nbsp;</span>
+	</nav>
+</div>
+</div>
+<div id="recent-comments-2" class="widget widget_recent_comments">
+<h3 class="group"><span>近期评论</span></h3>
+<ul id="recentcomments">
+<li class="recentcomments">
+<span class="comment-author-link"><a class="url" rel="ugc">Hello</a></span>发表在《<a href="/archives/316#comment-39">LVGL库入门教程02-基本控件与交互</a>》</li>
+<li class="recentcomments">
+<span class="comment-author-link">Reader</span>发表在《<a href="/archives/316#comment-38">LVGL库入门教程02-基本控件与交互</a>》</li>
+</ul>
+</div>
+<div id="archives-2" class="widget widget_archive">
+<h3 class="group"><span>归档</span></h3>
+			<ul>
+					<li><a href="/archives/date/2023/05">2023年5月</a></li>
+	<li><a href="/archives/date/2023/04">2023年4月</a></li>
+	<li><a href="/archives/date/2023/03">2023年3月</a></li>
+	<li><a href="/archives/date/2023/02">2023年2月</a></li>
+	<li><a href="/archives/date/2023/01">2023年1月</a></li>
+	<li><a href="/archives/date/2022/12">2022年12月</a></li>
+	<li><a href="/archives/date/2022/11">2022年11月</a></li>
+	<li><a href="/archives/date/2022/10">2022年10月</a></li>
+	<li><a href="/archives/date/2022/09">2022年9月</a></li>
+	<li><a href="/archives/date/2022/08">2022年8月</a></li>
+	<li><a href="/archives/date/2022/07">2022年7月</a></li>
+	<li><a href="/archives/date/2022/06">2022年6月</a></li>
+	<li><a href="/archives/date/2022/05">2022年5月</a></li>
+	<li><a href="/archives/date/2022/03">2022年3月</a></li>
+	<li><a href="/archives/date/2022/02">2022年2月</a></li>
+			</ul>
+
+			</div>
+<div id="custom_html-5" class="widget_text widget widget_custom_html">
+<h3 class="group"><span>音频</span></h3>
+<div class="textwidget custom-html-widget"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=34690640&auto=0&height=66"></iframe></div>
+</div>
+<div id="tag_cloud-3" class="widget widget_tag_cloud">
+<h3 class="group"><span>标签</span></h3>
+<div class="tagcloud">
+<a href="/archives/tag/codemirror" class="tag-cloud-link tag-link-12 tag-link-position-1" style="font-size: 8pt;" aria-label="codemirror (1个项目)">codemirror<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/django" class="tag-cloud-link tag-link-9 tag-link-position-2" style="font-size: 8pt;" aria-label="Django (1个项目)">Django<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/dns" class="tag-cloud-link tag-link-34 tag-link-position-3" style="font-size: 8pt;" aria-label="DNS (1个项目)">DNS<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/esp32" class="tag-cloud-link tag-link-47 tag-link-position-4" style="font-size: 10.135593220339pt;" aria-label="ESP32 (2个项目)">ESP32<span class="tag-link-count"> (2)</span></a>
+<a href="/archives/tag/esp8266" class="tag-cloud-link tag-link-39 tag-link-position-5" style="font-size: 10.135593220339pt;" aria-label="ESP8266 (2个项目)">ESP8266<span class="tag-link-count"> (2)</span></a>
+<a href="/archives/tag/ip" class="tag-cloud-link tag-link-42 tag-link-position-6" style="font-size: 8pt;" aria-label="IP (1个项目)">IP<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/ipython" class="tag-cloud-link tag-link-53 tag-link-position-7" style="font-size: 8pt;" aria-label="IPython (1个项目)">IPython<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/javascript" class="tag-cloud-link tag-link-10 tag-link-position-8" style="font-size: 8pt;" aria-label="javascript (1个项目)">javascript<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/jupyter" class="tag-cloud-link tag-link-52 tag-link-position-9" style="font-size: 8pt;" aria-label="Jupyter (1个项目)">Jupyter<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/lvgl" class="tag-cloud-link tag-link-29 tag-link-position-10" style="font-size: 14.525423728814pt;" aria-label="LVGL (6个项目)">LVGL<span class="tag-link-count"> (6)</span></a>
+<a href="/archives/tag/micropython" class="tag-cloud-link tag-link-48 tag-link-position-11" style="font-size: 10.135593220339pt;" aria-label="MicroPython (2个项目)">MicroPython<span class="tag-link-count"> (2)</span></a>
+<a href="/archives/tag/oled" class="tag-cloud-link tag-link-28 tag-link-position-12" style="font-size: 8pt;" aria-label="OLED (1个项目)">OLED<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/pandas" class="tag-cloud-link tag-link-57 tag-link-position-13" style="font-size: 11.559322033898pt;" aria-label="pandas (3个项目)">pandas<span class="tag-link-count"> (3)</span></a>
+<a href="/archives/tag/python" class="tag-cloud-link tag-link-15 tag-link-position-14" style="font-size: 22pt;" aria-label="Python (29个项目)">Python<span class="tag-link-count"> (29)</span></a>
+<a href="/archives/tag/python%e6%a0%87%e5%87%86%e5%ba%93" class="tag-cloud-link tag-link-30 tag-link-position-15" style="font-size: 12.745762711864pt;" aria-label="Python标准库 (4个项目)">Python标准库<span class="tag-link-count"> (4)</span></a>
+<a href="/archives/tag/smtp" class="tag-cloud-link tag-link-36 tag-link-position-16" style="font-size: 8pt;" aria-label="SMTP (1个项目)">SMTP<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/stm32" class="tag-cloud-link tag-link-26 tag-link-position-17" style="font-size: 12.745762711864pt;" aria-label="STM32 (4个项目)">STM32<span class="tag-link-count"> (4)</span></a>
+<a href="/archives/tag/tcp" class="tag-cloud-link tag-link-41 tag-link-position-18" style="font-size: 8pt;" aria-label="TCP (1个项目)">TCP<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/u8g2" class="tag-cloud-link tag-link-27 tag-link-position-19" style="font-size: 8pt;" aria-label="u8g2 (1个项目)">u8g2<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/udp" class="tag-cloud-link tag-link-38 tag-link-position-20" style="font-size: 8pt;" aria-label="UDP (1个项目)">UDP<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/xpath" class="tag-cloud-link tag-link-56 tag-link-position-21" style="font-size: 8pt;" aria-label="XPath (1个项目)">XPath<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/%e5%87%bd%e6%95%b0%e5%bc%8f%e7%bc%96%e7%a8%8b" class="tag-cloud-link tag-link-23 tag-link-position-22" style="font-size: 16.779661016949pt;" aria-label="函数式编程 (10个项目)">函数式编程<span class="tag-link-count"> (10)</span></a>
+<a href="/archives/tag/%e5%b5%8c%e5%85%a5%e5%bc%8f" class="tag-cloud-link tag-link-46 tag-link-position-23" style="font-size: 8pt;" aria-label="嵌入式 (1个项目)">嵌入式<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/%e6%95%b0%e6%8d%ae%e5%a4%84%e7%90%86" class="tag-cloud-link tag-link-51 tag-link-position-24" style="font-size: 16.305084745763pt;" aria-label="数据处理 (9个项目)">数据处理<span class="tag-link-count"> (9)</span></a>
+<a href="/archives/tag/%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84" class="tag-cloud-link tag-link-44 tag-link-position-25" style="font-size: 15.71186440678pt;" aria-label="数据结构 (8个项目)">数据结构<span class="tag-link-count"> (8)</span></a>
+<a href="/archives/tag/%e6%97%a5%e6%9c%9f%e6%97%b6%e9%97%b4" class="tag-cloud-link tag-link-21 tag-link-position-26" style="font-size: 8pt;" aria-label="日期时间 (1个项目)">日期时间<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/%e6%9c%ba%e5%99%a8%e5%ad%a6%e4%b9%a0" class="tag-cloud-link tag-link-55 tag-link-position-27" style="font-size: 14.525423728814pt;" aria-label="机器学习 (6个项目)">机器学习<span class="tag-link-count"> (6)</span></a>
+<a href="/archives/tag/%e6%ad%a3%e5%88%99%e8%a1%a8%e8%be%be%e5%bc%8f" class="tag-cloud-link tag-link-18 tag-link-position-28" style="font-size: 10.135593220339pt;" aria-label="正则表达式 (2个项目)">正则表达式<span class="tag-link-count"> (2)</span></a>
+<a href="/archives/tag/%e7%89%a9%e8%81%94%e7%bd%91" class="tag-cloud-link tag-link-40 tag-link-position-29" style="font-size: 10.135593220339pt;" aria-label="物联网 (2个项目)">物联网<span class="tag-link-count"> (2)</span></a>
+<a href="/archives/tag/%e7%ae%97%e6%b3%95" class="tag-cloud-link tag-link-45 tag-link-position-30" style="font-size: 11.559322033898pt;" aria-label="算法 (3个项目)">算法<span class="tag-link-count"> (3)</span></a>
+<a href="/archives/tag/%e7%bc%96%e7%a0%81" class="tag-cloud-link tag-link-31 tag-link-position-31" style="font-size: 8pt;" aria-label="编码 (1个项目)">编码<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/%e7%bc%96%e7%a8%8b%e8%af%ad%e8%a8%80" class="tag-cloud-link tag-link-16 tag-link-position-32" style="font-size: 10.135593220339pt;" aria-label="编程语言 (2个项目)">编程语言<span class="tag-link-count"> (2)</span></a>
+<a href="/archives/tag/%e7%bc%96%e8%be%91%e5%99%a8" class="tag-cloud-link tag-link-11 tag-link-position-33" style="font-size: 8pt;" aria-label="编辑器 (1个项目)">编辑器<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%bd%91%e7%bb%9c" class="tag-cloud-link tag-link-33 tag-link-position-34" style="font-size: 14.525423728814pt;" aria-label="计算机网络 (6个项目)">计算机网络<span class="tag-link-count"> (6)</span></a>
+<a href="/archives/tag/%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e7%bc%96%e7%a8%8b" class="tag-cloud-link tag-link-37 tag-link-position-35" style="font-size: 12.745762711864pt;" aria-label="面向对象编程 (4个项目)">面向对象编程<span class="tag-link-count"> (4)</span></a>
+</div>
+</div>
+<div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="http://localhost:8000/wordpress/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter">
+	</div>
+</form></div>
+<div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div>
+<!--/.sidebar-content-->
+		
+	</div>
+<!--/.sidebar-->
+	
+
+				</div>
+<!--/.main-inner-->
+			</div>
+<!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div>
+<!--/.wrap-content-inner-->
+	</div>
+<!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div>
+<!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github"></i></a></li></ul>										
+				</div>
+							
+			</div>
+<!--/.pad-->
+
+		</div>
+<!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div>
+<!--/#wrapper-->
+
+<script type="text/javascript" src="/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.2.1" id="instorm-fitvids-js"></script>
+<script type="text/javascript" src="/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.2.1" id="instorm-jq-sticky-anything-js"></script>
+<script type="text/javascript" src="/wp-content/themes/instorm/js/scripts.js?ver=6.2.1" id="instorm-scripts-js"></script>
+<script type="text/javascript" src="/wp-includes/js/comment-reply.min.js?ver=6.2.1" id="comment-reply-js"></script>
+<script type="text/javascript" src="/wp-content/themes/instorm/js/nav.js?ver=1644596969" id="instorm-nav-script-js"></script>
+<script type="text/javascript" id="eael-general-js-extra">
+/* <![CDATA[ */
+var localize = {"ajaxurl":"\/wp-admin\/admin-ajax.php","nonce":"73cefbbfaa","i18n":{"added":"Added ","compare":"Compare","loading":"Loading..."},"eael_translate_text":{"required_text":"is a required field","invalid_text":"Invalid","billing_text":"Billing","shipping_text":"Shipping","fg_mfp_counter_text":"of"},"page_permalink":"\/archives\/425","cart_redirectition":"","cart_page_url":"","el_breakpoints":{"mobile":{"label":"手机","value":767,"default_value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"手机扩展","value":880,"default_value":880,"direction":"max","is_enabled":false},"tablet":{"label":"平板","value":1024,"default_value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"平板扩展","value":1200,"default_value":1200,"direction":"max","is_enabled":false},"laptop":{"label":"笔记本电脑","value":1366,"default_value":1366,"direction":"max","is_enabled":false},"widescreen":{"label":"全宽屏","value":2400,"default_value":2400,"direction":"min","is_enabled":false}}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="/wp-content/plugins/essential-addons-for-elementor-lite/assets/front-end/js/view/general.min.js?ver=5.6.2" id="eael-general-js"></script>
+<script defer type="text/javascript" src="/wp-content/plugins/akismet/_inc/akismet-frontend.js?ver=1682051871" id="akismet-frontend-js"></script>
+	<script>/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

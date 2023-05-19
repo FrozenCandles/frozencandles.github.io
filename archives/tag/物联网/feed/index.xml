@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>物联网归档 - 冰封残烛的个人小站</title>
+	<atom:link href="http://localhost/wordpress/archives/tag/%E7%89%A9%E8%81%94%E7%BD%91/feed?simply_static_page=3782" rel="self" type="application/rss+xml" />
+	<link></link>
+	<description>FrozenCandle&#039;s Personal Site</description>
+	<lastBuildDate>Mon, 12 Dec 2022 11:56:10 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2.1</generator>
+
+<image>
+	<url>/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg</url>
+	<title>物联网归档 - 冰封残烛的个人小站</title>
+	<link></link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>STM32与物联网02-网络数据收发</title>
+		<link>/archives/519</link>
+					<comments>/archives/519#respond</comments>
+		
+		<dc:creator><![CDATA[Hello]]></dc:creator>
+		<pubDate>Fri, 15 Jul 2022 02:13:17 +0000</pubDate>
+				<category><![CDATA[单片机与应用]]></category>
+		<category><![CDATA[ESP8266]]></category>
+		<category><![CDATA[STM32]]></category>
+		<category><![CDATA[物联网]]></category>
+		<guid isPermaLink="false">/?p=519</guid>
+
+					<description><![CDATA[<p>在上一节中，介绍了 ESP8266 的使用方法。不过&#46;&#46;&#46;</p>
+<p><a rel="nofollow" href="/archives/519">STM32与物联网02-网络数据收发</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>在<a href="/archives/496">上一节</a>中，介绍了 ESP8266 的使用方法。不过上一节中都是通过串口调试工具手动发送信息的方式来操作 ESP8266 ，这肯定不能用于实际开发。因此，本节介绍如何编写合适的程序来和 ESP8266 交互，从而收发并解析网络数据。</p>
+<h2>TCP服务器</h2>
+<p>在 TCP 服务器下，可以使用移动设备主动连接 ESP8266 提供的 WiFi 。如果编写正确的程序，那么可以使用移动设备控制 ESP8266 。</p>
+<h3>建立TCP服务器</h3>
+<p>从上一节的介绍可以了解到，程序和 ESP8266 的交互主要是通过发送 AT 指令完成的，因此程序中首要的任务就是编写合适的程序向 ESP8266 发送指令。</p>
+<p>不过在发送指令后，可能还需要判断指令是否被成功接收。一般来说，ESP8266 执行失败时可能返回各种信息，但在成功执行指令后都会返回 OK 。发送指令可以通过以下函数完成：</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">uint8_t</span> <span class="hljs-title">ESP8266_SendCmd</span><span class="hljs-params">(<span class="hljs-keyword">char</span>* cmd, <span class="hljs-keyword">uint8_t</span> timeout)</span> </span>{
+    ESP8266_Buffer.Length = <span class="hljs-number">0</span>;
+    <span class="hljs-built_in">memset</span>(ESP8266_Buffer.Body, <span class="hljs-number">0</span>, USART_RX_BUF_SIZE);
+    <span class="hljs-built_in">USART_printf</span>(USART3, <span class="hljs-string">"%s\r\n"</span>, cmd);
+    <span class="hljs-keyword">while</span> (timeout--) {
+        <span class="hljs-built_in">delay_ms</span>(<span class="hljs-number">100</span>);
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strstr</span>(ESP8266_Buffer.Body, <span class="hljs-string">"OK"</span>))
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+}
+</pre></div>
+<p>由于不同指令处理的时间也不一致，因此在程序中引入了一个倒计时器，在倒计时结束前不断检查接收到的信息中是否包含 <code>"OK"</code> ，如果是则结束当前倒计时，这样可以确保在指令执行完后就可以立即退出延时，提高程序执行效率。</p>
+<p>程序中与 ESP8266 交互基本是都采用这种方式。例如，在程序下载后若希望使 ESP8266 也重启，则可以通过拉低 RST 引脚复位 ESP8266 ，复位后会接到 <code>"ready"</code> 信息，则可以编写以下函数：</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">uint8_t</span> <span class="hljs-title">ESP8266_Reset</span><span class="hljs-params">(<span class="hljs-keyword">uint16_t</span> timeout)</span> </span>{
+    <span class="hljs-built_in">ESP8266_RST</span>(RESET);
+    <span class="hljs-built_in">delay_ms</span>(<span class="hljs-number">500</span>);
+    <span class="hljs-built_in">ESP8266_RST</span>(SET);
+    <span class="hljs-keyword">while</span> (timeout--) {
+        <span class="hljs-built_in">delay_ms</span>(<span class="hljs-number">100</span>);
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strstr</span>(ESP8266_Buffer.Body, <span class="hljs-string">"ready"</span>))
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+}
+</pre></div>
+<p>如果某条指令有其余回复的情况，只需要参照以上略做修改即可。</p>
+<p>有了以上函数后，就可以编写代码，逐条发送指令了。这里将 ESP8266 设置为 AP 模式，使其变成一个 WiFi 热点，使计算机可以直接连接上 ESP8266 并收发信息，因此首先需要发送 <code>AT+CWMODE=2</code> 指令：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">if</span> (<span class="hljs-built_in">ESP8266_Reset</span>(<span class="hljs-number">50</span>))
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+<span class="hljs-keyword">if</span> (<span class="hljs-built_in">ESP8266_SendCmd</span>(<span class="hljs-string">"AT+CWMODE=2"</span>, <span class="hljs-number">50</span>))
+    <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+</pre></div>
+<p>然后可以使用 <code>AT+CWSAP="&lt;ssid&gt;","&lt;password&gt;",&lt;chl&gt;,&lt;enc&gt;</code> 设置 WiFi 参数，一般来说通道号和加密类型都设置为 4 即可：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">char</span> cmd[<span class="hljs-number">64</span>];
+<span class="hljs-built_in">sprintf</span>(cmd, <span class="hljs-string">"AT+CWSAP=\"%s\",\"%s\",%d,%d\r\n"</span>, SSID, PASSWORD, <span class="hljs-number">4</span>, WPA_WPA2_PSK);
+<span class="hljs-keyword">if</span> (<span class="hljs-built_in">ESP8266_SendCmd</span>(cmd, <span class="hljs-number">50</span>))
+    <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>;
+</pre></div>
+<p>可以将这些参数设置为宏定义以方便修改。接下来的许多设置都和以上代码类似，可以以此为模板替换为其它命令，因此不再展示代码，仅介绍主要命令。</p>
+<p>如果要设置固定的局域网 IP ，可以通过 <code>AT+CIPAP="&lt;ip&gt;"</code> 完成。</p>
+<p>接下来可以通过指令 <code>AT+CIPMODE=&lt;mode&gt;</code> 设置 ESP8266 的传输模式。该命令可以设置 ESP8266 的两种传输模式：</p>
+<ol start="0">
+<li>普通传输模式(Normal Transmission Mode)，该模式下，用户可以通过 AT 指令发送 TCP 数据，同时 ESP8266 也会将接收到的数据以 +IPD 等指令的形式返回</li>
+<li>透传接收模式(Passthrough Receiving Mode)：该模式下，ESP8266 无法发送 TCP 数据，同时 ESP8266 会将接收到的数据以原始的形式返回给 STM32</li>
+</ol>
+<p>透传接收模式一般用于开启透传模式。关于透传模式会在后续介绍。</p>
+<p>ESP8266 支持多路连接，即一个 TCP 端口可以建立多个连接。通过 <code>AT+CIPMUX=1</code> 可以启用多连接，每个连接到端口上的客户端通过 <code>&lt;id&gt;</code> 标识，连接的数量最后为 5 个，因此 <code>&lt;id&gt;</code> 的取值范围为 0~4 。</p>
+<p>多连接必须在所有连接都断开且服务器也关闭时才可以设置，并且只有普通传输模式下才能设置为多连接。</p>
+<p>接下来，可以通过 <code>AT+CIPSERVER=1,8266</code> 开启一个位于端口 8266 上的 TCP 服务器。根据以上步骤，TCP 服务器便建立完成，可以准备接收客户端发来的数据了。</p>
+<h3>数据获取与解析</h3>
+<p>在建立了 TCP 服务器后，ESP8266 便会等待客户端的连接。</p>
+<p>TCP 客户端在接到客户端的数据时，会以 <code>+IPD,&lt;id&gt;,&lt;len&gt;:&lt;data&gt;</code> 的指令形式转交数据给 STM32 。由于以上开启了多路连接，因此接收的数据中多了一个字段 <code>&lt;id&gt;</code> 。</p>
+<p>因此判断是否有数据收到也很简单，只需要判断接收缓冲区内是否有子串 <code>"+IPD"</code> 即可：</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">ESP8266_HasData</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">strstr</span>(ESP8266_Buffer.Body,<span class="hljs-string">"+IPD"</span>) 
+        &amp;&amp; <span class="hljs-built_in">strstr</span>(ESP8266_Buffer.Body,<span class="hljs-string">":"</span>);
+}
+</pre></div>
+<p>以上同时查找子串 <code>":"</code> 确保数据有效性。根据以上格式，拆解该字符串并截取有效数据如下：</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">int8_t</span> <span class="hljs-title">ESP8266_MuxGetData</span><span class="hljs-params">(<span class="hljs-keyword">char</span>* data, <span class="hljs-keyword">uint16_t</span>* len)</span> </span>{
+    <span class="hljs-keyword">uint8_t</span> id;
+    <span class="hljs-keyword">char</span>* data_ptr = <span class="hljs-built_in">strstr</span>(ESP8266_Buffer.Body, <span class="hljs-string">"+IPD"</span>);
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">sscanf</span>(data_ptr,<span class="hljs-string">"+IPD,%d,%d"</span>, &amp;id, len) == <span class="hljs-number">2</span>) {
+        <span class="hljs-built_in">memcpy</span>(data, <span class="hljs-built_in">strstr</span>(data_ptr, <span class="hljs-string">":"</span>) + <span class="hljs-number">1</span>, *len);
+        data[*len] = <span class="hljs-string">'\0'</span>;
+        ESP8266_Buffer.Length = <span class="hljs-number">0</span>;
+        <span class="hljs-built_in">memset</span>(ESP8266_Buffer.Body, <span class="hljs-number">0</span>, USART_RX_BUF_SIZE);
+        <span class="hljs-keyword">return</span> id;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+}
+</pre></div>
+<p>以上函数略显复杂。之所以要这么复杂，主要有以下两个方面的原因：<code>scanf()</code> 类函数使用字符串转换说明时，它在读入数据时如果遇到一个空格或回车符，会丢弃后面的所有数据，这显然不能用于截取用户数据。</p>
+<p>另外上一节说过工程中接收串口传来的不定长数据的方式是使用串口空闲中断，然而空闲中断接收的一包数据并不都是符合期望的一包数据：在接收到 TCP 连接时，ESP8266 会发送 <code>&lt;id&gt;,CONNECT</code> 表示连接已建立，如果此时建立的连接接收到任何数据，ESP8266 也会立即转发该数据。因此如果连接建立后马上收到数据，那么两次发送的数据时间相隔过短，可能会没有引起空闲中断而被 STM32 认为是同一包数据。在连接取消时，也有同样的问题。</p>
+<p>不过发送数据的函数可能更加复杂：</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">uint8_t</span> <span class="hljs-title">ESP8266_MuxSendData</span><span class="hljs-params">(<span class="hljs-keyword">uint8_t</span>* data, <span class="hljs-keyword">uint16_t</span> length, <span class="hljs-keyword">uint8_t</span> id, <span class="hljs-keyword">uint8_t</span> timeout)</span> </span>{
+    <span class="hljs-built_in">ESP8266_ClearBuffer</span>();
+    <span class="hljs-built_in">USART_printf</span>(USART3, <span class="hljs-string">"AT+CIPSEND=%d,%d\r\n"</span>, id, length);
+    <span class="hljs-keyword">while</span> (timeout--) {
+        <span class="hljs-built_in">delay_ms</span>(<span class="hljs-number">10</span>);
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strstr</span>(ESP8266_Buffer.Body, <span class="hljs-string">"&gt;"</span>))
+            <span class="hljs-keyword">break</span>;
+    }
+    <span class="hljs-keyword">if</span> (timeout &gt; <span class="hljs-number">0</span>) {
+        <span class="hljs-built_in">ESP8266_ClearBuffer</span>();
+        <span class="hljs-built_in">USART_SendBytes</span>(USART3, data, length);
+        <span class="hljs-keyword">while</span> (timeout--) {
+            <span class="hljs-built_in">delay_ms</span>(<span class="hljs-number">10</span>);
+            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strstr</span>(ESP8266_Buffer.Body, <span class="hljs-string">"SEND OK"</span>)) {
+                <span class="hljs-built_in">ESP8266_ClearBuffer</span>();
+                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+            }
+            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strstr</span>(ESP8266_Buffer.Body, <span class="hljs-string">"link is not valid"</span>)) {
+                <span class="hljs-built_in">ESP8266_ClearBuffer</span>();
+                <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+            }
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>;
+    }
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+}
+</pre></div>
+<p>上一节介绍了发送数据主要使用 <code>AT+CIPSEND</code> 指令完成（多连接下需要一个额外的字段指示发送给的 <code>&lt;id&gt;</code> ），如果可以发送 ESP8266 会返回 <code>"&gt; "</code> 作提示。如果发送成功，ESP8266 会返回 <code>"SEND OK"</code> ，通过返回提示就可以知道发送状态。</p>
+<p>有了以上函数以后，就可以着手编写主程序了。主程序的处理逻辑非常简单，在建立 TCP 服务器后，便不断判断是否有数据到达，如果有那么便读取数据并回复信息：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">char</span> ipd_data[<span class="hljs-number">512</span>];
+<span class="hljs-keyword">int8_t</span> ipd_id;
+<span class="hljs-keyword">uint16_t</span> ipd_len;
+<span class="hljs-keyword">while</span> (<span class="hljs-built_in">ESP8266_CreateTcpServer</span>())
+    <span class="hljs-built_in">delay_ms</span>(<span class="hljs-number">200</span>);
+<span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">ESP8266_HasData</span>()) {
+        ipd_id = <span class="hljs-built_in">ESP8266_MuxGetData</span>(ipd_data, &amp;ipd_len);
+        <span class="hljs-built_in">ESP8266_MuxSendData</span>(<span class="hljs-string">"Acknowledge"</span>, <span class="hljs-number">12</span>, ipd_id, <span class="hljs-number">30</span>);
+    }
+    <span class="hljs-built_in">delay_ms</span>(<span class="hljs-number">500</span>);
+}
+</pre></div>
+<p>可以将得到的数据显示在串口中。在计算机客户端，编写如下套接字程序：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">import</span> socket, time
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client.connect((<span class="hljs-string">'192.168.10.1'</span>, <span class="hljs-number">8266</span>))
+client.send(time.ctime().encode())
+message = client.recv(<span class="hljs-number">1024</span>)
+<span class="hljs-built_in">print</span>(message.decode())
+client.close()
+</pre></div>
+<p>将计算机连接到 ESP8266 创建的 WiFi 上并运行该套接字程序，即可观察到实验现象。如果为程序编写合适的用户界面并在 STM32 上进一步解析数据，那么便可以实现手机端控制 STM32 了。</p>
+<h2>TCP客户端与HTTP请求</h2>
+<p>TCP 客户端的建立与 TCP 服务器类似，这里先使 ESP8266 连接到路由器，借助路由器访问公网上的服务器。</p>
+<p>前几步操作与 TCP 客户端类似：在复位 ESP8266 后，首先通过指令 <code>AT+CWMODE=1</code> 设置 Sta 模式，然后通过 <code>AT+CWJAP="&lt;ssid&gt;","&lt;password&gt;"</code> 连接到路由器中。由于客户端无需多个连接，可以使用 <code>AT+CIPMUX=0</code> 关闭多连接。</p>
+<p>本次采用透传模式(Passthrough Mode)来收发数据。透传模式是一种特殊的收发数据模式，在透传模式下，用户不能发送 AT 指令，发送的任何数据都会作为原始的数据发送到传输对端；从传输对端收到的数据也会不经由任何 <code>+IPD</code> 封装而原封不动地返回给 STM32 。</p>
+<p>使用 <code>AT+CIPMODE=1</code> 可以设置传输模式为透传模式。通过 <code>AT+CIPSTART</code> 连接上服务器后，直接执行 <code>AT+CIPSEND</code> ，待 ESP8266 返回 <code>"&gt;"</code> 后就进入了透传模式。透传模式下，每包数据以 20ms 间隔区分，每包最大 2048 字节，发送和接收数据都不需要封装成指令，方便处理。</p>
+<p>正常退出透传模式的唯一方式就是单独发送一包发送指令 <code>+++</code> 。</p>
+<p>根据以上原理，可以使用 STM32 发送相应指令，连接到服务器后进入透传模式，并准备发送相应的数据。其代码和上文服务端类似，例如：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">if</span> (<span class="hljs-built_in">ESP8266_Reset</span>(<span class="hljs-number">50</span>))
+    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>);
+<span class="hljs-keyword">if</span> (<span class="hljs-built_in">ESP8266_SendCmd</span>(<span class="hljs-string">"AT+CWMODE=1"</span>, <span class="hljs-number">20</span>))
+    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>);
+<span class="hljs-keyword">if</span> (<span class="hljs-built_in">ESP8266_SendCmd</span>(<span class="hljs-string">"AT+CWJAP=\"TP_LINK\",\"abc123456\""</span>, <span class="hljs-number">100</span>))
+    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>);
+<span class="hljs-comment">// ... and so on</span>
+</pre></div>
+<p>当然，考虑到一些指令执行成功时不总是返回 <code>OK</code> ，并且为了使程序逻辑更清晰，可以将一些指令封装成函数。例如，以下函数根据地址（可以是 IP 地址或域名，DNS 解析将自动完成）和端口号，连接到特定的 TCP 服务器中并进入透传模式：</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">uint8_t</span> <span class="hljs-title">ESP8266_ConnectServer</span><span class="hljs-params">(<span class="hljs-keyword">char</span>* address, <span class="hljs-keyword">uint16_t</span> port, <span class="hljs-keyword">uint8_t</span> timeout)</span> </span>{
+    <span class="hljs-built_in">ESP8266_ClearBuffer</span>();
+    <span class="hljs-built_in">USART_printf</span>(USART3, <span class="hljs-string">"AT+CIPSTART=\"TCP\",\"%s\",%d\r\n"</span>, address, port);
+    <span class="hljs-keyword">while</span> (timeout--) {
+        <span class="hljs-built_in">delay_ms</span>(<span class="hljs-number">100</span>);
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strstr</span>(ESP8266_Buffer.Body, <span class="hljs-string">"CONNECT"</span>)) {
+            <span class="hljs-built_in">ESP8266_ClearBuffer</span>();
+            <span class="hljs-built_in">USART_printf</span>(USART3, <span class="hljs-string">"AT+CIPSEND\r\n"</span>);
+            <span class="hljs-keyword">while</span> (timeout--) {
+                <span class="hljs-built_in">delay_ms</span>(<span class="hljs-number">100</span>);
+                <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strstr</span>(ESP8266_Buffer.Body, <span class="hljs-string">"\r\nOK\r\n\r\n&gt;"</span>))
+                    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+            }
+            <span class="hljs-keyword">return</span> <span class="hljs-number">4</span>;
+        }
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strstr</span>(ESP8266_Buffer.Body, <span class="hljs-string">"CLOSED"</span>))
+            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strstr</span>(ESP8266_Buffer.Body, <span class="hljs-string">"ALREADY CONNECTED"</span>))
+            <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>;
+}
+</pre></div>
+<p>可以仿照该函数将其它指令封装成具有抽象功能的对应函数。</p>
+<p>在本示例中，在使用 TCP 连接到远程服务器的 80 端口的基础上，手动构造合适的 HTTP 请求并发送：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) {
+    <span class="hljs-built_in">USART_SendString</span>(USART3, <span class="hljs-string">"GET /api/temperature?time=now HTTP/1.1\r\n"</span>
+                            <span class="hljs-string">"Connection: keep-alive\r\n"</span>
+                            <span class="hljs-string">"Host: 192.168.1.105:80\r\n\r\n"</span>);
+    <span class="hljs-built_in">delay_s</span>(<span class="hljs-number">5</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s"</span>, ESP8266_Buffer.Body);
+}
+</pre></div>
+<p>这里 5 秒钟便查询一次数据。如果间隔过长，连接可能断开，那么可以先主动断开连接，等需要查询时再发起 TCP 连接。</p>
+<p>通过 HTTP 服务器提供的合适接口，ESP8266 便可以从互联网中获取到非常广泛的数据。在测试用的服务器中，该接口返回一个 json 响应并被转发到 STM32 中，串口调试工具中显示的原始数据如下：</p>
+
+<div class="codeblock code-console">HTTP/1.1 200 OK
+Date: Wed, 13 Jul 2022 10:57:48 GMT
+Server: WSGIServer/0.2 CPython/3.9.1
+Content-Type: application/json
+X-Frame-Options: DENY
+Content-Length: 93
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+
+{"temperature": {"high": 37.6, "low": 28.1, "now": 36.7}, "humidity": "50%", "wind": "11mph"}
+</div>
+<p>通过解析请求头 <code>Content-Length</code> 就可以获取数据的长度，然后查找子串 <code>"{"</code> 的位置便可以提取出接口返回的 json 数据，并可以使用 cJSON 等第三方库解析其中的数据。互联网中存在许多类似的接口，只需要构造合适的请求头，便可以抓取很多有用的信息，不过这需要有一定的抓包或爬虫的基础。</p>
+<p>通过路由器可以接入互联网，在 TCP 服务的基础上，构造出合适的 HTTP 等应用层协议的封装，便可以采集互联网中的各种数据，或者向服务器报告自身传感器的数据，由此真正实现物联网的基础。</p>
+<p>例如，可以向 HTTP 服务器提供的接口发送 POST 请求，将传感器数据作为参数发送给服务器，服务器解析 POST 请求并更新数据库，然后便可以显示在前端上，这样便可以在任何地点查看 STM32 的状态了。不过由于其实现涉及到的知识点过于广泛，无论是环境的配置还是程序的编写都不是一篇文章能完整介绍的，这里便不再涉及。</p>
+<p>一个比较有趣的实现是利用 SMTP 发送电子邮件，可以阅读<a href="/archives/403#email">这篇文章</a>了解 SMTP 应用层协议的原理与基本报文格式，文章中附带了 Python 套接字程序实现，它和 AT 指令的思路具有一定相似性，移植到 STM32 的主要难点是使用 base64 编码完成身份验证，有兴趣的读者可以尝试自行实现。</p>
+<h2>参考资料/延伸阅读</h2>
+<p><a href="https://docs.espressif.com/projects/esp-at/en/release-v2.2.0.0_esp8266/AT_Command_Set/TCP-IP_AT_Commands.html">https://docs.espressif.com/projects/esp-at/en/release-v2.2.0.0_esp8266/AT_Command_Set/TCP-IP_AT_Commands.html</a><br>TCP/IP 相关 AT 指令集的官方文档。<!-- 讲道理使用 AT 指令真的该读读文档，我 google 时发现很多关于 ESP8266 使用的介绍都是错误的。 --></p>
+<p><a rel="nofollow" href="/archives/519">STM32与物联网02-网络数据收发</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/archives/519/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>STM32与物联网01-ESP8266基本操作</title>
+		<link>/archives/496</link>
+					<comments>/archives/496#respond</comments>
+		
+		<dc:creator><![CDATA[Hello]]></dc:creator>
+		<pubDate>Mon, 11 Jul 2022 13:47:08 +0000</pubDate>
+				<category><![CDATA[单片机与应用]]></category>
+		<category><![CDATA[ESP8266]]></category>
+		<category><![CDATA[STM32]]></category>
+		<category><![CDATA[物联网]]></category>
+		<guid isPermaLink="false">/?p=496</guid>
+
+					<description><![CDATA[<p>ESP8266物联网简介 ESP8266简介 ESP&#46;&#46;&#46;</p>
+<p><a rel="nofollow" href="/archives/496">STM32与物联网01-ESP8266基本操作</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<h2>ESP8266物联网简介</h2>
+
+<h3>ESP8266简介</h3>
+
+<p>ESP8266 是上海乐鑫公司开发的一款具有 WiFi 功能的控制芯片，它带有完整的 TCP/IP 协议栈，因此可以用作物联网开发。</p>
+
+<p>ESP8266 本身也是一个性能不错的 32 位微控制器，完全可以作为普通的 MCU 使用。然而，考虑到 ESP8266 作为 MCU 时需要一整套开发环境，且 ESP8266 的外设并不算丰富，因此这里仅将其作为一个普通外围器件使用，通过 STM32 等 MCU 控制它并接收 ESP8266 收到的网络数据。</p>
+
+<p>在作为外围模块使用时，ESP8266 主要通过串口收发命令和数据，因此任意可以使用串口并设置波特率的 MCU 理论上都可以操作 ESP8266 实现物联网功能，包括但不限于 51 单片机、AVR 、STM32 和树莓派。</p>
+
+<p>这里选用 ESP-01 作为 WiFi 模块，其外观为：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/esp8266-appearance.png" alt="" width="220">
+    <figcaption>ESP-01S模块</figcaption>
+</figure>
+
+<p>它具有的优点为：</p>
+
+<ol>
+    <li>价格非常低廉，仅需个位数</li>
+    <li>尺寸很小，大约为 25mm x 15mm</li>
+    <li>功能完善，它本身也是一个微型开发板，具有 8 个引脚，可以实现程序下载、串口收发等功能</li>
+    <li>市面上大多数 ESP-01 模块在售卖时已经内置了串口控制程序，上电后便可以正常工作。如果没有也不要紧，只需再花个位数价格就可以再买一个 ESP8266 固件下载器，结合商家给出的资料就可以重新烧入固件</li>
+</ol>
+
+<p>在详细介绍 ESP8266 的使用方法之前，最好先了解以下背景知识：</p>
+
+<p>ESP8266 所使用的 WiFi 是工作频率在 2.4GHz 波段的局域网无线通信。有些笔记本电脑或路由器默认使用的是 5GHz 的网络频段，如果不修改将会无法与 ESP8266 连接上。</p>
+
+<p>ESP8266 支持两种 WiFi 通信模式：AP 和 Sta 。AP 表示接入点(access point)，可以创建一个 WiFi 热点让其余设备连接，一般作为局域网服务器使用；Sta 表示连接设备，该模式下 ESP8266 可以主动连接其它 WiFi 信号，一般作为局域网客户端使用。不过 ESP8266 支持 Sta 和 AP 两模式共存，可以在连接 WiFi 的同时被其余设备连接。</p>
+
+<p>在 ESP-01 模块中，具有 8 个引脚，各个引脚的作用为：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/esp8266-pins.png" alt="" width="170">
+</figure>
+
+<table>
+    <tr>
+        <th>序号</th>
+        <th>名称</th>
+        <th>功能</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td><code>GND</code></td>
+        <td>接地</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td><code>GPIO 2</code></td>
+        <td>通用输入输出（内部已上拉）</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td><code>GPIO 0</code></td>
+        <td>选择模式：低电平为下载模式，未连接或高电平为正常工作模式</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td><code>RXD</code></td>
+        <td>串口 0 数据接收，也可用作普通 GPIO</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td><code>VCC</code></td>
+        <td>3.3V 供电</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td><code>RST</code></td>
+        <td>复位线，若通过外部置为低电平则复位</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td><code>CH_PD</code></td>
+        <td>高电平使能芯片，低电平失能芯片</td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td><code>TXD</code></td>
+        <td>串口 0 数据发送，也可用作普通 GPIO</td>
+    </tr>
+</table>
+
+<p>接下来的程序使用基于 STM32 的标准库编写，并可以比较容易地修改为 HAL 库的代码，或使用其余类似的单片机编写作用相似的代码。</p>
+
+<h3>串口接收不定长数据方法</h3>
+
+<p>在正式介绍 ESP8266 操作方法之前，首先介绍一个基本的要点：如何使用串口接收 ESP8266 可能发来的不定长数据并解析。</p>
+
+<p>不定长数据的接收方法有很多，例如可以通过空字符确定结尾。这里使用串口的空闲中断实现该方法，空闲中断的的产生是由于在两次数据发送间隔，串口没有检测到数据输入而产生的，从而可以判断数据接收完毕，停止接收数据。</p>
+
+<p>首先，为了保存接收数据，需要定义一个缓冲区。这里通过一个结构体的形式确定缓冲区所需成员：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;">#</span><span style="color: #994cc3;font-weight: bold;">define</span> <span style="color: #4876d6;">USART_RX_BUF_SIZE</span> <span style="color: #aa0982;">1024</span></div><div><span style="color: #994cc3;">typedef</span> <span style="color: #994cc3;font-weight: bold;">struct</span><span style="color: #403f53;"> {</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">char</span> <span style="color: #0c969b;">Body</span><span style="color: #403f53;">[</span><span style="color: #4876d6;">USART_RX_BUF_SIZE</span><span style="color: #403f53;">];</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;font-weight: bold;">uint16_t</span> <span style="color: #0c969b;">Length</span><span style="color: #403f53;"> &#160; &#160; :</span><span style="color: #aa0982;">15</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;font-weight: bold;">uint16_t</span> <span style="color: #0c969b;">FinishFlag</span><span style="color: #403f53;"> :</span><span style="color: #aa0982;">1</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">} </span><span style="color: #4876d6;">USART_Buffer</span><span style="color: #403f53;">;</span></div></div>
+
+<p>注意，由于不总是在中断函数内处理接收数据，因此需要一个比特的字段用于判断数据是否接收完毕。</p>
+
+<p>为了接收串口空闲中断，需要先在初始化函数内使能它：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span> <span style="color: #4876d6;">USART_Config</span><span style="color: #403f53;">(</span><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;">) {</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> ...</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">USART_ITConfig(</span><span style="color: #4876d6;">USART3</span><span style="color: #4876d6;">, </span><span style="color: #4876d6;">USART_IT_IDLE</span><span style="color: #4876d6;">, </span><span style="color: #4876d6;">ENABLE</span><span style="color: #4876d6;">)</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">}</span></div></div>
+
+<p>对应的串口中断函数的实现如下：</p>
+
+<div class="vscode-block"><div><span style="color: #4876d6;">USART_Buffer</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">ESP8266_Buffer</span><span style="color: #403f53;">;</span></div><div><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">USART3_IRQHandler</span><span style="color: #403f53;">(</span><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;">) {</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">if</span><span style="color: #403f53;"> (</span><span style="color: #4876d6;">USART_GetITStatus(</span><span style="color: #4876d6;">USART3</span><span style="color: #4876d6;">, </span><span style="color: #4876d6;">USART_IT_RXNE</span><span style="color: #4876d6;">)</span><span style="color: #403f53;"> </span><span style="color: #994cc3;">!=</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">RESET</span><span style="color: #403f53;">) {</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">if</span><span style="color: #403f53;"> (</span><span style="color: #4876d6;">ESP8266_Buffer</span><span style="color: #403f53;">.</span><span style="color: #0c969b;">Length</span><span style="color: #403f53;"> </span><span style="color: #994cc3;">&lt;</span><span style="color: #403f53;"> (</span><span style="color: #4876d6;">USART_RX_BUF_SIZE</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">-</span><span style="color: #403f53;"> </span><span style="color: #aa0982;">1</span><span style="color: #403f53;">))</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">ESP8266_Buffer</span><span style="color: #403f53;">.</span><span style="color: #0c969b;">Body</span><span style="color: #403f53;">[</span><span style="color: #4876d6;">ESP8266_Buffer</span><span style="color: #403f53;">.</span><span style="color: #0c969b;">Length</span><span style="color: #994cc3;">++</span><span style="color: #403f53;">] </span><span style="color: #994cc3;">=</span><span style="color: #403f53;"> (</span><span style="color: #994cc3;font-weight: bold;">char</span><span style="color: #403f53;">)</span><span style="color: #4876d6;">USART_ReceiveData(</span><span style="color: #4876d6;">USART3</span><span style="color: #4876d6;">)</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; }</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">if</span><span style="color: #403f53;"> (</span><span style="color: #4876d6;">USART_GetITStatus(</span><span style="color: #4876d6;">USART3</span><span style="color: #4876d6;">, </span><span style="color: #4876d6;">USART_IT_IDLE</span><span style="color: #4876d6;">)</span><span style="color: #403f53;"> </span><span style="color: #994cc3;">!=</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">RESET</span><span style="color: #403f53;">) {</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">ESP8266_Buffer</span><span style="color: #403f53;">.</span><span style="color: #0c969b;">FinishFlag</span><span style="color: #403f53;"> </span><span style="color: #994cc3;">=</span><span style="color: #403f53;"> </span><span style="color: #aa0982;">1</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">ESP8266_Buffer</span><span style="color: #403f53;">.</span><span style="color: #0c969b;">Body</span><span style="color: #403f53;">[</span><span style="color: #4876d6;">ESP8266_Buffer</span><span style="color: #403f53;">.</span><span style="color: #0c969b;">Length</span><span style="color: #403f53;">] </span><span style="color: #994cc3;">=</span><span style="color: #403f53;"> </span><span style="color: #111111;">'</span><span style="color: #aa0982;">\0</span><span style="color: #111111;">'</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">volatile</span><span style="color: #403f53;"> </span><span style="color: #4876d6;font-weight: bold;">uint16_t</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">temp</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">temp</span><span style="color: #403f53;"> </span><span style="color: #994cc3;">=</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">USART3</span><span style="color: #403f53;">-&gt;</span><span style="color: #4876d6;">SR</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">temp</span><span style="color: #403f53;"> </span><span style="color: #994cc3;">=</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">USART3</span><span style="color: #403f53;">-&gt;</span><span style="color: #4876d6;">DR</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">ESP8266_FrameFinish_CallBack()</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; }</span></div><div><span style="color: #403f53;">}</span></div></div>
+
+<p>在串口中断函数中，对以下两个中断类型响应：<code>USART_IT_RXNE</code> 表示数据接收寄存器收到内容，那么将接收到的内容作为一个字符放入缓冲区中；<code>USART_IT_IDLE</code> 表示数据包接收完毕，在缓冲器结尾添加上一个空字符使其变为字符串，并将结束标志位置 1 。</p>
+
+<p>注意在不接收中断时，串口空闲中断会一直产生，从而干扰程序运行；清除串口空闲中断标志位需要由软件完成，具体做法是通过程序先读取 <var type="register">USART_SR</var> 寄存器，再读取 <var type="register">USART_DR</var> 寄存器。</p>
+
+<p>在程序的最后使用一个回调函数来处理本次接收的数据包，它可以根据当前项目的使用情况自行编写或替换为相应的语句。</p>
+
+<h2>ESP8266基本使用</h2>
+
+<h3>设备连接与初始化</h3>
+
+<p>根据上文的介绍，单片机最少需要 4 个 I/O 口与 ESP8266 相连：这里选用 USART3 作为与 ESP8266 通信的串口，则 <var type="pin">PB10</var> 与 ESP8266 的 RXD 相连，<var type="pin">PB11</var> 与 TXD 相连；<var type="pin">PA4</var> 与 RST 相连，<var type="pin">PA5</var> 与 CH_PD 相连：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/esp8266-pin-connect.png" alt="" width="230">
+</figure>
+
+<p>这里主要通过以下两个宏操作引脚：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;">#</span><span style="color: #994cc3;font-weight: bold;">define</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">ESP8266_RST</span><span style="color: #111111;">(</span><span style="color: #403f53;">state</span><span style="color: #111111;">)</span><span style="color: #403f53;"> &#160; </span><span style="color: #4876d6;">GPIO_WriteBit</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">GPIOA</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">GPIO_Pin_4</span><span style="color: #403f53;">, (</span><span style="color: #4876d6;">BitAction</span><span style="color: #403f53;">)state)</span></div><div><span style="color: #994cc3;">#</span><span style="color: #994cc3;font-weight: bold;">define</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">ESP8266_CH_PD</span><span style="color: #111111;">(</span><span style="color: #403f53;">state</span><span style="color: #111111;">)</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">GPIO_WriteBit</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">GPIOA</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">GPIO_Pin_5</span><span style="color: #403f53;">, (</span><span style="color: #4876d6;">BitAction</span><span style="color: #403f53;">)state)</span></div></div>
+
+<p>本节先介绍一个最简单的、手动操作 ESP8266 的方式演示操作的整个过程：通过计算机的串口调试工具将命令发送给 STM32 ，STM32 接收后转发给 ESP8266 ，并将接收到的数据再转发给串口调试工具：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/esp8266-connect-debug.png" alt="" width="480">
+</figure>
+
+<p>因此，在初始化 ESP8266 时需要初始化相应的 GPIO 及两个 USART 外设，并将 RST 和 CH_PD 都置高电平：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">ESP8266_Init</span><span style="color: #403f53;">(</span><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;">) {</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">ESP8266_GPIO_Config()</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">ESP8266_USART_Config()</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">ESP8266_RST</span><span style="color: #4876d6;">(</span><span style="color: #4876d6;">SET</span><span style="color: #4876d6;">)</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">ESP8266_CH_PD</span><span style="color: #4876d6;">(</span><span style="color: #4876d6;">SET</span><span style="color: #4876d6;">)</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">}</span></div></div>
+
+<p>注意，初始化 STM32 连接到 ESP8266 的串口时，需要将波特率设置为 115200 ，否则数据无法被正常接收。当连接上 ESP8266 后，可以通过后续发送指令修改 ESP8266 的串口波特率。</p>
+
+<p>除此之外，还有一些其它的外设如定时器、调试用串口等，其使用情况可以根据项目需要自行管理，对应的初始化过程不再介绍。</p>
+
+<p>在串口 3 中断中，将接收到的 ESP8266 数据转发回串口调试工具：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">static</span><span style="color: #403f53;"> </span><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">ESP8266_FrameFinish_CallBack</span><span style="color: #403f53;">(</span><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;">) {</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">printf(</span><span style="color: #111111;">"</span><span style="color: #4876d6;">%s</span><span style="color: #111111;">"</span><span style="color: #4876d6;">, </span><span style="color: #4876d6;">ESP8266_Buffer</span><span style="color: #4876d6;">.</span><span style="color: #0c969b;">Body</span><span style="color: #4876d6;">)</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">ESP8266_Buffer</span><span style="color: #403f53;">.</span><span style="color: #0c969b;">FinishFlag</span><span style="color: #403f53;"> </span><span style="color: #994cc3;">=</span><span style="color: #403f53;"> </span><span style="color: #aa0982;">0</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">ESP8266_Buffer</span><span style="color: #403f53;">.</span><span style="color: #0c969b;">Length</span><span style="color: #403f53;"> </span><span style="color: #994cc3;">=</span><span style="color: #403f53;"> </span><span style="color: #aa0982;">0</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">}</span></div></div>
+
+<p>串口 1 的中断处理过程与以上类似，这里不再重复。</p>
+
+<h3>AT指令简介</h3>
+
+<p>既然是使用串口通信的方式操作 ESP8266 ，那么收、发数据都需要遵循一定格式。ESP8266 的固件内置了 AT 指令，可以通过串口发送 AT 指令控制 ESP8266 。</p>
+
+<p>所谓 AT 指令，是一种字符串形式的数据，但开头都是 <code>AT</code> 两个字符，后续跟上具体的选项。AT 指令有以下 4 种主要的表现形式：</p>
+
+<table>
+    <tr>
+        <th>指令类型</th>
+        <th>指令格式</th>
+        <th>说明</th>
+    </tr>
+    <tr>
+        <td>测试指令</td>
+        <td>AT+&lt;x&gt;=?</td>
+        <td>用于查询设置命令或内部程序设置的参数以及其取值范围</td>
+    </tr>
+    <tr>
+        <td>查询指令</td>
+        <td>AT+&lt;x&gt;?</td>
+        <td>用于查询参数当前设置的值</td>
+    </tr>
+    <tr>
+        <td>设置命令</td>
+        <td>AT+&lt;x&gt;=&lt;...&gt;</td>
+        <td>用于设置用户自定义的参数值</td>
+    </tr>
+    <tr>
+        <td>执行指令</td>
+        <td>AT+&lt;x&gt;</td>
+        <td>用于执行受模块内部程序控制的变参数不可变的功能</td>
+    </tr>
+</table>
+
+<p>每一个 AT 指令以换行符 CRLF <code>\r\n</code> 作为结尾的标志，在串口调试工具中需要另起一行。</p>
+
+<p>AT 指令很多，但是并不是每一个都会用得到。这里仅介绍需要的 AT 指令，完整的 AT 指令可以从文档中查看。</p>
+
+<blockquote>
+    <p>注意，某些厂商在生产开发板时，可能会对 AT 固件做一些裁剪，去除一些用处不大的指令，因此在使用时请阅读商家提供的说明文档。</p>
+</blockquote>
+
+<p>最简单的 AT 指令就是单个 <code>AT</code> ，用于测试 AT 固件是否能用。如果能用，ESP8266 会返回 <code>OK</code> ：</p>
+
+<div class="codeblock code-console"><span class="codetoken command">AT</span>
+AT
+
+
+OK</div>
+
+<p>上面发送了一个指令 <code>AT</code> ，而 ESP8266 则先回复了指令内容 <code>AT</code> ，再回复一个 <code>OK</code> ，这种先复述指令内容再发送有效数据的方式称为回显。回显会在一定程度上影响数据解析，并且在设计时 STM32 在接到串口调试工具发送的消息时已经执行了一次回显操作，因此可以使用 <code>ATE0</code> 指令关闭回显：</p>
+
+<div class="codeblock code-console"><span class="codetoken command">ATE0</span>
+ATE0
+
+
+OK
+<span class="codetoken command">AT</span>
+
+OK</div>
+
+<p>这样后续发送指令时只会回复有效数据了。在后续的操作中全部关闭回显，命令都是通过 STM32 收到后立即转发回来的。</p>
+
+<p>可以使用 <code>AT+GMR</code> 查看当前固件的版本信息：</p>
+
+<div class="codeblock code-console"><span class="codetoken command">AT+GMR</span>
+
+AT version:0.22.0.0(Mar 20 2015 10:04:26)
+SDK version:1.0.0
+compile time:Mar 20 2015 11:00:32
+
+OK</div>
+
+<p>如果固件版本过旧，可能也会缺少一些命令。可以使用专用的固件烧入模块通过 USB 为 ESP8266 更新固件。</p>
+
+<p>上文曾经提到 ESP8266 有两种主要的工作模式：Sta 和 AP 。可以使用 <code>AT+CWMODE=&lt;mode&gt;</code> 设置 ESP8266 的通信模式：参数 <code>&lt;mode&gt;</code> 为 <code>1</code> 代表 ESP8266 设置为 Sta 模式；<code>2</code> 代表设置为 AP 模式；参数 <code>3</code> 则是 Sta 模式和 AP 模式共存。</p>
+
+<p>这里将其设置为 Sta 模式，主动连接路由器或笔记本提供的 WiFi ：</p>
+
+<div class="codeblock code-console"><span class="codetoken command">AT+CWMODE=1</span>
+
+
+OK</div>
+
+<p>在 Sta 模式下，可以使用执行命令 <code>AT+CWLAP</code> 列出(List)当前环境下可用的 WiFi 接入点：</p>
+
+<div class="codeblock code-console"><span class="codetoken command">AT+CWLAP</span>
+
++CWLAP:(4,"Laptop",-54,"ac:4e:aa:b2:1f:f2",1)
++CWLAP:(4,"TP-LINK",-28,"51:38:39:a8:d5:e0",1)
++CWLAP:(4,"Mobile",-86,"a8:79:4b:22:42:e6",11)
+
+OK</div>
+
+<p>返回的结果中，每项数据都占一行，有 5 个元素，第一个元素 <code>&lt;ecn&gt;</code> 列出了 WiFi 所使用的加密类型，值 <code>4</code> 代表加密类型为 WPA_WPA2_PSK ；第二个元素 <code>&lt;ssid&gt;</code> 代表 WiFi 名，第三个元素 <code>&lt;rssi&gt;</code> 代表 WiFi 强度，绝对值越小强度越高；第四个元素 <code>&lt;mac&gt;</code> 是设备的 MAC 地址；最后一个元素 <code>&lt;channel&gt;</code> 代表频道。</p>
+
+<blockquote>
+    <p>注意，ESP8266 返回的数据都是 UTF-8 编码的，需要将串口调试工具的编码也设置为 UTF-8 ，否则可能出现中文乱码。</p>
+</blockquote>
+
+<p>连接(Join) WiFi 可以通过以下命令执行：</p>
+
+<div class="codeblock code-console"><span class="codetoken command">AT+CWJAP="TP-LINK","abc123456"</span>
+
+
+OK</div>
+
+<p>WiFi 名和密码都要以字符串的形式放在双引号内，两者间使用逗号隔开。</p>
+
+<p>连接到 WiFi 后，可以使用 <code>AT+CIFSR</code> 命令查看当前设备的 IP 地址：</p>
+
+<div class="codeblock code-console">AT+CIFSR
+
++CIFSR:STAIP,"192.168.137.129"
++CIFSR:STAMAC,"65:e8:db:a5:9b:84"
+
+OK</div>
+
+<p>更多的 AT 指令及其用法可以参考官方文档。接下来介绍 ESP8266 从连接 WiFi 到接收网络数据的常用过程。</p>
+
+<h3>WiFi连接与数据收发测试</h3>
+
+<p>以下测试也全部在串口调试工具中发送命令与接收数据。</p>
+
+<p>首先提前设置好 WiFi 名和密码，然后让 ESP8266 主动连接 WiFi ：</p>
+
+<div class="codeblock code-console"><span class="codetoken command">AT+CWMODE=1</span>
+
+
+OK
+<span class="codetoken command">AT+CWJAP="TP-LINK","abc123456"</span>
+
+
+OK</div>
+
+<p>这里将计算机和 ESP8266 都主动连接到路由器提供的 WiFi 中，两者处于同一个局域网内，这样便可以比较方便地互发数据。</p>
+
+<p>连接后，需要在计算机中查看本机在局域网内的地址：(IPv4 Address)</p>
+
+<div class="codeblock code-console"><span class="codetoken prompt">C:\Users\Hello></span> <span class="codetoken command">ipconfig</span>
+
+Windows IP Configuration
+
+Wireless LAN adapter WLAN:
+
+    Connection-specific DNS Suffix  . :
+    IPv4 Address. . . . . . . . . . . : 192.168.1.105
+    Subnet Mask . . . . . . . . . . . : 255.255.255.0
+    Default Gateway . . . . . . . . . : 192.168.1.1
+</div>
+
+<p>以下通过 ESP8266 主动向计算机发起连接，并发送查询当前时间的命令；计算机接到命令后，向 ESP8266 返回当前的时间。在计算机的客户端，使用 Python 编写如下套接字程序：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">import</span><span style="color: #403f53;"> socket, time</span></div><div><span style="color: #403f53;">server </span><span style="color: #994cc3;">=</span><span style="color: #403f53;"> socket.</span><span style="color: #0c969b;">socket</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">socket.AF_INET</span><span style="color: #111111;">,</span><span style="color: #4876d6;"> socket.SOCK_STREAM</span><span style="color: #403f53;">)</span></div><div><span style="color: #403f53;">server.</span><span style="color: #0c969b;">bind</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">(</span><span style="color: #111111;">''</span><span style="color: #4876d6;">, </span><span style="color: #aa0982;">12000</span><span style="color: #4876d6;">)</span><span style="color: #403f53;">)</span></div><div><span style="color: #403f53;">server.</span><span style="color: #0c969b;">listen</span><span style="color: #403f53;">(</span><span style="color: #aa0982;">1</span><span style="color: #403f53;">)</span></div><div><span style="color: #994cc3;font-weight: bold;">while</span><span style="color: #403f53;"> </span><span style="color: #bc5454;">True</span><span style="color: #403f53;">:</span></div><div><span style="color: #403f53;">&#160; &#160; connect, address </span><span style="color: #994cc3;">=</span><span style="color: #403f53;"> server.</span><span style="color: #0c969b;">accept</span><span style="color: #403f53;">()</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">print</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">address</span><span style="color: #403f53;">)</span></div><div><span style="color: #403f53;">&#160; &#160; message </span><span style="color: #994cc3;">=</span><span style="color: #403f53;"> connect.</span><span style="color: #0c969b;">recv</span><span style="color: #403f53;">(</span><span style="color: #aa0982;">1024</span><span style="color: #403f53;">)</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">print</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">message</span><span style="color: #403f53;">)</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">if</span><span style="color: #403f53;"> message.</span><span style="color: #0c969b;">decode</span><span style="color: #403f53;">() </span><span style="color: #994cc3;">==</span><span style="color: #403f53;"> </span><span style="color: #111111;">'</span><span style="color: #c96765;">time</span><span style="color: #111111;">'</span><span style="color: #403f53;">:</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; connect.</span><span style="color: #0c969b;">send</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">time.</span><span style="color: #0c969b;">ctime</span><span style="color: #403f53;">()</span><span style="color: #4876d6;">.</span><span style="color: #0c969b;">encode</span><span style="color: #403f53;">())</span></div><div><span style="color: #403f53;">&#160; &#160; connect.</span><span style="color: #0c969b;">close</span><span style="color: #403f53;">()</span></div></div>
+
+<p>使用 Python 编写套接字程序的方法可以参考<a href="/archives/403">这篇文章</a>。运行该程序后，在单片机端通过设置指令 <code>AT+CIPSTART</code> 向该局域网 IP 地址与端口号发起 TCP 连接：</p>
+
+<div class="codeblock code-console"><span class="codetoken command">AT+CIPSTART="TCP","192.168.1.105",12000</span>
+
+CONNECT
+
+OK</div>
+
+<p>连接完成以后，可以通过设置指令 <code>AT+CIPSEND</code> 发送数据，参数 <code>&lt;length&gt;</code> 为数据的长度：</p>
+
+<div class="codeblock code-console"><span class="codetoken command">AT+CIPSEND=4</span>
+
+
+OK
+> <span class="codetoken command">time</span>
+SEND OK
+
++IPD,24:Mon Jul 11 14:58:48 2022CLOSED</div>
+
+<p>当收到此命令后，会换行返回 <code>> </code> 符号，表示接下来可以继续接收待发送的数据；后续通过串口发送的数据可以不用以新行结尾，当数据长度达到 <code>&lt;length&gt;</code> 时，ESP8266 才会将数据发送出去并返回 OK 。</p>
+
+<p>在收到网络数据时，ESP8266 会以 <code>+IPD</code> 的指令形式返回，第一个逗号后面代表数据的长度，冒号后面跟随的是实际的数据。最后的 <code>CLOSE</code> 代表连接中断，它和数据是是分两次接收的。通过解析数组 <code>ESP8266_Buffer.Body</code> 中保存的数据，单片机就可以通过网络获取当前的实时时间，并用于校正当前的 RTC 时钟等。</p>
+
+<p>当然，在实际使用时不会通过串口转发这么麻烦的方式，可以在程序中直接操作串口按指定的形式收发数据，下一节将会介绍相应程序的编写方法。</p>
+
+<h2>参考资料/延伸阅读</h2>
+
+<p><a href="https://docs.espressif.com/projects/esp-at/en/release-v2.2.0.0_esp8266/Get_Started/index.html">https://docs.espressif.com/projects/esp-at/en/release-v2.2.0.0_esp8266/Get_Started/index.html</a></p>
+
+<p>ESP-AT 指令文档。不过很少有商家的固件会有这么新的版本。</p>
+<p><a rel="nofollow" href="/archives/496">STM32与物联网01-ESP8266基本操作</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/archives/496/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

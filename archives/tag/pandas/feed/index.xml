@@ -1,0 +1,1315 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>pandas归档 - 冰封残烛的个人小站</title>
+	<atom:link href="http://localhost/wordpress/archives/tag/pandas/feed?simply_static_page=3739" rel="self" type="application/rss+xml" />
+	<link></link>
+	<description>FrozenCandle&#039;s Personal Site</description>
+	<lastBuildDate>Fri, 17 Mar 2023 09:55:49 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2.1</generator>
+
+<image>
+	<url>/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg</url>
+	<title>pandas归档 - 冰封残烛的个人小站</title>
+	<link></link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Python数据分析-pandas04:索引与缺失值</title>
+		<link>/archives/1054</link>
+					<comments>/archives/1054#respond</comments>
+		
+		<dc:creator><![CDATA[Hello]]></dc:creator>
+		<pubDate>Fri, 17 Mar 2023 09:55:47 +0000</pubDate>
+				<category><![CDATA[数据处理]]></category>
+		<category><![CDATA[pandas]]></category>
+		<category><![CDATA[Python]]></category>
+		<guid isPermaLink="false">/?p=1054</guid>
+
+					<description><![CDATA[<p>上一节介绍了 pandas 中的索引，本节补充关于索&#46;&#46;&#46;</p>
+<p><a rel="nofollow" href="/archives/1054">Python数据分析-pandas04:索引与缺失值</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p><a class="link-internal">上一节</a>介绍了 pandas 中的索引，本节补充关于索引对齐的更多内容。</p>
+
+<p>在 <var type="module">numpy</var> 中对两个数组做运算，如果它们形状既不完全一致，也不满足广播规则，那么会产生错误：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>a01 <span style="color: #7c4dff;">=</span> np<span style="color: #39adb5;">.</span>arange<span style="color: #39adb5;">(</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">5</span><span style="color: #39adb5;">)</span></div><div>a02 <span style="color: #7c4dff;">=</span> np<span style="color: #39adb5;">.</span>linspace<span style="color: #39adb5;">(</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">5</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">5</span><span style="color: #39adb5;">)</span></div><div><span style="color: #39adb5;font-weight: bold;">try</span><span style="color: #39adb5;">:</span></div><div>&#160; &#160; a01 <span style="color: #7c4dff;">+</span> a02</div><div><span style="color: #39adb5;font-weight: bold;">except</span> <span style="color: #8796b0;">ValueError</span> <span style="color: #39adb5;font-weight: bold;">as</span> e<span style="color: #39adb5;">:</span></div><div>&#160; &#160; <span style="color: #6182b8;">print</span><span style="color: #39adb5;">(</span>e<span style="color: #39adb5;">)</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">operands could not be broadcast together with shapes (4,) (5,) </div>
+</div>
+
+<p>但是对两个类似的 <code>Series</code> 对象做运算时，就不会产生这种错误：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s01 <span style="color: #7c4dff;">=</span> pd<span style="color: #39adb5;">.</span>Series<span style="color: #39adb5;">(</span>np<span style="color: #39adb5;">.</span>arange<span style="color: #39adb5;">(</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">5</span><span style="color: #39adb5;">))</span></div><div>s02 <span style="color: #7c4dff;">=</span> pd<span style="color: #39adb5;">.</span>Series<span style="color: #39adb5;">(</span>np<span style="color: #39adb5;">.</span>linspace<span style="color: #39adb5;">(</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">5</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">5</span><span style="color: #39adb5;">))</span></div><div>s01 <span style="color: #7c4dff;">+</span> s02</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">0    2.0
+1    4.0
+2    6.0
+3    8.0
+4    NaN
+dtype: float64</div>
+</div>
+
+<p>虽然不会产生错误，但是注意到得到的 <code>Series</code> 包含 5 个元素，并且最后一个元素似乎不是数值数据。同时结果的类型由整数变为了浮点数。</p>
+
+<p>这两个现象就包含了本节的内容。接下来逐一介绍。</p>
+
+<h2>索引对齐</h2>
+
+<p>当在两个 <code>Series</code> 或 <code>DataFrame</code> 对象上做计算时，<var type="module">pandas</var> 会按照索引值配对计算元素，而不是按位置配对：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>np<span style="color: #39adb5;">.</span>divide<span style="color: #39adb5;">(</span>pd<span style="color: #39adb5;">.</span>Series<span style="color: #39adb5;">(</span><span style="color: #6182b8;">range</span><span style="color: #39adb5;">(</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">5</span><span style="color: #39adb5;">),</span> <span style="color: #e53935;">index</span><span style="color: #7c4dff;">=</span><span style="color: #8796b0;">list</span><span style="color: #39adb5;">(</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">ABCD</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">)),</span></div><div>&#160; &#160; &#160; &#160; &#160; pd<span style="color: #39adb5;">.</span>Series<span style="color: #39adb5;">(</span><span style="color: #6182b8;">range</span><span style="color: #39adb5;">(</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">5</span><span style="color: #39adb5;">),</span> <span style="color: #e53935;">index</span><span style="color: #7c4dff;">=</span><span style="color: #8796b0;">list</span><span style="color: #39adb5;">(</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">ACBD</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">)))</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">A    1.000000
+B    0.666667
+C    1.500000
+D    1.000000
+dtype: float64</div>
+</div>
+
+<p>这实际上是由于 <var type="module">pandas</var> 会在计算过程中对齐两个对象的索引。索引对齐确保计算可以得到合理的结果，并且当处理不完整的数据时也更方便。</p>
+
+<p>例如，以下根据现有的地区面积和人口数据，计算人口密度：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>territory <span style="color: #7c4dff;">=</span> pd<span style="color: #39adb5;">.</span>Series<span style="color: #39adb5;">(</span></div><div>&#160; &#160; <span style="color: #39adb5;">{</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">D0</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">1708</span><span style="color: #39adb5;">,</span> <span style="color: #39adb5;">'</span><span style="color: #91b859;">D1</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">9403</span><span style="color: #39adb5;">,</span> <span style="color: #39adb5;">'</span><span style="color: #91b859;">D2</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">3640</span><span style="color: #39adb5;">,</span> <span style="color: #39adb5;">'</span><span style="color: #91b859;">D3</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">3360</span><span style="color: #39adb5;">},</span></div><div>&#160; &#160; <span style="color: #e53935;">name</span><span style="color: #7c4dff;">=</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">territory</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">)</span></div><div>population <span style="color: #7c4dff;">=</span> pd<span style="color: #39adb5;">.</span>Series<span style="color: #39adb5;">(</span></div><div>&#160; &#160; <span style="color: #39adb5;">{</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">D0</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">14300</span><span style="color: #39adb5;">,</span> <span style="color: #39adb5;">'</span><span style="color: #91b859;">D2</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">13900</span><span style="color: #39adb5;">,</span> <span style="color: #39adb5;">'</span><span style="color: #91b859;">D3</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">33280</span><span style="color: #39adb5;">},</span></div><div>&#160; &#160; <span style="color: #e53935;">name</span><span style="color: #7c4dff;">=</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">population</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">)</span></div><div>population <span style="color: #7c4dff;">/</span> territory</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">D0    8.372365
+D1         NaN
+D2    3.818681
+D3    9.904762
+dtype: float64</div>
+</div>
+
+<p>结果数组的索引是两个输入数组索引的并集，并用索引相同的元素做运算。这样一来不需要使两个 <code>Series</code> 都是完整且顺序一致的，也能根据索引完成配对元素的计算。</p>
+
+<p>在计算两个 <code>DataFrame</code> 时，类似的索引对齐规则也同样会出现在列索引中：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #39adb5;">(</span>pd<span style="color: #39adb5;">.</span>DataFrame<span style="color: #39adb5;">(</span>np<span style="color: #39adb5;">.</span>arange<span style="color: #39adb5;">(</span><span style="color: #f76d47;">6</span><span style="color: #39adb5;">).</span>reshape<span style="color: #39adb5;">(</span><span style="color: #f76d47;">3</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">2</span><span style="color: #39adb5;">),</span> <span style="color: #e53935;">columns</span><span style="color: #7c4dff;">=</span><span style="color: #8796b0;">list</span><span style="color: #39adb5;">(</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">AB</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">))</span> <span style="color: #7c4dff;">+</span> </div><div>&#160;pd<span style="color: #39adb5;">.</span>DataFrame<span style="color: #39adb5;">(</span>np<span style="color: #39adb5;">.</span>arange<span style="color: #39adb5;">(</span><span style="color: #f76d47;">9</span><span style="color: #39adb5;">).</span>reshape<span style="color: #39adb5;">(</span><span style="color: #f76d47;">3</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">3</span><span style="color: #39adb5;">),</span> <span style="color: #e53935;">columns</span><span style="color: #7c4dff;">=</span><span style="color: #8796b0;">list</span><span style="color: #39adb5;">(</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">BAC</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">)))</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><table class="pandas-dataframe">
+        <tr>
+            <th></th><th>A</th><th>B</th><th>C</th>
+        </tr>
+        <tr>
+            <td>0</td><td>1</td><td>1</td><td>NaN</td>
+        </tr>
+        <tr>
+            <td>1</td><td>6</td><td>6</td><td>NaN</td>
+        </tr>
+        <tr>
+            <td>2</td><td>11</td><td>11</td><td>NaN</td>
+        </tr>
+    </table></div>
+</div>
+
+<p>因此，索引对齐就是在计算时根据配对的索引完成元素的运算。如果有一个运算对象缺少该索引，该位置的数据会用 <code>NaN</code> 填充。这是 <var type="module">pandas</var> 表示缺失值的方法，接下来会介绍缺失值的处理方法。</p>
+
+<h2>处理缺失值</h2>
+
+<h3>认识缺失值</h3>
+
+<p>在 Python 中，空值一般用 <code>None</code> 对象表示。它是一个特殊的 Python <code>object</code> 对象 ，由 Python 解释器提供并处理。</p>
+
+<p><code>None</code> 作为一个 Python 对象，并不能兼容任何 <var type="module">numpy</var> 的原生类型。如果在创建数组时包含 <code>None</code> ，那么数组的类型会被强制提升为 <code>object</code> ：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>a1 <span style="color: #7c4dff;">=</span> np<span style="color: #39adb5;">.</span>array<span style="color: #39adb5;">([</span><span style="color: #f76d47;">0</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">3</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">None</span><span style="color: #39adb5;">])</span></div><div>a1</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">array([0, 1, 3, None], dtype=object)</div>
+</div>
+
+<p>然而，使用 <code>object</code> 作为数组类型会严重拖慢计算速度，因为它在底层不但占用更多空间，并且无法通过向量化加速运算：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>a2 <span style="color: #7c4dff;">=</span> np<span style="color: #39adb5;">.</span>array<span style="color: #39adb5;">(</span><span style="color: #6182b8;">range</span><span style="color: #39adb5;">(</span><span style="color: #f76d47;">10000</span><span style="color: #39adb5;">),</span> <span style="color: #e53935;">dtype</span><span style="color: #7c4dff;">=</span>np<span style="color: #39adb5;">.</span>int32<span style="color: #39adb5;">)</span></div><div>a3 <span style="color: #7c4dff;">=</span> np<span style="color: #39adb5;">.</span>array<span style="color: #39adb5;">(</span><span style="color: #6182b8;">range</span><span style="color: #39adb5;">(</span><span style="color: #f76d47;">10000</span><span style="color: #39adb5;">),</span> <span style="color: #e53935;">dtype</span><span style="color: #7c4dff;">=</span><span style="color: #8796b0;">object</span><span style="color: #39adb5;">)</span></div><div><span style="color: #7c4dff;">%</span>timeit a2 <span style="color: #7c4dff;">/</span> <span style="color: #f76d47;">2</span></div><div><span style="color: #7c4dff;">%</span>timeit a3 <span style="color: #7c4dff;">/</span> <span style="color: #f76d47;">2</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">9.99 µs ± 51.7 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
+199 µs ± 1.35 µs per loop (mean ± std. dev. of 7 runs, 10,000 loops each)</div>
+</div>
+
+<p>可以看到即便对于简单的除法运算，两者都有 20 倍的速度差异。除此之外，数组中一旦包含 <code>None</code> 值，那么它就无法参与各种运算，因为 Python 并没有实现 <code>None</code> 和其它类型的运算方法。</p>
+
+<p>不过好在 <var type="module">numpy</var> 提供了另一种缺失值：<code>NaN</code> 。它全称 Not a Number ，即非数字，是一种按照 IEEE 754 标准设计的特殊<em>浮点数</em>：（有关 <code>NaN</code> 与浮点数的更多底层设计可以参见<a href="https://en.wikipedia.org/wiki/NaN">维基百科</a>）</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>np<span style="color: #39adb5;">.</span>array<span style="color: #39adb5;">([</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> np<span style="color: #39adb5;">.</span>nan<span style="color: #39adb5;">,</span> <span style="color: #f76d47;">2</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">3</span><span style="color: #39adb5;">])</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">array([ 1., nan,  2.,  3.])</div>
+</div>
+
+<p><code>NaN</code> 作为一种浮点数，在大多数编程语言中都可以被处理。浮点类型使得含 <code>NaN</code> 的数组可以使用向量化计算，获得很快的运算速度。</p>
+
+<p><code>NaN</code> 的一个特性是：它与任何数字的运算结果都是它本身。也就是说无论 <code>NaN</code> 参与何种运算，最终结果都是 <code>NaN</code> ：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>np<span style="color: #39adb5;">.</span>nan <span style="color: #7c4dff;">+</span> <span style="color: #f76d47;">1</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">nan</div>
+
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>np<span style="color: #39adb5;">.</span>nan <span style="color: #7c4dff;">/</span> np<span style="color: #39adb5;">.</span>nan <span style="color: #7c4dff;">*</span> <span style="color: #f76d47;">0</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">nan</div>
+</div>
+
+<p>这种特性使得在对含有 <code>NaN</code> 的数组做聚合处理时，虽然不会引起异常，但结果不一定有效：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>a5 <span style="color: #7c4dff;">=</span> np<span style="color: #39adb5;">.</span>array<span style="color: #39adb5;">([</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> np<span style="color: #39adb5;">.</span>nan<span style="color: #39adb5;">,</span> <span style="color: #f76d47;">2</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">3</span><span style="color: #39adb5;">])</span></div><div>a5<span style="color: #39adb5;">.</span>sum<span style="color: #39adb5;">(),</span> a5<span style="color: #39adb5;">.</span>max<span style="color: #39adb5;">()</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">(nan, nan)</div>
+</div>
+
+<p>为此，<var type="module">numpy</var> 提供了一些以 <var>nan</var> 开头的特殊累计函数，它们可以忽略数组中的缺失值：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>np<span style="color: #39adb5;">.</span>nansum<span style="color: #39adb5;">(</span>a5<span style="color: #39adb5;">),</span> np<span style="color: #39adb5;">.</span>nanmax<span style="color: #39adb5;">(</span>a5<span style="color: #39adb5;">)</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">(6.0, 3.0)</div>
+</div>
+
+<h3>处理缺失值</h3>
+
+<p><code>NaN</code> 虽然不像 <code>None</code> 的问题那么明显，但也容易出现奇怪的问题。接下来看看 <var type="module">pandas</var> 中对 <code>NaN</code> 的处理方式。</p>
+
+<p>考虑到空值 <code>None</code> 的副作用太过明显，<var type="module">pandas</var> 会将空值自动转换为 <code>NaN</code> ：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s03 <span style="color: #7c4dff;">=</span> pd<span style="color: #39adb5;">.</span>Series<span style="color: #39adb5;">([</span><span style="color: #f76d47;">0</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">None</span><span style="color: #39adb5;">,</span> np<span style="color: #39adb5;">.</span>nan<span style="color: #39adb5;">,</span> <span style="color: #f76d47;">1</span><span style="color: #39adb5;">])</span></div><div>s03</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">0    0.0
+1    NaN
+2    NaN
+3    1.0
+dtype: float64</div>
+</div>
+
+<p><code>Series</code> 和 <code>DataFrame</code> 均可以使用 <code>.isnull()</code> 和 <code>.notnull()</code> 方法来发现缺失值，它们像通用函数一样返回布尔数组，例如：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s03<span style="color: #39adb5;">.</span>isnull<span style="color: #39adb5;">()</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">0    False
+1     True
+2     True
+3    False
+dtype: bool</div>
+</div>
+
+<p>这种布尔数组可以配合数组索引直接修改缺失值：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s03<span style="color: #39adb5;">[</span>s03<span style="color: #39adb5;">.</span>isnull<span style="color: #39adb5;">()]</span> <span style="color: #7c4dff;">=</span> <span style="color: #f76d47;">2</span></div><div>s03</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">0    0.0
+1    2.0
+2    2.0
+3    1.0
+dtype: float64</div>
+</div>
+
+<p><var type="module">pandas</var> 还提供了两种很好用的缺失值处理方式，分别是 <code>.dropna()</code> 和 <code>.fillna()</code> 方法，分别用于剔除缺失值和填充缺失值。在 <code>Series</code> 上使用这些方法比较易懂：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s03<span style="color: #39adb5;">.</span>dropna<span style="color: #39adb5;">()</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">0    0.0
+3    1.0
+dtype: float64</div>
+</div>
+
+<p>更复杂的情况涉及对 <code>DataFrame</code> 的缺失值处理，因为 <code>DataFrame</code> 增删的最小单元是一行或一列。默认情况下，<code>DataFrame.dropna()</code> 会剔除任何包含缺失值的整行数据。可以设置按不同的坐标轴剔除缺失值，比如 <code>axis=1</code>（或 <code>axis='columns'</code> ）会剔除任何包含缺失值的整列数据：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>df01 <span style="color: #7c4dff;">=</span> pd<span style="color: #39adb5;">.</span>DataFrame<span style="color: #39adb5;">([[</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> np<span style="color: #39adb5;">.</span>nan<span style="color: #39adb5;">,</span> <span style="color: #f76d47;">2</span><span style="color: #39adb5;">],</span> <span style="color: #39adb5;">[</span><span style="color: #f76d47;">2</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">3</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">5</span><span style="color: #39adb5;">],</span> <span style="color: #39adb5;">[</span>np<span style="color: #39adb5;">.</span>nan<span style="color: #39adb5;">,</span> <span style="color: #f76d47;">4</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">6</span><span style="color: #39adb5;">]])</span></div><div>df01<span style="color: #39adb5;">.</span>dropna<span style="color: #39adb5;">()</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><table class="pandas-dataframe">
+        <tr>
+            <th></th><th>0</th><th>1</th><th>2</th>
+        </tr>
+        <tr>
+            <td>1</td><td>2.0</td><td>3.0</td><td>5</td>
+        </tr>
+    </table></div>
+</div>
+
+<p>这种做法会把非缺失值一并剔除。有时候可能只需要剔除缺失值较多的行或列，这种需求可以通过以下两个参数来满足：</p>
+
+<ul>
+    <li><code><em>how</em></code> 参数的默认值是 <code>'any'</code> ，表示只要有缺失值就剔除整行或整列。还可以传入 <code>'all'</code> ，从而剔除全部是缺失值的行或列</li>
+    <li><code><em>thresh</em></code> 参数用于设置需要保留的行或列中非缺失值的最小数量</li>
+</ul>
+
+<p>剔除缺失值时只关注特定的列也是一种常见的需求，因为有时 <code>DataFrame</code> 只有部分列会参与运算，而其它列无论是否包含缺失值都想保留下了。这时可以通过向 <code><em>subset</em></code> 参数传入包含列名的列表来指定剔除缺失值时只关注表的哪些部分。</p>
+
+<p>除此之外，<code><em>inplace</em></code> 当然也是 <code>.dropna()</code> 方法具有的参数，说明该方法默认情况下也不修改原有表，而是得到一个剔除缺失值后的副本。</p>
+
+<p><code>.fillna()</code> 方法用于填充缺失值。对于 <code>Series</code> 而言，该方法就是一个简单的替换：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s03<span style="color: #39adb5;">.</span>fillna<span style="color: #39adb5;">(</span><span style="color: #f76d47;">3</span><span style="color: #39adb5;">)</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">0    0.0
+1    3.0
+2    3.0
+3    1.0
+dtype: float64</div>
+</div>
+
+<p>对于 <code>DataFrame</code> 而言，除了用单个值填充所有的缺失位置外，还可以使用字典为不同列指定不同的填充值：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>df01<span style="color: #39adb5;">.</span>fillna<span style="color: #39adb5;">({</span><span style="color: #f76d47;">0</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">10</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">1</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">20</span><span style="color: #39adb5;">})</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><table class="pandas-dataframe">
+        <tr>
+            <th></th><th>0</th><th>1</th><th>2</th>
+        </tr>
+        <tr>
+            <td>0</td><td>1.0</td><td>20.0</td><td>2</td>
+        </tr>
+        <tr>
+            <td>1</td><td>2.0</td><td>3.0</td><td>5</td>
+        </tr>
+        <tr>
+            <td>2</td><td>10.0</td><td>4.0</td><td>6</td>
+        </tr>
+    </table></div>
+</div>
+
+<p><code>.fillna()</code> 方法还有以下两个常用参数：</p>
+
+<ul>
+    <li><code><em>method</em></code> ：参数指定填充的方法，例如 <code>"pad"</code> 或 <code>"ffill"</code> 用缺失值前或上面的有效值填充；<code>"bfill"</code> 或 <code>"backfill"</code> 用缺失值后或下面的有效值填充。默认用自定义行为填充</li>
+    <li><code><em>limit</em></code> ：填充的最大数量</li>
+</ul>
+
+<!-- 可以用适当的对象方法代替运算符，并使用参数 <code><em>fill_value</em></code> 填充缺失的数据后再参与运算。 -->
+
+<h3>可空类型</h3>
+
+<p>最后要说明的是，尽管 <var type="module">pandas</var> 为处理 <code>NaN</code> 提供了很多便利的工具，但是尽可能不要向表中引入 <code>NaN</code> 。因为一旦表中出现一个 <code>NaN</code> ，会使得一列的数据类型都变成浮点数：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>df02 <span style="color: #7c4dff;">=</span> pd<span style="color: #39adb5;">.</span>DataFrame<span style="color: #39adb5;">(</span>np<span style="color: #39adb5;">.</span>arange<span style="color: #39adb5;">(</span><span style="color: #f76d47;">12</span><span style="color: #39adb5;">).</span>reshape<span style="color: #39adb5;">(</span><span style="color: #f76d47;">3</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">4</span><span style="color: #39adb5;">),</span> <span style="color: #e53935;">dtype</span><span style="color: #7c4dff;">=</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">int32</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">)</span></div><div>df02<span style="color: #39adb5;">.</span>iloc<span style="color: #39adb5;">[</span><span style="color: #f76d47;">2</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">1</span><span style="color: #39adb5;">]</span> <span style="color: #7c4dff;">=</span> np<span style="color: #39adb5;">.</span>nan</div><div>df02</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><table class="pandas-dataframe">
+        <tr>
+            <th></th><th>0</th><th>1</th><th>2</th><th>3</th>
+        </tr>
+        <tr>
+            <td>0</td><td>0</td><td>1.0</td><td>2</td><td>3</td>
+        </tr>
+        <tr>
+            <td>1</td><td>4</td><td>5.0</td><td>6</td><td>7</td>
+        </tr>
+        <tr>
+            <td>2</td><td>8</td><td>NaN</td><td>10</td><td>11</td>
+        </tr>
+    </table></div>
+</div>
+
+<p>浮点数可能使得表在处理时出现问题。例如，如果一个整型或布尔数组出现了一个浮点数，那么它便无法用于索引。</p>
+
+<p>为此，<var type="module">pandas</var> 提供了一类特别的可空类型，向可空类型中引入空值并不会使 <code>Series</code> 变为浮点数。目前 <var type="module">pandas</var> 具有的可空类型包括各种长度的 <code>Int</code> 和 <code>Float</code> 类型（注意首字母大写）、<code>string</code> 类型和 <code>boolean</code> 类型。</p>
+
+<p>如果在创建 <code>Series</code> 时使用 <code><em>dtype</em></code> 参数指定类型为以上这些可空类型，那么其中的缺失值便会使用特别的缺失值指示器 <code>pd.NA</code> 代替：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s04 <span style="color: #7c4dff;">=</span> pd<span style="color: #39adb5;">.</span>Series<span style="color: #39adb5;">([</span><span style="color: #f76d47;">0</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">None</span><span style="color: #39adb5;">,</span> np<span style="color: #39adb5;">.</span>nan<span style="color: #39adb5;">,</span> pd<span style="color: #39adb5;">.</span>NA<span style="color: #39adb5;">,</span> <span style="color: #f76d47;">1</span><span style="color: #39adb5;">],</span> </div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #e53935;">dtype</span><span style="color: #7c4dff;">=</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">Int32</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">)</span></div><div>s04</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">0       0
+1    &lt;NA&gt;
+2    &lt;NA&gt;
+3    &lt;NA&gt;
+4       1
+dtype: Int32</div>
+</div>
+
+<p><code>pd.NA</code> 不代表任何实际的值，因此可以用在任何数组中而不会改变其原有类型。例如，如果创建一个类型为 <code>boolean</code> 的可空布尔数组，那么它便可用于索引，并且其中的 <code>pd.NA</code> 会被当做 <code>False</code> 用于索引：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #90a4ae;">s05 </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> pd</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">Series</span><span style="color: #39adb5;">([</span><span style="color: #f76d47;">True</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> </span><span style="color: #f76d47;">None</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> np</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">nan</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> </span><span style="color: #f76d47;">False</span><span style="color: #39adb5;">],</span><span style="color: #90a4ae;"> </span><span style="color: #e53935;">dtype</span><span style="color: #7c4dff;">=</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">boolean</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">)</span></div></div>
+
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s01<span style="color: #39adb5;">[</span>s05<span style="color: #39adb5;">]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">0    1
+dtype: int32</div>
+</div>
+
+<p>但截至 pandas 1.5 ，该功能似乎仍然处于实验阶段。</p>
+<p><a rel="nofollow" href="/archives/1054">Python数据分析-pandas04:索引与缺失值</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/archives/1054/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Python数据分析-pandas03:深入认识索引</title>
+		<link>/archives/1048</link>
+					<comments>/archives/1048#respond</comments>
+		
+		<dc:creator><![CDATA[Hello]]></dc:creator>
+		<pubDate>Mon, 06 Mar 2023 09:35:45 +0000</pubDate>
+				<category><![CDATA[数据处理]]></category>
+		<category><![CDATA[pandas]]></category>
+		<category><![CDATA[Python]]></category>
+		<guid isPermaLink="false">/?p=1048</guid>
+
+					<description><![CDATA[<p>Pandas索引机制 pandas 相比 numpy&#46;&#46;&#46;</p>
+<p><a rel="nofollow" href="/archives/1048">Python数据分析-pandas03:深入认识索引</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<h2>Pandas索引机制</h2>
+
+<p><var type="module">pandas</var> 相比 <var type="module">numpy</var> ，一个很重要的特点就在于它引入了显式的索引机制。显式的索引在方便数据获取的同时，也可能造成学习上的困惑。接下来首先详细介绍 <var type="module">pandas</var> 的索引机制。</p>
+
+<h3>Series与索引</h3>
+
+<p>之前说过，<code>Series</code> 对象可以看作一种字典，它提供了索引与值对的映射，因此可以使用字典一样的方式获取值：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s01 <span style="color: #7c4dff;">=</span> pd<span token="symbol">.</span>Series<span token="symbol">(</span>np<span token="symbol">.</span>arange<span token="symbol">(</span><span token="number">4</span><span token="symbol">),</span> <span style="color: #e53935;">index</span><span style="color: #7c4dff;">=</span><span token="symbol">[</span><span token="symbol">'</span><span style="color: #91b859;">a</span><span token="symbol">'</span><span token="symbol">,</span> <span token="symbol">'</span><span style="color: #91b859;">b</span><span token="symbol">'</span><span token="symbol">,</span> <span token="symbol">'</span><span style="color: #91b859;">c</span><span token="symbol">'</span><span token="symbol">,</span> <span token="symbol">'</span><span style="color: #91b859;">d</span><span token="symbol">'</span><span token="symbol">])</span></div><div>s01<span token="symbol">[</span><span token="symbol">'</span><span style="color: #91b859;">b</span><span token="symbol">'</span><span token="symbol">]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">1</div>
+</div>
+
+<p><code>Series</code> 的许多操作都和 Python 字典很像，例如可以通过 item assignment 增加新的索引-值对，这等价于向 <code>Series</code> 添加新的一项：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s01<span token="symbol">[</span><span token="symbol">'</span><span style="color: #91b859;">e</span><span token="symbol">'</span><span token="symbol">]</span> <span style="color: #7c4dff;">=</span> <span token="number">10</span></div></div>
+</div>
+
+<p>这种自定义的索引是显式的，它是真实存在的，因此可以向字典一样获取所有的索引-值对：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #8796b0;">list</span><span token="symbol">(</span>s01<span token="symbol">.</span>items<span token="symbol">())</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">[('a', 0), ('b', 1), ('c', 2), ('d', 3), ('e', 10)]</div>
+</div>
+
+<p><code>Series</code> 不仅有着和字典一样的索引操作，还具备和 <var type="module">numpy</var> 数组一样的数组数据选择功能，例如数组索引：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s01<span token="symbol">[[</span><span token="symbol">'</span><span style="color: #91b859;">b</span><span token="symbol">'</span><span token="symbol">,</span> <span token="symbol">'</span><span style="color: #91b859;">d</span><span token="symbol">'</span><span token="symbol">]]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">b    1
+d    3
+dtype: int32</div>
+</div>
+
+<p>这么看来，<code>Series</code> 的索引除了允许自定义外，和 <code>ndarray</code> 的索引好像没什么区别。不过注意，<code>Series</code> 的索引是允许重复的，这可能会导致一次性获取到多个值：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s02 <span style="color: #7c4dff;">=</span> pd<span token="symbol">.</span>Series<span token="symbol">(</span>np<span token="symbol">.</span>arange<span token="symbol">(</span><span token="number">5</span><span token="symbol">),</span> <span style="color: #e53935;">index</span><span style="color: #7c4dff;">=</span><span token="symbol">[</span><span token="symbol">'</span><span style="color: #91b859;">a</span><span token="symbol">'</span><span token="symbol">,</span> <span token="symbol">'</span><span style="color: #91b859;">b</span><span token="symbol">'</span><span token="symbol">,</span> <span token="symbol">'</span><span style="color: #91b859;">b</span><span token="symbol">'</span><span token="symbol">,</span> <span token="symbol">'</span><span style="color: #91b859;">d</span><span token="symbol">'</span><span token="symbol">,</span> <span token="symbol">'</span><span style="color: #91b859;">b</span><span token="symbol">'</span><span token="symbol">])</span></div><div>s02<span token="symbol">[</span><span token="symbol">'</span><span style="color: #91b859;">b</span><span token="symbol">'</span><span token="symbol">]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">b    1
+b    2
+b    4
+dtype: int32</div>
+</div>
+
+<p>此外，这种索引在用作切片时，得到的结果将包含后端的值：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s01<span token="symbol">[</span><span token="symbol">'</span><span style="color: #91b859;">b</span><span token="symbol">'</span><span token="symbol">:</span><span token="symbol">'</span><span style="color: #91b859;">d</span><span token="symbol">'</span><span token="symbol">]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">b    1
+c    2
+d    3
+dtype: int32</div>
+</div>
+
+<p>这样做的好处是不用明白它后一项的索引是什么。但如果索引有重复的话，将不能用于切片操作：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span token="keyword">try</span><span token="symbol">:</span></div><div>&#160; &#160; s02<span token="symbol">[</span><span token="symbol">'</span><span style="color: #91b859;">a</span><span token="symbol">'</span><span token="symbol">:</span><span token="symbol">'</span><span style="color: #91b859;">b</span><span token="symbol">'</span><span token="symbol">]</span></div><div><span token="keyword">except</span> <span style="color: #8796b0;">Exception</span> <span token="keyword">as</span> e<span token="symbol">:</span></div><div>&#160; &#160; <span style="color: #6182b8;">print</span><span token="symbol">(</span><span style="color: #8796b0;">type</span><span token="symbol">(</span>e<span token="symbol">),</span> e<span token="symbol">)</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">&lt;class 'KeyError'> "Cannot get right slice bound for non-unique label: 'b'"</div>
+</div>
+
+<p>这种索引机制可能会导致数据获取的不便。但实际上，<code>Series</code> 依然保留了 <var type="module">numpy</var> 数组从零开始、切片时前闭后开的隐式索引：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s01<span token="symbol">[</span><span token="number">1</span><span token="symbol">]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">1</div>
+
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s01<span token="symbol">[</span><span token="number">1</span><span token="symbol">:</span><span token="number">3</span><span token="symbol">]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">b    1
+c    2
+dtype: int32</div>
+</div>
+
+<p>这两种索引方式很容易造成混淆，尤其是使用自定义整数作索引时，它可能会覆盖隐式索引，使得某些操作失效：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s03 <span style="color: #7c4dff;">=</span> pd<span token="symbol">.</span>Series<span token="symbol">(</span>np<span token="symbol">.</span>arange<span token="symbol">(</span><span token="number">4</span><span token="symbol">),</span> <span style="color: #e53935;">index</span><span style="color: #7c4dff;">=</span>np<span token="symbol">.</span>arange<span token="symbol">(</span><span token="number">1</span><span token="symbol">,</span> <span token="number">5</span><span token="symbol">))</span></div><div><span token="keyword">try</span><span token="symbol">:</span></div><div>&#160; &#160; s03<span token="symbol">[</span>s03<span token="symbol">.</span>argmin<span token="symbol">()]</span></div><div><span token="keyword">except</span> <span style="color: #8796b0;">Exception</span> <span token="keyword">as</span> e<span token="symbol">:</span></div><div>&#160; &#160; <span style="color: #6182b8;">print</span><span token="symbol">(</span><span style="color: #8796b0;">type</span><span token="symbol">(</span>e<span token="symbol">),</span> e<span token="symbol">)</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">&lt;class 'KeyError'> 0</div>
+</div>
+
+<p>因此 <var type="module">pandas</var> 提供了一些<strong>索引器</strong>作为取值的方法，它们是 <code>Series</code> 对象暴露取值与切片接口的属性。</p>
+
+<p>第一种索引器是 <code>.loc</code> 属性，表示用的是自定义、可重复、类型不限、切片时包含两端的显式索引：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s01<span token="symbol">.</span>loc<span token="symbol">[</span><span token="symbol">'</span><span style="color: #91b859;">a</span><span token="symbol">'</span><span token="symbol">:</span><span token="symbol">'</span><span style="color: #91b859;">b</span><span token="symbol">'</span><span token="symbol">]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">a    0
+b    1
+dtype: int32</div>
+
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span token="keyword">try</span><span token="symbol">:</span></div><div>&#160; &#160; s01<span token="symbol">.</span>loc<span token="symbol">[</span><span token="number">1</span><span token="symbol">]</span></div><div><span token="keyword">except</span> <span style="color: #8796b0;">KeyError</span> <span token="keyword">as</span> e<span token="symbol">:</span></div><div>&#160; &#160; <span style="color: #6182b8;">print</span><span token="symbol">(</span>e<span token="symbol">)</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">1</div>
+</div>
+
+<p>第二种索引器是 <code>.iloc</code> 属性，表示用的是从 0 开始、切片前闭后开的整数隐式(<span style="font-weight: bold;">i</span>mplicit)索引：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s03<span token="symbol">.</span>iloc<span token="symbol">[</span>s03<span token="symbol">.</span>argmin<span token="symbol">()]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">0</div>
+</div>
+
+<p>这两种索引器独立工作，不能混用，因此可以各自用于需要的场景中。</p>
+
+<h3>DataFrame与索引</h3>
+
+<p>之前说过 <code>DataFrame</code> 也可以看作一种字典，它提供了列索引与 <code>Series</code> 对的映射，因此可以使用字典一样的方式由列索引获取一个 <code>Series</code> ：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>df01 <span style="color: #7c4dff;">=</span> pd<span token="symbol">.</span>DataFrame<span token="symbol">(</span></div><div>&#160; &#160; <span token="symbol">{</span><span token="symbol">'</span><span style="color: #91b859;">units</span><span token="symbol">'</span><span token="symbol">:</span> <span token="symbol">{</span><span token="symbol">'</span><span style="color: #91b859;">pencil</span><span token="symbol">'</span><span token="symbol">:</span> <span token="number">95</span><span token="symbol">,</span> <span token="symbol">'</span><span style="color: #91b859;">binder</span><span token="symbol">'</span><span token="symbol">:</span> <span token="number">30</span><span token="symbol">,</span> <span token="symbol">'</span><span style="color: #91b859;">paperclip</span><span token="symbol">'</span><span token="symbol">:</span> <span token="number">81</span><span token="symbol">},</span></div><div>&#160; &#160; &#160;<span token="symbol">'</span><span style="color: #91b859;">unitcost</span><span token="symbol">'</span><span token="symbol">:</span> <span token="symbol">{</span><span token="symbol">'</span><span style="color: #91b859;">pencil</span><span token="symbol">'</span><span token="symbol">:</span> <span token="number">1.99</span><span token="symbol">,</span> <span token="symbol">'</span><span style="color: #91b859;">binder</span><span token="symbol">'</span><span token="symbol">:</span> <span token="number">19.99</span><span token="symbol">,</span> <span token="symbol">'</span><span style="color: #91b859;">paperclip</span><span token="symbol">'</span><span token="symbol">:</span> <span token="number">4.99</span><span token="symbol">}})</span></div><div>df01</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><table class="pandas-dataframe">
+        <tr>
+            <th></th><th>units</th><th>unitcost</th>
+        </tr>
+        <tr>
+            <td>pencil</td><td>95</td><td>1.99</td>
+        </tr>
+        <tr>
+            <td>binder</td><td>30</td><td>19.99</td>
+        </tr>
+        <tr>
+            <td>paperclip</td><td>81</td><td>4.99</td>
+        </tr>
+    </table></div>
+
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>df01<span token="symbol">[</span><span token="symbol">'</span><span style="color: #91b859;">unitcost</span><span token="symbol">'</span><span token="symbol">]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">pencil        1.99
+binder       19.99
+paperclip     4.99
+Name: unitcost, dtype: float64</div>
+</div>
+
+<p>和前面介绍的 <code>Series</code> 对象一样，也可以用 item assignment 增加一列：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>df01<span token="symbol">[</span><span token="symbol">'</span><span style="color: #91b859;">total</span><span token="symbol">'</span><span token="symbol">]</span> <span style="color: #7c4dff;">=</span> df01<span token="symbol">[</span><span token="symbol">'</span><span style="color: #91b859;">units</span><span token="symbol">'</span><span token="symbol">]</span> <span style="color: #7c4dff;">*</span> df01<span token="symbol">[</span><span token="symbol">'</span><span style="color: #91b859;">unitcost</span><span token="symbol">'</span><span token="symbol">]</span></div><div>df01</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><table class="pandas-dataframe">
+        <tr>
+            <th></th><th>units</th><th>unitcost</th><th>total</th>
+        </tr>
+        <tr>
+            <td>pencil</td><td>95</td><td>1.99</td><td>189.05</td>
+        </tr>
+        <tr>
+            <td>binder</td><td>30</td><td>19.99</td><td>599.70</td>
+        </tr>
+        <tr>
+            <td>paperclip</td><td>81</td><td>4.99</td><td>404.19</td>
+        </tr>
+    </table></div>
+</div>
+
+<p>因此对列索引而言，它和 <code>Series</code> 的索引机制比较像。但是由于 <code>DataFrame</code> 行列都有索引，因此单级的显式索引只能作用于列，否则操作很容易引起歧义。</p>
+
+<p>除此之外，直接对行或列应用隐式索引会引起错误。从概念上来说，对行和列的隐式索引容易存在误解：如果将 <code>DataFrame</code> 看作结构数组，那么一列就代表一个结构成员，列与列之间并没有严格的先后关系，直接取第几列这种操作无法让人明白其意图。而行虽然没有这种误解，但是会产生一个更关键的问题：直接取某一行使得行索引不再被用到而丢弃，返回一个 <code>Series</code> ，但是 <code>Series</code> 要求所有元素的类型一致，而一个结构各成员间往往有着各自各样的类型，强行统一它们的类型会造成类型提升，为后续操作带来更多问题。</p>
+
+<p>一种特殊的情况是切片。切片将会保留行索引，得到的仍然是一个 <code>DataFrame</code> 。如果切片涉及的范围只有一行，那么就基本等价于获取 <code>DataFrame</code> 的某一行（虽然得到的仍然是一个二维数组）：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>df01<span token="symbol">[</span><span token="number">0</span><span token="symbol">:</span><span token="number">1</span><span token="symbol">]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><table class="pandas-dataframe">
+        <tr>
+            <th></th><th>units</th><th>unitcost</th><th>total</th>
+        </tr>
+        <tr>
+            <td>pencil</td><td>95</td><td>1.99</td><td>189.05</td>
+        </tr>
+    </table></div>
+</div>
+
+<p>因此，除了对列应用显式索引外，其它形式的索引不仅应该使用索引器，而且应该使用 <var type="module">numpy</var> 高维数组的索引方式。</p>
+
+<p>例如，以下使用隐式索引器获取 <code>DataFrame</code> 的元素。这里在代表取值的方括号内传入了一个元组，第一个元素指代行的隐式索引，第二个元素指代列的隐式索引：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>df01<span token="symbol">.</span>iloc<span token="symbol">[</span><span token="number">2</span><span token="symbol">,</span> <span token="number">1</span><span token="symbol">]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">4.99</div>
+</div>
+
+<p>根据隐式索引的规则，获取的应该是第 3 行第 2 列位置的元素。</p>
+
+<p>再如，以下使用显式索引器得到指定几行的元素。这里对行应用数组索引，对列使用单个冒号 <code>:</code> 表示全部切片：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>df01<span token="symbol">.</span>loc<span token="symbol">[[</span><span token="symbol">'</span><span style="color: #91b859;">pencil</span><span token="symbol">'</span><span token="symbol">,</span> <span token="symbol">'</span><span style="color: #91b859;">paperclip</span><span token="symbol">'</span><span token="symbol">],</span> <span token="symbol">:]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><table class="pandas-dataframe">
+        <tr>
+            <th></th><th>units</th><th>unitcost</th><th>total</th>
+        </tr>
+        <tr>
+            <td>pencil</td><td>95</td><td>1.99</td><td>189.05</td>
+        </tr>
+        <tr>
+            <td>paperclip</td><td>81</td><td>4.99</td><td>404.19</td>
+        </tr>
+    </table></div>
+</div>
+
+<p>最后，下图总结了 <code>DataFrame</code> 的索引：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2023/03/09-dataframe-indexes.png" alt="" width="520">
+</figure>
+
+<h2>层级索引</h2>
+
+<h3>层级索引的概念</h3>
+
+通过之前的介绍可以认识到，<code>DataFrame</code> 是一种二维的结构。但有些时候，处理的数据可能不止两个维度。例如，在操作 Excel 时，经常可以看到这样的表格：
+
+<table>
+    <tr>
+        <th></th><th></th>
+        <th colspan="2">2021</th><th colspan="2">2022</th>
+    </tr>
+    <tr>
+        <th></th><th></th>
+        <th>mid term</th><th>end of term</th>
+        <th>mid term</th><th>end of term</th>
+    </tr>
+    <tr>
+        <td rowspan="3">grade 1</td>
+        <td>class 1</td>
+        <td>86</td><td>88</td>
+        <td>89</td><td>90</td>
+    </tr>
+    <tr>
+        <td>class 2</td>
+        <td>88</td><td>87</td>
+        <td>91</td><td>89</td>
+    </tr>
+    <tr>
+        <td>class 3</td>
+        <td>84</td><td>86</td>
+        <td>86</td><td>85</td>
+    </tr>
+    <tr>
+        <td rowspan="3">grade 2</td>
+        <td>class 1</td>
+        <td>86</td><td>94</td>
+        <td>90</td><td>91</td>
+    </tr>
+    <tr>
+        <td>class 2</td>
+        <td>85</td><td>84</td>
+        <td>87</td><td>91</td>
+    </tr>
+    <tr>
+        <td>class 3</td>
+        <td>87</td><td>91</td>
+        <td>90</td><td>90</td>
+    </tr>
+</table>
+
+<p>这种数据可以从四个维度聚合：对列来说，可以得出每个年度的得分平均值，也可以得出历年期中和期末的得分平均值；对行也是同理。只凭借二维数据无法实现这样的关系，这时就需要使用层级索引。层级索引可以从多个角度来描述数据的分组。</p>
+
+<p><var type="module">pandas</var> 中的索引类型不仅限于数值和字符串，甚至还能使用元组，例如：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>i01 <span style="color: #7c4dff;">=</span> <span token="symbol">[(</span><span token="symbol">'</span><span style="color: #91b859;">A</span><span token="symbol">'</span><span token="symbol">,</span> <span token="number">1</span><span token="symbol">),</span> <span token="symbol">(</span><span token="symbol">'</span><span style="color: #91b859;">A</span><span token="symbol">'</span><span token="symbol">,</span> <span token="number">2</span><span token="symbol">),</span> <span token="symbol">(</span><span token="symbol">'</span><span style="color: #91b859;">A</span><span token="symbol">'</span><span token="symbol">,</span> <span token="number">3</span><span token="symbol">),</span></div><div>&#160; &#160; &#160; &#160;<span token="symbol">(</span><span token="symbol">'</span><span style="color: #91b859;">B</span><span token="symbol">'</span><span token="symbol">,</span> <span token="number">1</span><span token="symbol">),</span> <span token="symbol">(</span><span token="symbol">'</span><span style="color: #91b859;">B</span><span token="symbol">'</span><span token="symbol">,</span> <span token="number">2</span><span token="symbol">),</span> <span token="symbol">(</span><span token="symbol">'</span><span style="color: #91b859;">B</span><span token="symbol">'</span><span token="symbol">,</span> <span token="number">3</span><span token="symbol">)]</span></div><div>s03 <span style="color: #7c4dff;">=</span> pd<span token="symbol">.</span>Series<span token="symbol">([</span><span token="number">1341</span><span token="symbol">,</span> <span token="number">1412</span><span token="symbol">,</span> <span token="number">1263</span><span token="symbol">,</span> <span token="number">643</span><span token="symbol">,</span> <span token="number">632</span><span token="symbol">,</span> <span token="number">685</span><span token="symbol">],</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #e53935;">index</span><span style="color: #7c4dff;">=</span>i01<span token="symbol">)</span></div><div>s03</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">(A, 1)    1341
+(A, 2)    1412
+(A, 3)    1263
+(B, 1)     643
+(B, 2)     632
+(B, 3)     685
+dtype: int64</div>
+</div>
+
+<p>元组表示存储了多个值，是多级索引的基础。<var type="module">pandas</var> 的 <code>MultiIndex</code> 类提供了更丰富的操作方法。可以用它的类方法从元组创建一个多级索引：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>i02 <span style="color: #7c4dff;">=</span> pd<span token="symbol">.</span>MultiIndex<span token="symbol">.</span>from_tuples<span token="symbol">(</span>i01<span token="symbol">,</span> <span style="color: #e53935;">names</span><span style="color: #7c4dff;">=</span><span token="symbol">[</span><span token="symbol">'</span><span style="color: #91b859;">class</span><span token="symbol">'</span><span token="symbol">,</span> <span token="symbol">'</span><span style="color: #91b859;">group</span><span token="symbol">'</span><span token="symbol">])</span></div></div>
+</div>
+
+<p>通过 <code><em>names</em></code> 参数可以为这两个层级指定名称，方面区分各索引层。层级名称会保存到索引对象的 <code>.names</code> 属性中。</p>
+
+<p>如果将前面创建的 <code>Series</code> 对象使用 <code>.reindex()</code> 方法将它的索引重置为 <code>MultiIndex</code> 对象，就会看到一个层级索引结构：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s03 <span style="color: #7c4dff;">=</span> s03<span token="symbol">.</span>reindex<span token="symbol">(</span><span style="color: #e53935;">index</span><span style="color: #7c4dff;">=</span>i02<span token="symbol">)</span></div><div>s03</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">class  group
+A      1        1341
+       2        1412
+       3        1263
+B      1         643
+       2         632
+       3         685
+dtype: int64</div>
+</div>
+
+<p>关于层级索引，需要记住的是：层级索引可以看作一个元素对应多个索引，或者说一个索引元组。如果检查层级索引的 <code>.values</code> 属性，会发现每个索引都使用多个值来描述：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s03<span token="symbol">.</span>index<span token="symbol">.</span>values</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">array([('A', 1), ('A', 2), ('A', 3), ('B', 1), ('B', 2), ('B', 3)],
+      dtype=object)</div>
+</div>
+
+<p>因此在获取元素的时候，也需要通过多个值，或者说一个元组来获取：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s03<span token="symbol">[(</span><span token="symbol">'</span><span style="color: #91b859;">A</span><span token="symbol">'</span><span token="symbol">,</span> <span token="number">2</span><span token="symbol">)]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">1412</div>
+</div>
+
+<p>多个值或一个元组构成的索引也可以用于切片。除了索引由一个值变成一个元组外，均遵循一维 <code>Series</code> 的切片规则，例如可以使用显式索引器 <code>.loc</code> ：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s03<span token="symbol">.</span>loc<span token="symbol">[(</span><span token="symbol">'</span><span style="color: #91b859;">A</span><span token="symbol">'</span><span token="symbol">,</span> <span token="number">2</span><span token="symbol">):(</span><span token="symbol">'</span><span style="color: #91b859;">B</span><span token="symbol">'</span><span token="symbol">,</span> <span token="number">1</span><span token="symbol">)]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">class  group
+A      2        1412
+       3        1263
+B      1         643
+dtype: int64</div>
+</div>
+
+<p>显式索引器使切片包含两端的元素。返回检查层级索引的 <code>.values</code> 属性可以发现，包含两端的元素确实是 3 个。</p>
+
+<p>这里需要注意，如果层级索引不是有序的，那么大多数切片操作都会失败。以下演示一种会导致错误的操作：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>rand <span style="color: #7c4dff;">=</span> np<span token="symbol">.</span>random<span token="symbol">.</span>RandomState<span token="symbol">(</span><span token="number">3</span><span token="symbol">)</span></div><div>s04 <span style="color: #7c4dff;">=</span> pd<span token="symbol">.</span>Series<span token="symbol">(</span>rand<span token="symbol">.</span>rand<span token="symbol">(</span><span token="number">6</span><span token="symbol">),</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #e53935;">index</span><span style="color: #7c4dff;">=</span>pd<span token="symbol">.</span>MultiIndex<span token="symbol">.</span>from_product<span token="symbol">([[</span><span token="symbol">'</span><span style="color: #91b859;">C</span><span token="symbol">'</span><span token="symbol">,</span> <span token="symbol">'</span><span style="color: #91b859;">B</span><span token="symbol">'</span><span token="symbol">,</span> <span token="symbol">'</span><span style="color: #91b859;">A</span><span token="symbol">'</span><span token="symbol">],</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="symbol">[</span><span token="number">1</span><span token="symbol">,</span> <span token="number">2</span><span token="symbol">]]))</span></div></div>
+
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span token="keyword">try</span><span token="symbol">:</span></div><div>&#160; &#160; s04<span token="symbol">.</span>loc<span token="symbol">[(</span><span token="symbol">'</span><span style="color: #91b859;">C</span><span token="symbol">'</span><span token="symbol">,</span> <span token="number">2</span><span token="symbol">):(</span><span token="symbol">'</span><span style="color: #91b859;">A</span><span token="symbol">'</span><span token="symbol">,</span> <span token="number">1</span><span token="symbol">)]</span></div><div><span token="keyword">except</span> <span style="color: #8796b0;">Exception</span> <span token="keyword">as</span> e<span token="symbol">:</span></div><div>&#160; &#160; <span style="color: #6182b8;">print</span><span token="symbol">(</span><span style="color: #8796b0;">type</span><span token="symbol">(</span>e<span token="symbol">))</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">&lt;class 'pandas.errors.UnsortedIndexError'></div>
+</div>
+
+<p>问题出在切片和许多其它相似的操作都要求 <code>MultiIndex</code> 的各级索引是有序的。为此，<var type="module">pandas</var> 提供了一些操作可以实现对索引的排序，最简单的方法是 <code>.sort_index()</code> ：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s04<span token="symbol">.</span>sort_index<span token="symbol">(</span><span style="color: #e53935;">inplace</span><span style="color: #7c4dff;">=</span><span token="number">True</span><span token="symbol">)</span></div><div>s04<span token="symbol">.</span>loc<span token="symbol">[(</span><span token="symbol">'</span><span style="color: #91b859;">B</span><span token="symbol">'</span><span token="symbol">,</span> <span token="number">2</span><span token="symbol">):(</span><span token="symbol">'</span><span style="color: #91b859;">C</span><span token="symbol">'</span><span token="symbol">,</span> <span token="number">2</span><span token="symbol">)]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">B  2    0.510828
+C  1    0.550798
+   2    0.708148
+dtype: float64</div>
+</div>
+
+<p>经过索引排序后的切片结果就正常了。这里再次使用 <code><em>inplace</em></code> 参数来提醒默认情况下排序后得到的是一个新的对象，而不是在原有对象的基础上做修改。</p>
+
+<p>层级索引相比普通的索引，索引类型由一个值变为多个值（或者说一个元组）。这看似多此一举，但是它允许从不同层面来处理一维的数据。如果访问层级索引的 <code>.level</code> 属性，可以得到：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s03<span token="symbol">.</span>index<span token="symbol">.</span>levels</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">FrozenList([['A', 'B'], [1, 2, 3]])</div>
+</div>
+
+<p>这说明该层级索引有两层：从索引的角度看，第一层有 2 种不同的索引，第二层有 3 种不同的索引；从数据的角度看，根据第一层索引可以将数据分为 2 类，根据第二层可以将数据分为 3 类。因此数据在聚合、变换时，可以根据不同的索引层级，从不同的<em>角度</em>处理。例如，对于以上具有层级索引的 <code>Series</code> ，可以统计每个 <code>"class"</code> 的数值平均值：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s03<span token="symbol">.</span>sum<span token="symbol">(</span><span style="color: #e53935;">level</span><span style="color: #7c4dff;">=</span><span token="symbol">'</span><span style="color: #91b859;">class</span><span token="symbol">'</span><span token="symbol">)</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">class
+A    4016
+B    1960
+dtype: int64</div>
+</div>
+
+<p>新版本的 <var type="module">pandas</var> 可能已经弃用了这种使用方式，或者抛出 <code>FutureWarning</code> ，提示说应该使用对表作分组计算后再合并，这就是以后介绍的内容了。</p>
+
+<p>具有层级索引的 <code>Series</code> 很像一个 <code>DataFrame</code> 。事实上，使用对象的 <code>.unstack()</code> 方法可以将一个多级索引的 <code>Series</code> 转化为普通索引的 <code>DataFrame</code> ：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s03<span token="symbol">.</span>unstack<span token="symbol">()</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><table class="pandas-dataframe">
+        <tr>
+            <th></th><th>group</th><th>1</th><th>2</th><th>3</th>
+        </tr>
+        <tr>
+            <td>class</td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>A</td><td>1341</td><td>1412</td><td>1263</td>
+        </tr>
+        <tr>
+            <td>B</td><td>643</td><td>632</td><td>685</td>
+        </tr>
+    </table></div>
+</div>
+
+<p>或者使用 <code>.stack()</code> 方法实现相反的效果，将一个 <code>DataFrame</code> 变成具有多级索引的 <code>Series</code> 。 既然可以用含多级索引的一维 <code>Series</code> 数据表示二维数据，那么就可以用 <code>Series</code> 或 <code>DataFrame</code> 表示三维甚至更高维度的数据。借助多级索引，可以使三维及以上的数据以一种较为易读的形式表示出来。层级索引每增加一层，就表示数据增加一维，使得 <code>DataFrame</code> 可以表示任意维度的数据。因此 <var type="module">pandas</var> 并没有提供三维及以上的数量类型。</p>
+
+<h3>DataFrame与层级索引</h3>
+
+<p>在 <code>DataFrame</code> 使用层级索引和在 <code>Series</code> 上使用层级索引是一致的，只不过列索引和行索引都可以设置为层级索引。</p>
+
+<p>以下创建一个较为复杂的、行列都具有两级索引的 <code>DataFrame</code> 用于演示：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>df03 <span style="color: #7c4dff;">=</span> pd<span token="symbol">.</span>DataFrame<span token="symbol">(</span>rand<span token="symbol">.</span>randint<span token="symbol">(</span><span token="number">50</span><span token="symbol">,</span> <span token="number">95</span><span token="symbol">,</span> <span style="color: #e53935;">size</span><span style="color: #7c4dff;">=</span><span token="symbol">(</span><span token="number">4</span><span token="symbol">,</span> <span token="number">6</span><span token="symbol">)),</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #e53935;">index</span><span style="color: #7c4dff;">=</span>pd<span token="symbol">.</span>MultiIndex<span token="symbol">.</span>from_product<span token="symbol">([[</span><span token="number">2020</span><span token="symbol">,</span> <span token="number">2021</span><span token="symbol">],</span> <span token="symbol">[</span><span token="number">1</span><span token="symbol">,</span> <span token="number">2</span><span token="symbol">]],</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;<span style="color: #e53935;">names</span><span style="color: #7c4dff;">=</span><span token="symbol">[</span><span token="symbol">'</span><span style="color: #91b859;">year</span><span token="symbol">'</span><span token="symbol">,</span> <span token="symbol">'</span><span style="color: #91b859;">term</span><span token="symbol">'</span><span token="symbol">]),</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #e53935;">columns</span><span style="color: #7c4dff;">=</span>pd<span token="symbol">.</span>MultiIndex<span token="symbol">.</span>from_product<span token="symbol">([[</span><span token="symbol">'</span><span style="color: #91b859;">Tim</span><span token="symbol">'</span><span token="symbol">,</span> <span token="symbol">'</span><span style="color: #91b859;">Mary</span><span token="symbol">'</span><span token="symbol">,</span> <span token="symbol">'</span><span style="color: #91b859;">John</span><span token="symbol">'</span><span token="symbol">],</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="symbol">[</span><span token="symbol">'</span><span style="color: #91b859;">math</span><span token="symbol">'</span><span token="symbol">,</span> <span token="symbol">'</span><span style="color: #91b859;">physics</span><span token="symbol">'</span><span token="symbol">]],</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;<span style="color: #e53935;">names</span><span style="color: #7c4dff;">=</span><span token="symbol">[</span><span token="symbol">'</span><span style="color: #91b859;">name</span><span token="symbol">'</span><span token="symbol">,</span> <span token="symbol">'</span><span style="color: #91b859;">subject</span><span token="symbol">'</span><span token="symbol">])</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="symbol">)</span></div><div>df03</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><table class="pandas-dataframe">
+        <tr>
+            <th></th><th>name</th><th colspan="2">Tim</th><th colspan="2">Mary</th><th colspan="2">John</th>
+        </tr>
+        <tr>
+            <th></th><th>subject</th><th>math</th><th>physics</th><th>math</th><th>physics</th><th>math</th><th>physics</th>
+        </tr>
+        <tr>
+            <th>year</th><th>term</th><td></td><td></td><td></td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td rowspan="2">2020</td><td>1</td><td>92</td><td>74</td><td>53</td><td>58</td><td>50</td><td>71</td>
+        </tr>
+        <tr>
+            <td>2</td><td>69</td><td>60</td><td>93</td><td>91</td><td>60</td><td>71</td>
+        </tr>
+        <tr>
+            <td rowspan="2">2021</td><td>1</td><td>88</td><td>82</td><td>70</td><td>94</td><td>79</td><td>89</td>
+        </tr>
+        <tr>
+            <td>2</td><td>64</td><td>76</td><td>67</td><td>76</td><td>72</td><td>52</td>
+        </tr>
+    </table></div>
+</div>
+
+<p>对 <code>DataFrame</code> 索引和 <code>Series</code> 基本一致，需要通过元组形式的索引来获取一个 <code>Series</code> ，并会保留行的层级索引：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>df03<span token="symbol">[(</span><span token="symbol">'</span><span style="color: #91b859;">John</span><span token="symbol">'</span><span token="symbol">,</span> <span token="symbol">'</span><span style="color: #91b859;">math</span><span token="symbol">'</span><span token="symbol">)]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">year  term
+2020  1       50
+      2       60
+2021  1       79
+      2       72
+Name: (John, math), dtype: int32</div>
+</div>
+
+<p>索引器和切片的用法都是一致的：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>df03<span token="symbol">.</span>loc<span token="symbol">[(</span><span token="number">2020</span><span token="symbol">,</span> <span token="number">1</span><span token="symbol">):(</span><span token="number">2020</span><span token="symbol">,</span> <span token="number">2</span><span token="symbol">),</span> <span token="symbol">[(</span><span token="symbol">'</span><span style="color: #91b859;">John</span><span token="symbol">'</span><span token="symbol">,</span> <span token="symbol">'</span><span style="color: #91b859;">math</span><span token="symbol">'</span><span token="symbol">),</span> <span token="symbol">(</span><span token="symbol">'</span><span style="color: #91b859;">Mary</span><span token="symbol">'</span><span token="symbol">,</span> <span token="symbol">'</span><span style="color: #91b859;">math</span><span token="symbol">'</span><span token="symbol">)]]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><table class="pandas-dataframe">
+        <tr>
+            <th></th><th>name</th><th>John</th><th>Mary</th>
+        </tr>
+        <tr>
+            <th>subject</th><th>math</th><th>math</th>
+        </tr>
+        <tr>
+            <th>year</th><th>term</th><th></th><td></td>
+        </tr>
+        <tr>
+            <td>2020</td><td>1</td><td>50</td><td>53</td><td></td>
+        </tr>
+        <tr>
+            <td></td><td>2</td><td>60</td><td>93</td>
+        </tr>
+    </table></div>
+</div>
+
+<p>不过这种索引元组的用法不是很方便，因为这个 <code>DataFrame</code> 实际上可以看作四维数据，但是只能在两个维度上切片。如果想获取所有人在第 1 学期的数学成绩，那么可能需要这样的索引：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>df03<span token="symbol">.</span>loc<span token="symbol">[(:,</span> <span token="number">1</span><span token="symbol">),</span> <span token="symbol">(:,</span> <span token="symbol">'</span><span style="color: #91b859;">math</span><span token="symbol">'</span><span token="symbol">)]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">  Cell In [35], line 1
+        df03.loc[(:, 1), (:, 'math')]
+                  ^
+<span style="color: red;">SyntaxError</span>: invalid syntax</div>
+</div>
+
+<p>这是错误的用法，它会直接导致解释出错。为此，<var type="module">pandas</var> 提供了 <code>IndexSlice</code> 对象，专门用来解决高维 <code>DataFrame</code> 的切片问题，例如：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>Idx <span style="color: #7c4dff;">=</span> pd<span token="symbol">.</span>IndexSlice</div><div>df03<span token="symbol">.</span>loc<span token="symbol">[</span>Idx<span token="symbol">[:,</span> <span token="number">1</span><span token="symbol">],</span> Idx<span token="symbol">[:,</span> <span token="symbol">'</span><span style="color: #91b859;">math</span><span token="symbol">'</span><span token="symbol">]]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><table class="pandas-dataframe">
+        <tr>
+            <th></th><th>name</th><th>Tim</th><th>Mary</th><th>John</th>
+        </tr>
+        <tr>
+            <th></th><th>subject</th><th>math</th><th>math</th><th>math</th>
+        </tr>
+        <tr>
+            <td>year</td><td>term</td><td></td><td></td><td></td>
+        </tr>
+        <tr>
+            <td>2020</td><td>1</td><td>92</td><td>53</td><td>50</td>
+        </tr>
+        <tr>
+            <td>2021</td><td>1</td><td>88</td><td>70</td><td>79</td>
+        </tr>
+    </table></div>
+</div>
+
+<p>下图总结了 <code>DataFrame</code> 的层级索引：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2023/03/09-dataframe-multi-indexes.png" alt="" width="720">
+</figure>
+<p><a rel="nofollow" href="/archives/1048">Python数据分析-pandas03:深入认识索引</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/archives/1048/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>Python数据分析-pandas01:基本数据类型</title>
+		<link>/archives/1041</link>
+					<comments>/archives/1041#respond</comments>
+		
+		<dc:creator><![CDATA[Hello]]></dc:creator>
+		<pubDate>Mon, 27 Feb 2023 07:03:43 +0000</pubDate>
+				<category><![CDATA[数据处理]]></category>
+		<category><![CDATA[pandas]]></category>
+		<category><![CDATA[Python]]></category>
+		<guid isPermaLink="false">/?p=1041</guid>
+
+					<description><![CDATA[<p>Pandas简介 之前详细介绍了 NumPy 和它的&#46;&#46;&#46;</p>
+<p><a rel="nofollow" href="/archives/1041">Python数据分析-pandas01:基本数据类型</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<h2>Pandas简介</h2>
+
+<p><a href="/all/data-science">之前</a>详细介绍了 <var type="module">NumPy</var> 和它的 <code>ndarray</code> 多维数组对象，为 Python 多维数组提供了高效的存储和处理方法。</p>
+
+<p>本章基于前面的知识，继续学习 <a href="https://pandas.pydata.org/">Pandas</a> 库提供的数据操作方法。<code>Pandas</code> 是在 <code>NumPy</code> 基础上建立的另一个第三方库，提供了一种高效的 <code>DataFrame</code> 数据结构。<code>DataFrame</code> 本质上是一种带行标签和列标签、支持相同类型数据和缺失值的多维数组。<code>Pandas</code> 不仅为带各种标签的数据提供了便利的存储与展示接口，还实现了许多强大的计算、查找和分类等操作。</p>
+
+<p><var type="module">pandas</var> 在底层存储时使用的是 <var type="module">numpy</var> 的数组，因此在安装 <var type="module">pandas</var> 之前，需要确保已经安装了 <var type="module">numpy</var> 。</p>
+
+<p>在安装完成 <code>pandas</code> 之后，可以导入它检查一下版本号：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">import</span> pandas</div><div>pandas.__version__</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">'1.3.1'</div>
+</div>
+
+<p>和之前导入 <var type="module">numpy</var> 并使用别名 <code>np</code> 一样，之后将导入 <var type="module">pandas</var> 并使用别名 <code>pd</code> ：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">import</span> pandas <span style="color: #f76d47;">as</span> pd</div></div>
+</div>
+
+<h2>Pandas的数据对象</h2>
+
+<h3>Series对象</h3>
+
+<p><var type="module">pandas</var> 最简单的数据类型是 <code>Series</code> 。<code>Series</code> 对象是一个带索引数据构成的一维数组。可以用一个数组创建 <code>Series</code> 对象，如下所示：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s01 <span style="color: #7c4dff;">=</span> pd<span style="color: #39adb5;">.</span>Series<span style="color: #39adb5;">([</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">2</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">3</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">4</span><span style="color: #39adb5;">])</span></div><div>s01</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">0    1
+1    2
+2    3
+3    4
+dtype: int64</div>
+</div>
+
+<p><code>Series</code> 对象将一组数据和一组索引绑定在一起，可以通过 <code>.values</code> 属性获取数据，通过 <code>.index</code> 属性获取索引。<code>.values</code> 属性返回的结果就是底层的 <var type="module">numpy</var> 数组：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s01<span style="color: #39adb5;">.</span>values</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">array([1, 2, 3, 4], dtype=int64)</div>
+
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #6182b8;">isinstance</span><span style="color: #39adb5;">(</span>s01<span style="color: #39adb5;">.</span>values<span style="color: #39adb5;">,</span> np<span style="color: #39adb5;">.</span>ndarray<span style="color: #39adb5;">)</span></div></div>    
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">True</div>
+</div>
+
+<p><code>.index</code> 属性返回的结果是一个类型为 <code>Index</code> 的索引对象。索引是 <var type="module">pandas</var> 的特点之一，将在后面的内容里详细介绍它。</p>
+
+<p>和 <var type="module">numpy</var> 数组一样，可以通过中括号实现索引或切片：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s01<span style="color: #39adb5;">[</span><span style="color: #f76d47;">2</span><span style="color: #39adb5;">]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">3</div>
+
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s01<span style="color: #39adb5;">[</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">:</span><span style="color: #7c4dff;">-</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">1    2
+2    3
+3    4
+dtype: int64</div>
+</div>
+
+<p>这么看来，<var type="module">pandas</var> 的 <code>Series</code> 与 <var type="module">numpy</var> 的一维数组很类似。但 <code>Series</code> 为数组提供了一种更加强大的索引系统：<var type="module">numpy</var> 数组通过隐式定义的整数索引获取数值，而 <var type="module">pandas</var> 的 <code>Series</code> 对象用可以手动指定索引与数值关联。</p>
+
+<p>显式索引的定义让 <code>Series</code> 拥有了更好的可读性。例如，索引不再仅仅是整数，还可以是任意想要的类型。如果需要，完全可以用字符串定义索引：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s02 <span style="color: #7c4dff;">=</span> pd<span style="color: #39adb5;">.</span>Series<span style="color: #39adb5;">([</span><span style="color: #f76d47;">0.25</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">0.5</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">0.75</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">1.0</span><span style="color: #39adb5;">],</span> <span style="color: #e53935;">index</span><span style="color: #7c4dff;">=</span><span style="color: #39adb5;">[</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">a</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">,</span> <span style="color: #39adb5;">'</span><span style="color: #91b859;">b</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">,</span> <span style="color: #39adb5;">'</span><span style="color: #91b859;">c</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">,</span> <span style="color: #39adb5;">'</span><span style="color: #91b859;">d</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">])</span></div><div>s02</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">a    0.25
+b    0.50
+c    0.75
+d    1.00
+dtype: float64</div>
+</div>
+
+<p>在使用索引访问元素时，可以通过之前定义的字符索引获取数值：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s02<span style="color: #39adb5;">[</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">b</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">0.5</div>
+</div>
+
+<p>这种数值的访问形式很像 Python 字典，可以将每个索引作为键映射到一个值。因此可以直接使用 Python 的字典创建一个 <code>Series</code> 对象，让两者的类比更加清晰：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s03 <span style="color: #7c4dff;">=</span> pd<span style="color: #39adb5;">.</span>Series<span style="color: #39adb5;">({</span></div><div>&#160; &#160; <span style="color: #39adb5;">'</span><span style="color: #91b859;">key1</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span></div><div>&#160; &#160; <span style="color: #39adb5;">'</span><span style="color: #91b859;">key2</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">2</span><span style="color: #39adb5;">,</span></div><div>&#160; &#160; <span style="color: #39adb5;">'</span><span style="color: #91b859;">keyi</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">5</span><span style="color: #39adb5;">,</span></div><div>&#160; &#160; <span style="color: #39adb5;">'</span><span style="color: #91b859;">keyn</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">10</span></div><div><span style="color: #39adb5;">})</span></div></div>
+</div>
+
+<p>由于 Python3.6+ 的字典是有序的，因此创建的 <code>Series</code> 对象索引也默认按照顺序排列。</p>
+
+<p>除了可以使用像字典一样按键获取数值外，<code>Series</code> 的索引还可以用于切片操作：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s03<span style="color: #39adb5;">[</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">key2</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #39adb5;">'</span><span style="color: #91b859;">keyn</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">key2     2
+keyi     5
+keyn    10
+dtype: int64</div>
+</div>
+
+<p>这种切片是包括终点位置的元素的，这和普通的索引形式不同。后续会详细介绍这种索引规则。</p>
+
+<h3>DataFrame对象</h3>
+
+<p><var type="module">pandas</var> 的另一个基础数据结构是 <code>DataFrame</code> 。<code>DataFrame</code> 可以看作是一种二维数组，但它既有行索引，又有列索引，因此它经常被当做一个表格使用。注意，<code>DataFrame</code> 是 <var type="module">pandas</var> 的非常重要的一个数据类型，因为它可以很好地表达日常生活中处理的各种表格结构。<code>DataFrame</code> 与 Excel 中表格或 SQL 中表的概念非常相似，可以实现大多数 Excel 或 SQL 的表操作。</p>
+
+<p><code>DataFrame</code> 有许多创建方式，每种创建方式都代表着对它的理解。例如，和 <code>Series</code> 对象一样，<code>DataFrame</code> 可以看作一个更灵活的 <var type="module">numpy</var> 二维数组。因此可以直接使用二维数据创建 <code>DataFrame</code> ，只要手动指定符合形状的行列索引即可：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>df01 <span style="color: #7c4dff;">=</span> pd<span style="color: #39adb5;">.</span>DataFrame<span style="color: #39adb5;">(</span>np<span style="color: #39adb5;">.</span>arange<span style="color: #39adb5;">(</span><span style="color: #f76d47;">12</span><span style="color: #39adb5;">).</span>reshape<span style="color: #39adb5;">((</span><span style="color: #f76d47;">3</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">4</span><span style="color: #39adb5;">)),</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #e53935;">index</span><span style="color: #7c4dff;">=</span><span style="color: #6182b8;">range</span><span style="color: #39adb5;">(</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">4</span><span style="color: #39adb5;">),</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #e53935;">columns</span><span style="color: #7c4dff;">=</span><span style="color: #39adb5;">[</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">A</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">,</span> <span style="color: #39adb5;">'</span><span style="color: #91b859;">B</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">,</span> <span style="color: #39adb5;">'</span><span style="color: #91b859;">C</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">,</span> <span style="color: #39adb5;">'</span><span style="color: #91b859;">D</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">])</span></div><div>df01</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><table class="pandas-dataframe">
+        <tr>
+            <th></th><th>A</th><th>B</th><th>C</th><th>D</th>
+        </tr>
+        <tr>
+            <td>1</td><td>0</td><td>1</td><td>2</td><td>3</td>
+        </tr>
+        <tr>
+            <td>2</td><td>4</td><td>5</td><td>6</td><td>7</td>
+        </tr>
+        <tr>
+            <td>3</td><td>8</td><td>9</td><td>10</td><td>11</td>
+        </tr>
+    </table></div>
+</div>
+
+<p>也可以把 <code>DataFrame</code> 看成是一种结构数组，每行表示一个结构元素，行索引表示每个结构元素的索引，列索引则表示的是结构的字段名。因此，当然可以使用 <var type="module">numpy</var> 的结构数组来创建 <code>DataFrame</code> ：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>pd<span style="color: #39adb5;">.</span>DataFrame<span style="color: #39adb5;">(</span>np<span style="color: #39adb5;">.</span>zeros<span style="color: #39adb5;">(</span></div><div>&#160; &#160; <span style="color: #f76d47;">3</span><span style="color: #39adb5;">,</span> <span style="color: #e53935;">dtype</span><span style="color: #7c4dff;">=</span><span style="color: #39adb5;">[(</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">A</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">,</span> <span style="color: #39adb5;">'</span><span style="color: #91b859;">i8</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">),</span> <span style="color: #39adb5;">(</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">B</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">,</span> <span style="color: #39adb5;">'</span><span style="color: #91b859;">f8</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">)]))</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><table class="pandas-dataframe">
+        <tr>
+            <th></th><th>A</th><th>B</th>
+        </tr>
+        <tr>
+            <td>0</td><td>0</td><td>0.0</td>
+        </tr>
+        <tr>
+            <td>1</td><td>0</td><td>0.0</td>
+        </tr>
+        <tr>
+            <td>2</td><td>0</td><td>0.0</td>
+        </tr>
+    </table></div>
+</div>
+
+<p>结构数组的表述便于理解，但实际上可能会带来一些误解。例如，<code>DataFrame</code> 的索引和 <var type="module">numpy</var> 的二维数组索引不太一样：在 <var type="module">numpy</var> 的二维数组里，<code>arr[0]</code> 被认为是一个嵌套数组返回包含的第一个子数组；而在 <var type="module">pandas</var> 中，第一层索引得到的结果是一个列的数据：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>df01<span style="color: #39adb5;">[</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">A</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">1    0
+2    4
+3    8
+Name: A, dtype: int32</div>
+</div>
+
+<p>对 <code>DataFrame</code> 一种更好的理解方式是看作一个数组字典，每一个索引都可以看作是字典的一个键，对应一个列的数据；这些数据是一系列同种类型的数值，或者说一个 <code>Series</code> 。也就是说，<code>DataFrame</code> 是具有共同索引的若干 <code>Series</code> 对象组合。</p>
+
+<p>因此，使用单个 <code>Series</code> 创建的是一个单列的 <code>DataFrame</code> ：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>pd<span style="color: #39adb5;">.</span>DataFrame<span style="color: #39adb5;">(</span>pd<span style="color: #39adb5;">.</span>Series<span style="color: #39adb5;">(</span></div><div>&#160; &#160; <span style="color: #39adb5;">{</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">bread</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">279</span><span style="color: #39adb5;">,</span> <span style="color: #39adb5;">'</span><span style="color: #91b859;">biscuit</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">78</span><span style="color: #39adb5;">,</span> <span style="color: #39adb5;">'</span><span style="color: #91b859;">strawberry</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">26</span><span style="color: #39adb5;">}))</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><table class="pandas-dataframe">
+        <tr>
+            <th></th><th>0</th>
+        </tr>
+        <tr>
+            <td>bread</td><td>279</td>
+        </tr>
+        <tr>
+            <td>biscuit</td><td>78</td>
+        </tr>
+        <tr>
+            <td>strawberry</td><td>26</td>
+        </tr>
+    </table></div>
+</div>
+
+<p>如果能接受这种 <code>DataFrame</code> 的理解方式，不仅容易记住它的创建方式，也有助于明白对它的操作会得到什么样的结果。</p>
+
+<p>创建 <code>DataFrame</code> 的方式非常丰富，只要能表达出这种二维的 <span class="code-font">{column: series}</span> 的映射关系基本都可以用于创建它。例如，可以使用一组具有<em>相同索引</em>的 <code>Series</code> 对象创建它；由于 <code>Series</code> 可以被看作特殊的字典，因此也可以使用一个二维字典来创建一个 <code>DataFrame</code> 对象：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>price <span style="color: #7c4dff;">=</span> <span style="color: #39adb5;">{</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">cake</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">23</span><span style="color: #39adb5;">,</span> <span style="color: #39adb5;">'</span><span style="color: #91b859;">cookie</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">6</span><span style="color: #39adb5;">,</span> <span style="color: #39adb5;">'</span><span style="color: #91b859;">bread</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">10</span><span style="color: #39adb5;">}</span></div><div>sales <span style="color: #7c4dff;">=</span> <span style="color: #39adb5;">{</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">cake</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">5</span><span style="color: #39adb5;">,</span> <span style="color: #39adb5;">'</span><span style="color: #91b859;">cookie</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">14</span><span style="color: #39adb5;">,</span> <span style="color: #39adb5;">'</span><span style="color: #91b859;">bread</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">23</span><span style="color: #39adb5;">}</span></div><div>df02 <span style="color: #7c4dff;">=</span> pd<span style="color: #39adb5;">.</span>DataFrame<span style="color: #39adb5;">({</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">price</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> price<span style="color: #39adb5;">,</span> <span style="color: #39adb5;">'</span><span style="color: #91b859;">sales</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> sales<span style="color: #39adb5;">})</span></div><div>df02</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><table class="pandas-dataframe">
+        <tr>
+            <th></th><th>price</th><th>sales</th>
+        </tr>
+        <tr>
+            <td>cake</td><td>23</td><td>5</td>
+        </tr>
+        <tr>
+            <td>cookie</td><td>6</td><td>14</td>
+        </tr>
+        <tr>
+            <td>bread</td><td>10</td><td>23</td>
+        </tr>
+    </table></div>
+</div>
+
+<p>如果明白“<code>DataFrame</code> 是一组具有<em>相同索引</em>的 <code>Series</code> 对象组合”，就会知道字典的嵌套与被嵌套的关系：内层的字典应该要具有相同的键。</p>
+
+<p>如果能理解这种嵌套关系，那么就可以很自然地明白数据获取方式：第一次索引将以列索引值为键，得到一个列作为字典；第二次索引将以行索引值为键，从得到字典中获取相应的元素：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>df02<span style="color: #39adb5;">[</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">price</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">][</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">cookie</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">6</div>
+</div>
+
+<p>和 Python 字典一样，<code>Series</code> 和 <code>DataFrame</code> 还支持 item assignment ，对 <code>Series</code> 的操作结果是更新项或添加项，对 <code>DataFrame</code> 的操作结果是更新列或添加列：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>df02<span style="color: #39adb5;">[</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">sum</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">]</span> <span style="color: #7c4dff;">=</span> df02<span style="color: #39adb5;">[</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">price</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">]</span> <span style="color: #7c4dff;">*</span> df02<span style="color: #39adb5;">[</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">sales</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">]</span></div><div>df02</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><table class="pandas-dataframe">
+        <tr>
+            <th></th><th>price</th><th>sales</th><th>sum</th>
+        </tr>
+        <tr>
+            <td>cake</td><td>23</td><td>5</td><td>115</td>
+        </tr>
+        <tr>
+            <td>cookie</td><td>6</td><td>14</td><td>84</td>
+        </tr>
+        <tr>
+            <td>bread</td><td>10</td><td>23</td><td>230</td>
+        </tr>
+    </table></div>
+</div>
+
+<h3>Index对象</h3>
+
+<p><var type="module">pandas</var> 的 <code>Index</code> 对象是构成 <code>Series</code> 和 <code>DataFrame</code> 显式索引的基础。</p>
+
+<p><code>Series</code> 是一维的数据，因此需要一个 <code>Index</code> 对象用于获取数据，这个对象被保存在它的 <code>.index</code> 属性中。而二维的 <code>DataFrame</code> 需要两个 <code>Index</code> 对象来定位数据，它们分别是代表行的 <code>.index</code> 属性和代表列的 <code>.columns</code> 属性：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>df02<span style="color: #39adb5;">.</span>index</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">Index(['cake', 'cookie', 'bread'], dtype='object')</div>
+
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>df02<span style="color: #39adb5;">.</span>columns</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">Index(['price', 'sales'], dtype='object')</div>
+</div>
+
+<p><code>Index</code> 对象可以看作是一个不可变数组，因此可以像创建数组一样创建 <code>Index</code> 对象：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>i01 <span style="color: #7c4dff;">=</span> pd<span style="color: #39adb5;">.</span>Index<span style="color: #39adb5;">([</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">3</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">5</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">6</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">7</span><span style="color: #39adb5;">])</span></div><div>i01</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">Int64Index([1, 3, 5, 6, 7], dtype='int64')</div>
+</div>
+
+<p>除了没有那么丰富的创建方法外，<code>Index</code> 对象的许多属性与操作都像数组，例如索引与切片：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>i01<span style="color: #39adb5;">[[</span><span style="color: #f76d47;">0</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">2</span><span style="color: #39adb5;">]]</span> &#160;<span style="color: #a8a8a8;"># array indexing</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">Int64Index([1, 3, 5], dtype='int64')</div>
+
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>i01<span style="color: #39adb5;">[:</span><span style="color: #7c4dff;">-</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">:</span><span style="color: #f76d47;">2</span><span style="color: #39adb5;">]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">Int64Index([1, 5], dtype='int64')</div>
+</div>
+
+<p>两者之间的不同在于 <code>Index</code> 对象是不可变的，这种特征使得多个 <code>DataFrame</code> 等类型之间共享索引时更加安全，可以避免修改索引而破坏表的结构。</p>
+
+<p>一种对 <code>Index</code> 更精确的描述是<em>有序集合</em>。<var type="module">pandas</var> 对象被设计用于实现许多操作，如合并数据集，这就要求相同列之间需要合并。<code>Index</code> 对象遵循 Python 标准库的集合 <code>set</code> 数据结构的许多习惯用法，包括并集、交集、差集等：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>i02 <span style="color: #7c4dff;">=</span> pd<span style="color: #39adb5;">.</span>Index<span style="color: #39adb5;">([</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">3</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">5</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">7</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">9</span><span style="color: #39adb5;">])</span></div><div>i03 <span style="color: #7c4dff;">=</span> pd<span style="color: #39adb5;">.</span>Index<span style="color: #39adb5;">([</span><span style="color: #f76d47;">2</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">3</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">5</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">7</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">11</span><span style="color: #39adb5;">])</span></div><div>i02 <span style="color: #7c4dff;">&amp;</span> i03 &#160;<span style="color: #a8a8a8;"># intersection</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">Int64Index([3, 5, 7], dtype='int64')</div>
+
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>i02<span style="color: #39adb5;">.</span>union<span style="color: #39adb5;">(</span>i03<span style="color: #39adb5;">)</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">Int64Index([1, 2, 3, 5, 7, 9, 11], dtype='int64')</div>
+</div>
+
+<p>高版本的 <var type="module">pandas</var> 可能已经弃用了运算符重载的形式，或对其抛出警告，因此一般更推荐直接调用对象的方法实现这些运算。</p>
+<p><a rel="nofollow" href="/archives/1041">Python数据分析-pandas01:基本数据类型</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/archives/1041/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

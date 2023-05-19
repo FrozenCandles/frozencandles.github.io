@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>XPath归档 - 冰封残烛的个人小站</title>
+	<atom:link href="http://localhost/wordpress/archives/tag/xpath/feed?simply_static_page=3758" rel="self" type="application/rss+xml" />
+	<link></link>
+	<description>FrozenCandle&#039;s Personal Site</description>
+	<lastBuildDate>Sun, 25 Dec 2022 03:01:24 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2.1</generator>
+
+<image>
+	<url>/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg</url>
+	<title>XPath归档 - 冰封残烛的个人小站</title>
+	<link></link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>XPath简单入门</title>
+		<link>/archives/842</link>
+					<comments>/archives/842#respond</comments>
+		
+		<dc:creator><![CDATA[Hello]]></dc:creator>
+		<pubDate>Thu, 03 Nov 2022 14:55:49 +0000</pubDate>
+				<category><![CDATA[编程语言]]></category>
+		<category><![CDATA[XPath]]></category>
+		<guid isPermaLink="false">/?p=842</guid>
+
+					<description><![CDATA[<p>XPath简介 XPath 是一种用作解析 XML &#46;&#46;&#46;</p>
+<p><a rel="nofollow" href="/archives/842">XPath简单入门</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<h2>XPath简介</h2>
+
+<p>XPath 是一种用作解析 XML 并提取所要信息的语法，就像 CSS 选择器一样。XPath 也可以用于解析其它类 XML 的文档结构，例如 HTML 。在本节中也主要以 HTML 为例演示 Path 的各种解析结果。</p>
+
+<p>XPath 应用较为广泛，目前主流浏览器的开发者工具均支持使用 XPath 语法查找页面元素。XPath 解析速度较快，可以实现处理属性等许多 CSS 选择器无法实现的功能，但是语法较为复杂。</p>
+
+<p>本节使用 Python 的<a href="https://lxml.de/">第三方库 lxml</a> ，该库提供了丰富的工具用于解析 XML 和 HTML ，其中就包括 XPath 。<var>lxml</var> 底层使用 libxml2 等 C 语言库实现，因此处理速度非常快。</p>
+
+<p><var>lxml</var> 可以使用 <code>pip</code> 安装：</p>
+
+<div class="codeblock code-console">$ pip install lxml    
+</div>
+
+<p>解析 HTML 需要用到 <var>lxml</var> 中的 <var>etree</var> 模块：</p>
+
+<div class="vscode-block"><div><span style="color: #0991b6;font-weight: bold;">from</span> lxml <span style="color: #0991b6;font-weight: bold;">import</span> etree</div></div>
+
+<p>使用 <var>etree</var> 模块中的函数 <code>HTML()</code> ，可以用来将一段 HTML 文本字符串解析为存储 HTML 结构信息的类：</p>
+
+<div class="vscode-block"><div>html <span style="color: #7b30d0;">=</span> etree.HTML(html_str)</div><div><span style="color: #08134a;">print</span>(<span style="color: #dc3eb7;">type</span>(html))</div></div>
+
+<p>该函数对 HTML 支持很好，甚至可以处理有一定破损的 HTML 。以上代码执行结果为：</p>
+
+<div class="codeblock code-console">$ py lxml-xpath.py
+&lt;class 'lxml.etree._Element'>   
+</div>
+
+<p>可以使用该类的 <code>.xpath()</code> 方法来使用 XPath 语法解析。得到的结果是一个列表，包含解析得到的所有结果。</p>
+
+<p>接下来正式介绍 XPath 的语法。</p>
+
+<h2>XPath语法</h2>
+
+<h3>选取节点</h3>
+
+<p>HTML 等类 XML 文档都是使用树状的结构来表示文档。例如，对于以下简单的 HTML 文档：</p>
+
+<div class="vscode-block"><div><span style="color: #3e3e3e;">&lt;!</span><span style="color: #0444ac;">DOCTYPE</span> <span style="color: #df8618;">html</span><span style="color: #3e3e3e;">&gt;</span></div><div><span style="color: #3e3e3e;">&lt;</span><span style="color: #0444ac;">html</span><span style="color: #3e3e3e;">&gt;</span></div><div><span style="color: #3e3e3e;">&lt;</span><span style="color: #0444ac;">head</span><span style="color: #3e3e3e;">&gt;</span></div><div>&#160; &#160; <span style="color: #3e3e3e;">&lt;</span><span style="color: #0444ac;">meta</span> <span style="color: #df8618;">charset</span>=<span style="color: #d86db6;">"</span><span style="color: #a44185;">utf-8</span><span style="color: #d86db6;">"</span><span style="color: #3e3e3e;">&gt;</span></div><div>&#160; &#160; <span style="color: #3e3e3e;">&lt;</span><span style="color: #0444ac;">title</span><span style="color: #3e3e3e;">&gt;</span>page<span style="color: #3e3e3e;">&lt;/</span><span style="color: #0444ac;">title</span><span style="color: #3e3e3e;">&gt;</span></div><div><span style="color: #3e3e3e;">&lt;/</span><span style="color: #0444ac;">head</span><span style="color: #3e3e3e;">&gt;</span></div><div><span style="color: #3e3e3e;">&lt;</span><span style="color: #0444ac;">body</span><span style="color: #3e3e3e;">&gt;</span></div><div>&#160; &#160; <span style="color: #3e3e3e;">&lt;</span><span style="color: #0444ac;">p</span><span style="color: #3e3e3e;">&gt;</span>This is a simple <span style="color: #3e3e3e;">&lt;</span><span style="color: #0444ac;">strong</span><span style="color: #3e3e3e;">&gt;</span>HTML<span style="color: #3e3e3e;">&lt;/</span><span style="color: #0444ac;">strong</span><span style="color: #3e3e3e;">&gt;</span> page<span style="color: #3e3e3e;">&lt;/</span><span style="color: #0444ac;">p</span><span style="color: #3e3e3e;">&gt;</span></div><div><span style="color: #3e3e3e;">&lt;/</span><span style="color: #0444ac;">body</span><span style="color: #3e3e3e;">&gt;</span></div><div><span style="color: #3e3e3e;">&lt;/</span><span style="color: #0444ac;">html</span><span style="color: #3e3e3e;">&gt;</span></div></div>
+
+<p>那么它的所有元素构成的树状结构可以表示为：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/12/html-dom.png" alt="" width="300">
+</figure>
+
+<p>元素节点可以分为标签节点和文本节点。XPath 中通过一个斜杠 <code>/</code> 开头的标签名</p>
+
+<div class="codeblock code-template">
+    /<em>tag</em>
+</div>
+
+<p>来在文档树中向下<em>匹配</em>某一标签节点 <code><em>tag</em></code> 。通过堆叠这样的表示符号，即可表示若干节点的层级关系。</p>
+
+<p>注意，使用该语法时必须要从根节点处开始搜索，例如：</p>
+
+<div class="vscode-block"><div>html.xpath(<span style="color: #d86db6;">"</span><span style="color: #a44185;">/html/body/table/tbody/tr/td/a</span><span style="color: #d86db6;">"</span>)</div><div><span token="comment"># [&lt;Element a at 0x23ada3b7c40&gt;, ...]</span></div></div>
+
+<p>使用单个斜杠只能表示相邻的层级关系，但如果使用两个斜杠：</p>
+
+<div class="codeblock code-template">
+    //<em>tag</em>
+</div>
+
+<p>就可以跨越表示相差任意深度的层级关系。因此以上匹配（在不引起歧义的话）也可以由下列形式表达：</p>
+
+<div class="vscode-block"><div>html.xpath(<span style="color: #d86db6;">"</span><span style="color: #a44185;">//td/a</span><span style="color: #d86db6;">"</span>)</div><div>html.xpath(<span style="color: #d86db6;">"</span><span style="color: #a44185;">/html//td/a</span><span style="color: #d86db6;">"</span>)</div><div>html.xpath(<span style="color: #d86db6;">"</span><span style="color: #a44185;">/html//table//tr/td/a</span><span style="color: #d86db6;">"</span>)</div></div>
+
+<p>也可以将其拆分理解，标签名表示一个具体的标签节点，而单个斜杠 <code>/</code> 表示两个节点的只能具有父子关系，而两个斜杠 <code>//</code> 表示两个节点具有祖孙关系，中间可以相差若干级。</p>
+
+<p>除了使用具体的标签名外，还可以使用两个特殊的节点表示语法：</p>
+
+<p>可以使用一个点</p>
+
+<div class="codeblock code-template">
+    .
+</div>
+
+<p>来代表当前节点，或使用两个点</p>
+
+<div class="codeblock code-template">
+    ..
+</div>
+
+<p>来代表上一级节点。例如，以下可以搜索出与 <code>img</code> 标签同级的 <code>figcaption</code> 标签：</p>
+
+<div class="vscode-block"><div>html.xpath(<span style="color: #d86db6;">"</span><span style="color: #a44185;">/html/body/article//img/../figcaption</span><span style="color: #d86db6;">"</span>)</div></div>
+
+<p>这种表示节点关系的语法很像 Unix 的文件路径。</p>
+
+<hr>
+
+<p>在使用 <var>lxml</var> 处理文档的时候，很多时候都不能只使用一个 XPath 表达式就选中所有符合的元素，经常需要在处理到某一步后对结果做一些过滤后，再对符合条件的元素进一步处理。</p>
+
+<p>每次调用 <code>.xpath()</code> 方法得到的都是一个列表，其中包含所有匹配的节点。可以在过滤后对其中的节点对象再次应用 <code>.xpath()</code> 方法，但此时注意需要表明“从当前节点开始匹配”，即不能以单个斜杠 <code>/</code> 开头。以下演示了错误的情况和几种正确的表示方法：</p>
+
+<div class="vscode-block"><div><span style="color: #0991b6;font-weight: bold;">for</span> table <span style="color: #0991b6;font-weight: bold;">in</span> html.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">//article//table</span><span style="color: #d86db6;">'</span>):</div><div>&#160; &#160; table.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">/thead//th</span><span style="color: #d86db6;">'</span>) &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="comment"># incorrect</span></div><div>&#160; &#160; <span token="comment"># []</span></div><div>&#160; &#160; table.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">./tbody//td</span><span style="color: #d86db6;">'</span>) &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;<span token="comment"># correct, and recommended</span></div><div>&#160; &#160; <span token="comment"># [&lt;Element td at 0x202b8dab080&gt;, ...]</span></div><div>&#160; &#160; table.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">tbody//td</span><span style="color: #d86db6;">'</span>) &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;<span token="comment"># correct</span></div><div>&#160; &#160; <span token="comment"># [&lt;Element td at 0x202b8dab080&gt;, ...]</span></div><div>&#160; &#160; table.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">//article//table/tbody//td</span><span style="color: #d86db6;">'</span>) &#160; <span token="comment"># correct, but unnecessary</span></div><div>&#160; &#160; <span token="comment"># [&lt;Element td at 0x202b8dab080&gt;, ...]</span></div></div>
+
+<p>这种表示形式有点像 Unix 的相对路径表示，也是当前节点 <code>.</code> 常用的一种场合。</p>
+
+<p>在实际应用中，相比搜寻节点更需要提取节点包含的文本信息。前面说过文本也可以看作一种节点，这种节点可以使用</p>
+
+<div class="codeblock code-template">
+    text()
+</div>
+
+<p>代表一个标签元素内的文本内容。<var>lxml</var> 会将每一项包含的文本以字符串的形式放入返回的列表中。</p>
+
+<p>在使用 <code>text()</code> 的时候要注意，元素包含的缩进及换行也算在元素的文本内。有些元素的部分文本放在它的子元素内，例如这种：</p>
+
+<div class="vscode-block"><div><span style="color: #3e3e3e;">&lt;</span><span style="color: #0444ac;">p</span><span style="color: #3e3e3e;">&gt;</span>This is a simple <span style="color: #3e3e3e;">&lt;</span><span style="color: #0444ac;">strong</span><span style="color: #3e3e3e;">&gt;</span>HTML<span style="color: #3e3e3e;">&lt;/</span><span style="color: #0444ac;">strong</span><span style="color: #3e3e3e;">&gt;</span> page<span style="color: #3e3e3e;">&lt;/</span><span style="color: #0444ac;">p</span><span style="color: #3e3e3e;">&gt;</span></div></div>
+
+<p>那么需要使用两个斜杠才能将这部分内容一并提取出来，并且提取出的结果被子元素分割了：</p>
+
+<div class="vscode-block"><div>html.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">//article/p//text()</span><span style="color: #d86db6;">'</span>)</div><div><span token="comment"># ['This is a simple ', 'HTML', ' page']</span></div></div>
+
+
+<p>最后，总结一下本小节涉及的选取节点的基本路径符号：</p>
+
+<table>
+    <tr>
+        <th>表达式</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td class="cell-code"><em>tag</em></td>
+        <td>标签名代表的某个具体的节点</td>
+    </tr>
+    <tr>
+        <td class="cell-code">text()</td>
+        <td>文本节点</td>
+    </tr>
+    <tr>
+        <td class="cell-code">/</td>
+        <td>所属的子节点；若用在开头，则表示位于根下一层的节点</td>
+    </tr>
+    <tr>
+        <td class="cell-code">//</td>
+        <td>所属的后代节点，可以是任意深度</td>
+    </tr>
+    <tr>
+        <td class="cell-code">.</td>
+        <td>当前节点</td>
+    </tr>
+    <tr>
+        <td class="cell-code">..</td>
+        <td>当前节点的父节点</td>
+    </tr>
+</table>
+
+<h3>谓语</h3>
+
+<p>上面介绍了 XPath 选取节点的方法，但很多时候并不希望选取路径上的全部节点元素，而是只选取具有特定性质的元素。</p>
+
+<p>XPath 中的<strong>谓语</strong>(predicate)用于<em>限定</em>查找符合特定条件的节点元素。谓语以</p>
+
+<div class="codeblock code-template">
+    <em>tag</em>[]
+</div>
+
+<p>这样的方括号形式出现在标签名后面。方括号内可以加上具体的谓词。</p>
+
+<p>一个简单的谓词为：</p>
+
+<div class="codeblock code-template">
+    <em>n</em>
+</div>
+
+<p>代表选择文档中从上至下匹配路径的第 <code><em>n</em></code> 个标签。例如，以下表达式可以提取文章中第一段的所有文本：</p>
+
+<div class="vscode-block"><div>html.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">//article/p[1]//text()</span><span style="color: #d86db6;">'</span>)</div></div>
+
+<p>与之类似的谓词是</p>
+
+<div class="codeblock code-template">
+    last()
+</div>
+
+<p>代表匹配到的最后一个元素。在介绍了 XPath 的运算符后，可以使用简单运算来得到第任意个元素。当然这一过程也可以交给 Python 处理，写成如下形式：</p>
+
+<div class="vscode-block"><div>html.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">//article/p</span><span style="color: #d86db6;">'</span>)[<span style="color: #174781;">0</span>].xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">.//text()</span><span style="color: #d86db6;">'</span>)</div></div>
+
+<p>注意，尽管这两个谓词都只得到一个元素，但是该方法的返回结果仍然是一个列表。</p>
+
+<p>标签名</p>
+
+<div class="codeblock code-template">
+    <em>tag</em>
+</div>
+
+<p>也可以做谓词使用，代表选择匹配到的标签需要含有该子标签（只能是父子关系）。例如，以下提取包含链接的单元格文本：</p>
+
+<div class="vscode-block"><div>html.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">//article/table//td[a]//text()</span><span style="color: #d86db6;">'</span>)</div></div>
+
+<p>更为常用的限定与属性相关。XPath 表示属性的符号为：</p>
+
+<div class="codeblock code-template">
+    @<em>attribute</em>
+</div>
+
+<p>如果直接将属性作为谓词放入方括号中，那么代表标签需要存在该属性。更常用的做法是判断属性的值是否符合要求，那么这个时候就需要使用以下语法：</p>
+
+<div class="codeblock code-template">
+    @<em>attribute</em>="<em>value</em>"
+</div>
+
+<p>例如，通过 <code>class</code> 属性检索合适的节点是一种很常见的做法：</p>
+
+<div class="vscode-block"><div>html.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">//article//div[@class="item"]</span><span style="color: #d86db6;">'</span>)</div></div>
+
+<p>考虑到这是一种很常用的语法，因此这里提前介绍了一个关系运算符。</p>
+
+<p>属性除了作为谓词，还可以直接用作节点，获取某个属性对应的值。例如获取链接对应的 URL ：</p>
+
+<div class="vscode-block"><div>html.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">//article/a/@href</span><span style="color: #d86db6;">'</span>)</div><div><span token="comment"># ['https://pypi.org/', '#content', '/jobs/', ...]</span></div></div>
+
+<p>这种情况和文本节点一样不可能再会有子节点和谓语，因此只会出现在最后。当然再对它们应用子节点和谓语也不会发生异常，只是结果可能未必符合预期。</p>
+
+<p>谓语还常与通配符一起使用。在 XPath 中，通配符</p>
+
+<div class="codeblock code-template">
+    *
+</div>
+
+<p>可以表示任意标签节点，而通配符</p>
+
+<div class="codeblock code-template">
+    @*
+</div>
+
+<p>可以表示任意属性节点。使用 <code>id</code> 属性寻找元素也是一种常用的做法，此时就可以配合通配符，例如：</p>
+
+<div class="vscode-block"><div>html.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">//*[@id="content"][1]</span><span style="color: #d86db6;">'</span>)</div></div>
+
+<p>注意这里同时使用了两个谓语串联限定，串联谓语也是从左向右顺序结合。如果想要表示所有的节点（包括标签节点、文本节点和属性节点），那么可以使用</p>
+
+<div class="codeblock code-template">
+    node()
+</div>
+
+<p>来表示。</p>
+
+<p>由于 HTML 是一种不够规范的标记语言，在编写属性的时候可能会出现多个属性值或有额外空白符。例如，对于以下文档片段：</p>
+
+<div class="vscode-block"><div><span style="color: #3e3e3e;">&lt;</span><span style="color: #0444ac;">pre</span> <span style="color: #df8618;">class</span>=<span style="color: #d86db6;">"</span><span style="color: #a44185;">codeblock python</span><span style="color: #d86db6;">"</span><span style="color: #3e3e3e;">&gt;</span></div><div>&#160; &#160; ...</div><div><span style="color: #3e3e3e;">&lt;/</span><span style="color: #0444ac;">pre</span><span style="color: #3e3e3e;">&gt;</span></div></div>
+
+<p>在 CSS 选择器中，可以使用 <code>pre.codeblock</code> 来选中并修改所有代码块的样式。但是 XPath 的解析却很严谨，这会造成因为值没有完全匹配而忽略的情况：</p>
+
+<div class="vscode-block"><div>html.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">//pre[@class="codeblock"]</span><span style="color: #d86db6;">'</span>)</div><div><span token="comment"># []</span></div></div>
+
+<p>此时可以使用以下谓词来处理这类标签：</p>
+
+<div class="codeblock code-template">
+    contains(<em>node</em>, "<em>value</em>")
+</div>
+
+<p>只要节点 <code><em>node</em></code> 对应的值内含有 “ <code><em>value</em></code> ” 字符串，那么该标签就会被匹配。</p>
+
+<p>这种节点可以是属性节点也可以是文本节点，例如对 <code>class</code> 属性的处理一般为：</p>
+
+<div class="vscode-block"><div>html.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">//pre[contains(@class, "codeblock")]</span><span style="color: #d86db6;">'</span>)</div><div><span token="comment"># [&lt;Element pre at 0x278d422a480&gt;, ...]</span></div></div>
+
+<p>类似地，也可以使用</p>
+
+<div class="codeblock code-template">
+    starts-with(<em>node</em>, "<em>value</em>")
+</div>
+
+<p>作为谓词，来选取所有以特定字符串开头的属性值或文本内容。</p>
+
+<p>最后总结一下涉及的语法。注意，所有谓词均可看作布尔值：</p>
+
+<table>
+    <tr>
+        <th>表达式</th>
+        <th>描述</th>
+    </tr>
+    <tr>
+        <td colspan="2">谓词放在 <code><em>node</em>[]</code> 的方括号内，表示限定</td>
+    </tr>
+    <tr>
+        <td class="cell-code"><em>node</em></td>
+        <td>包含该类子节点</td>
+    </tr>
+    <tr>
+        <td class="cell-code"><em>n</em></td>
+        <td>位于该位置</td>
+    </tr>
+    <tr>
+        <td class="cell-code">last()</td>
+        <td>位于最后一个位置</td>
+    </tr>
+    <tr>
+        <td class="cell-code">contains(<em>node</em>, "<em>value</em>")</td>
+        <td>节点值包含该字符串</td>
+    </tr>
+    <tr>
+        <td class="cell-code">starts-with(<em>node</em>, "<em>value</em>")</td>
+        <td>节点值以该字符串开头</td>
+    </tr>
+    <tr>
+        <td class="cell-code">@<em>attribute</em></td>
+        <td>属性节点</td>
+    </tr>
+    <tr>
+        <td class="cell-code">*</td>
+        <td>任意标签节点</td>
+    </tr>
+    <tr>
+        <td class="cell-code">@*</td>
+        <td>任意属性节点</td>
+    </tr>
+    <tr>
+        <td class="cell-code">node()</td>
+        <td>任意节点</td>
+    </tr>
+</table>
+
+<h3>运算符</h3>
+
+<p>之前说到 XPath 的谓词可以看作布尔值，因此可以使用或、与、非做逻辑运算，通过多个条件获得需要匹配的标签。</p>
+
+<p>逻辑运算“与”“或”“非”的关键字分别为：</p>
+
+<div class="codeblock code-template">
+    and<br>
+    or<br>
+    not()
+</div>
+
+<p>为了防止歧义，逻辑非需要像函数一样加上括号。以下是两个使用示例：</p>
+
+<div class="vscode-block"><div>html.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">//a[not(@href)]</span><span style="color: #d86db6;">'</span>)</div><div>html.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">//div[contains(@id, "content") and 1]</span><span style="color: #d86db6;">'</span>)</div><div><span token="comment"># different from [contains(@id, "content")][1]</span></div></div>
+
+<p>除了逻辑运算外，XPath 也有自身的运算符。这些运算符都作为谓语的一部分使用。</p>
+
+<p>例如数学运算：</p>
+
+<table>
+    <tr>
+        <th>运算符</th>
+        <th>功能</th>
+        <th>运算符</th>
+        <th>功能</th>
+    </tr>
+    <tr>
+        <td>+</td>
+        <td>加法</td>
+        <td>ceiling()</td>
+        <td>向上取整</td>
+    </tr>
+    <tr>
+        <td>-</td>
+        <td>减法</td>
+        <td>floor()</td>
+        <td>向下取整</td>
+    </tr>
+    <tr>
+        <td>*</td>
+        <td>乘法</td>
+        <td>mod</td>
+        <td>取余</td>
+    </tr>
+    <tr>
+        <td>div</td>
+        <td>除法</td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
+<p>例如，要选取倒数第二个列表项，可以使用：</p>
+
+<div class="vscode-block"><div><span token="comment"># &#160; (Emmet markup) ol&gt;li*7{$} </span></div><div>html.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">//ol/li[last() - 1]/text()</span><span style="color: #d86db6;">'</span>)</div><div><span token="comment"># ['6']</span></div></div>
+
+<p>再如，如果要选择中间项，可以使用：</p>
+
+<div class="vscode-block"><div>html.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">//ol/li[floor(last() div 2 + 0.5)]/text()</span><span style="color: #d86db6;">'</span>)</div><div><span token="comment"># ['4']</span></div></div>
+
+<p>除了算术运算符外，还可以使用以下关系运算符：</p>
+
+<div class="codeblock code-template">
+    = != &gt; &gt;= > >=
+</div>
+
+<p>关系运算符常用在对纯 XML 文档的解析上，因为 XML 经常使用某个标签存储一个数值。不过关系运算符可以配合以下函数</p>
+
+<div class="codeblock code-template">
+    position()
+</div>
+
+<p>该函数泛指位置，配合关系运算符就可以选取特定位置范围的标签，例如：</p>
+
+<div class="vscode-block"><div>html.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">//ol/li[position() &lt; 4]/text()</span><span style="color: #d86db6;">'</span>)</div><div><span token="comment"># ['1', '2', '3']</span></div></div>
+
+<p>或者以下函数</p>
+
+<div class="codeblock code-template">
+    count(<em>node</em>)
+</div>
+
+<p>用于统计符合条件的子节点个数，例如：</p>
+
+<div class="vscode-block"><div>html.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">//ol[count(li) &gt;= 4]</span><span style="color: #d86db6;">'</span>)</div><div><span token="comment"># [&lt;Element ol at 0x2628154a480&gt;]</span></div></div>
+
+<p>表达式组合应用得当可以处理很多关系，例如像 CSS 选择器的伪类一样选择偶数位置的节点：</p>
+
+<div class="vscode-block"><div>html.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">//ol/li[position() = ((position() mod 2) = 0)]/text()</span><span style="color: #d86db6;">'</span>)</div><div><span token="comment"># ['2', '4', '6']</span></div></div>
+
+<p>以上涉及的表达式都用在谓语内，还可以使用符号</p>
+
+<div class="codeblock code-template">
+    |
+</div>
+
+<p>用在两个表达式内，表示对两个表达式匹配的元素取并集。例如，以下可以选取所有的链接：</p>
+
+<div class="vscode-block"><div>html.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">//@src | //@href</span><span style="color: #d86db6;">'</span>)</div></div>
+
+<h3>轴</h3>
+
+<p><strong>轴</strong>(Axes)是 XPath 中的一个更高级的概念。轴用于从文档树中定位和当前节点具有一定位置关系的那些节点，相比基本的 XPath 表达式可以表示更复杂的位置关系。</p>
+
+<p>轴的使用通过以下语法表示：</p>
+
+<div class="codeblock code-template">
+    <em>axisname</em>::<em>node</em>
+</div>
+
+<p>其中 <code><em>axisname</em></code> 表示限定位置关系，<code><em>node</em></code> 表示限定该位置上的节点类型。这些位置关系可以有：</p>
+
+<table>
+    <tr>
+        <th>名称</th>
+        <th>效果</th>
+        <th>名称</th>
+        <th>效果</th>
+    </tr>
+    <tr>
+        <td class="cell-code">ancestor</td>
+        <td>选取所有祖先</td>
+        <td class="cell-code">ancestor-or-self</td>
+        <td>选取所有祖先及自身</td>
+    </tr>
+    <tr>
+        <td class="cell-code">descendant</td>
+        <td>选取所有后代</td>
+        <td class="cell-code">descendant-or-self</td>
+        <td>选取所有后代及自身</td>
+    </tr>
+    <tr>
+        <td class="cell-code">following</td>
+        <td>选取文档中位于其之后的所有节点</td>
+        <td class="cell-code">following-sibling</td>
+        <td>选取之后的所有兄弟节点</td>
+    </tr>
+    <tr>
+        <td class="cell-code">preceding</td>
+        <td>选取文档中位于其之前的所有节点</td>
+        <td class="cell-code">preceding-sibling</td>
+        <td>选取之前的所有兄弟节点</td>
+    </tr>
+    <tr>
+        <td class="cell-code">child</td>
+        <td>选取所有子节点</td>
+        <td class="cell-code">attribute</td>
+        <td>选取节点的所有属性</td>
+    </tr>
+    <tr>
+        <td class="cell-code">parent</td>
+        <td>选取所有父节点</td>
+        <td class="cell-code">self</td>
+        <td>选取当前节点</td>
+    </tr>
+    <tr>
+        <td class="cell-code">namespace</td>
+        <td>选取所有命名空间节点</td>
+        <td class="cell-code"></td>
+        <td></td>
+    </tr>
+</table>
+
+<p>例如，对于以下 HTML 结构：</p>
+
+<div class="vscode-block"><div><span style="color: #3e3e3e;">&lt;</span><span style="color: #0444ac;">article</span><span style="color: #3e3e3e;">&gt;</span></div><div>&#160; &#160; <span style="color: #3e3e3e;">&lt;</span><span style="color: #0444ac;">h2</span><span style="color: #3e3e3e;">&gt;</span>...<span style="color: #3e3e3e;">&lt;/</span><span style="color: #0444ac;">h2</span><span style="color: #3e3e3e;">&gt;</span></div><div>&#160; &#160; <span style="color: #3e3e3e;">&lt;</span><span style="color: #0444ac;">p</span><span style="color: #3e3e3e;">&gt;</span>...<span style="color: #3e3e3e;">&lt;/</span><span style="color: #0444ac;">p</span><span style="color: #3e3e3e;">&gt;</span></div><div>&#160; &#160; <span style="color: #3e3e3e;">&lt;</span><span style="color: #0444ac;">h2</span> <span style="color: #df8618;">id</span>=<span style="color: #d86db6;">"</span><span style="color: #a44185;">xpath-tutorial</span><span style="color: #d86db6;">"</span><span style="color: #3e3e3e;">&gt;&lt;/</span><span style="color: #0444ac;">h2</span><span style="color: #3e3e3e;">&gt;</span></div><div>&#160; &#160; <span style="color: #3e3e3e;">&lt;</span><span style="color: #0444ac;">p</span><span style="color: #3e3e3e;">&gt;</span>...<span style="color: #3e3e3e;">&lt;/</span><span style="color: #0444ac;">p</span><span style="color: #3e3e3e;">&gt;</span></div><div>&#160; &#160; <span style="color: #3e3e3e;">&lt;</span><span style="color: #0444ac;">p</span><span style="color: #3e3e3e;">&gt;</span>...<span style="color: #3e3e3e;">&lt;/</span><span style="color: #0444ac;">p</span><span style="color: #3e3e3e;">&gt;</span></div><div><span style="color: #3e3e3e;">&lt;/</span><span style="color: #0444ac;">article</span><span style="color: #3e3e3e;">&gt;</span></div></div>
+
+<p>如果想提取 <code>#xpath-tutorial</code> 的二级标题后的第一段，假设使用一般的同级节点表示方法：</p>
+
+<div class="vscode-block"><div>html.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">//h2[@id="xpath-tutorial"]/../p</span><span style="color: #d86db6;">'</span>)</div><div><span token="comment"># [&lt;Element p at 0x24c5f54a480&gt;, </span></div><div><span token="comment"># &#160;&lt;Element p at 0x24c5f54a1c0&gt;, </span></div><div><span token="comment"># &#160;&lt;Element p at 0x24c5f54a4c0&gt;]</span></div></div>
+
+<p>那么没法定位到这样一个结果。而使用轴就可以很清楚地表示这种位置关系：</p>
+
+<div class="vscode-block"><div>html.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">//h2[@id="xpath-tutorial"]/following-sibling::p[1]</span><span style="color: #d86db6;">'</span>)</div><div><span token="comment"># [&lt;Element p at 0x209deaca3c0&gt;]</span></div></div>
+
+<p>就像它的名称一样，轴是一种很强大的定位关系。</p>
+
+<h2>lxml的其余内容</h2>
+
+<h3>其它XPath语法</h3>
+
+<p>前文说了在 <var>lxml</var> 中，通过 <code>.xpath()</code> 方法都会返回匹配节点组成的列表。然而 <var>lxml</var> 还支持这样的一些 XPath 语法，它们的返回结果是单个值。因此这些语法并不一定在浏览器的调试界面中能得出结果。</p>
+
+<p>例如，当 <code>count()</code> 作用于一个表达式时，会返回包含的结果个数，并且在 <var>lxml</var> 中结果以浮点数形式给出：</p>
+
+<div class="vscode-block"><div>html.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">count(//ol/li[text()])</span><span style="color: #d86db6;">'</span>)</div><div><span token="comment"># 7.0</span></div></div>
+
+<p>再如，<code>string-length()</code> 可以返回一个文本的字符个数，并且结果可以被用在关系运算中：</p>
+
+<div class="vscode-block"><div>html.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">//article/p[string-length() &gt; 10]</span><span style="color: #d86db6;">'</span>)</div><div><span token="comment"># [&lt;Element p at 0x23224bea380&gt;, ...]</span></div></div>
+
+<p>还有一个比较好用的 <code>local-name()</code> 用于获取节点的标签名，有时在使用通配符时会用到：</p>
+
+<div class="vscode-block"><div>html.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">local-name(//*[@id="content"])</span><span style="color: #d86db6;">'</span>)</div><div><span token="comment"># "article"</span></div></div>
+
+<p>XPath 还有许多类似这样的语法，不过并不是很常用，因此这里就不介绍了。</p>
+
+<p>最后需要说明的是，本节的主要目的是为了介绍 XPath 语法，而不是介绍使用 <var>lxml</var> 处理 XML 文档的方法，因此可能涉及一些虽然很强大，但实际上并不直接使用的 XPath 语法。就像正则表达式不能表示所有的情况一样，XPath 尽管很强大，但也不是万能的，在适当的时候还是应该辅以编程语言的功能协助处理。例如提取一个元素包含标签、属性以及文本的所有结构，使用纯 XPath 比较难实现，但是 <code>lxml</code> 就提供了 Python 函数来处理这个问题：</p>
+
+<div class="vscode-block"><div>etree.tostring(html.xpath(<span style="color: #d86db6;">'</span><span style="color: #a44185;">//article/p</span><span style="color: #d86db6;">'</span>)[<span style="color: #174781;">0</span>])</div><div><span token="comment"># b'&lt;p&gt;This is a simple &lt;strong&gt;HTML&lt;/strong&gt; page&lt;/p&gt;\n &#160; &#160; &#160; &#160;'</span></div></div>
+
+<p>此外，一昧地追求复杂的 XPath 表达式可能会让代码变得晦涩难懂，并不是一种合理的使用方式。</p>
+
+<h2>参考资料/延伸阅读</h2>
+
+<p>
+    <a href="https://www.w3.org/TR/2017/REC-xpath-31-20170321/">https://www.w3.org/TR/2017/REC-xpath-31-20170321/</a><br>
+    XPath 3.1 标准
+</p>
+
+<p>
+    <a href="https://devhints.io/xpath">https://devhints.io/xpath</a><br>
+    一份 XPath 语法小抄
+</p>
+<p><a rel="nofollow" href="/archives/842">XPath简单入门</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/archives/842/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

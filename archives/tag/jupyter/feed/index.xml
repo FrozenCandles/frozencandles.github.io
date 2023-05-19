@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Jupyter归档 - 冰封残烛的个人小站</title>
+	<atom:link href="http://localhost/wordpress/archives/tag/jupyter/feed?simply_static_page=3731" rel="self" type="application/rss+xml" />
+	<link></link>
+	<description>FrozenCandle&#039;s Personal Site</description>
+	<lastBuildDate>Mon, 12 Dec 2022 10:47:32 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2.1</generator>
+
+<image>
+	<url>/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg</url>
+	<title>Jupyter归档 - 冰封残烛的个人小站</title>
+	<link></link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Jupyter Notebook 入门指南</title>
+		<link>/archives/823</link>
+					<comments>/archives/823#respond</comments>
+		
+		<dc:creator><![CDATA[Hello]]></dc:creator>
+		<pubDate>Sun, 23 Oct 2022 09:45:16 +0000</pubDate>
+				<category><![CDATA[数据科学]]></category>
+		<category><![CDATA[IPython]]></category>
+		<category><![CDATA[Jupyter]]></category>
+		<category><![CDATA[Python]]></category>
+		<guid isPermaLink="false">/?p=823</guid>
+
+					<description><![CDATA[<p>使用IPython IPython简介 有时候仅需要&#46;&#46;&#46;</p>
+<p><a rel="nofollow" href="/archives/823">Jupyter Notebook 入门指南</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<h2>使用IPython</h2>
+
+<h3>IPython简介</h3>
+
+<p>有时候仅需要通过几行 Python 代码来执行一些简单的功能，或测试某个库的基本使用方式。此时专门再编写一个脚本运行不免有些麻烦。好在 Python 提供了一个命令行的交互式控制台，可以立即执行输入的每一条语句并暂时保存变量。例如；</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/10/python-console-demo.png" alt="" width="530">
+</figure>
+
+<p>交互式控制台的特点在于其的交互功能，它可以直接查看变量的值，这样就避免了在简单的脚本中大量使用 <code>print()</code> 。</p>
+
+<p>然而，Python 自带的交互式控制台功能过于薄弱。它没有语法高亮，没有自动补全，并且对缩进的处理也不够自然。如果代码较多，那么不但编写容易出错，而且难以阅读。</p>
+
+<p>因此许多项目都尝试增强原有交互式控制台的功能。<a href="https://www.bpython-interpreter.org/">bpython</a> 就是其中之一，bpython 在原有控制台的功能的基础上，提供了代码高亮、自动补全、括号匹配、缩进处理等功能，大大优化了交互体验。以下是 bpython 的简单交互效果：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/10/bpython-demo.jpg" alt="" width="500">
+</figure>
+
+<p>bpython 可以通过命令行快速安装，但它目前只支持 Linux 系统。</p>
+
+<p><a href="https://ipython.org/">IPython</a> 则是一个更加强大的改进版交互式控制台，它不但支持代码高亮、自动补全等功能，还实现了跨平台以及更加丰富的扩展功能。以下是 IPython 的效果演示：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/10/ipython-demo.jpg" alt="" width="380">
+</figure>
+
+<p>从截图中可以看到，IPython 还具有以下功能：</p>
+
+<p>IPython 使用一个个单元格(cell)来对输入及输出编号，相比原先 Python 的提示符更加清晰。</p>
+
+<p>单元格及其编号也为获取历史记录提供了一些便利。在 Python 的交互式控制台中都有一个特殊变量单下划线 <code>_</code> ，它保存着上次访问的对象信息，而 IPython 则具有更多这样的特殊变量，例如：</p>
+
+<ul>
+    <li><code>_i4</code> 用于获取 <var>In[4]</var> 单元的代码</li>
+</ul>
+
+<div class="codeblock code-console"><span class="ipython-in">In [6]:</span> _i4
+<span class="ipython-out">Out[6]</span>: 'for i in range(2, 8):\n    d.append(log(i))\n    '
+</div>
+
+<ul>
+    <li>两个下划线 <code>__</code> 用于获取上上次访问的对象信息：</li>
+</ul>
+
+<div class="codeblock code-console"><span class="ipython-in">In [7]:</span> __
+<span class="ipython-in">Out[7]:</span>
+[0.6931471805599453,
+ 1.0986122886681098,
+ 1.3862943611198906,
+ 1.6094379124341003,
+ 1.791759469228055,
+ 1.9459101490553132]
+</div>
+
+<p>这样的特殊变量还有很多。并且从返回的结果来看，IPython 还提供了更加美观的打印效果：列表、字典等会换行对齐展示，更易于阅读。IPython 也对其它常见的输出做了一定优化，使其更便于展示。</p>
+
+<p>在 2 号单元格内，执行了以下命令：</p>
+
+<div class="codeblock code-console"><span class="ipython-in">In [2]:</span> log?
+</div>
+
+<p>这不是标准的 Python 语法，而是 IPython 的扩展语法，在某个函数或类后面添加一个问号可以显示其文档字符串。IPython 提供了更丰富的扩展语法，使得某些基础的功能可以通过简单的命令实现。再如，IPython 将一些简单的命令行功能整合进了扩展语法中：</p>
+
+<div class="codeblock code-console"><span class="ipython-in">In [1]:</span> cd project/
+E:\workspace\ai\project
+</div>
+
+<p>IPython 通过 <code>pip</code> 就可以安装。接下来介绍 IPython 更多类似这样的扩展语法。</p>
+
+<h3>IPython的高级功能</h3>
+
+<h4>提示与帮助</h4>
+
+<p>前文介绍了 IPython 可以在函数或类后面加上一个问号获取它的文档帮助。实际上，对于任意的对象都可以用此方法查看它的基本信息：</p>
+
+<div class="codeblock code-console"><span class="ipython-in">In [2]:</span> l?
+Type:        list
+String form: [1, 2, 3]
+Length:      3
+Docstring:   ...
+</div>
+
+<p>除此之外，还可以通过两个问号 <code>??</code> 来获取函数的源代码：</p>
+
+<div class="codeblock code-console"><span class="ipython-in">In [3]:</span> average??
+Signature: average(a)
+Source:
+def average(a):
+    """Returns the average of some numbers"""
+    return sum(a) / len(a)
+File:      e:\workspace\ai\project\&lt;ipython-input-5-96774c320447>
+Type:      function
+</div>
+
+<p>当然，如果源代码不是使用 Python 编写的，那么就只能获取到一些基本信息了。</p>
+
+<p>单个问号还可以配合通配符检查命名空间中所有匹配的成员：</p>
+
+<div class="codeblock code-console">In [16]: os.*dir?
+os.chdir
+os.curdir
+os.listdir
+... 
+</div>
+
+<p>IPython 还提供了强大的自动补全功能。在访问模块或类的成员时，可以通过 <kbd>TAB</kbd> 键获取其包含的成员提示：</p>
+
+<div class="codeblock code-console"><span class="ipython-in">In [4]:</span> import urllib.r
+                       <span class="ipython-hint"> request     </span>
+                       <span class="ipython-hint"> response    </span>
+                       <span class="ipython-hint"> robotparser </span>  
+</div>
+
+<h4>shell交互</h4>
+
+<p>IPython 还可以直接与命令行交互，使用 <code>!</code> 符号作为前缀可以执行命令行命令：</p>
+
+<div class="codeblock code-console"><span class="ipython-in">In [5]:</span> !echo ${PATH}
+/usr/local/sbin:...
+</div>
+
+<p>注意，在 Windows 系统上默认调用的是 DOS 而不是 PowerShell 命令，即使 IPython 是通过 PowerShell 启动的。</p>
+
+<p>该命令甚至还能作为一个值赋给变量：</p>
+
+<div class="codeblock code-console"><span class="ipython-in">In [6]:</span> files = !ls
+
+<span class="ipython-in">In [7]:</span> files
+<span class="ipython-out">Out[7]:</span> ['user123', 'user01', 'user3', 'image']
+</div>
+
+<p>这个结果有点类似列表，但它实际上是 IPython 提供的一种增强版列表，它提供了更多操作方法，例如使用函数或正则字符串筛选合适元素：</p>
+
+<div class="codeblock code-console"><span class="ipython-in">In [7]:</span> files.grep(r'user\d+')
+<span class="ipython-out">Out[7]:</span> ['user123', 'user01', 'user3']
+</div>
+
+<p>也可以实现相反方向的交互，通过 <code>{<em>var</em>}</code> 将 Python 变量传入 shell ：</p>
+
+<div class="codeblock code-console"><span class="ipython-in">In [8]:</span> for i in range(1, 5):
+  ....:     !mkdir group{i}
+</div>
+
+<h4>魔法命令</h4>
+
+<p>IPython 中的一个更强大的功能是魔法命令(magic command)，魔法命令可以用一种简洁的形式解决各种常见问题。</p>
+
+<p>魔法命令以 <code>%</code> 符号作为前缀，如果要让魔法命令作用于整个单元，那么以两个 <code>%%</code> 作为前缀。魔法命令是一个很复杂的系统，接下来只介绍各种常用的魔法命令。</p>
+
+<p><code>%run <em>file</em></code> 是一个很常用的魔法命令，它可以执行某一个 Python 脚本，在执行完后由 IPython 接管环境。这在 Debug 的时候很好用，当抛出异常时可以自动切换到 IPython 环境，此时可以使用 IPython 检查异常位置一些变量的值，或者查看异常的回溯栈等，在非图形界面下也可以很好地调试。</p>
+
+<p><code>%timeit</code> 也是一个很常用的魔法命令，用于分析一条或一块语句执行时长，这在科学计算或分析性能瓶颈的时候非常有用：</p>
+
+<div class="codeblock code-console"><span class="ipython-in">In [9]:</span> a = np.arange(1, 1000)
+
+<span class="ipython-in">In [10]:</span>  %%timeit
+    ...: b = np.empty_like(a)
+    ...: for i, v in enumerate(a):
+    ...:     b[i] = math.log(v)
+    ...:
+517 µs ± 4.4 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+
+<span class="ipython-in">In [11]:</span> %timeit np.log(a)
+9.63 µs ± 1.53 µs per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
+</div>
+
+<p>直接从 Python 命令行控制台中复制的代码会带上提示符，如果要使用它还必须去除提示符。使用 <code>%paste</code> 命令可以从剪贴板中获取并执行代码，同时消除提示符的影响：</p>
+
+<div class="codeblock code-console"><span class="ipython-in">In [12]:</span> %paste
+>>> from typing import NamedTuple
+>>> class User(NamedTuple):
+...     id_: int
+...     name: str
+
+## -- End pasted text --
+
+<span class="ipython-in">In [13]:</span> u = User(id_=1, name='hello')
+</div>
+
+<p>配合特殊变量 <code>In</code> 可以获取去除提示符的实际执行的代码：</p>
+
+<div class="codeblock code-console"><span class="ipython-in">In [14]:</span> print(In[13])
+from typing import NamedTuple
+class User(NamedTuple):
+    id_: int
+    name: str
+</div>
+
+<p>这里对魔法命令暂时就介绍这么多。可以通过 <code>%magic</code> 打开魔法命令的帮助文档，所有魔法命令可以通过 <code>%lsmagic</code> 获取，通过使用 <code>?</code> 符号就可以了解每个魔法命令的使用。</p>
+
+<h2>使用Jupyter Notebook</h2>
+
+<h3>简介与安装</h3>
+
+<p>IPython 的功能非常丰富，甚至超越了原生 Python 的功能。然而 IPython 毕竟只是个命令行的控制台，进一步提升的空间被限制了。</p>
+
+<p>基于此，IPython 发展出了一种更强大的编辑器模式：<a href="https://jupyter.org/">Jupyter Notebook</a> 。Notebook 具有可视化的编辑界面，并使用文件来编辑与保存单元格的内容。</p>
+
+<p>以下是 Jupyter Notebook 的使用截图：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/10/jupyter-page-demo.png" alt="" width="540">
+</figure>
+
+<p>Jupyter 在保留 IPython 特点的同时，功能与交互性都更加强大。</p>
+
+<p>Jupyter 的安装十分简单，只需要通过 <code>pip</code> 安装即可：</p>
+
+<div class="codeblock code-console">$ pip install jupyter
+</div>
+
+<blockquote>
+    <p>注：目前主流的 Jupyter 安装和管理都是通过 Anaconda 完成的，这里使用命令行仅仅是为了简化使用与配置。关于 Anaconda 的使用网络上已经有较多文章，这里不再重复。</p>
+</blockquote>
+
+<p>然后在命令行中就可以启动 Notebook ：</p>
+
+<div class="codeblock code-console">$ jupyter notebook
+</div>
+
+<p>这会在浏览器中打开一个新的页面，稍等片刻后便会进入 Notebook 的初始界面：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/10/jupyter-page-initial.png" alt="" width="760">
+</figure>
+
+<h3>认识Notebook</h3>
+
+<p>Jupyter Notebook 也是基于文件执行的，其文件后缀为 <code>.ipynb</code> ，它实质上是一个 Json 文件，只有使用 Jupyter 等支持的编辑器打开才能正常被渲染。在 Jupyter 提供的浏览器页面中，可以像别的编辑器一样新建、修改和保存这种文件，还可以将其导出为 Python 代码、Markdown 文本、PDF 文档等。</p>
+
+<p>进入 Jupyter 后，它提供了 3 个选项卡：</p>
+
+<ol>
+    <li>Files 页用于管理工作路径下的文件</li>
+    <li>Running 页显示当前正在运行的终端和 Notebooks</li>
+    <li>Clusters 页用于处理计算群集</li>
+</ol>
+
+<p>新建或打开一个 Notebook 文件后，即可像 IPython 一样在各个单元格内编写、执行代码：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/10/jupyter-page-write.png" alt="" width="480">
+</figure>
+
+<p>但与 IPython 不同的是，Notebook 单元格的代码可以修改后重新执行，这会使得虽然上面某个单元格的代码修改了，但是下面单元格的输出结果还没更新，并且原始的数据也会被覆盖。注意单元格左侧 In 中的编号才表示真正的执行顺序。</p>
+
+<p>Jupyter 提供的菜单中有各种功能，例如新建或保存文件、合并或移动单元格、控制显示内容等，它们使用较为简单，这里就不展开介绍了。</p>
+
+<p>Notebook 中的单元格除了可以编写代码，还可以使用其余类型的单元格，例如通过 Markdown 单元格编写简单文档并嵌入 LaTeX 公式，或者使用 Raw 单元格显示纯文本。一些 Notebook 的扩展还允许它编写 bash 脚本、执行 R 语言甚至 SQL 命令等。</p>
+
+<p>Notebook 的单元格在编写代码时，具有以下两种模式：</p>
+
+<ul>
+    <li>编辑模式：此时单元格外围的边框颜色为绿色，可以直接在该单元格中输入代码或文本</li>
+    <li>命令模式：此时单元格外围的边框颜色为蓝色，键盘操作将作为命令执行</li>
+</ul>
+
+<p>点击单元格代码外区域或使用快捷键 <kbd>Esc</kbd> 即可进入命令模式，此时可以使用以下常用的命令对单元格做调整：</p>
+
+<table>
+    <tr>
+        <th>命令</th>
+        <th>功能</th>
+        <th>命令</th>
+        <th>功能</th>
+    </tr>
+    <tr>
+        <td><kbd>L</kbd></td>
+        <td>在单元格中显示或取消显示代码行号</td>
+        <td><kbd>X</kbd></td>
+        <td>剪切选中的单元格</td>
+    </tr>
+    <tr>
+        <td><kbd>M</kbd></td>
+        <td>将该单元格变为 Markdown 类型</td>
+        <td><kbd>C</kbd></td>
+        <td>复制选中的单元格</td>
+    </tr>
+    <tr>
+        <td><kbd>Y</kbd></td>
+        <td>将该单元格变为 Code 类型</td>
+        <td><kbd>V</kbd></td>
+        <td>将单元格粘贴到当前单元格下方</td>
+    </tr>
+    <tr>
+        <td><kbd>A</kbd></td>
+        <td>在当前单元格上方插入一个 Code 单元格</td>
+        <td><kbd>Shift+↑</kbd> 或 <kbd>Shift+↓</kbd></td>
+        <td>向上或向下连续选择多个单元格</td>
+    </tr>
+</table>
+
+<p>返回编辑模式可以点击代码区域或使用快捷键 <kbd>Enter</kbd> 。运行代码可以使用如下快捷键，它们在任意模式下都可以直接使用：</p>
+
+<ul>
+    <li><kbd>Ctrl+Enter</kbd> ：运行选中单元格</li>
+    <li><kbd>Shift+Enter</kbd> ：运行选中的单元格，并选中下一个单元格</li>
+    <li><kbd>Alt+Enter</kbd> ：运行选中的单元格，并在下方插入一个新的单元格</li>
+</ul>
+
+<h3>配置Jupyter</h3>
+
+<p>Jupyter 的某些配置可以修改以满足使用要求。</p>
+
+<p>在启动时可以通过命令行参数临时修改配置。例如 Jupyter 运行的默认端口号是 8888 ，可以通过如下参数修改端口号：</p>
+
+<div class="codeblock code-console">$ jupyter notebook --NotebookApp.port=8088
+</div>
+
+<p>如果需要永久更改某个配置，那么就需要使用配置文件。初次使用需要通过如下命令生成配置文件：</p>
+
+<div class="codeblock code-console">$ jupyter notebook --generate-config
+</div>
+
+<p>然后可以根据提示信息找到配置文件的位置。该文件是一个纯 Python 文件，使用变量保存所有的配置信息，并且默认情况下配置都被注释了。</p>
+
+<p>如果要启用某项配置只需要取消注释即可，这些配置的说明都在注释中写的很明白了。例如，假设要更改 Jupyter 打开后的根目录，那么可以修改以下配置：</p>
+
+<div class="vscode-block"><div><span style="color: #a8a8a8;">## The directory to use for notebooks and kernels.</span></div><div><span style="color: #a8a8a8;"># &#160;Default: ''</span></div><div><span style="color: #405c79;">c.NotebookApp.notebook_dir = </span><span style="color: #bf568b;font-weight: bold;">r</span><span style="color: #405c79;">'</span><span style="color: #568bbf;">E\workspace</span><span style="color: #405c79;">'</span></div></div>
+
+<h3>管理内核</h3>
+
+<p>Notebook 在浏览器前端编写代码后，由内核(kernel)负责执行并返回结果。内核保存着单元格中的所有变量，因此一个 Notebook 所有的代码都在一个内核中执行。</p>
+
+<p>在编辑界面中，可以在 kernel 菜单中终止或重启内核。但需要注意的是：内核一旦中断，所有的变量都会丢失，只有重新执行才可以访问这些变量。</p>
+
+<p>在使用 Python 的过程中，免不了要管理各种虚拟环境，此时就需要管理 Jupyter 的各种内核。内核管理需要借助 <code>ipykernel</code> 第三方库实现，不过它应该在安装 Jupyter 时已经作为一个依赖被一并安装了。</p>
+
+<p>使用以下命令即可查看当前 Jupyter 具有的全部内核：</p>
+
+<div class="codeblock code-console">$ jupyter kernelspec list
+</div>
+
+<p>每个内核都是一个目录，它主要包含以下文件：</p>
+
+<div class="codeblock code-template">
+    kernel.json<br>
+    logo-32x32.png<br>
+    logo-64x64.png<br>
+    logo-svg.svg
+</div>
+
+<p>通过在 <var>kernels</var> 目录中创建多个类似这样的目录并修改 <var>kernel.json</var> 文件的内容，即可创建多个使用不同解释器的内核。<var>kernel.json</var> 文件中的内容为：</p>
+
+<div class="vscode-block" style="color: #90a4ae;"><div><span style="color: #39adb5;">{</span></div><div><span>&#160; &#160; </span><span style="color: #39adb5;">"</span><span style="color: #7c4dff;">argv</span><span style="color: #39adb5;">"</span><span style="color: #39adb5;">:</span><span> </span><span style="color: #39adb5;">[</span></div><div><span>&#160; &#160; &#160; &#160; </span><span style="color: #39adb5;">"</span><span style="color: #91b859;">E:</span><span style="color: #39adb5;">\\</span><span style="color: #91b859;">workspace</span><span style="color: #39adb5;">\\</span><span style="color: #91b859;">ai</span><span style="color: #39adb5;">\\</span><span style="color: #91b859;">env</span><span style="color: #39adb5;">\\</span><span style="color: #91b859;">sci</span><span style="color: #39adb5;">\\</span><span style="color: #91b859;">Scripts</span><span style="color: #39adb5;">\\</span><span style="color: #91b859;">python.exe</span><span style="color: #39adb5;">"</span><span style="color: #39adb5;">,</span></div><div><span>&#160; &#160; &#160; &#160; </span><span style="color: #39adb5;">"</span><span style="color: #91b859;">-m</span><span style="color: #39adb5;">"</span><span style="color: #39adb5;">,</span></div><div><span>&#160; &#160; &#160; &#160; </span><span style="color: #39adb5;">"</span><span style="color: #91b859;">ipykernel_launcher</span><span style="color: #39adb5;">"</span><span style="color: #39adb5;">,</span></div><div><span>&#160; &#160; &#160; &#160; </span><span style="color: #39adb5;">"</span><span style="color: #91b859;">-f</span><span style="color: #39adb5;">"</span><span style="color: #39adb5;">,</span></div><div><span>&#160; &#160; &#160; &#160; </span><span style="color: #39adb5;">"</span><span style="color: #91b859;">{connection_file}</span><span style="color: #39adb5;">"</span></div><div><span>&#160; &#160; </span><span style="color: #39adb5;">],</span></div><div><span>&#160; &#160; </span><span style="color: #39adb5;">"</span><span style="color: #7c4dff;">display_name</span><span style="color: #39adb5;">"</span><span style="color: #39adb5;">:</span><span> </span><span style="color: #39adb5;">"</span><span style="color: #91b859;">Python 3 (sci)</span><span style="color: #39adb5;">"</span><span style="color: #39adb5;">,</span></div><div><span>&#160; &#160; </span><span style="color: #39adb5;">"</span><span style="color: #7c4dff;">language</span><span style="color: #39adb5;">"</span><span style="color: #39adb5;">:</span><span> </span><span style="color: #39adb5;">"</span><span style="color: #91b859;">python</span><span style="color: #39adb5;">"</span><span style="color: #39adb5;">,</span></div><div><span>&#160; &#160; </span><span style="color: #39adb5;">"</span><span style="color: #7c4dff;">metadata</span><span style="color: #39adb5;">"</span><span style="color: #39adb5;">:</span><span> </span><span style="color: #39adb5;">{</span></div><div><span>&#160; &#160; &#160; &#160; </span><span style="color: #39adb5;">"</span><span style="color: #ffb62c;">debugger</span><span style="color: #39adb5;">"</span><span style="color: #39adb5;">:</span><span> </span><span style="color: #f76d47;">true</span></div><div><span>&#160; &#160; </span><span style="color: #39adb5;">}</span></div><div><span style="color: #39adb5;">}</span></div></div>
+
+<p>这里主要修改 <code>"argv"[0]</code> 决定的解释器路径和 <code>"display_name"</code> 决定的内核名，启动 Jupyter 后就能在 Kernel 菜单中更换内核并使用不同的虚拟环境了：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/10/jupyter-manage-kernels.png" alt="" width="340">
+</figure>
+
+<h3>高级交互效果</h3>
+
+<p>借助浏览器的前端技术，Jupyter 可以使用在命令行甚至一般的编辑器中无法实现的交互效果。</p>
+
+<p>在之前介绍 Jupyter 时就展示了在单元格内显示，借助 <code>IPython.display</code> 模块的各种显示类，可以在浏览器中显示各种格式的文本、数学公式乃至多媒体文件等：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/10/jupyter-display.jpg" alt="" width="630">
+</figure>
+
+<p>还可以使用控件(widget)实现更强大的交互效果。控件的实现由第三方库 <code>ipywidgets</code> 提供，它应该在安装 Jupyter 时就被一并安装了，如果没有的话也可以使用 <code>pip</code> 安装它。</p>
+
+<p>先来看一个最简单的示例，在输出中显示一个滑块：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">w = ipywidgets.IntSlider()</span></div><div><span style="color: #405c79;">w</span></div></div>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/10/jupyter-widgets-demo-1.png" alt="" width="360">
+</figure>
+
+<p>交互最主要的就是处理各种事件，这可以通过向 <code>.observe()</code> 方法提供回调函数实现。每次发生交互时，事件的相关信息将以字典的形式由回调函数处理：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">w = ipywidgets.IntSlider()</span></div><div><span style="color: #405c79;">w.observe(</span><span style="color: #bf568b;font-weight: bold;">lambda</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">e</span><span style="color: #405c79;">: </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(e[</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">new</span><span style="color: #405c79;">'</span><span style="color: #405c79;">]), </span><span style="color: #bf8b56;">names</span><span style="color: #405c79;">=[</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">value</span><span style="color: #405c79;">'</span><span style="color: #405c79;">])</span></div><div><span style="color: #405c79;">w</span></div></div>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/10/jupyter-widget-demo-2.gif" alt="" width="440">
+</figure>
+
+<p>由于许多动作都会导致事件的发生，因此这里通过 <code>names</code> 参数限制处理的事件，即只有选定的值发生变化时才处理该事件。滑块在滑动过程中会不断触发事件，在复杂操作时可能引起卡顿。如果想让滑块在最终释放时才执行动作，那么可以在初始化时将 <code>continuous_update</code> 参数设置为 <code>False</code> 。</p>
+
+<p>按钮之类的特殊控件没有那么多交互逻辑，可以使用其它方法简化处理，例如：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">w = ipywidgets.Button(</span><span style="color: #bf8b56;">description</span><span style="color: #405c79;">=</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">click me</span><span style="color: #405c79;">'</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">w.on_click(</span><span style="color: #bf568b;font-weight: bold;">lambda</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">w</span><span style="color: #405c79;">: </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">'clicked </span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">w</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">'</span><span style="color: #405c79;">))</span></div><div><span style="color: #405c79;">w</span></div></div>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/10/jupyter-widgets-demo-3.png" alt="" width="480">
+</figure>
+
+<p>给多个控件建立联系也是很常见的做法，这点可以通过 <code>link()</code> 函数实现。例如，以下在一个滑块和进度条之间建立联系，使滑块的位置被同步反映到进度条上：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">w1 = ipywidgets.FloatSlider()</span></div><div><span style="color: #405c79;">w2 = ipywidgets.FloatProgress()</span></div><div><span style="color: #405c79;">ipywidgets.link((w1, </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">value</span><span style="color: #405c79;">'</span><span style="color: #405c79;">), (w2, </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">value</span><span style="color: #405c79;">'</span><span style="color: #405c79;">))</span></div><br><div><span style="color: #405c79;">display.display(w1, w2)</span></div></div>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/10/jupyter-widgets-demo-4.png" alt="" width="300">
+</figure>
+
+<p>如果要建立单向联系，可以使用 <code>dlink()</code> 。这种联系的后台交互由内核实现，因此内核断开后就无法继续使用。如果要使用纯前端方法实现的联系，可以使用 <code>jslink()</code> 和 <code>jsdlink()</code> 。</p>
+
+<p>一种更为强大的交互效果由 <code>interact()</code> 函数实现。该函数可以根据初始值自动选择合适的控件展示，以下简单展示了几个示例：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/10/jupyter-widgets-demo-5.png" alt="" width="500">
+</figure>
+
+<p><var>ipywidgets</var> 的内容非常复杂，它不仅包含了大量常用的输入框、按钮、框架盒系列的控件，还允许对控件的样式做详细的定制，这里就不展开说明了。要了解更多有关它的内容，可以参考<a href="https://ipywidgets.readthedocs.io/en/latest/">官方文档</a>。</p>
+
+<h3>JupyterLab：更强大的Notebook IDE</h3>
+
+<p>Jupyter 作为 Notebook 的开发环境，只提供了基本的界面及一些简单的单元格编辑与处理功能。JupyterLab 则是一个更高级的浏览器 Notebook 开发环境，它提供了更加丰富的功能，其使用截图如下：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/10/jupyterlab-demo.png" alt="" width="840">
+</figure>
+
+<p>用过 VS Code 等编辑器的话应该会对该界面比较熟悉，JupyterLab 提供了更实用的文件管理、预览、分屏、状态显示等功能，并且还可以通过安装扩展进一步丰富其功能。</p>
+
+<p>JupyterLab 可以通过 <code>pip</code> 快速安装：</p>
+
+<div class="codeblock code-console">$ pip install jupyterlab
+</div>
+
+<p>然后就可以在命令行中运行：</p>
+
+<div class="codeblock code-console">$ jupyter lab
+</div>
+
+<p>Jupyter 及 Notebook 的发展远没有结束，除了以上介绍的技术外，Jupyter Hub 可以用于多人协同开发，而各个常用 Python IDE（如 Pycharm 和 VS Code ）也推出了内置的 Notebook 开发环境，使 Notebook 可以使用它们提供的代码补全、语法检查、调试、环境管理等更多功能。</p>
+<p><a rel="nofollow" href="/archives/823">Jupyter Notebook 入门指南</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/archives/823/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,830 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>算法归档 - 冰封残烛的个人小站</title>
+	<atom:link href="http://localhost/wordpress/archives/tag/%E7%AE%97%E6%B3%95/feed?simply_static_page=3785" rel="self" type="application/rss+xml" />
+	<link></link>
+	<description>FrozenCandle&#039;s Personal Site</description>
+	<lastBuildDate>Mon, 12 Dec 2022 11:33:25 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2.1</generator>
+
+<image>
+	<url>/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg</url>
+	<title>算法归档 - 冰封残烛的个人小站</title>
+	<link></link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>数据结构08-图</title>
+		<link>/archives/743</link>
+					<comments>/archives/743#respond</comments>
+		
+		<dc:creator><![CDATA[Hello]]></dc:creator>
+		<pubDate>Thu, 15 Sep 2022 03:41:15 +0000</pubDate>
+				<category><![CDATA[数据结构与算法]]></category>
+		<category><![CDATA[数据结构]]></category>
+		<category><![CDATA[算法]]></category>
+		<guid isPermaLink="false">/?p=743</guid>
+
+					<description><![CDATA[<p>图存储结构 图结构简介 在之前的章节中已经见过了一对&#46;&#46;&#46;</p>
+<p><a rel="nofollow" href="/archives/743">数据结构08-图</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<h2>图存储结构</h2>
+
+<h3>图结构简介</h3>
+
+<p>在之前的章节中已经见过了一对一和一对多的数据结构，它们分别可以使用<a href="/archives/586">线性表</a>和<a href="/archives/622">树</a>来描述。本节介绍一种典型的多对多数据结构：<strong>图</strong>(graph)。</p>
+
+<p>下面展示了一个简单的图结构，可以看出每两个数据之间都可能有对应关系：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/09/11-graph-concept.png" alt="" width="260">
+</figure>
+
+<p>这种对应关系使得图不能简单地使用节点和指针表示，否则一个节点需要大量空间来表示这种对多的关系。在介绍图的表示方法之前，可以了解一下图的定义。</p>
+
+<h3>图的若干定义</h3>
+
+<p>一个图 <span class="math">\\( G=(V,E) \\)</span> 由<strong>顶点</strong>(vertex)集合 <span class="math">\\( V \\)</span> 和<strong>边</strong>(edge)集合 <span class="math">\\( E \\)</span> 组成。顶点类似于树节点的概念，边是一对顶点的关联 <span class="math">\\( (v, w) \\)</span> 其中 <span class="math">\\( v, w \in V \\)</span> ，边有时也称为<strong>弧</strong>(arc)。</p>
+
+<p>有时候顶点之间并不是双向联系，而是像树一样的单方面指向，这种图称为<strong>有向图</strong>(digraph)。有向图的顶点对是有序的。下面展示了一个有向图，每两个数据之间的对应关系可能是指向也可能是被指向：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/09/11-digraph-concept.png" alt="" width="220">
+</figure>
+
+<p>有向图中顶点的<strong>入度</strong>(indegree)指的是箭头指向它的数量，而<strong>出度</strong>(outdegree)指的是它指出的箭头数量。</p>
+
+<p>两个顶点 <span class="math">\\( v \\)</span> 和 <span class="math">\\( w \\)</span> <strong>邻接</strong>(adjacent)指的是边 <span class="math">\\( (v, w) \in E \\)</span> ，即两个顶点之间有直接连接（且符合指向顺序）的边。</p>
+
+<p>一个边有时也具有<strong>值</strong>(cost)或称为<strong>权</strong>(weight)。例如在一个地图中，两个地点（顶点）之间路线（边）的权可以反映它们的距离。</p>
+
+<p>图的一条<strong>路径</strong>(path)从一个顶点到另一顶点途经的所有顶点组成的序列，用数学描述就是是一个顶点序列 <span class="math">\\( w_1, w_2, \dots, w_N \\)</span> 使得 <span class="math">\\( (w_i, w_{i+1}) \in E \\)</span> 。从一个顶点到自身可以看作一条路径，这种路径不包含边，路径长为 0 。</p>
+
+<p>如果一个顶点到其自身存在一条边 <span class="math">\\( (v, v) \\)</span> ，那么路径 <span class="math">\\( v,v \\)</span> 称为<strong>环</strong>(loop)，一般来说很少有图的应用需要有这种直接与自身有关联的顶点。</p>
+
+<p>与环相似的概念是<strong>圈</strong>(cycle)，如果路径中第一个顶点和最后一个顶点相同，且路径的长度至少为 1（至少涉及两个顶点），则这样的路径就是圈。对于无向图还要求边之间互不相同，防止在两个顶点间左右横跳被认为是圈。</p>
+
+<p>如果在一个无向图中从每一个顶点到其它顶点中都存在一条路径，则称该无向图是<strong>连通</strong>(connected)的。具有这样性质的有向图称为<strong>强连通</strong>(strongly connected)的；如果它不具备这样的性质，但它的边去掉方向所退化为的无向图是连通的，那么该有向图是<strong>弱连通</strong>(weakly connected)的。一个比较典型的实例是航空系统，如果航空网络构成的图是强连通的，那么说明从任意一个航站到另一个航站都只需要若干次换乘；否则还需要借助其它交通方式才能到达。</p>
+
+<h3>图的实现</h3>
+
+<p>下面以有向图为例说明图的实现。无向图可以看作每一条边都是双向连接的有向图。</p>
+
+<p>表示图的一种最简单的方式是使用二维数据，一个维度存储这些顶点，另一个维度存储顶点之间的对应关系：如果存在边 <span class="math">\\( (u, v) \\)</span> ，那么就置 <span class="math">\\( A[u][v] \\)</span> 为 1 或它的权；否则将其清零或使用 <span class="math">\\( \infty \\)</span> 等表示。</p>
+
+<p>这种二维数组称为<strong>邻接矩阵</strong>(adjacency matrix)，使用邻接矩阵表示图易于理解，且对无向图来说由于指向具有对称性，存储时可以采用上三角或下三角矩阵进一步压缩空间。</p>
+
+<p>然而邻接矩阵的空间要求还是太多了，它的空间复杂度为 <span class="math">\\( O(|V|^2) \\)</span> ，除非图中顶点间的关联基本都存在，否则邻接矩阵的大多数位置都不会被用到。</p>
+
+<p>如果要提高空间利用率，那么就需要只存储存在的数据而不存储不存在的数据。那么就可以使用链表这种长度可以灵活调整的数据结构：对于每一个顶点，使用一个链表存放所有邻接的顶点，这样空间需求只为 <span class="math">\\( O(|V|+|E|) \\)</span> 。这种图的表现形式称为<strong>邻接表</strong>(adjacency list)。</p>
+
+<p>以下展示了图的邻接表表示方法，左侧是图的直观结构：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/09/11-adjacency-list.png" alt="" width="570">
+</figure>
+
+<p>可以看到这种结构类似于分离链接散列表。邻接表是表示图的基本方法，接下来的操作都以邻接表为例。邻接表的定义可以参考如下：</p>
+
+<div class="vscode-block"><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">graph_arc</span> <span token="type">graph_arc</span>;</div><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">graph_vertex</span> {</div><div>&nbsp; &nbsp; <span token="type">elemtype</span> <span style="color: #7fdbca;">data</span>;</div><div>&nbsp; &nbsp; <span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">firstarc</span>;</div><div>} <span token="type">graph_vertex</span>;</div><div><span token="keyword">struct</span> <span token="type">graph_arc</span> {</div><div>&nbsp; &nbsp; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">vertex</span>;</div><div>&nbsp; &nbsp; <span token="keyword">struct</span> <span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">nextarc</span>;</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span style="color: #7fdbca;">weight</span>;</div><div>};</div><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">graph</span> {</div><div>&nbsp; &nbsp; <span token="type">graph_vertex</span><span style="color: #7fdbca;">**</span> <span style="color: #7fdbca;">vertices</span>;</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span style="color: #7fdbca;">vertex_num</span>;</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span style="color: #7fdbca;">arc_num</span>;</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span style="color: #7fdbca;">size</span>;</div><div>} <span style="color: #7fdbca;">*</span> <span token="type">graph</span>;</div></div>
+
+<p>接下来介绍几个关于图的典型问题。</p>
+
+<h2 id="top-sort">拓扑排序</h2>
+
+<p>拓扑排序是一种针对有向图顶点的一种排序，由于有向图有指向关系，因此可以通过该指向关系来为顶点安排先后顺序。</p>
+
+<p>一种典型的拓扑排序应用就是选课流程：为了确保知识的连贯性，有些课程必须学完之后才可以继续学习下一门课程，那么这些课程之间就可以按学习顺序构成一个有向图，使用拓扑排序可以确定如何安排课程。</p>
+
+<p>因此，被排序的图除了是有向的外，还要求它没有圈，不然圈上的元素没有严格的先后关系。</p>
+
+<p>例如，以下图：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/09/11-top-sort.png" alt="" width="310">
+</figure>
+
+<p>顶点的指向顺序从左向右。特别地，顶点 C 和 D 之间是并列的，没有严格的先后关系，两者任意一个排在前面都可以。因此，以上图的拓扑排序可以有两种结果：</p>
+
+<div class="codeblock code-template">
+    A→B→C→D→E<br>
+    A→B→D→C→E
+</div>
+
+<p>拓扑排序的思路也很简单：如果一个顶点可以排在最前面，那么应该没有顶点指向它，即它的入度为 0 ；那么只需要找出入度为 0 的顶点，然后将它和它指出的边暂时排除，继续寻找下一个符合条件（入度为 0 ）的顶点即可。以下展示了这一步骤：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/09/11-top-sort-steps.png" alt="" width="560">
+</figure>
+
+<p>以上算法可以做一个小的优化：每一次查找入度为 0 的顶点都花费 <span class="math">\\( O(|V|) \\)</span> 的时间，但只取出一个顶点做处理，如果下一次还是遍历图去寻找入度为 0 的顶点，会使得算法的运行时间达到了平方级 <span class="math">\\( O(|V|^2) \\)</span> 。在第一次扫描时，可以将入度为 0 的顶点放入一个表中，然后逐个取出表中的顶点，检查它指向的顶点入度减 1 后是否为 0 ：只要一个顶点的入度降为 0 ，说明去除那些指向它的顶点后它就可以作为下一位置的顶点，可以同样地将它放入表中继续处理。</p>
+
+<p>这样就只需一次扫描顶点和边并建立表，使执行时间可以变为 <span class="math">\\( O(|V|+|E|) \\)</span> 。这种表可以使用栈或队列。这里使用<a href="/archives/609#queue">队列</a>以实现顺序处理。</p>
+
+<p>拓扑排序的代码实现为：</p>
+
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">TopSort</span>(<span token="type">graph</span> <span style="color: #d7dbe0;">g</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">indegree</span>[<span style="color: #82aaff;">VERTEX_MAXNUM</span>];</div><div>&nbsp; &nbsp; <span style="color: #82aaff;">memset</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">&amp;</span><span token="variable">indegree</span><span style="color: #82aaff;">, </span><span token="number">0</span><span style="color: #82aaff;">, </span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;"> </span><span token="variable">indegree</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; <span style="color: #82aaff;">Graph_GatherInDegree</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">, </span><span token="variable">indegree</span><span style="color: #82aaff;">)</span>;</div><br><div>&nbsp; &nbsp; <span token="type">queue</span> <span token="variable">q</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Queue_New</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;">VERTEX_MAXNUM</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">indegree</span>[<span token="variable">i</span>] <span style="color: #c792ea;">==</span> <span token="number">0</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">Queue_Enqueue</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">vertices</span><span style="color: #82aaff;">[</span><span token="variable">i</span><span style="color: #82aaff;">]-&gt;</span><span style="color: #7fdbca;">data</span><span style="color: #82aaff;">)</span>;</div><br><div>&nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">counter</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&nbsp; &nbsp; <span token="keyword">while</span> (<span style="color: #c792ea;">!</span><span style="color: #82aaff;">Queue_IsEmpty</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">)</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span token="variable">v</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Graph_GetVertexByData</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">, </span><span style="color: #82aaff;">Queue_Dequeue</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">))</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">printf</span><span style="color: #82aaff;">(</span><span style="color: #d9f5dd;">"</span><span style="color: #82aaff;">%d</span><span style="color: #ecc48d;"> &gt;</span><span style="color: #d9f5dd;">"</span><span style="color: #82aaff;">, </span><span token="variable">v</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">data</span><span style="color: #82aaff;">)</span>;<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> print in topological order</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">counter</span><span style="color: #c792ea;">++</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">v</span>-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span token="variable">w</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #7fdbca;">--</span><span token="variable">indegree</span>[<span style="color: #82aaff;">Graph_GetVertexIndex</span>(<span style="color: #d7dbe0;">g</span>, <span token="variable">w</span>)] <span style="color: #c792ea;">==</span> <span token="number">0</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">Queue_Enqueue</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">, </span><span token="variable">w</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">data</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; }</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">counter</span> <span style="color: #c792ea;">!=</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertex_num</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">warning</span><span style="color: #82aaff;">(</span><span style="color: #d9f5dd;">"</span><span style="color: #ecc48d;">Graph has a cycle</span><span style="color: #d9f5dd;">"</span><span style="color: #82aaff;">)</span>;</div><br><div>&nbsp; &nbsp; <span style="color: #82aaff;">Queue_Delete</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">)</span>;</div><div>}</div></div>
+
+<p>由于图的实现比较复杂，本节涉及到的代码一般会将一些细节抽象为函数，使用类似伪代码的形式展现。如果要获取包括拓扑排序在内的完整图论算法实现，以及图的创建等其它操作实现，可以访问 <a href="https://github.com/FrozenCandles/example-code/blob/master/DataStructure/Src/graph.c">GitHub 仓库</a>。</p>
+
+<p>这个程序比较复杂，它可以分为几个部分理解。在计算入度时，由于邻接表只记录一个顶点指出的边，因此要计算入度时需要遍历所有的顶点才能完整得出指向一个顶点的所有边。这里使用一个数组 <code>indegree[]</code> 在一次遍历时便统计出所有顶点的边，加快运行的同时方便处理。</p>
+
+<p>由于图中可能存在圈，但无法通过简单的方式来判断。不过如果存在圈，圈上的顶点就不会降到 0 ，使得它们不会被排序。那么最后只需要判断排序的顶点数是否等于图中包含的顶点数，就知道图中是否存在圈了。</p>
+
+<h2>图的遍历</h2>
+
+<p>遍历也是图常用的一种操作。遍历的要求是从图中的某一个顶点开始，访问每个路径上能到达的顶点且每个顶点应该只访问一次。遍历可以用于规划路线、安排流量、计算其它数学量等。</p>
+
+<h3>深度优先搜索</h3>
+
+<p><strong>深度优先搜索</strong>(depth-first search, DFS)的原理是从某个顶点搜索时，当搜索到下一个顶点时，再递归地从下一个顶点继续搜索下一个顶点。</p>
+
+<p>下图展示了深度优先搜索某一时刻顶点的搜索情况，可以看出远处的顶点可能会被先搜索到：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/09/11-DFS.png" alt="" width="360">
+</figure>
+
+<p>深度优先搜索可以使用递归的形式来求解。另外为了让每个顶点只遍历一次，还需要有一个额外的顶点字段或数组记录顶点是否被访问过。</p>
+
+<p>以下代码是深度优先搜索的一个通用形式：</p>
+
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">Graph_DepthFirstSearch</span>(<span token="type">graph</span> <span style="color: #d7dbe0;">g</span>, <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">v</span>) {</div><div>&nbsp; &nbsp; <span token="variable">visited</span>[<span style="color: #d7dbe0;">v</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">true</span>;</div><div>&nbsp; &nbsp; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">v</span>-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span token="variable">w</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span token="variable">visited</span>[<span token="variable">w</span>-&gt;<span style="color: #7fdbca;">data</span>])</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">Graph_DepthFirstSearch</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">, </span><span token="variable">w</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; }</div><div>}</div></div>
+
+<p>值的注意的是，如果图是无向不连通或有向弱连通的，未必所有顶点都会在此过程中访问到。</p>
+
+<h3>广度优先搜索</h3>
+
+<p>深度优先搜索的缺点是有时要搜索的顶点可能离它较近，但程序可能会花费很多不必要的时间处理更远的顶点。这在图很大时不利于处理较近的顶点。<strong>广度优先搜索</strong>(breadth-first search)则优先处理较近的顶点，然后再处理更远的顶点。</p>
+
+<p>广度优先搜索的原理为：从某一顶点开始搜索时，遍历每一个顶点时，依次遍历其所有的邻接点，然后再从这些邻接点出发，同样依次访问它们的邻接点。按照此过程，直到图中所有被访问过的顶点的邻接点都被访问到。</p>
+
+<p>下图展示了广度优先搜索某一时刻顶点的搜索情况，搜索的顶点从起点开始向外辐射展开：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/09/11-BFS.png" alt="" width="360">
+</figure>
+
+<p>广度优先搜索需要在访问一批顶点时保存这些顶点的信息，这样下一次才能向外拓展一层。保存已访问但还没向外拓展的顶点可以使用队列来实现，并且使用队列可以让先向外拓展的顶点下一次也先向外拓展。</p>
+
+<p>以下代码是广度优先搜索的一个通用形式：</p>
+
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">Graph_BreadthFirstSearch</span>(<span token="type">graph</span> <span style="color: #d7dbe0;">g</span>, <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">v</span>) {</div><div>&nbsp; &nbsp; <span style="color: #82aaff;">bool</span> <span token="variable">visited</span>[<span style="color: #d7dbe0;">g</span>-&gt;<span token="variable">size</span>];</div><div>&nbsp; &nbsp; <span style="color: #82aaff;">memset</span><span style="color: #82aaff;">(</span><span token="variable">visited</span><span style="color: #82aaff;">, </span><span token="number">0</span><span style="color: #82aaff;">, </span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;"> </span><span token="variable">visited</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; <span token="type">queue</span> <span token="variable">q</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Queue_New</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;">VERTEX_MAXNUM</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span token="variable">visited</span>[<span style="color: #d7dbe0;">v</span>-&gt;<span style="color: #7fdbca;">data</span>]) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">visited</span>[<span style="color: #d7dbe0;">v</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">true</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">Queue_Enqueue</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">v</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">data</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">while</span> (<span style="color: #c792ea;">!</span><span style="color: #82aaff;">Queue_IsEmpty</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">)</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span token="variable">w</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Graph_GetVertexByData</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">, </span><span style="color: #82aaff;">Queue_Dequeue</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">))</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">w</span>-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span token="variable">visited</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>]) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">visited</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">true</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">Queue_Enqueue</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">, </span><span token="variable">arc</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">vertex</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">data</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; }</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span style="color: #82aaff;">Queue_Delete</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">)</span>;</div><div>}</div></div>
+
+<p>图的两种遍历方式各有侧重点，它们都有比较典型的应用。</p>
+
+<h2>最短路径算法</h2>
+
+<p>图的顶点之间会互相联系，形成一种网状结构。这个时候查找两个顶点之间的最短路径就是一个常见的问题。例如，导航和游戏在寻路时都需要在地图上的两点内规划一条最短的路线。</p>
+
+<h3>无权图的最短路径</h3>
+
+<p>无权图在寻找最短路径时只需要考虑边的条数，而不需要考虑边的权重，因此这种情况实现起来比较简单：在计算顶点 <span class="math">\\( v_1 \\)</span> 到 <span class="math">\\( v_2 \\)</span> 的最短路径时，只需要使路径上具有最少的边即可。</p>
+
+<p>无权图的最短路径可以使用广度优先搜索的思想解决：广度优先搜索每向外拓展一层，那么路径长便增加 1 ，并且第一次遇到一个顶点时的路径是离起点最短的路径。</p>
+
+<p>可以通过一个附加的顶点字段或数组记录每个顶点离起点的最短路径，并且它可以代替之前使用的 <code>visited[]</code> 数组：在起始时置所有顶点的路径为 -1（无限远），每搜索到一个顶点，只要它是无限远，那就说明没有访问过，将其路径长置为上一级顶点的路径长多 1 。</p>
+
+<p>无权图计算最短路径的实现方式和广度优先算法比较相似。接下来介绍有权图最短路径的算法实现。</p>
+
+<h3>有权图的最短路径</h3>
+
+<p>如果在计算最短路径时要考虑到边上的权，那么计算最短路径就会复杂许多，不过基本的处理思路依然可以参考无权图。</p>
+
+<p>Dijkstra 算法是一个解决有权最短路径问题的较好的算法。该算法和无权最短路径问题一样分阶段执行：每个阶段该算法选择在未访问顶点中路径长 <span class="math">\\( d_v \\)</span> 最小的顶点 <span class="math">\\( v \\)</span> ，并通过该顶点更新邻接顶点的长度：如果从 <span class="math">\\( v \\)</span> 到邻接顶点 <span class="math">\\( w \\)</span> 的路径比从其它顶点到 <span class="math">\\( w \\)</span> 的路径更短，那么就更新 <span class="math">\\( w \\)</span> 最短路径。</p>
+
+<p>例如，假设要在以下有向有权图中寻找从 <span class="math">\\( v_1 \\)</span> 到 <span class="math">\\( v_8 \\)</span> 的最短路径：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/09/11-Dijkstra-step-1.png" alt="" width="320">
+</figure>
+
+<p>那么首先从 <span class="math">\\( v_1 \\)</span> 开始，标记出从它到邻接顶点的路径，并暂时视为最短路径：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/09/11-Dijkstra-step-2.png" alt="" width="320">
+</figure>
+
+<p>然后找到未访问且具有最短路径的顶点，即顶点 <span class="math">\\( v_2 \\)</span> ，再标记出经由它到邻接顶点的路径：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/09/11-Dijkstra-step-3.png" alt="" width="320">
+</figure>
+
+<p>每次更新完邻接顶点的路径后，都继续从未访问的顶点中找出具有最短路径的顶点。</p>
+
+<p>本次找到的顶点为 <span class="math">\\( v_6 \\)</span> ，计算它邻接顶点的路径长时，发现从它到 <span class="math">\\( v_3 \\)</span> 比从已到达的顶点到 <span class="math">\\( v_3 \\)</span> 路径更短，那么就更新到 <span class="math">\\( v_3 \\)</span> 的最短路径：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/09/11-Dijkstra-step-4.png" alt="" width="320">
+</figure>
+
+<p>重复以上步骤，直到确定了 <span class="math">\\( v_1 \\)</span> 与图中所有顶点的最短路径后才结束算法。</p>
+
+<p>例如，接下来两步是处理 <span class="math">\\( v_3 \\)</span> 和 <span class="math">\\( v_4 \\)</span> 顶点并更新它们邻接顶点的路径长：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/09/11-Dijkstra-step-5.png" alt="" width="320">
+</figure>
+
+<p>Dijkstra 算法也可用于处理无向图的最短路径，甚至可以用于处理无权图的最短路径（无权图可以将每条边的权看作 1 ）。</p>
+
+<p>Dijkstra 算法的代码大致实现如下：</p>
+
+<div class="vscode-block"><div><span token="keyword">int</span> <span style="color: #82aaff;">Graph_WeightedPath_Dijkstra</span>(<span token="type">graph</span> <span style="color: #d7dbe0;">g</span>, <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">v</span>, <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">w</span>) {</div><div>&nbsp; &nbsp; <span style="color: #82aaff;">bool</span> <span token="variable">visited</span>[<span style="color: #82aaff;">VERTEX_MAXNUM</span>];</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">minpathlen</span>[<span style="color: #82aaff;">VERTEX_MAXNUM</span>];</div><div>&nbsp; &nbsp; <span style="color: #82aaff;">memset</span><span style="color: #82aaff;">(</span><span token="variable">visited</span><span style="color: #82aaff;">, </span><span token="number">0</span><span style="color: #82aaff;">, </span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;"> </span><span token="variable">visited</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #82aaff;">VERTEX_MAXNUM</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) <span token="variable">minpathlen</span>[<span token="variable">i</span>] <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">INT_MAX</span>;</div><div>&nbsp; &nbsp; </div><div>&nbsp; &nbsp; <span token="variable">minpathlen</span>[<span style="color: #d7dbe0;">v</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="variable">i</span>]) <span token="keyword">continue</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">minv</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">minlen</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">INT_MAX</span>;</div><br><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">j</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">j</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">j</span><span style="color: #c792ea;">++</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span token="variable">visited</span>[<span token="variable">j</span>] <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">minpathlen</span>[<span token="variable">j</span>] <span style="color: #c792ea;">&lt;</span> <span token="variable">minlen</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">minv</span> <span style="color: #c792ea;">=</span> <span token="variable">j</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">minlen</span> <span style="color: #c792ea;">=</span> <span token="variable">minpathlen</span>[<span token="variable">minv</span>];</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">visited</span>[<span token="variable">minv</span>] <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">true</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span token="variable">v_k</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Graph_GetVertexByData</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">, </span><span token="variable">minv</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">v_k</span>-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span token="variable">u</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span token="variable">visited</span>[<span token="variable">u</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">&amp;&amp;</span> (<span token="variable">minlen</span> <span style="color: #7fdbca;">+</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">weight</span> <span style="color: #c792ea;">&lt;</span> <span token="variable">minpathlen</span>[<span token="variable">u</span>-&gt;<span style="color: #7fdbca;">data</span>]))</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">minpathlen</span>[<span token="variable">u</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span token="variable">minlen</span> <span style="color: #7fdbca;">+</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">weight</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; }</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="variable">minpathlen</span>[<span style="color: #d7dbe0;">w</span>-&gt;<span style="color: #7fdbca;">data</span>];</div><div>}</div></div>
+
+<p>注意一个已计算路径最小值的顶点未必被访问过。</p>
+
+<p>Dijkstra 算法需要花费线性的时间处理完所有顶点；每处理一个顶点，接下来还需要花费线性时间查找未访问顶点的路径最小值，而所有顶点的最小路径长需要遍历所有边才能得出一个确定的结果，因此该算法的时间复杂度为 <span class="math">\\( O(|V|^2+|E|) = O(|V|^2 \\)</span> 。</p>
+
+<p>如果图较为稠密（每两个顶点间基本都有边，<span class="math">\\( |E| \approx |V|^2 \\)</span> ），那么该算法的效率基本已经是最优的了。</p>
+
+<p>否则当边较为稀疏时，以上算法还有优化的空间。优化主要体现在线性时间的最小值查找上，可以借助优先队列（堆）降低查找的时间。由于优先队列的删除最小值需要 <span class="math">\\( O(\log N) \\)</span> 时间，因此使用优先队列的 Dijkstra 算法花费的总时间为 <span class="math">\\( O(|E|\log |V| + |V|\log |V|) = O(|E| log |V|) \\)</span> ，在边数较少时可以加快运行效率。</p>
+
+<p>使用堆存储路径长的缺点是二叉堆不支持查找，难以修改一个顶点的最小路径长。要改进这个问题只能使用更高级的优先队列结构，这里暂不讨论这个问题。</p>
+
+<p>除此之外，Dijkstra 算法在某些情况下也可能失效。例如当边的权为负值的时候，那么一个已访问的顶点并不一定已经计算出最短路径，因为可能从未访问顶点有一条负值很大的路径指向它使得从更远的顶点到这里反而可能变得更短，问题是该顶点已经用于计算邻接顶点的最短路径，不能只更新该顶点的最短路径长。一个最坏的情况下，图中可能有含有负值边的圈，并且这个负值可能很大使得每走完一圈路径反而会变短。如果不处理这种情况很容易会造成无限循环。</p>
+
+<p>无权最短路径和有权最短路径的算法都可以得出最短路径：可以增加一个辅助顶点字段或数组，记录到达该顶点的最短路径的上一个顶点的信息，最后收集这些信息，就可以从目的顶点逆序到达起始顶点。</p>
+
+<h2>最小生成树</h2>
+
+<p><strong>最小生成树</strong>(minimum spanning tree)是一个主要针对无向图的问题。一个无向图的最小生成树就是由图中所有顶点和部分边构成的另一个图，且边的权重之和最小。</p>
+
+<p>例如，以上是上一节示例退化的无向图及其最小生成树：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/09/11-minimum-spanning-tree.png" alt="" width="580">
+</figure>
+
+<p>最小生成树也有典型的实际应用。例如，假设要在若干地点间建立通信路线，那么需要通过最小生成树来规划建立需要的最短线路长度或最少花费。</p>
+
+<p>最小生成树之所以称为“树”，是因为这样得到的无向图是没有圈的，因此它将退化为树形结构。如果无向图有圈，那么圈上的两个顶点之间就会有两条不一样的路径，但这是不必要的，会增加总的路径长度，只需要保留更短的路径即可。</p>
+
+<p>并且由于无向图是没有圈的，无向图边的条数为 <span class="math">\\( |V| - 1 \\)</span> ，因为除了根之外，每个顶点都需要一条边来接到图中；如果多了一条边，那么某个顶点就会接到图中两次，形成一个不必要的圈。</p>
+
+<p>具有最小生成树的图需要是连通的。计算图的最小生成树有两种常用的算法。</p>
+
+<h3>Prim算法</h3>
+
+<p>Prim 是一种易于理解的最小生成树算法。该算法先将每个顶点独立出来，然后每次从独立的顶点中选择离生成树最近的顶点，将它和它的边插入生成树中。</p>
+
+<p>一开始可以随机选择一个顶点作为生成树的根。下图展示了该算法计算以上图最小生成树的前几步：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/09/11-Prim-steps.png" alt="" width="440">
+</figure>
+
+<p>Prim 算法原理比较直观，但有一些细节需要谨慎处理。Prim 算法的实现可以参照以下思路完成：</p>
+
+<p>该思路要求每个顶点有两个字段：分别记录还不在生成树的顶点离生成树的最近路径长与离生成树最近的顶点。</p>
+
+<p>首先，任取一个顶点放入生成树中，并将其邻接的顶点视为离生成树最近的顶点，更新这些顶点的最近路径长与最近顶点：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/09/11-Prim-step-1.png" alt="" width="320">
+</figure>
+
+<p>每个顶点的最近路径长一开始被置为 <span class="math">\\( \infty \\)</span> 或 <code>INT_MAX</code> 。如果一个顶点的最近路径长为 0 ，那么说明该顶点已经位于生成树中。</p>
+
+<p>接下来每次都选取离生成树最近的顶点，将其插入到生成树中，并更新该顶点邻接的顶点信息。例如，下一次离生成树最近的顶点是 <span class="math">\\( v_2 \\)</span> ，则将其插入生成树中。更新 <span class="math">\\( v_2 \\)</span> 邻接顶点时发现 <span class="math">\\( v_3 \\)</span> 离它比离 <span class="math">\\( v_1 \\)</span> 更近，因此将该顶点的相关字段更新：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/09/11-Prim-step-2.png" alt="" width="320">
+</figure>
+
+<p>下一步继续选择离生成树最近的顶点，依照上述方式插入到生成树中并更新邻接顶点的信息：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/09/11-Prim-step-3.png" alt="" width="320">
+</figure>
+
+<p>Prim 算法的简单代码实现可以参考如下，它与 Dijkstra 算法的实现上非常相似：</p>
+
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">Graph_MinSpanTree_Prim</span>(<span token="type">graph</span> <span style="color: #d7dbe0;">g</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">min_vtx</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="number">0</span>]-&gt;<span style="color: #7fdbca;">data</span>;</div><div>&nbsp; &nbsp; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="number">0</span>]-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">minpathfrom</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span token="variable">min_vtx</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">minpathlen</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">weight</span>;</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span token="variable">minpathlen</span>[<span token="variable">min_vtx</span>] <span style="color: #c792ea;">=</span> <span token="number">0</span>;<span style="color: #637777;"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> put it in the tree</span></div><div><span style="color: #a8a8a8;">&nbsp; &nbsp; /* Add new edge ( minpathfrom[min_vtx] --- min_len --&gt; min_vtx ) */</span></div><div>&nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">1</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="variable">i</span>])</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">continue</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">min_len</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">INT_MAX</span>;<span style="color: #637777;"> &nbsp; &nbsp; &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> find the closest vertex</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">j</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">j</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">j</span><span style="color: #c792ea;">++</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">minpathlen</span>[<span token="variable">j</span>] <span style="color: #c792ea;">!=</span> <span token="number">0</span> <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">minpathlen</span>[<span token="variable">j</span>] <span style="color: #c792ea;">&lt;</span> <span token="variable">min_len</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">min_len</span> <span style="color: #c792ea;">=</span> <span token="variable">minpathlen</span>[<span token="variable">j</span>];</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">min_vtx</span> <span style="color: #c792ea;">=</span> <span token="variable">j</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">minpathlen</span>[<span token="variable">min_vtx</span>] <span style="color: #c792ea;">=</span> <span token="number">0</span>;<span style="color: #637777;"> &nbsp; &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> put it in the tree</span></div><div><span style="color: #a8a8a8;">&nbsp; &nbsp; &nbsp; &nbsp; /* update adjacent vertex */</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Graph_GetVertexByData</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">, </span><span token="variable">min_vtx</span><span style="color: #82aaff;">)</span>-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">minpathlen</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">!=</span> <span token="number">0</span> <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">weight</span> <span style="color: #c792ea;">&lt;</span> <span token="variable">minpathlen</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>]) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">minpathfrom</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span token="variable">min_vtx</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">minpathlen</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">weight</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div><div>&nbsp; &nbsp; }</div><div>}</div></div>
+
+<p>该算法的复杂度分析也和 Dijkstra 算法一致：不使用优先队列时复杂度为 <span class="math">\\( O(|V|^2) \\)</span> ，使用优先队列的复杂度为 <span class="math">\\( O(|E|\log |V|) \\)</span> 。</p>
+
+<h3>Kruskal算法</h3>
+
+<p>Kruskal 是另一种计算最小生成树的算法，它的实现较为简单：同样将顶点独立出来并向其中添加边，每次都从图中的所有边选取权重最小的边，如果加上该边后的图不会形成圈，则说明该边是最小生成树的一部分。</p>
+
+<p>还是以上面那个图为例，首先选择权重最小的边加入图中：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/09/11-Kruskal-step-1.png" alt="" width="320">
+</figure>
+
+<p>然后继续选择未添加的权重最小的边尝试放入图中：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/09/11-Kruskal-step-2.png" alt="" width="320">
+</figure>
+
+<p>继续添加边，但添加边 <span class="math">\\( (v_1, v_4) \\)</span> 时发现会形成圈，因此需要抛弃该边：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/09/11-Kruskal-step-3.png" alt="" width="320">
+</figure>
+
+<p>重复以上步骤即可建立最小生成树。</p>
+
+<p>Kruskal 算法也不难理解，不过实现时也有很多细节要注意。最大的问题是如何判断添加边后是否会形成圈：如果为连通图中的某个顶点添加一条边会形成圈，那么说明该边指向的还是这一连通图。那么只需要将图中的连通部分各做一个独立的标记，如果准备插入一个边时发现该边的两端同属一个连通图，那么就说明插入该边会产生圈。</p>
+
+<p>例如，以上是某个图调用 Kruskal 算法的中间结果，它形成了三个互相独立的连通图：（这里使用不同颜色作为连通图的标记）</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/09/11-Kruskal-has-cycle.png" alt="" width="290">
+</figure>
+
+<p>如果要向顶点 <span class="math">\\( v_4 \\)</span> 和 <span class="math">\\( v_6 \\)</span> 之间插入一条边，那么就需要先判断这两个顶点的标记是否相同：如果相同，说明它们属于同一个连通图，两者已经存在了一条路径，再向它们之间插入一条边，则又增加了一条路径，使得无向图产生了一个圈。</p>
+
+<p>Kruskal 算法大致可以由以下方式实现：</p>
+
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">Graph_MinSpanTree_Kruskal</span>(<span token="type">graph</span> <span style="color: #d7dbe0;">g</span>) {</div><br><div>&nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>)<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> collect arcs</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="variable">i</span>])</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="variable">i</span>]-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">arcs</span>[<span token="variable">arcs_ptr</span><span style="color: #c792ea;">++</span>] <span style="color: #c792ea;">=</span> (<span token="keyword">struct</span> <span token="type">_graph_arc</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .from<span style="color: #c792ea;">=</span><span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="variable">i</span>]-&gt;<span style="color: #7fdbca;">data</span>, .to<span style="color: #c792ea;">=</span><span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>, .weight<span style="color: #c792ea;">=</span><span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">weight</span> };</div><div>&nbsp; &nbsp; <span style="color: #82aaff;">qsort</span><span style="color: #82aaff;">(</span><span token="variable">arcs</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">arc_num</span><span style="color: #82aaff;">, </span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span token="keyword">struct</span><span style="color: #82aaff;"> </span><span style="color: #82aaff;text-decoration: underline;">_graph_arc</span><span style="color: #82aaff;">), </span><span style="color: #82aaff;">CompareByWeight</span><span style="color: #82aaff;">)</span>;</div><br><div>&nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">arcs_inserted</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">arc_num</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">conn_mark</span>[<span token="variable">arcs</span>[<span token="variable">i</span>].<span token="variable">from</span>] <span style="color: #c792ea;">!=</span> <span token="variable">conn_mark</span>[<span token="variable">arcs</span>[<span token="variable">i</span>].<span token="variable">to</span>]) {</div><div><span style="color: #a8a8a8;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /* insert edge (arcs[i].from &lt;-- arcs[i].weight --&gt; arcs[i].to) to tree */</span></div><div><span style="color: #a8a8a8;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /* union sets between edge */</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">k</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">k</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertex_num</span>; <span token="variable">k</span><span style="color: #c792ea;">++</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">conn_mark</span>[<span token="variable">k</span>] <span style="color: #c792ea;">==</span> <span token="variable">conn_mark</span>[<span token="variable">arcs</span>[<span token="variable">i</span>].<span token="variable">to</span>])</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">conn_mark</span>[<span token="variable">k</span>] <span style="color: #c792ea;">=</span> <span token="variable">conn_mark</span>[<span token="variable">arcs</span>[<span token="variable">i</span>].<span token="variable">from</span>];</div><br><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">arcs_inserted</span><span style="color: #c792ea;">++</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">arcs_inserted</span> <span style="color: #c792ea;">==</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertex_num</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>)<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> minimum spanning tree has created</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">break</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; }</div><div>&nbsp; &nbsp; }</div><div>}</div></div>
+
+<p>以上代码首先收集所有的边（注意如果用邻接表表示无向图的话每条边只应该收集一次），然后对所有边做<a href="/archives/735">排序</a>，以实现从小到大插入合适的边。</p>
+
+<p>在插入前需要判断边两侧顶点的标记是否相同，如果不相同便可插入，插入完成后还需更新两侧连通图的标记为同一连通图。修改标记的方式为：遍历所有顶点标记，将和边一侧顶点相同的标记修改为另一侧的标记。</p>
+
+<p>这种合并方式虽然易于理解，但效率不高。如果要使用更高效的合并，需要使用某些特殊的集合数据结构才能实现。</p>
+<p><a rel="nofollow" href="/archives/743">数据结构08-图</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/archives/743/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>数据结构07-排序算法</title>
+		<link>/archives/735</link>
+					<comments>/archives/735#respond</comments>
+		
+		<dc:creator><![CDATA[Hello]]></dc:creator>
+		<pubDate>Fri, 09 Sep 2022 03:09:22 +0000</pubDate>
+				<category><![CDATA[数据结构与算法]]></category>
+		<category><![CDATA[数据结构]]></category>
+		<category><![CDATA[算法]]></category>
+		<guid isPermaLink="false">/?p=735</guid>
+
+					<description><![CDATA[<p>本节暂时不讨论数据结构，而是研究算法。排序是一个经典&#46;&#46;&#46;</p>
+<p><a rel="nofollow" href="/archives/735">数据结构07-排序算法</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>本节暂时不讨论数据结构，而是研究算法。排序是一个经典的算法问题，有许多算法都可以用于排序，但是它们各有优缺点。本节讨论各种排序算法并分析其特点。</p>
+
+<p>为了方便起见，本节介绍的排序算法都用于将数组内的元素排序，只要知道其原理就可以将其应用到其余需要的数据结构中。排序的依据是元素的大小。也就是说两个元素可以直接做比较。</p>
+
+<h2>排序算法</h2>
+
+<h3>选择排序</h3>
+
+<p><strong>选择排序</strong>(selection sort)应该是最易于理解的排序算法，早在<a href="/archives/586">第一节</a>中就已经介绍过其原理，这里再次重复一遍：先找出数组的最小元素并移动到数组的起始位置，然后每次都从剩余未排序元素中<em>选择</em>最小元素并放到已排序序列的末尾，直到没有待排序元素为止。</p>
+
+<p>根据以上介绍，选择排序的代码实现如下：</p>
+
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">SelectionSort</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">arr</span><span token="keyword">[]</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">len</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">min</span>;</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">len</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="variable">min</span> <span style="color: #c792ea;">=</span> <span token="variable">i</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">j</span> <span style="color: #c792ea;">=</span> <span token="variable">i</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span>; <span token="variable">j</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">len</span>; <span token="variable">j</span><span style="color: #c792ea;">++</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">arr</span>[<span token="variable">j</span>] <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">min</span>])</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">min</span> <span style="color: #c792ea;">=</span> <span token="variable">j</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">array_swap</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span token="variable">min</span><span style="color: #82aaff;">, </span><span token="variable">i</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; }</div><div>}</div></div>
+
+<p>选择排序是一个典型的时间复杂度为 <span class="math">\\( O(N^2) \\)</span> 的排序算法，因为代码中有两层嵌套的循环，每层循环的次数都与 <span class="math">\\( N \\)</span> 有关，并且循环不会中断。</p>
+
+<p>从原理上理解，不管原始数组如何，代码都需要花费线性时间找出数组的最小值，然后又花费线性时间找出数组的次小值，一共有线性个元素需要寻找，因此时间复杂度为 <span class="math">\\( O(N^2) \\)</span> 。</p>
+
+<p>这种排序算法平平无奇，很难有改进的余地，接下来再看一个同样简单的排序算法：插入排序。</p>
+
+<h3>插入排序</h3>
+
+<p><strong>插入排序</strong>(insertion sort)同样是一种简单的排序算法，其原理是：顺序扫描整个数组，将扫描的每个元素依次<em>插入</em>已排序序列的适当位置。</p>
+
+<p>插入排序的代码实现为：</p>
+
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">InsertionSort</span>(<span token="type">elemtype</span> <span style="color: #d7dbe0;">arr</span><span token="keyword">[]</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">len</span>) {</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">len</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="type">elemtype</span> <span token="variable">temp</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">i</span>];</div><div>&#160; &#160; &#160; &#160; <span token="keyword">int</span> <span token="variable">j</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="variable">j</span> <span style="color: #c792ea;">=</span> <span token="variable">i</span>; <span token="variable">j</span> <span style="color: #c792ea;">&gt;</span> <span token="number">0</span> <span style="color: #c792ea;">&amp;&amp;</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">j</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>] <span style="color: #c792ea;">&gt;</span> <span token="variable">temp</span>; <span token="variable">j</span><span style="color: #7fdbca;">--</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">arr</span>[<span token="variable">j</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">j</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>];</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">arr</span>[<span token="variable">j</span>] <span style="color: #c792ea;">=</span> <span token="variable">temp</span>;</div><div>&#160; &#160; }</div><div>}</div></div>
+
+<p>插入排序也有两层嵌套的循环，且每层循环也和 <span class="math">\\( N \\)</span> 有关。但是内层循环是可能终止的：如果待排序元素比已排序序列末尾（最大）的元素还大，那么它就无需移动，放在原位就可以作为已排序序列的一部分，这就避免了插入时需要找到合适位置的线性复杂度。</p>
+
+<p>在极端情况下，如果一个数组本身就是有序的，那么顺序扫描整个数组时，程序会发现数组与之前的序列总是能直接构成有序序列，这样每一个元素都无需移动，时间复杂度可以达到 <span class="math">\\( O(N) \\)</span> 。</p>
+
+<p>如果原始数组越有序，那么无需移动的元素个数也越多，排序需要花费的时间也越短。在平均情况下，如果数组完全是随机的，那么显然需要移动的元素个数随着数组的大小线性增长，而移动又要花费线性时间，因此插入排序的平均时间复杂度仍然为 <span class="math">\\( O(N^2) \\)</span> 。</p>
+
+<h3>希尔排序</h3>
+
+<p><strong>希尔排序</strong>(Shell sort)是最早突破二次时间屏障的算法之一，它利用了插入排序在数组偏向有序时效率会更高的特点。</p>
+
+<p>希尔排序使用一个<strong>增量序列</strong>(increment sequence) <span class="math">\\( h_1, h_2, \dots, h_t \\)</span> ，在使用 <span class="math">\\( h_k \\)</span> 做一次排序之后，数组中所有相隔为 <span class="math">\\( h_k \\)</span> 的元素都被排序。也就是说，将 <span class="math">\\( h_k, h_k + 1, \dots, N-1 \\)</span> 每个位置的元素使用插入排序放到 <span class="math">\\( i, i-h_k, i-2h_k, \dots \\)</span> 中的正确位置上。</p>
+
+<p>提出者 Donald Shell 建议的增量序列的选择为：</p>
+
+<div class="math">
+\\[
+    h_1 = \lfloor N / 2 \rfloor \\
+    h_{k+1} = \lfloor h_k / 2 \rfloor
+\\]
+</div>
+
+<p>该增量并不是效率最高的增量，但是比较流行。使用该增量编写的希尔排序如下：</p>
+
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">ShellSort</span>(<span token="type">elemtype</span> <span style="color: #d7dbe0;">arr</span><span token="keyword">[]</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">len</span>) {</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">inc</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">len</span> <span style="color: #7fdbca;">/</span> <span token="number">2</span>; <span token="variable">inc</span> <span style="color: #c792ea;">&gt;</span> <span token="number">0</span>; <span token="variable">inc</span> <span style="color: #c792ea;">/=</span> <span token="number">2</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="variable">inc</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">len</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) {</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="type">elemtype</span> <span token="variable">temp</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">i</span>];</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">int</span> <span token="variable">j</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="variable">j</span> <span style="color: #c792ea;">=</span> <span token="variable">i</span>; <span token="variable">j</span> <span style="color: #c792ea;">&gt;=</span> <span token="variable">inc</span>; <span token="variable">j</span> <span style="color: #c792ea;">-=</span> <span token="variable">inc</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">temp</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">j</span> <span style="color: #7fdbca;">-</span> <span token="variable">inc</span>])</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">arr</span>[<span token="variable">j</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">j</span> <span style="color: #7fdbca;">-</span> <span token="variable">inc</span>];</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">else</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">break</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">arr</span>[<span token="variable">j</span>] <span style="color: #c792ea;">=</span> <span token="variable">temp</span>;</div><div>&#160; &#160; &#160; &#160; }</div><div>}</div></div>
+
+<p>有了以上函数，就可以分析其复杂度了。虽然以上函数有三层嵌套循环，但并不意味着时间复杂度就为三次函数。希尔排序在条件最差的情况下，其时间复杂度为 <span class="math">\\( O(N^2) \\)</span> 。</p>
+
+<p>在增量为 <span class="math">\\( h_k \\)</span> 时，需要有 <span class="math">\\( h_k \\)</span> 组，每组 <span class="math">\\( N / h_k \\)</span> 个元素做插入排序。假设这些插入排序都是平均或最坏情况的二次时间，那么该增量下排序的总时间花费为：</p>
+
+<div class="math">
+\\[
+    O(h_k \dot (N/h_k)^2) = O(N^2/h_k)
+\\]
+</div>
+
+<p>对所有增量下排序的时间总和为：</p>
+
+<div class="math">
+\\[
+    O(\sum_{i=1}^{t}N^2/h_i)=O(N^2\sum_{i=1}^{t} 1/h_i)
+\\]
+</div>
+
+<p>由于 <span class="math">\\( h_t \\)</span> 的取值为 1 ，其余值应该大于前一个值的两倍，因此该数列是一个等比数列，总和小于 2 ，故时间复杂度为 <span class="math">\\( O(N^2) \\)</span> 。</p>
+
+<p>希尔排序的时间复杂度是一个复杂的问题，甚至许多增量下平均情况的时间复杂度都还没解决。目前还不能确定取什么增量具有最好的时间复杂度，不过它确实有优于二次函数的时间复杂度：当增量序列取用 <span class="math">\\( 2^k-1, \dots, 7, 3, 1 \\)</span> 时，其时间复杂度为 <span class="math">\\( O(N^{3/2}) \\)</span> ，不过证明该结论需要一定数论知识。</p>
+
+<p>还有许多不同的增量序列可供选取，例如 <span class="math">\\( 2^{k-1} + 1, \dots, 9, 5, 3, 2, 1 \\)</span> 或 <span class="math">\\( 0.5(3^{k-1}-1), \dots, 40, 13, 4, 1 \\)</span> 等。在选取增量序列时需要注意序列的最后一个值需要为 1 ，使数组最终要让所有元素都一起参与排序；并且序列中的值不要有除 1 以外的其它公因数，否则这些位置上的值会多次一并参与排序，影响效率。</p>
+
+<h3>堆排序</h3>
+
+<p>在<a href="/archives/717">上一节</a> 中介绍了堆的概念。二叉堆能以 <span class="math">\\( O(1) \\)</span> 的时间做插入，并以 <span class="math">\\( O(\log N) \\)</span> 的时间删除最小值。</p>
+
+<p>删除是有序的，因此可以借由该性质完成排序：如果将数组内的每个元素插入二叉堆中，然后再按值的大小顺序出队，那么就可以得到一个有序的结果。</p>
+
+<p>单个插入需要 <span class="math">\\( O(1) \\)</span> 的时间，插入所有元素就需要 <span class="math">\\( O(N) \\)</span> 的时间。删除最小值并放到数组中的合适位置需要花费 <span class="math">\\( O(\log N) \\)</span> 的时间，将所有元素依次删除就需要花费 <span class="math">\\( O(N\log N) \\)</span> 的时间。两者是先后执行的关系，总的时间复杂度也是二者之和，因此总的时间复杂度为 <span class="math">\\( O(N\log N) \\)</span> 。</p>
+
+<p>这是目前为止效率最好的排序算法，不过它需要一个额外的数组来构建二叉树，因此需要 <span class="math">\\( O(N) \\)</span> 的空间复杂度。</p>
+
+<p>可以对二叉堆做一定调整来避免额外的线性空间要求：注意到二叉堆在删除一个元素时，堆的最后一个元素空缺了出来，并且随着删除的继续，数组从后向前腾出空间。如果将每次删除的元素放在因删除而空缺出的位置上，就可以利用单个数组构建二叉堆并排序为数组。</p>
+
+<p>不过这样得到的最终数组后面位置的元素小而前面位置的元素大。如果想得到升序排列的数组，可以对二叉堆做一定改进，使其每次在删除时，删除的是最大的元素而不是最小的元素。</p>
+
+<p>这种堆称为 max-堆。它的堆序性质与上一节介绍的二叉堆是相反的：大的元素在上，小的元素在下。下图展示了一个 max-堆的结构：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/09/10-max-heap.png" alt="" width="260">
+</figure>
+
+<p>除此之外，max-堆的操作思路都与普通的二叉堆相同。例如，可以将堆中的任意一个元素调整到合适的位置上：</p>
+
+<div class="vscode-block"><div><span style="color: #c792ea;">#</span><span token="keyword">define</span> <span style="color: #82aaff;">leftchild</span><span style="color: #d9f5dd;">(</span><span style="color: #d7dbe0;">pos</span><span style="color: #d9f5dd;">)</span> (<span token="number">2</span> <span style="color: #7fdbca;">*</span> (pos) <span style="color: #7fdbca;">+</span> <span token="number">1</span>)</div><br><div><span token="keyword">static</span> <span token="keyword">void</span> <span style="color: #82aaff;">PercolateDown</span>(<span token="type">elemtype</span> <span style="color: #d7dbe0;">arr</span><span token="keyword">[]</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">len</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">pos</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">child</span>;</div><div>&#160; &#160; <span token="type">elemtype</span> <span token="variable">temp</span>;</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="variable">temp</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">pos</span>]; <span style="color: #82aaff;">leftchild</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">pos</span><span style="color: #82aaff;">)</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">len</span>; <span style="color: #d7dbe0;">pos</span> <span style="color: #c792ea;">=</span> <span token="variable">child</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="variable">child</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">leftchild</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">pos</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">child</span> <span style="color: #c792ea;">!=</span> <span style="color: #d7dbe0;">len</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span> <span style="color: #c792ea;">&amp;&amp;</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">child</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span>] <span style="color: #c792ea;">&gt;</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">child</span>])</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">child</span><span style="color: #c792ea;">++</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">temp</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">child</span>])</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">pos</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">child</span>];</div><div>&#160; &#160; &#160; &#160; <span token="keyword">else</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">break</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">pos</span>] <span style="color: #c792ea;">=</span> <span token="variable">temp</span>;</div><div>}</div></div>
+
+<p>注意：使用堆对数组排序时，索引值为 0 的位置上是有元素的，因此左子节点的计算方式略有不同。</p>
+
+<p>堆的构建与删除都是基于该基本操作实现的：</p>
+
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">HeapSort</span>(<span token="type">elemtype</span> <span style="color: #d7dbe0;">arr</span><span token="keyword">[]</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">len</span>) {</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">len</span> <span style="color: #7fdbca;">/</span> <span token="number">2</span>; <span token="variable">i</span> <span style="color: #c792ea;">&gt;=</span> <span token="number">0</span>; <span token="variable">i</span><span style="color: #7fdbca;">--</span>)</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">PercolateDown</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">len</span><span style="color: #82aaff;">, </span><span token="variable">i</span><span style="color: #82aaff;">)</span>;<span style="color: #637777;"> </span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> build heap</span></div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">len</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>; <span token="variable">i</span> <span style="color: #c792ea;">&gt;</span> <span token="number">0</span>; <span token="variable">i</span><span style="color: #7fdbca;">--</span>) {</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">array_swap</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span token="number">0</span><span style="color: #82aaff;">, </span><span token="variable">i</span><span style="color: #82aaff;">)</span>;<span style="color: #637777;"> &#160; &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> delete max</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">PercolateDown</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span token="variable">i</span><span style="color: #82aaff;">, </span><span token="number">0</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; }</div><div>}</div></div>
+
+<p>在构建堆时，只需要将前半个数组的元素调整到合适的高度上，后半个数组的元素会在此过程中自动调整，且它们没有子节点，无需做进一步的调整。</p>
+
+<h3>归并排序</h3>
+
+<p><strong>归并排序</strong>(merge sort)同样是一种很快的排序算法。它的基本思想是合<em>并</em>：如果给定两个已排序的子数组，如果要将其合并为一个数组，只需要顺序遍历两个数组，不断将较小值放入合并数组的下一个位置即可。</p>
+
+<p>假设要将一个数组的左右两部分合并成一个完整的数组：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/09/10-merge-array.png" alt="" width="290">
+</figure>
+
+<p>那么合并的代码实现如下：</p>
+
+<div class="vscode-block"><div><span token="keyword">static</span> <span token="keyword">void</span> <span style="color: #82aaff;">Merge</span>(<span token="type">elemtype</span> <span style="color: #d7dbe0;">arr</span><span token="keyword">[]</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">temp</span><span token="keyword">[]</span>, </div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">int</span> <span style="color: #d7dbe0;">left</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">right</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">end</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">leftend</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">right</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">elems</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">end</span> <span style="color: #7fdbca;">-</span> <span style="color: #d7dbe0;">left</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">curpos</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">left</span>;</div><br><div>&#160; &#160; <span token="keyword">while</span>(<span style="color: #d7dbe0;">left</span> <span style="color: #c792ea;">&lt;=</span> <span token="variable">leftend</span> <span style="color: #c792ea;">&amp;&amp;</span> <span style="color: #d7dbe0;">right</span> <span style="color: #c792ea;">&lt;=</span> <span style="color: #d7dbe0;">end</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">left</span>] <span style="color: #c792ea;">&lt;=</span> <span style="color: #d7dbe0;">arr</span>[ <span style="color: #d7dbe0;">right</span> ])</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">temp</span>[<span token="variable">curpos</span><span style="color: #c792ea;">++</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">left</span><span style="color: #c792ea;">++</span>];</div><div>&#160; &#160; &#160; &#160; <span token="keyword">else</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">temp</span>[<span token="variable">curpos</span><span style="color: #c792ea;">++</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">right</span><span style="color: #c792ea;">++</span>];</div><br><div>&#160; &#160; <span token="keyword">while</span> (<span style="color: #d7dbe0;">left</span> <span style="color: #c792ea;">&lt;=</span> <span token="variable">leftend</span>)<span style="color: #637777;"> </span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> Copy rest of first half</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">temp</span>[<span token="variable">curpos</span><span style="color: #c792ea;">++</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">left</span><span style="color: #c792ea;">++</span>];</div><div>&#160; &#160; <span token="keyword">while</span> (<span style="color: #d7dbe0;">right</span> <span style="color: #c792ea;">&lt;=</span> <span style="color: #d7dbe0;">end</span>)<span style="color: #637777;"> &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> Copy rest of second half</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">temp</span>[<span token="variable">curpos</span><span style="color: #c792ea;">++</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">right</span><span style="color: #c792ea;">++</span>];</div><br><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span token="variable">elems</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>, <span style="color: #d7dbe0;">end</span><span style="color: #7fdbca;">--</span>)</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">end</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">temp</span>[<span style="color: #d7dbe0;">end</span>];<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> Copy temp back</span></div><div>}</div></div>
+
+<p>程序中需要考虑处理完一个数组的情况，此时只需要将另一个数组剩余的部分全部拼接到合并数组的末尾即可。</p>
+
+<p>归并排序很适合使用递<em>归</em>的方式解决：只需要一开始将每个元素都看作一个有序的子数组，然后不断对有序的子数组之间两两合并，就可以逐渐将小数组合并为大数组，直至合并为一个完整的有序数组。</p>
+
+<p>递归实现下，使用代码描述非常简单：</p>
+
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">_MergeSort</span>(<span token="type">elemtype</span> <span style="color: #d7dbe0;">arr</span><span token="keyword">[]</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">temp</span><span token="keyword">[]</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">left</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">right</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">left</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">right</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="keyword">int</span> <span token="variable">center</span> <span style="color: #c792ea;">=</span> (<span style="color: #d7dbe0;">left</span> <span style="color: #7fdbca;">+</span> <span style="color: #d7dbe0;">right</span>) <span style="color: #7fdbca;">/</span> <span token="number">2</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">_MergeSort</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">temp</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">left</span><span style="color: #82aaff;">, </span><span token="variable">center</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">_MergeSort</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">temp</span><span style="color: #82aaff;">, </span><span token="variable">center</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">right</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">Merge</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">temp</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">left</span><span style="color: #82aaff;">, </span><span token="variable">center</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">right</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; }</div><div>}</div></div>
+
+<p>先将待排序数组尽量均分，然后递归地对这两部分实施归并排序，最后再将两个排序完成的子数组合并起来。</p>
+
+<p>该函数一般不用于直接执行，还需要一个入口函数驱动它：</p>
+
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">MergeSort</span>(<span token="type">elemtype</span> <span style="color: #d7dbe0;">arr</span><span token="keyword">[]</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">len</span>) {</div><div>&#160; &#160; <span token="type">elemtype</span><span style="color: #7fdbca;">*</span> <span token="variable">temp</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">elemtype</span><span style="color: #82aaff;">) </span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">len</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span token="variable">temp</span>) {</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">_MergeSort</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span token="variable">temp</span><span style="color: #82aaff;">, </span><span token="number">0</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">len</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">free</span><span style="color: #82aaff;">(</span><span token="variable">temp</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; }</div><div>}</div></div>
+
+<p>从直观上看，每一次合并主要花费的时间在于顺序遍历数组，因此对数组做一次（影响每个元素的）排序并合并需要花费线性时间。第一次排序可以将单独元素的数组合并为两个元素的数组，第二次合并将两个元素的数组合并为 4 个元素的数组，那么最终经过对数次数的合并，就可以将其合并为包含所有元素的数组，因此归并排序的时间复杂度为 <span class="math">\\( O(N \log N) \\)</span> 。</p>
+
+<p>此外，归并排序必须使用一个辅助数组用于存储排序的中间结果。不过需要的额外空间不会超过原始数组大小，因此归并排序的空间复杂度为 <span class="math">\\( O(N) \\)</span> 。</p>
+
+<h3>快速排序</h3>
+
+<p>和它的名字一样，<strong>快速排序</strong>(quick sort)速度很快。快速排序的思想是首先从数列中随机选出一个元素作为<strong>枢纽元</strong>(pivot)，将比枢纽元大的元素放在它的左端，将比枢纽元小的元素放在它的右端，此时枢纽元就相对它的左右端有序，再递归地将左端和右端按这种方式排序即可。</p>
+
+<p>归并排序将小数组合并为大数组，而快速排序将大数组分割为小数组再互相排序。当数组足够小（如元素个数小于等于 3 个）时已经无需划分，可以使用其余比较简单的排序方式（如插入排序）即可。</p>
+
+<p>枢纽元的选取非常重要，因为它应该能反映一个比较中间的位置，如果选取的是数组内元素的最值，那么它将花费线性的时间将其它元素都移到它的同一边，且一次只能将一个元素排到合适的位置，使快速排序达到最坏的情况 <span class="math">\\( O(N^2) \\)</span> 。</p>
+
+<p>一个比较合理且速度较快的方法是<strong>三数中值分割法</strong>(median-of-three partitioning)，即随机选取三个数并取用它们的中值。不过一般不会随机选取，而是取用数组的首端、末端和中间端的元素，再取它们的中值。三数中值分割法的代码实现如下：</p>
+
+<div class="vscode-block"><div><span token="keyword">static</span> <span token="type">elemtype</span> <span style="color: #82aaff;">Median3</span>(<span token="type">elemtype</span> <span style="color: #d7dbe0;">arr</span><span token="keyword">[]</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">left</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">right</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">center</span> <span style="color: #c792ea;">=</span> (<span style="color: #d7dbe0;">left</span> <span style="color: #7fdbca;">+</span> <span style="color: #d7dbe0;">right</span>) <span style="color: #7fdbca;">/</span> <span token="number">2</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">left</span>] <span style="color: #c792ea;">&gt;</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">center</span>])</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">array_swap</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">left</span><span style="color: #82aaff;">, </span><span token="variable">center</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">left</span>] <span style="color: #c792ea;">&gt;</span> <span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">right</span>])</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">array_swap</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">left</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">right</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">arr</span>[<span token="variable">center</span>] <span style="color: #c792ea;">&gt;</span> <span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">right</span>])</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">array_swap</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span token="variable">center</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">right</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span style="color: #82aaff;">array_swap</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span token="variable">center</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">right</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span><span style="color: #82aaff;">)</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> hide pivot</span></div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">right</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>];<span style="color: #637777;"> &#160; &#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> return pivot</span></div><div>}</div></div>
+
+<p>以上在寻找中值时将涉及到的元素放在合适的位置，方便后续程序处理。</p>
+
+<p>快速排序的主要实现如下：</p>
+
+<div class="vscode-block"><div><span style="color: #c792ea;">#</span><span token="keyword">define</span> <span style="color: #82aaff;">QUICKSORT_CUTOFF</span> (<span token="number">3</span>)</div><br><div><span token="keyword">static</span> <span token="keyword">void</span> <span style="color: #82aaff;">_QuickSort</span>(<span token="type">elemtype</span> <span style="color: #d7dbe0;">arr</span><span token="keyword">[]</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">left</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">right</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">left</span> <span style="color: #7fdbca;">+</span> <span style="color: #82aaff;">QUICKSORT_CUTOFF</span> <span style="color: #c792ea;">&lt;=</span> <span style="color: #d7dbe0;">right</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="type">elemtype</span> <span token="variable">pivot</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Median3</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">left</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">right</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">left</span>; </div><div>&#160; &#160; &#160; &#160; <span token="keyword">int</span> <span token="variable">j</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">right</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">while</span> (<span token="number">1</span>) {</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">while</span> (<span style="color: #d7dbe0;">arr</span>[<span style="color: #c792ea;">++</span><span token="variable">i</span>] <span style="color: #c792ea;">&lt;</span> <span token="variable">pivot</span>) <span token="keyword">continue</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">while</span> (<span style="color: #d7dbe0;">arr</span>[<span style="color: #7fdbca;">--</span><span token="variable">j</span>] <span style="color: #c792ea;">&gt;</span> <span token="variable">pivot</span>) <span token="keyword">continue</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span token="variable">j</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #82aaff;">array_swap</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span token="variable">i</span><span style="color: #82aaff;">, </span><span token="variable">j</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">else</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">break</span>;</div><div>&#160; &#160; &#160; &#160; }</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">array_swap</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span token="variable">i</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">right</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span><span style="color: #82aaff;">)</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> restore pivot</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">_QuickSort</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">left</span><span style="color: #82aaff;">, </span><span token="variable">i</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">_QuickSort</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span token="variable">i</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">right</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">else</span><span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> do an insertion sort on the subarray</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">InsertionSort</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span> <span style="color: #7fdbca;">+</span> <span style="color: #d7dbe0;">left</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">right</span> <span style="color: #7fdbca;">-</span> <span style="color: #d7dbe0;">left</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span><span style="color: #82aaff;">)</span>;</div><div>}</div></div>
+
+<p>每一趟排序中，程序从左右两边向中间扫描，并将左边较大的元素和右边较小的元素交换位置，两边交汇的位置即为枢纽元应该位于的中值位置，该位置左边的元素都比枢纽元小，右边的元素都比枢纽元大。由于在寻找枢纽元时将其移动到了数组的末端，因此最后一步需要将其移动到合适的位置。</p>
+
+<p>每一趟排序涉及数组内的每一个元素，因此需要花费线性时间；平均上看来，第一次排序将一个元素放在合适的位置，并分割为左右两端的子数组再排序，而下一次排序又将左右两端的子数组的各一个元素放在合适的位置，并再次分割为四个子数组。由此可见平均情况下已排序的元素将随着每趟排序指数增长，总的时间是两者之积 <span class="math">\\( O(N\log N) \\)</span> 。</p>
+
+<p>尽管时间复杂度都是 <span class="math">\\( O(N\log N) \\)</span> ，但快速排序在多数情况下比堆排序和归并排序快。这是由于快速排序在每趟排序中，基本上只有一半左右的元素需要移动，而归并排序在每趟排序时每个元素都需要参与合并的移动；堆排序在插入和删除时也涉及所有元素的移动，因此它们的操作都比快速排序复杂，使得函数的常数项比快速排序大，相对来说运行的时间没有快速排序快。</p>
+
+<!-- <div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">QuickSort</span>(<span token="type">elemtype</span> <span style="color: #d7dbe0;">arr</span><span token="keyword">[]</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">len</span>) {</div><div>&#160; &#160; <span style="color: #82aaff;">_QuickSort</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span token="number">0</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">len</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span><span style="color: #82aaff;">)</span>;</div><div>}</div></div> -->
+
+<p>最后，总结一下本节涉及到的所有排序算法的特点：</p>
+
+<table>
+    <tr>
+        <th>排序算法</th>
+        <th>最好运行时间</th>
+        <th>平均运行时间</th>
+        <th>最坏运行时间</th>
+        <th>额外空间需求</th>
+    </tr>
+    <tr>
+        <td>选择排序</td>
+        <td><span class="math">\\( O(N^2) \\)</span></td>
+        <td><span class="math">\\( O(N^2) \\)</span></td>
+        <td><span class="math">\\( O(N^2) \\)</span></td>
+        <td><span class="math">\\( O(1) \\)</span></td>
+    </tr>
+    <tr>
+        <td>插入排序</td>
+        <td><span class="math">\\( O(N) \\)</span></td>
+        <td><span class="math">\\( O(N^2) \\)</span></td>
+        <td><span class="math">\\( O(N^2) \\)</span></td>
+        <td><span class="math">\\( O(1) \\)</span></td>
+    </tr>
+    <tr>
+        <td>希尔排序</td>
+        <td><span class="math">\\( O(N) \\)</span></td>
+        <td><span class="math">\\( O(N^{5/4}) \\)</span>（与增量选取有关）</td>
+        <td><span class="math">\\( O(N^{3/2}) \\)</span>（与增量选取有关）</td>
+        <td><span class="math">\\( O(1) \\)</span></td>
+    </tr>
+    <tr>
+        <td>堆排序</td>
+        <td><span class="math">\\( O(N\log N) \\)</span></td>
+        <td><span class="math">\\( O(N\log N) \\)</span></td>
+        <td><span class="math">\\( O(N\log N) \\)</span></td>
+        <td><span class="math">\\( O(1) \\)</span></td>
+    </tr>
+    <tr>
+        <td>归并排序</td>
+        <td><span class="math">\\( O(N\log N) \\)</span></td>
+        <td><span class="math">\\( O(N\log N) \\)</span></td>
+        <td><span class="math">\\( O(N\log N) \\)</span></td>
+        <td><span class="math">\\( O(N) \\)</span></td>
+    </tr>
+    <tr>
+        <td>快速排序</td>
+        <td><span class="math">\\( O(N\log N) \\)</span></td>
+        <td><span class="math">\\( O(N\log N) \\)</span></td>
+        <td><span class="math">\\( O(N^2) \\)</span></td>
+        <td><span class="math">\\( O(1) \\)</span></td>
+    </tr>
+</table>
+
+<p>排序算法有非常多种，本节只介绍了其中几个比较典型的排序算法。堆排序将数据结构二叉堆的性质应用在算法之中，建立了数据结构与算法之间的联系。</p>
+
+<p>归并排序和快速排序是一种典型的分治(divide-and-conquer)算法：它将一个大的问题（数组排序）分成一系列较小的问题（数组的一部分排序），再将得到的各个部分合并为一个完整的答案，因此分治问题非常适合使用递归来实现。</p>
+<p><a rel="nofollow" href="/archives/735">数据结构07-排序算法</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/archives/735/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>数据结构01-基本概念与线性表</title>
+		<link>/archives/586</link>
+					<comments>/archives/586#respond</comments>
+		
+		<dc:creator><![CDATA[Hello]]></dc:creator>
+		<pubDate>Sat, 30 Jul 2022 14:26:30 +0000</pubDate>
+				<category><![CDATA[数据结构与算法]]></category>
+		<category><![CDATA[数据结构]]></category>
+		<category><![CDATA[算法]]></category>
+		<guid isPermaLink="false">/?p=586</guid>
+
+					<description><![CDATA[<p>什么是数据结构 在编程程序时，往往会遇到数据的存储问&#46;&#46;&#46;</p>
+<p><a rel="nofollow" href="/archives/586">数据结构01-基本概念与线性表</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<h2>什么是数据结构</h2>
+
+<p>在编程程序时，往往会遇到数据的存储问题。在一般情况下，都会使用数组存储一系列数据，然而仅仅使用数组并不能有效地组织复杂的数据。考虑以下几个典型的应用场景：</p>
+
+<p>在以分类表示数据时，一个类别可能包括众多子类别。如果仅以数组存储数据，那么类别之间就很难建立联系，如果需要按类别筛选数据，不便于查找子类别中的数据。</p>
+
+<p>在地图中存储各个地点的信息时，地点间存在空间上的关联，而数组难以体现这种关联，不方便规划路径。</p>
+
+<p>这些时候，就需要使用<strong>数据结构</strong>(data structure)。当数据量较小的时候，使用数据结构的优势并不明星；但当数据量开始变大时，数据结构的优势便体现出来。一个合适的数据结构可以在数据量很大时，将数据以规则的形式组织起来，使数据的管理更加方便高效。</p>
+
+<p><strong>抽象数据类型</strong>(Abstract Data Type, ADT)是在一个模型定义下的操作集合，操作效果只取决于特性，而与具体的数据类型无关。例如，对于数组 ADT ，它所具有的操作有获取索引值位置元素、修改索引值位置元素等，这个数组可以是整型数组、字符数组、结构数组或更复杂的嵌套数组等，但只要它是数组，就拥有这些操作或特性。</p>
+
+<p>在后续研究的数据结构都属于 ADT ，因为往往需要使用不同的数据类型来适应不同的场合。例如在使用数组时，如果要处理一系列实验数据，可以使用浮点数数组，如果要处理一段文本，可以使用字符数组，只需要研究数组本身的特性，就可以将其应用到不同的场合中。</p>
+
+<p>在第一节中，暂时只研究数组这种比较熟悉的数据结构，并分析其优缺点。这里研究的数组指的不仅仅是C语言中的数组，而是更广义的线性存储结构，一般称为线性表。</p>
+
+<h2>线性表</h2>
+
+<h3>线性表的概念</h3>
+
+<p><strong>线性表</strong>(linear list)是一组数据组成的有限序列，其中每个数据项含义相似。本节研究顺序存储结构的线性表，它常在内存中以一块地址连续的存储单元依次存储，非常类似C语言中数组的特征，因此可以使用C语言中的数组来表示线性表。</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/01-linearlist-concept.png" alt="" width="230">
+</figure>
+
+<p>采用以下定义实现线性表：</p>
+
+<div class="vscode-block"><div><span style="color: #c792ea;">typedef</span> <span token="keyword">int</span> <span token="type">elemtype</span>;</div><br><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> {</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span style="color: #7fdbca;">length</span>;</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span style="color: #7fdbca;">size</span>;<span style="color: #637777;"> &nbsp; &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> actual allocated size</span></div><div>&nbsp; &nbsp; <span token="type">elemtype</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">body</span>;</div><div>} <span token="type">linearlist</span>;</div></div>
+
+<p>在第一行中定义了 <code>elemtype</code> 类型，由于这里仅研究线性表 ADT ，因此不关心实际的数据项类型，它可以是任意有效的类型。C语言没有泛型，因此这里只能通过 <code>typedef</code> 用整型暂时模拟通用数据项类型。</p>
+
+<p>由于C语言中数组的功能偏弱，因此除了使用数组存储数据外，为了方便后期处理表中的数据，线性表还需要实时记录以下 2 项信息：</p>
+
+<ul>
+    <li>线性表申请的<strong>存储容量</strong></li>
+    <li>线性表的<strong>长度</strong>，也就是表中存储数据元素的个数</li>
+</ul>
+
+<p>为了确保拥有合适的空间存储数据，线性表申请的存储容量应大于期望存储的数据长度。当达到最大存储容量时，应该不能再对线性表添加新元素。</p>
+
+<p>这里采用结构的形式描述线性表，这是因为在程序中可能同时存在许多不同的线性表，使用结构易于批量生产线性表。</p>
+
+<p>在结构内存储实际数据的字段 <code>body</code> 字段是一个指针。它的用途是：通过 <code>malloc()</code> 函数动态申请到足够的存储空间，然后将其作为一个数组使用。</p>
+
+<p>因此，新创建一个顺序表的步骤为：</p>
+
+<ul>
+    <li>给 <code>body</code> 指针申请足够的内存空间</li>
+    <li>给 <code>length</code> 和 <code>size</code> 字段赋一个合适的初始值</li>
+</ul>
+
+<p>相应的C语言实现如下：</p>
+
+<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">Linearlist_Init</span>(<span token="type">linearlist</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">l</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">size</span>) {</div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">l</span>-&gt;<span style="color: #7fdbca;">body</span> <span style="color: #c792ea;">=</span> (<span token="type">elemtype</span><span style="color: #7fdbca;">*</span>) <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">elemtype</span><span style="color: #82aaff;">) </span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">size</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">l</span>-&gt;<span style="color: #7fdbca;">body</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="number">1</span>;</div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">l</span>-&gt;<span style="color: #7fdbca;">length</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">l</span>-&gt;<span style="color: #7fdbca;">size</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">size</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="number">0</span>;</div><div>}</div></div>
+
+<h3>线性表项操作</h3>
+
+<p>得到一个线性表后，就可以对线性表做一些操作。对线性表的操作主要是对线性表内的元素做一些改动。</p>
+
+<p>首先是插入。线性表可以向任意位置插入元素，不过如果向中间位置插入元素，需要将线性表的后续元素整体后移，为插入的元素空出位置。下图展示了这种情况：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/01-linearlist-insert.png" alt="" width="510">
+</figure>
+
+<p>因此，线性表插入数据元素的代码实现如下：</p>
+
+<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">Linearlist_InsertAt</span>(<span token="type">linearlist</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">list</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">elem</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">index</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">index</span> <span style="color: #c792ea;">&gt;</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">length</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span> <span style="color: #c792ea;">||</span> <span style="color: #d7dbe0;">index</span> <span style="color: #c792ea;">&lt;</span> <span token="number">1</span>) {</div><div><span style="color: #a8a8a8;">&nbsp; &nbsp; &nbsp; &nbsp; /* inappropriate inserting position */</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="number">1</span>;</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">length</span> <span style="color: #c792ea;">==</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">size</span>) {</div><div><span style="color: #a8a8a8;">&nbsp; &nbsp; &nbsp; &nbsp; /* have no extra storage space for element */</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="number">2</span>;</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">length</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>; <span token="variable">i</span> <span style="color: #c792ea;">&gt;=</span> <span style="color: #d7dbe0;">index</span>; <span token="variable">i</span><span style="color: #7fdbca;">--</span>) </div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">i</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">i</span>];</div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">body</span>[<span style="color: #d7dbe0;">index</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">elem</span>;</div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">length</span><span style="color: #c792ea;">++</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="number">0</span>;</div><div>}</div></div>
+
+<p>在插入前，需要做两次判断：插入数据的位置是否合适，以及是否还有多余的空间让数据插入。</p>
+
+<p>具体插入的方式为从最后一个元素开始，从后向前逐个将元素后移，直到将待插入位置的元素也后移了为止，这样便可以空出一个位置让数据插入。</p>
+
+<p>与插入相反的操作是删除。删除某个位置的元素只需要将目标元素的后续元素整体前移即可，待删除元素便会被直接覆盖：</p>
+
+<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">Linearlist_RemoveAt</span>(<span token="type">linearlist</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">list</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">index</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">index</span> <span style="color: #c792ea;">&gt;</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">length</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span> <span style="color: #c792ea;">||</span> <span style="color: #d7dbe0;">index</span> <span style="color: #c792ea;">&lt;</span> <span token="number">1</span>) {</div><div><span style="color: #a8a8a8;">&nbsp; &nbsp; &nbsp; &nbsp; /* inappropriate position */</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="number">1</span>;</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">index</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">length</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">i</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">i</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span>];</div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">length</span><span style="color: #7fdbca;">--</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="number">0</span>;</div><div>}</div></div>
+
+查找也是线性表常用的一种操作。查找元素可以用多种算法实现，这里仅仅使用最基本的顺序查找算法，即遍历线性表的每个元素，直到找到需要的值为止。代码实现为：
+
+<div class="vscode-block"><div><span style="color: #c792ea;font-weight: bold;">int</span> <span style="color: #82aaff;">Linearlist_Find</span>(<span style="color: #d6deeb;text-decoration: underline;">linearlist</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">list</span>, <span style="color: #d6deeb;text-decoration: underline;">elemtype</span> <span style="color: #d7dbe0;">elem</span>) {</div><div>&nbsp; &nbsp; <span style="color: #c792ea;font-weight: bold;">for</span> (<span style="color: #c792ea;font-weight: bold;">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">length</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #c792ea;font-weight: bold;">if</span> (<span style="color: #d7dbe0;">elem</span> <span style="color: #c792ea;">==</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">i</span>])</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #c792ea;font-weight: bold;">return</span> <span token="variable">i</span>;</div><div>&nbsp; &nbsp; <span style="color: #c792ea;font-weight: bold;">return</span> <span style="color: #7fdbca;">-</span><span token="number">1</span>;</div><div>}</div></div>
+
+<p>如果找到了相应的元素，它会返回该元素的索引值；如果没有找到相应的元素，则返回 <code>-1</code> 。</p>
+
+<p>如果能成功查找到一个元素，凭借返回的索引值，就能轻松修改该元素的值。</p>
+
+<h2>算法分析</h2>
+
+<p><strong>算法</strong>(algorithm)是对求解特定问题所做的一些步骤的描述。如果能够确认该步骤是有效的，那么就需要分析该算法的效率如何。例如，如果需要求解一个等差数列连续若干项的和，一种算法是逐个计算每项的值再累加，得到的结果也是正确的；也可以采取累加公式，直接由所给定的基本信息代入公式即可一步计算出结果，更加省时省力。</p>
+
+<p>因此，对一个算法最主要的评估标准就是执行的时间资源和存储中间结果的额外空间资源。</p>
+
+<h3>算法的复杂度</h3>
+
+<p>一般来说，使用某种数据结构处理某个实际问题时，随着数据项的个数变多，算法的执行时间和占用的额外空间往往也会受到变化。例如，从一个简单的记事本中查找一段文本，和从一篇很长的小说中查找一段文本，两者消耗的时间也是不同的。如果搜索的文本重复率较高，那么需要的空间资源也会更多。</p>
+
+<p>虽然不可能精确得知算法执行消耗的时间，也比较难计算占用内存的实际大小，但是可以从算法的某些特征中估算出算法的性能：当数据项个数变多时，算法消耗的资源呈什么增长率变化。</p>
+
+<p>例如，如果需要查找线性表内的某个元素，由于它可能出现在线性表内的任意位置，需要遍历线性表。重新展示代码如下：</p>
+
+<div class="vscode-block"><div><span token="keyword">int</span> <span style="color: #82aaff;">Linearlist_Find</span>(<span token="type">linearlist</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">list</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">elem</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">length</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">elem</span> <span style="color: #c792ea;">==</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">i</span>])</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="variable">i</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #7fdbca;">-</span><span token="number">1</span>;</div><div>}</div></div>
+
+<p>如果线性表内有 <span class="math">\\( n \\)</span> 个元素，那么在最坏的情况下，算法需要做 <span class="math">\\( n \\)</span> 次判断，然后才返回一个值。如果使用数学函数表示算法的性能，参数 <span class="math">\\( n \\)</span> 表示数据结构内包含的元素个数，计算结果为每个基本操作执行的次数，那么随着数据结构内包含的元素个数增多，在最久的情况下，需要执行的操作次数为：</p>
+
+<div class="math">
+\\[
+    T(n) = 2n+1
+\\]
+</div>
+
+<p>每增加一项数据，就需要判断其值是否满足要求，还需要 <code>for</code> 多循环一次。如果假定每个操作执行的时间差不多，那么只需要知道该函数对应关系，就可以估算出一定数据量下，算法执行的大致时间。</p>
+
+<p>不过一般来说无需计算得这么详细，只需要知道算法执行时间的增长变化趋势即可，或者说算法中基本操作重复执行的次数与数据规模 <span class="math">\\( n \\)</span> 呈什么函数关系变化。算法的时间度量记作：</p>
+
+<div class="math">
+\\[
+    T(n)=O(f(n))
+\\]
+</div>
+
+<p>大写字母 O 表示随数据规模 <span class="math">\\( n \\)</span> 增大，算法执行时间的增长率主要由 <span class="math">\\( f(n) \\)</span> 的增长率主导，称为算法的<strong>渐进时间复杂度</strong>(asymptotic time complexity)，简称<strong>时间复杂度</strong>。</p>
+
+<p>在以上查找算法中，随着数据规模增大，查找所消耗的时间也普遍呈线性规模增长，因此查找时间复杂度为：</p>
+
+<div class="math">
+\\[
+    T(n) = O(n)
+\\]
+</div>
+
+<p>只需关心函数是线性变化的，至于线性系数和低项都可以省略。</p>
+
+<p>之所以时间复杂度只关心最高项，主要是为了对比各算法的执行效率。当 <span class="math">\\( n \\)</span> 足够大的时候，消耗恒定时间的返回语句对算法的时间影响可以不计，而线性系数对时间的影响远不如更换算法对时间的影响大。</p>
+
+<p>例如，以下是二分查找(binary search)算法的代码实现。二分查找算法的原理是如果数组是有序的，那么为了查找某一个值是否在数组内，只需将其与数组中间位置的元素做比较：如果数组中间位置的元素比待查找的值大，那么由于数组是有序的，数组后半部分的元素都比该值大，待查找的值不可能出现在这半部分中，那么只需再用这种方法在前半部分查找即可：</p>
+
+<div class="vscode-block"><div><span token="keyword">int</span> <span style="color: #82aaff;">binary_search</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">arr</span><span token="keyword">[]</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">len</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">elem</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">int</span> left <span style="color: #c792ea;">=</span> <span token="number">0</span>; </div><div>&nbsp; &nbsp; <span token="keyword">int</span> right <span style="color: #c792ea;">=</span> len <span style="color: #7fdbca;">-</span> <span token="number">1</span>;</div><div>&nbsp; &nbsp; <span token="keyword">while</span> (left <span style="color: #c792ea;">&lt;=</span> right) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">int</span> mid <span style="color: #c792ea;">=</span> (right <span style="color: #7fdbca;">+</span> left) <span style="color: #7fdbca;">/</span> <span token="number">2</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">arr</span>[mid] <span style="color: #c792ea;">==</span> elem)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> mid; </div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">else</span> <span token="keyword">if</span> (<span token="variable">arr</span>[mid] <span style="color: #c792ea;">&lt;</span> elem)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; left <span style="color: #c792ea;">=</span> mid <span style="color: #7fdbca;">+</span> <span token="number">1</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">else</span> <span token="keyword">if</span> (<span token="variable">arr</span>[mid] <span style="color: #c792ea;">&gt;</span> elem)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; right <span style="color: #c792ea;">=</span> mid <span style="color: #7fdbca;">-</span> <span token="number">1</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #7fdbca;">-</span><span token="number">1</span>;</div><div>}</div></div>
+
+<p>这种查找算法每一次判断都可以剔除剩余的一半查找范围，使待查找的范围呈指数级递减。运气最差的情况下，当查找 <span class="math">\\( log_2 n \\)</span> 次左右便可以将搜索范围缩减到零，此时就可以判断值是否出现在数组中了。因此，该算法的时间复杂度为：</p>
+
+<div class="math">
+\\[
+    T(n) = O(\log\, n)
+\\]
+</div>
+
+<p>当 <span class="math">\\( n \\)</span> 足够大时，根据极限的等价无穷小概念可知，该算法的执行时间是明显优于普通的查找算法的。可以通过绘制时间复杂度的函数图像比较两个算法的运行时间：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/01-time-complexity.png" alt="" width="300">
+</figure>
+
+<p>不过为了能够实现快速查找，二分搜索法要求数组必须是有序的。</p>
+
+<p>接下来再看一个示例，选择排序(selection sort)是一种简单的排序算法，用于使数组内的每个元素从小到大排列。该算法的基本原理为：先找出数组的最小元素并移动到数组的起始位置，然后每次都从剩余未排序元素中查找最小元素并放到已排序序列的末尾，直到没有待排序元素为止。</p>
+
+<p>选择排序的算法实现如下：</p>
+
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">selection_sort</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">arr</span><span token="keyword">[]</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">len</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">min</span>, <span token="variable">temp</span>;</div><div>&nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">len</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">min</span> <span style="color: #c792ea;">=</span> <span token="variable">i</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">j</span> <span style="color: #c792ea;">=</span> <span token="variable">i</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span>; <span token="variable">j</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">len</span>; <span token="variable">j</span><span style="color: #c792ea;">++</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">arr</span>[<span token="variable">j</span>] <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">min</span>])</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">min</span> <span style="color: #c792ea;">=</span> <span token="variable">j</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">temp</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">min</span>];</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">arr</span>[<span token="variable">min</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">i</span>];</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">arr</span>[<span token="variable">i</span>] <span style="color: #c792ea;">=</span> <span token="variable">temp</span>;</div><div>&nbsp; &nbsp; }</div><div>}</div></div>
+
+<p>在这个算法中，<code>for</code> 循环内又嵌套了一层 <code>for</code> 循环。如果数据规模为 <span class="math">\\( n \\)</span> ，那么外层循环一共执行 <span class="math">\\( n-1 \\)</span> 次，内层循环的额执行次数也与 <span class="math">\\( n \\)</span> 有关，总的执行时间是两者的乘积，即时间复杂度为：</p>
+
+<div class="math">
+\\[
+    T(n) = O(n^2)
+\\]
+</div>
+
+<p>显然，当 <span class="math">\\( n \\)</span> 足够大的时候，它消耗的时间远比线性的时间复杂度多。因此选择排序效率较低，一般不用于排序很大的数据。选择排序的时间复杂度比普通的查找大，因此没有必要为了二分查找法的速度优势而特地为数组排序。</p>
+
+<p>排序是算法的一个重要话题，后续会专门花费一节介绍排序算法，许多精彩的思想都可以有效降低排序的时间复杂度。</p>
+
+<p>空间复杂度与时间复杂度类似，也可以使用类似的方法估计并对比算法花费的空间资源。不过只要不是太过夸张，一般对空间的需求并没有时间那么首要，并且大多数情况下空间复杂度都易于分析，因此较少研究算法的空间复杂度。</p>
+
+<h3>线性表的复杂度分析</h3>
+
+<p>使用顺序存储结构的线性表在其中某个位置插入或删除一个数据元素时，为了保证线性表的连续性，必须要移动表中的一系列元素。</p>
+
+<p>如果插入或删除开头位置的元素，则整个线性表的元素都要发生移动；如果删除末尾位置的元素，则可以不用移动元素。假设插入和删除的位置是随机的，那么每次操作平均会移动约一半元素，也就是说操作的时间复杂度为 <span class="math">\\( O(n) \\)</span> 。</p>
+
+<p>使用顺序存储结构的线性表时，其优势在于获取表的长度和取确定位置的元素时间复杂度都为 <span class="math">\\( O(1) \\)</span> ，也就是说不管线性表多长，要取哪一个位置的元素，都只需要常数级的时间。如果需要频繁地访问元素的话，使用线性表是不错的选择。</p>
+
+<p>由于顺序存储结构的线性表在应对大量数据的增加或修改时表现并不是很好，表的一部分需要经常移来移去。下一节介绍链表，链表是一种非连续的存储，在插入和删除时表的整体或部分无需全部移动。</p>
+<p><a rel="nofollow" href="/archives/586">数据结构01-基本概念与线性表</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/archives/586/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

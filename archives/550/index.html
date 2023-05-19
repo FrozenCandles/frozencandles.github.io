@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn">
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw">
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		<link rel="pingback" href="/xmlrpc.php">
+		
+	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>计算机网络06-网络层概述与网际协议IP - 冰封残烛的个人小站</title>
+	<link rel="canonical" href="/archives/550">
+	<meta property="og:locale" content="zh_CN">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="计算机网络06-网络层概述与网际协议IP - 冰封残烛的个人小站">
+	<meta property="og:description" content="网络层简介 网络层的主要作用为实现网络互联，即将分组&#046;&#046;&#046;">
+	<meta property="og:url" content="/archives/550">
+	<meta property="og:site_name" content="冰封残烛的个人小站">
+	<meta property="article:published_time" content="2022-07-24T14:34:16+00:00">
+	<meta property="article:modified_time" content="2022-12-12T11:45:46+00:00">
+	<meta property="og:image" content="http://localhost:8000/wordpress/wp-content/uploads/2022/07/计算机网络05-网络层概述与网际协议IP.jpg">
+	<meta property="og:image:width" content="1920">
+	<meta property="og:image:height" content="1280">
+	<meta property="og:image:type" content="image/jpeg">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:label1" content="作者">
+	<meta name="twitter:data1" content="Hello">
+	<meta name="twitter:label2" content="预计阅读时间">
+	<meta name="twitter:data2" content="6分">
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle's Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/archives/550#primaryimage",
+	            "url": "/wp-content/uploads/2022/07/计算机网络05-网络层概述与网际协议IP.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/07/计算机网络05-网络层概述与网际协议IP.jpg",
+	            "width": 1920,
+	            "height": 1280
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/archives/550#webpage",
+	            "url": "/archives/550",
+	            "name": "计算机网络06-网络层概述与网际协议IP - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/archives/550#primaryimage"
+	            },
+	            "datePublished": "2022-07-24T14:34:16+00:00",
+	            "dateModified": "2022-12-12T11:45:46+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "breadcrumb": {
+	                "@id": "/archives/550#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/archives/550"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/archives/550#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "计算机网络06-网络层概述与网际协议IP"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                ""
+	            ],
+	            "url": "/archives/author/hello"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed">
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; 评论Feed" href="/comments/feed">
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; 计算机网络06-网络层概述与网际协议IP评论Feed" href="/archives/550/feed">
+<script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.2.1"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){p.clearRect(0,0,i.width,i.height),p.fillText(e,0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(t,0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(p&&p.fillText)switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s("🏳️‍⚧️","🏳️​⚧️")?!1:!s("🇺🇳","🇺​🇳")&&!s("🏴󠁧󠁢󠁥󠁮󠁧󠁿","🏴​󠁧​󠁢​󠁥​󠁮​󠁧​󠁿");case"emoji":return!s("🫱🏻‍🫲🏿","🫱🏻​🫲🏿")}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+<style type="text/css">img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}</style>
+	<link rel="stylesheet" id="wp-block-library-css" href="/wp-includes/css/dist/block-library/style.min.css?ver=6.2.1" type="text/css" media="all">
+<link rel="stylesheet" id="classic-theme-styles-css" href="/wp-includes/css/classic-themes.min.css?ver=6.2.1" type="text/css" media="all">
+<style id="global-styles-inline-css" type="text/css">body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}</style>
+<link rel="stylesheet" id="orbisius_ct_instorm_child_theme_parent_style-css" href="/wp-content/themes/instorm/style.css?ver=1.1.1" type="text/css" media="all">
+<link rel="stylesheet" id="orbisius_ct_instorm_child_theme_parent_style_child_style-css" href="/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1" type="text/css" media="all">
+<link rel="stylesheet" id="instorm-style-css" href="/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1" type="text/css" media="all">
+<style id="instorm-style-inline-css" type="text/css">body { font-family: "Roboto", Arial, sans-serif; }</style>
+<link rel="stylesheet" id="instorm-responsive-css" href="/wp-content/themes/instorm/responsive.css?ver=6.2.1" type="text/css" media="all">
+<link rel="stylesheet" id="instorm-font-awesome-css" href="/wp-content/themes/instorm/fonts/all.min.css?ver=6.2.1" type="text/css" media="all">
+<link rel="stylesheet" id="roboto-css" href="//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.2.1" type="text/css" media="all">
+<link rel="stylesheet" id="elementor-frontend-css" href="/wp-content/plugins/elementor/assets/css/frontend-lite.min.css?ver=3.6.5" type="text/css" media="all">
+<link rel="stylesheet" id="eael-general-css" href="/wp-content/plugins/essential-addons-for-elementor-lite/assets/front-end/css/view/general.min.css?ver=5.6.2" type="text/css" media="all">
+<script type="text/javascript" src="/wp-includes/js/jquery/jquery.min.js?ver=3.6.4" id="jquery-core-js"></script>
+<script type="text/javascript" src="/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.0" id="jquery-migrate-js"></script>
+<script type="text/javascript" src="/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1" id="alx-ext-sharrre-js"></script>
+<script type="text/javascript" src="/wp-content/themes/instorm/js/slick.min.js?ver=6.2.1" id="instorm-slick-js"></script>
+<link rel="https://api.w.org/" href="/wp-json/">
+<link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/550">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="/wp-includes/wlwmanifest.xml">
+<meta name="generator" content="WordPress 6.2.1">
+<link rel="shortlink" href="/?p=550">
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=%2Farchives%2F550">
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=%2Farchives%2F550#038;format=xml">
+<!-- start Simple Custom CSS and JS -->
+<style type="text/css">/* Add your CSS code here.
+
+For example:
+.example {
+    color: red;
+}
+
+For brushing up on your CSS knowledge, check out http://www.w3schools.com/css/css_syntax.asp
+
+End of comment */</style>
+<!-- end Simple Custom CSS and JS -->
+<link rel="stylesheet" href="http://blog.frozencandles.fun/static/article/css/text.css">
+<link rel="stylesheet" href="http://localhost:8000/wp-content/static/css/text.css">
+<link rel="stylesheet" href="http://localhost:8000/wp-content/static/css/note.css">
+<link rel="stylesheet" href="http://localhost:8000/wp-content/static/css/theme@law.wp.css">
+<style>div.vscode-block { color: #24292E; background-color: #FFFFFF; }</style>
+<!-- Analytics by WP Statistics v14.0.2 - https://wp-statistics.com/ -->
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32">
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192">
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg">
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg">
+<style id="kirki-inline-styles"></style>
+<style id="wpforms-css-vars-root">:root {
+					--wpforms-field-border-radius: 3px;
+--wpforms-field-background-color: #ffffff;
+--wpforms-field-border-color: rgba( 0, 0, 0, 0.25 );
+--wpforms-field-text-color: rgba( 0, 0, 0, 0.7 );
+--wpforms-label-color: rgba( 0, 0, 0, 0.85 );
+--wpforms-label-sublabel-color: rgba( 0, 0, 0, 0.55 );
+--wpforms-label-error-color: #d63637;
+--wpforms-button-border-radius: 3px;
+--wpforms-button-background-color: #066aab;
+--wpforms-button-text-color: #ffffff;
+--wpforms-field-size-input-height: 43px;
+--wpforms-field-size-input-spacing: 15px;
+--wpforms-field-size-font-size: 16px;
+--wpforms-field-size-line-height: 19px;
+--wpforms-field-size-padding-h: 14px;
+--wpforms-field-size-checkbox-size: 16px;
+--wpforms-field-size-sublabel-spacing: 5px;
+--wpforms-field-size-icon-size: 1;
+--wpforms-label-size-font-size: 16px;
+--wpforms-label-size-line-height: 19px;
+--wpforms-label-size-sublabel-font-size: 14px;
+--wpforms-label-size-sublabel-line-height: 17px;
+--wpforms-button-size-font-size: 17px;
+--wpforms-button-size-height: 41px;
+--wpforms-button-size-padding-h: 15px;
+--wpforms-button-size-margin-top: 10px;
+
+				}</style>	</head>
+
+<body class="post-template-default single single-post postid-550 single-format-standard col-2cr full-width skew-active logged-out elementor-default elementor-kit-193">
+
+<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-dark-grayscale"><fecolormatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></fecolormatrix><fecomponenttransfer color-interpolation-filters="sRGB"><fefuncr type="table" tablevalues="0 0.49803921568627"></fefuncr><fefuncg type="table" tablevalues="0 0.49803921568627"></fefuncg><fefuncb type="table" tablevalues="0 0.49803921568627"></fefuncb><fefunca type="table" tablevalues="1 1"></fefunca></fecomponenttransfer><fecomposite in2="SourceGraphic" operator="in"></fecomposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-grayscale"><fecolormatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></fecolormatrix><fecomponenttransfer color-interpolation-filters="sRGB"><fefuncr type="table" tablevalues="0 1"></fefuncr><fefuncg type="table" tablevalues="0 1"></fefuncg><fefuncb type="table" tablevalues="0 1"></fefuncb><fefunca type="table" tablevalues="1 1"></fefunca></fecomponenttransfer><fecomposite in2="SourceGraphic" operator="in"></fecomposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-purple-yellow"><fecolormatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></fecolormatrix><fecomponenttransfer color-interpolation-filters="sRGB"><fefuncr type="table" tablevalues="0.54901960784314 0.98823529411765"></fefuncr><fefuncg type="table" tablevalues="0 1"></fefuncg><fefuncb type="table" tablevalues="0.71764705882353 0.25490196078431"></fefuncb><fefunca type="table" tablevalues="1 1"></fefunca></fecomponenttransfer><fecomposite in2="SourceGraphic" operator="in"></fecomposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-blue-red"><fecolormatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></fecolormatrix><fecomponenttransfer color-interpolation-filters="sRGB"><fefuncr type="table" tablevalues="0 1"></fefuncr><fefuncg type="table" tablevalues="0 0.27843137254902"></fefuncg><fefuncb type="table" tablevalues="0.5921568627451 0.27843137254902"></fefuncb><fefunca type="table" tablevalues="1 1"></fefunca></fecomponenttransfer><fecomposite in2="SourceGraphic" operator="in"></fecomposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-midnight"><fecolormatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></fecolormatrix><fecomponenttransfer color-interpolation-filters="sRGB"><fefuncr type="table" tablevalues="0 0"></fefuncr><fefuncg type="table" tablevalues="0 0.64705882352941"></fefuncg><fefuncb type="table" tablevalues="0 1"></fefuncb><fefunca type="table" tablevalues="1 1"></fefunca></fecomponenttransfer><fecomposite in2="SourceGraphic" operator="in"></fecomposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-magenta-yellow"><fecolormatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></fecolormatrix><fecomponenttransfer color-interpolation-filters="sRGB"><fefuncr type="table" tablevalues="0.78039215686275 1"></fefuncr><fefuncg type="table" tablevalues="0 0.94901960784314"></fefuncg><fefuncb type="table" tablevalues="0.35294117647059 0.47058823529412"></fefuncb><fefunca type="table" tablevalues="1 1"></fefunca></fecomponenttransfer><fecomposite in2="SourceGraphic" operator="in"></fecomposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-purple-green"><fecolormatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></fecolormatrix><fecomponenttransfer color-interpolation-filters="sRGB"><fefuncr type="table" tablevalues="0.65098039215686 0.40392156862745"></fefuncr><fefuncg type="table" tablevalues="0 1"></fefuncg><fefuncb type="table" tablevalues="0.44705882352941 0.4"></fefuncb><fefunca type="table" tablevalues="1 1"></fefunca></fecomponenttransfer><fecomposite in2="SourceGraphic" operator="in"></fecomposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-blue-orange"><fecolormatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></fecolormatrix><fecomponenttransfer color-interpolation-filters="sRGB"><fefuncr type="table" tablevalues="0.098039215686275 1"></fefuncr><fefuncg type="table" tablevalues="0 0.66274509803922"></fefuncg><fefuncb type="table" tablevalues="0.84705882352941 0.41960784313725"></fefuncb><fefunca type="table" tablevalues="1 1"></fefunca></fecomponenttransfer><fecomposite in2="SourceGraphic" operator="in"></fecomposite></filter></defs></svg>
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewbox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewbox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="http://localhost:8000/wordpress/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter">
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon">
+<span></span><span></span><span></span>
+</div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu">
+<li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200">
+<span class="menu-item-wrapper has-arrow"><a href="/all">文章汇总</a><button onclick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewbox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline">时光轴</a></span></li>
+<li id="menu-item-73" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-73"><span class="menu-item-wrapper"><a href="/reading">阅读计划</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div>
+<!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="http://localhost:8000/wordpress/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter">
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github"></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-550" class="post-550 post type-post status-publish format-standard has-post-thumbnail hentry category-32 tag-ip tag-33">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">计算机网络06-网络层概述与网际协议IP</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/archives/category/%e8%ae%a1%e7%ae%97%e6%9c%ba%e4%b8%8e%e7%bc%96%e7%a8%8b/%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%bd%91%e7%bb%9c" rel="category tag">计算机网络</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年7月24日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/archives/author/hello" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+											<a class="post-comments" href="/archives/550#respond"><span>0</span></a>
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+<h2>网络层简介</h2>
+
+<p>网络层的主要作用为实现网络互联，即将分组从一台主机发送到另一台主机上。为此需要实现两种功能：</p>
+
+<ol>
+    <li>
+<strong>转发</strong>(forwarding)：网络层将输入链路到达的分组移动到适当的一条或多条输出链路中，或者可能阻挡异常分组转发</li>
+    <li>
+<strong>路由选择</strong>(routing)：网络层决定发送方向接收方发送分组所采用的路由或路径，因此网络层需要提供合适的路由选择算法</li>
+</ol>
+
+<p>转发一般在几纳秒内完成，通常由硬件实现。路由选择一般需要几秒完成，通常采用软件实现。</p>
+
+<p>为了实现主机互联，网络层需要庞大的遍布世界的分组交换机连接形成网络拓扑结构。分组交换机指能根据首部字段将分组从输入链路接口转移到输出接口的通用分组交换设备。某些分组交换机基于链路层帧的字段转发，称为<strong>链路层交换机</strong>(link-layer switch)，其它基于网络层数据报做转发决定的分组交换机称为<strong>路由器</strong>(router)。</p>
+
+<p>为了使分组发送到正确的位置，路由器需要选择合适的路径。每台路由器中都有<strong>转发表</strong>(forwarding table)。路由器根据到达分组首部的一个或多个字段值在其转发表中索引，确定该分组将被转发的路由器的输出链路接口：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/05-network-layer-2-planes.png" alt="" width="580">
+    <figcaption>网络层的结构</figcaption>
+</figure>
+
+<p>网络层能够被分解为两个相互作用的部分：数据平面和控制平面。数据平面主要是每台路由器的功能，决定到达路由器输入链路之一的数据报转发到哪条输出链路。控制平面控制数据报沿着从源主机到目的主机的端到端路径中路由器之间的路由方式。</p>
+
+<p><strong>网络服务模型</strong>(network service model)定义了分组在发送与接收端系统之间的端到端运输特性，包括：</p>
+
+<ul>
+    <li>分组到达目的地</li>
+    <li>时延不超过某一上界</li>
+    <li>分组有序交付</li>
+    <li>一定带宽</li>
+    <li>安全性</li>
+    <li>...</li>
+</ul>
+
+<p>网络层仅提供尽力而为服务，不能保证这些服务的质量。</p>
+
+<h2 id="router-internal">路由器工作原理</h2>
+
+<p>路由器是网络层设备，它们最高只涉及处理网络层的服务，几乎不参与处理运输层与应用层。</p>
+
+<p>下图展示了路由器的基本结构：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/05-router-internal.png" alt="" width="570">
+    <figcaption>路由器体系结构</figcaption>
+</figure>
+
+<p>路由器包含 4 个主要组件：</p>
+
+<ul>
+    <li>
+<strong>输入端口</strong>：处理输入分组的物理层和链路层功能，并执行查找决定路由器输出端口</li>
+    <li>
+<strong>交换结构</strong>：将路由器的输入接口与输出接口相连</li>
+    <li>
+<strong>路由选择处理器</strong>：执行控制平面功能</li>
+    <li>
+<strong>输出端口</strong>：存储从交换结构接收的分组，执行必要的链路层和物理层功能后发送到输出链路上</li>
+</ul>
+
+<h3>输入端口处理</h3>
+
+<p>下图展示了输入端口更详细的结构：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/05-router-input-port.png" alt="" width="410">
+    <figcaption>输入端口处理</figcaption>
+</figure>
+
+<p>在输入端口中，路由器使用转发表查找输出端口。路由器用分组目的地址的前缀匹配该表项，并向匹配项相关联的链路转发分组。当有多个匹配时，路由器使用最长前缀匹配规则，寻找最长的匹配项并转发。 </p>
+
+<p>由于在高速链路中查找需要在纳秒时间内完成，因此需要通过硬件使用快速查找算法执行。</p>
+
+<p>一旦通过查找确定了分组的输出端口，则该分组就准备进入交换结构。如果其它输入端口正使用交换结构，那么该分组将被阻塞并排队，等待稍后调度通过交换结构。</p>
+
+<p>除此之外，输入端口还会处理一些别的事务，将在后续介绍。</p>
+
+<h3>交换</h3>
+
+<p>交换结构是路由器的核心部位，可以通过三种方式完成交换：</p>
+
+<ul>
+    <li>经内存交换</li>
+</ul>
+
+<p>最简单、最早的路由器由计算机充当，到达的分组通过中断的形式通知 CPU ，使其从首部提取目的地址并通过内存复制到输出端口的缓存中。</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/05-router-exchange-memory.png" alt="" width="380">
+    <figcaption>经由内存交换</figcaption>
+</figure>
+
+<p>使用该方式需要各读写一次内存，因此吞吐量只有内存读写速率的一半，且不能同时转发两个分组。</p>
+
+<p>现代经由内存交换的路由器由输入线路卡来将分组写入适当输出端口的内存中。</p>
+
+<ul>
+    <li>经总线交换</li>
+</ul>
+
+<p>输入端口可以使用一根共享总线将分组直接传送到输出端口。通常在输入端口处使分组附加一个额外的临时首部标签，经由总线可以被所有输出端口接收，但只有标签对应的输出端口才能保留并发送该分组：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/05-router-exchange-bus.png" alt="" width="360">
+    <figcaption>经由总线交换</figcaption>
+</figure>
+
+<p>一次只有一个分组能够跨越总线，因此多个分组同时到达路由器时，只有一个分组能通行，其余必须等待。路由器的交换带宽受总线速率的限制。</p>
+
+<ul>
+    <li>经互联网络交换</li>
+</ul>
+
+<p>使用复杂的互联网络可以克服单一总线的带宽限制。纵横式交换机通过互联网络总线连接多个输入与输出端口，交叉点通过交换结构控制器控制分组通行：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/05-router-exchange-network.png" alt="" width="300">
+    <figcaption>经由总线互联网络交换</figcaption>
+</figure>
+
+<p>通过闭合合适的交叉点，就可以产生合适的通行路径，并可以转发给多个输出端口。这种交换机是可并行的，且只要不发生总线冲突，转发分组将不会被阻塞。</p>
+
+<ul>
+    <li>输出端口处理</li>
+</ul>
+
+<p>输出端口处理存放在其缓存中的分组，并将其发送到输出链路上，执行所需的链路层和物理层传输功能：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/05-router-output-port.png" alt="" width="350">
+    <figcaption>输入端口处理</figcaption>
+</figure>
+
+<h3>分组排队与调度</h3>
+
+<p>在输入端口和输出端口处都可能存在分组队列：如果交换结构处理速度比输入分组到达速度慢，在输入端口处将出现分组排队等待通过；同样如果向输出链路发送分组比到达速度慢，输出端口也可能发生排队。</p>
+
+<p>交换结构一次只允许一个分组到达指定输出端口，因此如果两个输入队列待发送分组目的一致，则其中的一个分组将被阻塞，必须在输入队列等候。并且该等候分组的排在后面的所有分组也需要等待，称为<strong>线路前部(Head-Of-the-Line, HOL)阻塞</strong>：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/05-router-HOL-congestion.png" alt="" width="440">
+    <figcaption>输入端口排队与 HOL 阻塞</figcaption>
+</figure>
+
+<p>当队列缓存耗尽时，可能产生分组丢失。路由器可以丢弃到达的分组，不过有时在队列满之前也可能主动丢弃一个分组，用于向发送方提供拥塞信号。</p>
+
+<p>多个分组可能同时准备发往同一个输出端口，并且其后的分组也可能发往该输出端口，这就需要输出端口的分组调度(packet schedular)在其中选择一个分组来传输。分组调度可以使用以下方法处理：</p>
+
+<ul>
+    <li>先进先出</li>
+</ul>
+
+<p><strong>先进先出</strong>(First-In-First-Out, FIFO)队列的抽象模型如下：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/05-packet-schedular-FIFO.png" alt="" width="180">
+</figure>
+
+<p>FIFO 调度规则按照分组到达队列的次序来选择处理分组：先到达的分组先被传输，如果链路正在传输前面的分组，则后续到达的分组要排队等待。</p>
+
+<ul>
+    <li>优先权排队</li>
+</ul>
+
+<p><strong>优先权排队</strong>(priority queuing)规则使到达的分组被分类放入不同的优先权类，通常位于各自的队列中：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/05-packet-schedular-priority-queuing.png" alt="" width="240">
+</figure>
+
+<p>多个分组准备传输时，将传输有等待分组的最高优先权类中的分组。同一优先权类的分组之间通常以 FIFO 方式完成传输。非抢占式优先权排队规则可以使低优先级分组在传输时，不会被到达的高优先级分组打断，高优先级分组只能先等待。</p>
+
+<ul>
+    <li>循环和加权公平排队</li>
+</ul>
+
+<p><strong>循环排队</strong>(round robin queuing)规则下分组同样被分类，但类之间不存在严格的服务优先权，循环调度器在这些类之间轮流传输。保持工作排队(work-conserving queuing)规则在有分组排队等候时不允许链路空闲，某个类没有分组时将立即处理下一个类。</p>
+
+<p>下图表示常用的加权公平排队(Weighted Fair Queuing, WFQ)规则，可以根据权重分配服务时间占比：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/05-packet-schedular-WFQ.png" alt="" width="250">
+</figure>
+
+<p>这样可以保证所有类都获得一定的吞吐量。</p>
+
+<h2 id="internet protocol">网际协议</h2>
+
+<h3>网际协议简介与IPv4数据报</h3>
+
+<p><strong>网际协议</strong>(Internet Protocol, IP)是网络层一个非常重要的协议，IP 协议组织了互联网上的主机，对网络层运作至关重要。</p>
+
+<p>IP 协议有两个最重要的版本，目前最常用的版本是 IPv4 。</p>
+
+<p>首先研究 IPv4 数据报，其格式为：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/05-ip-message.png" alt="" width="370">
+</figure>
+
+<p>其包含的一些关键字段如下：</p>
+
+<ul>
+    <li>版本：通过版本号可以确认数据报剩余部分的格式，IP 版本 6 的数据报格式与上图并不一样，将在后文研究</li>
+    <li>首部长度：由于选项长度可变，因此需要该字段指示首部长度。如果不包含选项，典型的 IP 数据报首部长度为 20 字节</li>
+    <li>服务类型：使不同类型的 IP 数据报区分。不同类型的 IP 数据报在路由器中往往调度方式也不同</li>
+    <li>数据报长度：数据报包括数据的完整长度</li>
+    <li>标识、标志、片偏移：与 IP 分片有关，将在后文介绍</li>
+    <li>生命周期(Time-To-Live, TTL)：确保数据报在路由环路等情况下不会永远存在。每一台路由器处理数据报时，该值便减一，减至零便被丢弃</li>
+    <li>协议：指示 IP 数据报的数据部分需要被交付给哪个运输层协议。在 <a href="http://localhost:8000/archives/453">UDP 协议的检验和计算实验</a>中介绍过计算检验和时需要添加伪首部，伪首部的协议类型就是该字段</li>
+    <li>源和目的 IP 地址：IP 地址用于指示主机，在前面几篇文章中都提到了该地址的作用，将在接下来详细介绍它</li>
+    <li>选项：一些额外的信息</li>
+    <li>数据：有效载荷（例如运输层报文段）</li>
+</ul>
+
+<h3>IPv4数据报分片</h3>
+
+<p>IPv4 支持的最大报文长度为 65535 字节，但是链路层未必能承载这么多字节。一个链路层帧能承载的最大数据量称为<strong>最大传送单元</strong>(Maximum Transmission Unit, MTU)。MTU 限制着数据报的长度，并且在不同的链路上该长度可能会变化。</p> 
+
+<p>为此，需要将 IP 数据报分片，用单独的链路层帧封装这些较小的 IP 数据报并发送。这些较小的数据报称为<strong>片</strong>(fragment)。</p>
+
+<p>片在其到达目的地运输层以前需要重新组装。首部的标识字段区分不同的原始数据报；原始数据报的最后一个片的标志位被置为 0 ，其它片的标志位被置 1 以提示分片接收完毕可以组装；偏移字段表示这些片位于原始数据报中的哪个位置，以避免片丢失或乱序到达。</p>
+
+<h3>IPv4编址</h3>
+
+<p>主机或路由器与物理链路之间的边界称为接口，它们为了能发送或接收数据报，要求每个接口都需要拥有一个独立的 IP 地址。IP 地址是互联网上每一台主机每一个接口 32 比特的标识符，可用的 IP 地址约有 40 亿个。</p>
+
+<p>IP 地址通常按所谓点分十进制记法(dotted-decimal notation)书写，即地址中的每个字节用十进制形式书写，各字节间以点号隔开。例如，如果一个 IP 地址为 </p>
+
+<p style="text-align: center;">01111011 00111000 01001110 10011010</p>
+
+<p>那么它通常书写为：</p>
+
+<p style="text-align: center;">123.56.78.154</p>
+
+<p>全球互联网中的每台主机和路由器上的每个接口，都必须有唯一的 IP 地址。但这些地址不能随意地选择，需要由其连接的子网来确定。</p>
+
+<p>考虑以下连接，路由器的两个接口连接两组主机。路由器的一个接口和主机的多个接口之间通过一个无路由器的网络相连，称为<strong>子网</strong>(subnet)。IP 编址为这个子网提供了一个<strong>子网掩码</strong>(network mask)，指示接入该子网的任何主机最左侧的若干比特都要相同。</p>
+
+<p>以下示例共有 3 个子网，注意两个路由器接口间也存在一个子网：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/05-ip-addressing.png" alt="" width="550">
+</figure>
+
+<p>最左侧的子网掩码可以表示为 <code>172.217.2.0/24</code> ，斜杠表示 IP 地址最左侧的 24 比特相同。互联网的地址分配策略称为<strong>无类别域间路由选择</strong>(Classless Interdomain Routing, CIDR)，它将地址分为前缀和剩余部分，一个区域通常被分配一块前缀相同的连续地址，这样路由器转发时只需匹配该前缀就可以发往正确的方向，大大减少了转发表长度。前缀越长，对应的地址块越小，地址越详细。</p>
+
+<p>还有一个特殊的 IP 地址 <code>255.255.255.255</code> ，称为广播地址。当一台主机发出的数据报具有目的地址为广播地址时，该报文会交付给同一个网络中的所有主机。</p>
+
+<p>IP 地址由互联网名字和编号分配机构(Internet Corporation for Assigned Names and Numbers, ICANN)管理，并且该组织还管理 DNS 根服务器。ICANN 向区域性互联网注册机构分配地址，从而为每一台主机提供 IP 。</p>
+
+<h3>动态主机配置协议</h3>
+
+<p>一个组织一旦获得了一块地址，它就可为本组织内的主机与路由器接口逐个分配。路由器地址一般远程手工配置，然而主机地址一般使用<strong>动态主机配置协议</strong>(Dynamic Host Configuration, DHCP)完成。DHCP 使主机每次连接到网络时，都可以自动分配一个合适的 IP 地址，并通知主机子网掩码、本地 DNS 服务器地址等信息。</p>
+
+<p>DHCP 是一个客户-服务器应用层协议，基于 UDP 提供的服务。每个子网需要有一台 DHCP 服务器或使用路由器充当网络中继代理，服务器使用端口号 67 ，客户使用端口号 68 。</p>
+
+<p>DHCP 为一台新到达的主机分配 IP 需要经历以下 4 个步骤：</p>
+
+<ul>
+    <li>DHCP 服务器发现：一台新到达的主机可以通过使用 <strong>DHCP 发现报文</strong>发现 DHCP 服务器，该报文通过目的地址 <code>255.255.255.255</code> 向子网所有节点中广播，并使用源 IP 地址 <code>0.0.0.0</code> 代表本主机</li>
+    <li>DHCP 服务器提供：DHCP 服务器收到一个 DHCP 发现报文后，使用 <strong>DHCP 提供报文</strong>作响应，向客户提供推荐的 IP 地址、网络掩码、第一跳路由器地址（<strong>默认网关</strong>）以及 DHCP 租用期等。提供报文仍然使用广播地址回应</li>
+    <li>DHCP 请求：子网中可能有不止一个 DHCP 服务器，新到达的客户从中选择一个合适的服务，并向选中的服务器提供用 <strong>DHCP 请求报文</strong>，确认配置参数</li>
+    <li>DHCP 响应：服务器使用 <strong>DHCP ACK 报文</strong>对此作出响应，证实所要求的参数</li>
+</ul>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/05-dhcp-working.png" alt="" width="530">
+    <figcaption>DHCP 工作流程</figcaption>
+</figure>
+
+<p>在广播期间，由于非新接入主机和 DHCP 服务器不提供 67 、68 端口的服务，因此不会参与 DHCP 的工作。</p>
+
+<p>一旦客户收到 DHCP ACK 后，交互便完成了，并且该客户能够在租用期内使用 DHCP 分配的 IP 地址。主机可以随时通过 DHCP 释放报文终止租用期。</p>
+
+<p>当租用期过半时，主机会重新发送 DHCP 请求，若 DHCP 服务器拒绝请求，主机必须重新执行 DHCP 服务器发现等一系列步骤；当租用期快到时，主机也会重新发送 DHCP 请求，若 DHCP 服务器未响应，则当租用期到达后，主机必须立即停止使用其租用的 IP 地址。</p>
+
+<h3>网络地址转换</h3>
+
+<p>子网中的主机数可能会增加，<strong>网络地址转换</strong>(Network Address Translation, NAT)提供了一种管理 IP 地址的典型方法。</p>
+
+<p>NAT 路由器对外界的行为就如同一个具有单一 IP 地址的单一设备，所有离开子网路由器流向互联网的报文都拥有相同的 IP 地址。NAT 使路由器对外界隐藏了专用网络(private network)的细节。</p>
+
+<p>在专用网络中，所有接口都具有相同的地址空间 <code>10.0.0.0/8</code> ，该地址是一个保留地址空间，保留地址空间仅可用于当前的专用网络，不可用于互联网中。每一个专用网络各自维护一个保留地址空间，从而管理专用网络中的主机 IP 地址。</p>
+
+<p>当专用网络中的主机要和互联网通信时，需要通过 NAT 路由器转发。NAT 路由器具有一张 <strong>NAT 转换表</strong>(NAT translation table)，在表项中包含需要转发给的 IP 地址及端口号。</p>
+
+<p>例如，专用网络主机 <code>10.0.0.1</code> 如果要向互联网上的某台服务器发送请求，它通过端口号 12000 发送给 NAT 路由器，NAT 路由器使用互联网一侧接口的 IP 地址 <code>138.76.29.7</code> 和空闲端口号 3435 替换源数据报的信息，将转换后的数据报发送到互联网上，并在 NAT 转换表中新建一个表项。当接收到服务器的响应后，根据表项的转换规则将 <code>138.76.29.7:2425</code> 换回 <code>10.0.0.1:12000</code> 。</p>
+
+<p>NAT 充当计算机网络的中间盒组件，连接了互联网的同时也易于管理内网。现今绝大多数家庭网络都使用 NAT 管理，因此平时上网时的主机无法被广域网发现，也就无法充当互联网服务器。为了突破 NAT 的限制，可以使用 NAT 穿透(NAT traversal)工具（或称内网穿透）。不过内网穿透得到的服务器不够稳定，且可能被屏蔽。</p>
+
+<h3>IPv6</h3>
+
+<p>IPv4 仅提供约 40 亿个 IP 地址，哪怕有专用网络使特定范围的 IP 可以被重复使用，也无法满足日益增长的 IP 地址的需求。为此一个新的 IP 版本 IPv6 被提出。</p>
+
+<p>IPv6 的数据报格式如下：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/05-ipv6-message.png" alt="" width="380">
+    <figcaption>IPv6 数据报格式</figcaption>
+</figure>
+
+<p>IPv6 将地址长度从 32 比特增加到 128 比特，甚至地球上每个沙粒都可以分配一个 IP 地址。除了普通地址和广播地址以外，IPv6 还引入了任播地址(anycast address)，这种地址可以使数据报交付给一组主机中的任意一个。</p>
+
+<p>IPv6 使用简化高效的 40 宇节首部，许多必要字段被舍弃，从而使路由器可以更快处理。</p>
+
+<p>IPv6 提供了一个流(flow)的支持，不过其定义还没有完全明确。</p>
+
+<p>除此之外，IPv6 还包含以下字段：</p>
+
+<ul>
+    <li>版本：通过将该字段置为 6 ，可以提醒按 IPv6 报文格式处理后续数据</li>
+    <li>流量类型：与 IPv4 报文中服务类型字段含义相同</li>
+    <li>有效载荷长度：给出 IPv6 数据报在定长 40 字节首部后面的字节数量</li>
+    <li>下一个首部：与 IPv4 报文中协议类型字段含义相同</li>
+    <li>跳限制：与 IPv4 报文中生命周期字段含义相同</li>
+</ul>
+
+<p>IPv6 不再支持分片，因为其耗时太大。如果数据报太大，则路由器将其丢弃并返回一个特殊的差错报文。</p>
+
+<p>IPv6 不再提供检验和，必要的检验已经由运输层完成了。</p>
+
+<p>IPv6 不再显式支持选项，不过其首部的“下一个首部”字段可以指向额外的选项字段位置。去除选项使 IPv6 首部成为定长的 40 字节，无需再拥有长度字段。</p>
+
+<p>由于目前公共互联网只支持 IPv4 ，要使其完全迁移到 IPv6 几乎不可能。目前可行的方式只是先迁移一部分节点，在通过 IPv4 节点时新建一个 IPv4 数据报并作为载荷通过。</p>
+												<div class="clear"></div>				
+					</div>
+<!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+					<p class="post-tags"><span>Tags:</span> <a href="/archives/tag/ip" rel="tag">IP</a><a href="/archives/tag/%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%bd%91%e7%bb%9c" rel="tag">计算机网络</a></p>					
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/archives/1081">
+											<img width="520" height="293" src="/wp-content/uploads/2023/04/机器学习-参数选择与模型验证-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2023/04/机器学习-参数选择与模型验证-520x293.jpg 520w, /wp-content/uploads/2023/04/机器学习-参数选择与模型验证-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px">																								</a>
+			</div>
+<!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/archives/1081" rel="bookmark">机器学习-参数选择与模型验证</a>
+				</h4>
+<!--/.post-title-->
+			
+			</div>
+<!--/.related-inner-->
+
+		</article>
+	</li>
+<!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/archives/816">
+											<img width="520" height="293" src="/wp-content/uploads/2022/10/Python数据分析-numpy06高级数据类型-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/10/Python数据分析-numpy06高级数据类型-520x293.jpg 520w, /wp-content/uploads/2022/10/Python数据分析-numpy06高级数据类型-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px">																								</a>
+			</div>
+<!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/archives/816" rel="bookmark">Python数据分析-numpy06:高级数据类型</a>
+				</h4>
+<!--/.post-title-->
+			
+			</div>
+<!--/.related-inner-->
+
+		</article>
+	</li>
+<!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/archives/448">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-520x293.jpg 520w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-300x169.jpg 300w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-1024x576.jpg 1024w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-768x432.jpg 768w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-1536x864.jpg 1536w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-950x534.jpg 950w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px">																								</a>
+			</div>
+<!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/archives/448" rel="bookmark">Python面向对象编程02-类与实例的属性</a>
+				</h4>
+<!--/.post-title-->
+			
+			</div>
+<!--/.related-inner-->
+
+		</article>
+	</li>
+<!--/.related-->
+		
+</ul>
+<!--/.post-related-->
+
+					
+					
+					
+<div id="comments" class="themeform">
+	
+	
+					<!-- comments open, no comments -->
+			
+		
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">发表回复 <small><a rel="nofollow" id="cancel-comment-reply-link" href="/archives/550#respond" style="display:none;">取消回复</a></small>
+</h3>
+<form action="http://localhost:8000/wordpress/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+<p class="comment-notes"><span id="email-notes">您的电子邮箱地址不会被公开。</span> <span class="required-field-message">必填项已用<span class="required">*</span>标注</span></p>
+<p class="comment-form-comment"><label for="comment">评论 <span class="required">*</span></label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p>
+<p class="comment-form-author"><label for="author">显示名称 <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" autocomplete="name" required="required"></p>
+<p class="comment-form-email"><label for="email">电子邮箱地址 <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" maxlength="100" aria-describedby="email-notes" autocomplete="email" required="required"></p>
+<p class="comment-form-url"><label for="url">网站地址</label> <input id="url" name="url" type="text" value="" size="30" maxlength="200" autocomplete="url"></p>
+<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"> <label for="wp-comment-cookies-consent">在此浏览器中保存我的显示名称、邮箱地址和网站地址，以便下次评论时使用。</label></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="发表评论"> <input type="hidden" name="comment_post_ID" value="550" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p>
+<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="ececeb396a"></p>
+<p style="display: none !important;"><label>&#916;<textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="ak_js" value="198"><script>document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );</script></p>
+</form>	</div>
+<!-- #respond -->
+	
+</div>
+<!--/#comments-->					
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div>
+<!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/archives/579" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>Python面向对象编程03-类的继承</span></a></li>
+		<li class="previous"><a href="/archives/525" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>计算机网络05-面向连接的运输：TCP</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/archives/1116">积分表(上)</a>
+											<span class="post-date">2023年5月17日</span>
+									</li>
+											<li>
+					<a href="/archives/1094">微积分-泰勒展开式</a>
+											<span class="post-date">2023年5月4日</span>
+									</li>
+											<li>
+					<a href="/archives/1081">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/archives/1059">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/archives/1054">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/archives/1048">Python数据分析-pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/archives/1041">Python数据分析-pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+					</ul>
+
+		</div>
+<div id="categories-4" class="widget widget_categories">
+<h3 class="group"><span>分类</span></h3>
+			<ul>
+					<li class="cat-item cat-item-58">
+<a href="/archives/category/%e6%95%b0%e5%ad%a6">数学</a> (2)
+<ul class="children">
+	<li class="cat-item cat-item-59">
+<a href="/archives/category/%e6%95%b0%e5%ad%a6/%e5%be%ae%e7%a7%af%e5%88%86">微积分</a> (2)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49">
+<a href="/archives/category/%e6%95%b0%e6%8d%ae%e7%a7%91%e5%ad%a6">数据科学</a> (17)
+<ul class="children">
+	<li class="cat-item cat-item-50">
+<a href="/archives/category/%e6%95%b0%e6%8d%ae%e7%a7%91%e5%ad%a6/%e6%95%b0%e6%8d%ae%e5%a4%84%e7%90%86">数据处理</a> (9)
+</li>
+	<li class="cat-item cat-item-54">
+<a href="/archives/category/%e6%95%b0%e6%8d%ae%e7%a7%91%e5%ad%a6/%e6%9c%ba%e5%99%a8%e5%ad%a6%e4%b9%a0">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24">
+<a href="/archives/category/%e7%94%b5%e5%ad%90%e7%94%b5%e8%b7%af%e4%b8%8e%e5%b5%8c%e5%85%a5%e5%bc%8f">电子电路与嵌入式</a> (11)
+<ul class="children">
+	<li class="cat-item cat-item-25">
+<a href="/archives/category/%e7%94%b5%e5%ad%90%e7%94%b5%e8%b7%af%e4%b8%8e%e5%b5%8c%e5%85%a5%e5%bc%8f/%e5%8d%95%e7%89%87%e6%9c%ba%e4%b8%8e%e5%ba%94%e7%94%a8">单片机与应用</a> (11)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-6">
+<a href="/archives/category/%e7%ab%99%e7%82%b9">站点</a> (1)
+</li>
+	<li class="cat-item cat-item-13">
+<a href="/archives/category/%e7%bc%96%e7%a8%8b%e8%af%ad%e8%a8%80">编程语言</a> (20)
+<ul class="children">
+	<li class="cat-item cat-item-14">
+<a href="/archives/category/%e7%bc%96%e7%a8%8b%e8%af%ad%e8%a8%80/python">Python</a> (18)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7">
+<a href="/archives/category/%e8%ae%a1%e7%ae%97%e6%9c%ba%e4%b8%8e%e7%bc%96%e7%a8%8b">计算机与编程</a> (16)
+<ul class="children">
+	<li class="cat-item cat-item-8">
+<a href="/archives/category/%e8%ae%a1%e7%ae%97%e6%9c%ba%e4%b8%8e%e7%bc%96%e7%a8%8b/%e5%89%8d%e7%ab%af">前端</a> (1)
+</li>
+	<li class="cat-item cat-item-43">
+<a href="/archives/category/%e8%ae%a1%e7%ae%97%e6%9c%ba%e4%b8%8e%e7%bc%96%e7%a8%8b/%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84%e4%b8%8e%e7%ae%97%e6%b3%95">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32">
+<a href="/archives/category/%e8%ae%a1%e7%ae%97%e6%9c%ba%e4%b8%8e%e7%bc%96%e7%a8%8b/%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%bd%91%e7%bb%9c">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div>
+<div id="calendar-3" class="widget widget_calendar">
+<h3 class="group"><span>活动日历</span></h3>
+<div id="calendar_wrap" class="calendar_wrap">
+<table id="wp-calendar" class="wp-calendar-table">
+	<caption>2023年 5月</caption>
+	<thead>
+	<tr>
+		<th scope="col" title="星期一">一</th>
+		<th scope="col" title="星期二">二</th>
+		<th scope="col" title="星期三">三</th>
+		<th scope="col" title="星期四">四</th>
+		<th scope="col" title="星期五">五</th>
+		<th scope="col" title="星期六">六</th>
+		<th scope="col" title="星期日">日</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td><a href="/archives/date/2023/05/04" aria-label="2023年5月4日 发布的文章">4</a></td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+	</tr>
+	<tr>
+		<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+<td>12</td>
+<td>13</td>
+<td>14</td>
+	</tr>
+	<tr>
+		<td>15</td>
+<td>16</td>
+<td><a href="/archives/date/2023/05/17" aria-label="2023年5月17日 发布的文章">17</a></td>
+<td>18</td>
+<td id="today">19</td>
+<td>20</td>
+<td>21</td>
+	</tr>
+	<tr>
+		<td>22</td>
+<td>23</td>
+<td>24</td>
+<td>25</td>
+<td>26</td>
+<td>27</td>
+<td>28</td>
+	</tr>
+	<tr>
+		<td>29</td>
+<td>30</td>
+<td>31</td>
+		<td class="pad" colspan="4">&nbsp;</td>
+	</tr>
+	</tbody>
+	</table>
+<nav aria-label="上个月及下个月" class="wp-calendar-nav">
+		<span class="wp-calendar-nav-prev"><a href="/archives/date/2023/04">&laquo; 4月</a></span>
+		<span class="pad">&nbsp;</span>
+		<span class="wp-calendar-nav-next">&nbsp;</span>
+	</nav>
+</div>
+</div>
+<div id="recent-comments-2" class="widget widget_recent_comments">
+<h3 class="group"><span>近期评论</span></h3>
+<ul id="recentcomments">
+<li class="recentcomments">
+<span class="comment-author-link"><a class="url" rel="ugc">Hello</a></span>发表在《<a href="/archives/316#comment-39">LVGL库入门教程02-基本控件与交互</a>》</li>
+<li class="recentcomments">
+<span class="comment-author-link">Reader</span>发表在《<a href="/archives/316#comment-38">LVGL库入门教程02-基本控件与交互</a>》</li>
+</ul>
+</div>
+<div id="archives-2" class="widget widget_archive">
+<h3 class="group"><span>归档</span></h3>
+			<ul>
+					<li><a href="/archives/date/2023/05">2023年5月</a></li>
+	<li><a href="/archives/date/2023/04">2023年4月</a></li>
+	<li><a href="/archives/date/2023/03">2023年3月</a></li>
+	<li><a href="/archives/date/2023/02">2023年2月</a></li>
+	<li><a href="/archives/date/2023/01">2023年1月</a></li>
+	<li><a href="/archives/date/2022/12">2022年12月</a></li>
+	<li><a href="/archives/date/2022/11">2022年11月</a></li>
+	<li><a href="/archives/date/2022/10">2022年10月</a></li>
+	<li><a href="/archives/date/2022/09">2022年9月</a></li>
+	<li><a href="/archives/date/2022/08">2022年8月</a></li>
+	<li><a href="/archives/date/2022/07">2022年7月</a></li>
+	<li><a href="/archives/date/2022/06">2022年6月</a></li>
+	<li><a href="/archives/date/2022/05">2022年5月</a></li>
+	<li><a href="/archives/date/2022/03">2022年3月</a></li>
+	<li><a href="/archives/date/2022/02">2022年2月</a></li>
+			</ul>
+
+			</div>
+<div id="custom_html-5" class="widget_text widget widget_custom_html">
+<h3 class="group"><span>音频</span></h3>
+<div class="textwidget custom-html-widget"><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=34690640&auto=0&height=66"></iframe></div>
+</div>
+<div id="tag_cloud-3" class="widget widget_tag_cloud">
+<h3 class="group"><span>标签</span></h3>
+<div class="tagcloud">
+<a href="/archives/tag/codemirror" class="tag-cloud-link tag-link-12 tag-link-position-1" style="font-size: 8pt;" aria-label="codemirror (1个项目)">codemirror<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/django" class="tag-cloud-link tag-link-9 tag-link-position-2" style="font-size: 8pt;" aria-label="Django (1个项目)">Django<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/dns" class="tag-cloud-link tag-link-34 tag-link-position-3" style="font-size: 8pt;" aria-label="DNS (1个项目)">DNS<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/esp32" class="tag-cloud-link tag-link-47 tag-link-position-4" style="font-size: 10.135593220339pt;" aria-label="ESP32 (2个项目)">ESP32<span class="tag-link-count"> (2)</span></a>
+<a href="/archives/tag/esp8266" class="tag-cloud-link tag-link-39 tag-link-position-5" style="font-size: 10.135593220339pt;" aria-label="ESP8266 (2个项目)">ESP8266<span class="tag-link-count"> (2)</span></a>
+<a href="/archives/tag/ip" class="tag-cloud-link tag-link-42 tag-link-position-6" style="font-size: 8pt;" aria-label="IP (1个项目)">IP<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/ipython" class="tag-cloud-link tag-link-53 tag-link-position-7" style="font-size: 8pt;" aria-label="IPython (1个项目)">IPython<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/javascript" class="tag-cloud-link tag-link-10 tag-link-position-8" style="font-size: 8pt;" aria-label="javascript (1个项目)">javascript<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/jupyter" class="tag-cloud-link tag-link-52 tag-link-position-9" style="font-size: 8pt;" aria-label="Jupyter (1个项目)">Jupyter<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/lvgl" class="tag-cloud-link tag-link-29 tag-link-position-10" style="font-size: 14.525423728814pt;" aria-label="LVGL (6个项目)">LVGL<span class="tag-link-count"> (6)</span></a>
+<a href="/archives/tag/micropython" class="tag-cloud-link tag-link-48 tag-link-position-11" style="font-size: 10.135593220339pt;" aria-label="MicroPython (2个项目)">MicroPython<span class="tag-link-count"> (2)</span></a>
+<a href="/archives/tag/oled" class="tag-cloud-link tag-link-28 tag-link-position-12" style="font-size: 8pt;" aria-label="OLED (1个项目)">OLED<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/pandas" class="tag-cloud-link tag-link-57 tag-link-position-13" style="font-size: 11.559322033898pt;" aria-label="pandas (3个项目)">pandas<span class="tag-link-count"> (3)</span></a>
+<a href="/archives/tag/python" class="tag-cloud-link tag-link-15 tag-link-position-14" style="font-size: 22pt;" aria-label="Python (29个项目)">Python<span class="tag-link-count"> (29)</span></a>
+<a href="/archives/tag/python%e6%a0%87%e5%87%86%e5%ba%93" class="tag-cloud-link tag-link-30 tag-link-position-15" style="font-size: 12.745762711864pt;" aria-label="Python标准库 (4个项目)">Python标准库<span class="tag-link-count"> (4)</span></a>
+<a href="/archives/tag/smtp" class="tag-cloud-link tag-link-36 tag-link-position-16" style="font-size: 8pt;" aria-label="SMTP (1个项目)">SMTP<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/stm32" class="tag-cloud-link tag-link-26 tag-link-position-17" style="font-size: 12.745762711864pt;" aria-label="STM32 (4个项目)">STM32<span class="tag-link-count"> (4)</span></a>
+<a href="/archives/tag/tcp" class="tag-cloud-link tag-link-41 tag-link-position-18" style="font-size: 8pt;" aria-label="TCP (1个项目)">TCP<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/u8g2" class="tag-cloud-link tag-link-27 tag-link-position-19" style="font-size: 8pt;" aria-label="u8g2 (1个项目)">u8g2<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/udp" class="tag-cloud-link tag-link-38 tag-link-position-20" style="font-size: 8pt;" aria-label="UDP (1个项目)">UDP<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/xpath" class="tag-cloud-link tag-link-56 tag-link-position-21" style="font-size: 8pt;" aria-label="XPath (1个项目)">XPath<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/%e5%87%bd%e6%95%b0%e5%bc%8f%e7%bc%96%e7%a8%8b" class="tag-cloud-link tag-link-23 tag-link-position-22" style="font-size: 16.779661016949pt;" aria-label="函数式编程 (10个项目)">函数式编程<span class="tag-link-count"> (10)</span></a>
+<a href="/archives/tag/%e5%b5%8c%e5%85%a5%e5%bc%8f" class="tag-cloud-link tag-link-46 tag-link-position-23" style="font-size: 8pt;" aria-label="嵌入式 (1个项目)">嵌入式<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/%e6%95%b0%e6%8d%ae%e5%a4%84%e7%90%86" class="tag-cloud-link tag-link-51 tag-link-position-24" style="font-size: 16.305084745763pt;" aria-label="数据处理 (9个项目)">数据处理<span class="tag-link-count"> (9)</span></a>
+<a href="/archives/tag/%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84" class="tag-cloud-link tag-link-44 tag-link-position-25" style="font-size: 15.71186440678pt;" aria-label="数据结构 (8个项目)">数据结构<span class="tag-link-count"> (8)</span></a>
+<a href="/archives/tag/%e6%97%a5%e6%9c%9f%e6%97%b6%e9%97%b4" class="tag-cloud-link tag-link-21 tag-link-position-26" style="font-size: 8pt;" aria-label="日期时间 (1个项目)">日期时间<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/%e6%9c%ba%e5%99%a8%e5%ad%a6%e4%b9%a0" class="tag-cloud-link tag-link-55 tag-link-position-27" style="font-size: 14.525423728814pt;" aria-label="机器学习 (6个项目)">机器学习<span class="tag-link-count"> (6)</span></a>
+<a href="/archives/tag/%e6%ad%a3%e5%88%99%e8%a1%a8%e8%be%be%e5%bc%8f" class="tag-cloud-link tag-link-18 tag-link-position-28" style="font-size: 10.135593220339pt;" aria-label="正则表达式 (2个项目)">正则表达式<span class="tag-link-count"> (2)</span></a>
+<a href="/archives/tag/%e7%89%a9%e8%81%94%e7%bd%91" class="tag-cloud-link tag-link-40 tag-link-position-29" style="font-size: 10.135593220339pt;" aria-label="物联网 (2个项目)">物联网<span class="tag-link-count"> (2)</span></a>
+<a href="/archives/tag/%e7%ae%97%e6%b3%95" class="tag-cloud-link tag-link-45 tag-link-position-30" style="font-size: 11.559322033898pt;" aria-label="算法 (3个项目)">算法<span class="tag-link-count"> (3)</span></a>
+<a href="/archives/tag/%e7%bc%96%e7%a0%81" class="tag-cloud-link tag-link-31 tag-link-position-31" style="font-size: 8pt;" aria-label="编码 (1个项目)">编码<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/%e7%bc%96%e7%a8%8b%e8%af%ad%e8%a8%80" class="tag-cloud-link tag-link-16 tag-link-position-32" style="font-size: 10.135593220339pt;" aria-label="编程语言 (2个项目)">编程语言<span class="tag-link-count"> (2)</span></a>
+<a href="/archives/tag/%e7%bc%96%e8%be%91%e5%99%a8" class="tag-cloud-link tag-link-11 tag-link-position-33" style="font-size: 8pt;" aria-label="编辑器 (1个项目)">编辑器<span class="tag-link-count"> (1)</span></a>
+<a href="/archives/tag/%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%bd%91%e7%bb%9c" class="tag-cloud-link tag-link-33 tag-link-position-34" style="font-size: 14.525423728814pt;" aria-label="计算机网络 (6个项目)">计算机网络<span class="tag-link-count"> (6)</span></a>
+<a href="/archives/tag/%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e7%bc%96%e7%a8%8b" class="tag-cloud-link tag-link-37 tag-link-position-35" style="font-size: 12.745762711864pt;" aria-label="面向对象编程 (4个项目)">面向对象编程<span class="tag-link-count"> (4)</span></a>
+</div>
+</div>
+<div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="http://localhost:8000/wordpress/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter">
+	</div>
+</form></div>
+<div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div>
+<!--/.sidebar-content-->
+		
+	</div>
+<!--/.sidebar-->
+	
+
+				</div>
+<!--/.main-inner-->
+			</div>
+<!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div>
+<!--/.wrap-content-inner-->
+	</div>
+<!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div>
+<!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github"></i></a></li></ul>										
+				</div>
+							
+			</div>
+<!--/.pad-->
+
+		</div>
+<!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div>
+<!--/#wrapper-->
+
+<script type="text/javascript" src="/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.2.1" id="instorm-fitvids-js"></script>
+<script type="text/javascript" src="/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.2.1" id="instorm-jq-sticky-anything-js"></script>
+<script type="text/javascript" src="/wp-content/themes/instorm/js/scripts.js?ver=6.2.1" id="instorm-scripts-js"></script>
+<script type="text/javascript" src="/wp-includes/js/comment-reply.min.js?ver=6.2.1" id="comment-reply-js"></script>
+<script type="text/javascript" src="/wp-content/themes/instorm/js/nav.js?ver=1644596969" id="instorm-nav-script-js"></script>
+<script type="text/javascript" id="eael-general-js-extra">
+/* <![CDATA[ */
+var localize = {"ajaxurl":"\/wp-admin\/admin-ajax.php","nonce":"73cefbbfaa","i18n":{"added":"Added ","compare":"Compare","loading":"Loading..."},"eael_translate_text":{"required_text":"is a required field","invalid_text":"Invalid","billing_text":"Billing","shipping_text":"Shipping","fg_mfp_counter_text":"of"},"page_permalink":"\/archives\/550","cart_redirectition":"","cart_page_url":"","el_breakpoints":{"mobile":{"label":"手机","value":767,"default_value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"手机扩展","value":880,"default_value":880,"direction":"max","is_enabled":false},"tablet":{"label":"平板","value":1024,"default_value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"平板扩展","value":1200,"default_value":1200,"direction":"max","is_enabled":false},"laptop":{"label":"笔记本电脑","value":1366,"default_value":1366,"direction":"max","is_enabled":false},"widescreen":{"label":"全宽屏","value":2400,"default_value":2400,"direction":"min","is_enabled":false}}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="/wp-content/plugins/essential-addons-for-elementor-lite/assets/front-end/js/view/general.min.js?ver=5.6.2" id="eael-general-js"></script>
+<script defer type="text/javascript" src="/wp-content/plugins/akismet/_inc/akismet-frontend.js?ver=1682051871" id="akismet-frontend-js"></script>
+	<script>/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

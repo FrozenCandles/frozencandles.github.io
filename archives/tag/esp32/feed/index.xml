@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>ESP32归档 - 冰封残烛的个人小站</title>
+	<atom:link href="http://localhost/wordpress/archives/tag/esp32/feed?simply_static_page=3721" rel="self" type="application/rss+xml" />
+	<link></link>
+	<description>FrozenCandle&#039;s Personal Site</description>
+	<lastBuildDate>Mon, 12 Dec 2022 11:18:34 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2.1</generator>
+
+<image>
+	<url>/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg</url>
+	<title>ESP32归档 - 冰封残烛的个人小站</title>
+	<link></link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>ESP32与MicroPython入门-02 基本外设操作</title>
+		<link>/archives/723</link>
+					<comments>/archives/723#respond</comments>
+		
+		<dc:creator><![CDATA[Hello]]></dc:creator>
+		<pubDate>Thu, 01 Sep 2022 02:38:05 +0000</pubDate>
+				<category><![CDATA[单片机与应用]]></category>
+		<category><![CDATA[ESP32]]></category>
+		<category><![CDATA[MicroPython]]></category>
+		<guid isPermaLink="false">/?p=723</guid>
+
+					<description><![CDATA[<p>开发板介绍 在介绍 GPIO 的基本操作之前，有必要&#46;&#46;&#46;</p>
+<p><a rel="nofollow" href="/archives/723">ESP32与MicroPython入门-02 基本外设操作</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<h2>开发板介绍</h2>
+<p>在介绍 GPIO 的基本操作之前，有必要先介绍一下所使用的开发板，以便更好地了解其用途。</p>
+<p>DOIT ESP32 DEVKIT V1 使用的是 ESP-WROOM-32 模块，其主要参数为：</p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主频</td>
+<td>240MHZ</td>
+</tr>
+<tr>
+<td>Flash容量</td>
+<td>4MB</td>
+</tr>
+<tr>
+<td>RAM容量</td>
+<td>512KB</td>
+</tr>
+</tbody>
+</table>
+<p>开发板上的一些主要元器件功能如下：</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/09/02-esp32-devkits.jpg" alt="开发板"></figure>
+<ol>
+<li>ESP-WROOM-32 模块，是整个开发板的核心</li>
+<li>CP2102 芯片，用于串口转 USB</li>
+<li>3.3V 稳压器，使 ESP32 能正常工作</li>
+<li>EN(ENABLE) 按键，用于复位芯片</li>
+<li>BOOT 按键，用于引导芯片进入烧入状态</li>
+</ol>
+<p><a href="/archives/673">上一节</a>中，使用 MicroPython 实现了 LED 灯闪烁效果，完整的代码为：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">from</span> machine <span class="hljs-keyword">import</span> Pin
+<span class="hljs-keyword">import</span> time
+led = Pin(<span class="hljs-number">2</span>, Pin.OUT)
+<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    led.value(<span class="hljs-number">0</span>)
+    time.sleep(<span class="hljs-number">0.5</span>)
+    led.value(<span class="hljs-number">1</span>)
+    time.sleep(<span class="hljs-number">0.5</span>)
+</pre></div>
+<p>接下来通过详细分析该程序来介绍 MicroPython 操作 GPIO 的一般方法。</p>
+<h2>基本GPIO操作</h2>
+<h3>GPIO 输出代码分析</h3>
+<p>在第一行中，导入了 <code>machine</code> 模块的 <code>Pin</code> 类：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">from</span> machine <span class="hljs-keyword">import</span> Pin
+</pre></div>
+<p><code>machine</code> 是MicroPython提供的一个与芯片的外设交互的接口模块，包括 GPIO 、ADC 、计时器等。而 <code>Pin</code> 类就是对 GPIO 封装。</p>
+<p>第二行中，导入了标准库 <code>time</code> ：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">import</span> time
+</pre></div>
+<p>尽管 MicroPython 删除了很多标准库以及标准库里的函数，但还是有不少标准库可以正常使用。可以使用以下代码检查当前 MicroPython 支持的所有标准库：</p>
+<div class="hljs codeblock"><pre><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">help</span>(<span class="hljs-string">'modules'</span>)
+__main__          gc                ubinascii         urandom
+_boot             inisetup          ubluetooth        ure
+_onewire          machine           ucollections      urequests
+_thread           math              ucryptolib        uselect
+...
+Plus <span class="hljs-built_in">any</span> modules on the filesystem
+</pre></div>
+<p>接下来，以下代码用于初始化 GPIO 口：</p>
+<div class="hljs codeblock"><pre>led = Pin(<span class="hljs-number">2</span>, Pin.OUT)
+</pre></div>
+<p><code>Pin</code> 类的初始化方法中，有以下几个主要的参数：</p>
+<ul>
+<li><code>id</code> ：指定 GPIO 的引脚号，可以是一个标识符数字，也可以是字符串形式的引脚名称</li>
+<li><code>mode</code> ：引脚模式，可以为 <code>Pin.OUT</code> 常规输出、<code>Pin.IN</code> 输入，以及 <code>Pin.OPEN_RAIN</code> 开漏输出模式。</li>
+<li><code>pull</code> ：如果设置为 <code>Pin.PULL_UP</code> ，为上拉模式；<code>Pin.PULL_DOWN</code> 为下拉模式；设置为 <code>None</code> 则为悬空模式。</li>
+</ul>
+<p>当初始化完成后，随时都可以通过以下方法重新设置 GPIO 引脚功能：</p>
+<ul>
+<li><code>.mode(mode=None)</code> ：更改工作模式。如果忽略参数，则可以查询当前引脚的工作模式</li>
+<li><code>.pull(pull=None)</code> ：更改上下拉方式。如果忽略参数，则可以查询当前引脚的上下拉方式</li>
+<li><code>.init(mode=None, pull=None)</code> ：根据给定的参数重新初始化引脚</li>
+</ul>
+<p>GPIO 的输入输出，主要是通过类的 <code>.value(x=None)</code> 方法实现。该方法如果忽略参数，则可以读取当前引脚的数字逻辑电平（ 0 或 1 ）。如果是工作在输出模式，可以通过传入等价于 <code>True</code> 的值让引脚输出高电平，或传入等价于 <code>False</code> 的值让引脚输出低电平。</p>
+<p><code>Pin</code> 类还将其封装为方法 <code>.on(self)</code> 和 <code>.off(self)</code> ，能将一个引脚的电平快速置 1 或 0 。</p>
+<p>实际上，<code>Pin</code> 类还通过重载 <code>.__call__(self, x=None)</code> 特殊方法，只需要像函数一样调用 <code>Pin</code> 对象就可以读写 GPIO 。</p>
+<p>因此，借助 Python 的语法，循环还能写成如下更简洁的形式：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    led(<span class="hljs-keyword">not</span> led())
+    sleep(<span class="hljs-number">1</span>)
+</pre></div>
+<h3>GPIO 按键输入实例</h3>
+<p>有了以上对 GPIO 的介绍后，就可以很轻松编写出 GPIO 的按键输入程序了。</p>
+<p>例如，与 ESP32 相连的电路为：</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/09/02-circuit-key-led.jpg" alt="电路图"></figure>
+<p>根据电路图，首先需要初始化 GPIO 引脚为：</p>
+<div class="hljs codeblock"><pre>led = Pin(<span class="hljs-number">4</span>, Pin.OUT)
+key = Pin(<span class="hljs-number">5</span>, Pin.IN, Pin.PULL_UP)
+</pre></div>
+<p>由于按钮按下时，GPIO5 的输入变为低电平 0 ，因此这里将 GPIO5 初始化设置为上拉模式，在按钮未按下时其值恒为 1 。</p>
+<p>以下程序，当按钮按下时，LED 灯也同步亮起；当按钮松开时，LED 灯同步熄灭：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    led.value(key.value())
+    time.sleep(<span class="hljs-number">0.1</span>)
+</pre></div>
+<p>对程序稍加改动，就可以实现通过按键每次按下控制 LED 亮起与熄灭翻转：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> key.value():
+        led.value(<span class="hljs-keyword">not</span> led.value())
+    time.sleep(<span class="hljs-number">0.1</span>)
+</pre></div>
+<h2>外设操作：PWM和ADC</h2>
+<p>ESP32 提供了许多外设，如 ADC 、UART 、I2C 、SPI 、CAN 等，这些外设不一定都会用到，因此这里先以比较常用且比较简单的 PWM 和 ADC 为例作为介绍，剩余的只有当需要时再作介绍。</p>
+<h3>PWM</h3>
+<p>PWM(Pulse-Width Modulation, 脉冲宽度调制)，是一种利用数字信号有无来控制某些模拟电路程度的方式。</p>
+<p>PWM 可以这样浅显地理解：某些元件（例如 LED ）的工作程度（例如 LED 灯的亮度）是根据功率来确定的，而功率又是根据电压的有效值来决定的。因此，如果让一个数字信号在很短的周期内快速变化，那么得到的电压有效值将介于两者之间，并且高电平持续的时间越长，有效值将越大。</p>
+<p>下图展示了 PWM 的概念。PWM 中有一个很重要的概念为<strong>占空比</strong>，指一个周期内高电平占用时间的比例：</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/09/02-pwm-concept.jpg" alt="PWM概念"></figure>
+<p>可以这样认为，占空比越高，电压利用率也就越高，有效值就越大。</p>
+<p>实现 PWM 效果非常容易，<code>machine</code> 模块包含了 <code>PWM</code> 类，可以快速生成 PWM 。首先引入该类：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">from</span> machine <span class="hljs-keyword">import</span> PWM
+</pre></div>
+<p>以下代码将一个 GPIO 引脚包装为 PWM 输出：</p>
+<div class="hljs codeblock"><pre>led = Pin(<span class="hljs-number">2</span>, Pin.OUT)
+led_pwm = PWM(led)
+</pre></div>
+<p><code>PWM</code> 类的 <code>.freq(freq=None)</code> 和 <code>.duty(duty=None)</code> 分别用于设置 PWM 的频率和占空比。如果忽略参数，则可以查询当前所用的频率和占空比。频率的设置范围为 0-78125 ，单位为 Hz ；而占空比的设置范围为 0-1023 ，它与 1023 的比值（或者说 0 到该值的范围占 0-1023 的范围比例）则是实际的占空比。这两个值都不能超过这个范围，否则实际结果会被约束到合法范围内。</p>
+<p>这里先设置好工作频率：</p>
+<div class="hljs codeblock"><pre>FREQUENCY = <span class="hljs-number">5000</span>
+led_pwm = PWM(Pin(<span class="hljs-number">2</span>), freq=FREQUENCY)
+</pre></div>
+<p>这里让占空比不断变化，以达到 LED 的亮度逐渐变化的效果，对应的代码为：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    <span class="hljs-keyword">for</span> duty <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-number">1024</span>, <span class="hljs-number">4</span>):
+        led_pwm.duty(duty)
+        time.sleep(<span class="hljs-number">0.01</span>)
+</pre></div>
+<p>运行该代码，可以看到开发板上的蓝色 LED 灯从熄灭开始逐渐变亮，达到最大亮度后再熄灭逐渐变亮，以此循环。</p>
+<p>如果要关闭 PWM 效果，可以调用其 <code>.deinit()</code> 方法。</p>
+<h3>ADC</h3>
+<p>ADC(Analog to Digital Converter, 模拟/数字信号转换)用于处理模拟信号。模拟信号指的是介于 0~Vcc 的电压值，此时该信号不能简单地使用 0 或 1 表示，而是要通过一定方式将其转换为其它可读的值。</p>
+<p>和大多数单片机一样，这种功能只有部分引脚具备。下图列出了 DOIT ESP32 DEVKIT V1 的所有 GPIO 口支持的复用功能。需要注意的是，该图所对应的开发板为 30 个引脚，而某些版本的开发板是 36 个引脚的，可能会多出一些功能。但不管怎么说，相同序号的引脚功能是基本相同的。</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/09/02-esp32-devkit-pinout.jpg" alt="e"></figure>
+<p>注意 GPIO 口和引脚序号是不同步的。</p>
+<p>使用 ADC 和使用 PWM 的方式类似，首先都需要将一个引脚变为 ADC 功能：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">from</span> machine <span class="hljs-keyword">import</span> Pin, ADC
+adc = ADC(Pin(<span class="hljs-number">32</span>))
+</pre></div>
+<p>默认情况下，ADC 只能测量 1v 左右范围内的电压。如果要测量更大范围，可以使用 <code>.atten(attenuation)</code> 设置 ADC 输入的衰减量，以获取更大的电压测量范围。可以设置以下衰减值：</p>
+<ul>
+<li><code>ADC.ATTN_0DB</code> ：不衰减，最大输入电压为 1.1v（默认值）</li>
+<li><code>ADC.ATTN_2_5DB</code> ：2.5dB 衰减，最大输入电压约为 1.5v</li>
+<li><code>ADC.ATTN_6DB</code> ：6dB 衰减，最大输入电压约为 2.2v</li>
+<li><code>ADC.ATTN_11DB</code> ：11dB 衰减，最大输入电压约为 3.9v</li>
+</ul>
+<p>因此，如果要测量 0-3.3v 变化的电压，需要使用以下代码：</p>
+<div class="hljs codeblock"><pre>adc.atten(ADC.ATTN_11DB)
+</pre></div>
+<p>在适当的时候，调用 <code>ADC</code> 类的 <code>.read()</code> 方法就可以获取当前的电压。电压使用一个 12 位的值来描述，因此如果当读取的值为 4095 时，达到最大输入电压。其余值可以根据比例换算成相应的电压。</p>
+<blockquote>
+<p>注意，ESP32 的 ADC 引脚可以分为两组，GPIO 32-39 是第一组，GPIO 0, 2, 4, 12-15 和 25-27 是第二组。第二组引脚在有些时候（如使用 WiFi 功能时）不能作为 ADC 功能使用。</p>
+</blockquote>
+<h2>ESP32高级功能</h2>
+<h3>触摸检测</h3>
+<p>这算是 ESP32 提供的一个非常有意思的功能了。ESP32 的某些引脚具备一种能力，可以检测引脚是否被人体触摸。</p>
+<p>ESP32 有 10 个 GPIO 口可用作电容触摸输入，它们分别为：0、2、4、12、13、14、15、27、32、33。在 30 个引脚的开发板中，没有 0 号 GPIO ，这点需要注意。</p>
+<p>使用电容触摸检测功能非常简单，只需要将一个 GPIO 引脚转化成触摸口，然后读入电容值即可。在有无触摸情况下，读入的值差别甚大。对应的代码为：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">from</span> machine <span class="hljs-keyword">import</span> Pin, TouchPad
+<span class="hljs-keyword">import</span> time
+
+touch = TouchPad(Pin(<span class="hljs-number">4</span>))
+
+<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    <span class="hljs-built_in">print</span>(touch.read())
+    time.sleep(<span class="hljs-number">0.5</span>)
+</pre></div>
+<p>运行代码，观察输出结果如下：</p>
+<div class="hljs codeblock"><pre><span class="hljs-number">809</span>
+<span class="hljs-number">684</span>
+<span class="hljs-number">671</span>
+<span class="hljs-number">809</span>
+<span class="hljs-number">109</span>
+<span class="hljs-number">62</span>
+<span class="hljs-number">56</span>
+<span class="hljs-number">43</span>
+<span class="hljs-number">57</span>
+<span class="hljs-number">808</span>
+<span class="hljs-number">825</span>
+</pre></div>
+<p>当被触摸时，读取的值变为几十，而未触摸时的值则为几百。当然，具体的值可能会随着环境的改变而不一定，但是只要捕捉到很大的差别就可以判断是否被触摸。</p>
+<h3>中断</h3>
+<p>MicroPython 可以直接操作中断功能，通过某个信号暂停当前程序的运转并执行特定的功能。下面以外部中断为例简单介绍外部中断的使用方法。</p>
+<p>除了 GPIO6 ~ GPIO11 之外的 GPIO 引脚都有这样一种功能，在电平发生跳变的瞬间，发出一个中断信号，并强制跳转执行某些代码。</p>
+<p>要使用外部中断，首先需要初始化一个 GPIO 引脚，将其作为输入模式：</p>
+<div class="hljs codeblock"><pre>key = Pin(<span class="hljs-number">23</span>, Pin.IN, Pin.PULL_DOWN)
+</pre></div>
+<p>为了在发送中断时执行某些功能，需要定义一个函数，这个函数要有这样一个参数，当发送外部中断时，传入产生中断的中断源：</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">interrupt_handler</span>(<span class="hljs-params">source</span>):</span>
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f'interrupt caused by <span class="hljs-subst">{source}</span>'</span>)
+</pre></div>
+<p>然后，通过调用 GPIO 引脚的 <code>.irq(trigger, handler)</code> 方法，可以将其变成一个中断源。<em><code>trigger</code></em> 表示触发方式，可以为上升沿 <code>Pin.IRQ_RISING</code> 即低电平向高电平跳变的瞬间，或下降沿 <code>Pin.IRQ_FALLING</code> 即高电平向低电平跳变的瞬间。<code>handler</code> 应该传入一个中断处理函数。</p>
+<p>例如：</p>
+<div class="hljs codeblock"><pre>key.irq(trigger=Pin.IRQ_RISING, handler=interrupt_handler)
+</pre></div>
+<p>则与按键相连的 GPIO 口在从低电平向高电平跳变的瞬间，会调用 <code>interrupt_handler()</code> 函数，执行其中的代码，在终端中打印 <code>"interrupt caused by Pin(23)"</code> 。</p>
+
+<h2>参考资料/延伸阅读</h2>
+
+<p>
+	<a href="https://docs.micropython.org/en/latest/esp32/quickref.html#">https://docs.micropython.org/en/latest/esp32/quickref.html#</a><br>
+	MicroPython 官方文档
+</p>
+<p><a rel="nofollow" href="/archives/723">ESP32与MicroPython入门-02 基本外设操作</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/archives/723/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>ESP32与MicroPython入门-01 搭建开发环境</title>
+		<link>/archives/673</link>
+					<comments>/archives/673#respond</comments>
+		
+		<dc:creator><![CDATA[Hello]]></dc:creator>
+		<pubDate>Mon, 15 Aug 2022 03:20:50 +0000</pubDate>
+				<category><![CDATA[单片机与应用]]></category>
+		<category><![CDATA[ESP32]]></category>
+		<category><![CDATA[MicroPython]]></category>
+		<guid isPermaLink="false">/?p=673</guid>
+
+					<description><![CDATA[<p>ESP32简介 ESP32 是上海乐鑫公司开发的一款&#46;&#46;&#46;</p>
+<p><a rel="nofollow" href="/archives/673">ESP32与MicroPython入门-01 搭建开发环境</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<h2>ESP32简介</h2>
+<p>ESP32 是上海乐鑫公司开发的一款比较新的32位微控制器，它集成了WiFi及蓝牙等功能，有着性能稳定、功耗低、价格低廉等特点，非常适用于物联网开发，但也可以作为普通的MCU使用。</p>
+<p>ESP8266 也是乐鑫公司开发的一种非常流行的WiFi芯片。相比 ESP8266 ，ESP32 更加强大。<a href="https://makeradvisor.com/esp32-vs-esp8266/">这篇文章</a> 比较了 ESP8266 和 ESP32 之间的差别。</p>
+<p>ESP32的主要芯片种类有ESP32-C系列、ESP32-S系列和ESP32系列。这些芯片的参数和功能略有差异，例如ESP32-S2就不支持蓝牙功能。在选型时注意检查芯片型号。</p>
+<p>完整的芯片型号对比可以参考官方网站的介绍：<a href="https://www.espressif.com/zh-hans/products/socs">https://www.espressif.com/zh-hans/products/socs</a></p>
+<p><strong>模块</strong>是基于ESP32芯片，按照一定功能封装了基本的外设等形成的集成芯片。乐鑫提供的ESP32模块主要可分为WROOM系列、WROVER系列以及MINI系列，完整的介绍及对比可以参见官方网站：<a href="https://www.espressif.com/zh-hans/products/modules">https://www.espressif.com/zh-hans/products/modules</a> 。模块参数的详细PDF文档可以从 <a href="https://www.espressif.com/zh-hans/products/modules/esp32">https://www.espressif.com/zh-hans/products/modules/esp32</a> 处下载。</p>
+<p>而<strong>开发板</strong>则是由ESP32模块和USB口、复位开关等组成的完整开发套件。开发板的厂商较多，使用时需要查看对应的开发板电路连接原理图，并注意开发板提供的功能。乐鑫提供的官方开发板介绍可以参见 <a href="https://www.espressif.com/zh-hans/products/devkits">https://www.espressif.com/zh-hans/products/devkits</a> 。</p>
+<p>这里选择 DOIT ESP32 DEVKIT V1 作为开发板。该开发板的特点为：</p>
+<ol>
+<li>尺寸很小（约 52mm x 28mm ）</li>
+<li>价格低廉（仅需 ￥20 左右，相比乐鑫官方动辄 60+ 非常亲民）</li>
+<li>板载一个蓝色 LED 灯，方便在无额外元器件时便可以调试</li>
+<li>远销海外（ platformIO 甚至还有该开发板专门的介绍文档）</li>
+</ol>
+<p>其外观如下。事实上很多商家的 ESP32 的开发板结构都非常类似。在选择开发板时只需注意主要结构及功能即可。</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/08/01-esp32-devkits.jpg" alt="开发板外观" width="210"></figure>
+<h2>MicroPython简介</h2>
+<h3>什么是MicroPython</h3>
+<p>MicroPython是基于Python实现的简易版本，用于在嵌入式系统中运行，例如树莓派、ARM单片机和ESP32。它兼容大部分Python3语法，因此只要熟悉Python3就能无障碍上手MicroPython。</p>
+<p>相比Python3，MicroPython精简了许多实现细节，并且删去了许多标准库以及标准库里的内容。不过，MicroPython却额外包含了能够操作底层GPIO等外设的标准库，这些是对底层寄存器的高度封装。</p>
+<h3>建立MicroPython开发环境</h3>
+<p>目前来说，有 3 个比较常用的 MicroPython 开发环境，它们都是免费、开源且跨平台的。它们分别为：</p>
+<ul>
+<li><strong>uPyCraft IDE</strong></li>
+</ul>
+<p>uPyCraft IDE 是一个简单并且对入门 MicroPython 友好的集成开发环境，它自身可以直接烧入 MicroPython 到 ESP32 中，并且支持从编写程序到串口调试的所有基本功能。除此之外，它还内置了许多示例代码，可以直接运行这些示例代码查看效果。</p>
+<p>uPyCraft 的 GitHub 地址为：<a href="https://github.com/DFRobot/uPyCraft">https://github.com/DFRobot/uPyCraft</a> 。可以从中下载软件与查看官方文档。</p>
+<ul>
+<li><strong>Thonny IDE</strong></li>
+</ul>
+<p>Thonny IDE 是一个 Python 的集成开发环境，不过它同时也支持直接开发 MicroPython 。Thonny IDE 功能丰富，支持各种调试方式，，并且可以加上插件进一步扩展功能。</p>
+<p>Thonny IDE 的官方网站为：<a href="https://thonny.org/">https://thonny.org/</a> ，GitHub 仓库地址为：<a href="https://github.com/thonny/thonny">https://github.com/thonny/thonny</a> 。</p>
+<ul>
+<li><strong>Visual Studio Code</strong></li>
+</ul>
+<p>大名鼎鼎的 VSCode 想必许多人都有所耳闻。VSCode 想要开发 MicroPython ，主要依靠插件的支持。</p>
+<p>这里推荐将 Thonny IDE 作为开发环境，主要是出于以下考虑：</p>
+<ol>
+<li>VSCode 相对 MicroPython 入门来说，还是有些过于重量级。并且 VSCode 主要依赖于插件来开发 MicroPython ，并不能很好地用到 VSCode 的所有优势，而且开发环境的配置也对入门级别不是很友好，因此除非日后需要利用到一些进阶功能，否则并是很不推荐将 VSCode 作为入门开发环境。</li>
+<li>uPyCraft 尽管是专门支持 MicroPython 的开发环境，但是它目前版本还比较低，不仅功能很少，而且使用者也很少，许多功能没有得到广泛的测试，可能存在许多 bug 未能得到解决。</li>
+<li>相比之下，Thonny IDE 非常轻量级，却也支持许多高级的功能。由于有足够多的使用者，现版本的 Thonny 已经非常稳定，完全可以满足 MicroPython 的全流程开发。</li>
+</ol>
+<p>由于 Thonny 不支持烧入功能，因此需要额外下载烧入工具。在烧入之前，需要安装 CP210x 串口转 USB 驱动，让设备识别到 ESP32 。</p>
+<p>该驱动可以在 <a href="https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers">https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers</a> 处下载，打开网站后点击 DOWNLOAD 页面，选择对应系统的驱动下载即可：</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/08/01-download-driver.jpg" alt="下载页面" width="420"></figure>
+<p>下载完成驱动后，安装对应的驱动文件即可，安装方式就和一般的软件一致：</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/08/01-install-driver.jpg" alt="安装程序" width="390"></figure>
+<p>接下来需要下载 Flash 烧入工具，用来将 MicroPython 烧入到 ESP32 内。烧入软件可以选用乐鑫官方提供的 Flash 下载工具，下载地址在 <a href="https://www.espressif.com/zh-hans/support/download/other-tools">https://www.espressif.com/zh-hans/support/download/other-tools</a> ，或在乐鑫官网找到<strong>支持</strong>→<strong>相关下载</strong>→<strong>工具</strong>：</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/08/01-download-flash-tool.jpg" alt="下载页面" width="470"></figure>
+<p>解压下载得到的文件夹即可。</p>
+<p>最后一步是下载 MicroPython 固件。下载的地址为：<a href="https://micropython.org/download/esp32/">https://micropython.org/download/esp32/)</a> ，或在 MicroPython 官网首页找到 <strong>Download</strong>→<strong>ESP32</strong> ：</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/08/01-download-micropython.jpg" alt="下载页面" width="480"></figure>
+<p>一般来说，推荐下载第二新的固件版本。注意下载的是 <code>.bin</code> 格式的固件。</p>
+<p>接下来就可以准备将 MicroPython 烧入到 ESP32 设备中。</p>
+<p>将 ESP32 使用 microusb 线连接到计算机上，如果 ESP32 开发板上的红色灯亮起，同时计算机的设备检测到串口信息，则证明连接正常：</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/08/01-download-step-2.jpg" alt="设备管理器窗口" width="570"></figure>
+<p>打开 ESP32 的 Flash 烧入工具，在第一个下拉菜单芯片类型中选择 ESP32：</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/08/01-download-step-1.jpg" alt="软件操作界面" width="200"></figure>
+<p>接下来进入到烧入配置界面，其中几个关键的选项已经在图中标示出来了：</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/08/01-download-step-3.jpg" alt="软件操作界面" width="310"></figure>
+<ol>
+<li>烧入的固件文件，可在右侧省略号按钮选取文件</li>
+<li>烧入地址为 <code>0x1000</code></li>
+<li>记得勾上要烧入的文件</li>
+<li>这些选项保持图示的默认选项即可</li>
+<li>波特率以 921600 为佳，上方的端口号注意和 ESP32 的端口号匹配</li>
+</ol>
+<p>接下来就可以下载固件了。下载前需要先擦除原有内容，<em>按住</em>开发板上的“BOOT”按键，然后点击下载工具左下角的“ERASE”按钮。刚点击时上方绿色矩形里的文字会从“等待/IDLE”变成“等待上电同步/SYNC”，如果文字再次变成“下载中/DOWNLOAD”，那么便可以松开开发板上的“BOOT”按键了。等到文字再次变为“完成/FINISH”，则说明擦除成功。</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/08/01-download-step-4.jpg" alt="BOOT按键位置" width="330"></figure>
+<p>接下来点击下载工具左下角的“START”按钮，类似上一步，在开始下载前也需要按住开发板上的“BOOT”按键。在下载时，下载工具最下方的进度条将会显示当前下载进度。</p>
+<p>这样，MicroPython 就烧入完毕了。接下来可以建立第一个MicroPython 工程，同时测试烧入是否正确。</p>
+<h3>建立第一个工程</h3>
+<p>这里使用 Thonny IDE 作为开发环境。首先可以在官网下载该软件：</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/08/01-download-step-5.jpg" alt="下载页面" width="450"></figure>
+<p>也可以在 GitHub 仓库里找到 Release 版本。这些地址在上文都提到过。</p>
+<p>安装成功 Thonny 后，打开软件，接下来还需要进行一些初始化配置。</p>
+<p>首先，在菜单栏里找到<strong>运行</strong>→<strong>选择解释器</strong>。之前说过 Thonny 主要用于进行常规 Python 开发，因此如果要将其用于 MicroPython 开发需要修改解释器选项：</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/08/01-config-step-1.jpg" alt="配置界面" width="360"></figure>
+<p>修改解释器为 MicroPython (ESP32) 。该页面中同时可以修改端口配置，如果有时发现识别出现问题，不妨检查一下端口号是否正确。</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/08/01-config-step-2.jpg" alt="配置界面" width="240"></figure>
+<p>接下来，将 ESP32 接入计算机，然后点击功能按钮栏里的“停止/重启后端进程(Ctrl+F2)”：</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/08/01-config-step-3.jpg" alt="配置界面"></figure>
+<p>如果此时在下方的终端(Shell)内看到如下所示的 Python 解释器提示，则说明与 MicroPython 的连接成功：</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/08/01-config-step-4.jpg" alt="配置界面" width="490"></figure>
+<p>如果在打开 Thonny 前就维持着 ESP32 与计算机的连接，那么进入 Thonny 时应该就能看到该提示信息。“停止/重启后端进程(Ctrl+F2)”用于重新使计算机与 ESP32 里的 MicroPython 连接，在每次插拔 ESP32 后都需要这样手动使两者重新连接。</p>
+<p>终端(Shell)允许在串口通信中使用 MicroPython 命令行交互窗口。例如：</p>
+<div class="hljs codeblock"><pre>MicroPython v1<span class="hljs-number">.17</span> on <span class="hljs-number">2021</span>-09-02; ESP32 module <span class="hljs-keyword">with</span> ESP32
+<span class="hljs-type">Type</span> <span class="hljs-string">"help()"</span> <span class="hljs-keyword">for</span> more information.
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">print</span>(<span class="hljs-string">'Hello, world!'</span>)
+Hello, world!
+</pre></div>
+<p><code>print()</code> 函数可以让 ESP32 向计算机通过串口发送调试信息。</p>
+<p>MicroPython 还支持以文件的形式运行。新建一个文件后，点击保存（如果 Thonny 成功连接上了 ESP32 的 MicroPython ），那么此时就会出现两个选项，可以将 <code>.py</code> 文件保存在计算机上，还可以将其保存在 ESP32 里：</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/08/01-first-py.jpg" alt="软件界面" width="260"></figure>
+<p>选择将文件保存在 ESP32 内，此时会发现 ESP32 内已经有一个 <code>boot.py</code> 文件了。这里，将文件命名为 <code>main.py</code> 保存。<code>boot.py</code> 和 <code>main.py</code> 是 MicroPython 里的两个比较特殊的文件，将在之后详细介绍。</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/08/01-save-py.jpg" alt="软件界面" width="500"></figure>
+<p>在 <code>main.py</code> 内编写以下代码后保存：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">from</span> machine <span class="hljs-keyword">import</span> Pin
+<span class="hljs-keyword">import</span> time
+led = Pin(<span class="hljs-number">2</span>, Pin.OUT)
+<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    led.value(<span class="hljs-number">0</span>)
+    time.sleep(<span class="hljs-number">0.5</span>)
+    led.value(<span class="hljs-number">1</span>)
+    time.sleep(<span class="hljs-number">0.5</span>)
+</pre></div>
+<p>点击功能按钮栏里的“运行当前脚本(F5)”，即可运行以上代码。运行成功后，可以看到开发板上蓝色的 LED 灯以 0.5 秒为间隔闪烁，说明运行成功。</p>
+<figure><img decoding="async" src="/wp-content/uploads/2022/08/01-led-flash.jpg" alt="成功截图" width="330"></figure>
+<p><code>while</code> 循环可以通过在交互式控制台内按下 <kbd>CTRL+C</kbd> 触发键盘中断退出。如果再次将 ESP32 接入计算机后重启后台进程，一直显示 ESP32 处于繁忙状态或无显示，则可能是由于 ESP32 一直在执行代码导致的，可以通过键盘中断强制停止 MicroPython 的执行。</p>
+<p><a rel="nofollow" href="/archives/673">ESP32与MicroPython入门-01 搭建开发环境</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/archives/673/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

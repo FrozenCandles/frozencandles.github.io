@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>日期时间归档 - 冰封残烛的个人小站</title>
+	<atom:link href="http://localhost/wordpress/archives/tag/%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4/feed?simply_static_page=3773" rel="self" type="application/rss+xml" />
+	<link></link>
+	<description>FrozenCandle&#039;s Personal Site</description>
+	<lastBuildDate>Mon, 12 Dec 2022 12:21:35 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2.1</generator>
+
+<image>
+	<url>/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg</url>
+	<title>日期时间归档 - 冰封残烛的个人小站</title>
+	<link></link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Python标准库time：处理时间</title>
+		<link>/archives/168</link>
+					<comments>/archives/168#respond</comments>
+		
+		<dc:creator><![CDATA[Hello]]></dc:creator>
+		<pubDate>Wed, 23 Mar 2022 05:06:00 +0000</pubDate>
+				<category><![CDATA[Python]]></category>
+		<category><![CDATA[Python标准库]]></category>
+		<category><![CDATA[日期时间]]></category>
+		<guid isPermaLink="false">/?p=168</guid>
+
+					<description><![CDATA[<p>time，顾名思义，是用来处理时间的一个标准库。该库&#46;&#46;&#46;</p>
+<p><a rel="nofollow" href="/archives/168">Python标准库time：处理时间</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p><code class="traditional">time</code>，顾名思义，是用来处理时间的一个标准库。该库主要由C语言的标准库 <code class="traditional">time.h</code>&nbsp;封装而成，因此部分函数的命名可读性一般，整体设计思路也不够面向对象。</p>
+
+
+
+<p>此外，Python与时间、日期相关的标准库有若干个，它们的功能可能有一定交集，但是侧重点不同：</p>
+
+
+
+<ul><li><code class="traditional">time</code>库：主要用于处理时间相关的事务，但是功能比较基础</li><li><code class="traditional">datetime</code>库：是 <code class="traditional">time</code> 库的封装版本，具有更现代化的处理方式</li><li><code class="traditional">calendar</code>库：主要用于得到日历</li><li><code class="traditional">zoneinfo</code>库：主要用于处理时区</li></ul>
+
+
+
+<p>时间并不只是日历，为了明白该库的一些用法，不仅需要对地理概念上的时间有所了解，还需要对计算机概念中的时间有所认识。</p>
+
+
+
+<p>以下简单介绍一些关于时间的概念：</p>
+
+
+
+<ul><li>格林尼治平均时间(Greenwich Mean Time, GMT)</li></ul>
+
+
+
+<p>由于全地球每个地方的时间都并不相同，某地处于“早上8时”时，大洋彼岸却并不是“早上8时”，这可能会在交流时引起一定混乱。因此全地球需要一个标准，当人们需要表达明确的时间时，将当地的时间翻译成标准时间以供参照。</p>
+
+
+
+<p>这个标准就是<span style="text-decoration: underline;">格林尼治平均时间</span> GMT 。它以位于英国伦敦的格林尼治天文台所处的以太阳参照的时间为标准，所谓“平均”指的是消除由于公转引起的太阳升降的差别，而造成每天长度都不完全一致的影响。</p>
+
+
+
+<ul><li>协调世界时(Coordinated Universal Time, UTC)</li></ul>
+
+
+
+<p>协调世界时由格林尼治平均时间发展而来，是最主要的世界时间标准。它与格林尼治平均时间的区别在于使用原子钟确定精确的秒数，这样报时更准确，因此被许多标准用作标准时间。</p>
+
+
+
+<p>其缩写UTC并不完全对应原英文，原因是法文缩写和英文缩写都包含U、T、C三个字母，最后标准采用中庸的方式，决定都不按照这两种语言的缩写排列。</p>
+
+
+
+<ul><li>Unix计时元年(Unix Epoch)</li></ul>
+
+
+
+<p>Unix计时元年是目前大多数计算机和编程语言确定时间原点的一种方式。由于Unix操作系统诞生自1970年，因此该操作系统将时间的原点确定在 1970-01-01 00:00:00(UTC)。目前计算机要处理的大部分时间都发生在这之后，因此可以将该时间点作为坐标原点，以时间的流逝方向作为正向，确定一个计算时间的坐标轴。</p>
+
+
+
+<ul><li>Unix时间(Unix Time)，或Unix时间戳(Unix Timestamp)</li></ul>
+
+
+
+<p>这是计算机表示当前时间的一种方式，它表示从Unix计时元年到现在所经过的秒数。例如，在编写这篇文章时，当前的Unix时间戳是 1646380540 。时间戳可以非常方便地标识某一个具体的时间，并对比两个时间点的先后顺序。</p>
+
+
+
+<p><code class="traditional">gmtime()</code>&nbsp;是一个转换计算机时间戳到标准UTC时间的函数。例如，可以通过 <code class="traditional">gmtime(0)</code>&nbsp;来检查当前计算机的时间原点：</p>
+
+
+
+<div class="vscode-block"><div><span style="color: #405c79;">&gt;&gt;&gt; </span><span style="color: #bf568b;font-weight: bold;">import</span><span style="color: #405c79;"> time</span></div><div><span style="color: #405c79;">&gt;&gt;&gt; time.gmtime(</span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">time.struct_time(</span><span style="color: #bf8b56;">tm_year</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">1970</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_mon</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_mday</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_hour</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_min</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_sec</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_wday</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">3</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_yday</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_isdst</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">)</span></div></div>
+
+
+
+<p>结果表示，当前计算机使用Unix时间来表示时间。</p>
+
+
+
+<h2 class="wp-block-heading" id="结构化时间对象">结构化时间对象</h2>
+
+
+
+<p>以上函数得到的结果是一个表示时间的结构化对象，它的用法和 <code class="traditional">namedtuple</code>&nbsp;类似，该类包含以下属性：</p>
+
+
+
+<figure class="wp-block-table"><table><tbody><tr><td>索引</td><td>属性名</td><td>描述</td><td>索引</td><td>属性名</td><td>描述</td></tr><tr><td>0</td><td><code class="traditional">tm_year</code></td><td>对应的四位数年</td><td>5</td><td><code class="traditional">tm_sec</code></td><td>对应的秒钟</td></tr><tr><td>1</td><td><code class="traditional">tm_mon</code></td><td>对应的月</td><td>6</td><td><code class="traditional">tm_wday</code></td><td>对应的星期，星期一记为0</td></tr><tr><td>2</td><td><code class="traditional">tm_mday</code></td><td>对应的日</td><td>7</td><td><code class="traditional">tm_yday</code></td><td>这是一年中的第几天</td></tr><tr><td>3</td><td><code class="traditional">tm_hour</code></td><td>对应的小时，从0到23</td><td>8</td><td><code class="traditional">tm_isdst</code></td><td>是否使用夏令时，0是1否-1不确定</td></tr><tr><td>4</td><td><code class="traditional">tm_min</code></td><td>对应的分钟</td><td></td><td></td><td></td></tr></tbody></table></figure>
+
+
+
+<blockquote class="wp-block-quote"><p>关于夏令时</p><cite>所谓夏令时，也称<span style="text-decoration: underline;">日光节约时间</span>(daylight saving time)，是一种在夏季将时间调快一小时，以符合人们作息规律的一种时间。目前仅有部分地区采用这种报时方式。</cite></blockquote>
+
+
+
+<p>可以通过访问以上结构的某些成员，来获取其中的信息：</p>
+
+
+
+<div class="vscode-block"><div><span style="color: #405c79;">&gt;&gt;&gt; epoch = time.gmtime(</span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">&gt;&gt;&gt; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">'Unix timestamp since </span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">epoch.tm_year</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">-</span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">epoch.tm_mon</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">-</span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">epoch.tm_mday</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;"> </span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">epoch.tm_hour</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">:</span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">epoch.tm_min</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">:</span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">epoch.tm_sec</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;"> UTC'</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">Unix timestamp since </span><span style="color: #bf8b56;">1970</span><span style="color: #405c79;">-</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">-</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">:</span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">:</span><span style="color: #bf8b56;">0</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">UTC</span></div></div>
+
+
+
+<p>这样就可以创建需要的日期格式。</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>注意，由于 <code class="traditional">struct_time</code>&nbsp;是一种类似元组的类型，因此它的每个元素都是只读的。在作为参数时，也可以使用包含 9&nbsp;个元素的元组代替&nbsp;<code class="traditional">struct_time</code>&nbsp;类型。</p>
+
+
+
+<p>如果省略参数，那么 <code class="traditional">gmtime()</code>&nbsp;会返回当前的&nbsp;UTC&nbsp;时间。也可以使用 <code class="traditional">localtime()</code> ，该函数的用法和&nbsp;<code class="traditional">gmtime()</code>&nbsp;类似，不过得到的是表示本地时区时间的结构化时间对象：</p>
+
+
+
+<div class="vscode-block"><div><span style="color: #405c79;">&gt;&gt;&gt; time.gmtime()</span></div><div><span style="color: #405c79;">time.struct_time(</span><span style="color: #bf8b56;">tm_year</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">2022</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_mon</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">3</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_mday</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">22</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_hour</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">5</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_min</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">39</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_sec</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">32</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_wday</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_yday</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">81</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_isdst</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">&gt;&gt;&gt; time.localtime()</span></div><div><span style="color: #405c79;">time.struct_time(</span><span style="color: #bf8b56;">tm_year</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">2022</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_mon</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">3</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_mday</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">22</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_hour</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">13</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_min</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">39</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_sec</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">34</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_wday</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_yday</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">81</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_isdst</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">)</span></div></div>
+
+
+
+<p><code class="traditional">localtime()</code>&nbsp;函数，为获取本地时间提供了一个合适的方式。</p>
+
+
+
+<p>如果认为 <code class="traditional">localtime()</code>&nbsp;得到的结构化时间对象不够易读，可以使用 <code class="traditional">asctime()</code>&nbsp;函数将其转换为一个简单的表示时间的字符串描述：</p>
+
+
+
+<div class="vscode-block"><div><span style="color: #405c79;">&gt;&gt;&gt; time.asctime(time.localtime())</span></div><div><span style="color: #405c79;">'</span><span style="color: #56bf8b;">Tue Mar 22 13:53:59 2022</span><span style="color: #405c79;">'</span></div></div>
+
+
+
+<p>实际上，<code class="traditional">asctime()</code>&nbsp;函数在省略参数的情况下默认得到的就是对当前的本地时间描述：</p>
+
+
+
+<div class="vscode-block"><div><span style="color: #405c79;">&gt;&gt;&gt; time.asctime(time.localtime()) == time.asctime()</span></div><div><span style="color: #bf8b56;">True</span></div></div>
+
+
+
+<h2 class="wp-block-heading" id="时间戳的用法">时间戳的用法</h2>
+
+
+
+<p><code class="traditional">time()</code>&nbsp;是一个基本的函数，它用来获取当前（或者说语句执行时）的时间戳：</p>
+
+
+
+<div class="vscode-block"><div><span style="color: #405c79;">&gt;&gt;&gt; time.time()</span></div><div><span style="color: #bf8b56;">1646384946.4768329</span></div></div>
+
+
+
+<p>这种方式得到的时间戳可以比秒更精确。</p>
+
+
+
+<p>结构化时间对象可以使用&nbsp;<code class="traditional">asctime()</code>&nbsp;来获取字符串描述，而时间戳也有类似功能。<code class="traditional">ctime()</code>&nbsp;函数用于将时间戳转化为字符串描述：</p>
+
+
+
+<div class="vscode-block"><div><span style="color: #405c79;">&gt;&gt;&gt; time.ctime(time.time())</span></div><div><span style="color: #405c79;">'</span><span style="color: #56bf8b;">Tue Mar 22 14:07:57 2022</span><span style="color: #405c79;">'</span></div></div>
+
+
+
+<p><code class="traditional">ctime()</code>&nbsp;函数也可以省略参数，同样默认得到对当前的本地时间描述：</p>
+
+
+
+<div class="vscode-block"><div><span style="color: #405c79;">&gt;&gt;&gt; time.ctime() == time.ctime(time.time())</span></div><div><span style="color: #bf8b56;">True</span></div><div><span style="color: #405c79;">&gt;&gt;&gt; time.ctime() == time.asctime()</span></div><div><span style="color: #bf8b56;">True</span></div></div>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>既然有了结构化时间对象，为何要使用时间戳？首先，时间戳的优点在于，只需要对时间戳使用数值上的运算，就可以间接得到日期上的运算。</p>
+
+
+
+<p>例如，可以通过加减运算来获取一定间隔前后的日期信息：</p>
+
+
+
+<div class="vscode-block"><div><span style="color: #405c79;">&gt;&gt;&gt; day = </span><span style="color: #bf8b56;">3600</span><span style="color: #405c79;"> * </span><span style="color: #bf8b56;">24</span></div><div><span style="color: #405c79;">&gt;&gt;&gt; time.ctime(time.time() + </span><span style="color: #bf8b56;">30</span><span style="color: #405c79;"> * day) &nbsp;</span><span style="color: #a8a8a8;"># 30 days later</span></div><div><span style="color: #405c79;">'</span><span style="color: #56bf8b;">Wed Apr 20 23:33:12 2022</span><span style="color: #405c79;">'</span></div></div>
+
+
+
+<p>给当前时间戳加上 30&nbsp;天对应的秒数，就表示 30&nbsp;天后的时刻，然后便可以调用 <code class="traditional">ctime()</code>&nbsp;获取这一时刻的信息。</p>
+
+
+
+<p>其次，时间戳可以方便地标识具体的时刻。基于此，只需要通过比较数值大小就可以得出两个时间的先后。</p>
+
+
+
+<p>一种常见的需求是计算两个时间的差值，这种情况下只需要对两个时间戳相减即可。例如，以下实现了这样的一个装饰器，可以计算某个函数运行的时间：</p>
+
+
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">import</span><span style="color: #405c79;"> time</span></div><br><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">timeit</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">func</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">wrapper</span><span style="color: #405c79;">(*</span><span style="color: #bf8b56;">args</span><span style="color: #405c79;">, **</span><span style="color: #bf8b56;">kwargs</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; start = time.time()</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; func(*args, **kwargs)</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> time.time() - start</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> wrapper</span></div></div>
+
+
+
+<p>通过以下函数测试它的效果：</p>
+
+
+
+<div class="vscode-block"><div><span style="color: #405c79;">@</span><span style="color: #8b56bf;">timeit</span></div><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">test</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">start</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">length</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">10000</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; product = </span><span style="color: #bf8b56;">1</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i in </span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(start, start + length):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; product = product * start</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> product</span></div><br><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(test(</span><span style="color: #bf8b56;">start</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">30000</span><span style="color: #405c79;">))</span></div></div>
+
+
+
+<p>结果为：</p>
+
+
+
+<div class="code-console">
+0.07980942726135254
+</div>
+
+
+
+<p>可以看到计时结果还是比较精确的。</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p>时间戳和结构化时间对象是两种基本的时间表示方法。之前说过，可以使用 <code class="traditional">gmtime()</code>&nbsp;或&nbsp;<code class="traditional">localtime()</code>&nbsp;来将时间戳转换为结构化时间对象。<code class="traditional">mktime()</code>&nbsp;是 <code class="traditional">localtime()</code>&nbsp;的逆过程，它可以用一个表示本地时间的结构化时间对象生成时间戳：</p>
+
+
+
+<div class="vscode-block"><div><span style="color: #405c79;">&gt;&gt;&gt; time.mktime((</span><span style="color: #bf8b56;">2022</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">3</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">22</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">14</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">57</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">40</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">81</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">))</span></div><div><span style="color: #bf8b56;">1647932260.0</span></div><div><span style="color: #405c79;">&gt;&gt;&gt; time.mktime(time.localtime())</span></div><div><span style="color: #bf8b56;">1647932333.0</span></div></div>
+
+
+
+<p>以上使用元组的形式来表示结构化时间对象。</p>
+
+
+
+<h2 class="wp-block-heading" id="处理时间格式">处理时间格式</h2>
+
+
+
+<p><code class="traditional">asctime()</code>&nbsp;和 <code class="traditional">ctime()</code>&nbsp;得到的时间格式可能无法符合需求。此时，一个改善思路就是重新借用 <code class="traditional">localtime()</code>&nbsp;返回的结构化时间对象，重新编写一个函数利用它提供的信息得到格式化的字符串。</p>
+
+
+
+<p><code class="traditional">time</code>&nbsp;库就提供了这样的一个函数 <code class="traditional">strftime(<em>format</em>, <em>t</em>=localtime())</code> 。它利用 <code class="traditional"><em>format</em></code> 参数提供的格式字符串，将一个结构化时间对象提供的信息填入其中。</p>
+
+
+
+<p><code class="traditional"><em>format</em></code> 参数使用类似 Python2&nbsp;的百分号形式的格式化字符串。即，以一个百分号紧跟一个字符作为格式化的转换说明。这也是C语言标准的字符串格式方法。</p>
+
+
+
+<p>以下给出了一个示例，将当前的时间格式化为另一种阅读习惯的方式：</p>
+
+
+
+<div class="vscode-block"><div><span style="color: #405c79;">&gt;&gt;&gt; time.ctime()</span></div><div><span style="color: #405c79;">'</span><span style="color: #56bf8b;">Tue Mar 22 15:15:26 2022</span><span style="color: #405c79;">'</span></div><div><span style="color: #405c79;">&gt;&gt;&gt; time.strftime(</span><span style="color: #405c79;">"</span><span style="color: #56bf8b;">%Y </span><span style="color: #bf8b56;">%b</span><span style="color: #56bf8b;"> </span><span style="color: #bf8b56;">%d</span><span style="color: #56bf8b;"> </span><span style="color: #bf8b56;">%a</span><span style="color: #56bf8b;"> %H:%M:</span><span style="color: #bf8b56;">%d</span><span style="color: #405c79;">"</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">'</span><span style="color: #56bf8b;">2022 Mar 22 Tue 15:16:22</span><span style="color: #405c79;">'</span></div></div>
+
+
+
+<p>下表列出了完整的转换说明符：</p>
+
+
+
+<figure class="wp-block-table"><table><tbody><tr><td>符号</td><td>含义</td><td>符号</td><td>含义</td></tr><tr><td><code class="traditional">%a</code></td><td>星期几，英文缩写</td><td><code class="traditional">%p</code></td><td>现在是上午(AM)还是下午(PM)，使用本地化表述</td></tr><tr><td><code class="traditional">%A</code></td><td>星期几，英文全称</td><td><code class="traditional">%S</code></td><td>秒钟，取值为 [00, 61]</td></tr><tr><td><code class="traditional">%b</code></td><td>月份名，英文缩写</td><td><code class="traditional">%U</code></td><td>一年的第几周，取值为 [00, 53]</td></tr><tr><td><code class="traditional">%B</code></td><td>月份名，英文全称</td><td><code class="traditional">%w</code></td><td>星期几，序号表示，取值为 [0, 6] 。0 表示星期天</td></tr><tr><td><code class="traditional">%c</code></td><td>ctime() 等使用的本地化日期时间完整表示格式</td><td><code class="traditional">%W</code></td><td>类似 %U ，不过使用星期天而不是星期一来界定第0周的结束</td></tr><tr><td><code class="traditional">%d</code></td><td>日期，取值为 [01, 31]</td><td><code class="traditional">%x</code></td><td>本地化日期表示格式</td></tr><tr><td><code class="traditional">%H</code></td><td>24进制小时，取值为 [00, 23] </td><td><code class="traditional">%X</code></td><td>本地化时间表示格式</td></tr><tr><td><code class="traditional">%I</code></td><td>12进制小时，取值为 [01, 12]</td><td><code class="traditional">%y</code></td><td>两位数年份，取值为 [00, 99]</td></tr><tr><td><code class="traditional">%j</code></td><td>一年的第几天，取值为 [001, 366]</td><td><code class="traditional">%Y</code></td><td>四位数年份</td></tr><tr><td><code class="traditional">%m</code></td><td>月份，取值为 [01, 12]</td><td><code class="traditional">%z</code></td><td>本地时区与UTC的时间差，取值为 [-23:59, +23:59]</td></tr><tr><td><code class="traditional">%M</code></td><td>分钟，取值为 [00, 59]</td><td><code class="traditional">%%</code></td><td>表示一个百分号 %</td></tr></tbody></table></figure>
+
+
+
+<p>利用转换说明，就可以自定义时间表示的格式。以下再次给出一个示例：</p>
+
+
+
+<div class="vscode-block"><div><span style="color: #405c79;">&gt;&gt;&gt; time.strftime(</span><span style="color: #405c79;">"</span><span style="color: #56bf8b;">Tomorrow is </span><span style="color: #bf8b56;">%m</span><span style="color: #56bf8b;">-</span><span style="color: #bf8b56;">%d</span><span style="color: #405c79;">"</span><span style="color: #405c79;">, time.localtime(time.time() + day))</span></div><div><span style="color: #405c79;">'</span><span style="color: #56bf8b;">Tomorrow is 03-23</span><span style="color: #405c79;">'</span></div></div>
+
+
+
+<p><code class="traditional">strptime(<em>string</em>, <em>format</em>="%a %b %d %H:%M:%S %Y")</code>&nbsp;与&nbsp;<code class="traditional">strftime()</code>&nbsp;函数的作用相反，它用于将一个已经格式化后的字符串，通过提供的格式反推得到结构化时间对象。例如：</p>
+
+
+
+<div class="vscode-block"><div><span style="color: #405c79;">&gt;&gt;&gt; time.strptime(</span><span style="color: #405c79;">"</span><span style="color: #56bf8b;">2020-03-22</span><span style="color: #405c79;">"</span><span style="color: #405c79;">, </span><span style="color: #405c79;">"</span><span style="color: #bf8b56;">%Y</span><span style="color: #56bf8b;">-</span><span style="color: #bf8b56;">%m</span><span style="color: #56bf8b;">-</span><span style="color: #bf8b56;">%d</span><span style="color: #405c79;">"</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">time.struct_time(</span><span style="color: #bf8b56;">tm_year</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">2020</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_mon</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">3</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_mday</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">22</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_hour</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_min</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_sec</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_wday</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">6</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_yday</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">82</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">tm_isdst</span><span style="color: #405c79;">=-</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">)</span></div></div>
+
+
+
+<p>如果提供的信息不足，那么结构化时间对象里的元素将使用默认值。如果提供的字符串与格式字符串不匹配，那么会引发 <code class="error">ValueError</code>&nbsp;错误。</p>
+
+
+
+<h2 class="wp-block-heading" id="其余内容">其余内容</h2>
+
+
+
+<p>除了日期和时间相关的格式化外，<code class="traditional">time</code>&nbsp;库还提供了几个常用的与时间相关的功能。</p>
+
+
+
+<p><code class="traditional">sleep(<em>secs</em>: float)</code>&nbsp;是一个常用的函数，它的功能是暂停当前的程序一段时间。它的效果就相当于进入一个空循环，直到达到了设定的时间为止。</p>
+
+
+
+<div class="vscode-block"><div><span style="color: #405c79;">@</span><span style="color: #8b56bf;">timeit</span></div><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">delay</span><span style="color: #405c79;">():</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; time.sleep(</span><span style="color: #bf8b56;">3.14</span><span style="color: #405c79;">)</span></div><br><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(delay())</span></div></div>
+
+
+
+<p>结果为：</p>
+
+
+
+<div class="code-console">
+3.1410584449768066
+</div>
+
+
+
+<p>当然暂停的时间不会那么精确。暂停过程可以被&nbsp;<code class="error">KeyboardInterrupt</code>&nbsp;中断。</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<p><code class="traditional">perf_counter()</code>&nbsp;是一个用于精确计时的函数。它并没有确定的计时零点，但是它确定的时间差值却非常精确。因此，上文编写的 <code class="traditional">timeit()</code>&nbsp;函数可以使用 <code class="traditional">perf_counter()</code>&nbsp;函数用于计时以获取更精确的结果。</p>
+
+
+
+<p>下面给出了这样一个示例，使用 <code class="traditional">time()</code>&nbsp;函数无法捕捉到如此小的时间差：</p>
+
+
+
+<div class="vscode-block"><div><span style="color: #405c79;">start = time.time()</span></div><div><span style="color: #8b56bf;">sum</span><span style="color: #405c79;">(</span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">1000</span><span style="color: #405c79;">))</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(time.time() - start)</span></div><br><div><span style="color: #405c79;">start = time.perf_counter()</span></div><div><span style="color: #8b56bf;">sum</span><span style="color: #405c79;">(</span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">1000</span><span style="color: #405c79;">))</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(time.perf_counter() - start)</span></div></div>
+
+
+
+<p>结果为：</p>
+
+
+
+<div class="code-console">
+0.0<br>
+4.190000000001137e-05
+</div>
+
+
+
+<p>除此之外，<code class="traditional">time</code> 库还包括一些其余的函数，包括获取纳秒级别的时间信息、操作Unix的系统时钟等。不过这些都不够常用，具体可以参阅Python官方文档。</p>
+
+
+
+<p>最后，用一张图总结 <code class="traditional">time</code>&nbsp;库的内容：</p>
+
+
+
+<figure class="wp-block-image size-full is-resized"><img decoding="async" src="/wp-content/uploads/2022/03/python-time.png" alt="" class="wp-image-176" width="417" height="249" srcset="/wp-content/uploads/2022/03/python-time.png 498w, /wp-content/uploads/2022/03/python-time-300x179.png 300w" sizes="(max-width: 417px) 100vw, 417px" /></figure>
+
+
+
+<h2 class="wp-block-heading" id="参考资料">参考资料</h2>
+
+
+
+<p><a href="https://en.wikipedia.org/wiki/Greenwich_Mean_Time">https://en.wikipedia.org/wiki/Greenwich_Mean_Time</a></p>
+
+
+
+<p><a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">https://en.wikipedia.org/wiki/Coordinated_Universal_Time</a></p>
+
+
+
+<p><a href="https://en.wikipedia.org/wiki/Leap_second">https://en.wikipedia.org/wiki/Leap_second</a></p>
+
+
+
+<p><a href="https://en.wikipedia.org/wiki/Unix_time">https://en.wikipedia.org/wiki/Unix_time</a></p>
+
+
+
+<p><a href="https://en.wikipedia.org/wiki/Daylight_saving_time">https://en.wikipedia.org/wiki/Daylight_saving_time</a></p>
+
+
+
+<p>维基百科对一些概念的解释</p>
+
+
+
+<p><a href="https://docs.python.org/3/library/time.html">https://docs.python.org/3/library/time.html</a></p>
+
+
+
+<p>Python3文档——标准库 <code class="traditional">time</code></p>
+<p><a rel="nofollow" href="/archives/168">Python标准库time：处理时间</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/archives/168/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

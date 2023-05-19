@@ -1,0 +1,1343 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>数学归档 - 冰封残烛的个人小站</title>
+	<atom:link href="http://localhost/wordpress/archives/category/%E6%95%B0%E5%AD%A6/feed?simply_static_page=3379" rel="self" type="application/rss+xml" />
+	<link></link>
+	<description>FrozenCandle&#039;s Personal Site</description>
+	<lastBuildDate>Thu, 18 May 2023 03:00:18 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2.1</generator>
+
+<image>
+	<url>/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg</url>
+	<title>数学归档 - 冰封残烛的个人小站</title>
+	<link></link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>积分表(上)</title>
+		<link>/archives/1116</link>
+					<comments>/archives/1116#respond</comments>
+		
+		<dc:creator><![CDATA[Hello]]></dc:creator>
+		<pubDate>Wed, 17 May 2023 14:25:17 +0000</pubDate>
+				<category><![CDATA[微积分]]></category>
+		<guid isPermaLink="false">/?p=1116</guid>
+
+					<description><![CDATA[<p>注意：本页面含有大量公式，加载时渲染较慢。 常用不定&#46;&#46;&#46;</p>
+<p><a rel="nofollow" href="/archives/1116">积分表(上)</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+
+<p><span class="text-frame">注意：本页面含有大量公式，加载时渲染较慢。</span></p>
+    
+<h2>常用不定积分积分表</h2>
+
+<h3>多项式类</h3>
+
+<h4 id="anchor-case-1">含有 <span class="math">\\( ax+b \\)</span> 的积分</h4>
+
+<div class="math">
+\\[
+    \begin{align}
+    (1). \cques{\int \frac{\dd x}{ax+b}} &= \frac 1 a \int \frac{\dd (ax)}{ax+b} = \frac 1 a \int \frac{\dd (ax+b)}{ax+b} \\
+        &= \cansw{\frac 1 a \ln |ax+b| + C}
+    \end{align}
+\\]
+</div>
+<div class="math">
+\\[
+    \begin{align}
+    (2). \cques{\int (ax+b)^\mu \dd x} &= \frac 1 a \int (ax+b)^\mu \dd (ax+b) = \frac 1 a \cdot \frac 1 {\mu+1} \int (\mu+1) (ax+b)^\mu \dd (ax+b) \\
+        &= \cansw{\frac 1 {a(\mu+1)} (ax+b)^{\mu+1} \qquad (\mu \neq -1)}
+    \end{align}
+\\]
+</div>
+<div class="math">
+\\[
+    \begin{align}
+    (3). \cques{\int \frac{x}{ax+b} \dd x} &= \frac 1 a \int \frac {ax+b-b}{ax+b} \dd x = \frac 1 a \int \left(1 - \frac b{ax+b}\right) \dd x\\
+        &= \frac 1 a \int \dd x - \frac 1 a \int \frac b {ax+b} \dd x = \cansw{\frac x a - \frac b {a^2} \ln |ax+b| + C}
+    \end{align}
+\\]
+</div>
+<div class="math">
+\\[
+    \begin{align}
+    (4). \cques{\int \frac {x^2}{ax+b} \dd x} &= \int \bigg( \frac x a - \frac b {a^2} + \cfrac{\cfrac{b^2}{a^2}}{ax+b} \bigg) \dd x
+        = \frac 1 a \int x \dd x - \frac b {a^2} \int \dd x + \frac {b^2} {a^2} \int \frac{\dd x}{ax+b} \\
+        &= \cansw{\frac {1}{2a} x^2 - \frac b {a^2} x + \frac {b^2} {a^3} \ln|ax+b|+C}
+    \end{align}
+\\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (5). \cques{\int \frac{\dd x}{x(ax+b)}} &= \int \bigg(\frac{A_1}{x} + \frac{A_2}{ax+b}\bigg) \dd x = \int \bigg(\frac{\cfrac{1}{b_1}}{x} + \frac{-\cfrac a b}{ax+b}\bigg) \dd x \\
+        &= \frac 1 b \int \frac 1 x \dd x - \frac a b \int \frac{1}{ax+b} \dd x = \frac 1 b \ln |x| - \frac 1 b \ln|ax+b| +C \\
+        &= \cansw{\frac 1 b \ln|\frac{x}{ax+b}| + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (6). \cques{\int \frac{\dd x}{x^2(ax+b)}} &= \int \bigg(\frac{A_1} x + \frac{A_2}{x^2} + \frac{A_3}{ax+b}\bigg) \dd x
+        = \int \bigg(\frac{-\cfrac{a}{b^2}}{x} + \frac{\cfrac{1}{b}}{x^2} + \frac{\cfrac{a^2}{b^2}}{ax+b} \bigg) \dd x \\
+        &= - \frac{a}{b^2}\int \frac{1}{x} \dd x + \frac 1 b \int \frac{1}{x^2} \dd x + \frac {a^2}{b^2} \int \frac 1 {ax+b} \dd x \\
+        &= -\frac a {b^2} \ln |x| - \frac 1 b \cdot \frac 1 x + \frac a {b^2} \ln |ax+b| + C \\
+        &= \cansw{\frac a {b^2} \ln \bigg|\frac{ax+b}{x}\bigg|-\frac 1 {bx} + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (7). {\cques{ \int \frac{x}{(ax+b)^2} \dd x }} = \int \bigg(\frac {A_1}{ax+b} + \frac {A_2}{(ax+b)^2}\bigg)\dd x
+        = \int \bigg(\frac {\cfrac 1 a}{ax+b} + \frac {-\cfrac b a}{(ax+b)^2}\bigg)\dd x\\
+        = \frac 1 a \int \frac{\dd x}{ax+b} - \frac b a \int \frac{\dd x}{(ax+b)^2}
+        = \cansw{\frac 1 {a^2} \ln |ax+b|+\frac {b} {a^2(ax+b)} + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (8). \cques{\int \frac{x^2}{(ax+b)^2} \dd x} &= \int \bigg(\frac 1 {a^2} + \frac{-\cfrac{2b} a x - \cfrac{a^2}{b^2}}{(ax+b)^2}\bigg) \dd x
+        = \int \bigg(\frac 1 {a^2} + \frac{A_1}{ax+b} + \frac{A_2}{(ax+b)^2}\bigg) \dd x \\
+        &= \int \bigg(\frac 1 {a^2} + \frac{-\cfrac{2b}{a^2}}{ax+b} + \frac{\cfrac{b^2}{a^2}}{(ax+b)^2}\bigg) \dd x
+        = \cansw{\frac 1 {a^2} x - \frac{2b}{a^3} \ln |ax+b|-\frac {b^2} {a^3} \cdot \frac 1 {ax+b}}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (9). \cques{\int \frac{\dd x}{x(ax+b)^2}}&=\int \bigg(\frac{A_1}x + \frac{A_2}{ax+b} + \frac{A_3}{(ax+b)^2}\bigg)\dd x
+        =\int \bigg(\frac{\cfrac 1 {b^2}}x + \frac{-\cfrac a {b^2}}{ax+b} + \frac{-\cfrac a b}{(ax+b)^2}\bigg)\dd x\\
+        &= \frac 1 {b^2} \ln |x| - \frac 1 {b^2} \ln|ax+b| - \frac 1 b \cdot \frac 1 {ax+b} + C\\
+        &= \cansw{\frac 1 {b^2} \ln \bigg|\frac x {ax+b}\bigg| - \frac 1 {b(ax+b)} + C\\}
+    \end{align}
+    \\]
+</div>
+
+<h4 id="anchor-case-2">含有 <span class="math">\\( \quB \\)</span> 的积分</h4>
+
+<div class="math">
+    \\[
+    \begin{align}
+    (10). \cques{\int \quB\dd x} &= \frac 1 a \int (ax+b)^\frac 1 2 \dd (ax)
+        = \frac {2}{3a}\int \frac 3 2 (ax+b)^\frac 1 2 \dd (ax+b)\\
+        &= \cansw{\frac {2}{3a}(ax+b)^\frac 3 2 + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (11). \cques{\int x \quB \dd x} 
+        &= \frac 1 a \int (ax+b-b) (ax+b)^{\frac 1 2} \dd x 
+         = \frac 1 a \int (ax+b)^{\frac 3 2} \dd x - \frac b a \int (ax+b)^{\frac 1 2} \dd x \\
+        &= \frac 2 {5a^2} (ax+b)^{\frac 5 2} - \frac{2b}{3a^2}(ax+b)^{\frac 3 2} + C = \cansw{\frac 2{15a^2}(3ax-2b)(ax+b)^{\frac 3 2} + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (12). \cques{\int x^2 \quB \dd x} &= \frac 1 {a^2} \int [(ax+b)^2-2abx-b^2] \quB \dd x\\
+        &= \frac 1 {a^2} \int (ax+b)^{\frac 5 2} \dd x - \frac {2b} a \int x \quB \dd x - \frac {b^2}{a^2} \int \quB \dd x \\
+        &= \frac 2 {7a^3}(ax+b)^{\frac 7 2} - \frac {2b}{a} \left[ \frac 2{15a^2}(3ax-2b)(ax+b)^{\frac 3 2} \right] - \frac {2b^2}{3a^3}(ax+b)^\frac 3 2\\
+        &= \cansw{\frac 2 {15a^3} (3a^2x^2-4abx+8b^2)(ax+b)^{\frac 3 2} + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (13). \cques{\int \fc x {\quB} \dd x} &= \fc 1 a \int \fc {\quA - b}{\sqrt{\quA}} \dd x = \fc 1 a \int (\quA)^{\fc 1 2} \dd x - \fc b a \int (\quA)^{-\fc 1 2} \dd x\\
+        &= \cansw{\fc 2 {3a^2}(ax-2b)\quB + C}
+    \end{align}
+    \\]
+</div>
+
+<div class="math">
+    \\[
+    \begin{align}
+    (14). \cques{\int \fc {x^2}{\quB} \dd x} &= \fc 1 {a^2} \int \fc {(\quA)^2-2abx-b^2}{\quB} \dd x \\
+        &= \fc 1 {a^2} \int (\quA)^{\fc 3 2} - \fc {2b} a \int \fc x {\quB} \dd x - \fc {b^2}{a^3} \int \fc 1 {\quB} \dd x\\
+        &= \fc 2 {5a^3}(\quA)^\fc 5 2 - \fc {2b} a \left[ \fc 2 {3a^2}(ax-2b)\quB \right] - \fc {2b^2}{a^3} (\quA)^\fc 1 2 + C \\
+        &= \cansw{\fc 2 {15a^3}(3a^2x^2-4abx+8b^2)\quB + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (15). \cques{\int \fc {\dd x }{x \quB}} &\xlongequal{\textstyle u=\quB} \int \cfc {\cfc 1 a 2u \dd u}{\cfc{u^2-b} a u} = 2 \int \fc {\dd u}{u^2-b} \\
+        &= \begin{cases}
+            (b > 0) &\displaystyle \int \fc 1 {\sq{b}} \left( { \fc 1 {u-\sq{b}} - \fc 1 {u+\sq{b}} } \right) \dd u
+            = \fc 1 {\sq{b}} \ln \left| {\fc {u-\sq{b}}{u+\sq{b}}} \right| + C \\
+            (b &lt; 0) &\displaystyle 2 \int \fc 1 {1 + (\cfc {u}{\sq{-b}} )^2} \dd u = \fc 2 {\sq{-b}} \arctan \left(\cfc {u}{\sq{-b}} \right) + C
+        \end{cases} \\
+        
+        &= \cansw{
+            \begin{cases}
+                (b > 0) &\displaystyle \fc 1 {\sq{b}} \ln \left| {\fc {\quB-\sq{b}}{\quB+\sq{b}}} \right| + C\\
+                (b &lt; 0) &\displaystyle \fc 2 {\sq{-b}} \arctan \sq{\cfc {\quA}{-b}}  + C
+            \end{cases}
+        } \\
+
+
+    \end{align}
+    \\]
+</div>
+
+<div class="math">
+    \\[
+    \begin{align}
+    (18). \cques{\int \fc {\quB} {x^2} \dd x} &= \int \quB \dd \abig(){-\frac 1 x} = -\fc 1 x \quB - \int - \fc 1 x \dd (\quB) \\
+        &= \cansw{-\fc{\quB}{x} + \fc a 2 \int \fc{\dd x}{x \quB} = \dots}
+    \end{align}
+    \\]
+</div>
+
+<div class="math">
+    \\[
+    \begin{align}
+    (17). \cques{\int \fc {\quB}{x} \dd x} &\xlongequal{\textstyle u=\quB} \int \fc {au}{u^2-b} \cdot \fc 1 a 2u \dd u = \int \fc{2u^2}{u^2-b} \dd u\\
+        &= \int \abig(){2+\fc{2b}{u^2-b}} \dd u =  2u + b \int \fc{2\dd u}{u^2-b} \\
+        &= \cansw{2 \quB + b \int \fc{\dd x}{x \quB} = \dots}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (16). \cques{\int \fc{\dd x}{x^2 \quB}} &= \int \bigg( \fc {A_1 \quB}{x^2} + \fc {A_2}{x \quB} \bigg)\dd x = \int \bigg( \fc {\cfc 1 b \quB}{x^2} + \fc {-\cfc a b}{x \quB} \bigg)\dd x \\
+        &= \cansw{\fc 1 b\int \fc {\quB} {x^2} \dd x - \fc a b \int \fc{\dd x}{x \quB} = -\fc{\quB}{bx} - \fc a {2b} \int \fc{\dd x}{x \quB} = \dots}
+    \end{align}
+    \\]
+</div>
+
+<h4 id="anchor-case-3">含有 <span class="math">\\( x^2\pm a^2 \\)</span> 的积分</h4>
+
+<div class="math">
+    \\[
+    \begin{align}
+    (19). \cques{\int \fc {\dd x}{x^2+a^2}} &= \int \fc {\dd \cfc x a}{1+(\cfc x a)^2}\\
+        &= \cansw{\fc 1 a \arctan \fc x a + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (21). \cques{\int \fc {\dd x}{x^2-a^2}} &= \int \fc 1 {2a} \left( \fc 1 {x-a} - \fc 1 {x+a} \right) \dd x 
+        = \fc 1 {2a} \left( \int \fc {\dd (x-a)}{x-a} - \int \fc {\dd (x+a)}{x+a} \right) \\
+        &= \cansw{\fc 1 {2a} \ln \left| \fc{x-a}{x+a} \right| + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (20). \cques{\int \fc {\dd x}{(x^2+a^2)^n}} &= \fc x {(x^2+a^2)^n} - \int x \dd \abig[]{\fc 1 {(x^2+a^2)^n}}
+        = \fc x {(x^2+a^2)^n} - \int x \cdot \fc {-n}{(x^2+a^2)^n} \cdot 2x \dd x \\
+        &= \fc x {(x^2+a^2)^n} + 2n \int \fc {x^2+a^2-a^2}{(x^2+a^2)^{n+1}} \dd x\\ 
+        &= \fc x {(x^2+a^2)^n} + 2n \int \fc 1 {(x^2+a^2)^n} \dd x - 2na^2 \int \fc 1 {(x^2+a^2)^{n+1}} \dd x
+    \end{align}
+    \\]
+</div>
+<div class="math">
+\\[
+    \quad \text{so, } \quad
+    \cques{\int \fc {\dd x}{(x^2+a^2)^{n+1}}} = \cansw{\fc x {2na^2(x^2+a^2)^n} + \fc {2n-1}{2na^2} \int \fc {\dd x}{(x^2+a^2)^n} + C} 
+\\]
+</div>
+<!-- 
+<div class="math">
+    \\[
+    \begin{align}
+    (). \cques{\int} &=
+        &= \cansw{ + C}
+    \end{align}
+    \\]
+</div> -->
+<!-- 
+<div class="math">
+    \\[
+    \begin{align}
+    (). \cques{\int} &=
+        &= \cansw{ + C}
+    \end{align}
+    \\]
+</div> -->
+
+<h4 id="anchor-case-4">含有 <span class="math">\\( \quC \quad (a>0) \\)</span> 的积分</h4>
+
+<div class="math">
+    \\[
+    \begin{align}
+    (22). \cques{\int \fc {\dd x}{\quC}} &= 
+        \begin{cases}
+            (b>0) & \displaystyle \int \fc {\dd x}{(\sq{a}x)^2 + (\sq{b})^2} \xlongequal[\textstyle d=\sq{b}]{\textstyle u=\sq a x} 
+                \fc 1 {\sq a} \int \fc {\dd u}{u^2 + d^2} \\
+            (b&lt;0) & \displaystyle \int \fc {\dd x}{(\sq{a}x)^2 - (\sq{-b})^2} \xlongequal[\textstyle d=\sq{-b}]{\textstyle u=\sq a x} 
+                \fc 1 {\sq a} \int \fc {\dd u}{u^2 - d^2} 
+        \end{cases} \\
+        &= \begin{cases}
+            (b>0) & \displaystyle \fc 1 {\sq a d} \arctan \fc u d + C = \cansw{\fc 1 {\sq {ab}} \arctan \sq{\fc a b} x + C} \\
+            \displaystyle
+            (b&lt;0) & \displaystyle \fc 1 {2\sq a d} \ln \abig||{\fc{u-d}{u+d}} + C = \cansw{\fc 1 {2\sq {-ab}} \ln \abig||{\fc{\sq a x - \sq{-b}}{\sq a x + \sq{-b}}} + C}
+        \end{cases}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (23). \cques{\int \fc x {\quC}} \dd x &= \fc 1 2 \int \fc {\dd (x^2)}{\quC} \\
+        &= \fc 1 {2a} \int \fc {\dd (\quC)}{\quC} = \cansw{\fc 1 {2a} \ln |\quC| + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (24). \cques{\int \fc {x^2}{ax^2+b} \dd x} &= \fc 1 a \int \fc {ax^2+b-b}{ax^2+b} \dd x = \fc 1 a \int (1-\fc {b}{ax^2+b}) \dd x\\
+        &= \cansw{\fc x a - \fc b a \int \fc {\dd x}{\quC} + C = \dots}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (25). \cques{\int \fc {\dd x}{x(\quC)}} &= \int \abig(){\fc {A_1} x + \fc {A_2 x + A_3}{\quC}} \dd x = \int \bigg( {\fc {\cfc 1 b} x + \fc {-\cfc a b x}{\quC}} \dd x \bigg) \\
+        &= \cansw{\fc 1 b \ln |x| - \fc a b \int \fc x {\quC} \dd x + C = \fc 1 {2b} \ln \abig||{\fc {x^2}{\quC}} + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (26). \cques{\int \fc {\dd x}{x^2(\quC)}} &= \int \abig(){\fc {A_1} {x^2} + \fc {A_2}{\quC}} \dd x 
+        = \int \bigg( \fc {\cfc 1 b}{x^2} + \fc{-\cfc a b}{\quC} \bigg) \dd x \\
+        &= \cansw{-\fc 1 {bx} - \fc a b \int \fc {\dd x}{\quC} + C = \dots}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (27). \cques{\int} & \xlongequal{\textstyle x = \sq u} \int \fc {\cfc 1 {2 \sq u} \dd u}{u \sq u (au+b)} = \cansw{\fc 1 2 \int \fc {\dd u}{u^2(au+b)} + C} \\
+        &= \cansw{- \fc 1 {2bx^2} + \fc a {2b^2} \ln \abig||{\fc {ax^2+b}{x^2}} + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (28). \cques{\int \fc {\dd x}{(\quC)^2}} &= \fc 1 {2a} \int \fc {x \dd x}{x (\quC)^2} = \fc 1 {2a} \int \fc {\dd (\quC)}{x (\quC)^2} 
+        = - \fc 1 {2a} \int \fc 1 x \dd \abig(){\fc 1 \quC} \\
+        &= \cansw{- \fc 1 {2ax(\quC)} - \fc 1 {2a} \int \fc {\dd x}{x^2(\quC)} + C} \\
+        &= \cansw{\fc x {2b(\quC)} + \fc 1 {2b} \int \fc {\dd x}{\quC}}
+    \end{align}
+    \\]
+</div>
+
+<h4 id="anchor-case-5">含有 <span class="math">\\( \quD \quad (a>0) \\)</span> 的积分</h4>
+
+<div class="math">
+    \\[
+    \begin{align}
+    (29). \cques{\int \fc {\dd x}{\quD}} &= \int \fc {\dd x} {a \abig(){x+\cfc b {2a}}^2 + \cfc {4ac-b^2}{4a}}
+        \xlongequal[\textstyle d = \dfc {4ac-b^2}{4a}]{\textstyle u = x + \dfc b {2a}} \cansw{ \int \fc {\dd u}{au^2+d} } \\
+        &= \cansw{\begin{cases} 
+            (4ac-b^2>0) & \displaystyle \fc 2 {\sq {4ac-b^2}} \arctan \fc {2ax+b}{\sq {4ac-b^2}} + C \\
+            (4ac-b^2 &lt; 0) & \displaystyle \fc 1 {\sq {b^2-4ac}} \ln \abig||{\fc {2ax+b-\sq{b^2-4ac}}{2ax+b+\sq{b^2-4ac}}} + C
+        \end{cases}}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (30). \cques{\int \fc x {\quD} \dd x} &= \fc 1 2 \int \fc {\dd x^2} {\quD} = \fc 1 {2a} \int \fc {\dd (\quD)}{\quD} - \fc 1 {2a} \int \fc {\dd (bx+c)}{\quD} \\
+        &= \cansw{\fc 1 {2a} \ln |\quD| - \fc b {2a} \int \fc {\dd x}{\quD} + C}
+    \end{align}
+    \\]
+</div>
+
+<h3>三角换元类</h3>
+
+<h4 id="anchor-case-6">含有 <span class="math">\\( \quE \quad (a>0) \\)</span> 的积分</h4>
+
+<div class="math">
+    \\[
+    \begin{align}
+    (31). \cques{\int \fc {\dd x}{\quE}} & \xeqt{x=a\tan t} \int \fc {a \sec^2 t}{a\sec t} \dd t = \int \sec t \dd t = \ln |\sec t + \tan t| + C_1\\
+        &= \ln \abig||{\fc{\quE} a + \fc x a} + C_1 = \cansw{\ln |\quE+x| + C}
+    \end{align}
+    \\]
+</div>
+
+<p>注：这部分常用的换元为：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2023/05/integral-table-xatant.png" alt="" width="380">
+</figure>
+
+<div class="math">
+    \\[
+    \begin{align}
+    (32). \cques{\int \fc {\dd x}{(\quE)^3}} & \xeqt{x=a\tan t} \int \fc {a\sec^2 t \dd t}{a^3 \sec^3 t} = \fc 1 {a^2} \int \cos t \dd t\\
+        &= \fc {\sin t}{a^2} + C = \cansw{\fc x {a^2\quE} + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (33). \cques{\int \fc x {\quE} \dd x} &= \int \fc {\dd (x^2+a^2)}{2\quE}
+        = \cansw{\quE + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (34). \cques{\int \fc x {(\quE)^3}} \dd x &= \int (x^2+a^2)^{-\fc 3 2} \cdot \fc 1 2 \dd (x^2+a^2)
+        = \cansw{- (x^2+a^2)^{-\fc 1 2} + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (41). \cques{\int x \quE \dd x} &= \fc 1 2 \int (x^2+a^2)^{\fc 1 2} \dd (x^2+a^2) = \cansw{\fc 1 3 (x^2+a^2)^{\fc 3 2} + C}
+    \end{align}
+    \\]
+</div>
+
+<p>这里插播一个常用定理：</p>
+
+<div class="math">
+\\[
+\begin{align}
+    \int \sec ^n x \dd x &= \int \sec ^{n-2} x \dd (\tan x) = \int \tan x \sec ^{n-2} x - \int \tan x \dd (\sec ^{n-2} x) \\
+        &= \tan x \sec ^{n-2} x - \int (n-2) \sec ^{n-2} x \tan^2 x \dd x \\
+        &= \tan x \sec ^{n-2} x - \int (n-2) \sec ^{n-2} x (\sec^2 x - 1) \dd x  \\
+        &= \tan x \sec ^{n-2} x - (n-2) \int sec ^n x \dd x + (n-2) \int \sec ^{n-2} x \dd x
+\end{align}
+\\]
+</div>
+
+<p>所以 <span class="math">\\( \displaystyle \cansw{\int \sec^n x \dd x = \fc {\tan x \sec ^{n-2} x}{n-1} + \fc {n-2}{n-1} \int \sec^{n-2} x \dd x} \\)</span> </p>
+
+<p>可以推出：</p>
+
+<div class="math">
+\\[
+    \int \sec^3 x \dd x = \fc 1 2 (\tan x \sec x + \ln |\sec x + \tan x|) + C
+\\]
+</div>
+<div class="math">
+\\[
+    \int \sec^5 x \dd x = \fc {\tan x \sec ^3 x} 4 + \fc 3 8 (\tan x \sec x + \ln|\sec x+ \tan x |)+C
+\\]
+</div>
+
+<div class="math">
+    \\[
+    \begin{align}
+    (35). \cques{\int \fc {x^2}{\quE} \dd x} & \xeqt{x=a\tan t} \int \fc {a^2\tan^2 t}{a\sec t} \cdot a \sec ^2 t \dd t = a^2 \int (\sec ^2 t - 1) \sec t \dd t \\
+        &= a^2 \int \sec ^3 t \dd t + a^2 \int \sec t \dd t 
+        = \fc {a^2} 2 \tan t \sec t - \fc {a^2} 2 \ln |\sec t + \tan t| + C_1 \\
+        &= \cansw{\fc 1 2 x \quE - \fc {a^2}2 \ln|x+\quE| + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (36). \cques{\int \fc {x^2}{(\quE)^3} \dd x} & \quEsub \int \fc {a^2\tan^2 t}{a^3\sec^3 t} a \sec^2 t \dd t \\
+        &= \int \fc {\sec^2 t - 1}{\sec t} \dd t = \int \sec t \dd t - \int \cos t \dd t \\
+        &= \cansw{\ln |x+\quE| - \fc x {\quE} + C}
+    \end{align}
+    \\]
+</div>
+
+<div class="math">
+    \\[
+    \begin{align}
+    (37). \cques{\int \fc {\dd x}{x \quE}} &\quEsub \int \fc 1 {a \tan t \cdot a \sec t} a \sec^2 t \dd t \\
+        &= \fc 1 a \int \csc t \dd t = \cansw{\fc 1 a \ln \abig||{\fc {\quE - a} x} + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (38). \cques{\int \fc {\dd x}{x^2 \quE}} & \quEsub \int \fc 1 {a^2 \tan^2 t} \cdot \fc 1 {a \sec t} \cdot a \sec^2 t \dd t\\
+        &= \fc 1 {a^2} \int \fc {\sec t }{\tan ^2 t} \dd t = \fc 1 {a^2} \int \fc {\cos t}{\sin^2 t}\dd t = \fc 1 a^2 \cdot -\fc 1 {\sin t} \\  
+        &= \cansw{- \fc {\quE}{a^2x} + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (39). \cques{\int \sq {x^2+a^2} \dd x} & \quEsub \int a \sec t \cdot a \sec ^2 t \dd t = a^2 \int \sec ^3 t \dd t \\
+        &= \fc {a^2} 2 (\tan t \sec t + \ln |\sec t + \tan t|+C) \\
+        &= \cansw{\fc {x\quE} 2 + \fc {a^2} 2 \ln |x+\quE| + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (40). \cques{\int (\quE)^3 \dd x} & \quEsub \int a^3 \sec ^3 t \cdot a \sec^2 t \dd t = a^4 \int \sec ^5 t \dd t \\
+        &= a^4\bigg[\fc {x (x^2+a^2)^{\fc 3 2}}{4a^4} + \fc 3 8 \abig(){\fc {x\quE}{a^2} + \ln \abig||{\fc x a+\fc {\quE} a}}\bigg] + C_1 \\
+        &= a^4 \abig[]{\fc {\quE}{4a^4} x (x^2+a^2) + \fc 3 {2a} x \fc {\quE}{4a}+ \fc 3 8 \ln |x + \quE|} + C\\
+        &=\cansw{x\quE \fc {2x^2+5a^2} 8 + \fc 3 8 a^4 \ln |x+\quE| + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (42). \cques{\int x^2 \quE \dd x} & \quEsub \int a^2 \tan^2 t \cdot a \sec t \cdot a \sec^2 t \dd t = \int a^4 (\sec^2 t - 1) \sec^3 t \dd t\\
+        &= a^4 \int \sec^5 t \dd t - a^4 \int \sec ^3 t \dd t
+        = \fc {a^4} 4 \tan t\sec ^3 t - \fc {a^4} 8 \tan t\sec t - \fc {a^4} 8 \ln |\sec t +\tan t| + C_1 \\
+        &= \cansw{\fc {x\quE} 8 (2x^2+a^2) - \fc {a^4} 8 \ln|x+\quE| + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (43). \cques{\int \fc {\quE}x \dd x } & \quEsub \int \fc {a\sec t}{a\tan t } \cdot a \sec ^2 \dd t = a \int \fc {\sec t}{\tan t} (1+\tan^2 t) \dd t \\
+        &= a\int \csc t \dd t + a \int \sec t \tan t \dd t = a \ln |\csc t - \cot t| + a \sec t + C_1\\
+        &= \cansw{a\ln \abig||{\fc {\quE - a} x} + \quE + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (44). \cques{\int \fc{\quE}{x^2} \dd x} & \quEsub \int \fc {a\sec t }{a^2 \tan^2 t } \cdot a \sec^2 \dd t = \int \fc {\sec t}{\tan^2 t}(1+\tan^2 t) \dd t\\
+        &= \int \fc {\cos t }{\sin^2 t} \dd t + \int \sec t \dd t = -\fc 1 {\sin t}+ \ln|\sec t +\tan t | + C_1 \\
+        &= \cansw{-\fc {\quE} x + \ln|x+\quE| + C}
+    \end{align}
+    \\]
+</div>
+
+<h4 id="anchor-case-7">含有 <span class="math">\\( \quF \quad (a>0) \\)</span> 的积分</h4>
+
+<div class="math">
+    \\[
+    \begin{align}
+    (47). \cques{\int \fc x {\quF} \dd x} &= \int \fc {\dd (\quFF)}{2\quF} \dd x 
+        = \cansw{\quF + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (48). \cques{\int \fc x {(\quF)^3} \dd x} &= \int (\quFF)^{-\fc 3 2} \cdot \fc 1 2 \dd (\quFF)
+        = \cansw{-(\quFF)^{\fc 1 2} + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (55). \cques{\int x \quF \dd x} &= \int (\quFF)^{\fc 1 2} \cdot \fc 1 2 \dd (\quFF)
+        = \cansw{\fc 1 3 (\quFF)^{\fc 3 2} + C}
+    \end{align}
+    \\]
+</div>
+
+<div class="math">
+    \\[
+    \begin{align}
+    (45). \cques{\int \fc {\dd x}{\quF}} & \quFsub \int \fc {a\sec t \tan t \dd t}{a\tan t} = \int \sec t \dd t \\
+        &= \ln|\fc{\quF} a + \fc x a| + C_1 = \cansw{\ln|\quF + x| + C}
+    \end{align}
+    \\]
+</div>
+
+<p>注：这部分常用的换元为：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2023/05/integral-table-xasect.png" alt="" width="440">
+</figure>
+
+<div class="math">
+    \\[
+    \begin{align}
+    (46). \cques{\int \fc {\dd x}{(\quF)^3}} & \quFsub \int \fc{a\sec t \tan t \dd t}{a^3\tan^3 t} \\
+        &= \fc 1 {a^2} \int \fc {\cos t}{\sin^2 t} \dd t = - \fc 1 {a^2 \sin t}
+        = \cansw{-\fc x {a^2 \quF} + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (49). \cques{\int \fc {x^2}{\quF} \dd x} & \quFsub \int \fc {a^2 \sec ^2 t}{a \tan t} \cdot a\sec t \tan t \dd t = a^2 \int \sec ^3 t \dd t \\
+        &= \fc {a^3} 2 (\tan t \sec t + \ln |\sec t + \tan t|) + C_1\\
+        &= \cansw{\fc 1 2 x\quF + \fc {a^2}2 \ln |\quF + x| + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (50). \cques{\int \fc {x^2}{(\quF)^3} \dd x} & \quFsub \int \fc {a^2 \sec^2 t}{(a\tan t)^3} a\sec t \tan t \dd t = \int \csc^2 t\sec t \dd t\\
+        &= \int \sec t \cdot -\dd (\cot t) = -\sec t \cot t + \int \cot t \dd (\sec t)\\
+        &= -\csc t + \int \sec t \dd t = \cansw{-\fc x {\quF} + \ln|x+\quF| + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (52). \cques{\int \fc {\dd x}{x^2 \quF}} & \quFsub \int \fc {a \sec t \tan t \dd t}{a^2 \sec^2 t \cdot a\tan t}\\
+        &= \fc 1 {a^2} \int \cos t \dd t = \fc {\sin t}{a^2} +C = \cansw{\fc {\quF}{a^2x} + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (53). \cques{\int \quF \dd x} & \quFsub \int a\tan t \cdot a \sec t \tan t \dd t = a^2 \int \sec t (\sec^2 t - 1) \dd t\\
+        &= a^2 \int \sec^3 t \dd t - a^2 \int \sec t \dd t = \fc {a^2} 2 (\tan t \sec t ) - \fc {a^2} 2 \ln |\sec t + \tan t | + C_1\\
+        &= \cansw{\fc {x\quF} 2 - \fc {a^2} 2 \ln |x + \quF| + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (54). \cques{\int (\quF)^3 \dd x} & \quFsub \int a^3 \int a^3 \tan^3 t \cdot a\sec t \tan t \dd t = a^4 \int (\sec^2 t - 1)^2 \sec t \dd t\\
+        &= a^4 \int \sec^5 t \dd t - 2 a^4 \int \sec^3 t \dd t + a^4 \int \sec t \dd t \\
+        &= \fc 1 4 a^4 \tan t \sec^3 t - \fc 5 8 a^4 \tan t\sec t + \fc 3 8 a^4 \ln|\sec t + \tan t| + C_1\\ 
+        &= \cansw{\fc 1 8 (2x^2-5a^2) x\quF + \fc 3 8 a^4 \ln|x+\quF| + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (56). \cques{\int x^2 \quF \dd x} & \quFsub \int a^2 \sec^2 t \cdot a \tan t \cdot a \sec t \tan t \dd t = a^4 \int \sec^3 t (\sec^2 t - 1) \dd t\\
+        &= a^4 \int \sec^5 t \dd t - a^4 \int \sec^3 t \dd t \\
+        &= \fc {a^4} 4 \tan t \sec^3 t - \fc 1 8 a^4 \tan t \sec t - \fc 1 8 a^4 \ln |\sec t + \tan t| + C_1\\
+        &= \cansw{\fc 1 8 (2x^2-a^2) x\quF - \fc {a^4} 8 \ln |x+\quF| + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (58). \cques{\int \fc {\quF} {x^2} \dd x} &= \int \quF \dd \abig(){-\fc 1 x} = -\fc{\quF}x + \int \fc 1 x \dd (\quF)\\
+        &= -\fc{\quF}x + \int \fc 1 x \cdot \fc {2x \dd x}{2\quF} = -\fc{\quF}x + \int \fc {\dd x}{\quF}\\ 
+        &= \cansw{-\fc{\quF}x + \ln|x+\quF| + C}
+    \end{align}
+    \\]
+</div>
+
+<div class="math">
+    \\[
+    \begin{align}
+    (51). \cques{\int \fc {\dd x}{x \quF}} & \quFsub \int \fc {a\sec t \tan t}{a\sec t \cdot a\tan t} \dd t = \fc 1 a \int \dd t = \fc t a\\
+        &= \cansw{\fc 1 a \arccos \fc a {|x|} + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (57). \cques{\int \fc{\quF}x \dd x} & \quFsub \int \fc {a\tan t}{a\sec t} \cdot a\sec t\tan t \dd t = a \int (\sec^2 t -1) \dd t = a \tan t - at\\
+        &= \cansw{\quF - a\arccos \fc a {|x|} + C}
+    \end{align}
+    \\]
+</div>
+
+<h4>含有 <span class="math">\\( \quG \quad a>0 \\)</span> 的积分</h4>
+
+<div class="math">
+    \\[
+    \begin{align}
+    (61). \cques{\int \fc x {\quG} \dd x} &= \int \fc {-\dd(\quGG)}{2\quG}
+        = \cansw{-\quG + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (62). \cques{\int \fc x {(\quG)^3} \dd x} &= \int (\quGG)^{-\fc 3 2} \cdot -\dd (\quGG)
+        = \cansw{(\quGG)^{-\fc 1 2} + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (69). \cques{\int x\quG \dd x} &= \int (\quGG)^{-\fc 1 2} \cdot -\fc 1 2 \dd (\quGG) = \cansw{-\fc 1 3 (\quGG)^{\fc 3 2} + C}
+    \end{align}
+    \\]
+</div>
+
+<div class="math">
+    \\[
+    \begin{align}
+    (59). \cques{\int \fc {\dd x}{\quG}} & \quGsub \int \fc{a\cos t \dd t}{a\cos t} = \int \dd t = t\\
+        &= \cansw{\arcsin \fc x a + C}
+    \end{align}
+    \\]
+</div>
+
+<p>注：这部分常用的换元为：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2023/05/integral-table-xasint.png" alt="" width="370">
+</figure>
+
+<div class="math">
+    \\[
+    \begin{align}
+    (60). \cques{\int \fc {\dd x}{(\quG)^3}} & \quGsub \int \fc{a\cos t \dd t}{(a\cos t)^3} = \fc 1 {a^2} \int \sec^2 t \dd t\\
+        &= \fc 1 {a^2} \tan t + C \cansw{\fc x {a^2 \quG} + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (63). \cques{\int \fc {x^2}{\quG} \dd x} & \quGsub \int \fc{a^2\sin^2 t}{a\cos t} a\cos t \dd t = a^2 \int \sin^2 t \dd t\\
+        &= a^2 \int \fc {1-\cos 2t} 2 \dd t = \fc {a^2} 2 \int \dd t - \fc{a^2} 4 \int \cos 2t \dd (2t) \\
+        &= \fc {a^2} 2 t - \fc {a^2} 4 2\sin t \cos t + C = \cansw{\fc {a^2} 2 \arcsin \fc x a - \fc 1 2 x \quG + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (64). \cques{\int \fc {x^2}{(\quG)^3} \dd x} & \quGsub \int \fc{a^2\sin^2 t}{(a\cos t)^3} a\cos t \dd t = \int \tan^2 t \dd t\\
+        &= \int \sec^2 t \dd t - \int \dd t = \tan t - t = \cansw{\fc x {\quG} - \arcsin \fc x a + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (65). \cques{\int \fc {\dd x}{x\quG}} & \quGsub \int \fc {a\cos t \dd t}{a\sin t \cdot a \cos t} = \fc 1 a \int \csc t \dd t\\
+        &= \fc 1 a \ln |\csc t - \cot t| + C = \cansw{\fc 1 a \ln \abig||{\fc {a-\quG} x} + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (66). \cques{\int \fc {\dd x}{x^2 \quG}} & \quGsub \int \fc {a\cos t \dd t}{a^2 \sin^2 t \cdot a \cos t} = \fc 1 {a^2} \int \csc^2 t \dd t\\
+        &= -\fc 1 {a^2} \cot t + C = \cansw{-\fc {\quG}{a^2 x} + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (67). \cques{\int \quG \dd x} & \quGsub \int a \cos t \cdot a \cos t \dd t = a^2 \int \fc {1+\cos 2t} 2 \dd t \\
+        &= \fc {a^2} 2 \int \dd t + \fc {a^2} 4 \int \cos 2t \dd (2t) = \text{ref (63).} \\
+        &= \cansw{\fc {a^2} 2 \arcsin \fc x a + \fc 1 2 x \quG + C}
+    \end{align}
+    \\]
+</div>
+
+<p>这里插播一个也算常用定理：</p>
+
+<div class="math">
+\\[
+\begin{align}
+    \int \cos^n \dd x &= \int \cos^{n-1} \dd (\sin x) = \sin x \cos^{n-1} x - \int \sin x \dd (\cos^{n-1} x)\\
+        &= \sin x \cos^{n-1} x - (n-1)\int \sin x \cos^{n-2} x \cdot -\sin x \dd x\\
+        &= \sin x \cos^{n-1} x + (n-1) \int \cos^{n-2} x \dd x - (n-1)\int \cos ^n x \dd x
+\end{align}
+\\]
+</div>
+
+<p>因此有以下规律：</p>
+
+<div class="math">
+\\[
+    \cansw{\int \cos^n x \dd x = \fc {\sin x \cos^{n-1} x} n + \fc {n-1} n \int \cos ^{n-2} x \dd x}
+\\]
+</div>
+
+<div class="math">
+    \\[
+    \begin{align}
+    (68). \cques{\int (\quG)^3 \dd x} & \quGsub \int a^3 \cos^3 t \cdot a \cos t \dd t = a^4 \int \cos^4 t \dd t\\
+        &= a^4 \abig(){\fc {\sin t \cos^3 t} 4 + \fc {3\sin t \cos t} 8 + \fc {3t} 8 } + C\\
+        &= \cansw{\fc {5a^2 - 2x^2} 8 x\quG + \fc 3 8 a^4 \arcsin \fc x a + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (70). \cques{\int x^2 \quG \dd x} & \quGsub \int a^2\sin^2 t \cdot a\cos t \cdot a\cos t \dd t = a^4 \int \cos^2 t (1-\cos^2 t) \dd t \\
+        &= -a^4 \cos^4 t \dd t + a^4 \int \cos^2 t \dd t \\
+        &= -a^4 \cos^4 t \dd t + \fc {4a^2} 8 x\quG + \fc {4a^4} 8 \arcsin \fc x a \\
+        &= \cansw{\fc {2x^2-a^2} 8 x\quG + \fc 1 8 a^4 \arcsin \fc x a + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (71). \cques{\int \fc {\quG}x \dd x} & \quGsub \int \fc {a\cos t}{a\sin t} a\cos t \dd t  = a\int \fc {1-\sin^2 t}{\sin t} \dd t \\
+        &= a\int \csc t \dd t - a\int \sin t \dd t = \ln |\csc t - \cot t| + \cos t \\
+        &= \cansw{\quG + a \ln \abig||{\fc {a-\quG} x} + C}
+    \end{align}
+    \\]
+</div>
+<div class="math">
+    \\[
+    \begin{align}
+    (72). \cques{\int \fc {\quG} {x^2} \dd x} & \quGsub \int \fc {a\cos t}{a\sin t} a\cos t \dd t = \int \cot^2 t \dd t \\
+        &= \int (\csc^2 t - 1) \dd t = -\cot t - t = \cansw{-\fc {\quG} x - \arcsin \fc x a + C}
+    \end{align}
+    \\]
+</div>
+
+
+
+<p></p>
+<p><a rel="nofollow" href="/archives/1116">积分表(上)</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/archives/1116/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>微积分-泰勒展开式</title>
+		<link>/archives/1094</link>
+					<comments>/archives/1094#respond</comments>
+		
+		<dc:creator><![CDATA[Hello]]></dc:creator>
+		<pubDate>Thu, 04 May 2023 08:05:14 +0000</pubDate>
+				<category><![CDATA[微积分]]></category>
+		<category><![CDATA[数学]]></category>
+		<guid isPermaLink="false">/?p=1094</guid>
+
+					<description><![CDATA[<p>泰勒展开式 泰勒展开式的由来 在数学中，加法、减法、&#46;&#46;&#46;</p>
+<p><a rel="nofollow" href="/archives/1094">微积分-泰勒展开式</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<h2>泰勒展开式</h2>
+
+<h3>泰勒展开式的由来</h3>
+
+<p>在数学中，加法、减法、乘法和除法是四种最基本、也是最简单的运算。要计算任意复杂的加法、减法、乘法和除法在内的混合运算，只需要熟记九九乘法表，再结合竖式就可以计算得到最终的结果。</p>
+
+<p>多项式函数是由常数和变量之间的加、减、乘以及幂次方运算得到的，它的表达式为：</p>
+
+<div class="math">
+\\[
+a_0 + a_1 x + a_2 x^2 + \cdots + a_n x^n + \cdots
+\\]
+</div>
+
+<p>多项式函数可以算是比较友好的函数，因为给定一个 <span class="math">\\( x \\)</span> ，可以比较容易地计算出函数的值。而且多项式函数求导、积分运算也非常方便。</p>
+
+<p>但并不是所有表达式的计算都很简单，也不是所有函数的结果都易于求出。在几种初等函数中，三角函数 <span class="math">\\( \sin(x) \\)</span> 就是这样一个例子。虽然有一些特殊情况例如 <span class="math">\\( \sin(\cfrac{\pi}{6})=\cfrac 1 2 \\)</span> ，但是想要求出 <span class="math">\\( \sin(2.36) \\)</span> 这种值，目前似乎并没有一个已知的工具能快速、准确地给出它的精确或近似精确的解。</p>
+
+<p>其余的几个基本函数也存在这种问题，例如对于 <span class="math">\\( e^{7.52} \\)</span> ，这种非整数次幂就很难直接计算出。因此，这些函数虽然性质很简单，但真正需要计算的时候却难以下手。这时候就会想到，这些函数是否能像多项式函数一样，借用基本的四则运算工具就能计算结果。</p>
+
+<p>也就是说，是否有可能存在这样一个多项式函数</p>
+
+<div class="math">
+\\[
+    g(x) = a_0 + a_1 x + a_2 x^2 + \cdots + a_n x^n + \cdots
+\\]
+</div>
+
+<p>和一些复杂的函数 <span class="math">\\( f(x) = e^x/\sin x /\cos x \\)</span> 能够相等，或者说至少在某一个范围能至少能近似相等，这样就可以使用多项式函数去计算复杂函数任一点处的值了，就像这样：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2023/05/04-taylor-derive-step-0.png" alt="" width="410">
+</figure>
+
+<p>这个多项式函数是 <span class="math">\\( \displaystyle{g(x) = x-\frac 1 6 x^3 + \frac 1 {120} x^5 - \frac 1 {5040} x^7 + \frac 1 {362880} x^9} \\)</span> ，它与 <span class="math">\\( f(x)=\sin(x) \\)</span> 在 <span class="math">\\( [-3,3] \\)</span> 范围内表现出惊人的相似性，<span class="math">\\( f(3) \\)</span> 与 <span class="math">\\( g(3) \\)</span> 的差值只有 <span class="math">\\( 0.0042 \\)</span> ，<span class="math">\\( f(1) \\)</span> 与 <span class="math">\\( g(1) \\)</span> 的差值更是只有 <span class="math">\\( 0.000000025 \\)</span> ，这个精度用于计算已经很高了。</p>
+
+<p>一个四项的多项式函数就能和 <span class="math">\\( \sin(x) \\)</span> 在一定范围内如此接近，有理由相信可能存在一个项数更多的多项式函数，它能在更大的范围内接近 <span class="math">\\( \sin(x) \\)</span> ，或者在此范围内更接近 <span class="math">\\( \sin(x) \\)</span> 甚至完全一致。接下来研究如果这样的多项式函数如果存在，它需要满足怎么样的一个规律或性质。</p>
+
+<hr>
+
+<p>如果</p>
+
+<div class="math">
+    \\[
+    \begin{align}
+        g(x) &amp;= a_0 + a_1 x + a_2 x^2 + \cdots + a_n x^n + \cdots\\
+        f(x) &amp;= e^x/\sin x /\cos x/\cdots
+    \end{align}
+    \\]
+</div>
+
+<p>这两个函数能够相等的话，那么对于定义域内任意一点 <span class="math">\\( x_0 \\)</span> ，总有 <span class="math">\\( f(x_0)=g(x_0) \\)</span> 。</p>
+
+<p>当然，这两个函数不一定能完全相等，不过这两个函数哪怕能在一个点的附近能够近似相等，也非常具有研究价值。<span class="math">\\( x=0 \\)</span> 是一个比较特殊的点，因为该点处 <span class="math">\\( g(x) \\)</span> 除了第一项外其余项的结果都为 <span class="math">\\( 0 \\)</span> ；并且对于函数 <span class="math">\\( f(x)=e^x/\sin x /\cos x \\)</span> 它们在 <span class="math">\\( x=0 \\)</span> 处的值也是容易求得的，分别为 <span class="math">\\( 1/0/1 \\)</span> 。</p>
+
+<p>接下来就以 <span class="math">\\( x=0 \\)</span> 附近为例，研究这两个函数的相等条件。如果这附近能存在 <span class="math">\\( f(x)=g(x) \\)</span> ，它必定要满足以下条件：</p>
+
+<div class="math">
+\\[
+\begin{align}
+    g(0) &amp;= a_0 + a_1 \cdot 0 + a_2 \cdot 0^2 + \cdots + a_n \cdot 0^n + \cdots\\
+        &amp;= a_0\\
+        &amp;= f(0)
+\end{align}
+\\]
+</div>
+
+<p>这样就可以解出 <span class="math">\\( a_0 = f(0) \\)</span> 了。</p>
+
+<p>但好像除了 <span class="math">\\( x=0 \\)</span> ，不存在其它的特殊点能够解出其它参数了。不过实际上对 <span class="math">\\( x=0 \\)</span> 这个点的研究并没有结束。<span class="math">\\( f(0)=g(0) \\)</span> 真的能说明两个函数在 <span class="math">\\( x=0 \\)</span> 附近完全一致吗？例如以下两个函数：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2023/05/04-taylor-derive-step-1.png" alt="" width="290">
+</figure>
+
+<p>如果只看 <span class="math">\\( x=0 \\)</span> 附近的范围，可以发现两个函数虽然值的大小相近，但是值的<em>变化率</em>或者说函数图像的<em>倾斜程度</em>并不相近，这就会导致 <span class="math">\\( f(x) \\)</span> 和 <span class="math">\\( g(x) \\)</span> 在离开 <span class="math">\\( x=0 \\)</span> 后立刻就不相等了，并且离得越远差异越大。这样就会使得用这个多项式函数计算一个很接近但不完全是 <span class="math">\\( x=0 \\)</span> 附近的函数值，结果和原函数值的差距可能也很大。</p>
+
+<p>说到变化率，很自然就联想到<a>导数</a>。也就是说两者的导函数必须要在 <span class="math">\\( x=0 \\)</span> 处相等，即 <span class="math">\\( g'(0)=f'(0) \\)</span> 。</p>
+
+<p>对于这三个函数 <span class="math">\\( e^x/\sin x /\cos x \\)</span> ，它们的导数分别为 <span class="math">\\( e^x/\cos x /-\sin x \\)</span> 。而它们导数在 <span class="math">\\( x=0 \\)</span> 这一点的值也容易求得，分为为 <span class="math">\\( 1/1/0 \\)</span> 。</p>
+
+<p>而多项式函数 <span class="math">\\( g(x) \\)</span> 的导数为：</p>
+
+<div class="math">
+\\[
+    g'(x) = 0 + a_1 \cdot 1 + a_2 \cdot 2 x + a_3 \cdot 3 x^2 + \cdots + a_n \cdot n x^{x-1} + \cdots
+\\]
+</div>
+
+<p>容易发现，<span class="math">\\( x=0 \\)</span> 仍然是一个特殊点，该点处 <span class="math">\\( g'(x) \\)</span> 除了第二项外其余项的结果都为 <span class="math">\\( 0 \\)</span> 。也就是说，如果要使 <span class="math">\\( f(x) \\)</span> 和 <span class="math">\\( g(x) \\)</span> 在离开 <span class="math">\\( x=0 \\)</span> 后还能保持一小段距离的相等，它们在 <span class="math">\\( x=0 \\)</span> 的增长率需要一致，也就是说要满足以下条件：</p>
+
+<div class="math">
+\\[
+\begin{align}
+    g'(0) &amp;= 0 + a_1 \cdot 0 + a_2 \cdot 0 + a_3 \cdot 0 + \cdots + a_n \cdot 0 + \cdots\\
+        &amp;= a_1\\
+        &amp;= f'(0)
+\end{align}
+\\]
+</div>
+
+<p>不过一阶导数相等还不能说明两者在 <span class="math">\\( x=0 \\)</span> 附近就能完全一致，例如：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2023/05/04-taylor-derive-step-2.png" alt="" width="280">
+</figure>
+
+<p>可以看到，虽然两者在 <span class="math">\\( x=0 \\)</span> 附近确实保持了一段距离近似相等，但没过一会这个差距又迅速拉开了。这种情况说明两者的变化率虽然在一点处相等，但是<em>凹凸性</em>并不相等，也可以说两者<em>变化率的变化率</em>不等。</p>
+
+<p>说到这两个指标，可以想到二阶导数。也就是说，两者的二阶导函数也需要在 <span class="math">\\( x=0 \\)</span> 处相等。而多项式函数的二阶导数为：</p>
+
+<div class="math">
+    \\[
+        g''(x) = 0 + 0 + a_2 \cdot 2 + a_3 \cdot 3 \cdot 2 x + \cdots + a_n \cdot n \cdot (n-1) x^{x-2} + \cdots
+    \\]
+</div>
+
+<p>对于二阶导数，<span class="math">\\( x=0 \\)</span> 处 <span class="math">\\( g''(x) \\)</span> 除了第三项外其余项的结果都为 <span class="math">\\( 0 \\)</span> 。也就是说，如果要使 <span class="math">\\( f(x) \\)</span> 和 <span class="math">\\( g(x) \\)</span> 在离开 <span class="math">\\( x=0 \\)</span> 后增长率保存一致，并且增长率的变化也保持一致，那就要使两者在 <span class="math">\\( x=0 \\)</span> 的加速度相等，即：</p>
+
+<div class="math">
+    \\[
+    \begin{align}
+        g''(0) &amp;= 0 + 0 + a_2 \cdot 2 + a_3 \cdot 0 + \cdots + a_n \cdot 0 + \cdots\\
+            &amp;= a_2 \cdot 2\\
+            &amp;= f''(0)
+    \end{align}
+    \\]
+</div>
+
+<p>根据这个规律推广下去，如果要让多项式函数和它“模仿”的原函数在 <span class="math">\\( x=0 \\)</span> 附近完全等价，就要求两者在该点处的任意阶导数相等。而这么一直推导下去可以得到如下规律：</p>
+
+<div class="math">
+\\[
+    \begin{align}
+    g'''(x) &amp;=6a_3+24a_4x+60x^2+ \cdots +n(n-1)(n-2)x^{n-3}+ \cdots = f'''(x) \\
+    g^{(4)}(x) &amp;=24a_4+120x+ \cdots +n(n-1)(n-2)(n-3)x^{n-4}+ \cdots = f^{(4)}(x) \\
+     &amp;\vdots\\
+    g^{(n)}(x) &amp;=n!a_n + (n+1)!a_{n+1}x + \cdots = f^{(n)}(x)
+    \end{align}
+\\]
+</div>
+
+<p>如果要使两者在 <span class="math">\\( x=0 \\)</span> 附近完全等价，那么令各式中的 <span class="math">\\( x=0 \\)</span> ，就有如下规律：</p>
+
+<div class="math">
+\\[
+\begin{align}
+    g(0)    &amp;= a_0   = f(0) \\
+    g'(0)   &amp;= a_1   = f'(0) \\ 
+    g''(0)  &amp;= 2a_2  = f''(0) \\
+    g'''(0) &amp;= 6a_3  = f'''(0) \\
+    g^{(4)}(0) &amp;= 24a_4  = f^{(4)}(0) \\
+    &amp;\cdots \\
+    g^{(n)}(0) &amp;= n!a_n = f^{(n)}(0)
+\end{align}
+\\]
+</div>
+
+<p>也就是说，通过每一阶的导数，都可以解出多项式每一项的系数：</p>
+
+<div class="math">
+\\[
+    a_0=f(0) \quad a_1=\frac{f'(0)}{1!} \quad
+    a_2=\frac{f''(0)}{2!} \quad a_3=\frac{f'''(0)}{3!}
+    \quad \cdots \quad
+    a_n=\frac{f^{(n)}(0)}{n!}
+\\]
+</div>
+
+<p>于是，可以得到 <span class="math">\\( f(x) \\)</span> 在 <span class="math">\\( x=0 \\)</span> 处的展开式：</p>
+
+<div class="math">
+\\[
+\begin{align}
+    f(x) &amp;= g(x)\\
+        &amp;=\frac{f(0)}{0!}+\frac{f'(0)}{1!}x+\frac{f''(0)}{2!}x^2+\frac{f'''(0)}{3!}x^3
+            + \cdots + \frac{f^{(n)}(0)}{n!}x^n + \cdots
+\end{align}
+\\]
+</div>
+
+<p>以上公式称为<strong>麦克劳林(Maclaurin)展开式</strong>。麦克劳林展开式表明如果要用一个多项式函数和一个任意复杂的函数在 <span class="math">\\( x=0 \\)</span> 处完全等价，那么这个多项式函数是什么。</p>
+
+<p>该展开式有一个缺点，就是只能用于计算 <span class="math">\\( x=0 \\)</span> 附近等价的多项式，而对其它点不适用；而且如果 <span class="math">\\( f(x) \\)</span> 在 <span class="math">\\( x=0 \\)</span> 处没有定义或不可导，那么麦克劳林展开式似乎就失效了。</p>
+
+<p>不过这个缺点也很好解决：如果函数 <span class="math">\\( f(x) \\)</span> 在 <span class="math">\\( x=x_0 \\)</span> 处任意阶可导，只需把该函数平移到原点就可以应用麦克劳林展开式。<span class="math">\\( f(x) \\)</span> 向左平移 <span class="math">\\( x_0 \\)</span> 距离的结果为 <span class="math">\\( f(x-x_0) \\)</span> ，就是把所有的 <span class="math">\\( x \\)</span> 改写成 <span class="math">\\( x-x_0 \\)</span> 的方式。这便是<strong>泰勒(Taylor)展开式</strong>的一般形式：</p>
+
+<div class="math">
+\\[
+    \begin{align}
+    f(x)&amp;=g(x)\\
+    &amp;=f(x_0)+\frac{f'(x_0)}{1!}(x-x_0)+\frac{f''(x_0)}{2!}(x-x_0)^2+\frac{f'''(x_0)}{3!}(x-x_0)^3
+    + \cdots + \frac{f^{(n)}(x_0)}{n!}(x-x_0)^n + \cdots
+    \end{align}
+\\]
+</div>
+
+<h3>佩亚诺余项</h3>
+
+<p>当对函数应用泰勒展开式时，它只有展开项数趋于无穷时，两者才能在某点附近完全相等。但无穷项根本不可能用于计算，实际中总是希望只使用一个有限的多项式</p>
+
+<div class="math">
+\\[
+p(x)=f(x_0)+\frac{f'(x_0)}{1!}(x-x_0)+\frac{f''(0)}{2!}(x-x_0)^2+ \cdots + \frac{f^(n)(0)}{n!}(x-x_0)^n
+\\]
+</div>
+
+<p>来表示它。其余被忽略的部分称为<strong>余项</strong>，记作 <span class="math">\\( R(x) \\)</span> 。因此一个函数的展开式也可以表示为多项式和余项之和 <span class="math">\\( f(x)=p(x)+R(x) \\)</span> 。</p>
+
+<p>注意到泰勒展开的一个特点是，展开越多，项的次数越大，余项的次数全都比多项式的次数大，因此余项在 <span class="math">\\( x_0 \\)</span> 附近，它收敛到 0 的速度要远比多项式快，即：</p>
+
+<div class="math">
+\\[
+    \lim_{x \to x_0} \frac{R(x)}{p(x)} =\lim_{x \to x_0} \cfrac{
+        \cfrac{f^{(n+1)}(x_0)}{(n+1)!}(x-x_0)^{n+1}+\cfrac{f^{(n+2)}(x_0)}{(n+2)!}(x-x_0)^{n+2}+\cdots
+    }{
+        \cfrac{f^{(n)}(0)}{n!}(x-x_0)^n + \cfrac{f^{(n-1)}(0)}{(n-1)!}(x-x_0)^{n-1} +\cdots
+    }=0
+\\]
+</div>
+
+<p>使用洛必达法则也很容易求解这个极限。所以<strong>佩亚诺(Peano)余项</strong>将其表示为一个高阶无穷小 <span class="math">\\( R(x)=o((x-x_0)^n) \\)</span> 。</p>
+
+<p>泰勒展开式的项是无限多的，而佩亚诺余项则引入了“精度”这一概念：可以根据外界环境精度的要求，决定需要展开到几项多项式，后续的部分则可以省略。这就像将一个无限小数四舍五入到某一位一样。</p>
+
+<p>例如，假设要求以下极限的值：</p>
+
+<div class="math">
+\\[
+    \lim_{x \to 0} \frac{\tan x - x}{x^3}
+\\]
+</div>
+
+<p>这里的精度要求是 <span class="math">\\( x^3 \\)</span> ，更高次的项可以忽略，那么可以将 <span class="math">\\( \tan x \\)</span> 在 <span class="math">\\( x=0 \\)</span> 展开为带有佩亚诺余项的多项式：</p>
+
+<div class="math">
+\\[
+    (x\to 0) \quad \tan x = x + \frac{x^3}{3} + o(x^3)
+\\]
+</div>
+
+<p>这时极限的结果就非常容易求得了：</p>
+
+<div class="math">
+\\[
+    \begin{align}
+    \lim_{x \to 0} \frac{\tan x - x}{x^3} &amp;= \lim_{x \to 0} x + \cfrac{x + \cfrac{x^3}{3} + o(x^3) - x}{x^3}\\
+    &amp;= \lim_{x \to 0} \frac{x^3}{3 \cdot x^3} = \frac 1 3
+    \end{align}
+\\]
+</div>
+
+<h3>拉格朗日余项</h3>
+
+<p>佩亚诺余项使用无穷小的方式来表示余项，这样做虽然简单直接，在很多计算极限问题中很有用，但它终究还是回避了“余项到底有多大”这个主题，这就使得当 <span class="math">\\( x \\)</span> 稍微远离 <span class="math">\\( x_0 \\)</span> 时，佩亚诺余项不能用于估算有限的多项式和原函数的误差。</p>
+
+<p>在之前的学习中，已经知道了柯西中值定理。如果 <span class="math">\\( f(x) \\)</span> 在 <span class="math">\\( [x_1,x_2] \\)</span> 内连续，在 <span class="math">\\( (x_1,x_2) \\)</span> 内可导且 <span class="math">\\( g(x) \\)</span> 的导数不为 0 ，则有：</p>
+
+<div class="math">
+\\[
+    \frac{f(x_1)-f(x_2)}{g(x_1)-g(x_2)}=\frac{f'(\xi)}{g'(\xi)}
+\\]
+</div>
+
+<p>其中 <span class="math">\\( \xi \\)</span> 是介于 <span class="math">\\( x_1 \\)</span> 与 <span class="math">\\( x_2 \\)</span> 之间的某个值。</p>
+
+<p>柯西中值定理的几何解释就是，由 <span class="math">\\( x \\)</span> 引导的参数方程确定的曲线，任取其中光滑的某一段，这段内一定有一点的切线斜率和两端的斜率相等：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2023/05/04-cauchy-mean-value.png" alt="" width="340">
+</figure>
+
+<p>而泰勒公式的余项为：</p>
+
+<div class="math">
+\\[
+    R(x) = \frac{f^{(n+1)}(x_0)}{(n+1)!}(x-x_0)^{n+1}+\frac{f^{(n+2)}(x_0)}{(n+2)!}(x-x_0)^{n+2}+\cdots 
+        +\frac{f^{(\infty)}(x_0)}{(\infty)!}(x-x_0)^{\infty}\\
+\\]
+</div>
+
+<p>余项中的每项都不一样，不过它们都有 <span class="math">\\( S(x) = (x-x_0)^{n+1} \\)</span> 这个公因式。为了方便分析，可以先将这些公因式去除：</p>
+
+<div class="math">
+\\[
+    \frac{R(x)}{S(x)}
+\\]
+</div>
+
+<p>不过先不急着展开，分子分母这两个函数都有一个点比较特殊，就是 <span class="math">\\( x=x_0 \\)</span> ：在 <span class="math">\\( x=x_0 \\)</span> 处，有 <span class="math">\\( R(x)=S(x)=0 \\)</span> ，所以可以应用柯西中值定理：</p>
+
+<div class="math">
+\\[
+\frac{R(x)}{S(x)}=\frac{R(x)-R(x_0)}{S(x)-S(x_0)}=\frac{R'(\xi)}{S'(\xi)}
+\\]
+</div>
+
+<p>其中 <span class="math">\\( \xi \\)</span> 为介于 <span class="math">\\( x \\)</span> 和 <span class="math">\\( x_0 \\)</span> 的某个值。这样便可以使用这两个多项式等价之前的余项和公因式：</p>
+
+<div class="math">
+\\[
+\begin{align}
+R'(\xi) &amp;= \frac{f^{(n+1)}(x_0)}{(n)!}(\xi-x_0)^{n}+\frac{f^{(n+2)}(x_0)}{(n+2)!}(\xi-x_0)^{n+1}+\cdots \\
+S'(\xi) &amp;= (n+1)(\xi-x_0)^{n}
+\end{align}
+\\]
+</div>
+
+<p>因为 <span class="math">\\( \xi \\)</span> 可能是介于 <span class="math">\\( x \\)</span> 和 <span class="math">\\( x_0 \\)</span> 的任意值，因此这两个多项式可以看作关于 <span class="math">\\( \xi \\)</span> 的函数。而它们在 <span class="math">\\( \xi=x_0 \\)</span> 处，仍有：<span class="math">\\( R'(\xi)=S'(\xi)=0 \\)</span> ，故上式仍然可以运用柯西中值定理：</p>
+
+<div class="math">
+\\[
+\frac{R'(\xi)}{S'(\xi)}=\frac{R'(\xi)-R'(x_0)}{S'(\xi)-S'(x_0)}=\frac{R''(\xi_2)}{S''(\xi_2)}
+\\]
+</div>
+
+<p>其中 <span class="math">\\( \xi_2 \\)</span> 为介于 <span class="math">\\( \xi \\)</span> 和 <span class="math">\\( x_0 \\)</span> 之间的某个值。考虑到 <span class="math">\\( \xi \\)</span> 是介于 <span class="math">\\( x \\)</span> 和 <span class="math">\\( x_0 \\)</span> 之间的某个值，实际上 <span class="math">\\( \xi_2 \\)</span> 也是这个范围内的值。</p>
+
+<p>像这样多次应用柯西中值定理，可以得出：</p>
+
+<div class="math">
+\\[
+\frac{R(x)}{S(x)}=\frac{R'(\xi)}{S(\xi)}=\frac{R''(\xi_2)}{S''(\xi_2)}=\cdots=
+\frac{R^{(n+1)}}{S^{(n+1)}}=\frac{R^{(n+1)}(\xi_{n+1})}{(n+1)!}
+\\]
+</div>
+
+<p>柯西中值定理是一个将函数与导数相关联的定理。对多项式求导是一种<em>降低次数</em>的过程：因为 <span class="math">\\( R^{(n+1)}(x)=f^{(n+1)}(x)-p^{(n+1)}(x) \\)</span> ，而 <span class="math">\\( p(x) \\)</span> 的最高次为 <span class="math">\\( n \\)</span> ，所以经过 <span class="math">\\( n+1 \\)</span> 次求导，多项式 <span class="math">\\( p^{(n+1)}(x)=0 \\)</span> ，这种情况下 <span class="math">\\( R^{(n+1)}(x)=f^{(n+1)}(x) \\)</span> ，余项将决定原函数的走向，所以有 <span class="math">\\( R^{(n+1)}(\xi)=f^{(n+1)}(\xi) \\)</span> 。整理得</p>
+
+<div class="math">
+\\[
+R(x)=\frac{R^{(n+1)}(\xi_{n+1})}{(n+1)!}S(x)=\frac{f^{(n+1)}(\xi_{n+1})}{(n+1)!}(x-x_0)^{n+1}
+\\]
+</div>
+
+<p>其中 <span class="math">\\( \xi_{n+1} \\)</span> 为介于 <span class="math">\\( x \\)</span> 与 <span class="math">\\( x_0 \\)</span> 之间的某个值。以上的余项记作 <span class="math">\\( R_n(x) \\)</span> ，称作<strong>拉格朗日(Lagrange)余项</strong>。</p>
+
+<p>拉格朗日余项表明，如果以多项式 <span class="math">\\( p(x) \\)</span> 近似表达函数 <span class="math">\\( f(x) \\)</span> 时，两者的误差为 <span class="math">\\( |R_n(x)| \\)</span> 。如果多项式的最高项 <span class="math">\\( n \\)</span> 是确定的，在 <span class="math">\\( x \\)</span> 与 <span class="math">\\( x_0 \\)</span> 范围内函数 <span class="math">\\( n+1 \\)</span> 阶导数的界限 <span class="math">\\( |f^{(n+1)}(x)| \le M \\)</span> 已知，那么误差的估计式为：</p>
+
+<div class="math">
+\\[
+    |R_n(x)| \le \frac{M}{(n+1)!}|x-x_0|^{n+1}
+\\]
+</div>
+
+<p>利用以上估计式，就可以得知利用有限项多项式计算的精度，这在数值计算时很有用。</p>
+
+<h2>泰勒展开与级数</h2>
+
+<!-- <p class="text-indent" css-text-indent="4em">注：以下内容需要无穷级数相关知识。</p> -->
+
+<p>通过之前对泰勒展开式的介绍可以知道，泰勒展开式使用多项式在某点附近模拟一个函数。例如，<span class="math">\\( \sin x \\)</span> 在 <span class="math">\\( x=0 \\)</span> 附近的展开式（麦克劳林展开）为：</p>
+
+<div class="math">
+\\[
+\sin x = x - \frac{x^3}{3!} + \frac{x^5}{5!} + \dots + \frac{(-1)^n x^{2n+1}}{(2n+1)!}
+\\]
+</div>
+
+<p>绘制 <span class="math">\\( \sin x \\)</span> 逐项展开后的函数图像如下：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2023/05/04-expand-sinx.png" alt="" width="500">
+</figure>
+
+<p>观察以上展开式可以发现，随着展开的项数越来越多，多项式向着两侧越来越贴合正弦函数的形状，这就像逐渐将一根铁丝掰成波浪线的过程。</p>
+
+<p>接下来考虑泰勒展开式在 <span class="math">\\( x_0 \\)</span> 附近多大的范围（邻域）上能和原函数相等。</p>
+
+<hr>
+
+<p>泰勒展开式是无穷多个幂函数之和，因此它是一个无穷级数，还是一个幂级数。因此泰勒展开式也可以写作：</p>
+
+<div class="math">
+\\[
+f(x)=\sum\limits_{n=0}^{\infty}\frac{f^{(n)}(x_{0})}{n!}(x-x_{0})^{n}
+\\]
+</div>
+
+<p>对于一个级数，首先要考虑的就是它的收敛性。如果一个级数都不收敛，那么就没有讨论的必要了。</p>
+
+<p>幂级数收敛性有一个很重要的定理：对于形如 <span class="math">\\( \displaystyle \sum_{n=0}^{\infty} a_n(x-x_0)^n \\)</span> 的幂级数，若 <span class="math">\\( \displaystyle \lim_{n\to\infty}\left|\frac{a_{n+1}}{a_n}\right|=\frac 1 R \\)</span> ，则该幂级数在 <span class="math">\\( |x-x_0|\lt R \\)</span> 上是收敛的，至于边界上的收敛情况要单独讨论。</p>
+
+<p>而泰勒展开的幂级数通项为：</p>
+
+<div class="math">
+\\[
+P_{n}(x)=\frac{f^{(n)}(x_{0})}{n!}(x-x_{0})^{n}
+\\]
+</div>
+
+<p>因此，泰勒级数的收敛半径为：</p>
+
+<div class="math">
+\\[
+R=\lim_{n\to\infty}\left|\frac{a_n}{a_{n+1}}\right|=\lim_{n\to\infty}\left|\frac{(n+1)f^{(n)}(x_0)}{f^{(n+1)}(x_0)}\right|
+\\]
+</div>
+
+<p>例如，对于 <span class="math">\\( e^x \\)</span> 的泰勒展开，它的每一阶导数都是相同的，这就有：</p>
+
+<div class="math">
+\\[
+R=\lim_{n\to\infty}\left|\frac{a_n}{a_{n+1}}\right|=\lim_{n\to\infty}\left|\frac{(n+1)e^{x_0}}{e^{x_0}}\right|=\lim_{n\to\infty}|n+1|=\infty
+\\]
+</div>
+
+<p>这说明对 <span class="math">\\( e^x \\)</span> 展开后的泰勒级数在 <span class="math">\\( \mathbb{R} \\)</span> 上全部收敛，展开式对任何 <span class="math">\\( x \\)</span> 都能计算出一个值。</p>
+
+<p>既然泰勒展开的级数在这些范围内收敛，接下来看看它到底收敛到什么程度。以 <span class="math">\\( \sin x \\)</span> 为例，它在 <span class="math">\\( x=0 \\)</span> 处展开后，其展开式在任意 <span class="math">\\( x \\)</span> 处的拉格朗日余项为：</p>
+
+<div class="math">
+\\[
+R(x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}
+\\]
+</div>
+
+<p><span class="math">\\( x \\)</span> 的各阶导数导来导去就是 <span class="math">\\( \pm\sin x \\)</span> 或 <span class="math">\\( \pm\cos x \\)</span> 中的一个，因此导数这部分产生的误差为 <span class="math">\\( f^{(n+1)}(\xi) \le 1 \\)</span> ，所以余项的误差界限为：</p>
+
+<div class="math">
+\\[
+|p(x) − \sin(x)| \le \frac{|x|^{n+1}}{(n+1)!}
+\\]
+</div>
+
+<p>如果让原函数展开到无限多项，那么误差就逐渐趋于以下值：</p>
+
+<div class="math">
+\\[
+    \lim_{n\to\infty} \frac{|x|^{n+1}}{(n+1)!}
+\\]
+</div>
+
+<p>对于这个极限，可以这样理解：分子和分母都是 <span class="math">\\( n+1 \\)</span> 个数相乘，但对于 <span class="math">\\( |x|^{n+1} \\)</span> 来说，每个相乘的数都是 <span class="math">\\( x \\)</span> ，是不变的；但 <span class="math">\\( (n+1)! \\)</span> 随着 <span class="math">\\( n \\)</span> 的无止境上升，总有那么一刻 <span class="math">\\( n \\)</span> 的大小会超过 <span class="math">\\( x \\)</span> 的大小，在这之后 <span class="math">\\( (n+1)! \\)</span> 将很快追平并超过 <span class="math">\\( |x|^{n+1} \\)</span> ，并且随着 <span class="math">\\( n \\)</span> 的无限增长，这个差距将无限扩大。因此，原极限将趋于 0 ：</p>
+
+<div class="math">
+\\[
+    \lim_{n\to\infty} \frac{|x|^{n+1}}{(n+1)!}=0
+\\]
+</div>
+
+<p>余项趋于 0 ，这说明 <span class="math">\\( \sin x \\)</span> 展开的泰勒级数不仅在 <span class="math">\\( \mathbb{R} \\)</span> 内收敛，并且在这个范围内还和原函数相等。</p>
+
+<p>这个结论初看有点难以置信，泰勒展开只通过了一点上的多项式展开，却得到了整个实数范围的函数趋近。对于这个问题的理解：在一点处无穷多阶导数的信息实在是太丰富了，通过一阶导数，能预测到函数在下一个微小范围内的变化；通过二阶导数能预测到一阶导数在下一个微小范围内的变化，从而预测函数在下下个微小范围内的变化，……。这样无限多的信息便有可能预测到函数在整个实数范围的走势。</p>
+
+<p>泰勒展开的应用非常广泛，除了求解极限问题外，泰勒展开常用于函数值以及积分和微分方程的近似计算。除此之外，利用复数域中的泰勒展开可以发现许多特别的性质。例如，对 <span class="math">\\( e^{ix} \\)</span> 的展开等价于 <span class="math">\\( \cos x+ i\sin x \\)</span> 的展开，代入 <span class="math">\\( x=\pi \\)</span> 就可以得到著名的欧拉公式 <span class="math">\\( e^{i\pi}+1=0 \\)</span> 。</p>
+
+<h2>附录</h2>
+
+<h3>常用函数的麦克劳林展开</h3>
+
+<p>以下列出了常用函数的麦克劳林展开式，通过将 <span class="math">\\( x \\)</span> 改写为 <span class="math">\\( x-x_0 \\)</span> 便可以得到对应的泰勒展开式。</p>
+
+<div class="math">
+\\[
+\begin{align}
+(1)&amp;\quad e^x =1+x+\frac{x^2}{2!}+\cdots+\frac{x^n}{n!}+\cdots &amp;&amp;=\sum_{n=0}^{\infty}\frac{x^n}{n!} &amp;&amp; x \in \mathbb{R}\\ 
+(2)&amp;\quad \sin x = x - \frac{x^3}{3!} + \frac{x^5}{5!} + \dots + (-1)^n\frac{x^{2n+1}}{(2n+1)!}+\cdots &amp;&amp;=\sum_{n = 0}^{\infty} (-1)^n \frac{x^{2n+1}}{(2n+1)!} &amp;&amp; x \in \mathbb{R}\\
+(3)&amp;\quad \cos x =1-\frac{x^2}{2!}+\frac{x^4}{4!}-\cdots+(-1)^n\frac{x^{n+1}}{n+1}+\cdots &amp;&amp;=\sum_{n=0}^{\infty}(-1)^n \frac{x^{2n}}{(2n)!} &amp;&amp; x \in \mathbb{R}\\
+(4)&amp;\quad \ln (1+x) =x-\frac{x^2}{2}+\frac{x^3}{3}-\cdots+(-1)^n\frac{x^{n+1}}{n+1}+\cdots &amp;&amp;=\sum_{n=1}^{\infty} (-1)^{n-1} \frac{x^n}{n} &amp;&amp; -1 &lt; x \le 1\\
+(5)&amp;\quad \frac{1}{1-x} =1+x+x^2+x^3+\cdots+x^n &amp;&amp;=\sum_{n=0}^{\infty} x^n &amp;&amp; -1&lt;x&lt;1\\
+\end{align}
+\\]
+</div>
+
+<h3>参考资料/延伸阅读</h3>
+
+<p>
+    <a class="link-external" href="https://www.bilibili.com/video/av11251323">https://www.bilibili.com/video/av11251323</a><br>
+    3b1b 对泰勒展开式的介绍
+</p>
+
+<p>
+    <a class="link-external" href="https://www.ixigua.com/6577670049224458765">https://www.ixigua.com/6577670049224458765</a><br>
+    <a class="link-external" href="https://www.ixigua.com/6578415087093023239">https://www.ixigua.com/6578415087093023239</a><br>
+    妈咪叔对泰勒展开式的介绍
+</p>
+<p><a rel="nofollow" href="/archives/1094">微积分-泰勒展开式</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/archives/1094/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

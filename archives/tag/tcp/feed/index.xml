@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>TCP归档 - 冰封残烛的个人小站</title>
+	<atom:link href="http://localhost/wordpress/archives/tag/tcp/feed?simply_static_page=3752" rel="self" type="application/rss+xml" />
+	<link></link>
+	<description>FrozenCandle&#039;s Personal Site</description>
+	<lastBuildDate>Mon, 12 Dec 2022 11:48:59 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2.1</generator>
+
+<image>
+	<url>/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg</url>
+	<title>TCP归档 - 冰封残烛的个人小站</title>
+	<link></link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>计算机网络05-面向连接的运输：TCP</title>
+		<link>/archives/525</link>
+					<comments>/archives/525#respond</comments>
+		
+		<dc:creator><![CDATA[Hello]]></dc:creator>
+		<pubDate>Thu, 21 Jul 2022 15:25:53 +0000</pubDate>
+				<category><![CDATA[计算机网络]]></category>
+		<category><![CDATA[TCP]]></category>
+		<guid isPermaLink="false">/?p=525</guid>
+
+					<description><![CDATA[<p>TCP概述 TCP简介 TCP 被称为是面向连接的(&#46;&#46;&#46;</p>
+<p><a rel="nofollow" href="/archives/525">计算机网络05-面向连接的运输：TCP</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<h2>TCP概述</h2>
+
+<h3>TCP简介</h3>
+
+<p>TCP 被称为是<strong>面向连接的</strong>(connection-oriented)，需要使用连接来保证数据传输的可靠性。在一个应用进程可以开始向另一个应用进程发送数据前，两者必须先“握手”，相互发送某些预备报文段，以准备连接所需的参数。</p>
+
+<p>TCP 的“连接”是一种逻辑连接，TCP 程序使用某些变量确定当前连接的状态，通过数据报更新连接状态。因此 TCP 连接是一个点对点(point-to-point)连接，只能维持两台主机间的连接状态。</p>
+
+<p>在客户请求发起 TCP 连接时，客户首先发送一个特殊的 TCP 报文段，服务器则以一个特殊的 TCP 报文段响应，这两个报文段都不包含应用层数据；最后客户再用第三个特殊报文段作为响应，该可以包含应用数据。由于在这两台主机之间发送了三个报文段，所以这种连接建立过程通常被称为<strong>三次握手</strong>(three-way handshake)。</p>
+
+<p>建立起一条 TCP 连接后，两个应用进程之间就可以相互发送数据了。发送方的应用层将数据通过套接字推送到运输层中，TCP 接收数据并放入<strong>发送缓存</strong>内，并在合适的时候将数据从缓存中取出，为每块客户数据配上 TCP 首部，形成多个 <strong>TCP 报文段</strong>，然后下传给网络层中。网络层将其分别封装在网络层 IP 数据报中，并发送到网络中。</p>
+
+<p>一个 TCP 报文段存储的数据数量受限于<strong>最大报文段长度</strong>(Maximum Segment Size, MSS)，该值通常由链路层确定。接收方的 TCP 收到一个报文段后，该报文段的数据就被放入接收方 TCP 连接的接收缓存中，应用程序从缓存中读取数据流。</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/06/02-socket-process.png" alt="" width="370">
+    <figcaption>TCP 发送和接收</figcaption>
+</figure>
+
+<h3>TCP报文段</h3>
+
+<p>TCP 报文段由首部字段和数据字段组成，MSS 限制了报文段数据字段的最大长度。下图展示了 TCP 的报文段结构：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-message.png" alt="" width="380">
+    <figcaption>TCP 报文段结构</figcaption>
+</figure>
+
+<p>TCP 报文段首部同样包含<strong>源端口号</strong>和<strong>目的端口号</strong>，用于多路复用和分解。并且 TCP 也提供了<strong>检验和</strong>字段，可以检测报文是否在传输过程中发送比特差错。</p>
+
+<p>除此之外，TCP 还包含一些特殊字段：</p>
+
+<ul>
+    <li>32 比特的<strong>序号</strong>(sequence number)字段和<strong>确认号</strong>(acknowledgment)字段，用于在可靠数据传输服务中表明分组顺序</li>
+    <li>16 比特的<strong>接收窗口</strong>(receive window)字段指示接收方愿意接收的字节数，用于流量控制。流量控制是 TCP 提供的服务之一，用于防止缓存溢出</li>
+    <li>由于 TCP 存在一个长度可变的选项字段，4 比特的<strong>首部长度</strong>(header length)字段指示 TCP 首部长度，单位为 32 比特（即图示的一行）</li>
+    <li>可选与变长的<strong>选项</strong>(optional)字段用于发送方与接收方调整一些发送规则</li>
+</ul>
+
+<p>首部还存在 8 比特的<strong>标志</strong>(flag)字段，<strong>ACK</strong> 标志用于确认一个接收的报文段是有效的；<strong>RST</strong> 、<strong>SYN</strong> 和 <strong>FIN</strong> 标志用于建立和拆除 TCP 连接；<strong>CWR</strong> 和 <strong>ECE</strong> 标志用于 TCP 拥塞控制；<strong>PSH</strong> 标志用于指示接收方是否应立即将数据交给应用层。</p>
+
+<p><strong>URG</strong> 标志用于指示报文段中存在被标记为“紧急”的数据，紧急数据的最后一个字节由 16 比特的<strong>紧急数据指针</strong>(urgent data pointer)字段表示。当紧急数据存在并给出指向紧急数据尾指针的时候，接收端的 TCP 必须立即通知应用层。 </p>
+
+
+
+
+<h2>TCP提供的服务</h2>
+
+<h3>连接管理</h3>
+
+<p>当运行在客户主机上的一个进程要和服务主机上的一个进程建立一条连接时，它们会交换 3 个特殊的报文段，称为三次握手。三次握手的具体过程如下：</p>
+
+<p><strong>第一步：</strong>客户端的 TCP 首先向服务器端的 TCP 发送一个不包含数据的特殊 TCP 报文段，首部的 <var type="flag">SYN</var> 标志位被置 1 。客户还会随机选择一个初始序号 <code>client_isn</code> 放置于序号字段，合适的初始序号可以避免某些安全性攻击。这一个报文段被称为 SYN 报文段。</p>
+
+<p><strong>第二步：</strong>服务器接收到 SYN 报文段后，会为该 TCP 连接分配缓存和变量，并向该客户 TCP 发送允许连接的报文段：该报文段 <var type="flag">SYN</var> 置 1 ；且首部的确认号字段置为 <code>client_isn + 1</code> ；最后服务器选择自己的初始序号 <code>server_isn</code> 并放置到序号字段中。该允许连接的报文段被称为 SYNACK 报文段。</p>
+
+<p><strong>第三步：</strong>在收到 SYNACK 报文段后，客户为该连接分配缓存和变量，并向服务器发送最后一个报文段：将首部确认字段置为 <code>server_isn + 1</code> ，并清零 <var type="flag">SYN</var> 位。这个报文段可以携带客户到服务器的数据。</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-three-way-handshake.png" alt="" width="280">
+    <figcaption>TCP 三次握手过程</figcaption>
+</figure>
+
+<p>完成以上步骤后，客户和服务器就可以相互发送包括数据的报文段了，且之后的报文段 <var type="flag">SYN</var> 位都清零。</p>
+
+<p>参与 TCP 连接的任何一个进程都能终止该连接，通过发送一个 <var type="flag">FIN</var> 位置 1 的特殊报文段，接收方对其响应后也发送一个这样的特殊报文段，发送方确认后双方的缓存和变量都可以被释放。</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-close-connect.png" alt="" width="280">
+    <figcaption>TCP 四次挥手过程</figcaption>
+</figure>
+
+<h3>序号和确认</h3>
+
+<p>由于运输层之下都不一定提供可靠数据传输服务，因此需要 TCP 提供相应服务，确保进程从其接收缓存中读出的字节流和连接的发送方送出的字节流完全相同，数据流无损坏、无间隙、非冗余且按序交付。TCP 涉及的可靠数据传输的方法涉及上一节介绍的许多原理。</p>
+
+<p>暂时不考虑 TCP 实现的更多细节，发送方主要响应 3 个与靠数据传输服务（发送和重传）有关的主要事件：</p>
+
+<ol>
+    <li>当TCP 从上层应用程序接收数据时，它根据分组序号 <code>nextseqnum</code> 将数据封装在 1 个报文段中，并把该报文段传递给网络层。如果定时器没有启动，这一步还负责启动定时器</li>
+    <li>在定时器超时事件中，TCP 重传引起超时（即具有最小序号但仍未应答）的报文段，并重启定时器</li>
+    <li>当 TCP 发送方收到 ACK 时，将确认序号与最早未被确认的序号 <code>send_base</code> 比较。由于 TCP 采用累积确认，所以只要确认序号大于 <code>send_base</code> ，则该 ACK 确认其之前一个或多个未被确认的报文段，发送方便可以更新 <code>send_base</code> ；如果窗口中还有未被确认的报文段，还要重新启动定时器</li>
+</ol>
+
+<p>TCP 报文段首部中两个最重要的字段是序号字段和确认号字段。这两个字段是 TCP 可靠传输服务的关键部分。</p>
+
+<p>TCP 把数据看成一个有序的字节流，一个报文段的序号是该报文段首字节的字节流编号，而非报文段的序号：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-sequence-number.png" alt="" width="390">
+</figure>
+
+<p>接收方的确认号是期望从发送方收到的下一字节的序号，即确认该流中至首个丢失字节为止的所有字节，这便是 TCP 采取的累积确认的方式。</p>
+
+<p>TCP 可能接到失序报文，但对失序报文的处理取决于具体实现：有些接收端为了简化设计，直接丢弃失序报文段；大部分接收端为了提高效率，将保存失序的字节直到缺少的内容可以填补间隙。</p>
+
+<h3>超时重传</h3>
+
+<p>TCP 采用超时重传机制来处理报文段的丢失。为了正确设计超时时间，需要估计报文段从发送到确认的往返时间 RTT 。</p>
+
+<p>TCP 在连接过程中，在特定时刻会利用某些报文段测量一次 RTT 的样本值 <span class="math">\\( \text{sampleRTT} \\)</span> ，并综合之前测量的 RTT 估计量，加权平均得到一个接近每个 RTT 的新估计量。另外，考虑到重传的报文响应不一定来自自身，TCP 并不用重传的报文段计算 <span class="math">\\( \text{sampleRTT} \\)</span> 。</p>
+
+<p>每测量一次 <span class="math">\\( \text{sampleRTT} \\)</span> ，TCP 就会使用以下公式估算新的 RTT 值：</p>
+
+<div class="math">
+\\[
+    \text{NewEstimatedRTT} = (1-\alpha)\text{EstimatedRTT} + \alpha \, \text{SampleRTT}
+\\]
+</div>
+
+<p>典型的 <span class="math">\\( \alpha \\)</span> 推荐值为 0.125 。这样每次计算后，估计出的新 RTT 值都会朝着本次样本 RTT 的大小变化，并更加平滑：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-estimate-RTT.png" alt="" width="320">
+    <figcaption>RTT 样本和 RTT 估计</figcaption>
+</figure>
+
+<p>另一个实用的值 <span class="math">\\( \text{DevRTT} \\)</span> 用于描述估计 RTT 和样本 RTT 的偏离程度：</p>
+
+<div class="math">
+\\[
+    \text{NewDevRTT}=(1-\beta)\text{DevRTT}+\beta |\text{SampleRTT}-\text{EstimatedRTT}|
+\\]
+</div>
+
+<p>典型的 <span class="math">\\( \beta \\)</span> 推荐值为 0.25 。如果样本 RTT 变化幅度很大，那么 <span class="math">\\( \text{DevRTT} \\)</span> 的值也会变得很大。</p>
+
+<p>以上已经计算出了 RTT 的估计值和波动值，TCP 超时间隔首先应该大于估计值，否则将造成很多不必要的重传；但也不能比估计值大太多，应该综合波动值加上一定余量。超时重传间隔一般由以下公式计算：</p>
+
+<div class="math">
+    \\[
+        \text{TimeoutInterval}=\text{EstimatedRTT}+4 \cdot \text{DevRTT}|
+    \\]
+</div>
+
+<p>综合考虑下，就不容易出现超时时间过长或过早超时的情况了。</p>
+
+<p>在大多数 TCP 实现中，在最开头的几次超时事件中，在重传后都会将超时间隔设为之前值的两倍，用指数增长来降低重传的频率并靠近真实时延。</p>
+
+<h3>快速重传</h3>
+
+<p>超时触发重传存在的问题之一是超时时间可能相对较长。当一个报文段丢失时，较长的超时时间使发送方延迟一段时间后才重传丢失的分组，因而增加了端到端时延。</p>
+
+<p><strong>快速重传</strong>(fast retransmit)采取冗余 ACK 处理该问题。当具有期望序号的按序报文段到达，且序号之前的数据都被确认时，先等待片刻，如果下一个按序报文段按时到达，则将两个累计 ACK 都发出，以确认两个按序的报文段；如果下一个报文段没有在这个间隔内到达，再发送该 ACK 。</p>
+
+<p>当 TCP 接收方收到一个序号大于下一个所期望的、按序的报文段时，说明数据流中存在一个间隔，可能是由于在网络中报文段丢失或重新排序造成的，那么 TCP 可以对已经接收到的最后一个按序字节数据使用冗余 ACK 重复确认，从而指示发送方下一个发送字节的位置（为间隔的低端序号）。</p>
+
+<p>最后，如果间隔中的部分或完整的缺失报文段到达，则将其作为具有期望序号的按序报文段处理。</p>
+
+<p>由于发送方经常连续发送大量的报文段，如果一个报文段丢失，后续的若干失序报文段都会引起冗余 ACK 。如果 TCP 发送方接收到对相同数据的 3 个冗余 ACK ，说明之后的报文段已经丢失，可以执行快速重传。之所以是 3 个，主要是为了防止某个先发送的报文段可能意外地后到达，造成接收方误判为丢失导致不必要的重传。</p>
+
+<p>下图展示了 TCP 快速重传的原理，可以看到快速重传允许 TCP 在定时器过期之前重传丢失的报文段，缩短等待时间：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-fast-retransmit.png" alt="" width="380">
+</figure>
+
+<h3>流量控制</h3>
+
+<p>一条 TCP 连接的每一侧主机都有接收缓存，使数据不必立即处理。但若发送方发送太快或接收方处理较慢，该连接的接收缓存可能会溢出。</p>
+
+<p>因此 TCP 提供了<strong>流程控制</strong>(flow-control)服务，匹配双方处理速度而消除缓存溢出可能。TCP 通过让<em>发送方</em>维护<strong>接收窗口</strong>(receive window)变量来提供流量控制，接收窗口用于提示接收方还有多少可用的缓存空间，双方都各自拥有一个接收窗口。</p>
+
+<p>记 <code>read</code> 为接收方应用进程从缓存读出数据流的最后一个字节编号，<code>received</code> 为接收方收到并放入缓存中数据流的最后一个字节编号，为使已分配的缓存不溢出，下式必须成立：</p>
+
+<div class="math">
+\\[
+    \text{received} = \text{read} \leq \text{buffer}
+\\]
+</div>
+
+<p>接收窗口则根据缓存可用空间的数量来设置，下图展示了以上几个关键变量间的联系：</p>
+
+<!-- 
+<div class="math">
+\\[
+    \text{window} = \text{buffer} - [ \text{received} - \text{read} ]
+\\]
+</div> 
+-->
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-flow-control-variables.png" alt="" width="390">
+</figure>
+
+<p>接收主机通过响应报文段中的接收窗口字段，通知发送方其接收缓存中还有多少可用空间，并通过跟踪相关变量实时更新窗口长度。</p>
+
+<p>发送主机主要跟踪变量 <code>sent</code> 和 <code>acked</code> ，分别代表最后发送和最后累积确认的字节编号，其差就是发送但未被确认的数据量。通过将该数据量控制在 <code>window</code> 以内，就可以保证不会使接收主机的缓存溢出。</p>
+
+<p>一种特殊的情况是接收主机缓存已满，窗口长度为 0 ，发送方理应不再能发送数据，但接收方可能已经确认了所有接收的报文段，不再产生响应，使发送方不知道接收方什么时候处理完数据而一直等待不能发送数据。为此，TCP 的一个特殊的规定是：当接收主机窗口为 0 时，发送方持续发送一个只有一个字节数据的探测报文段，使接收方能继续作出响应，并直到接收方清理出一部分缓存，返回的窗口长度不为 0 了才恢复正常发送方式。</p>
+
+<h2>TCP拥塞控制</h2>
+
+<h3>拥塞产生原因</h3>
+
+<p>当两台主机之间互相传输数据时，尽管运输层可以正常工作，但链路容量、路由器缓存容量等可能无法提供足够资源，使 TCP 发送方因为下层的拥塞(congestion)而被遏制，这种形式的发送方的控制被称为<strong>拥塞控制</strong>。</p>
+
+<p>首先研究拥塞产生的原因。在最简单的情况下，两台发送主机通过一台路由器在一段容量为 <span class="math">\\( R \\)</span> 的链路上传输，不考虑缓存、重传和流量控制等开销。此时每连接的吞吐量（即每个接收方每秒接收的字节数）最多只有 <span class="math">\\( R/2 \\)</span> ，并随着发送速率的增大，突发到达引起路由器中的队列也会越长，等待发送就会经常处在更长的队列中，因而增加了排队的时间。</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-congestion-control-circumstance-A.png" alt="" width="610">
+    <figcaption>第一种假设情形</figcaption>
+</figure>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-throughput-latency-function.png" alt="" width="600">
+    <figcaption>发送速率、时延与接收速率间的关系</figcaption>
+</figure>
+
+<p>当分组到达的速率超过 <span class="math">\\( R/2 \\)</span> 时，到达队列的平均速率超过从该队列传输出去的速率，任意到达的分组都会导致时延，最终时延变得越来越大而趋近无穷。</p>
+
+<p>如果路由器缓存有限，那么路由器缓存溢出时可能会引起新到达的分组被丢弃，并引起运输层重传。并且时延较大时，过早重传会引起路由器利用率进一步降低。</p>
+
+<hr>
+
+<p>再考虑一种更复杂的情况，4 台主机通过交叠的两条路径传输：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-congestion-control-circumstance-B.png" alt="" width="660">
+</figure>
+
+<p>当四台主机的发送速率都较小时，不容易发生缓存溢出，发送与接收速率大致接近。如果主机 A 的发送速率过大，那么它就会占据 AB 和 BD 之间路由器的大部分缓存，造成该路线上其余连接的流量越来越小：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-throughput-latency-function2.png" alt="" width="290">
+    <figcaption>有限缓存与多跳路径时的性能</figcaption>
+</figure>
+
+<p>并且此时，接收方 B 由于 AB 段流量被占据，其上游路由器 DA 转发得到的分组往往会被丢弃，还会使传输容量被浪费。</p>
+
+<h3>TCP拥塞控制</h3>
+
+<p>在实践中，往往采用以下两种常见方法来控制拥塞：</p>
+
+<ul>
+    <li>端到端拥塞控制：如果底层没有显式提供拥塞控制支持，那么运输层一般通过观察分组丢失与时延等行为来推测网络拥塞情况，并相应调整窗口长度</li>
+    <li>网络辅助的拥塞控制：如果路由器可以向发送方提供关于网络拥塞情况的反馈信息，</li>
+</ul>
+
+<p>TCP 通过网络拥塞程度来调整发送速率。TCP 必须使用端到端拥塞控制，因为 IP 层不向端系统提供显式的网络拥塞反馈。</p>
+
+<p>为了实现这一点，TCP 发送方额外维护一个变量<strong>拥塞窗口</strong>(congestion window)，用于限制 TCP 发送速率，并确保以下公式成立：</p>
+
+<div class="math">
+\\[
+    \text{sent} - \text{acked} \leq min{\text{cwnd}, \text{rwnd}}
+\\]
+</div>
+
+<p>当接收窗口较大时，通过调节 <code>cwnd</code> 的值，可以调整发送速率。</p>
+
+<p>当出现拥塞时，路径上的某些路由器缓存会溢出，造成丢包。TCP 发送方可以由超时或接收到 3 个冗余 ACK 来检测到这个丢包，意味着拥塞产生，需要减小窗口长度以减慢发送速率。如果没有发生丢包，TCP 可以根据确认的速率增大拥塞窗口长度。</p>
+
+<p><strong>TCP 拥塞控制算法</strong>主要包含以下方面的内容：</p>
+
+<ol start="1"><li><strong>慢启动</strong></li></ol>
+
+<p>当一条 TCP 连接开始时，为了尽量利用带宽，在慢启动(slow-start)状态下 <code>cwnd</code> 的值通常初始置为一个 MSS ，并且每当传输的报文段首次确认就增加一个 MSS ，这使得 TCP 起始发送速率较慢，但可以以指数增长：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-slow-start.png" alt="" width="250">
+</figure>
+
+<p>如果存在一个由超时引起的丢包事件（拥塞），TCP 发送方引入一个新的状态变量慢启动阈值 <code>ssthresh = cwnd / 2</code> ，同时将 <code>cwnd</code> 重置为 1 并重新开始慢启动，此次慢启动如果达到阈值 <code>ssthresh</code> ，那么便不能再翻倍拥塞窗口，应该结束慢启动并进入拥塞避免模式。</p>
+
+<ol start="2"><li><strong>拥塞避免</strong></li></ol>
+
+<p>进入拥塞避免(congestion avoidance)状态后，拥塞窗口接近引发拥塞的长度，此时可以采用线性增长，无论何时到达一个新的确认，就将 <code>cwnd</code> 增加 <span class="math">\\( \text{MSS} (\text{MSS} / \text{cwnd}) \\)</span> 字节。</p>
+
+<p>当出现超时，则与慢启动情况一致，更新阈值并重置窗口长度：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-congestion-avoidance.png" alt="" width="450">
+    <figcaption>慢启动与拥塞避免</figcaption>
+</figure>
+
+<p>如果由 3 个冗余 ACK 引发丢包，则更新阈值并减半拥塞窗口长度，然后进入快速恢复模式。</p>
+
+<ol start="3"><li><strong>快速恢复</strong></li></ol>
+
+<p>对引起快速恢复(fast recovery)的缺失报文段，每个冗余的 ACK 使 <code>cwnd</code> 值增加 MSS ，最终当 ACK 到达时，TCP 在减半 <code>cwnd</code> 后进入拥塞避免状态。</p>
+
+<p>假设所有丢包都是由冗余 ACK 引起，忽略慢启动过程，拥塞窗口随时间变化为：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-congestion-fast-recovery.png" alt="" width="320">
+    <figcaption>快速恢复与拥塞避免</figcaption>
+</figure>
+
+<p>这种 TCP 拥塞控制常常被称为加性增、乘性减，行为表现为以上锯齿状的图形。</p>
+
+<p>如果出现超时事件，快速恢复在执行如同在慢启动和拥塞避免中相同的动作（更新阈值并重置窗口长度）后，迁移到慢启动状态。</p>
+
+<h2>实验：使用WireShark探究TCP</h2>
+
+<p>本节通过 WireShark 捕获一次 TCP 发送的完整过程，来研究 TCP 的行为。这里向地址 192.168.10.1 的 8266 端口发送一个较大的文本文件，相应的代码为：（这里一共做了不止一次发送实验，因此下图中源端口号有不同情况）</p>
+
+<div class="vscode-block"><div><span style="color: #d73a49;font-weight: bold;">import</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">socket</span></div><div><span style="color: #24292e;">server_name</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #032f62;">'192.168.10.1'</span></div><div><span style="color: #24292e;">server_port</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">8266</span></div><div><span style="color: #24292e;">client</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">(</span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #24292e;">AF_INET</span><span style="color: #24292e;">, </span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #24292e;">SOCK_STREAM</span><span style="color: #24292e;">)</span></div><div><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">connect</span><span style="color: #24292e;">((</span><span style="color: #24292e;">server_name</span><span style="color: #24292e;">, </span><span style="color: #24292e;">server_port</span><span style="color: #24292e;">))</span></div><div><span style="color: #d73a49;font-weight: bold;">with</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">open</span><span style="color: #24292e;">(</span><span style="color: #032f62;">'alice.txt'</span><span style="color: #24292e;">, </span><span style="color: #032f62;">'r'</span><span style="color: #24292e;">) </span><span style="color: #d73a49;font-weight: bold;">as</span><span style="color: #24292e;"> </span><span style="color: #24292e;">file</span><span style="color: #24292e;">:</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #24292e;">message</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">file</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">read</span><span style="color: #24292e;">().</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">()</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">send</span><span style="color: #24292e;">(</span><span style="color: #24292e;">message</span><span style="color: #24292e;">)</span></div><div><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">close</span><span style="color: #24292e;">()</span></div></div>
+
+<p>由于日常使用计算机时，有许多后台进程都会不断通信，这些数据包严重干扰了本次发送的观察，不过 WireShark 提供了过滤器，可以在过滤器中输入表达式 <code>ip.addr == 192.168.10.1 and tcp.port == 8266</code> 来过滤出与地址 192.168.10.1 的 8266 端口有关的 TCP 报文段：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-wireshark-A.png" alt="" width="680">
+</figure>
+
+<p>过滤器由过滤器表达式组成，每条表达式由过滤项、过滤关系、过滤值三项组成，表达式之间可以通过一定关系连接。完整的过滤器表达式教程可以参考官方文档 <a href="https://www.wireshark.org/docs/man-pages/wireshark-filter.html">https://www.wireshark.org/docs/man-pages/wireshark-filter.html</a> ，通过菜单【分析→显示过滤器】可以找到一些常用的过滤器表达式：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-wireshark-B.png" alt="" width="560">
+</figure>
+
+<p>接下来开始研究 TCP 通信的整个过程，可以在“Info”信息项看到每个 TCP 报文段的简短描述。前三个报文段是 TCP 的建立连接过程：</p>
+
+<ol>
+    <li>第一个报文段 <var type="flag">SYN</var> 标志置位，序号字段为客户初始序号 0</li>
+    <li>第二个报文段 <var type="flag">SYN</var> 和 <var type="flag">ACK</var> 标志置位，序号字段为 1 ，确认号字段为服务器初始序号 0</li>
+    <li>第三个报文段 <var type="flag">ACK</var> 标志置位，序号字段为 1 ，确认号字段为 1</li>
+</ol>
+
+<p>这和之前介绍的三次握手过程是一致的。</p>
+
+<p>TCP 的传输过程可以通过菜单【统计→TCP 流图形】来绘制一些图表。例如，以下是整个传输过程中往返时间 RTT 的变化：（如果感觉图线不太对，可以试着点击下方“切换方向”按钮）</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-wireshark-RTT.png" alt="" width="510">
+</figure>
+
+<blockquote>
+    <p>本次利用物联网芯片 ESP32 创建 WiFi 并得到一个小型局域网服务器，可以通过手动遮掩、放到几面墙后等方式产生恶劣的网络环境，易于制造分组丢失等情况。</p>
+</blockquote>
+
+<p>当向 8266 端口发送信息时，<code>Seq</code> 指示了发送的序号；TCP 使用累积确认的形式，8266 返回的信息使用 <code>Ack</code> 指示该编号之前接收的所有字节顺序无误。从下图中可以看到正常传输时，TCP 的序列号每次都会增加一个 <code>Len</code> 的长度：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-wireshark-normal.png" alt="" width="1000">
+</figure>
+
+<p>实验中产生的冗余 ACK 、失序和重传，其现象如下图所示：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-wireshark-bad.png" alt="" width="600">
+</figure>
+
+<p>以上似乎还出现了接收窗口已满的现象，不过接收方响应的接收窗口字段一直没有发生变化，暂时不知道 TCP 是否有明显的流量控制特征。</p>
+
+<p>本次实验还捕获到了快速重传现象，特点为 3 次冗余 ACK ：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-wireshark-fast-restransmit.png" alt="" width="600">
+</figure>
+
+<p>不过我在多次尝试时并没有发现 TCP 的拥塞控制，如果把 ESP32 放得够远，那么似乎会丢包丢到 WireShark 甚至连 TCP 都认不出来；反之只要情况稍好，那 TCP 传输得就挺顺畅的。等以后有空了我再改进一下实验环境。</p>
+<p><a rel="nofollow" href="/archives/525">计算机网络05-面向连接的运输：TCP</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/archives/525/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

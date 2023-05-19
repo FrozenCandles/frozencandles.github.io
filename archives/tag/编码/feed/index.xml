@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>编码归档 - 冰封残烛的个人小站</title>
+	<atom:link href="http://localhost/wordpress/archives/tag/%E7%BC%96%E7%A0%81/feed?simply_static_page=3791" rel="self" type="application/rss+xml" />
+	<link></link>
+	<description>FrozenCandle&#039;s Personal Site</description>
+	<lastBuildDate>Fri, 24 Jun 2022 02:05:15 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2.1</generator>
+
+<image>
+	<url>/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg</url>
+	<title>编码归档 - 冰封残烛的个人小站</title>
+	<link></link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>字节、字符与字符编码</title>
+		<link>/archives/290</link>
+					<comments>/archives/290#respond</comments>
+		
+		<dc:creator><![CDATA[Hello]]></dc:creator>
+		<pubDate>Sun, 05 Jun 2022 01:45:54 +0000</pubDate>
+				<category><![CDATA[计算机与编程]]></category>
+		<category><![CDATA[编码]]></category>
+		<guid isPermaLink="false">/?p=290</guid>
+
+					<description><![CDATA[<p>字节 位(bit)是计算机中信息的最小单元。位是由电&#46;&#46;&#46;</p>
+<p><a rel="nofollow" href="/archives/290">字节、字符与字符编码</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<h2 class="wp-block-heading" id="字节">字节</h2>
+
+
+
+<p><strong>位</strong>(bit)是计算机中信息的最小单元。位是由电路实现的，硬件底层使用数字电路，以电压的高低作为记录信息的方式：较高的电压表示数值“1”，较低的电压表示数字“0”。因此，一个位有两种可能的值，二进制是一种非常适合表示计算机存储数据的方式。</p>
+
+
+
+<p>计算机使用字节作为最小的存储单元，大多数计算机上，一个字节等于 8 个位，因此一个字节能表示的数字范围为 0 - 255 ，或二进制形式下的 0b0000 0000 - 0b1111 1111 。如果采用 16 进制表示，那么可以很方便地表示为 0x00 - 0xFF 。</p>
+
+
+
+<p>多个字节按顺序组合，便可以组成任意数据。</p>
+
+
+
+<h2 class="wp-block-heading" id="字符与编码">字符与编码</h2>
+
+
+
+<h3 class="wp-block-heading" id="ascii编码">ASCII编码</h3>
+
+
+
+<p>字节只能表示一个数字，为了让人们可以更好地明白其中的含义，需要将其解读为文字符号，即<strong>字符</strong>，然后显示在屏幕上。例如，如果一个字节中存储的数据是 0x08 ，如果计算机将其解读为第八个英文字母，那么计算机处理之后可以在屏幕上显示“h”；如果连续 5 个字节中存储的数据是 [0x08, 0x05, 0x0C, 0x0C, 0x0E] ，计算机处理之后就可以根据类似的规则转换为连续的英文字符“hello”，根据这种方式就可以将计算机中保存的数据转换为人们容易理解的形式。</p>
+
+
+
+<p>根据以上思路，人们制定了 <strong>ASCII</strong>(American Standard Code for Information Interchange, 美国标准信息交换代码)，使用如下图所示的数值-字符对应关系表：</p>
+
+
+
+<figure class="wp-block-image size-full is-resized"><img decoding="async" src="/wp-content/uploads/2022/06/ASCII-Table.png" alt="" class="wp-image-293" width="769" height="511" srcset="/wp-content/uploads/2022/06/ASCII-Table.png 875w, /wp-content/uploads/2022/06/ASCII-Table-300x200.png 300w, /wp-content/uploads/2022/06/ASCII-Table-768x511.png 768w" sizes="(max-width: 769px) 100vw, 769px" /></figure>
+
+
+
+<p>ASCII 是一种编码规则，利用该规则，便可以利用数字替换实际的形状符号。特别地，数值 0 - 31 表示控制字符，而不是实际可显示的形状符号。例如，当计算机处理时遇到数值 0x07 ，它会控制某些设备发出响铃，而不是控制屏幕显示符号；当计算机遇到遇到数值 0x10 ，那么就表示一行的结束，应该控制屏幕从下一行开始显示字符。</p>
+
+
+
+<p>这种编码规则是双向的，对字符<strong>编码</strong>(encoding)可以将字符串转换为字节形式的数据；而对字节数据<strong>解码</strong>(decoding)则可以将字节形式的数据转换为字符串，并显示出来。</p>
+
+
+
+<p>ASCII 使用的字符代码范围从 0 到 127 ，对应 7 个二进制位，完全可以使用一个字节存储一个字符代码。这种情况下多余的 1 个二进制位还可以用作校验，检查这个字符在存储的过程中有没有发生意外变动。</p>
+
+
+
+<h3 class="wp-block-heading" id="gbk编码">GBK编码</h3>
+
+
+
+<p>ASCII 码可以表示出所有的英文字符、数字和常用标点，但是一个字节最多只有 256 种不同的值，尽管 ASCII 只使用了其中的一半，但还是不足以容纳其它语言的字符。常用的汉字大约有 3000 个，已经远远超出了一个字节的容纳能力了，因此这种情况下需要规定一套新的字符编码规则。</p>
+
+
+
+<p>为了能表示更多的字符，许多编码方案往往用多个字节来指代一个字符。<strong>GB2312</strong> 是一种用于表示汉字的编码方案，它扩展自 ASCII 码，使用两个字节来表示一个汉字。</p>
+
+
+
+<p>为了兼容 ASCII 码，一个数值小于等于 127 的字符的意义与原来相同，但两个连续的、数值大于 127 的字符连在一起时，就表示一个汉字。但是 GB2312 也没有完全用尽两个字节，前面的一个字节（称为高字节）的范围从 0xA1 至 0xF7 ，后一个字节（称为低字节）的范围从 0xA1 到 0xFE ，组合起来可以表达出大约 7000 多个简体汉字，以及必要的拼音符号、希腊字母、甚至日文假名都包括在内。</p>
+
+
+
+<p>为了区分中文的标点和英文的标点，GB2312 编码为数字、标点、字母也重新编排了两个字节长的编码，也就是输入法中存在的“全角”字符。而兼容的 ASCII 中存在的标点符号就是“半角”字符。</p>
+
+
+
+<p>为了表示更多的字符，GB2312 后来再次被扩展，将两个字节中的所有组合全部使用，发展为了 <strong>GBK 编码</strong>。GBK 向下兼容 GB2312 的所有编码情况的同时，增加了许多生僻的汉字和不太常用的符号。</p>
+
+
+
+<p>GB2312 和 GBK 是对 ASCII 的中文扩展，不同的国家或地区都针对本国语言产生的新的编码标准。基于这种用两个或多个字节表示一个字符的编码思路，台湾地区针对繁体推出了 Big5 编码方案，日本针对日文与日文汉字推出了 Shift_JIS 编码方案，欧洲地区也有类似的编码方案。它们都兼容 ASCII 编码，也就是说如果一个字节的值小于等于 127 ，那么就按 ASCII 编码处理；如果大于 127 ，那么就和后续的字节一起当做当前编码的内容处理。</p>
+
+
+
+<blockquote class="wp-block-quote"><p>在 Windows 等系统上也可以看到一种称为“ANSI”的编码，实际上这是一种误称，实际代表的是系统当前使用的本地化编码方案。如果改变系统设置里的区域，相应的编码方案也将改变。</p></blockquote>
+
+
+
+<h2 class="wp-block-heading" id="unicode">Unicode</h2>
+
+
+
+<h3 class="wp-block-heading" id="unicode字符集">Unicode字符集</h3>
+
+
+
+<p>随着互联网的兴起，世界各地的信息开始在互联网上流通。这时，不同的编码方案就免不了发生碰撞。一串相同的字节序列使用不同的编码解码，得到的信息是完全不一样的。例如，中文 "你好" 如果使用 GBK 编码，得到的字节序列为 [0xc4, 0xe3, 0xba, 0xc3] ，但反过来如果使用 Big5 对这串字节序列解码，得到的内容为 "斕疑" ，如果使用 Shift_JIS 解码，得到的内容为 "ﾄ羲ﾃ" 。这也就导致不同地区发送的字节形式的消息，如果被另一个地区接收到，那么使用另一个地区的编码对其处理后的结果完全没法阅读，这就是通常看到的“乱码”。</p>
+
+
+
+<p>因此，ISO(International Organization for Standardization, 国际标谁化组织)重新制定了一套完整的编码方案，称为 Universal Coded Character Set ，俗称 <strong>Unicode</strong> 或“万国码”。Unicode 在设计时，包括了地球上所有文字和和符号，甚至还有多余的编号保存简单的表情(emoji)。</p>
+
+
+
+<p>Unicode 使用两个字节统一表示所有的字符，包括原有的 ASCII 字符也不例外。不过原有的 ASCII 除了由一个字节扩展成两个字节外，还是按原有的顺序占据 U+0000 - U+007F 这最前面的位置。除此之外，其它语言文字也按照一定规则被编排进去，例如汉字占据其中的 U+4E00 - U+9FA5 这些码位。</p>
+
+
+
+<p>完整的 Unicode 字符表可以在 <a href="https://home.unicode.org/">https://home.unicode.org/</a> 中找到，以下展示了部分 Unicode 字符：</p>
+
+
+
+<figure class="wp-block-embed is-type-wp-embed is-provider-unicode wp-block-embed-unicode"><div class="wp-block-embed__wrapper">
+<div class="video-container"><blockquote class="wp-embedded-content" data-secret="lVYsIqCpTk"><a href="https://home.unicode.org/">Home</a></blockquote><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" title="&#8220;Home&#8221; &#8212; Unicode" src="https://home.unicode.org/embed/#?secret=s2nAUdxGQw#?secret=lVYsIqCpTk" data-secret="lVYsIqCpTk" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></div>
+</div></figure>
+
+
+
+<p>Unicode 从诞生起也一直在发展。最早的 Unicode 使用两个字节来表示为一个字符，这种标准称为 UCS-2（其中 UCS 指 Unicode Character Set），因此总共可以组合出 65535 不同的字符。然而 Unicode 的野心是很大的，它除了表示文字、符号之外，还想表示一个文字的多种不同变体形式。例如，一个汉字有简体和繁体两种表示形式，而繁体的汉字在香港、台湾和日本的写法可能略微有差别的。再加上 Unicode 包含了许多表情符号，因此这 65535 个字符很快就不够用了。</p>
+
+
+
+<p>基于此，Unicode 提供了 UCS-4 方案，使用四个字节来表示一个字符。UCS-4 是向下兼容 UCS-2 的，其中最高字节的最高位为 0 ，其它 7 位将 Unicode 字符集划分为了 128 个<strong>组</strong>(group)，每个组再根据次高字节划分为 256 个<strong>平面</strong>(plane)，每个平面根据次低字节划分为 256 <strong>行</strong>(row)，每行有 256 个<strong>码位</strong>(cell)，这样就可以组合出约 21 亿个不同的字符出来，这下完全够用了。</p>
+
+
+
+<p>UCS-4 不仅是完全够用，甚至还过于冗余，这 21 亿个码位不可能用的完，更不可能一下塞满，只能根据需求向上添加。截止 2021 年 9 月，Unicode 只编排了 144,697 个字符，分布在平面 0 、平面 1 、平面 2 、平面 14 、平面 15 和平面 16 上。其中平面 15 和平面 16 只作为专用区使用。所谓专用区，就是保留给大家放自定义字符的区域。例如，苹果公司就在专用区上定义了一系列的公司图标，但这些图标在 Android 和 Windows 平台都无法正确显示。</p>
+
+
+
+<h3 class="wp-block-heading" id="utf编码方案">UTF编码方案</h3>
+
+
+
+<p>目前的 Unicode 连平面都只使用了一个零头，更用不到组了。这种使用 4 个字节存储一个字符的形式显然过于浪费，尤其是对于只需要使用 ASCII 字符的场景来说，足足有 3 倍的空间浪费。在互联网传输数据时，过多冗余的信息会造成传输缓慢、收发效率低下的问题。基于此，Unicode 提出了 UCS Transformation Format ，简称 <strong>UTF</strong> ，旨在对现有的 Unicode 字符集重新再次编码，再次编码后的字符可以按照一定规则重新解码为 Unicode 字符集。</p>
+
+
+
+<p>最简单的编码方案称为 <strong>UTF-32</strong> ，即直接使用 UCS-4 的四字节共 32 位的形式。这种形式的编码压根没有减少字符占用的空间，因此并不实用。Unicode 实际只使用了 32 位中的 21 位，既然 Unicode 并没有用到组，那么这部分空间完全可以压缩。Unicode 也只用了平面的一个零头，这部分空间如果能进一步被压缩，那显然是更好的。</p>
+
+
+
+<p>但是再怎么压缩，存储的最小单元是字节，为了支持到平面这个维度，最小也只能压缩到 3 字节，这种情况下对于多数只需要使用 ASCII 字符的场景来说，还是有 2 倍的空间浪费。</p>
+
+
+
+<h3 class="wp-block-heading" id="utf-16">UTF-16</h3>
+
+
+
+<p>基于此，一种变长的编码方案 UTF-16 被提出：对于 Unicode 码小于 U+10000 的字符（也就是原先的 UCS-2 字符），使用 2 个字节直接存储，不用进行编码转换；但对于 U+10000 - U+10FFFF 之间的字符，则需要使用 4 个字节存储：首先将字符对应的 Unicode 码 减去 0x10000 ，得到的结果不超过 20 位，再将这 20 位分为高 10 位和低 10 位，分别塞进前两个字节的低 10 位和后两个字节的低 10 位中。并且前两个字节剩余的 6 个二进制位固定为 0b110110 ，后两个字节剩余的 6 个二进制位固定为 0b110111 。</p>
+
+
+
+<p>下表展示了 UTF-16 对 Unicode 的编码规则：</p>
+
+
+
+<figure class="wp-block-table"><table><thead><tr><th>Unicode 编码（十六进制）</th><th>Unicode 编码（有效二进制）</th><th>UTF-16编码方式</th></tr></thead><tbody><tr><td>0x0000 0000 - 0x0000 FFFF</td><td>0b xxxxxxxx xxxxxxxx</td><td>0b xxxxxxxx xxxxxxxx</td></tr><tr><td>0x0001 0000 - 0x0010 FFFF</td><td>0b yyyy yyyyyyxx xxxxxxxx</td><td>0b 110110yy yyyyyyyy 110111xx xxxxxxxx</td></tr></tbody></table></figure>
+
+
+
+<p>同时，为了区分两个字节的 UTF-16 和四个字节的 UTF-16 ，Unicode 还专门保留了 U+D800（ 0xD8 的二进制为 0b110110 00 ）到 U+DFFF（ 0xDF 的二进制为 0b110111 11 ）不被任何字符使用，这样只要解析到 0b110110yy 形式的字节或 0b110111xx 形式的字节，就可以认为这是一个四字节的 UTF-16 了。</p>
+
+
+
+<p>这种编码方案十分复杂，但它至少成功压缩了 Unicode 编码的存储。由于目前最多只使用到第 16（即第 0x10 ）平面，因此 UTF-16 可以完全对目前所有的 Unicode 字符编码。</p>
+
+
+
+<h3 class="wp-block-heading" id="big-endian与little-endian">Big Endian与Little Endian</h3>
+
+
+
+<p>在网络发送数据时，还有一个问题需要解决：一个字符有多个字节，但在发送时只能一个字节一个字节发送。操作系统可能有两种发送方式：可以先发送最高字节，也可以先发送最低字节。这两种发送方式会造成数据的解读不同，从而破坏 Unicode 编码。</p>
+
+
+
+<p>不过 Unicode 定义了一个专门的控制符：零宽度非换行空格(zero width no-break space ，它的 Unicode 码位为 U+FEFF ，如果先发送高位（这种发送方式称为 big endian ，大端法），那么目标会先接收到 0xFE 字节；反之如果先发送低位（这种发送方式称为 little endian ，小端法），那么目标会先接收到 0xFF 字节。</p>
+
+
+
+<p>这样，只要根据最先接收到的字符，就可以判断是高位先发送还是低位先发送。这种用来判断哪个字节先发送的特殊字符称为 byte order mark (BOM)。在本地使用 UTF-16 存储文本文件时，也需要在文件头带上 BOM 。</p>
+
+
+
+<h3 class="wp-block-heading" id="utf-8">UTF-8</h3>
+
+
+
+<p>UTF-16 尽管对编码实现了一次压缩，但是这种使用二或四字节的形式还是有一些问题，尤其是 ASCII 码也被强制编排为两字节，这对于大多数使用 ASCII 的情况还是不够友好。不过，Unicode 还存在一种更强大的编码方案：UTF-8 。</p>
+
+
+
+<p>UTF-8 使用控制位与字符位组成，控制位表示当前字符占据的字节数，字符位则对应真正的 Unicode 字符位。其中：</p>
+
+
+
+<ul><li>如果一个字节的最高位为 0 ，那么该字符就占据一个字节，剩下的 7 位则完全对应 7 位的 ASCII 码</li><li>对于 n 字节字符，第 1 个字节的最高 n 位为 1 ，第 n+1 位为 0 ，并且其它字节的最高两位都为 10 </li></ul>
+
+
+
+<p>下表展示了 UTF-8 与 Unicode 的转换关系:</p>
+
+
+
+<figure class="wp-block-table"><table><thead><tr><th>Unicode</th><th>UTF-8</th></tr></thead><tbody><tr><td>U+0000 - U+007F</td><td>0b0xxxxxxx</td></tr><tr><td>U+0080 - U+07FF</td><td>0b110xxxxx 10xxxxxx</td></tr><tr><td>U+0800 - U+FFFF</td><td>0b1110xxxx 10xxxxxx 10xxxxxx</td></tr><tr><td>U+10000 - U+10FFFF</td><td>0b11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</td></tr></tbody></table></figure>
+
+
+
+<p>UTF-8 这种变长的形式完全兼容 ASCII ，这是它最大的特点。仔细观察 UTF-8 的二进制位可以发现，UTF-8 甚至不需要 BOM ，因为除去单字节的情况不考虑，多字节情况下只有最高字节的次高二进制位才是 1 。</p>
+
+
+
+<p>UTF-8 目前是世界上使用最广泛的 Unicode 编码方案，几乎所有的互联网网站都使用 UTF-8 编码，大多数 Linux 系统的默认编码也为 UTF-8 。UTF-8 与 Unicode 一起，构成了现代编码方案的基础。</p>
+
+
+
+<p>当然，UTF-8 也是有缺点的：尽管目前 UTF-8 可以使用一个到四个字节灵活地表示所有的 Unicode 编码，但是如果 Unicode 再往上添加，UTF-8 也不可避免地需要再次添加长度，甚至最长需要 6 个字节才能表示 UCS-4 的所有情况。不过，在可遇见的将来，人们都不需要这么多字符。</p>
+
+
+
+<p>Unicode 与编码经过了一个很长的发展过程，人们为了统一编码附出了许多努力。在此过程中出现了许多编码方案的尝试。为了保持编码的兼容，也付出过惨痛的代价：Windows 系统为了让二十年前还没有使用 UTF-8 编码的程序不出现乱码的情况，至今系统的默认编码都不是 UTF-8 。</p>
+
+
+
+<p>Unicode 也是在不断发展的，除了继续向 Unicode 添加字符以外，也有尝试过多种 Unicode 的替代编码方案。GB18030 是一种针对汉字的编码改善方案，它在完全兼容 GB2312（部分兼容 GBK ）的同时，也添加了对 Unicode 的支持。总之，为了规范编码，人们还有很长的一段路要走。</p>
+
+
+
+<h2 class="wp-block-heading" id="参考资料-延伸阅读">参考资料/延伸阅读</h2>
+
+
+
+<p><a href="https://en.wikipedia.org/wiki/Universal_Coded_Character_Set">https://en.wikipedia.org/wiki/Universal_Coded_Character_Set</a></p>
+
+
+
+<p><a href="https://en.wikipedia.org/wiki/Unicode">https://en.wikipedia.org/wiki/Unicode</a></p>
+
+
+
+<p><a href="https://baike.baidu.com/item/%E7%BB%9F%E4%B8%80%E7%A0%81/2985798">https://baike.baidu.com/item/%E7%BB%9F%E4%B8%80%E7%A0%81/2985798</a></p>
+
+
+
+<p><a href="https://en.wikipedia.org/wiki/UTF-16">https://en.wikipedia.org/wiki/UTF-16</a></p>
+
+
+
+<p><a href="https://en.wikipedia.org/wiki/UTF-8">https://en.wikipedia.org/wiki/UTF-8</a></p>
+
+
+
+<p><a href="https://en.wikipedia.org/wiki/Byte_order_mark">https://en.wikipedia.org/wiki/Byte_order_mark</a></p>
+
+
+
+<p><a href="https://unicode.org/faq/utf_bom.html">https://unicode.org/faq/utf_bom.html</a></p>
+
+
+
+<p><a href="https://www.ibm.com/docs/en/aix/7.2?topic=globalization-code-sets-multicultural-support">https://www.ibm.com/docs/en/aix/7.2?topic=globalization-code-sets-multicultural-support</a></p>
+<p><a rel="nofollow" href="/archives/290">字节、字符与字符编码</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/archives/290/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

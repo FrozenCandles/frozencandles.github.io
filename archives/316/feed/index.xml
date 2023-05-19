@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>
+	《LVGL库入门教程02-基本控件与交互》的评论	</title>
+	<atom:link href="http://localhost/wordpress/archives/316/feed?simply_static_page=3638" rel="self" type="application/rss+xml" />
+	<link>/archives/316</link>
+	<description>FrozenCandle&#039;s Personal Site</description>
+	<lastBuildDate>Mon, 12 Dec 2022 12:08:45 +0000</lastBuildDate>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2.1</generator>
+	<item>
+		<title>
+		评论者：Hello		</title>
+		<link>/archives/316#comment-39</link>
+
+		<dc:creator><![CDATA[Hello]]></dc:creator>
+		<pubDate>Wed, 10 Aug 2022 07:33:34 +0000</pubDate>
+		<guid isPermaLink="false">/?p=316#comment-39</guid>
+
+					<description><![CDATA[回复给&lt;a href=&quot;/archives/316#comment-38&quot;&gt;Reader&lt;/a&gt;。
+
+默认有一个中文的Unicode字库 &lt;code&gt;lvgl\src\font\lv_font_simsun_16_cjk.c&lt;/code&gt; ，可以试试用 &lt;code&gt;lv_obj_set_style_text_font(label, &amp;lv_font_simsun_16_cjk, 0);&lt;/code&gt; 为标签设置中文字体。如果觉得字体不好看的话可以使用 &lt;a href=&quot;https://lvgl.io/tools/fontconverter&quot; rel=&quot;nofollow ugc&quot;&gt;https://lvgl.io/tools/fontconverter&lt;/a&gt; 提供的在线字体转换器制作新的字体]]></description>
+			<content:encoded><![CDATA[<p>回复给<a href="/archives/316#comment-38">Reader</a>。</p>
+<p>默认有一个中文的Unicode字库 <code>lvgl\src\font\lv_font_simsun_16_cjk.c</code> ，可以试试用 <code>lv_obj_set_style_text_font(label, &#038;lv_font_simsun_16_cjk, 0);</code> 为标签设置中文字体。如果觉得字体不好看的话可以使用 <a href="https://lvgl.io/tools/fontconverter" rel="nofollow ugc">https://lvgl.io/tools/fontconverter</a> 提供的在线字体转换器制作新的字体</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		评论者：Reader		</title>
+		<link>/archives/316#comment-38</link>
+
+		<dc:creator><![CDATA[Reader]]></dc:creator>
+		<pubDate>Wed, 10 Aug 2022 06:35:10 +0000</pubDate>
+		<guid isPermaLink="false">/?p=316#comment-38</guid>
+
+					<description><![CDATA[你好！文章写的很好，但是关于label标签的中文支持，是不是应该先配置支持中文的字库才可以？我没有配置字库的时候会提示 &quot;Not Found: U+xxxx&quot;的错误]]></description>
+			<content:encoded><![CDATA[<p>你好！文章写的很好，但是关于label标签的中文支持，是不是应该先配置支持中文的字库才可以？我没有配置字库的时候会提示 "Not Found: U+xxxx"的错误</p>
+]]></content:encoded>
+		
+			</item>
+	</channel>
+</rss>

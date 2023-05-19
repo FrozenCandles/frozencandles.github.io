@@ -1,0 +1,2187 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>计算机网络归档 - 冰封残烛的个人小站</title>
+	<atom:link href="http://localhost/wordpress/archives/category/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%8E%E7%BC%96%E7%A8%8B/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/feed?simply_static_page=3619" rel="self" type="application/rss+xml" />
+	<link></link>
+	<description>FrozenCandle&#039;s Personal Site</description>
+	<lastBuildDate>Mon, 12 Dec 2022 11:59:38 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2.1</generator>
+
+<image>
+	<url>/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg</url>
+	<title>计算机网络归档 - 冰封残烛的个人小站</title>
+	<link></link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>MQTT协议简介</title>
+		<link>/archives/662</link>
+					<comments>/archives/662#respond</comments>
+		
+		<dc:creator><![CDATA[Hello]]></dc:creator>
+		<pubDate>Sun, 14 Aug 2022 14:16:50 +0000</pubDate>
+				<category><![CDATA[计算机网络]]></category>
+		<category><![CDATA[嵌入式]]></category>
+		<guid isPermaLink="false">/?p=662</guid>
+
+					<description><![CDATA[<p>在传统的互联网通信中，往往采用 HTTP 作为应用层&#46;&#46;&#46;</p>
+<p><a rel="nofollow" href="/archives/662">MQTT协议简介</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>在传统的互联网通信中，往往采用 HTTP 作为应用层协议。HTTP 应用广泛、内容丰富、生态完善，使用起来非常方便。</p>
+
+<p>然而，HTTP 在嵌入式物联网的应用中，存在许多问题：首先 HTTP 过于复杂，HTTP 缓存、连接管理、认证等都是十分复杂的机制；哪怕忽略这方面的内容，HTTP 请求和响应也携带了较多无用的信息，需要较大缓存空间，且解析数据比较麻烦。</p>
+
+<p><strong>MQTT</strong>(Message Queuing Telemetry Transport, 消息队列遥测传输)<strong>协议</strong>是一种轻量级的通讯协议，由 IBM 在 1999 年发布，是一种低开销、低带宽占用的即时通讯协议，可以用极少的代码和有限的带宽，为连接远程设备提供实时可靠的消息服务，在物联网、小型设备、移动应用等方面有较广泛的应用。</p>
+
+<p>MQTT 是一个基于客户端-服务器的消息发布/订阅(publish/subscribe)传输协议，基于 TCP 服务实现，是一个应用层协议。MQTT 经过许多年的发展，目前主流版本有 3.1.1 和 5.0 ，不过 5.0 用的不多。<a href="http://www.steves-internet-guide.com/mqtt/">这篇文章</a> 对比了 MQTT 的各个版本，并给出了许多有用的资源。</p>
+
+<p>接下来介绍 MQTT 3.1.1 协议的基本内容。</p>
+
+<h2>MQTT协议包含内容</h2>
+
+<h3>消息的发布和订阅</h3>
+
+<p>MQTT 使用一种特别的<strong>消息发布/订阅</strong>模式，每一台主机可以发布一个消息，也可以接收一个消息。但需要注意的是，消息不是点对点直接从发送端到达接收端，而是由 MQTT 服务器（称为 MQTT Broker）分发的。</p>
+
+<p><strong>主题</strong>(topic)是一种消息分类的方式，每一台主机可以订阅(subscribe)一个主题。订阅主题后，一台主机可以发布(publish)该主题的消息，也可以接收该主题的消息，不同主题之间的消息各自独立，互不影响。</p>
+
+<p>下图展示了经由 MQTT Broker 订阅与发布消息的工作场景：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/08/mqtt-publish-subscribe.png" alt="" width="480">
+</figure>
+
+<p>由于 Publisher 与 Subscriber 并不会直接交互，因此两者无需知道对方的 IP 地址和端口等信息，也不一定需要同时运行。所有这一切都交给 Broker 处理。</p>
+
+<h3>主题</h3>
+
+<p>主题用于过滤消息，一个客户端只会接收到有订阅主题的消息。</p>
+
+<p>主题的表现形式是一个 UTF-8 字符串，主题之间可以存在层级关系，不同层级之间以斜杠 <code>/</code> 划分，类似于操作系统的文件体系。例如，<code>'home/lamp/red'</code> 就是一个合适的多级主题，订阅该主题的客户端只会收到该主题下的消息。</p>
+
+<p>多层主题的用途是可以通过通配符来一次影响多个主题。通配符主要有两个：</p>
+
+<p><strong>单级通配符</strong>：使用加号 <code>+</code> 作为某层主题时，可以匹配该层的所有主题。例如：</p>
+
+<ul>
+    <li><code>'home/lamp/+'</code></li>
+    <li>可以匹配如下主题：<code>'home/lamp/red'</code> 、<code>'home/lamp/blue'</code> 、<code>'home/lamp/'</code></li>
+    <li>但是不会匹配如下主题：<code>'home/lamp'</code> 、<code>'home/lamp/red/1'</code> 、<code>'home/led/red'</code></li>
+</ul>
+
+<p><strong>多级通配符</strong>：使用井号 <code>#</code> 作为某层主题时，可以该层及包含的所有子层级的主题。例如：</p>
+
+<ul>
+    <li><code>'home/#'</code></li>
+    <li>可以匹配如下主题：<code>'home/lamp'</code> 、<code>'home/lamp/red'</code> 、<code>'home'</code></li>
+    <li>特别地，使用单独 <code>#</code> 会收到所有主题的消息</li>
+</ul>
+
+<p>通过设计并订阅合理的主题，就可以自由管理每台设备应该接收的消息。</p>
+
+<h3>MQTT 报文结构</h3>
+
+<p>接下来简要介绍 MQTT 的报文。MQTT 的报文结构为：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/08/mqtt-message.png" alt="" width="420">
+</figure>
+
+<p>MQTT 报文结构大致可分为 3 个部分：</p>
+
+<ol>
+    <li>固定头：必须存在，包含必要信息并决定报文的整体结构</li>
+    <li>可变头：可选，消息类型决定了可变头是否存在及其具体内容</li>
+    <li>负载：可选，表示客户端收到的具体内容</li>
+</ol>
+
+<p>固定头第一字节的前 4 个比特表示消息类型。MQTT 一共有 16 种消息类型，分别为：</p>
+
+<table>
+    <tr>
+        <th>值</th>
+        <th>名称</th>
+        <th>流向</th>
+        <th>含义</th>
+        <th>值</th>
+        <th>名称</th>
+        <th>流向</th>
+        <th>含义</th>
+    </tr>
+    <tr>
+        <td><code>0</code></td>
+        <td>Reserved</td>
+        <td>保留</td>
+        <td>保留</td>
+        <td><code>1</code></td>
+        <td>CONNECT</td>
+        <td>客户端到服务器</td>
+        <td>请求连接</td>
+    </tr>
+    <tr>
+        <td><code>2</code></td>
+        <td>CONNACK</td>
+        <td>服务器到客户端</td>
+        <td>连接确认</td>
+        <td><code>3</code></td>
+        <td>PUBLISH</td>
+        <td>双向</td>
+        <td>发布消息</td>
+    </tr>
+    <tr>
+        <td><code>4</code></td>
+        <td>PUBACK</td>
+        <td>双向</td>
+        <td>发布确认</td>
+        <td><code>5</code></td>
+        <td>PUBREC</td>
+        <td>双向</td>
+        <td>发布收到（保证第1部分到达）</td>
+    </tr>
+    <tr>
+        <td><code>6</code></td>
+        <td>PUBREL</td>
+        <td>双向</td>
+        <td>发布释放（保证第2部分到达）</td>
+        <td><code>7</code></td>
+        <td>PUBCOMP</td>
+        <td>双向</td>
+        <td>发布完成（保证第3部分到达）</td>
+    </tr>
+    <tr>
+        <td><code></code></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><code></code></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><code>8</code></td>
+        <td>SUBSCRIBE</td>
+        <td>客户端到服务器</td>
+        <td>请求订阅</td>
+        <td><code>9</code></td>
+        <td>SUBACK</td>
+        <td>服务器到客户端</td>
+        <td>订阅确认</td>
+    </tr>
+    <tr>
+        <td><code>10</code></td>
+        <td>UNSUBSCRIBE</td>
+        <td>客户端到服务器</td>
+        <td>取消订阅</td>
+        <td><code>11</code></td>
+        <td>UNSUBACK</td>
+        <td>服务器到客户端</td>
+        <td>取消订阅确认</td>
+    </tr>
+    <tr>
+        <td><code>12</code></td>
+        <td>PINGREQ</td>
+        <td>客户端到服务器</td>
+        <td>PING 请求</td>
+        <td><code>13</code></td>
+        <td>PINGRESP</td>
+        <td>服务器到客户端</td>
+        <td>PING 应答</td>
+    </tr>
+    <tr>
+        <td><code>14</code></td>
+        <td>DISCONNECT</td>
+        <td>客户端到服务器</td>
+        <td>中断连接</td>
+        <td><code>15</code></td>
+        <td>Reserved</td>
+        <td>保留</td>
+        <td>保留</td>
+    </tr>
+</table>
+
+<p>这最开头的 4 个比特决定了后 4 个比特以及接下来部分的内容。不同的报文可变头的内容也不一样，对报文完整的结构描述可以参见<a href="http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html#_Toc398718027">文档</a>。</p>
+
+<p>接下来通过一个具体的操作实验了解 MQTT 通信的基本过程，并简要介绍几个报文的组成。</p>
+
+<h2>MQTT测试实验</h2>
+
+<h3>搭建环境</h3>
+
+<p>为了研究 MQTT 的运行，需要搭建一个可以使用 MQTT 的运行环境。</p>
+
+<p>首先安装 mosquitto ，它是一个开源、跨平台的 MQTT broker ，提供轻量级的 MQTT 发布/订阅实现。mosquitto 的官网为 <a href="https://mosquitto.org/">https://mosquitto.org/</a> 。</p>
+
+<p>似乎 mosquitto 2.0 及以上才支持 MQTT 5 。各个版本的安装细节可以参照 <a href="https://mosquitto.org/download/">https://mosquitto.org/download/</a> 。可以在 Linux 上直接通过命令安装 mosquitto 。例如，以下是在 Ubuntu 上安装 mosquitto 的命令：</p>
+
+<div class="codeblock code-console">$ sudo apt-get update
+$ sudo apt-get install -y mosquitto mosquitto-clients</div>
+
+<p>然后检查安装的版本并启动服务：</p>
+
+<div class="codeblock code-console">$ mosquitto -v
+1660444055: mosquitto version 2.0.10 starting
+1660444055: Using default config.
+1660444055: Starting in local only mode. Connections will only be possible from clients running on this machine.
+1660444055: Create a configuration file which defines a listener to allow remote access.
+1660444055: For more details see https://mosquitto.org/documentation/authentication-methods/
+1660444055: Opening ipv4 listen socket on port 1883.
+1660444055: Opening ipv6 listen socket on port 1883.
+1660444055: mosquitto version 2.0.10 running</div>
+
+<p>可以看到 MQTT 默认运行的端口号为 1883 。</p>
+
+<p>接下来需要一个合适的 MQTT 客户端用于发布消息。这里推荐 MQTTX ，它是一个开源跨平台的 MQTT 桌面客户端，功能丰富且界面精美，使用起来就像社交聊天软件一样方便。它可以在 <a href="https://mqttx.app/">https://mqttx.app/</a> 下载并像一般的软件一样安装。</p>
+
+<p>MQTTX 的使用可以参考<a href="https://mqttx.app/docs">文档</a>，以下简单介绍了界面各个部分的作用：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/08/mqtt-mqttx-new.png" alt="" width="750">
+</figure>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/08/mqtt-mqttx-chat.png" alt="" width="750">
+</figure>
+
+<p>可以在软件中建立两个连接，分别订阅同一个主题，然后在一个连接中发送一些消息，即可在另一个连接中收到同样的信息。如果想研究通信过程中交换了哪些报文，可以使用 WireShark 等软件捕获并分析。以下是一次订阅并发送消息的过程中，WireShark 捕获到的信息：（蓝色是 client 向 broker 发送，紫色是 broker 回复 client ）</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/08/mqtt-communication.png" alt="" width="500">
+</figure>
+
+<h3>模拟通信</h3>
+
+<p>接下来使用套接字程序模拟简单的通信（消息发布）过程，可以使用任意支持套接字编程的语言编写程序，以下使用 Python 。消息发布的过程可以参考<a href="http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html#_Toc398718099">文档的相关部分</a>。</p>
+
+<p>首先必须发送 CONNECT 报文连接到 broker ，因此程序需要发送如下字节：</p>
+
+<div class="codeblock code-template">10 19 00 04 4D 51 54 54 04 02 00 3C 00 0D 50 79 74 68 6F 6E 20 73 6F 63 6B 65 74 
+</div>
+
+<p>以上各个字节的含义分别是固定头、剩余长度值（除了前两字节）、协议名长度（两个字节）、协议名 <code>'MQTT'</code>（四个字节）、版本号（4 代表 v3.1.1）、标志位、会话状态的生存时间（两个字节）、客户端 ID 长度（两个字节）、客户端 ID <code>'Python socket'</code> 。更多细节建议参考<a href="http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html#_Toc398718028">官方文档</a> 。</p>
+
+<p>接下来编写 Python 套接字程序，将以上字节发送给 mosquitto ：</p>
+
+<div class="vscode-block"><div><span style="color: #d73a49;font-weight: bold;">import</span> <span style="color: #6f42c1;">socket</span></div><div>server_name <span style="color: #d73a49;">=</span> <span style="color: #032f62;">'localhost'</span></div><div>server_port <span style="color: #d73a49;">=</span> <span style="color: #005cc5;">1883</span></div><br><div>client <span style="color: #d73a49;">=</span> <span style="color: #6f42c1;">socket</span>.<span style="color: #6f42c1;">socket</span>(<span style="color: #6f42c1;">socket</span>.AF_INET, <span style="color: #6f42c1;">socket</span>.SOCK_STREAM)</div><div>client.<span style="color: #6f42c1;">connect</span>((server_name, server_port))</div><br><div><span style="color: #d73a49;font-weight: bold;">with</span> <span style="color: #6f42c1;">open</span>(<span style="color: #032f62;">'mqtt-connect.bin'</span>, <span style="color: #032f62;">'rb'</span>) <span style="color: #d73a49;font-weight: bold;">as</span> file:</div><div>&#160; &#160; client.<span style="color: #6f42c1;">send</span>(file.<span style="color: #6f42c1;">read</span>()) &#160;<span style="color: #a8a8a8;"># CONNECT</span></div><div><span style="color: #6f42c1;">print</span>(client.<span style="color: #6f42c1;">recv</span>(<span style="color: #005cc5;">1024</span>)) &#160; &#160; &#160;<span style="color: #a8a8a8;"># CONNACK</span></div><div>client.<span style="color: #6f42c1;">close</span>()</div></div>
+
+<p>运行以上程序，可以在 mosquitto 中看到活动记录：</p>
+
+<div class="codeblock code-console">1660459407: New connection from 127.0.0.1:13080 on port 1883.
+1660459407: New client connected from 127.0.0.1:13080 as Python socket (p2, c1, k60).
+1660459407: No will message specified.
+1660459407: Sending CONNACK to Python socket (0, 0)
+1660459407: Client Python socket closed its connection.
+</div>
+
+<p>同时 Python 程序也会接收到它的响应信息 <code>b' \x02\x00\x00'</code> ，该信息的首个字节为 0x20（等价于空格的 ASCII 码），说明这是一个 CONNACK 连接确认信息，剩余长度为 0x02 ，分别用于初始化会话设置和表示连接已接受（响应状态码）。</p>
+
+<p>接下来尝试发布消息，此时控制报文类型为 PUBLISH(3) ，并且第一个字节的后 4 位有了意义，这些标志位的细节可以参见<a href="http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html#_Toc398718037">文档</a>。例如，第一个字节为 0x34（或 0b0011 0100），代表这是 PUBLISH 报文、第一次请求发送、只分发一次、不保留消息。</p>
+
+<p>这些标志位中值的注意的是<strong>服务质量</strong>(Quality of Service, QoS)标志位，它是 MQTT 的一个特性，用于处理复杂环境下嵌入式网络的中断和干扰，避免信息丢失。QoS 有三个等级，不同等级下消息的发送方需要采取不同的措施应对当前的网络情况：</p>
+
+<ul>
+    <li>QoS 0 ：At most once delivery ，仅发送消息，不考虑丢失及重发</>
+    <li>QoS 1 ：At least once delivery ，发送消息后需要关注 ACK 响应并可能重发，保证消息至少能到达一次，但无法保证消息重复</li>
+    <li>QoS 2 ：Exactly once delivery ，使用复杂的消息重发机制，保证消息到达对方并且严格只到达一次，但开销最大</li>
+</ul>
+
+<p>本次发布消息时，总共发送如下字节：</p>
+
+<div class="codeblock code-template">34 12 00 09 64 65 6D 6F 2F 74 65 73 74 AE 00 68 65 6C 6C 6F 
+</div>
+
+<p>各个字节的含义分别是固定头、剩余长度值、主题长度（两个字节）、主题 <code>'demo/test'</code>、消息标识符（两个字节）、消息 <code>'hello'</code> 。</p>
+
+<p>不过仅仅发送以上报文，还不能在客户端中收到包含的信息。阅读<a href="http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.html#_Toc398718102">文档的相关部分</a>可以发现，在接收到 PUBLISH 的响应 PUBREC 后，发送端还需要响应 PUBREL ，内容为：</p>
+
+<div class="codeblock code-template">62 02 AE 00
+</div>
+
+<p>包括固定头、剩余长度值和消息标识符（两个字节）。</p>
+
+<p>在确认发布完毕后，broker 会将该消息发送给其订阅者，然后发布者便可以主动取消连接了：</p>
+
+<div class="codeblock code-template">E0 00
+</div>
+
+<p>将以上字节发送出去后，便可以在 MQTTX 订阅对应主题的连接中接收到发送的消息了：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/08/mqtt-mqttx-receive-message.png" alt="" width="400">
+</figure>
+
+<p>同时，broker 显示的完整活动记录如下：</p>
+
+<div class="codeblock code-console">1660476177: New connection from 127.0.0.1:11074 on port 1883.
+1660476177: New client connected from 127.0.0.1:11074 as Python socket (p2, c1, k60).
+1660476177: No will message specified.
+1660476177: Sending CONNACK to Python socket (0, 0)
+1660476177: Received PUBLISH from Python socket (d0, q2, r0, m44544, 'demo/test', ... (5 bytes))
+1660476177: Sending PUBREC to Python socket (m44544, rc0)
+1660476177: Received PUBREL from Python socket (Mid: 44544)
+1660476177: Sending PUBLISH to MyPC (d0, q0, r0, m0, 'demo/test', ... (5 bytes))
+1660476177: Sending PUBCOMP to Python socket (m44544)
+1660476177: Client Python socket closed its connection.</div>
+
+<p>对 MQTT 简单通信的分析就到这里为止，感兴趣的话可以参考以上步骤分析消息的订阅与分发过程。</p>
+
+<h3>关于遗嘱消息</h3>
+
+<p><strong>遗嘱消息</strong>(will message)是 MQTT 的特点之一，用于在某些设备意外断线时，将一个特定的消息发送给第三方。</p>
+
+<p>遗嘱是一种特殊的 PUBLISH 消息，在设备意外断线时，由 broker 将其发布到特定的主题上，因此 broker 需要提前存储遗嘱消息。</p>
+
+<p>遗嘱消息会在设备与服务端连接时，通过客户端的 CONNECT 报文指定。如果 CONNECT 报文标志字节的第 2 位遗嘱标志位被置 1 ，则该报文包含需要记录的遗嘱消息，并在 CONNECT 报文的最后包含以下信息：</p>
+
+<ul>
+    <li>遗嘱主题长度</li>
+    <li>遗嘱主题</li>
+    <li>遗嘱消息长度</li>
+    <li>遗嘱消息</li>
+</ul>
+
+<p>遗嘱相关的信息将会保存在服务器中，并在发生意外时被推送到订阅的客户端中，直到客户端主动断开连接才被清除。</p>
+
+<p>本次对 MQTT 的简单介绍就到这里为止了。其余部分官方文档已经写的足够详细，这里不再重复。总的来说，MQTT 相比 HTTP ，报文非常短小紧凑，几乎每一个字节都没有浪费，极大缓解了嵌入式网络带宽不足的问题。同时，MQTT 也包含了较为完善的错误处理机制，可以在网络条件较差的情况下及时纠错。</p>
+
+<h2>参考资料/延伸阅读</h2>
+
+<p>
+    <a href="https://mqtt.org/">https://mqtt.org/</a><br>
+    MQTT 官网，从中可以找到许多有用的资料
+</p>
+
+<p>
+    <a href="https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html">https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html</a><br>
+    MQTT 5 最新文档
+</p>
+
+<p>
+    <a href="https://developer.ibm.com/articles/iot-mqtt-why-good-for-iot/">https://developer.ibm.com/articles/iot-mqtt-why-good-for-iot/</a><br>
+    IBM 的 MQTT 介绍文档
+</p>
+
+<p>
+    <a href="https://github.com/mqtt/mqtt.org/wiki">https://github.com/mqtt/mqtt.org/wiki</a><br>
+    MQTT 社区 wiki
+</p>
+
+<p>
+    <a href="https://www.emqx.com/zh/mqtt/public-mqtt5-broker">https://www.emqx.com/zh/mqtt/public-mqtt5-broker</a><br>
+    MQTTX 的公司提供的一个用于测试学习的 MQTT 服务器
+</p>
+
+<p>
+    <a href="https://www.emqx.com/zh/mqtt">https://www.emqx.com/zh/mqtt</a><br>
+    它同时提供的 MQTT 介绍文章
+</p>
+
+<p>
+    <a href="https://mcxiaoke.gitbooks.io/mqtt-cn/content/mqtt/01-Introduction.html">https://mcxiaoke.gitbooks.io/mqtt-cn/content/mqtt/01-Introduction.html</a><br>
+    MQTT 协议中文版
+</p>
+
+<p>
+    <a href="https://www.hivemq.com/mqtt-essentials/">https://www.hivemq.com/mqtt-essentials/</a><br>
+    MQTT 系列介绍文章
+</p>
+<p><a rel="nofollow" href="/archives/662">MQTT协议简介</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/archives/662/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>计算机网络06-网络层概述与网际协议IP</title>
+		<link>/archives/550</link>
+					<comments>/archives/550#respond</comments>
+		
+		<dc:creator><![CDATA[Hello]]></dc:creator>
+		<pubDate>Sun, 24 Jul 2022 14:34:16 +0000</pubDate>
+				<category><![CDATA[计算机网络]]></category>
+		<category><![CDATA[IP]]></category>
+		<guid isPermaLink="false">/?p=550</guid>
+
+					<description><![CDATA[<p>网络层简介 网络层的主要作用为实现网络互联，即将分组&#46;&#46;&#46;</p>
+<p><a rel="nofollow" href="/archives/550">计算机网络06-网络层概述与网际协议IP</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<h2>网络层简介</h2>
+
+<p>网络层的主要作用为实现网络互联，即将分组从一台主机发送到另一台主机上。为此需要实现两种功能：</p>
+
+<ol>
+    <li><strong>转发</strong>(forwarding)：网络层将输入链路到达的分组移动到适当的一条或多条输出链路中，或者可能阻挡异常分组转发</li>
+    <li><strong>路由选择</strong>(routing)：网络层决定发送方向接收方发送分组所采用的路由或路径，因此网络层需要提供合适的路由选择算法</li>
+</ol>
+
+<p>转发一般在几纳秒内完成，通常由硬件实现。路由选择一般需要几秒完成，通常采用软件实现。</p>
+
+<p>为了实现主机互联，网络层需要庞大的遍布世界的分组交换机连接形成网络拓扑结构。分组交换机指能根据首部字段将分组从输入链路接口转移到输出接口的通用分组交换设备。某些分组交换机基于链路层帧的字段转发，称为<strong>链路层交换机</strong>(link-layer switch)，其它基于网络层数据报做转发决定的分组交换机称为<strong>路由器</strong>(router)。</p>
+
+<p>为了使分组发送到正确的位置，路由器需要选择合适的路径。每台路由器中都有<strong>转发表</strong>(forwarding table)。路由器根据到达分组首部的一个或多个字段值在其转发表中索引，确定该分组将被转发的路由器的输出链路接口：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/05-network-layer-2-planes.png" alt="" width="580">
+    <figcaption>网络层的结构</figcaption>
+</figure>
+
+<p>网络层能够被分解为两个相互作用的部分：数据平面和控制平面。数据平面主要是每台路由器的功能，决定到达路由器输入链路之一的数据报转发到哪条输出链路。控制平面控制数据报沿着从源主机到目的主机的端到端路径中路由器之间的路由方式。</p>
+
+<p><strong>网络服务模型</strong>(network service model)定义了分组在发送与接收端系统之间的端到端运输特性，包括：</p>
+
+<ul>
+    <li>分组到达目的地</li>
+    <li>时延不超过某一上界</li>
+    <li>分组有序交付</li>
+    <li>一定带宽</li>
+    <li>安全性</li>
+    <li>...</li>
+</ul>
+
+<p>网络层仅提供尽力而为服务，不能保证这些服务的质量。</p>
+
+<h2 id="router-internal">路由器工作原理</h2>
+
+<p>路由器是网络层设备，它们最高只涉及处理网络层的服务，几乎不参与处理运输层与应用层。</p>
+
+<p>下图展示了路由器的基本结构：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/05-router-internal.png" alt="" width="570">
+    <figcaption>路由器体系结构</figcaption>
+</figure>
+
+<p>路由器包含 4 个主要组件：</p>
+
+<ul>
+    <li><strong>输入端口</strong>：处理输入分组的物理层和链路层功能，并执行查找决定路由器输出端口</li>
+    <li><strong>交换结构</strong>：将路由器的输入接口与输出接口相连</li>
+    <li><strong>路由选择处理器</strong>：执行控制平面功能</li>
+    <li><strong>输出端口</strong>：存储从交换结构接收的分组，执行必要的链路层和物理层功能后发送到输出链路上</li>
+</ul>
+
+<h3>输入端口处理</h3>
+
+<p>下图展示了输入端口更详细的结构：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/05-router-input-port.png" alt="" width="410">
+    <figcaption>输入端口处理</figcaption>
+</figure>
+
+<p>在输入端口中，路由器使用转发表查找输出端口。路由器用分组目的地址的前缀匹配该表项，并向匹配项相关联的链路转发分组。当有多个匹配时，路由器使用最长前缀匹配规则，寻找最长的匹配项并转发。 </p>
+
+<p>由于在高速链路中查找需要在纳秒时间内完成，因此需要通过硬件使用快速查找算法执行。</p>
+
+<p>一旦通过查找确定了分组的输出端口，则该分组就准备进入交换结构。如果其它输入端口正使用交换结构，那么该分组将被阻塞并排队，等待稍后调度通过交换结构。</p>
+
+<p>除此之外，输入端口还会处理一些别的事务，将在后续介绍。</p>
+
+<h3>交换</h3>
+
+<p>交换结构是路由器的核心部位，可以通过三种方式完成交换：</p>
+
+<ul>
+    <li>经内存交换</li>
+</ul>
+
+<p>最简单、最早的路由器由计算机充当，到达的分组通过中断的形式通知 CPU ，使其从首部提取目的地址并通过内存复制到输出端口的缓存中。</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/05-router-exchange-memory.png" alt="" width="380">
+    <figcaption>经由内存交换</figcaption>
+</figure>
+
+<p>使用该方式需要各读写一次内存，因此吞吐量只有内存读写速率的一半，且不能同时转发两个分组。</p>
+
+<p>现代经由内存交换的路由器由输入线路卡来将分组写入适当输出端口的内存中。</p>
+
+<ul>
+    <li>经总线交换</li>
+</ul>
+
+<p>输入端口可以使用一根共享总线将分组直接传送到输出端口。通常在输入端口处使分组附加一个额外的临时首部标签，经由总线可以被所有输出端口接收，但只有标签对应的输出端口才能保留并发送该分组：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/05-router-exchange-bus.png" alt="" width="360">
+    <figcaption>经由总线交换</figcaption>
+</figure>
+
+<p>一次只有一个分组能够跨越总线，因此多个分组同时到达路由器时，只有一个分组能通行，其余必须等待。路由器的交换带宽受总线速率的限制。</p>
+
+<ul>
+    <li>经互联网络交换</li>
+</ul>
+
+<p>使用复杂的互联网络可以克服单一总线的带宽限制。纵横式交换机通过互联网络总线连接多个输入与输出端口，交叉点通过交换结构控制器控制分组通行：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/05-router-exchange-network.png" alt="" width="300">
+    <figcaption>经由总线互联网络交换</figcaption>
+</figure>
+
+<p>通过闭合合适的交叉点，就可以产生合适的通行路径，并可以转发给多个输出端口。这种交换机是可并行的，且只要不发生总线冲突，转发分组将不会被阻塞。</p>
+
+<ul>
+    <li>输出端口处理</li>
+</ul>
+
+<p>输出端口处理存放在其缓存中的分组，并将其发送到输出链路上，执行所需的链路层和物理层传输功能：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/05-router-output-port.png" alt="" width="350">
+    <figcaption>输入端口处理</figcaption>
+</figure>
+
+<h3>分组排队与调度</h3>
+
+<p>在输入端口和输出端口处都可能存在分组队列：如果交换结构处理速度比输入分组到达速度慢，在输入端口处将出现分组排队等待通过；同样如果向输出链路发送分组比到达速度慢，输出端口也可能发生排队。</p>
+
+<p>交换结构一次只允许一个分组到达指定输出端口，因此如果两个输入队列待发送分组目的一致，则其中的一个分组将被阻塞，必须在输入队列等候。并且该等候分组的排在后面的所有分组也需要等待，称为<strong>线路前部(Head-Of-the-Line, HOL)阻塞</strong>：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/05-router-HOL-congestion.png" alt="" width="440">
+    <figcaption>输入端口排队与 HOL 阻塞</figcaption>
+</figure>
+
+<p>当队列缓存耗尽时，可能产生分组丢失。路由器可以丢弃到达的分组，不过有时在队列满之前也可能主动丢弃一个分组，用于向发送方提供拥塞信号。</p>
+
+<p>多个分组可能同时准备发往同一个输出端口，并且其后的分组也可能发往该输出端口，这就需要输出端口的分组调度(packet schedular)在其中选择一个分组来传输。分组调度可以使用以下方法处理：</p>
+
+<ul>
+    <li>先进先出</li>
+</ul>
+
+<p><strong>先进先出</strong>(First-In-First-Out, FIFO)队列的抽象模型如下：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/05-packet-schedular-FIFO.png" alt="" width="180">
+</figure>
+
+<p>FIFO 调度规则按照分组到达队列的次序来选择处理分组：先到达的分组先被传输，如果链路正在传输前面的分组，则后续到达的分组要排队等待。</p>
+
+<ul>
+    <li>优先权排队</li>
+</ul>
+
+<p><strong>优先权排队</strong>(priority queuing)规则使到达的分组被分类放入不同的优先权类，通常位于各自的队列中：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/05-packet-schedular-priority-queuing.png" alt="" width="240">
+</figure>
+
+<p>多个分组准备传输时，将传输有等待分组的最高优先权类中的分组。同一优先权类的分组之间通常以 FIFO 方式完成传输。非抢占式优先权排队规则可以使低优先级分组在传输时，不会被到达的高优先级分组打断，高优先级分组只能先等待。</p>
+
+<ul>
+    <li>循环和加权公平排队</li>
+</ul>
+
+<p><strong>循环排队</strong>(round robin queuing)规则下分组同样被分类，但类之间不存在严格的服务优先权，循环调度器在这些类之间轮流传输。保持工作排队(work-conserving queuing)规则在有分组排队等候时不允许链路空闲，某个类没有分组时将立即处理下一个类。</p>
+
+<p>下图表示常用的加权公平排队(Weighted Fair Queuing, WFQ)规则，可以根据权重分配服务时间占比：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/05-packet-schedular-WFQ.png" alt="" width="250">
+</figure>
+
+<p>这样可以保证所有类都获得一定的吞吐量。</p>
+
+<h2 id="internet protocol">网际协议</h2>
+
+<h3>网际协议简介与IPv4数据报</h3>
+
+<p><strong>网际协议</strong>(Internet Protocol, IP)是网络层一个非常重要的协议，IP 协议组织了互联网上的主机，对网络层运作至关重要。</p>
+
+<p>IP 协议有两个最重要的版本，目前最常用的版本是 IPv4 。</p>
+
+<p>首先研究 IPv4 数据报，其格式为：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/05-ip-message.png" alt="" width="370">
+</figure>
+
+<p>其包含的一些关键字段如下：</p>
+
+<ul>
+    <li>版本：通过版本号可以确认数据报剩余部分的格式，IP 版本 6 的数据报格式与上图并不一样，将在后文研究</li>
+    <li>首部长度：由于选项长度可变，因此需要该字段指示首部长度。如果不包含选项，典型的 IP 数据报首部长度为 20 字节</li>
+    <li>服务类型：使不同类型的 IP 数据报区分。不同类型的 IP 数据报在路由器中往往调度方式也不同</li>
+    <li>数据报长度：数据报包括数据的完整长度</li>
+    <li>标识、标志、片偏移：与 IP 分片有关，将在后文介绍</li>
+    <li>生命周期(Time-To-Live, TTL)：确保数据报在路由环路等情况下不会永远存在。每一台路由器处理数据报时，该值便减一，减至零便被丢弃</li>
+    <li>协议：指示 IP 数据报的数据部分需要被交付给哪个运输层协议。在 <a href="/archives/453">UDP 协议的检验和计算实验</a>中介绍过计算检验和时需要添加伪首部，伪首部的协议类型就是该字段</li>
+    <li>源和目的 IP 地址：IP 地址用于指示主机，在前面几篇文章中都提到了该地址的作用，将在接下来详细介绍它</li>
+    <li>选项：一些额外的信息</li>
+    <li>数据：有效载荷（例如运输层报文段）</li>
+</ul>
+
+<h3>IPv4数据报分片</h3>
+
+<p>IPv4 支持的最大报文长度为 65535 字节，但是链路层未必能承载这么多字节。一个链路层帧能承载的最大数据量称为<strong>最大传送单元</strong>(Maximum Transmission Unit, MTU)。MTU 限制着数据报的长度，并且在不同的链路上该长度可能会变化。</p> 
+
+<p>为此，需要将 IP 数据报分片，用单独的链路层帧封装这些较小的 IP 数据报并发送。这些较小的数据报称为<strong>片</strong>(fragment)。</p>
+
+<p>片在其到达目的地运输层以前需要重新组装。首部的标识字段区分不同的原始数据报；原始数据报的最后一个片的标志位被置为 0 ，其它片的标志位被置 1 以提示分片接收完毕可以组装；偏移字段表示这些片位于原始数据报中的哪个位置，以避免片丢失或乱序到达。</p>
+
+<h3>IPv4编址</h3>
+
+<p>主机或路由器与物理链路之间的边界称为接口，它们为了能发送或接收数据报，要求每个接口都需要拥有一个独立的 IP 地址。IP 地址是互联网上每一台主机每一个接口 32 比特的标识符，可用的 IP 地址约有 40 亿个。</p>
+
+<p>IP 地址通常按所谓点分十进制记法(dotted-decimal notation)书写，即地址中的每个字节用十进制形式书写，各字节间以点号隔开。例如，如果一个 IP 地址为 </p>
+
+<p style="text-align: center;">01111011 00111000 01001110 10011010</p>
+
+<p>那么它通常书写为：</p>
+
+<p style="text-align: center;">123.56.78.154</p>
+
+<p>全球互联网中的每台主机和路由器上的每个接口，都必须有唯一的 IP 地址。但这些地址不能随意地选择，需要由其连接的子网来确定。</p>
+
+<p>考虑以下连接，路由器的两个接口连接两组主机。路由器的一个接口和主机的多个接口之间通过一个无路由器的网络相连，称为<strong>子网</strong>(subnet)。IP 编址为这个子网提供了一个<strong>子网掩码</strong>(network mask)，指示接入该子网的任何主机最左侧的若干比特都要相同。</p>
+
+<p>以下示例共有 3 个子网，注意两个路由器接口间也存在一个子网：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/05-ip-addressing.png" alt="" width="550">
+</figure>
+
+<p>最左侧的子网掩码可以表示为 <code>172.217.2.0/24</code> ，斜杠表示 IP 地址最左侧的 24 比特相同。互联网的地址分配策略称为<strong>无类别域间路由选择</strong>(Classless Interdomain Routing, CIDR)，它将地址分为前缀和剩余部分，一个区域通常被分配一块前缀相同的连续地址，这样路由器转发时只需匹配该前缀就可以发往正确的方向，大大减少了转发表长度。前缀越长，对应的地址块越小，地址越详细。</p>
+
+<p>还有一个特殊的 IP 地址 <code>255.255.255.255</code> ，称为广播地址。当一台主机发出的数据报具有目的地址为广播地址时，该报文会交付给同一个网络中的所有主机。</p>
+
+<p>IP 地址由互联网名字和编号分配机构(Internet Corporation for Assigned Names and Numbers, ICANN)管理，并且该组织还管理 DNS 根服务器。ICANN 向区域性互联网注册机构分配地址，从而为每一台主机提供 IP 。</p>
+
+<h3>动态主机配置协议</h3>
+
+<p>一个组织一旦获得了一块地址，它就可为本组织内的主机与路由器接口逐个分配。路由器地址一般远程手工配置，然而主机地址一般使用<strong>动态主机配置协议</strong>(Dynamic Host Configuration, DHCP)完成。DHCP 使主机每次连接到网络时，都可以自动分配一个合适的 IP 地址，并通知主机子网掩码、本地 DNS 服务器地址等信息。</p>
+
+<p>DHCP 是一个客户-服务器应用层协议，基于 UDP 提供的服务。每个子网需要有一台 DHCP 服务器或使用路由器充当网络中继代理，服务器使用端口号 67 ，客户使用端口号 68 。</p>
+
+<p>DHCP 为一台新到达的主机分配 IP 需要经历以下 4 个步骤：</p>
+
+<ul>
+    <li>DHCP 服务器发现：一台新到达的主机可以通过使用 <strong>DHCP 发现报文</strong>发现 DHCP 服务器，该报文通过目的地址 <code>255.255.255.255</code> 向子网所有节点中广播，并使用源 IP 地址 <code>0.0.0.0</code> 代表本主机</li>
+    <li>DHCP 服务器提供：DHCP 服务器收到一个 DHCP 发现报文后，使用 <strong>DHCP 提供报文</strong>作响应，向客户提供推荐的 IP 地址、网络掩码、第一跳路由器地址（<strong>默认网关</strong>）以及 DHCP 租用期等。提供报文仍然使用广播地址回应</li>
+    <li>DHCP 请求：子网中可能有不止一个 DHCP 服务器，新到达的客户从中选择一个合适的服务，并向选中的服务器提供用 <strong>DHCP 请求报文</strong>，确认配置参数</li>
+    <li>DHCP 响应：服务器使用 <strong>DHCP ACK 报文</strong>对此作出响应，证实所要求的参数</li>
+</ul>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/05-dhcp-working.png" alt="" width="530">
+    <figcaption>DHCP 工作流程</figcaption>
+</figure>
+
+<p>在广播期间，由于非新接入主机和 DHCP 服务器不提供 67 、68 端口的服务，因此不会参与 DHCP 的工作。</p>
+
+<p>一旦客户收到 DHCP ACK 后，交互便完成了，并且该客户能够在租用期内使用 DHCP 分配的 IP 地址。主机可以随时通过 DHCP 释放报文终止租用期。</p>
+
+<p>当租用期过半时，主机会重新发送 DHCP 请求，若 DHCP 服务器拒绝请求，主机必须重新执行 DHCP 服务器发现等一系列步骤；当租用期快到时，主机也会重新发送 DHCP 请求，若 DHCP 服务器未响应，则当租用期到达后，主机必须立即停止使用其租用的 IP 地址。</p>
+
+<h3>网络地址转换</h3>
+
+<p>子网中的主机数可能会增加，<strong>网络地址转换</strong>(Network Address Translation, NAT)提供了一种管理 IP 地址的典型方法。</p>
+
+<p>NAT 路由器对外界的行为就如同一个具有单一 IP 地址的单一设备，所有离开子网路由器流向互联网的报文都拥有相同的 IP 地址。NAT 使路由器对外界隐藏了专用网络(private network)的细节。</p>
+
+<p>在专用网络中，所有接口都具有相同的地址空间 <code>10.0.0.0/8</code> ，该地址是一个保留地址空间，保留地址空间仅可用于当前的专用网络，不可用于互联网中。每一个专用网络各自维护一个保留地址空间，从而管理专用网络中的主机 IP 地址。</p>
+
+<p>当专用网络中的主机要和互联网通信时，需要通过 NAT 路由器转发。NAT 路由器具有一张 <strong>NAT 转换表</strong>(NAT translation table)，在表项中包含需要转发给的 IP 地址及端口号。</p>
+
+<p>例如，专用网络主机 <code>10.0.0.1</code> 如果要向互联网上的某台服务器发送请求，它通过端口号 12000 发送给 NAT 路由器，NAT 路由器使用互联网一侧接口的 IP 地址 <code>138.76.29.7</code> 和空闲端口号 3435 替换源数据报的信息，将转换后的数据报发送到互联网上，并在 NAT 转换表中新建一个表项。当接收到服务器的响应后，根据表项的转换规则将 <code>138.76.29.7:2425</code> 换回 <code>10.0.0.1:12000</code> 。</p>
+
+<p>NAT 充当计算机网络的中间盒组件，连接了互联网的同时也易于管理内网。现今绝大多数家庭网络都使用 NAT 管理，因此平时上网时的主机无法被广域网发现，也就无法充当互联网服务器。为了突破 NAT 的限制，可以使用 NAT 穿透(NAT traversal)工具（或称内网穿透）。不过内网穿透得到的服务器不够稳定，且可能被屏蔽。</p>
+
+<h3>IPv6</h3>
+
+<p>IPv4 仅提供约 40 亿个 IP 地址，哪怕有专用网络使特定范围的 IP 可以被重复使用，也无法满足日益增长的 IP 地址的需求。为此一个新的 IP 版本 IPv6 被提出。</p>
+
+<p>IPv6 的数据报格式如下：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/05-ipv6-message.png" alt="" width="380">
+    <figcaption>IPv6 数据报格式</figcaption>
+</figure>
+
+<p>IPv6 将地址长度从 32 比特增加到 128 比特，甚至地球上每个沙粒都可以分配一个 IP 地址。除了普通地址和广播地址以外，IPv6 还引入了任播地址(anycast address)，这种地址可以使数据报交付给一组主机中的任意一个。</p>
+
+<p>IPv6 使用简化高效的 40 宇节首部，许多必要字段被舍弃，从而使路由器可以更快处理。</p>
+
+<p>IPv6 提供了一个流(flow)的支持，不过其定义还没有完全明确。</p>
+
+<p>除此之外，IPv6 还包含以下字段：</p>
+
+<ul>
+    <li>版本：通过将该字段置为 6 ，可以提醒按 IPv6 报文格式处理后续数据</li>
+    <li>流量类型：与 IPv4 报文中服务类型字段含义相同</li>
+    <li>有效载荷长度：给出 IPv6 数据报在定长 40 字节首部后面的字节数量</li>
+    <li>下一个首部：与 IPv4 报文中协议类型字段含义相同</li>
+    <li>跳限制：与 IPv4 报文中生命周期字段含义相同</li>
+</ul>
+
+<p>IPv6 不再支持分片，因为其耗时太大。如果数据报太大，则路由器将其丢弃并返回一个特殊的差错报文。</p>
+
+<p>IPv6 不再提供检验和，必要的检验已经由运输层完成了。</p>
+
+<p>IPv6 不再显式支持选项，不过其首部的“下一个首部”字段可以指向额外的选项字段位置。去除选项使 IPv6 首部成为定长的 40 字节，无需再拥有长度字段。</p>
+
+<p>由于目前公共互联网只支持 IPv4 ，要使其完全迁移到 IPv6 几乎不可能。目前可行的方式只是先迁移一部分节点，在通过 IPv4 节点时新建一个 IPv4 数据报并作为载荷通过。</p>
+<p><a rel="nofollow" href="/archives/550">计算机网络06-网络层概述与网际协议IP</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/archives/550/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>计算机网络05-面向连接的运输：TCP</title>
+		<link>/archives/525</link>
+					<comments>/archives/525#respond</comments>
+		
+		<dc:creator><![CDATA[Hello]]></dc:creator>
+		<pubDate>Thu, 21 Jul 2022 15:25:53 +0000</pubDate>
+				<category><![CDATA[计算机网络]]></category>
+		<category><![CDATA[TCP]]></category>
+		<guid isPermaLink="false">/?p=525</guid>
+
+					<description><![CDATA[<p>TCP概述 TCP简介 TCP 被称为是面向连接的(&#46;&#46;&#46;</p>
+<p><a rel="nofollow" href="/archives/525">计算机网络05-面向连接的运输：TCP</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<h2>TCP概述</h2>
+
+<h3>TCP简介</h3>
+
+<p>TCP 被称为是<strong>面向连接的</strong>(connection-oriented)，需要使用连接来保证数据传输的可靠性。在一个应用进程可以开始向另一个应用进程发送数据前，两者必须先“握手”，相互发送某些预备报文段，以准备连接所需的参数。</p>
+
+<p>TCP 的“连接”是一种逻辑连接，TCP 程序使用某些变量确定当前连接的状态，通过数据报更新连接状态。因此 TCP 连接是一个点对点(point-to-point)连接，只能维持两台主机间的连接状态。</p>
+
+<p>在客户请求发起 TCP 连接时，客户首先发送一个特殊的 TCP 报文段，服务器则以一个特殊的 TCP 报文段响应，这两个报文段都不包含应用层数据；最后客户再用第三个特殊报文段作为响应，该可以包含应用数据。由于在这两台主机之间发送了三个报文段，所以这种连接建立过程通常被称为<strong>三次握手</strong>(three-way handshake)。</p>
+
+<p>建立起一条 TCP 连接后，两个应用进程之间就可以相互发送数据了。发送方的应用层将数据通过套接字推送到运输层中，TCP 接收数据并放入<strong>发送缓存</strong>内，并在合适的时候将数据从缓存中取出，为每块客户数据配上 TCP 首部，形成多个 <strong>TCP 报文段</strong>，然后下传给网络层中。网络层将其分别封装在网络层 IP 数据报中，并发送到网络中。</p>
+
+<p>一个 TCP 报文段存储的数据数量受限于<strong>最大报文段长度</strong>(Maximum Segment Size, MSS)，该值通常由链路层确定。接收方的 TCP 收到一个报文段后，该报文段的数据就被放入接收方 TCP 连接的接收缓存中，应用程序从缓存中读取数据流。</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/06/02-socket-process.png" alt="" width="370">
+    <figcaption>TCP 发送和接收</figcaption>
+</figure>
+
+<h3>TCP报文段</h3>
+
+<p>TCP 报文段由首部字段和数据字段组成，MSS 限制了报文段数据字段的最大长度。下图展示了 TCP 的报文段结构：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-message.png" alt="" width="380">
+    <figcaption>TCP 报文段结构</figcaption>
+</figure>
+
+<p>TCP 报文段首部同样包含<strong>源端口号</strong>和<strong>目的端口号</strong>，用于多路复用和分解。并且 TCP 也提供了<strong>检验和</strong>字段，可以检测报文是否在传输过程中发送比特差错。</p>
+
+<p>除此之外，TCP 还包含一些特殊字段：</p>
+
+<ul>
+    <li>32 比特的<strong>序号</strong>(sequence number)字段和<strong>确认号</strong>(acknowledgment)字段，用于在可靠数据传输服务中表明分组顺序</li>
+    <li>16 比特的<strong>接收窗口</strong>(receive window)字段指示接收方愿意接收的字节数，用于流量控制。流量控制是 TCP 提供的服务之一，用于防止缓存溢出</li>
+    <li>由于 TCP 存在一个长度可变的选项字段，4 比特的<strong>首部长度</strong>(header length)字段指示 TCP 首部长度，单位为 32 比特（即图示的一行）</li>
+    <li>可选与变长的<strong>选项</strong>(optional)字段用于发送方与接收方调整一些发送规则</li>
+</ul>
+
+<p>首部还存在 8 比特的<strong>标志</strong>(flag)字段，<strong>ACK</strong> 标志用于确认一个接收的报文段是有效的；<strong>RST</strong> 、<strong>SYN</strong> 和 <strong>FIN</strong> 标志用于建立和拆除 TCP 连接；<strong>CWR</strong> 和 <strong>ECE</strong> 标志用于 TCP 拥塞控制；<strong>PSH</strong> 标志用于指示接收方是否应立即将数据交给应用层。</p>
+
+<p><strong>URG</strong> 标志用于指示报文段中存在被标记为“紧急”的数据，紧急数据的最后一个字节由 16 比特的<strong>紧急数据指针</strong>(urgent data pointer)字段表示。当紧急数据存在并给出指向紧急数据尾指针的时候，接收端的 TCP 必须立即通知应用层。 </p>
+
+
+
+
+<h2>TCP提供的服务</h2>
+
+<h3>连接管理</h3>
+
+<p>当运行在客户主机上的一个进程要和服务主机上的一个进程建立一条连接时，它们会交换 3 个特殊的报文段，称为三次握手。三次握手的具体过程如下：</p>
+
+<p><strong>第一步：</strong>客户端的 TCP 首先向服务器端的 TCP 发送一个不包含数据的特殊 TCP 报文段，首部的 <var type="flag">SYN</var> 标志位被置 1 。客户还会随机选择一个初始序号 <code>client_isn</code> 放置于序号字段，合适的初始序号可以避免某些安全性攻击。这一个报文段被称为 SYN 报文段。</p>
+
+<p><strong>第二步：</strong>服务器接收到 SYN 报文段后，会为该 TCP 连接分配缓存和变量，并向该客户 TCP 发送允许连接的报文段：该报文段 <var type="flag">SYN</var> 置 1 ；且首部的确认号字段置为 <code>client_isn + 1</code> ；最后服务器选择自己的初始序号 <code>server_isn</code> 并放置到序号字段中。该允许连接的报文段被称为 SYNACK 报文段。</p>
+
+<p><strong>第三步：</strong>在收到 SYNACK 报文段后，客户为该连接分配缓存和变量，并向服务器发送最后一个报文段：将首部确认字段置为 <code>server_isn + 1</code> ，并清零 <var type="flag">SYN</var> 位。这个报文段可以携带客户到服务器的数据。</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-three-way-handshake.png" alt="" width="280">
+    <figcaption>TCP 三次握手过程</figcaption>
+</figure>
+
+<p>完成以上步骤后，客户和服务器就可以相互发送包括数据的报文段了，且之后的报文段 <var type="flag">SYN</var> 位都清零。</p>
+
+<p>参与 TCP 连接的任何一个进程都能终止该连接，通过发送一个 <var type="flag">FIN</var> 位置 1 的特殊报文段，接收方对其响应后也发送一个这样的特殊报文段，发送方确认后双方的缓存和变量都可以被释放。</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-close-connect.png" alt="" width="280">
+    <figcaption>TCP 四次挥手过程</figcaption>
+</figure>
+
+<h3>序号和确认</h3>
+
+<p>由于运输层之下都不一定提供可靠数据传输服务，因此需要 TCP 提供相应服务，确保进程从其接收缓存中读出的字节流和连接的发送方送出的字节流完全相同，数据流无损坏、无间隙、非冗余且按序交付。TCP 涉及的可靠数据传输的方法涉及上一节介绍的许多原理。</p>
+
+<p>暂时不考虑 TCP 实现的更多细节，发送方主要响应 3 个与靠数据传输服务（发送和重传）有关的主要事件：</p>
+
+<ol>
+    <li>当TCP 从上层应用程序接收数据时，它根据分组序号 <code>nextseqnum</code> 将数据封装在 1 个报文段中，并把该报文段传递给网络层。如果定时器没有启动，这一步还负责启动定时器</li>
+    <li>在定时器超时事件中，TCP 重传引起超时（即具有最小序号但仍未应答）的报文段，并重启定时器</li>
+    <li>当 TCP 发送方收到 ACK 时，将确认序号与最早未被确认的序号 <code>send_base</code> 比较。由于 TCP 采用累积确认，所以只要确认序号大于 <code>send_base</code> ，则该 ACK 确认其之前一个或多个未被确认的报文段，发送方便可以更新 <code>send_base</code> ；如果窗口中还有未被确认的报文段，还要重新启动定时器</li>
+</ol>
+
+<p>TCP 报文段首部中两个最重要的字段是序号字段和确认号字段。这两个字段是 TCP 可靠传输服务的关键部分。</p>
+
+<p>TCP 把数据看成一个有序的字节流，一个报文段的序号是该报文段首字节的字节流编号，而非报文段的序号：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-sequence-number.png" alt="" width="390">
+</figure>
+
+<p>接收方的确认号是期望从发送方收到的下一字节的序号，即确认该流中至首个丢失字节为止的所有字节，这便是 TCP 采取的累积确认的方式。</p>
+
+<p>TCP 可能接到失序报文，但对失序报文的处理取决于具体实现：有些接收端为了简化设计，直接丢弃失序报文段；大部分接收端为了提高效率，将保存失序的字节直到缺少的内容可以填补间隙。</p>
+
+<h3>超时重传</h3>
+
+<p>TCP 采用超时重传机制来处理报文段的丢失。为了正确设计超时时间，需要估计报文段从发送到确认的往返时间 RTT 。</p>
+
+<p>TCP 在连接过程中，在特定时刻会利用某些报文段测量一次 RTT 的样本值 <span class="math">\\( \text{sampleRTT} \\)</span> ，并综合之前测量的 RTT 估计量，加权平均得到一个接近每个 RTT 的新估计量。另外，考虑到重传的报文响应不一定来自自身，TCP 并不用重传的报文段计算 <span class="math">\\( \text{sampleRTT} \\)</span> 。</p>
+
+<p>每测量一次 <span class="math">\\( \text{sampleRTT} \\)</span> ，TCP 就会使用以下公式估算新的 RTT 值：</p>
+
+<div class="math">
+\\[
+    \text{NewEstimatedRTT} = (1-\alpha)\text{EstimatedRTT} + \alpha \, \text{SampleRTT}
+\\]
+</div>
+
+<p>典型的 <span class="math">\\( \alpha \\)</span> 推荐值为 0.125 。这样每次计算后，估计出的新 RTT 值都会朝着本次样本 RTT 的大小变化，并更加平滑：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-estimate-RTT.png" alt="" width="320">
+    <figcaption>RTT 样本和 RTT 估计</figcaption>
+</figure>
+
+<p>另一个实用的值 <span class="math">\\( \text{DevRTT} \\)</span> 用于描述估计 RTT 和样本 RTT 的偏离程度：</p>
+
+<div class="math">
+\\[
+    \text{NewDevRTT}=(1-\beta)\text{DevRTT}+\beta |\text{SampleRTT}-\text{EstimatedRTT}|
+\\]
+</div>
+
+<p>典型的 <span class="math">\\( \beta \\)</span> 推荐值为 0.25 。如果样本 RTT 变化幅度很大，那么 <span class="math">\\( \text{DevRTT} \\)</span> 的值也会变得很大。</p>
+
+<p>以上已经计算出了 RTT 的估计值和波动值，TCP 超时间隔首先应该大于估计值，否则将造成很多不必要的重传；但也不能比估计值大太多，应该综合波动值加上一定余量。超时重传间隔一般由以下公式计算：</p>
+
+<div class="math">
+    \\[
+        \text{TimeoutInterval}=\text{EstimatedRTT}+4 \cdot \text{DevRTT}|
+    \\]
+</div>
+
+<p>综合考虑下，就不容易出现超时时间过长或过早超时的情况了。</p>
+
+<p>在大多数 TCP 实现中，在最开头的几次超时事件中，在重传后都会将超时间隔设为之前值的两倍，用指数增长来降低重传的频率并靠近真实时延。</p>
+
+<h3>快速重传</h3>
+
+<p>超时触发重传存在的问题之一是超时时间可能相对较长。当一个报文段丢失时，较长的超时时间使发送方延迟一段时间后才重传丢失的分组，因而增加了端到端时延。</p>
+
+<p><strong>快速重传</strong>(fast retransmit)采取冗余 ACK 处理该问题。当具有期望序号的按序报文段到达，且序号之前的数据都被确认时，先等待片刻，如果下一个按序报文段按时到达，则将两个累计 ACK 都发出，以确认两个按序的报文段；如果下一个报文段没有在这个间隔内到达，再发送该 ACK 。</p>
+
+<p>当 TCP 接收方收到一个序号大于下一个所期望的、按序的报文段时，说明数据流中存在一个间隔，可能是由于在网络中报文段丢失或重新排序造成的，那么 TCP 可以对已经接收到的最后一个按序字节数据使用冗余 ACK 重复确认，从而指示发送方下一个发送字节的位置（为间隔的低端序号）。</p>
+
+<p>最后，如果间隔中的部分或完整的缺失报文段到达，则将其作为具有期望序号的按序报文段处理。</p>
+
+<p>由于发送方经常连续发送大量的报文段，如果一个报文段丢失，后续的若干失序报文段都会引起冗余 ACK 。如果 TCP 发送方接收到对相同数据的 3 个冗余 ACK ，说明之后的报文段已经丢失，可以执行快速重传。之所以是 3 个，主要是为了防止某个先发送的报文段可能意外地后到达，造成接收方误判为丢失导致不必要的重传。</p>
+
+<p>下图展示了 TCP 快速重传的原理，可以看到快速重传允许 TCP 在定时器过期之前重传丢失的报文段，缩短等待时间：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-fast-retransmit.png" alt="" width="380">
+</figure>
+
+<h3>流量控制</h3>
+
+<p>一条 TCP 连接的每一侧主机都有接收缓存，使数据不必立即处理。但若发送方发送太快或接收方处理较慢，该连接的接收缓存可能会溢出。</p>
+
+<p>因此 TCP 提供了<strong>流程控制</strong>(flow-control)服务，匹配双方处理速度而消除缓存溢出可能。TCP 通过让<em>发送方</em>维护<strong>接收窗口</strong>(receive window)变量来提供流量控制，接收窗口用于提示接收方还有多少可用的缓存空间，双方都各自拥有一个接收窗口。</p>
+
+<p>记 <code>read</code> 为接收方应用进程从缓存读出数据流的最后一个字节编号，<code>received</code> 为接收方收到并放入缓存中数据流的最后一个字节编号，为使已分配的缓存不溢出，下式必须成立：</p>
+
+<div class="math">
+\\[
+    \text{received} = \text{read} \leq \text{buffer}
+\\]
+</div>
+
+<p>接收窗口则根据缓存可用空间的数量来设置，下图展示了以上几个关键变量间的联系：</p>
+
+<!-- 
+<div class="math">
+\\[
+    \text{window} = \text{buffer} - [ \text{received} - \text{read} ]
+\\]
+</div> 
+-->
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-flow-control-variables.png" alt="" width="390">
+</figure>
+
+<p>接收主机通过响应报文段中的接收窗口字段，通知发送方其接收缓存中还有多少可用空间，并通过跟踪相关变量实时更新窗口长度。</p>
+
+<p>发送主机主要跟踪变量 <code>sent</code> 和 <code>acked</code> ，分别代表最后发送和最后累积确认的字节编号，其差就是发送但未被确认的数据量。通过将该数据量控制在 <code>window</code> 以内，就可以保证不会使接收主机的缓存溢出。</p>
+
+<p>一种特殊的情况是接收主机缓存已满，窗口长度为 0 ，发送方理应不再能发送数据，但接收方可能已经确认了所有接收的报文段，不再产生响应，使发送方不知道接收方什么时候处理完数据而一直等待不能发送数据。为此，TCP 的一个特殊的规定是：当接收主机窗口为 0 时，发送方持续发送一个只有一个字节数据的探测报文段，使接收方能继续作出响应，并直到接收方清理出一部分缓存，返回的窗口长度不为 0 了才恢复正常发送方式。</p>
+
+<h2>TCP拥塞控制</h2>
+
+<h3>拥塞产生原因</h3>
+
+<p>当两台主机之间互相传输数据时，尽管运输层可以正常工作，但链路容量、路由器缓存容量等可能无法提供足够资源，使 TCP 发送方因为下层的拥塞(congestion)而被遏制，这种形式的发送方的控制被称为<strong>拥塞控制</strong>。</p>
+
+<p>首先研究拥塞产生的原因。在最简单的情况下，两台发送主机通过一台路由器在一段容量为 <span class="math">\\( R \\)</span> 的链路上传输，不考虑缓存、重传和流量控制等开销。此时每连接的吞吐量（即每个接收方每秒接收的字节数）最多只有 <span class="math">\\( R/2 \\)</span> ，并随着发送速率的增大，突发到达引起路由器中的队列也会越长，等待发送就会经常处在更长的队列中，因而增加了排队的时间。</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-congestion-control-circumstance-A.png" alt="" width="610">
+    <figcaption>第一种假设情形</figcaption>
+</figure>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-throughput-latency-function.png" alt="" width="600">
+    <figcaption>发送速率、时延与接收速率间的关系</figcaption>
+</figure>
+
+<p>当分组到达的速率超过 <span class="math">\\( R/2 \\)</span> 时，到达队列的平均速率超过从该队列传输出去的速率，任意到达的分组都会导致时延，最终时延变得越来越大而趋近无穷。</p>
+
+<p>如果路由器缓存有限，那么路由器缓存溢出时可能会引起新到达的分组被丢弃，并引起运输层重传。并且时延较大时，过早重传会引起路由器利用率进一步降低。</p>
+
+<hr>
+
+<p>再考虑一种更复杂的情况，4 台主机通过交叠的两条路径传输：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-congestion-control-circumstance-B.png" alt="" width="660">
+</figure>
+
+<p>当四台主机的发送速率都较小时，不容易发生缓存溢出，发送与接收速率大致接近。如果主机 A 的发送速率过大，那么它就会占据 AB 和 BD 之间路由器的大部分缓存，造成该路线上其余连接的流量越来越小：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-throughput-latency-function2.png" alt="" width="290">
+    <figcaption>有限缓存与多跳路径时的性能</figcaption>
+</figure>
+
+<p>并且此时，接收方 B 由于 AB 段流量被占据，其上游路由器 DA 转发得到的分组往往会被丢弃，还会使传输容量被浪费。</p>
+
+<h3>TCP拥塞控制</h3>
+
+<p>在实践中，往往采用以下两种常见方法来控制拥塞：</p>
+
+<ul>
+    <li>端到端拥塞控制：如果底层没有显式提供拥塞控制支持，那么运输层一般通过观察分组丢失与时延等行为来推测网络拥塞情况，并相应调整窗口长度</li>
+    <li>网络辅助的拥塞控制：如果路由器可以向发送方提供关于网络拥塞情况的反馈信息，</li>
+</ul>
+
+<p>TCP 通过网络拥塞程度来调整发送速率。TCP 必须使用端到端拥塞控制，因为 IP 层不向端系统提供显式的网络拥塞反馈。</p>
+
+<p>为了实现这一点，TCP 发送方额外维护一个变量<strong>拥塞窗口</strong>(congestion window)，用于限制 TCP 发送速率，并确保以下公式成立：</p>
+
+<div class="math">
+\\[
+    \text{sent} - \text{acked} \leq min{\text{cwnd}, \text{rwnd}}
+\\]
+</div>
+
+<p>当接收窗口较大时，通过调节 <code>cwnd</code> 的值，可以调整发送速率。</p>
+
+<p>当出现拥塞时，路径上的某些路由器缓存会溢出，造成丢包。TCP 发送方可以由超时或接收到 3 个冗余 ACK 来检测到这个丢包，意味着拥塞产生，需要减小窗口长度以减慢发送速率。如果没有发生丢包，TCP 可以根据确认的速率增大拥塞窗口长度。</p>
+
+<p><strong>TCP 拥塞控制算法</strong>主要包含以下方面的内容：</p>
+
+<ol start="1"><li><strong>慢启动</strong></li></ol>
+
+<p>当一条 TCP 连接开始时，为了尽量利用带宽，在慢启动(slow-start)状态下 <code>cwnd</code> 的值通常初始置为一个 MSS ，并且每当传输的报文段首次确认就增加一个 MSS ，这使得 TCP 起始发送速率较慢，但可以以指数增长：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-slow-start.png" alt="" width="250">
+</figure>
+
+<p>如果存在一个由超时引起的丢包事件（拥塞），TCP 发送方引入一个新的状态变量慢启动阈值 <code>ssthresh = cwnd / 2</code> ，同时将 <code>cwnd</code> 重置为 1 并重新开始慢启动，此次慢启动如果达到阈值 <code>ssthresh</code> ，那么便不能再翻倍拥塞窗口，应该结束慢启动并进入拥塞避免模式。</p>
+
+<ol start="2"><li><strong>拥塞避免</strong></li></ol>
+
+<p>进入拥塞避免(congestion avoidance)状态后，拥塞窗口接近引发拥塞的长度，此时可以采用线性增长，无论何时到达一个新的确认，就将 <code>cwnd</code> 增加 <span class="math">\\( \text{MSS} (\text{MSS} / \text{cwnd}) \\)</span> 字节。</p>
+
+<p>当出现超时，则与慢启动情况一致，更新阈值并重置窗口长度：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-congestion-avoidance.png" alt="" width="450">
+    <figcaption>慢启动与拥塞避免</figcaption>
+</figure>
+
+<p>如果由 3 个冗余 ACK 引发丢包，则更新阈值并减半拥塞窗口长度，然后进入快速恢复模式。</p>
+
+<ol start="3"><li><strong>快速恢复</strong></li></ol>
+
+<p>对引起快速恢复(fast recovery)的缺失报文段，每个冗余的 ACK 使 <code>cwnd</code> 值增加 MSS ，最终当 ACK 到达时，TCP 在减半 <code>cwnd</code> 后进入拥塞避免状态。</p>
+
+<p>假设所有丢包都是由冗余 ACK 引起，忽略慢启动过程，拥塞窗口随时间变化为：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-congestion-fast-recovery.png" alt="" width="320">
+    <figcaption>快速恢复与拥塞避免</figcaption>
+</figure>
+
+<p>这种 TCP 拥塞控制常常被称为加性增、乘性减，行为表现为以上锯齿状的图形。</p>
+
+<p>如果出现超时事件，快速恢复在执行如同在慢启动和拥塞避免中相同的动作（更新阈值并重置窗口长度）后，迁移到慢启动状态。</p>
+
+<h2>实验：使用WireShark探究TCP</h2>
+
+<p>本节通过 WireShark 捕获一次 TCP 发送的完整过程，来研究 TCP 的行为。这里向地址 192.168.10.1 的 8266 端口发送一个较大的文本文件，相应的代码为：（这里一共做了不止一次发送实验，因此下图中源端口号有不同情况）</p>
+
+<div class="vscode-block"><div><span style="color: #d73a49;font-weight: bold;">import</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">socket</span></div><div><span style="color: #24292e;">server_name</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #032f62;">'192.168.10.1'</span></div><div><span style="color: #24292e;">server_port</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">8266</span></div><div><span style="color: #24292e;">client</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">(</span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #24292e;">AF_INET</span><span style="color: #24292e;">, </span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #24292e;">SOCK_STREAM</span><span style="color: #24292e;">)</span></div><div><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">connect</span><span style="color: #24292e;">((</span><span style="color: #24292e;">server_name</span><span style="color: #24292e;">, </span><span style="color: #24292e;">server_port</span><span style="color: #24292e;">))</span></div><div><span style="color: #d73a49;font-weight: bold;">with</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">open</span><span style="color: #24292e;">(</span><span style="color: #032f62;">'alice.txt'</span><span style="color: #24292e;">, </span><span style="color: #032f62;">'r'</span><span style="color: #24292e;">) </span><span style="color: #d73a49;font-weight: bold;">as</span><span style="color: #24292e;"> </span><span style="color: #24292e;">file</span><span style="color: #24292e;">:</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #24292e;">message</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">file</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">read</span><span style="color: #24292e;">().</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">()</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">send</span><span style="color: #24292e;">(</span><span style="color: #24292e;">message</span><span style="color: #24292e;">)</span></div><div><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">close</span><span style="color: #24292e;">()</span></div></div>
+
+<p>由于日常使用计算机时，有许多后台进程都会不断通信，这些数据包严重干扰了本次发送的观察，不过 WireShark 提供了过滤器，可以在过滤器中输入表达式 <code>ip.addr == 192.168.10.1 and tcp.port == 8266</code> 来过滤出与地址 192.168.10.1 的 8266 端口有关的 TCP 报文段：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-wireshark-A.png" alt="" width="680">
+</figure>
+
+<p>过滤器由过滤器表达式组成，每条表达式由过滤项、过滤关系、过滤值三项组成，表达式之间可以通过一定关系连接。完整的过滤器表达式教程可以参考官方文档 <a href="https://www.wireshark.org/docs/man-pages/wireshark-filter.html">https://www.wireshark.org/docs/man-pages/wireshark-filter.html</a> ，通过菜单【分析→显示过滤器】可以找到一些常用的过滤器表达式：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-wireshark-B.png" alt="" width="560">
+</figure>
+
+<p>接下来开始研究 TCP 通信的整个过程，可以在“Info”信息项看到每个 TCP 报文段的简短描述。前三个报文段是 TCP 的建立连接过程：</p>
+
+<ol>
+    <li>第一个报文段 <var type="flag">SYN</var> 标志置位，序号字段为客户初始序号 0</li>
+    <li>第二个报文段 <var type="flag">SYN</var> 和 <var type="flag">ACK</var> 标志置位，序号字段为 1 ，确认号字段为服务器初始序号 0</li>
+    <li>第三个报文段 <var type="flag">ACK</var> 标志置位，序号字段为 1 ，确认号字段为 1</li>
+</ol>
+
+<p>这和之前介绍的三次握手过程是一致的。</p>
+
+<p>TCP 的传输过程可以通过菜单【统计→TCP 流图形】来绘制一些图表。例如，以下是整个传输过程中往返时间 RTT 的变化：（如果感觉图线不太对，可以试着点击下方“切换方向”按钮）</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-wireshark-RTT.png" alt="" width="510">
+</figure>
+
+<blockquote>
+    <p>本次利用物联网芯片 ESP32 创建 WiFi 并得到一个小型局域网服务器，可以通过手动遮掩、放到几面墙后等方式产生恶劣的网络环境，易于制造分组丢失等情况。</p>
+</blockquote>
+
+<p>当向 8266 端口发送信息时，<code>Seq</code> 指示了发送的序号；TCP 使用累积确认的形式，8266 返回的信息使用 <code>Ack</code> 指示该编号之前接收的所有字节顺序无误。从下图中可以看到正常传输时，TCP 的序列号每次都会增加一个 <code>Len</code> 的长度：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-wireshark-normal.png" alt="" width="1000">
+</figure>
+
+<p>实验中产生的冗余 ACK 、失序和重传，其现象如下图所示：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-wireshark-bad.png" alt="" width="600">
+</figure>
+
+<p>以上似乎还出现了接收窗口已满的现象，不过接收方响应的接收窗口字段一直没有发生变化，暂时不知道 TCP 是否有明显的流量控制特征。</p>
+
+<p>本次实验还捕获到了快速重传现象，特点为 3 次冗余 ACK ：</p>
+
+<figure>
+    <img decoding="async" src="/wordpress/wp-content/uploads/2022/07/04-tcp-wireshark-fast-restransmit.png" alt="" width="600">
+</figure>
+
+<p>不过我在多次尝试时并没有发现 TCP 的拥塞控制，如果把 ESP32 放得够远，那么似乎会丢包丢到 WireShark 甚至连 TCP 都认不出来；反之只要情况稍好，那 TCP 传输得就挺顺畅的。等以后有空了我再改进一下实验环境。</p>
+<p><a rel="nofollow" href="/archives/525">计算机网络05-面向连接的运输：TCP</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/archives/525/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>计算机网络04-运输层概览与UDP协议</title>
+		<link>/archives/453</link>
+					<comments>/archives/453#respond</comments>
+		
+		<dc:creator><![CDATA[Hello]]></dc:creator>
+		<pubDate>Fri, 08 Jul 2022 14:49:32 +0000</pubDate>
+				<category><![CDATA[计算机网络]]></category>
+		<category><![CDATA[UDP]]></category>
+		<guid isPermaLink="false">/?p=453</guid>
+
+					<description><![CDATA[<p>运输层概述 运输层协议为运行在不同主机上的应用进程之&#46;&#46;&#46;</p>
+<p><a rel="nofollow" href="/archives/453">计算机网络04-运输层概览与UDP协议</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<h2>运输层概述</h2>
+
+<p>运输层协议为运行在不同主机上的应用进程之间提供了逻辑通信(logic communication)功能，即主机之间表现得像直接相连。下图展示了这种封装思路：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/03-transport-layer.jpg" alt="" width="400">
+    <figcaption>运输层协议的工作原理</figcaption>
+</figure>
+
+<p>运输层协议是在主机上而不是路由器内实现的。在发送端，运输层将发送应用程序进程接收到的报文转换成运输层报文段，然后传递给网络层。</p>
+
+<p>网络应用程序可以使用多种运输层协议，互联网上主要使用的两种运输层协议是 TCP(Transmission Control Protocol, 传输控制协议)和 UDP(User Datagram Protocol, 用户数据报协议)。</p>
+
+<p>一台主机上可能同时存在若干个套接字，<strong>多路分解</strong>(demultiplexing)确保运输层报文段中的数据交付到正确的套接字。<strong>多路复用</strong>(multiplexing)则将源主机不同套接字发生的数据块封装上便于分解的首部信息，并将生成的报文段传递到网络层。</p>
+
+<p>为了实现多路复用服务，套接字需要有唯一标识，并且运输层的每个报文段具有特殊字段来指示该报文所要交付到的套接字；为了实现多路分解服务，在主机上的每个套接字能够分配一个端口号，当报文段到达主机时，运输层检查报文段中的目的端口号，并将其定向到相应的套接字。然后报文段中的数据通过套接字进入其所连接的进程。</p>
+
+<p>下图展示了多路分解与多路复用的思路：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/03-multiplexing.jpg" alt="" width="490">
+    <figcaption>多路复用与多路分解</figcaption>
+</figure>
+
+<p>进程的载体是操作系统，因此只能由操作系统来实现运输层协议，完成多路分解与多路复用。</p>
+
+<ul>
+    <li><strong>无连接的多路复用与多路分解</strong></li>
+</ul> 
+
+<p>在主机上运行的 Python 程序通过以下代码创建一个 UDP 套接字：</p>
+
+<div class="vscode-block"><div><span style="color: #24292e;">client</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">(</span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #24292e;">AF_INET</span><span style="color: #24292e;">, </span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #24292e;">SOCK_DGRAM</span><span style="color: #24292e;">)</span></div></div>
+
+<p>当使用这种方式创建一个 UDP 套接字时，许多操作系统的运输层会自动为该套接字从其它端口 49152~65535 内分配一个未被其它应用程序占用的端口号。当然，也可以使用套接字的 <code>.bind()</code> 方法关联一个特定的端口号：</p>
+
+<div class="vscode-block"><div><span style="color: #24292e;">client</span><span style="color: #24292e;">.bind((</span><span style="color: #032f62;">''</span><span style="color: #24292e;">, </span><span style="color: #005cc5;">13284</span><span style="color: #24292e;">))</span></div></div>
+
+<p>通常，应用程序的客户端会让运输层自动且透明地分配端口号，而服务器端则分配一个特定的端口号。</p>
+
+<p>UDP 在发送时，需要在报文中包含目的套接字的端口号。当 UDP 报文段到达时，接收主机的运输层会检查报文中的目的端口号，通过获得的端口号信息可以将每个报文段定向分解到相应的套接字，进而将报文交付给对应的应用程序。</p>
+
+<p>一个 UDP 套接字由两个元素的元组 (目的 IP 地址, 目的端口号) 标识，如果两个 UDP 报文具有相同的目的 IP 地址和目的端口号，它们将通过相同的目的套接字被定向到相同的进程。</p>
+
+<ul>
+    <li><strong>面向连接的多路复用与多路分解</strong></li>
+</ul>
+
+<p>不同于 UDP 协议，TCP 有一个初始套接字用于建立连接请求，当进程主机接收到定向到初始套接字的请求连接报文后，初始套接字根据该报文创建一个新的套接字：</p>
+
+<div class="vscode-block"><div><span style="color: #24292e;">connection</span><span style="color: #24292e;">, </span><span style="color: #24292e;">address</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">server</span><span style="color: #24292e;">.accept()</span></div></div>
+
+<p>对于每一个连接，都会创建一个单独的 TCP 套接字。因此一个 TCP 套接字由一个四个元素的元组 (源 IP 地址, 源端口号, 目的 IP 地址, 目的端口号) 标识，两个具有不同源 IP 地址或源端口号的 TCP 到达报文段（除了初始创建连接请求的报文段）时，将被定向到两个不同的套接字。</p>
+
+<blockquote>
+    <p>注意，TCP 在创建一个新的连接套接字时，并没有用到一个新的端口号。套接字还是会从之前的端口里取出报文段，并根据标识元组的内容转交给正确的连接。</p>
+</blockquote>
+
+<p>这也就揭示了为什么 TCP 套接字程序需要使用以下代码：</p>
+
+<div class="vscode-block"><div><span style="color: #24292e;">server.listen(</span><span style="color: #005cc5;">5</span><span style="color: #24292e;">)</span></div></div>
+
+<p>有时同时请求的连接数过多，服务主机需要为一个端口维持很多连接，造成负载过大，因此需要该代码控制一个 TCP 在相同时间内的最大连接数。</p>
+
+<h2>无连接运输：UDP</h2>
+
+<h3>UDP 协议概述</h3>
+
+<p>UDP 只对运输协议做最少的工作，除了复用/分解与功能以及少量错误检测外，几乎没有增加别的功能。</p>
+
+<p>UDP 从进程得到数据后，附加上用于多路复用/分解服务的源端口号字段和目的端口号字段，加上其它字段后将形成的报文段交给网络层。网络层将该运输层报文段封装到一个 IP 数据报中，然后交付给接收主机。如果该报文段到达接收主机，UDP 使用目的端口号将报文段中的数据交付给正确的进程。</p>
+
+<p>使用 UDP 时，在发送报文前，发送方和接收方的运输层之间没有任何通信，因此 UDP 被称为是<strong>无连接</strong>运输。</p>
+
+<p>UDP 主要有以下优点：</p>
+
+<ul>
+    <li>UDP 可以精确地控制发送的数据以及何时发送数据：UDP 会直接发送数据，而 TCP 为了保证数据能可靠传输，会确认目的主机接收后才进行下一次发送。在不希望数据传输会有过多延迟并且能容忍一定丢失时，可以使用 UDP 。</li>
+    
+    <li>UDP 无需建立连接，也没有连接状态，因此 UDP 不会引入建立连接的时延，操作系统也无需为了维护连接执行额外的操作并占用额外的缓存，因此可以支持更多活跃的连接数。</li>
+</ul>
+
+<p>UDP 报文段相对 TCP 更加简单。下图展示了 UDP 报文段的结构：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/03-udp-message.jpg" alt="" width="250">
+    <figcaption>UDP 报文段结构</figcaption>
+</figure>
+
+<p>UDP 报文段首部只有 4 个字段，每个字段由两个字节组成。端口号字段用于使目的主机执行分解功能，将数据交给正确的应用进程。由于应用数据的长度可变，因此需要用长度字段指示在 UDP 报文段的字节数（包括首部）。</p>
+
+<p>接收方使用检验和来检查该报文段是否出现差错。发送方的 UDP 对报文段中的所有 16 位数值按一定规律运算，最终得到一个 16 位的结果，再与检验和字段比较，如果结果相同，说明报文段在传输过程中应该没有发生比特差错。</p>
+
+<p>由于从源到目的地之间的所有链路并不能确保都提供差错检测服务，因此 UDP 在设计时在运输层提供该功能，从而确保应用数据不会因为差错而发生误解。</p>
+
+<h2>实验：探究UDP</h2>
+
+<h3>使用WireShark分析UDP报文</h3>
+
+<p>首先使用 WireShark 分析 UDP 数据包的结构。打开 WireShark 捕获并过滤出 UDP 分组如下：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/03-wireshark-udp.jpg" alt="" width="580">
+</figure>
+
+<p>有时过滤的分组还包括基于 UDP 实现的应用层协议的分组。这里手动使用代码在本地之间发送一个 UDP 分组，得到的数据如上图所示：</p>
+
+<p>从图中可以看出，UDP 分组中源端口号为 51785（操作系统随机分配的其它端口），目的端口号为 12000 ，UDP 报文长度为 20 字节（包括首部），检验和为 <code>0xE84D</code> 。在 UDP 报文体中，所发送的应用数据是 <code>Hello, world</code> 。</p>
+
+<h3>检验完整性</h3>
+
+<p>接下来通过分析 UDP 检验和字段，判断数据是否完整。</p>
+
+<p>UDP 在计算检验和字段时，会将三个部分的数据一起参与运算：伪首部、首部和数据部分。</p>
+
+<p>其中伪首部由源 IP 地址、目的 IP 地址、协议类型（UDP 协议类型使用 <code>0x11</code> 表示）和 UDP 分组长度，这部分内容会参与检验和字段的计算。它们的位置和长度如下图所示：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/03-udp-check-head.jpg" alt="" width="400">
+</figure>
+
+<p>然后就可以计算检验和字段了。检验和计算的步骤如下：首先结合伪首部、首部以及应用数据，将所有字节划分为每 16 位，即 2 字节的块（若应用数据中的字节数不为偶数，则需要额外在末尾填充一个全零字节）。然后，把所有 16 位的块逐块相加，考虑到结果可能不止 16 位，此时使用 32 位的值描述结果，但将这 32 位的高 16 位和低 16 位相加，抹除这个进位值（再次相加之后肯定不会再发生溢出），得到一个 16 位的回卷结果。</p>
+
+<p>按顺序将所有块相加，便可得到一个 16 位的最终结果。将这个结果的每个位都取反，便得到检验和字段的值。最后将伪首部和用于凑偶数的字节丢弃，便可得到完整的 UDP 分组。</p>
+
+<p>考虑到 C 语言操作底层字节比较方便，这里使用 C 语言验证以上结果。按照以上说明，给定一个字节数组，计算检验和的方法为：</p>
+
+<div class="vscode-block"><div><span style="color: #6f42c1;font-weight: bold;">uint16_t</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">checksum</span><span style="color: #24292e;">(</span><span style="color: #6f42c1;font-weight: bold;">uint8_t</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">*</span><span style="color: #e36209;">packet</span><span style="color: #24292e;">, </span><span style="color: #d73a49;font-weight: bold;">int</span><span style="color: #24292e;"> </span><span style="color: #e36209;">length</span><span style="color: #24292e;">) {</span></div><div><span style="color: #24292e;">&#160; &#160; </span><span style="color: #6f42c1;font-weight: bold;">uint32_t</span><span style="color: #24292e;"> </span><span style="color: #24292e;">sum</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">0</span><span style="color: #24292e;">;</span></div><div><span style="color: #24292e;">&#160; &#160; </span><span style="color: #d73a49;font-weight: bold;">for</span><span style="color: #24292e;"> (</span><span style="color: #6f42c1;font-weight: bold;">uint16_t</span><span style="color: #24292e;"> </span><span style="color: #24292e;">i</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">0</span><span style="color: #24292e;">; </span><span style="color: #24292e;">i</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">&lt;</span><span style="color: #24292e;"> </span><span style="color: #e36209;">length</span><span style="color: #24292e;">; </span><span style="color: #24292e;">i</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">+=</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">2</span><span style="color: #24292e;">) {</span></div><div><span style="color: #24292e;">&#160; &#160; &#160; &#160; </span><span style="color: #24292e;">sum</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">+=</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">*</span><span style="color: #24292e;">((</span><span style="color: #6f42c1;font-weight: bold;">uint16_t</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">*</span><span style="color: #24292e;">)(</span><span style="color: #e36209;">packet</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">+</span><span style="color: #24292e;"> </span><span style="color: #24292e;">i</span><span style="color: #24292e;">));</span></div><div><span style="color: #24292e;">&#160; &#160; &#160; &#160; </span><span style="color: #24292e;">sum</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> (</span><span style="color: #24292e;">sum</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">&gt;&gt;</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">16</span><span style="color: #24292e;">) </span><span style="color: #d73a49;">+</span><span style="color: #24292e;"> (</span><span style="color: #24292e;">sum</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">&amp;</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">0x</span><span style="color: #005cc5;">ffff</span><span style="color: #24292e;">);</span></div><div><span style="color: #24292e;">&#160; &#160; }</span></div><div><span style="color: #24292e;">&#160; &#160; </span><span style="color: #d73a49;font-weight: bold;">return</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">~</span><span style="color: #24292e;">sum</span><span style="color: #24292e;">;</span></div><div><span style="color: #24292e;">}</span></div></div>
+
+<p>程序中将两个字节当做一个块处理，每次计算后将 32 位结果的高 16 位和低 16 位相加。</p>
+
+<p>首部和数据部分可以在 WireShark 中右键下方的条目窗口，通过“导出分组字节流”以二进制的形式保存在磁盘上，保存的二进制内容为最下方十六进制查看器中蓝色高亮的部分：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/03-wireshark-udp-export.jpg" alt="" width="570">
+</figure>
+
+<p>这里将 UDP 首部和数据分开保存，并使用开源十六进制编辑器 ImHex 为首部添加上伪首部部分。在 ImHex 中，于 0x0 位置插入 0xC 个字节，这部分字节的内容按顺序为：源 IP 地址 <code>0x7F 00 00 01</code> ；目的 IP 地址 <code>0x7F 00 00 01</code> ；协议类型 <code>0x00 11</code> ；UDP 长度 <code>0x00 14</code> 。最后，由于此时还没有计算检验和字段，不要忘记将首部的检验和字段置为 <code>0x00 00</code> ，如下所示：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/03-udp-hex-head.jpg" alt="" width="570">
+</figure>
+
+<p>然后，使用程序读入保存的 UDP 首部和应用数据，并拼接在同一个数组中，计算检验和并打印：</p>
+
+<div class="vscode-block"><div><span style="color: #6f42c1;">FILE</span><span style="color: #d73a49;">*</span><span style="color: #24292e;"> </span><span style="color: #24292e;">fp_head</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">fopen</span><span style="color: #24292e;">(</span><span style="color: #032f62;">"udp-head.bin"</span><span style="color: #24292e;">, </span><span style="color: #032f62;">"r"</span><span style="color: #24292e;">);</span></div><div><span style="color: #6f42c1;">FILE</span><span style="color: #d73a49;">*</span><span style="color: #24292e;"> </span><span style="color: #24292e;">fp_body</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">fopen</span><span style="color: #24292e;">(</span><span style="color: #032f62;">"udp-body.bin"</span><span style="color: #24292e;">, </span><span style="color: #032f62;">"r"</span><span style="color: #24292e;">);</span></div><div><span style="color: #d73a49;font-weight: bold;">#define</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">UDP_HEAD_LENGTH</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">20</span></div><div><span style="color: #d73a49;font-weight: bold;">#define</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">UDP_BODY_LENGTH</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">12</span></div><div><span style="color: #6f42c1;font-weight: bold;">uint8_t</span><span style="color: #24292e;"> </span><span style="color: #24292e;">udp_packet</span><span style="color: #24292e;">[</span><span style="color: #6f42c1;">UDP_HEAD_LENGTH</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">+</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">UDP_BODY_LENGTH</span><span style="color: #24292e;">];</span></div><div><span style="color: #6f42c1;">fread</span><span style="color: #24292e;">(</span><span style="color: #24292e;">udp_packet</span><span style="color: #24292e;">, </span><span style="color: #005cc5;">1</span><span style="color: #24292e;">, </span><span style="color: #6f42c1;">UDP_HEAD_LENGTH</span><span style="color: #24292e;">, </span><span style="color: #24292e;">fp_head</span><span style="color: #24292e;">);</span></div><div><span style="color: #6f42c1;">fread</span><span style="color: #24292e;">(</span><span style="color: #24292e;">udp_packet</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">+</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">UDP_HEAD_LENGTH</span><span style="color: #24292e;">, </span><span style="color: #005cc5;">1</span><span style="color: #24292e;">, </span><span style="color: #6f42c1;">UDP_BODY_LENGTH</span><span style="color: #24292e;">, </span><span style="color: #24292e;">fp_body</span><span style="color: #24292e;">);</span></div><div><span style="color: #6f42c1;">printf</span><span style="color: #24292e;">(</span><span style="color: #032f62;">"</span><span style="color: #032f62;">0x</span><span style="color: #005cc5;">%x</span><span style="color: #032f62;">"</span><span style="color: #24292e;">, </span><span style="color: #6f42c1;">checksum</span><span style="color: #24292e;">(</span><span style="color: #24292e;">udp_packet</span><span style="color: #24292e;">, </span><span style="color: #6f42c1;">UDP_HEAD_LENGTH</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">+</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">UDP_BODY_LENGTH</span><span style="color: #24292e;">));</span></div></div>
+
+<p>计算的本次 UDP 分组检验和为：</p>
+
+<div class="codeblock code-console">$ gcc udp_checkedsum.c -o udp_checkedsum
+./udp_checkedsum
+0x4de8
+</div>
+
+<p>对比 WireShark 的捕获结果，注意到 WireShark 中的检验和字段为 <code>0xe84d</code> ，这是由于在网络发送时，一般通过 <code>htons()</code> 等函数将高字节先发送，因此得到的结果和计算出的高低字节顺序相反。</p>
+
+<blockquote>
+    <p>如果使用 WireShark 捕获到的是发送端的 UDP 分组，那么可能会出现计算结果和 WireShark 显示的结果根本不对的情况。这是由于现代的计算机计算检验和通常由网卡执行，以降低 CPU 的负担。而 WireShark 通常捕获的都是 CPU 中生成的分组，此时检验和字段还没有计算，因此与实际不符。</p>
+</blockquote>
+
+<p>尽管检验和字段不能完整地反应分组的原貌，但是分组发生比特差错的几率本身很小，如果有单个比特发生差错，那么检验和一定与实际计算结果不符；多个比特发生差错的概率很小，正好符合检验和的概率就非常小了，这种错误几乎不会影响实际的网络服务。</p>
+
+<h2>可靠数据传输原理</h2>
+
+<p>UDP 只确保数据能正确被接收，但几乎没有提供确保数据完整、有序送达的服务。下面通过研究可靠数据传输原理，讨论运输层为了实现可靠数据传输需要提供哪些服务。</p>
+
+<p>最简单的情况下，在底层信道是完全可靠的 。这种情况下，运输层只需要接受来自应用层的数据，添加首部后产生一个包含该数据的分组，并将分组发送到信道中即可。而在接收端，只需要从底层信道接收这个分组，从分组中取出数据并上传给应用层。</p>
+
+<p>在这个最简单的情况中，一个分组与一个应用数据没差别，而且所有分组是从发送方流向接收方。有了完全可靠的信道不必担心出现差错，接收端就不需要提供任何反馈信息给发送方，接收方接收数据的速率只需要与发送方发送数据的速率一样快就可以了。</p>
+
+<p>然而，实际上完全可信的底层信道是不存在的，在物理损坏、软件差错等情况下，在分组的传输、传播或缓存的过程中分组中的比特往往可能受损。此时仅考虑比特受损，但所有发送的分组将按其发送的顺序被接收，那么就需要一些额外的功能来应对比特受损的情况：</p>
+
+<ul>
+    <li><strong>差错检测</strong>：首先需要一种机制以使接收方检测到何时出现了比特差错，例如 UDP 的检验和字段正是为了这个目的。因此这就要求分组中有额外的检验和字段从发送方发送到接收方</li>
+    <li><strong>接收方反馈</strong>：为了让发送方了解接收方是否正确接收分组，接收方需要提供明确的反馈信息给发送方，例如发送<strong>肯定确认</strong>(positive acknowledgment, ACK)和<strong>否定确认</strong>(negative acknowledgment, NACK)，这种控制报文使得接收方可以让发送方知道哪些内容被正确接收，哪些内容接收有误并需要重复。在最简单的情况下，发送方每发送一个分组，就等待接收方响应是否正确接收到了分组，那么接收方的响应报文只需要一个比特长的布尔值</li>
+    <li><strong>重传</strong>：接收方收到有差错的分组时，发送方将重传该分组文</li>
+</ul>
+
+<p>在计算机网络环境中，基于这样重传机制的可靠数据传输协议称为自动重传请求(Automatic Repeat reQuest, ARQ)协议。</p>
+
+<p>使用以上差错检验时，发送端有两种状态：它可能正等待来自应用层传下来的数据，产生包含待发送数据和检验和的分组并执行发送操作；也可能等待来自接收方的反馈分组：如果收到一个 ACK 分组，则发送方知道最近发送的分组巳被正确接收，因此可以继续等待后续来自应用层的数据；如果收到 NACK 分组，该协议重传上一个分组并重复等待接方的响应分组。注意，当发送方处于等待反馈响应的状态时，它不能从应用层获得更多的数据，仅当接收到 ACK 离开该状态时才能继续接收。因此，发送方将不会发送新的数据，除非发送方确信接收方已正确接收当前分组。有着这种行为的协议被称为停等(stop-and-wait)协议</p>
+
+<p>此时接收方的处理比较简单，它只需要根据收到的分组是否受损回答 ACK 或 NACK 即可。下图展示了这种最简单的可靠数据传输协议的通信过程：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/03-rdt-2.0.jpg" alt="" width="380">
+</figure>
+
+<hr>
+
+<p>以上设计的具有差错检测与恢复的运输层协议看起来已经可以正常工作了，但是它存在一个致命的缺陷：该协议并没有考虑到响应分组损坏的可能性，而发送方却没有能力知道这个响应是否受损，进而无法知道接收方是否正确接收了上一块发送的数据。</p>
+
+<p>一个简单的解决方法是在发送端也引入 ACK/NACK 机制，但是这种情况下就必须在报文中增加一个字段，以区分发送方的数据和响应；而且发送方和接收方都存在 ACK/NACK ，设计不当时往往容易引起 ACK/NACK 的不断递归，形成死循环。</p>
+
+<p>或者干脆在响应不明时重传分组，但这种冗余分组(duplicate packet)无法判断是新的分组还是重传的分组。还可以增加足够的校验和比特，使发送方可以检测甚至恢复差错，不过过大的检验和字段可能会使分组过于臃肿。</p>
+
+<p>对此，现代计算机网络给出的解决方案是以上的综合。包括 TCP 在内的几乎所有现有的数据传输协议中，都在数据分组中添加一个数据分组的序号字段，接收方只需要检查序号即可确定收到的分组是否是一次重传。对于停等协议这种简单情况，只需要 1 比特标识发送方是否正在重传前一个发送分组就足够了。在信道不丢分组的情况下，发送方所接收到的 ACK/NACK 分组响应其最近发送的数据。同时，响应分组也需要加上检验和字段，以防止在传输的过程中 ACK 损坏变成 NACK 或相反情况的发生。</p>
+
+<p>由于发送方可能发送新的分组，也可能重传上一个分组，因此发送方和接收方的状态数都是以前的两倍。不过这两类状态下处理的动作是相似的，只是内容不同：当接收到正确的分组时，接收方对所接收的分组发送肯定确认；如果收到受损的分组，则接收方将发送否定确认。下图展示了改进后的可靠数据传输协议的通信过程：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/03-rdt-2.1.jpg" alt="" width="360">
+</figure>
+
+<p>如果不发送 NACK ，可以对上次正确接收的分组发送一个冗余ACK(duplicate ACK)，表示正确接收到被确认两次的分组后面的分组。</p>
+
+<hr>
+
+<p>除了比特受损外，实际的底层信道还会丢包，这就需要运输层提供检测丢包以及对丢包的弥补功能。</p>
+
+<p>解决丢包的方法有很多，以下采用发送方解决丢包的方式。假定发送方的分组或接收方对该分组的 ACK 发生了丢失，在这两种情况下，发送方在等待一段时间后都收不到接收方的响应，那么它就需要重传该数据分组。</p>
+
+<p>但问题在于如何确定这个超时的时间，选取的超时时长过长可能会在丢包时等待一段较长的时间才启动差错恢复。因此需要发送方选择一个合适的时间值，以判定可能发生了丢包；如果在这个时间内没有收到 ACK ，则重传该分组。这里已经可以不再使用 NACK 了，原因是接收方的 NACK 只能表示数据损坏，但不能表示数据丢失；而冗余 ACK 既可以表示数据丢失，也可以表示按正确顺序接收。</p>
+
+<p>注意到如果一个分组在网络高峰期经历了一个特别大的时延，在该数据分组及其 ACK 都没有丢失的情况下便开始重传该分组，造成一个冗余数据分组(duplicate data packet)，不过上文介绍的协议已经可以处理冗余分组。</p>
+
+<p>这种基于时间的重传机制，需要一个<strong>倒计数定时器</strong>(countdown timer)，发送方每次发送一个任意分组时都启动一个定时器，当倒计时结束后采取适当行动，例如重传。</p>
+
+<p>引入定时器后，通信原理并没有复杂多少，但过程中可能的情况变多了。首先考虑最简单的情况，底层并没有发生丢包或分组损坏，那么只需要不断根据 ACK 发送分组即可：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/03-rdt-3-case1.jpg" alt="" width="340">
+</figure>
+
+<p>再考虑稍微复杂一些的情况，在传输过程中发送了丢包。不论是分组丢失还是响应丢失，接收方都无法收到发送方的 ACK 响应，在倒计时结束后都会发生重传：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/03-rdt-3-case2-3.jpg" alt="" width="600">
+</figure>
+
+<p>接收方可能得到重复的分组，不过它可以通过判断分组序号，确定这是一个冗余分组而丢弃。</p>
+
+<p>最后是最复杂的一种情况，在传输过程中没有发生丢包，但发送方超时时间设置过短，发生过早超时而认为此时发生了丢包。此时，发送方尝试再发送一个相同分组，不过该分组会被接收方确认为冗余分组而舍弃，发送方接到重复响应后也会将其丢弃：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/03-rdt-3-case4.jpg" alt="" width="320">
+</figure>
+
+<p>这样便成功地构建了一种可靠数据传输协议。检验和可以验证一个分组是否受损，接收方反馈使发送方知道分组受损，重传机制可以恢复受损的内容，分组序号可以防止冗余分组的影响，超时机制用于防止通信过程中发生分组丢失。</p>
+
+<h3>流水线可靠数据传输协议</h3>
+
+<p>目前为止已经构造了一个可用的可靠数据传输协议，但是它的性能还是有很大问题：以上协议是一个停等协议，一个分组以光速在全国范围内往返通常需要十几到几十毫秒的往返时延，在得到发送方的响应或超时前，发送方无法去做其它的事情。</p>
+
+<p>考虑到一个分组不能太大，否则发生差错的概率将会指数上升。UDP 分组的长度字段有 2 个字节，因此能容纳的应用数据最多只有 65535 个字节，而一个传输速率以 Gbps 计的链路发送这么多字节也只需要几十微秒，也就是说发送方只有千分之几的时间是在工作，其余时间都在等待回复。</p>
+
+<p>为了解决该问题，可以不采用停等，而是以<strong>流水线</strong>(pipelining)的方式发送多个分组而无须等待确认，如下图所示：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/03-pipelining-transmission.jpg" alt="" width="520">
+</figure>
+
+<p>然而，流水线操作下，为了让接收方判断是否有冗余分组，分组的序号不再是简单的 0（一个新的分组）或 1（重复上一个分组），每个非重传的分组都必须有一个唯一的序号；并且发送方接到的响应都是之前发送的分组的，为了能够应对接收方的重传请求，发送方必须要能够缓存那些已经发送但还没有确认的分组。</p>
+
+<p>发送方需要为分组设置合适的序号范围和缓存大小，但具体按什么方式设置取决于数据传输协议如何处理丢失、损坏及延时过大的分组。解决流水线的差错恢复有两种基本方法是回退 N 步和选择重传。</p>
+
+<p><strong>回退 N 步</strong>(Go-Back-N, GBN)协议允许发送方发送多个分组而不需等待确认，但为了防止序号过大，它限制在流水线中未确认的分组数不能超过某个最大允许值 N 。</p>
+
+<p>若将基序号(base)定义为最早未确认分组的序号，后续序号(nextseqnum)定义为下个待发分组的序号，则这 N 个分组可分为 4 段：基序号之前的分组都已经发送并被确认；基序号到后续序号是已经发送但未被确认的分组；后续序号到基序号后的最大允许长度 N 内的序号能用于那些要被立即发送的分组；大于等于基序号后的最大允许长度 N 的序号暂时无法使用，直到当前流水线中出现被确认的分组为止（一般是基序号对应的分组）。下图描述了发送方的序号：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/03-pipelining-gobackN.jpg" alt="" width="440">
+</figure>
+
+<p>协议运行时，由有效序号标识的分组可以被看作一个长度为 N 的窗口，在序号空间向前滑动。如果分组中序号字段的长度为 k ，那么序号空间可以用重复的 0~2<sup>k</sup> 表示。</p>
+
+<p>GBN 发送方必须响应 3 种不同的事件，下图描述了 GBN 发送方的工作状态：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/03-pipelining-gobackN-sender.jpg" alt="" width="460">
+</figure>
+
+<p>当一个应用层准备发送数据时，发送方首先检查发送窗口是否已满（即已经发送但未被确认的分组是否达到了 N ）：如果窗口未满，则产生一个分组并发送，并相应地更新变量；如果窗口已满，发送方则返还数据并提醒应用层等候一段时间再尝试发送。或者发送方也可以先缓存这些数据，在合适的时间再发送。发送方的运输层也可以和应用层根据信号同步，让应用层仅当窗口未满时才执行发送数据。</p>
+
+<p>当接收方收到序号为 n 的分组时，它将采取<strong>累积确认</strong>(cumulative acknowlegment)的方式，表明接收方已正确按顺序接收到序号为 n 的以前且包括 n 在内的所有分组。在所有其它情况下，接收方都会丢弃该分组，并根据最近按序接收的分组重新发送 ACK 。因为一次交付给上层一个分组，如果分组 k 接收并交付，则所有序号比 k 小的分组也已经正确交付。</p>
+
+<p>因此，当出现丢失和时延过长时，发送方都会发现最早已发送但未被确认的分组响应超时。此时，发送方将重传所有已发送但还未被确认过的分组，这也就是上图中发送方接收对损坏的分组不采取任何动作的原因（因为不会接到损坏的响应，只会重复接到前面分组成功接收的响应）。上图中只用到一个定时器，如果收到 ACK 但仍有已发送但未被确认的分组，则定时器被重新启动，在倒计时内仍然可以接收到紧接而来的 ACK 。</p>
+
+<p>接收方必须按序将数据交付给应用层，由于在 GBN 协议中发送方会将除了已经按序正确接收的分组都重传，因此接收方可以丢弃所有失序分组而无需缓存，唯一要做的就是使用一个变量保存下个按序接收的分组的序号。丢弃一个正确接收的分组的缺点是随后对该分组的重传也可能会丢失或出错，因此可能需要更多的重传。</p>
+
+<p>下图表示一个窗口长度为 4 个分组的 GBN 协议的运行情况，此时发送方只能发送分组 0~3 ，直到一个或多个分组被确认才能继续发送。当接收到顺序的 ACK 时，该窗口便向前滑动，发送方便可以发送新的分组：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/03-pipelining-gobackN-demo.jpg" alt="" width="350">
+</figure>
+
+<p>由于窗口长度的限制，发送方只能一次性发送分组 0~3 ，在继续发送之前必须等待直到一个或多个分组被确认。当接收到每个连续的 ACK 时，该窗口便向前滑动，发送方便可以发送新的分组。分组 2 第一次传输时发生了丢失，接收方发现分组 3~5 是失序分组并丢弃，而发送方因为迟迟接不到分组 2 的响应而发生超时，在超时事件中重发当前窗口的分组 2~5 。</p>
+
+<hr>
+
+<p>改进后的 GBN 协议使发送方可以在没有接收响应时便同时发送多个分组，避免了停等协议中存在的时间利用率问题。然而 GBN 也存在一些性能问题，主要是当窗口长度和传输时延都很大时，单个分组的差错就能够引起 GBN 重传大量分组，但许多分组根本没有必要重传。随着底层通道差错率的增加，许多正确送达的分组可能会被多次不必要地重传。</p>
+
+<p><strong>选择重传</strong>(Selective Repeat, SR)协议可以让发送方仅重传可能丢失或受损的分组，而避免了不必要的重传。这种个别的、按需的重传要求接收方逐个确认正确接收的分组。接收方将确认一个正确接收的分组而不管其是否按序，失序的分组将被缓存直到所有丢失分组（序号更小的分组）都被收到为止，然后才可以将这一批分组一起交付给应用层。</p>
+
+<p>当发送方从应用层接收到数据后，将检查下个可用于该分组的序号是否位于窗口内：如果位于窗口内，则将数据打包并发送；否则要么将数据缓存，要么返还给应用层。此时接收方也需要一个长度为 N 的窗口，序号在窗口内的分组被正确接收并回送一个 ACK 。下图展示了 SR 的窗口状态：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/03-pipelining-selectiveRepeat-window.jpg" alt="" width="570">
+</figure>
+
+<p>当发送方收到某个分组的 ACK 时，如果该分组序号在窗口内，则发送方将该分组标记为已接收。如果该分组的序号等于发送方窗口基序号 <code>send_base</code> ，则基序号变为未确认分组的最小序号处并带动整个窗口移动，并发送落在窗口内的未发送序号。</p>
+
+<p>特别地，接收方会重新确认（而不是忽略）已收到过的序号小于当前接收窗口基序号的分组。考虑到 ACK 丢失，特别是分组 <code>send_base</code> 的 ACK 丢失，则发送方会重传该分组。然而对接收方来说，它的窗口已经滑过了该分组，如果接收方不确认该分组，则发送方窗口将永远不能向前滑动。因此在 SR 协议下，发送方和接收方的窗口并不总是一致的。</p>
+
+<p>在 SR 中，每个分组都可能发生超时，在超时事件中只能发送一个分组，因此每个分组必须拥有独立的逻辑定时器，否则不知道哪一个分组发生了超时。下图演示了 SR 是如何处理之前的情况下 GBN 遇到的问题的：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/07/03-pipelining-selectiveRepeat-demo.jpg" alt="" width="600">
+</figure>
+
+<p>至此终于得出了一个高效、可靠的数据传输协议。下表总结了该协议的一些机制，以及这些机制是如何保证协议正常运行的：</p>
+
+<table>
+    <tr>
+        <th>机制</th>
+        <th>用途</th>
+    </tr>
+    <tr>
+        <td>检验和</td>
+        <td>检测分组中是否发生比特差错</td>
+    </tr>
+    <tr>
+        <td>ACK 确认</td>
+        <td>告知发送方分组被正确接收</td>
+    </tr>
+    <tr>
+        <td>序号</td>
+        <td>用于表示分组或响应的顺序，并可以用于判断是否冗余</td>
+    </tr>
+    <tr>
+        <td>定时器</td>
+        <td>检测一个分组或响应是否在传输时发送丢失。但定时器可能引发过早超时，需要处理冗余分组或响应</td>
+    </tr>
+    <tr>
+        <td>流水线</td>
+        <td>使发送方和接收方能无需停等而继续操作，增加通信时间利用率</td>
+    </tr>
+    <tr>
+        <td>窗口</td>
+        <td>限制分组序号范围，减轻缓存压力</td>
+    </tr>
+</table>
+
+<p>下一节将介绍 TCP 协议，更详细地介绍差错检测、超时机制、流量控制等原理，并研究 TCP 是如何实现它们的。</p>
+
+<h2>延伸阅读</h2>
+
+<p>本文使用的 UDP 检验和算法参考自 OpenBSD ：<a href="https://github.com/openbsd/src/blob/master/sbin/dhclient/packet.c">https://github.com/openbsd/src/blob/master/sbin/dhclient/packet.c</a></p>
+<p><a rel="nofollow" href="/archives/453">计算机网络04-运输层概览与UDP协议</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/archives/453/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>计算机网络03-域名系统：DNS</title>
+		<link>/archives/419</link>
+					<comments>/archives/419#respond</comments>
+		
+		<dc:creator><![CDATA[Hello]]></dc:creator>
+		<pubDate>Mon, 27 Jun 2022 14:18:47 +0000</pubDate>
+				<category><![CDATA[计算机网络]]></category>
+		<category><![CDATA[DNS]]></category>
+		<guid isPermaLink="false">/?p=419</guid>
+
+					<description><![CDATA[<p>DNS服务 DNS服务内容 上一节介绍了应用层协议的&#46;&#46;&#46;</p>
+<p><a rel="nofollow" href="/archives/419">计算机网络03-域名系统：DNS</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+
+<h2>DNS服务</h2>
+
+<h3>DNS服务内容</h3>
+
+<p><a href="/archives/403">上一节</a>介绍了应用层协议的基本内容，并指出互联网上的每一个端系统都使用 IP 地址标识它的位置。根据 IP 地址，可以连接到正确的主机，并通过套接字向目的主机发送数据。</p>
+
+<p>然而，在平时使用浏览器时，如果要访问一个网页，通常都会在地址栏中输入一个比较长、带英文字符的网址，例如要访问谷歌搜索，通常会在地址栏中输入 <code>google.com</code> ，而不是 IP 地址 <code>172.217.163.46</code> ，尽管后者也能正确进入谷歌搜索页面。</p>
+
+<p>在互联网中，主机可以使用<strong>主机名</strong>(hostname)或 IP 地址标识，主机名方便用户认识并记忆，例如 <code>github.com</code> 这种名称就比 <code> 20.205.243.166</code> 方便记忆与输入。但主机名可能会变动，因此路由器只能解析 IP 地址。<strong>域名系统</strong>(Domain Name System, DNS)负责将主机名解析为 IP 地址。</p>
+
+<p>DNS 是一个使主机能查询运行在 DNS 服务器上的分布式数据库的应用层协议。它运行在 UDP 协议上，使用 53 号端口。</p>
+
+<p>DNS 的解析结果可以被其余应用层协议（如 HTTP 和 SMTP 等）利用，这也就是上一节编写邮件发送程序时并没有在代码中显式声明邮件服务器的 IP 地址的原因。当它们需要将一个报文发送到对应名称的主机上时，主要执行以下步骤：</p>
+
+<ol>
+    <li>浏览器将得到的主机名传给主机上正在运行的 DNS 客户端</li>
+    <li>DNS 客户端向 DNS 服务器发送一个包含主机名的请求</li>
+    <li>DNS 服务器返回一个包含解析得到的目标 IP 地址的回答报文</li>
+    <li>利用得到的目标 IP 地址向目的主机发送报文</li>
+</ol>
+
+<p>DNS 服务器还提供以下服务：</p>
+
+<p>当一台主机的<strong>规范主机名</strong>(canonical hostname)比较难以记忆时，它可能还有几个<strong>主机别名</strong>(host aliasing)。此时 DNS 服务器可以根据主机别名来获取主机的规范主机名及对应的 IP 地址。</p>
+
+<p>当一个大型站点被分配在多个主机上时，DNS 数据库会轮流将每个主机的 IP 地址提供给客户端，通过<strong>负载分配</strong>(load distribution)平均服务器的压力。</p>
+
+<p>DNS 服务基于大量分布式、分层形式的服务器组织。它们主要被分为 3 层：根 DNS 服务器、顶级域(Top-Level Domain, TLD) DNS 服务器以及权威 DNS 服务器。根 DNS 服务器遍及全球，提供 TLD 服务器的 IP 地址；顶级域提供权威 DNS 服务器的 IP 地址；权威 DNS 服务器提供由它管理的服务器的 IP 地址。</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/06/02-dns-server.jpg" alt="" width="470">
+    <figcaption>DNS 服务结构</figcaption>
+</figure>
+
+<p>每一级域名都由不区分大小写的英文字母和数字组成。多级域名由点号 <code>.</code> 隔开，且越高级的域名越靠右。例如，域名 <code>en.wikipedia.org</code> 中，顶级域名 org 提供 wikipedia.org 的 IP 地址，而 wikipedia.org 则提供 en.wikipedia.org 的 IP 地址。</p>
+
+<p>还有一类重要的<strong>本地 DNS 服务器</strong>(local DNS server)，由本地 ISP 提供，离用户较近，负责将主机发送的 DNS 请求转发到 DNS 服务器层次结构中。</p>
+
+<p>DNS 提供了两种域名解析的方式：递归查询和迭代查询。递归查询如果没有得到目的主机的 IP 地址，该服务器自身会继续向下一级 DNS 服务器查询，最后得到的 IP 地址将层层上报给本地 DNS 。而迭代查询时，DNS 服务器只会将下一级 DNS 服务器的地址交给本地 DNS ，由本地 DNS 向下一级 DNS 查询。</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/06/02-dns-query.jpg" alt="" width="830">
+    <figcaption>两种查询方式的比较</figcaption>
+</figure>
+
+<p>由于递归查询对于被查询的域名服务器负担太大，因此通常从请求主机到本地域名服务器的查询使用递归查询，而其余的查询则采用迭代查询。</p>
+
+<p>DNS 服务器普遍使用了 <strong>DNS 缓存</strong>(DNS caching)技术，当某个 DNS 服务器接收到一个包含主机名到 IP 地址的映射的 DNS 回答时，不管它是否属于该主机名的上一级服务器，都会被该 DNS 服务器保存在本地存储器中，这样下一次接收到相同的查询请求，该 DNS 服务器可以直接使用该缓存的结果而无需额外查询。</p>
+
+<p>由于主机名和对应 IP 的映射关系可能被改变，因此缓存将在一段时间（例如两天）后被清除。</p>
+
+<h3>DNS记录和报文</h3>
+
+<p>所有包含 DNS 分布式数据库的 DNS 服务器上都存储了<strong>资源记录</strong>(Resource Record, RR)，它提供了主机名到 IP 地址的映射，其结构是 <code>(Name, Value, Type, TTL)</code> 形式的四元组。</p>
+
+<p><code>TTL</code> 是该记录保存在缓存中的时间。<code>Name</code> 和 <code>Value</code> 的值主要取决于 <code>Type</code> 。<code>Type</code> 是记录类型，其值可以是：</p>
+
+<ul>
+    <li>如果其值为 <code>A</code> ，则 <code>Name</code> 是主机名，<code>Value</code> 是对应的 IP 地址</li>
+    <li>如果其值为 <code>NS</code> ，则 <code>Name</code> 为一个域名，<code>Value</code> 是一个知道如何获得该域名的主机的 IP 地址的权威 DNS 服务器的主机名。该记录可以沿着查询链得到 DNS 记录</li>。即将子域名指定其它的 DNS 服务器解析
+    <li>如果其值为 <code>CNAME</code> ，则 <code>Value</code> 是别名为 <code>Name</code> 的主机对应的规范主机名</li>。即将域名指向另外一个域名
+    <li>如果其值为 <code>MX</code> ，则 <code>Value</code> 是别名为 <code>Name</code> 的主机名对应的邮件服务器的规范主机名。这样一个相同的别名可以同时充当邮件服务器和其它服务器</li>
+</ul>
+
+<p>DNS 只有查询和回答两种报文，并且它们的格式相同。DNS 报文中各字段的语义为：</p>
+
+<p>前 12 字节为首部区域，第一个 2 字节的字段用于标识查询的 id ，以此区分一个 DNS 应答是哪一个 DNS 查询的回应。</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/06/02-dns-message.jpg" alt="" width="560">
+    <figcaption>DNS 报文</figcaption>
+</figure>
+
+<p>第二个字段含有若干标志位，各标志位的含义为：</p>
+
+<ul>
+    <li>QR ：查询/应答标志，置 1 代表是应答报文，清 0 代表是查询报文</li>
+    <li>opcode ：查询或应答的类型</li>
+    <li>AA ：置 1 表示该报文是权威 DNS 服务器的应答</li>
+    <li>TC ：截断标志，使用 UDP 发生报文时若报文过长，则将报文截断并置该位为 1</li>
+    <li>RD ：递归查询标志，置 1 为递归查询，清 0 为迭代查询</li>
+    <li>RA ：允许递归标志，应答报文置 1 代表 DNS 服务器允许递归查询</li>
+    <li>zero ：未使用，必须全部清 0 </li>
+    <li>rcode ：4 位返回码，表示应答状态</li>
+</ul>
+
+<p>其余四个字段指定了首部后四类数据区域出现的数量。</p>
+
+<p>问题区域包含正在进行的查询信息，包含名字字段（查询的主机名字）和类型字段（查询的问题类型）。回答区域对最初请求的名字的资源记录，可以包含多个 RR 。权威区域包含其它权威服务器的记录，附加区域包含了其它有帮助的记录。</p>
+
+<p>接下来，通过具体的实验来探究 DNS 查询的细节。</p>
+
+<h2>实验：DNS查询</h2>
+
+<h3>使用操作系统命令</h3>
+
+<p>为了执行 DNS 查询，首先要给出 DNS 服务器的地址。在 Linux 系统中，使用文件 <code>/etc/resolv.conf</code> 来存放 DNS 服务器的 IP 地址。该文件的内容大致为：</p>
+
+<div class="codeblock code-template"># [network]
+nameserver 8.8.8.8
+nameserver 4.2.2.2</div>
+
+<p>其中的两个 IP 地址分别是首选 DNS 服务器地址和备选 DNS 服务器地址。</p>
+
+<p><code>nslookup</code> 是一个简单的程序，可以运行在大多数 Linux 和 Windows 系统上，也可以使用在线工具如 <a href="https://www.nslookup.io/">https://www.nslookup.io/</a> 替代。它可以向任何 DNS 服务器发送 DNS 查询，并返回本次查询的结果报告。例如，以下是使用 <code>nslookup</code> 一次简单的 DNS 查询结果：</p>
+
+<div class="codeblock code-console">$ nslookup stackoverflow.com
+Server:   cache-fz.fj100110.com
+Address:  65.115.28.98
+
+Non-authoritative answer:
+Server:     stackoverflow.com
+Addresses:  151.101.1.69
+          151.101.129.69
+          151.101.65.69
+          151.101.193.69
+</div>
+
+<p>从解析结果可以看出，域名 <code>stackoverflow.com</code> 对应多台主机，在访问量较大的时候可以均衡负载。同时，由于本次查询用的 DNS 服务器并不实际管理该被查询的域名，它需要到其余 DNS 服务器中查询该域名，因此本次查询是非权威应答。</p>
+
+<p>可以使用第二个参数指定查询用的 DNS 服务器。例如，以下使用管理本域名的 DNS 服务器查询本域名的地址：</p>
+
+<div class="codeblock code-console">$ nslookup frozencandles.fun dns1.hichina.com
+Server:   UnKnown
+Address:  120.76.107.43
+
+Name:    frozencandles.fun
+Address:  123.56.83.47
+</div>
+
+<p>这时，该应答便为权威应答。</p>
+
+<p>还可以通过 <code>-q=<em>type</em></code> 参数指定查询的记录类型。例如，假设要解析一个域名对应的邮件服务器的地址，那么可以执行以下命令：</p>
+
+<div class="codeblock code-console">$ nslookup -qt=MX frozencandles.fun
+Server:  cache-fz.fj100110.com
+Address:  65.115.28.98
+
+Non-authoritative answer:
+frozencandles.fun       MX preference = 10, mail exchanger = mxw.mxhichina.com
+frozencandles.fun       MX preference = 5, mail exchanger = mxn.mxhichina.com
+</div>
+
+<!-- 
+<p><code>nslookup</code> 还提供了一种交互式的查询方式，可以使用交互式查询的方式来实现迭代查询。</p>
+
+<p>要使用交互式查询，首先需要在命令行中使用无参数的 <code>nslookup</code> 命令：</p>
+
+<div class="codeblock code-console">$ nslookup
+默认服务器:  cache-fz.fj100110.com
+Address:  65.115.28.98
+
+>
+</div>
+
+<p>为了沿着查询链得到 DNS 记录，需要获取管理该域名的上一级域名的权威名称服务器，也就是说要将类型设置为 <code>NS</code> ，这点可以通过以下命令完成：</p> 
+
+<div class="codeblock code-console">> set type=NS
+</div>
+
+首先，查询可用的根 DNS 服务器：
+
+<div class="codeblock code-console">> .
+Server:        65.115.28.98
+Address:       65.115.28.98#53
+
+Non-authoritative answer:
+.       nameserver = b.root-servers.net.
+.       nameserver = f.root-servers.net.
+....
+> server 194.169.218.72
+Default server: 194.169.218.72
+Address: 194.169.218.72#53
+> frozencandles.fun
+Server:         194.169.218.72
+Address:        194.169.218.72#53
+
+Non-authoritative answer:
+*** Can't find frozencandles.fun: No answer
+
+Authoritative answers can be found from:
+frozencandles.fun       nameserver = dns1.hichina.com.
+frozencandles.fun       nameserver = dns2.hichina.com.
+> server dns1.hichina.com.
+Default server: dns1.hichina.com.
+Address: 47.118.199.213#53
+Default server: dns1.hichina.com.
+Address: 139.224.142.123#53
+......
+> frozencandles.fun.
+Server:         dns1.hichina.com.
+Address:        47.118.199.213#53
+
+frozencandles.fun       nameserver = dns1.hichina.com.
+frozencandles.fun       nameserver = dns2.hichina.com.
+> frozencandles.fun
+Server:         dns1.hichina.com.
+Address:        47.118.199.213#53
+
+frozencandles.fun       nameserver = dns1.hichina.com.
+frozencandles.fun       nameserver = dns2.hichina.com.
+> set type=A
+> frozencandles.fun
+Server:         dns1.hichina.com.
+Address:        47.118.199.213#53
+
+Name:   frozencandles.fun
+Address: 123.56.83.47
+</div> 
+-->
+
+<p>如果想要查看更详细的 DNS 查询信息，可以使用 <code>dig</code> 命令发起一次 DNS 查询，第一个参数是 <code>Name</code> ，第二个参数是 <code>Type</code> 。该命令得到的 DNS 查询结果已经非常接近原始的 DNS 报文了：</p>
+
+<div class="codeblock code-console">$ <span class="codetoken command">dig</span> frozencandles.fun
+; <<>> DiG 9.10.3-P4-Ubuntu <<>> frozencandles.fun
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 37772
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4096
+;; QUESTION SECTION:
+;frozencandles.fun.             IN      A
+
+;; ANSWER SECTION:
+frozencandles.fun.      300     IN      A       123.56.83.47
+
+;; Query time: 6 msec
+;; SERVER: 65.115.28.98#53(65.115.28.98)
+;; WHEN: Mon May 02 14:17:47 CST 2022
+;; MSG SIZE  rcvd: 62</div>
+
+<p>从以上结果可以大致还原 DNS 报文的数据。接下来介绍使用 WireShark 获取 DNS 报文并解析的过程。实际上该过程非常简单。</p>
+
+<h3>使用WireShark分析DNS</h3>
+
+<p>在使用 WireShark 前，可以使用以下命令清除操作系统的 DNS 缓存，确保结果是由 DNS 服务器返回的：</p>
+
+<div class="codeblock code-console">$ ipconfig /flushdns
+</div>
+
+<p>然后打开 WireShark ，并在本地通过任意方式访问一个域名以执行 DNS 查询，例如使用 <code>nslookup</code> 命令。</p>
+
+<p>如果本地的网络服务比较繁忙，出现的网络数据包比较多，那么可以在下图浅绿色区域的窗口将所有 DNS 数据包过滤出来：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/06/02-wireshark-dns.jpg" alt="" width="670">
+    <figcaption>经过筛选的数据包</figcaption>
+</figure>
+
+<p>下半部分的文字列出了该数据包的概览。从第四行可以看到，DNS 是运行在 UDP(User Datagram Protocol) 协议之上的，并且使用 53 号端口。</p>
+
+<p>第五行表示该数据包是一个 DNS 应用层协议的数据，可以展开它进一步检查包含的内容：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/06/02-wireshark-dns-query.jpg" alt="" width="500">
+    <figcaption>DNS 数据包详细结构</figcaption>
+</figure>
+
+<p>第一个字段表示本次 DNS 查询的标识 id 为 0x7680 ；第二个字段的值的已经按位表示的很清楚了，说明这是一个标准的递归 DNS 查询；问题数和问题都在结果中显示出来了。</p>
+
+<p>除此之外，WireShark 还获取了 DNS 回答的数据包，其结构和查询用的数据包相差不大，因此不再展示。</p>
+
+<h2>参考资料/延伸阅读</h2>
+
+<p><a href="https://www.cloudflare.com/learning/dns/what-is-dns/">https://www.cloudflare.com/learning/dns/what-is-dns/</a></p>
+
+<p>cloudflare（一个业务包括 DNS 解析的公司）的 DNS 介绍文档</p>
+
+<p><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/nslookup">https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/nslookup</a></p>
+
+<p>MSDN 上关于 <code>nslookup</code> 命令的帮助文档</p>
+
+<p>有条件或有兴趣的话可以选择一家域名服务商购买一个域名，然后使用它们提供的 DNS 服务尝试添加一些 DNS 记录并在本地解析，这样可以快速加深对 DNS 的印象。</p>
+
+
+<p><a rel="nofollow" href="/archives/419">计算机网络03-域名系统：DNS</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/archives/419/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+		<item>
+		<title>计算机网络02-应用层概览与SMTP电子邮件发送</title>
+		<link>/archives/403</link>
+					<comments>/archives/403#respond</comments>
+		
+		<dc:creator><![CDATA[Hello]]></dc:creator>
+		<pubDate>Sat, 25 Jun 2022 15:35:56 +0000</pubDate>
+				<category><![CDATA[计算机网络]]></category>
+		<category><![CDATA[SMTP]]></category>
+		<guid isPermaLink="false">/?p=403</guid>
+
+					<description><![CDATA[<p>应用层协议原理 应用程序体系结构 应用层是计算机网络&#46;&#46;&#46;</p>
+<p><a rel="nofollow" href="/archives/403">计算机网络02-应用层概览与SMTP电子邮件发送</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+<h2>应用层协议原理</h2>
+
+<h3>应用程序体系结构</h3>
+
+<p>应用层是计算机网络结构体系的最顶层，也是计算机网络最终的发展目的。计算机网络的其余体系结构主要都是为应用层提供正常运作所需的服务而建立的。</p>
+
+<p>应用层主要通过应用程序的交互来实现网络应用，其核心是编写能够运行在不同的端系统和通过网络彼此通信的程序。因此这一章内容基本只涉及软件方面的应用。</p>
+
+<p>应用程序体系结构由研发者规定如何在各种端系统上组织来自多方的应用程序。目前来说有两种主要的体系结构：</p>
+
+<p><strong>客户-服务器体系结构</strong>(client-server architecture)中总是打开的主机称为<strong>服务器</strong>，它处理许多<strong>客户</strong>的请求。该体系结构中客户端之间不直接通信。例如，大型游戏需要有游戏服务器来记录玩家数据；视频网站需要有资源服务器来向用户提供视频。</p>
+
+<p><strong>P2P体系结构</strong>(Peer-to-Peer architecture)中，应用程序在间断连接的<strong>对等方</strong>主机对之间使用直接通信，这种对等方通信不需要通过专门的服务器。例如，一些小型游戏可以直接在两台主机间连接，而无需服务器的存在。</p>
+
+<p>下图展示了这两种应用程序体系结构的区别：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/06/02-program-architecture.jpg" alt="" width="840">
+    <figcaption>客户-服务器体系结构与P2P体系结构</figcaption>
+</figure>
+
+<p>在客户-服务器体系结构中，一台服务器往往要同时接收并处理多个客户的请求，为了避免单台服务器性能不足的问题，大型互联网服务往往使用计算机集群构建一个强大的虚拟服务器。而 P2P 体系结构则不存在该问题，服务随着规模的扩大，对等方中服务的提供者也会随之增加。</p>
+
+<h3>进程通信</h3>
+
+<p>在应用层中，进行通信的实际上是<strong>进程</strong>(process)，多个进程运行在相同的端系统上时，它们使用操作系统规定的进程进程通信机制相互通信。</p>
+
+<blockquote>
+    <p>进程是程序的载体。程序在执行时，操作系统会为它提供一些内存、输入设备（如键盘、鼠标）接口、权限等额外内容，由此产生的真正运行的任务称为进程。</p>
+
+    <p>由于应用层依赖操作系统提供的底层服务，因此应用层通信的真正主体是进程。</p>
+</blockquote>
+
+<p>在两个不同端系统上的进程通过跨越计算机网络交换<strong>报文</strong>(message)。报文是一种特殊格式的数据，不同应用程序体系交换的报文格式也可能不同。发送进程被创建并向网络中发送报文；接收进程接收这些报文并可能通过回复报文响应发送方。</p>
+
+<p>在一对进程之间的通信会话场景中，发起通信的进程被标识为<strong>客户端</strong>(client)，在会话开始时等待联系的进程是<strong>服务端</strong>(server)。</p>
+
+<p>进程通过<strong>套接字</strong>(socket)软件接口向网络发送和接收报文。套接字是同一台主机内应用层与运输层之间的接口，也称为<strong>应用程序编程接口</strong>(Application Programming Interface, API)。应用程序可以控制套接字在应用层端的功能。下图展示了套接字与进程在计算机网络中所处的位置（这里只关心应用层与运输层之间的部分）：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/06/02-socket-process.png" alt="" width="380">
+    <figcaption>进程、套接字与计算机网络其余部分的图示</figcaption>
+</figure>
+
+<p>为了向特定目的主机的进程发送分组，接收进程通过其<strong>IP 地址</strong>(IP address)标识，目前只需要知道它是一个 32 比特能够唯一标识主机的虚拟地址。目的地的<strong>端口号</strong>(port number)用于指定接收主机上的接收进程，它是一个无符号 16 位整数，用于区分一台主机上多个同时运行的套接字应用程序。总体来说，IP 地址和端口号结合，可以在互联网中找到一台主机上的特定进程。</p>
+
+<p>在运输层中，会更详细地介绍端口号存在的意义；在网络层中，会更详细地介绍 IP 地址的作用。</p>
+
+<h3>运输服务</h3>
+
+<p>运输层是应用层之下的部分，运输层的作用就是提供<strong>可靠数据传输</strong>(reliable data transfer)，确保一个端系统发送的数据能够正确、完全地交付给另一个端系统的应用程序。</p>
+
+<p>当一个运输层协议不提供可靠数据传输时，<strong>容忍丢失的应用</strong>(lost-tolerant application)可以接受部分无法到达接收进程的数据。</p>
+
+<p>可用吞吐量指两个进程通信时，发送进程向接收进程发送比特的速率。运输层协议应保证可用吞吐量不低于应用程序要求的吞吐量。具有吞吐量要求的应用被称为<strong>带宽敏感的应用</strong>(bandwidth-sensitive application)，而<strong>弹性应用</strong>(elastic application)能根据当时可用的吞吐量调整传输速率并尽可能利用当前的吞吐量。例如，互联网电话、视频直播就属于带宽敏感的应用，在吞吐量不足时会造成卡顿、信息丢失等情况；而文件传输、电子邮件则属于弹性应用，此时发送方在一定程度上允许延后接收来适应缓慢的传输速率。</p>
+
+<p>运输层协议也需要提供交互式实时应用程序的定时保证，发送方传递给套接字的每个比特到达接收方的套接字不能有太大间隔。较长的时延会使一些实时应用发生不自然的停顿等问题。</p>
+
+<p>最后，运输协议也可能需要为应用程序提供若干安全性服务，以防止传输的数据被窃取或篡改。</p>
+
+<hr>
+
+<p>互联网为应用程序提供了两个运输层协议：TCP 协议和 UDP 协议。这里仅对此做简要介绍，在运输层中才会真正涉及这两个协议的细节。</p>
+
+<ul>
+    <li><strong>TCP 服务</strong></li>
+</ul>
+
+<p>TCP 服务模型包括面向连接服务和可靠数据传输服务。</p>
+
+<p>在应用层数据报文传输之前，TCP 服务会先在客户和服务器之间握手，交互运输层控制信息，握手之后会在两个进程的套接字之间建立一个 TCP 连接，连接双方的进程可以在此连接上同时收发报文，并当应用程序结束报文发送后会拆除该连接。</p>
+
+<p>使用 TCP 服务，可以按正确顺序接收所有数据，不会有字节的丢失、乱序等差错。</p>
+
+<ul>
+    <li><strong>UDP 服务</strong></li>
+</ul>
+
+<p>UDP 是一种不提供不必要服务的轻量级运输服务，仅提供最小服务，因此它是无连接的，两个进程通信前没有握手过程。</p>
+
+<p>除此之外，UDP 也不能保证报文到达接收进程，也不能保证接收的顺序正确。但是 UDP 传输更快，基于 UDP 的扩展性也更强。</p>
+
+<h3>实验：套接字编程</h3>
+
+<h4>UDP 套接字编程</h4>
+
+<p>UDP 编程相对比比较简单，因此接下来先研究 UDP 编程。</p>
+
+<p>当套接字使用 UDP 通信时，在发送进程能够将数据分组从应用层推到运输层之前，需要先将目的地址填入分组里，这样互联网可以正确连接到接收方的套接字。</p>
+
+<p>一台主机可以运行多个网络进程，因此当生成一个套接字时，会为它分配一个端口号。发送进程除了为分组附加上目的地址，还要带上目的端口号。为了能接收到目的主机的响应信息，操作系统还会为发送方的分组附带源主机的 IP 地址和套接字端口号。</p>
+
+<p>当分组到达接收套接字时，接收进程通过套接字取回分组，然后检查分组内容并采取适当动作。</p>
+
+<p>下图描述了这一通信的过程：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/06/02-usp-socket.jpg" alt="" width="330">
+    <figcaption>UDP 套接字的通信过程</figcaption>
+</figure>
+
+<ul>
+    <li><strong>UDP 服务端套接字程序</strong></li>
+</ul>
+
+<p>服务器为了能够接收并回答该客户的报文，它必须提前运行套接字进程并等待接收。因此这里首先研究服务端的套接字程序。</p>
+
+<p>操作系统提供了套接字的接口，为了使用套接字，首先需要导入相应的模块：</p>
+
+<div class="vscode-block"><div><span style="color: #a8a8a8;"># server.py</span></div><div><span style="color: #d73a49;font-weight: bold;">import</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">socket</span></div></div>
+
+<p><code>socket</code> 模块是 Python 对操作系统提供的套接字接口的封装，是网络通信的基础，通过该模块可以在程序中创建套接字。</p>
+
+<p>对于每个生成的套接字，都需要为其分配一个端口号。例如，这里确定待分配的端口号为 12000 ：</p>
+
+<div class="vscode-block"><div><span style="color: #24292e;">server_port</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">12000</span></div></div>
+
+<p>接下来，通过 <code>socket</code> 类创建一个套接字：</p>
+
+<div class="vscode-block"><div><span style="color: #24292e;">server</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">(</span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #24292e;">AF_INET</span><span style="color: #24292e;">, </span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #24292e;">SOCK_DGRAM</span><span style="color: #24292e;">)</span></div></div>
+
+<p>第一个参数指示了所使用的地址族，这里 <code>socket.AF_INET</code> 表示使用的是一般的 IP 地址，不同类型的网络使用的地址族也不同，其它类型的地址留待网络层讨论。第二个参数指示该套接字是 <code>socket.SOCK_DGRAM</code> 类型，即一个 UDP 套接字。</p>
+
+<p>接下来，需要将端口号 12000 与该服务器的套接字绑定，即让套接字运行在端口 12000 上：</p>
+
+<div class="vscode-block"><div><span style="color: #24292e;">server</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">bind</span><span style="color: #24292e;">((</span><span style="color: #032f62;">''</span><span style="color: #24292e;">, </span><span style="color: #24292e;">server_port</span><span style="color: #24292e;">))</span></div></div>
+
+<p>这样，任何人向位于该服务器的 IP 地址的端口 12000 发送一个分组时，操作系统将该分组将导向该套接字。</p>
+
+<p>服务端的套接字进程需要持续运行，以在任何时候接收到客户端发送的信息，因此需要使用 <code>while True</code> 无限循环：</p>
+
+<div class="vscode-block"><div><span style="color: #d73a49;font-weight: bold;">while</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">True</span><span style="color: #24292e;">:</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #24292e;">received_message</span><span style="color: #24292e;">, </span><span style="color: #24292e;">client_address</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">server</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">recvfrom</span><span style="color: #24292e;">(</span><span style="color: #005cc5;">2048</span><span style="color: #24292e;">)</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #24292e;">message</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">received_message</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">decode</span><span style="color: #24292e;">()</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #24292e;">server</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">sendto</span><span style="color: #24292e;">(</span><span style="color: #d73a49;font-weight: bold;">f</span><span style="color: #032f62;">'</span><span style="color: #005cc5;">{</span><span style="color: #24292e;">message</span><span style="color: #005cc5;">}</span><span style="color: #032f62;"> (</span><span style="color: #005cc5;">{</span><span style="color: #6f42c1;">len</span><span style="color: #24292e;">(</span><span style="color: #24292e;">message</span><span style="color: #24292e;">)</span><span style="color: #005cc5;">}</span><span style="color: #032f62;">)'</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">(), </span><span style="color: #24292e;">client_address</span><span style="color: #24292e;">)</span></div></div>
+
+<p>套接字对象的 <code>.recvform(<em>bufsize</em>)</code> 方法将会返回一个有两个元素的元组，第一个元素是返回的数据字符串，第二个元素是数据的来源地址。<code>.sendto(<em>data</em>, <em>address</em>)</code> 方法则向特定远程地址发送数据。</p>
+
+<p>报文需要以字节的形式发送，因此发送的字符串需要提前调用 <code>.encode()</code> 方法将其变为字节形式，接收的字节也需要通过 <code>.decode()</code> 将其解码为一般形式的字符串。</p>
+
+<ul>
+    <li><strong>UDP 客户端套接字程序</strong></li>
+</ul>
+
+<p>为了找到服务端对应的套接字，客户端的 UDP 套接字程序还需要提供服务端的 IP 地址或主机名：</p>
+
+<div class="vscode-block"><div><span style="color: #a8a8a8;"># client.py</span></div><div><span style="color: #d73a49;font-weight: bold;">import</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">socket</span></div><br><div><span style="color: #24292e;">server_name</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #032f62;">'localhost'</span></div><div><span style="color: #24292e;">server_port</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">12000</span></div></div>
+
+<p>然后，创建一个用户端的 UDP 套接字对象：</p>
+
+<div class="vscode-block"><div><span style="color: #24292e;">client</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">(</span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #24292e;">AF_INET</span><span style="color: #24292e;">, </span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #24292e;">SOCK_DGRAM</span><span style="color: #24292e;">)</span></div></div>
+
+<p>用户端的 UDP 套接字将报文发送到服务端的套接字里：</p>
+
+<div class="vscode-block"><div><span style="color: #24292e;">message</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">input</span><span style="color: #24292e;">(</span><span style="color: #032f62;">'Enter something to send: '</span><span style="color: #24292e;">).</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">()</span></div><div><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">sendto</span><span style="color: #24292e;">(</span><span style="color: #24292e;">message</span><span style="color: #24292e;">, (</span><span style="color: #24292e;">server_name</span><span style="color: #24292e;">, </span><span style="color: #24292e;">server_port</span><span style="color: #24292e;">))</span></div><br><div><span style="color: #24292e;">received_message</span><span style="color: #24292e;">, </span><span style="color: #24292e;">address</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">recvfrom</span><span style="color: #24292e;">(</span><span style="color: #005cc5;">2048</span><span style="color: #24292e;">)</span></div><div><span style="color: #6f42c1;">print</span><span style="color: #24292e;">(</span><span style="color: #24292e;">received_message</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">decode</span><span style="color: #24292e;">())</span></div></div>
+
+<p>发送时，操作系统会自动将源主机地址附加在分组上，无需显式通过代码完成。发送之后，客户端可能还需要再次接收来自服务端的响应报文。在这里，客户端已经不需要使用了，可以主动关闭：</p>
+
+<div class="vscode-block"><div><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">close</span><span style="color: #24292e;">()</span></div></div>
+
+<p>在本地主机上分别运行这两个套接字程序，即可看到实验现象：</p>
+
+<section class="codeblock compare">
+    <div class="codeblock code-console">$ <span class="codetoken command">python</span> <span class="codetoken option">-u</span> server.py
+</div>
+    <div class="codeblock code-console">$ <span class="codetoken command">python</span> -u client.py
+Enter something to send: <span class="codetoken input">Hello, world!</span>
+Hello, world! (13)</div>
+</section>
+
+<h4>TCP 套接字编程</h4>
+
+<p>TCP 是一个面向连接的协议，因此客户和服务器需要先握手创建一个 TCP 连接，然后才能够开始互相发送数据。TCP 连接的一端与客户套接字相联系，另一端与服务器套接字相联系。</p>
+
+<p>当客户指定服务器套接字的地址与端口号后，客户会在运输层与服务器发起连接请求，然后服务器会生成一个新的用于连接的套接字，并且该连接套接字仅用于该客户。</p>
+
+<p>当创建该连接套接字后，一侧要向另一侧发送数据时，它只需经过连接套接字将数据送入 TCP 连接；而 UDP 连接每次在发送数据时，都需要附加上目的地地址。</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/06/02-tcp-socket.jpg" alt="" width="350">
+    <figcaption>TCP 套接字的通信过程</figcaption>
+</figure>
+
+<ul>
+    <li><strong>TCP 客户端套接字程序</strong></li>
+</ul>
+
+<p>首先处理客户端的套接字程序。客户端套接字为了连接到服务器套接字，同样需要标识出服务器的地址和套接字端口：</p>
+
+<div class="vscode-block"><div><span style="color: #a8a8a8;"># client.py</span></div><div><span style="color: #d73a49;font-weight: bold;">import</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">socket</span></div><br><div><span style="color: #24292e;">server_name</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #032f62;">'localhost'</span></div><div><span style="color: #24292e;">server_port</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">12000</span></div></div>
+
+<p>TCP 套接字和 UDP 套接字程序的区别首先是套接字的创建：</p>
+
+<div class="vscode-block"><div><span style="color: #24292e;">client</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">(</span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #24292e;">AF_INET</span><span style="color: #24292e;">, </span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #24292e;">SOCK_STREAM</span><span style="color: #24292e;">)</span></div></div>
+
+<p><code>socket.SOCK_STREAM</code> 指定了该套接字是一个 TCP 套接字。</p>
+
+<p>TCP 套接字在向服务器发送数据之前，必须在客户与服务器之间创建一个 TCP 连接，因此 TCP 客户端套接字的程序存在以下代码：</p>
+
+<div class="vscode-block"><div><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">connect</span><span style="color: #24292e;">((</span><span style="color: #24292e;">server_name</span><span style="color: #24292e;">, </span><span style="color: #24292e;">server_port</span><span style="color: #24292e;">))</span></div></div>
+
+<p><code>.connect(<em>address</em>)</code> 方法执行后，会发生三次握手，并在客户端和服务器之间创建一条 TCP 连接。</p>
+
+<p>TCP 套接字的通信过程也和 UDP 有一定区别：</p>
+
+<div class="vscode-block"><div><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">send</span><span style="color: #24292e;">(</span><span style="color: #24292e;">message</span><span style="color: #24292e;">)</span></div><div><span style="color: #24292e;">received_message</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">recv</span><span style="color: #24292e;">(</span><span style="color: #005cc5;">1024</span><span style="color: #24292e;">)</span></div></div>
+
+<p>由于连接已经建立了，因此客户端套接字程序在发送数据时，无需再附加上目的地址和端口号，在接收数据时，也无需接收发送方的地址和端口号，只需要简单调用 <code>.send()</code> 和 <code>.recv()</code> 方法就可以发送和接收数据。</p>
+
+<p>UDP 连接也可以调用 <code>.connect()</code> 方法，但这种情况下只是简单地标明目标服务器的地址，之后调用 <code>.send()</code> 和 <code>.recv()</code> 方法时附加目的地址和端口号会自动完成，但没有经历连接并传输其它的信息这一过程，并且实际还是会在数据中添加目的地址和端口号。</p>
+
+<p>最后，客户端在使用完成后，同样需要主动关闭套接字：</p>
+
+<div class="vscode-block"><div><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">close</span><span style="color: #24292e;">()</span></div></div>
+
+<ul>
+    <li><strong>TCP 服务端套接字程序</strong></li>
+</ul>
+
+<p>服务端的 TCP 套接字也需要先创建一个套接字对象，然后将其与服务器的端口号关联起来：</p>
+
+<div class="vscode-block"><div><span style="color: #a8a8a8;"># server.py</span></div><div><span style="color: #d73a49;font-weight: bold;">import</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">socket</span></div><br><div><span style="color: #24292e;">server_port</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">12000</span></div><br><div><span style="color: #24292e;">server</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">(</span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #24292e;">AF_INET</span><span style="color: #24292e;">, </span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #24292e;">SOCK_STREAM</span><span style="color: #24292e;">)</span></div><div><span style="color: #24292e;">server</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">bind</span><span style="color: #24292e;">((</span><span style="color: #032f62;">''</span><span style="color: #24292e;">, </span><span style="color: #24292e;">server_port</span><span style="color: #24292e;">))</span></div></div>
+
+<p>对于 TCP 连接，还需要调用 <code>.listen(<em>num</em>)</code> 让套接字监听该端口号，获取用户的连接请求。该方法的参数决定了同时请求连接的最大数量：</p>
+
+<div class="vscode-block"><div><span style="color: #24292e;">server</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">listen</span><span style="color: #24292e;">(</span><span style="color: #005cc5;">1</span><span style="color: #24292e;">)</span></div></div>
+
+<p>TCP 套接字的循环部分为：</p>
+
+<div class="vscode-block"><div><span style="color: #d73a49;font-weight: bold;">while</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">True</span><span style="color: #24292e;">:</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #24292e;">connection</span><span style="color: #24292e;">, </span><span style="color: #24292e;">address</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">server</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">accept</span><span style="color: #24292e;">()</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #24292e;">received_message</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">connection</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">recv</span><span style="color: #24292e;">(</span><span style="color: #005cc5;">1024</span><span style="color: #24292e;">)</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #24292e;">message</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">received_message</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">decode</span><span style="color: #24292e;">()</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #24292e;">connection</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">send</span><span style="color: #24292e;">(</span><span style="color: #d73a49;font-weight: bold;">f</span><span style="color: #032f62;">'</span><span style="color: #005cc5;">{</span><span style="color: #24292e;">message</span><span style="color: #005cc5;">}</span><span style="color: #032f62;"> (</span><span style="color: #005cc5;">{</span><span style="color: #6f42c1;">len</span><span style="color: #24292e;">(</span><span style="color: #24292e;">message</span><span style="color: #24292e;">)</span><span style="color: #005cc5;">}</span><span style="color: #032f62;">)'</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">())</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #24292e;">connection</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">close</span><span style="color: #24292e;">()</span></div></div>
+
+<p>当客户开始连接后，程序通过调用 <code>.accept()</code> 方法来接收连接请求，每次调用该方法都会等待一个新的客户连接该服务器，然后返回一个新的套接字，用于管理该连接的数据收发。借助于创建的 TCP ，客户可以直接与服务器收发信息，并且发送的所有内容可以按正确的顺序到达。</p>
+
+<p>由于 TCP 通信下，每个连接都使用唯一的套接字，因此连接结束后，服务端对应的套接字也需要关闭。</p>
+
+<p>同样可以在一台主机中运行这两个套接字程序，所得的现象与 UDP 套接字实验相同，这里不再展示。在下一章运输层中，还会结合运输层服务的内容对这几个程序中的细节作进一步分析。</p>
+
+<h2 id="email">电子邮件与SMTP协议</h2>
+
+<h3>应用层协议</h3>
+
+<p><strong>应用层协议</strong>(application-layer protocol)定义了在不同端系统上的应用程序如何相互传递报文，如：</p>
+
+<ul>
+    <li>交换的报文类型</li>
+    <li>报文类型的语法</li>
+    <li>字段信息的含义</li>
+    <li>进程发送报文的时间及方式、响应规则</li>
+</ul>
+
+<p>例如，当在浏览器中输入一个网址时，浏览器从网站服务器中从发送请求到完整显示网页的过程中，就会利用应用层的超文本传输协议(HyperText Transfer Protocol, HTTP)。HTTP 对请求和响应的报文都做了非常严格的规定，以下是 HTTP 响应部分的内容格式：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/06/02-http-response.jpg" alt="" width="540">
+    <figcaption>HTTP 响应包体</figcaption>
+</figure>
+
+<p>其中头部字段包含许多数据，例如响应包体数据的类型（是文本、图像还是视频等）、响应包含的用户信息等，浏览器会综合这类信息决定如何将响应包体的内容展示到标签页中。</p>
+
+<p>HTTP 是一个非常复杂的应用层协议，涉及的内容需要一本完整的书才能完全介绍。接下来介绍电子邮件所涉及的一个简单的应用层协议 SMTP ，并通过编写代码实现该协议来发生一封简单的邮件。</p>
+
+<h3>电子邮件的收发过程</h3>
+
+<p>互联网电子邮件主要由两个部分组成：<strong>用户代理</strong>(user agent)和<strong>邮件服务器</strong>(mail server)，它们之间传输数据（发送邮件）采用的应用层协议主要是<strong>简单邮件传输协议</strong>(Simple Mail Transfer Protocol, SMTP)。</p>
+
+<p>电子邮件服务的核心是邮件服务器，每个接收方在某个邮件服务器中都有一个<strong>邮箱</strong>(mailbox)，发送邮件时，邮件从发生方的用户代理传输到发送方的邮件服务器，由接收方的邮件服务器分发到接收方的邮箱中。如果发生方的服务器不能将邮件传给接收方的服务器，那么它会在一个<strong>报文队列</strong>(message queue)中保留该邮件，并每隔一定时间尝试重新发生，直到认为发送失败了为止。邮件发送过程中一般没有中间服务器。</p>
+
+<p>SMTP 是因特网电子邮件中主要的应用层协议。它使用 TCP 传输服务，从发送方的邮件服务器向接收方的邮件服务器发送邮件，因此它是一个<strong>推协议</strong>(push protocol)，TCP 连接由要发送该文件的机器发起。</p>
+
+<p>SMTP 要求每个报文的所有内容都采用 7bit ASCII 码格式，如果报文包含非 7bit ASCII 字符或二进制数据，则报文必须被编码。</p>
+
+<p>接收方要访问邮件则需要使用<strong>拉协议</strong>(pull protocol)来获取报文，目前常见的邮件访问协议包括第三版邮局协议(Post Office Protocol-Version 3, POP3)、互联网邮件访问协议(Internet Mail Access Protocol, IMAP)以及 HTTP 。</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/06/02-mail-transfer.jpg" alt="" width="540">
+    <figcaption>邮件发送的过程</figcaption>
+</figure>
+
+<p>标准规定，SMTP 的套接字程序运行在 25 号端口上，并且 25 号端口也只能用于 SMTP 进程。</p>
+
+<p>POP3 是一个非常简单的邮件访问协议，它使用 TCP 连接，运行在 110 号端口上。POP3 的处理分为 3 步：</p>
+
+<ol>
+    <li>验证(authorizarion)：用户代理发送用户名和口令，鉴别用户身份</li>
+    <li>事务处理：可以取回报文、标记删除或撤销标记，以及邮件的统计信息</li>
+    <li>更新：结束该 POP3 会话，并执行删除邮件</li>
+</ol>
+
+<p>POP3 功能简陋，而 IMAP 则具有更多的功能。IMAP 服务器将每一个邮件和一个文件夹联系，用户可以将一个邮件移动到另外的文件夹内，还可以按指定条件查询匹配的邮件，或获取邮件报文的某些部分等。IMAP 同样使用 TCP 连接，使用端口号 143 。</p>
+
+<blockquote>
+    <p>以上介绍的几个协议，运行这些协议的应用程序都具有确定的端口号。这样在编写套接字程序时，就可以按照规定直接将数据发送到正确的应用程序中并被解析。</p>
+    <p>端口号主要可以被划分为以下三类：</p>
+    <ul>
+        <li>知名端口：端口号范围 0~1023 ，被分配给最重要、最常见的服务，一般情况下不能运行别的服务</li>
+        <li>注册端口：端口号范围 1024~49151 ，被许多应用较广泛的网络服务占用，但如果它们不在使用时，用户也可以运行自己的服务</li>
+        <li>其它端口：端口号范围 49152~65535 ，用户可以随意使用</li>
+    </ul>
+    <p>所有用于互联网标准协议的端口号能够在 http://www.iana.org/ 处查询到。</p>
+    <p>在客户端发送数据时，由于会将发送的 IP 地址和端口号附在发送的报文内提供给接收方，因此可以随意使用端口号。操作系统在用户没有确定端口号时，也会从其它端口中任意取出一个可用的端口号提供给客户端的应用程序。</p>
+</blockquote>
+
+<p>Python 中，可以通过如下形式查询某个服务的端口号：</p>
+
+<div class="vscode-block"><div><span style="color: #d73a49;">&gt;&gt;&gt;</span><span style="color: #24292e;"> </span><span style="color: #d73a49;font-weight: bold;">import</span><span style="color: #24292e;"> socket</span></div><div><span style="color: #d73a49;">&gt;&gt;&gt;</span><span style="color: #24292e;"> socket.getservbyname(</span><span style="color: #032f62;">'smtp'</span><span style="color: #24292e;">)</span></div><div><span style="color: #005cc5;">25</span></div></div>
+
+<p>在 Linux 系统上，比较常用的服务名与对应的端口号保存在文件 <var class="file">/etc/services</var> 里。</p>
+
+<h3>实验：SMTP发送</h3>
+
+<p>一个电子邮件主要由首部和报文体组成，两者之间以一个空行(CRLF)隔开。首部中的每一行由关键字、冒号及其值组成，<code>From:</code> 首部行和 <code>To:</code> 首部行是必须的，它们标识出发送方和接收方的邮箱地址；而 <code>Subject:</code> 等首部行则是可选的。</p>
+
+<p>准备几个实验用的关键变量如下：</p>
+
+<div class="vscode-block"><div><span style="color: #a8a8a8;"># mail-client.py</span></div><div><span style="color: #d73a49;font-weight: bold;">import</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">socket</span></div><br><div><span style="color: #24292e;">mail_server</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #032f62;">'smtp.qiye.aliyun.com'</span></div><div><span style="color: #24292e;">mail_from</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #032f62;">'web@localhost'</span></div><div><span style="color: #24292e;">mail_to</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #032f62;">'alterdellusion@gmail.com'</span></div><br><div><span style="color: #24292e;">mail</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #d73a49;font-weight: bold;">f</span><span style="color: #032f62;">'From: </span><span style="color: #005cc5;">{</span><span style="color: #24292e;">mail_from</span><span style="color: #005cc5;">}\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">\</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; &nbsp; &nbsp;</span><span style="color: #d73a49;font-weight: bold;">f</span><span style="color: #032f62;">'To: </span><span style="color: #005cc5;">{</span><span style="color: #24292e;">mail_to</span><span style="color: #005cc5;">}\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">\</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #032f62;">'Subject: Hello World</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">\</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #032f62;">'</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">\</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #032f62;">'Hello, world!</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">'</span></div></div>
+
+<p>SMTP 使用 TCP 连接，端口号为 25 ，因此首先生成客户端套接字并连接：</p>
+
+<div class="vscode-block"><div><span style="color: #24292e;">client</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">(</span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #24292e;">AF_INET</span><span style="color: #24292e;">, </span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #24292e;">SOCK_STREAM</span><span style="color: #24292e;">)</span></div><div><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">connect</span><span style="color: #24292e;">((</span><span style="color: #24292e;">mail_server</span><span style="color: #24292e;">, </span><span style="color: #005cc5;">25</span><span style="color: #24292e;">))</span></div></div>
+
+<p>当连接到邮件服务器后，邮件服务器会主动发送就绪应答码 220 给用户，应答码后面可能会跟随一些描述信息。这里使用如下代码接收并检查邮件服务器返回的信息：</p>
+
+<div class="vscode-block"><div><span style="color: #24292e;">received_message</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">recv</span><span style="color: #24292e;">(</span><span style="color: #005cc5;">1024</span><span style="color: #24292e;">).</span><span style="color: #6f42c1;">decode</span><span style="color: #24292e;">()</span></div><div><span style="color: #6f42c1;">print</span><span style="color: #24292e;">(</span><span style="color: #24292e;">received_message</span><span style="color: #24292e;">, </span><span style="color: #e36209;">end</span><span style="color: #d73a49;">=</span><span style="color: #032f62;">''</span><span style="color: #24292e;">)</span></div><div><span style="color: #d73a49;font-weight: bold;">if</span><span style="color: #24292e;"> </span><span style="color: #24292e;">received_message</span><span style="color: #24292e;">[:</span><span style="color: #005cc5;">3</span><span style="color: #24292e;">] </span><span style="color: #d73a49;">!=</span><span style="color: #24292e;"> </span><span style="color: #032f62;">'220'</span><span style="color: #24292e;">:</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #d73a49;font-weight: bold;">raise</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">RuntimeError</span><span style="color: #24292e;">(</span><span style="color: #032f62;">'220 reply not received from server'</span><span style="color: #24292e;">)</span></div></div>
+
+<p>接下来，用户可以向服务器发送 <code>HELO <em>identity</em></code> 指令，<code><em>identity</em></code> 表示用户身份。若服务器认为身份有效，则返回应答码 250 。公共的邮件服务器在发送邮件之前，用户需要通过 <code>auth login</code> 指令登录邮箱，服务器接收后返回应答码 334 并提示用户输入用户名。以上行为翻译为代码就是：</p>
+
+<div class="vscode-block"><div><span style="color: #d73a49;font-weight: bold;">def</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">send_message</span><span style="color: #24292e;">(</span><span style="color: #e36209;">msg</span><span style="color: #24292e;">, </span><span style="color: #e36209;">status</span><span style="color: #24292e;">):</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #d73a49;font-weight: bold;">while</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">True</span><span style="color: #24292e;">:</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">send</span><span style="color: #24292e;">(</span><span style="color: #e36209;">msg</span><span style="color: #24292e;">)</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #24292e;">received_message</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">recv</span><span style="color: #24292e;">(</span><span style="color: #005cc5;">1024</span><span style="color: #24292e;">).</span><span style="color: #6f42c1;">decode</span><span style="color: #24292e;">()</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #6f42c1;">print</span><span style="color: #24292e;">(</span><span style="color: #24292e;">received_message</span><span style="color: #24292e;">, </span><span style="color: #e36209;">end</span><span style="color: #d73a49;">=</span><span style="color: #032f62;">''</span><span style="color: #24292e;">)</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #d73a49;font-weight: bold;">if</span><span style="color: #24292e;"> </span><span style="color: #24292e;">received_message</span><span style="color: #24292e;">[:</span><span style="color: #005cc5;">3</span><span style="color: #24292e;">] </span><span style="color: #d73a49;">==</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">str</span><span style="color: #24292e;">(</span><span style="color: #e36209;">status</span><span style="color: #24292e;">):</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #d73a49;font-weight: bold;">break</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #d73a49;font-weight: bold;">else</span><span style="color: #24292e;">:</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #d73a49;font-weight: bold;">raise</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">RuntimeError</span><span style="color: #24292e;">(</span><span style="color: #032f62;">'Bad response from server'</span><span style="color: #24292e;">)</span></div><br><div><span style="color: #6f42c1;">send_message</span><span style="color: #24292e;">(</span><span style="color: #032f62;">'HELO mailserver</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">(), </span><span style="color: #005cc5;">250</span><span style="color: #24292e;">)</span></div><div><span style="color: #6f42c1;">send_message</span><span style="color: #24292e;">(</span><span style="color: #032f62;">'auth login</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">(), </span><span style="color: #005cc5;">334</span><span style="color: #24292e;">)</span></div></div>
+
+<p>注意每条指令都需要使用一个 CRLF 回车换行表示结束。</p>
+
+<p>部分邮件服务器为了能够接收非 ASCII 字符，使用 base64 编码后传输。本例中将待发送的用户名使用 base64 编码后发送，若服务器认为用户名存在，便会再次返回 334 应答码并提示用户继续发送口令。使用 base64 编码发送口令后，若验证通过，服务器则会返回 235 应答码。以上行为翻译为代码就是：</p>
+
+<div class="vscode-block"><div><span style="color: #d73a49;font-weight: bold;">from</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">base64</span><span style="color: #24292e;"> </span><span style="color: #d73a49;font-weight: bold;">import</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">b64encode</span></div><br><div><span style="color: #6f42c1;">send_message</span><span style="color: #24292e;">(</span><span style="color: #6f42c1;">b64encode</span><span style="color: #24292e;">(</span><span style="color: #24292e;">mail_from</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">()) </span><span style="color: #d73a49;">+</span><span style="color: #24292e;"> </span><span style="color: #d73a49;font-weight: bold;">b</span><span style="color: #032f62;">'</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">, </span><span style="color: #005cc5;">334</span><span style="color: #24292e;">)</span></div><div><span style="color: #6f42c1;">send_message</span><span style="color: #24292e;">(</span><span style="color: #6f42c1;">b64encode</span><span style="color: #24292e;">(</span><span style="color: #032f62;">'password123'</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">()) </span><span style="color: #d73a49;">+</span><span style="color: #24292e;"> </span><span style="color: #d73a49;font-weight: bold;">b</span><span style="color: #032f62;">'</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">, </span><span style="color: #005cc5;">235</span><span style="color: #24292e;">)</span></div></div>
+
+<p>为了发送一封邮件，用户需要用 <code>MAIL FROM &lt;<em>from_address</em>&gt;</code> 指定邮件的发件邮箱，用 <code>RCPT TO &lt;<em>to_address</em>&gt;</code> 指定收件邮箱。若服务器认为邮箱有效，则返回应答码 250 ，用户便可以使用指令 <code>DATA</code> 告知服务器准备发送邮件内容，邮件服务器使用应答码 354 表明准备接收这部分内容。</p>
+
+<p>当用户发送完成所有内容后，需要发送结束符 <code>\r\n.\r\n</code> ，若邮件服务器接收完毕，则返回应答码 250 。发送结束后，用户发送指令 <code>QUIT</code> 请求断开连接，邮件服务器则返回应答码 221 并主动断开连接。</p>
+
+<p>以上行为翻译为代码就是：</p>
+
+<div class="vscode-block"><div><span style="color: #6f42c1;">send_message</span><span style="color: #24292e;">(</span><span style="color: #d73a49;font-weight: bold;">f</span><span style="color: #032f62;">'MAIL FROM: &lt;</span><span style="color: #005cc5;">{</span><span style="color: #24292e;">mail_from</span><span style="color: #005cc5;">}</span><span style="color: #032f62;">&gt;</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">(), </span><span style="color: #005cc5;">250</span><span style="color: #24292e;">)</span></div><div><span style="color: #6f42c1;">send_message</span><span style="color: #24292e;">(</span><span style="color: #d73a49;font-weight: bold;">f</span><span style="color: #032f62;">'RCPT TO: &lt;</span><span style="color: #005cc5;">{</span><span style="color: #24292e;">mail_to</span><span style="color: #005cc5;">}</span><span style="color: #032f62;">&gt;</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">(), </span><span style="color: #005cc5;">250</span><span style="color: #24292e;">)</span></div><div><span style="color: #6f42c1;">send_message</span><span style="color: #24292e;">(</span><span style="color: #032f62;">'DATA</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">(), </span><span style="color: #005cc5;">354</span><span style="color: #24292e;">)</span></div><div><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">send</span><span style="color: #24292e;">(</span><span style="color: #24292e;">mail</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">())</span></div><div><span style="color: #6f42c1;">send_message</span><span style="color: #24292e;">(</span><span style="color: #032f62;">'</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">.</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">(), </span><span style="color: #005cc5;">250</span><span style="color: #24292e;">)</span></div><div><span style="color: #6f42c1;">send_message</span><span style="color: #24292e;">(</span><span style="color: #032f62;">'QUIT</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">(), </span><span style="color: #005cc5;">221</span><span style="color: #24292e;">)</span></div></div>
+
+<p>运行以上程序，即可看到实验现象：</p>
+
+<div class="codeblock code-console">$ <span class="codetoken command">python</span> <span class="codetoken option">-u</span> client.py
+220 smtp.aliyun-inc.com MX AliMail Server
+250 Ok
+334 dXNlcm5hbWU6
+334 UGFzc3dvcmQ6
+235 Authentication successful
+250 Mail Ok
+250 Rcpt Ok
+354 End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;
+250 Data Ok: queued as freedom
+221 Bye</div>
+
+<p><code>dXNlcm5hbWU6</code> 使用 base64 解码即为 <code>Username:</code> ，而 <code>UGFzc3dvcmQ6</code> 使用 base64 解码即为 <code>Password:</code> 。如果邮件没有被服务器判定为垃圾邮件，那么即可在目标邮箱内接收到该邮件。</p>
+
+<p>在本节中，简单介绍了应用层体系结构。应用层本身主要通过应用程序来实现特定的互联网功能。应用层本身不参与数据的传输，因此需要操作系统提供的运输服务。应用层协议是计算机网络建立的最终目的，也是近几年计算机网络发展的最快的部分，各种各样的应用层协议层出不穷，让互联网在多媒体浏览、文件传输、远程主机登录，乃至工业物联网通信间的各种场景中可以自由发挥。</p>
+
+<p>在下一节中，将介绍 DNS 应用层协议，它是一种用于实现网络设备名字到主机地址映射的网络服务。</p>
+
+
+
+<p></p>
+<p><a rel="nofollow" href="/archives/403">计算机网络02-应用层概览与SMTP电子邮件发送</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/archives/403/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>

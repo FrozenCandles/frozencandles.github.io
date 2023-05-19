@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>DNS归档 - 冰封残烛的个人小站</title>
+	<atom:link href="http://localhost/wordpress/archives/tag/dns/feed?simply_static_page=3719" rel="self" type="application/rss+xml" />
+	<link></link>
+	<description>FrozenCandle&#039;s Personal Site</description>
+	<lastBuildDate>Mon, 27 Jun 2022 14:18:48 +0000</lastBuildDate>
+	<language>zh-CN</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.2.1</generator>
+
+<image>
+	<url>/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg</url>
+	<title>DNS归档 - 冰封残烛的个人小站</title>
+	<link></link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>计算机网络03-域名系统：DNS</title>
+		<link>/archives/419</link>
+					<comments>/archives/419#respond</comments>
+		
+		<dc:creator><![CDATA[Hello]]></dc:creator>
+		<pubDate>Mon, 27 Jun 2022 14:18:47 +0000</pubDate>
+				<category><![CDATA[计算机网络]]></category>
+		<category><![CDATA[DNS]]></category>
+		<guid isPermaLink="false">/?p=419</guid>
+
+					<description><![CDATA[<p>DNS服务 DNS服务内容 上一节介绍了应用层协议的&#46;&#46;&#46;</p>
+<p><a rel="nofollow" href="/archives/419">计算机网络03-域名系统：DNS</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></description>
+										<content:encoded><![CDATA[
+
+<h2>DNS服务</h2>
+
+<h3>DNS服务内容</h3>
+
+<p><a href="/archives/403">上一节</a>介绍了应用层协议的基本内容，并指出互联网上的每一个端系统都使用 IP 地址标识它的位置。根据 IP 地址，可以连接到正确的主机，并通过套接字向目的主机发送数据。</p>
+
+<p>然而，在平时使用浏览器时，如果要访问一个网页，通常都会在地址栏中输入一个比较长、带英文字符的网址，例如要访问谷歌搜索，通常会在地址栏中输入 <code>google.com</code> ，而不是 IP 地址 <code>172.217.163.46</code> ，尽管后者也能正确进入谷歌搜索页面。</p>
+
+<p>在互联网中，主机可以使用<strong>主机名</strong>(hostname)或 IP 地址标识，主机名方便用户认识并记忆，例如 <code>github.com</code> 这种名称就比 <code> 20.205.243.166</code> 方便记忆与输入。但主机名可能会变动，因此路由器只能解析 IP 地址。<strong>域名系统</strong>(Domain Name System, DNS)负责将主机名解析为 IP 地址。</p>
+
+<p>DNS 是一个使主机能查询运行在 DNS 服务器上的分布式数据库的应用层协议。它运行在 UDP 协议上，使用 53 号端口。</p>
+
+<p>DNS 的解析结果可以被其余应用层协议（如 HTTP 和 SMTP 等）利用，这也就是上一节编写邮件发送程序时并没有在代码中显式声明邮件服务器的 IP 地址的原因。当它们需要将一个报文发送到对应名称的主机上时，主要执行以下步骤：</p>
+
+<ol>
+    <li>浏览器将得到的主机名传给主机上正在运行的 DNS 客户端</li>
+    <li>DNS 客户端向 DNS 服务器发送一个包含主机名的请求</li>
+    <li>DNS 服务器返回一个包含解析得到的目标 IP 地址的回答报文</li>
+    <li>利用得到的目标 IP 地址向目的主机发送报文</li>
+</ol>
+
+<p>DNS 服务器还提供以下服务：</p>
+
+<p>当一台主机的<strong>规范主机名</strong>(canonical hostname)比较难以记忆时，它可能还有几个<strong>主机别名</strong>(host aliasing)。此时 DNS 服务器可以根据主机别名来获取主机的规范主机名及对应的 IP 地址。</p>
+
+<p>当一个大型站点被分配在多个主机上时，DNS 数据库会轮流将每个主机的 IP 地址提供给客户端，通过<strong>负载分配</strong>(load distribution)平均服务器的压力。</p>
+
+<p>DNS 服务基于大量分布式、分层形式的服务器组织。它们主要被分为 3 层：根 DNS 服务器、顶级域(Top-Level Domain, TLD) DNS 服务器以及权威 DNS 服务器。根 DNS 服务器遍及全球，提供 TLD 服务器的 IP 地址；顶级域提供权威 DNS 服务器的 IP 地址；权威 DNS 服务器提供由它管理的服务器的 IP 地址。</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/06/02-dns-server.jpg" alt="" width="470">
+    <figcaption>DNS 服务结构</figcaption>
+</figure>
+
+<p>每一级域名都由不区分大小写的英文字母和数字组成。多级域名由点号 <code>.</code> 隔开，且越高级的域名越靠右。例如，域名 <code>en.wikipedia.org</code> 中，顶级域名 org 提供 wikipedia.org 的 IP 地址，而 wikipedia.org 则提供 en.wikipedia.org 的 IP 地址。</p>
+
+<p>还有一类重要的<strong>本地 DNS 服务器</strong>(local DNS server)，由本地 ISP 提供，离用户较近，负责将主机发送的 DNS 请求转发到 DNS 服务器层次结构中。</p>
+
+<p>DNS 提供了两种域名解析的方式：递归查询和迭代查询。递归查询如果没有得到目的主机的 IP 地址，该服务器自身会继续向下一级 DNS 服务器查询，最后得到的 IP 地址将层层上报给本地 DNS 。而迭代查询时，DNS 服务器只会将下一级 DNS 服务器的地址交给本地 DNS ，由本地 DNS 向下一级 DNS 查询。</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/06/02-dns-query.jpg" alt="" width="830">
+    <figcaption>两种查询方式的比较</figcaption>
+</figure>
+
+<p>由于递归查询对于被查询的域名服务器负担太大，因此通常从请求主机到本地域名服务器的查询使用递归查询，而其余的查询则采用迭代查询。</p>
+
+<p>DNS 服务器普遍使用了 <strong>DNS 缓存</strong>(DNS caching)技术，当某个 DNS 服务器接收到一个包含主机名到 IP 地址的映射的 DNS 回答时，不管它是否属于该主机名的上一级服务器，都会被该 DNS 服务器保存在本地存储器中，这样下一次接收到相同的查询请求，该 DNS 服务器可以直接使用该缓存的结果而无需额外查询。</p>
+
+<p>由于主机名和对应 IP 的映射关系可能被改变，因此缓存将在一段时间（例如两天）后被清除。</p>
+
+<h3>DNS记录和报文</h3>
+
+<p>所有包含 DNS 分布式数据库的 DNS 服务器上都存储了<strong>资源记录</strong>(Resource Record, RR)，它提供了主机名到 IP 地址的映射，其结构是 <code>(Name, Value, Type, TTL)</code> 形式的四元组。</p>
+
+<p><code>TTL</code> 是该记录保存在缓存中的时间。<code>Name</code> 和 <code>Value</code> 的值主要取决于 <code>Type</code> 。<code>Type</code> 是记录类型，其值可以是：</p>
+
+<ul>
+    <li>如果其值为 <code>A</code> ，则 <code>Name</code> 是主机名，<code>Value</code> 是对应的 IP 地址</li>
+    <li>如果其值为 <code>NS</code> ，则 <code>Name</code> 为一个域名，<code>Value</code> 是一个知道如何获得该域名的主机的 IP 地址的权威 DNS 服务器的主机名。该记录可以沿着查询链得到 DNS 记录</li>。即将子域名指定其它的 DNS 服务器解析
+    <li>如果其值为 <code>CNAME</code> ，则 <code>Value</code> 是别名为 <code>Name</code> 的主机对应的规范主机名</li>。即将域名指向另外一个域名
+    <li>如果其值为 <code>MX</code> ，则 <code>Value</code> 是别名为 <code>Name</code> 的主机名对应的邮件服务器的规范主机名。这样一个相同的别名可以同时充当邮件服务器和其它服务器</li>
+</ul>
+
+<p>DNS 只有查询和回答两种报文，并且它们的格式相同。DNS 报文中各字段的语义为：</p>
+
+<p>前 12 字节为首部区域，第一个 2 字节的字段用于标识查询的 id ，以此区分一个 DNS 应答是哪一个 DNS 查询的回应。</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/06/02-dns-message.jpg" alt="" width="560">
+    <figcaption>DNS 报文</figcaption>
+</figure>
+
+<p>第二个字段含有若干标志位，各标志位的含义为：</p>
+
+<ul>
+    <li>QR ：查询/应答标志，置 1 代表是应答报文，清 0 代表是查询报文</li>
+    <li>opcode ：查询或应答的类型</li>
+    <li>AA ：置 1 表示该报文是权威 DNS 服务器的应答</li>
+    <li>TC ：截断标志，使用 UDP 发生报文时若报文过长，则将报文截断并置该位为 1</li>
+    <li>RD ：递归查询标志，置 1 为递归查询，清 0 为迭代查询</li>
+    <li>RA ：允许递归标志，应答报文置 1 代表 DNS 服务器允许递归查询</li>
+    <li>zero ：未使用，必须全部清 0 </li>
+    <li>rcode ：4 位返回码，表示应答状态</li>
+</ul>
+
+<p>其余四个字段指定了首部后四类数据区域出现的数量。</p>
+
+<p>问题区域包含正在进行的查询信息，包含名字字段（查询的主机名字）和类型字段（查询的问题类型）。回答区域对最初请求的名字的资源记录，可以包含多个 RR 。权威区域包含其它权威服务器的记录，附加区域包含了其它有帮助的记录。</p>
+
+<p>接下来，通过具体的实验来探究 DNS 查询的细节。</p>
+
+<h2>实验：DNS查询</h2>
+
+<h3>使用操作系统命令</h3>
+
+<p>为了执行 DNS 查询，首先要给出 DNS 服务器的地址。在 Linux 系统中，使用文件 <code>/etc/resolv.conf</code> 来存放 DNS 服务器的 IP 地址。该文件的内容大致为：</p>
+
+<div class="codeblock code-template"># [network]
+nameserver 8.8.8.8
+nameserver 4.2.2.2</div>
+
+<p>其中的两个 IP 地址分别是首选 DNS 服务器地址和备选 DNS 服务器地址。</p>
+
+<p><code>nslookup</code> 是一个简单的程序，可以运行在大多数 Linux 和 Windows 系统上，也可以使用在线工具如 <a href="https://www.nslookup.io/">https://www.nslookup.io/</a> 替代。它可以向任何 DNS 服务器发送 DNS 查询，并返回本次查询的结果报告。例如，以下是使用 <code>nslookup</code> 一次简单的 DNS 查询结果：</p>
+
+<div class="codeblock code-console">$ nslookup stackoverflow.com
+Server:   cache-fz.fj100110.com
+Address:  65.115.28.98
+
+Non-authoritative answer:
+Server:     stackoverflow.com
+Addresses:  151.101.1.69
+          151.101.129.69
+          151.101.65.69
+          151.101.193.69
+</div>
+
+<p>从解析结果可以看出，域名 <code>stackoverflow.com</code> 对应多台主机，在访问量较大的时候可以均衡负载。同时，由于本次查询用的 DNS 服务器并不实际管理该被查询的域名，它需要到其余 DNS 服务器中查询该域名，因此本次查询是非权威应答。</p>
+
+<p>可以使用第二个参数指定查询用的 DNS 服务器。例如，以下使用管理本域名的 DNS 服务器查询本域名的地址：</p>
+
+<div class="codeblock code-console">$ nslookup frozencandles.fun dns1.hichina.com
+Server:   UnKnown
+Address:  120.76.107.43
+
+Name:    frozencandles.fun
+Address:  123.56.83.47
+</div>
+
+<p>这时，该应答便为权威应答。</p>
+
+<p>还可以通过 <code>-q=<em>type</em></code> 参数指定查询的记录类型。例如，假设要解析一个域名对应的邮件服务器的地址，那么可以执行以下命令：</p>
+
+<div class="codeblock code-console">$ nslookup -qt=MX frozencandles.fun
+Server:  cache-fz.fj100110.com
+Address:  65.115.28.98
+
+Non-authoritative answer:
+frozencandles.fun       MX preference = 10, mail exchanger = mxw.mxhichina.com
+frozencandles.fun       MX preference = 5, mail exchanger = mxn.mxhichina.com
+</div>
+
+<!-- 
+<p><code>nslookup</code> 还提供了一种交互式的查询方式，可以使用交互式查询的方式来实现迭代查询。</p>
+
+<p>要使用交互式查询，首先需要在命令行中使用无参数的 <code>nslookup</code> 命令：</p>
+
+<div class="codeblock code-console">$ nslookup
+默认服务器:  cache-fz.fj100110.com
+Address:  65.115.28.98
+
+>
+</div>
+
+<p>为了沿着查询链得到 DNS 记录，需要获取管理该域名的上一级域名的权威名称服务器，也就是说要将类型设置为 <code>NS</code> ，这点可以通过以下命令完成：</p> 
+
+<div class="codeblock code-console">> set type=NS
+</div>
+
+首先，查询可用的根 DNS 服务器：
+
+<div class="codeblock code-console">> .
+Server:        65.115.28.98
+Address:       65.115.28.98#53
+
+Non-authoritative answer:
+.       nameserver = b.root-servers.net.
+.       nameserver = f.root-servers.net.
+....
+> server 194.169.218.72
+Default server: 194.169.218.72
+Address: 194.169.218.72#53
+> frozencandles.fun
+Server:         194.169.218.72
+Address:        194.169.218.72#53
+
+Non-authoritative answer:
+*** Can't find frozencandles.fun: No answer
+
+Authoritative answers can be found from:
+frozencandles.fun       nameserver = dns1.hichina.com.
+frozencandles.fun       nameserver = dns2.hichina.com.
+> server dns1.hichina.com.
+Default server: dns1.hichina.com.
+Address: 47.118.199.213#53
+Default server: dns1.hichina.com.
+Address: 139.224.142.123#53
+......
+> frozencandles.fun.
+Server:         dns1.hichina.com.
+Address:        47.118.199.213#53
+
+frozencandles.fun       nameserver = dns1.hichina.com.
+frozencandles.fun       nameserver = dns2.hichina.com.
+> frozencandles.fun
+Server:         dns1.hichina.com.
+Address:        47.118.199.213#53
+
+frozencandles.fun       nameserver = dns1.hichina.com.
+frozencandles.fun       nameserver = dns2.hichina.com.
+> set type=A
+> frozencandles.fun
+Server:         dns1.hichina.com.
+Address:        47.118.199.213#53
+
+Name:   frozencandles.fun
+Address: 123.56.83.47
+</div> 
+-->
+
+<p>如果想要查看更详细的 DNS 查询信息，可以使用 <code>dig</code> 命令发起一次 DNS 查询，第一个参数是 <code>Name</code> ，第二个参数是 <code>Type</code> 。该命令得到的 DNS 查询结果已经非常接近原始的 DNS 报文了：</p>
+
+<div class="codeblock code-console">$ <span class="codetoken command">dig</span> frozencandles.fun
+; <<>> DiG 9.10.3-P4-Ubuntu <<>> frozencandles.fun
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 37772
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4096
+;; QUESTION SECTION:
+;frozencandles.fun.             IN      A
+
+;; ANSWER SECTION:
+frozencandles.fun.      300     IN      A       123.56.83.47
+
+;; Query time: 6 msec
+;; SERVER: 65.115.28.98#53(65.115.28.98)
+;; WHEN: Mon May 02 14:17:47 CST 2022
+;; MSG SIZE  rcvd: 62</div>
+
+<p>从以上结果可以大致还原 DNS 报文的数据。接下来介绍使用 WireShark 获取 DNS 报文并解析的过程。实际上该过程非常简单。</p>
+
+<h3>使用WireShark分析DNS</h3>
+
+<p>在使用 WireShark 前，可以使用以下命令清除操作系统的 DNS 缓存，确保结果是由 DNS 服务器返回的：</p>
+
+<div class="codeblock code-console">$ ipconfig /flushdns
+</div>
+
+<p>然后打开 WireShark ，并在本地通过任意方式访问一个域名以执行 DNS 查询，例如使用 <code>nslookup</code> 命令。</p>
+
+<p>如果本地的网络服务比较繁忙，出现的网络数据包比较多，那么可以在下图浅绿色区域的窗口将所有 DNS 数据包过滤出来：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/06/02-wireshark-dns.jpg" alt="" width="670">
+    <figcaption>经过筛选的数据包</figcaption>
+</figure>
+
+<p>下半部分的文字列出了该数据包的概览。从第四行可以看到，DNS 是运行在 UDP(User Datagram Protocol) 协议之上的，并且使用 53 号端口。</p>
+
+<p>第五行表示该数据包是一个 DNS 应用层协议的数据，可以展开它进一步检查包含的内容：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/2022/06/02-wireshark-dns-query.jpg" alt="" width="500">
+    <figcaption>DNS 数据包详细结构</figcaption>
+</figure>
+
+<p>第一个字段表示本次 DNS 查询的标识 id 为 0x7680 ；第二个字段的值的已经按位表示的很清楚了，说明这是一个标准的递归 DNS 查询；问题数和问题都在结果中显示出来了。</p>
+
+<p>除此之外，WireShark 还获取了 DNS 回答的数据包，其结构和查询用的数据包相差不大，因此不再展示。</p>
+
+<h2>参考资料/延伸阅读</h2>
+
+<p><a href="https://www.cloudflare.com/learning/dns/what-is-dns/">https://www.cloudflare.com/learning/dns/what-is-dns/</a></p>
+
+<p>cloudflare（一个业务包括 DNS 解析的公司）的 DNS 介绍文档</p>
+
+<p><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/nslookup">https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/nslookup</a></p>
+
+<p>MSDN 上关于 <code>nslookup</code> 命令的帮助文档</p>
+
+<p>有条件或有兴趣的话可以选择一家域名服务商购买一个域名，然后使用它们提供的 DNS 服务尝试添加一些 DNS 记录并在本地解析，这样可以快速加深对 DNS 的印象。</p>
+
+
+<p><a rel="nofollow" href="/archives/419">计算机网络03-域名系统：DNS</a>最先出现在<a rel="nofollow" href="">冰封残烛的个人小站</a>。</p>
+]]></content:encoded>
+					
+					<wfw:commentRss>/archives/419/feed</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+		
+		
+			</item>
+	</channel>
+</rss>
