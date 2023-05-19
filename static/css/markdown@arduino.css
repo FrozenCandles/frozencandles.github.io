@@ -1,0 +1,239 @@
+
+html {
+    scroll-behavior: smooth;
+}
+
+.entry hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+.entry h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom: 1px solid #eee;
+}
+
+.entry h2{
+	padding-bottom: .3em;
+    font-size: 2em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+
+.entry h3{
+	font-size: 1.5em;
+    line-height: 1.225;
+}
+
+.entry h1, 
+.entry h2, 
+.entry h3 {
+	font-weight: bold;
+}
+
+.entry h1 code,
+.entry h2 code,
+.entry h3 code,
+.entry h4 code,
+.entry h5 code,
+.entry h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+/* .entry a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+} */
+
+/* .entry a {
+	color: #4080D0;
+	text-decoration: none;
+} */
+
+/* .entry a:focus, */
+.entry input:focus,
+.entry select:focus,
+.entry textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+.entry table {
+	border-collapse: collapse;
+}
+
+.entry table > thead > tr > th {
+	/* text-align: left; */
+	border-bottom: 1px solid;
+}
+
+.entry table > thead > tr > th,
+.entry table > thead > tr > td,
+.entry table > tbody > tr > th,
+.entry table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+.entry table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+.entry figure {
+    text-align: center;
+    margin: 30px;
+}
+
+.entry blockquote {
+	/* margin: 0 7px 0 5px; */
+	padding: 1px;
+	border-left: 5px solid;
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.entry code {
+    color:#870000;
+    font-size: 15px;
+    font-family: Consolas, 'Courier New', monospace;
+}
+
+.entry div.codeblock > pre {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+.entry div.hljs > pre {
+    background: none;
+    margin: 0;
+    border: none;
+	padding: 6px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+
+/** cover original css */
+
+.entry blockquote > p {
+    font-style: normal;
+}
+
+.entry blockquote::before {
+    content: none;
+}
+
+.entry blockquote {
+    padding-left: 20px;
+}
+
+.entry div.hljs {
+	background-color: #fdfdfd;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+/*
+
+Arduino Light Theme - Stefania Mellai <s.mellai@arduino.cc>
+
+*/
+
+
+.hljs,
+.hljs-subst {
+  color: #434f54;
+}
+
+.hljs-keyword,
+.hljs-attribute,
+.hljs-selector-tag,
+.hljs-doctag,
+.hljs-name {
+    color: #00979D;
+}
+
+.hljs-keyword {
+    font-weight: bold;
+}
+
+.hljs-built_in,
+.hljs-literal,
+.hljs-bullet,
+.hljs-code,
+.hljs-addition {
+    color: #D35400;
+}
+
+.hljs-regexp,
+.hljs-symbol,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-link,
+.hljs-selector-attr,
+.hljs-selector-pseudo {
+  color: #00979D;
+}
+
+.hljs-type,
+.hljs-string,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-quote,
+.hljs-template-tag,
+.hljs-deletion {
+    color: #005C5F;
+}
+
+.hljs-title,
+.hljs-section {
+    color: #880000;
+    /* font-weight: bold; */
+}
+
+.hljs-comment {
+    color: rgba(149,165,166,.8);
+}
+
+.hljs-meta-keyword {
+    color: #728E00;
+}
+
+.hljs-meta {
+    color: #434f54;
+}
+
+.hljs-emphasis {
+    font-style: italic;
+}
+
+.hljs-strong {
+    font-weight: bold;
+}
+
+.hljs-function {
+    color: #728E00;
+}
+
+.hljs-number {
+    color: #8A7B52;  
+}
+
+
+
+/* pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+} */
+
+.emoji {
+	height: 1.4em;
+}
+
+

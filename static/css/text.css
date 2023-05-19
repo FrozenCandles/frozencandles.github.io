@@ -1,0 +1,192 @@
+
+
+/* https://xie.infoq.cn/article/2ca9d08537559565e593b5efa 
+ * 黑幕 - 隐藏文字 
+ */
+span.heimu a.external,
+span.heimu a.external:visited,
+span.heimu a.extiw,
+span.heimu a.extiw:visited {
+    color: #252525;
+}
+.heimu,
+.heimu a,
+a .heimu,
+.heimu a.new {
+    background-color: #252525;
+    color: #252525;
+    text-shadow: none;
+}
+body:not(.heimu_toggle_on) .heimu:hover,
+body:not(.heimu_toggle_on) .heimu:active,
+body:not(.heimu_toggle_on) .heimu.off {
+    transition: color .13s linear;
+    color: white;
+}
+body:not(.heimu_toggle_on) .heimu:hover a,
+body:not(.heimu_toggle_on) a:hover .heimu,
+body:not(.heimu_toggle_on) .heimu.off a,
+body:not(.heimu_toggle_on) a:hover .heimu.off {
+    transition: color .13s linear;
+    color: lightblue;
+}
+body:not(.heimu_toggle_on) .heimu.off .new,
+body:not(.heimu_toggle_on) .heimu.off .new:hover,
+body:not(.heimu_toggle_on) .new:hover .heimu.off,
+body:not(.heimu_toggle_on) .heimu.off .new,
+body:not(.heimu_toggle_on) .heimu.off .new:hover,
+body:not(.heimu_toggle_on) .new:hover .heimu.off {
+    transition: color .13s linear;
+    color: #BA0000;
+}
+
+
+.math {
+    font-size: 15px;
+}
+
+code {
+    font-family: Consolas, 'Courier New', monospace;
+    word-break: break-word;
+}
+
+code.classic {
+    background-color: rgb(246, 246, 246);
+    border-radius: 3px;
+    color: rgb(18, 18, 18);
+    font-size: 14px;
+    margin-left: 4px;
+    margin-right: 4px;
+    padding: 3px 4px;
+}
+
+code.traditional {
+    font-family: Consolas, 'Courier New', monospace;
+    word-break: break-word;
+    color:#870000;
+    font-size: 15px;
+}
+
+code.error {
+    font-family: Consolas, 'Courier New', monospace;
+    word-break: break-word;
+    color:red;
+    font-size: 15px;
+}
+
+
+blockquote.classic {
+    border-left: 4px solid lightgrey;
+    padding-left: 15px;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    color: grey;
+}
+
+.vscode-block {
+    margin-bottom: 15px;
+    padding: 5px;
+    border: 1px solid silver;
+    /* border-radius: 3px; */
+}
+
+div.code-template {
+    color: black;
+    font-family: Consolas, 'Courier New', monospace;
+    padding: 5px;
+    border: 1px solid black;
+    margin-bottom: 15px;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+/* 
+span.has-inline-color.text-keyword-green     { color: #22ac00; }
+span.has-inline-color.has-vivid-purple-color { color: violet; } 
+*/
+
+
+/* 
+span.inline-symbol-register {
+    background-color: rgb(235, 246, 255);
+    font-family: Consolas, monospace;
+}
+
+span.inline-symbol-instruction {
+    background-color: rgb(243, 233, 220);
+    font-family: Consolas, monospace;
+}
+
+table.plain td,
+table.plain th {
+    padding: 0.4em;
+    border: 1px solid black;
+}
+table.plain {
+    position: relative;
+    left: 30px;
+    border-collapse: collapse;
+}
+table.plain th { background-color: gainsboro; } */
+
+kbd.stack {
+    display: inline-block;
+    margin: 0 .1em;
+    padding: .1em .6em;
+    font-family: "Segoe UI", "Liberation Sans", sans-serif;
+    font-size: 11px;
+    line-height: 1.5;
+    color: rgb(35, 38, 41);
+    text-shadow: rgb(255, 255, 255) 0px 1px 0px;
+    background-color: rgb(227, 230, 232);
+    border: 1px solid rgb(159, 166, 173);
+    border-radius: 3px;
+    box-shadow: 0 1px 1px hsla(210,8%,5%,0.15),inset 0 1px 0 0 hsl(0,0%,100%);
+    overflow-wrap: break-word;
+}
+
+kbd.quartz {
+    background-color: #f8f9fa;
+    color: #222;
+    font-size: 80%;
+    font-family: inherit;
+    font-weight: bold;
+    border: 1px solid #c8ccd1;
+    border-radius: 2px;
+    box-shadow: 0 1px 0 rgb(0 0 0 / 20%), 0 0 0 2px #fff inset;
+    padding: 0.1em 0.4em;
+    text-shadow: 0 1px 0 #fff;
+    text-align: center;
+}
+
+strong.green {
+    color: #22ac00;
+    font-weight: normal;
+}
+
+/* 
+var.register,
+var.instruction {
+    font-family: Consolas, 'Courier New', monospace;
+    font-style: normal;
+}
+
+var.register    { background-color: rgb(235, 246, 255); }
+var.instruction { background-color: rgb(243, 233, 220); }
+
+span.inline-color.violet { color: violet; } 
+*/
+
+
+.entry td.cell-code {
+    font-family: Consolas, 'Courier New', monospace;
+}
+
+/* 
+.entry .text-indent {
+    padding-left: attr(css-text-indent);
+} 
+*/
+
+
+

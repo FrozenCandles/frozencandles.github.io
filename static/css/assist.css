@@ -1,0 +1,25 @@
+
+/* global setting */
+
+html {
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+	text-rendering: optimizelegibility;
+	-webkit-font-smoothing: initial;
+}
+
+
+/* write is a wrapper of writable region */
+.entry {
+    position: relative;
+    /* float: right; */
+    width: 70%;
+    left: 15%;
+    /* max-width: 1000px; */
+    /* min-height: calc(100vh - 6rem);
+	min-width: calc(100vw - 45rem); */
+    line-height: 1.6;
+    transform: none;
+    height: auto;
+    caret-color: var(--main-color);
+}

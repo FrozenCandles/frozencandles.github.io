@@ -1,0 +1,7 @@
+div.codeblock.hljs > pre {color: #403F53;background-color: #FBFBFB;font-family: var(--monospace);font-size: 14px;line-height: 19px;background: none;margin: 0;border: none;padding: 6px;border-radius: 3px;overflow: auto;border: 1px solid gray;}
+div.codeblock.hljs span.hljs-built_in,
+div.codeblock.hljs span.hljs-function { color: #4876d6; }
+div.codeblock.hljs span.hljs-comment { color: #a8a8a8; }
+div.codeblock.hljs span.hljs-string,
+div.codeblock.hljs span.hljs-number { color: #aa0982; }
+div.codeblock.hljs span.hljs-keyword { color: #994cc3; font-weight: bold; }

@@ -1,0 +1,194 @@
+:root {
+    --side-bar-bg-color: white;
+    --window-border: none;
+    --search-select-bg-color: #575c61;
+    --active-file-bg-color: #f1f4f5;
+    --item-hover-bg-color: #f1f4f5;
+    --item-hover-text-color: black;
+    --control-text-color: #555;
+}
+
+/* @include-when-export url(https://raw.githubusercontent.com/slashfoo/lmweb/master/style/latinmodern-mono-light.css); */
+
+/* html {
+    font-size: 12pt;
+} */
+
+.entry { 
+    font-size: 15px; 
+    font-weight: 400;
+}
+
+.entry a         { color: blue; }
+.entry a:visited { color: purple; }
+
+.entry h1, 
+.entry h2,
+.entry h3, 
+.entry h4, 
+.entry h5, 
+.entry h6 {
+    font-family: inherit;
+    line-height: 1em;
+}
+
+.entry h1 {
+    font-size: 2em;
+    text-align: center;
+}
+
+.entry h2 {
+    font-size: 1.6em;
+    border-left: 10px solid #222;
+    padding-left: 10px;
+    margin-bottom: 1em;
+}
+
+.entry h3 {
+    font-size: 1.4em;
+}
+
+.entry h4 {
+    font-size: 1.2em;
+}
+
+.entry h5  {
+    font-size: 1.1em;
+}
+
+.entry h6 {
+    font-size: 1em;
+}
+
+.entry p {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    text-align: left;
+    line-height: normal;
+}
+
+.entry pre, 
+.entry var,
+.entry code {
+    font-family: Consolas, 'Courier New', monospace;
+    font-weight: 300;
+    font-size: 15px;
+}
+
+.entry code { color:#870000; }
+
+.entry figure {
+    text-align: center;
+}
+
+.entry figure figcaption {
+    font-size: 14px;
+    color: rgb(84, 84, 84);
+}
+/* 
+::selection {
+    background: var(--search-select-bg-color);
+    color: var(--search-select-text-color) !important;
+    text-shadow: none;
+} */
+
+.entry mark {
+    background: #fff387;
+}
+
+.entry table {
+    border-collapse: collapse;
+}
+
+.entry td, 
+.entry th {
+    border: 1px solid;
+    padding: 4px;
+    padding-left: 1ch;
+    padding-right: 1ch;
+}
+
+.entry th {
+    border-bottom: 0;
+    padding-top: 2px;
+    background: #575c61;
+    border-color: #333;
+    color: #f3f3f3;
+}
+
+.entry blockquote {
+    margin: 1.4em 0;
+    padding-left: 1em;
+    border-left: 3px solid #D3D3D3;
+}
+
+.entry blockquote p {
+    font-style: normal;
+    color: #646464;
+}
+
+.entry blockquote::before {
+    content: "";
+}
+
+.entry blockquote li::after {
+    position: initial;
+}
+
+/* .entry > blockquote {
+    padding: 5px 30px 5px 10px;
+	margin-left: -10px;
+    width: calc(100% + 20px);
+} */
+
+.entry li { margin: 0; }
+
+.entry ol, ul { padding-left: 30px; }
+
+.entry ol ol li > *    { font-weight: normal; }
+.entry ol ol ol li > * { font-weight: normal; }
+
+.entry ol                   { list-style-type: decimal; }
+.entry ol ol                { list-style-type: upper-alpha; }
+.entry ol ol ol             { list-style-type: lower-roman; }
+.entry ol ol ol ol          { list-style-type: decimal; }
+.entry ol ol ol ol ol       { list-style-type: lower-alpha; }
+.entry ol ol ol ol ol ol    { list-style-type: lower-roman; }
+.entry ol ol ol ol ol ol ol { list-style-type: decimal; }
+
+#toc ul {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+div.vscode-block {
+    font-family: Consolas, "Courier New", monospace;
+    line-height: 19px;
+    font-size: 0.92rem;
+    padding: 5px;
+    border: 1px solid rgb(81, 81, 81);
+}
+
+div.codeblock.code-template,
+div.codeblock.code-console {
+    line-height: 19px;
+    font-size: 0.92rem;
+    padding: 5px;
+}
+
+div.codeblock.code-console {
+    color: white;
+    background-color: rgb(59, 59, 59);
+}
+
+
+
+var.file { color: #005CC5; }
+
+code.error { color: red; }
+code.code-error { color: red; }
+
+.code-font {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 14px;
+}

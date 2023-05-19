@@ -1,0 +1,238 @@
+
+
+
+#reading-progress {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 3px;
+    transition-duration: 0.5s, 0.5s;
+    z-index: 9900;
+}
+
+.vscode-block {
+    margin-bottom: 15px;
+    padding: 5px;
+    border: 1px solid silver;
+    font-family: Consolas, 'Courier New', monospace;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+}
+
+div.code-template {
+    color: black;
+    font-family: Consolas, 'Courier New', monospace;
+    padding: 5px;
+    border: 1px solid black;
+    margin-bottom: 15px;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+div.code-console {
+    color: white;
+    background-color: black;
+    font-family: Consolas, 'Courier New', monospace;
+    padding: 5px;
+    margin-bottom: 15px; 
+    font-size: 14px;
+    line-height: 18px; 
+    white-space: pre-wrap;
+}
+div.code-console span.token-venv { color: lightgreen; }
+div.code-console span.token-succ { color: lightgreen; }
+div.code-console span.token-comd { color: yellow;     }
+div.code-console span.token-label { color: skyblue; }
+
+.token-file  { color: rgb(0, 119, 255); }
+.token-error { color: red; }
+
+
+
+
+
+.entry figure.parallel div { 
+    display: inline-block; 
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+/* section */
+
+.entry div.section.command {
+    border: 1px solid; 
+    padding: 5px; 
+    line-height: 1.5em;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.entry div.section.command h5 {
+    font-size: 22px; 
+    margin-left: 3em; margin: 0 0 0 10px ;
+}
+
+.entry div.section.command table {
+    text-align: left;
+    margin: 0;
+}
+
+.entry div.section.command table td,
+.entry div.section.command table th {
+    background-color: #fff; background: none;
+    padding-top: 0; padding-bottom: 0;
+}
+
+.entry div.section.command table th {
+    width: 60px;
+}
+/* .entry div.section.command table td {
+} */
+
+
+
+
+.codeblock.compare {
+    display: table;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+.codeblock.compare > * {
+    width: 50%;
+    display: table-cell;
+}
+/* section.codeblock.compare > *:first-child {
+    float: left;
+}
+
+section.codeblock.compare > *:last-child {
+    margin-left: auto;
+} */
+.codeblock.compare > * {
+    margin: 10px;
+}
+.codeblock.compare:after {
+    clear: both;
+}
+
+
+
+.entry div.section-arguments {
+    display: table;
+    border-spacing: 16px 4px;
+}
+.entry div.section-arguments-item {
+    display: table-row;
+}
+.entry div.section-arguments div.section-arguments-item div {
+    display: table-cell;
+}
+
+
+/* jupyter notebook */
+/* - cover original css */
+.entry .jupyter table th,
+.entry .jupyter table td {
+    border: none;
+    font-weight: inherit;
+    text-align: left;
+    padding: inherit; padding-right: inherit; padding-left: inherit;
+}
+.entry .jupyter table th { font-weight: bold;}
+.entry .jupyter table tr.alt {
+    background: inherit;
+}
+/* - new rules */
+.jupyter {
+    border: 1px solid black;
+    padding: 5px;
+}
+.jupyter .jupyter-mark-in, 
+.jupyter .jupyter-mark-out {
+    float: left;
+    /* background-color: white; */
+    color: rgb(97, 97, 97);
+    font-family: Consolas, 'Courier New', monospace; font-size: 14px; font-style: normal;
+    line-height: 19px;
+}
+.jupyter .jupyter-output {
+    color: rgb(97, 97, 97);
+    font-family: Consolas, 'Courier New', monospace; font-size: 14px; font-style: normal;
+    line-height: 19px;
+    /* margin-bottom: 15px;  */
+    padding-left: 70px;
+    white-space: pre-wrap;
+}
+.jupyter .jupyter-separator {
+    border-top: 1px solid black;
+    margin-top: 5px; margin-bottom: 5px;
+    /* width: 102%; */
+    /* left: -10px; */
+}
+
+.jupyter div.vscode-block {
+    padding: 0;
+    padding-left: 70px;
+    margin-bottom: 0;
+    border: none;
+}
+
+.jupyter .jupyter-output .notes {
+    font-size: 13px;
+    font-family: Arial, sans-serif;
+    color: rgb(144, 164, 174);
+}
+.jupyter .jupyter-output table.pandas-dataframe {
+    font-family: Arial, sans-serif;
+    border-collapse: collapse;
+    border: none;
+    text-align: right;
+    width: fit-content;
+    color: rgb(144, 164, 174);
+}
+.jupyter .jupyter-output table.pandas-dataframe tr:nth-child(odd) {
+    background-color: rgb(245, 245, 245);
+}
+.jupyter .jupyter-output table.pandas-dataframe tr td,
+.jupyter .jupyter-output table.pandas-dataframe tr th {
+    font-size: 13px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.jupyter .jupyter-output table.pandas-dataframe tr td[rowspan],
+.jupyter .jupyter-output table.pandas-dataframe tr th[rowspan] {
+    vertical-align: top;
+}
+.jupyter table.pandas-dataframe td.emphasis, 
+.jupyter table.pandas-dataframe th.emphasis { color: rgb(255, 110, 110); }
+
+.jupyter .jupyter-output img.matplotlib-output { max-width: 400px; }
+.jupyter .jupyter-output div.sklearn-model     { width: fit-content; border-collapse: collapse; }
+.jupyter .jupyter-output div.sklearn-model p:first-child { 
+    margin-block-start: 6px;
+    border-top-left-radius: 5px; border-top-right-radius: 5px;
+}
+.jupyter .jupyter-output div.sklearn-model p:last-child { 
+    margin-block-end: 6px; 
+    border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;
+}
+.jupyter .jupyter-output div.sklearn-model p {
+    margin-block-start: 0; margin-block-end: 0; 
+    padding: 5px; margin: -1px 0 0 0;
+    background-color: rgb(240, 248, 255);
+    border: 1px solid grey;
+    font-family: monospace; font-size: 13px;
+    line-height: 1.5em;
+}
+
+
+div.widget.widget_custom_html div#tableofcontents h4 { font-weight: bold; font-size: 18px; text-align: center; margin-bottom: 10px; }
+div.widget.widget_custom_html div#tableofcontents ol { counter-reset: nested-ordered; list-style-type: none; 
+    margin-left: 10px; }
+div.widget.widget_custom_html div#tableofcontents ol li { margin-top: 4px; margin-bottom: 4px; }
+div.widget.widget_custom_html div#tableofcontents ol li:before { counter-increment: nested-ordered;
+   content: counters(nested-ordered, ".") ": "; color: brown; }
+   

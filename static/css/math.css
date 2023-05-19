@@ -1,0 +1,57 @@
+
+:root {
+    --mathbook-main-color: #486eb4;
+}
+
+/* mathbook */
+
+.mathbook-widget-def {
+
+    padding: 0 0 10px 0; margin: 1em 0;
+}
+.mathbook-widget-def__title {
+    border: 3px solid var(--mathbook-main-color);
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background-color: var(--mathbook-main-color);
+    color: whitesmoke;
+    padding: 3px 12px;
+}
+.mathbook-widget-def__content {
+    border: 3px solid var(--mathbook-main-color);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 0 12px;
+}
+/*.mathbook-widget-def > * { margin-left: 12px; margin-right: 12px; }*/
+
+.mathbook-widget-def h5 {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+
+
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro&display=swap');
+.math-widget-definition {
+    border: 2px solid #94c8ff;
+    border-radius: 5px;
+    padding: 5px 20px; margin: 40px 0 10px 0;
+}
+.math-widget-definition_before {
+    position: relative;
+    top: -1.7em;
+    left: 0;
+    background-color: #e7f3ff;
+    width: fit-content;
+    font-family: 'Source Serif Pro', serif;
+    padding: 6px;
+    margin-bottom: -2em;
+    border: 1px rgb(34, 142, 200) solid;
+    border-radius: 3px;
+}

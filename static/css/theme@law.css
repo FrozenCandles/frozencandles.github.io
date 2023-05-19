@@ -1,0 +1,331 @@
+:root {
+    --side-bar-bg-color: white;
+    --window-border: none;
+    --search-select-bg-color: #575c61;
+    --active-file-bg-color: #f1f4f5;
+    --item-hover-bg-color: #f1f4f5;
+    --item-hover-text-color: black;
+    --control-text-color: #555;
+}
+
+/* @include-when-export url(https://raw.githubusercontent.com/slashfoo/lmweb/master/style/latinmodern-mono-light.css); */
+
+/* html {
+    font-size: 12pt;
+} */
+
+@font-face {
+    font-family: 'STIX2Text';
+    font-style: normal;
+    font-weight: normal;
+    src: local('STIX2Text Regular'),
+        url('./academic/STIX2Text-Regular.woff') format('woff'),
+        url('ttps://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/fonts/HTML-CSS/TeX/woff/MathJax_Main-Regular.woff') format('woff')
+}
+
+@font-face {
+    font-family: 'STIX2Text';
+    font-style: italic;
+    font-weight: normal;
+    src: local('STIX2Text Italic'),
+        url('./academic/STIX2Text-Italic.woff') format('woff'),
+        url('ttps://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/fonts/HTML-CSS/TeX/woff/MathJax_Main-Italic.woff') format('woff')
+}
+
+@font-face {
+    font-family: 'STIX2Text';
+    font-style: normal;
+    font-weight: bold;
+    src: local('STIX2Text Bold'),
+        url('./academic/STIX2Text-Bold.woff') format('woff'),
+        url('ttps://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/fonts/HTML-CSS/TeX/woff/MathJax_Main-Bold.woff') format('woff')
+}
+
+@font-face {
+    font-family: 'STIX2Text';
+    font-style: italic;
+    font-weight: bold;
+    src: local('STIX2Text Bold Italic'),
+    url('./academic/STIX2Text-BoldItalic.woff') format('woff'),
+    url('ttps://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/fonts/HTML-CSS/TeX/woff/MathJax_Main-BoldItalic.woff') format('woff')
+}
+
+@font-face {
+    font-family: 'STIX2Math';
+    font-style: italic;
+    font-weight: bold;
+    src: local('STIX2Math'),url('./academic/STIX2Math.woff') format('woff')
+}
+
+@font-face {
+    font-family: 'Lato';
+    src: url('./law/lato-v14-latin-regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Lato';
+    src: url('./law/lato-v14-latin-italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Lato';
+    src: url('./law/lato-v14-latin-700.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Lato';
+    src: url('./law/lato-v14-latin-700italic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+}
+
+.entry {
+    font-family: "Lato", "STIX2Text", "Times New Roman", "serif";
+    /* line-height: 1.5em;
+    padding: 10%;
+    padding-top: 5%;
+    margin-left: 150px; */
+}
+
+/* .entry {
+    max-width: 860px;
+    padding: 20px 30px 160px;
+    margin: 0 auto;
+  } */
+
+
+.entry a, 
+.entry a:visited {
+    color: #a00;
+}
+
+.entry h1, 
+.entry h2,
+.entry h3, 
+.entry h4, 
+.entry h5, 
+.entry h6 {
+    font-family: inherit;
+    line-height: 1em;
+}
+
+.entry h1 {
+    font-size: 2em;
+    text-align: center;
+}
+
+.entry h2 {
+    font-size: 1.6em;
+    border-left: 10px solid #222;
+    padding-left: 10px;
+}
+
+.entry h3 {
+    font-size: 1.4em;
+}
+
+.entry h4 {
+    font-size: 1.2em;
+}
+
+.entry h5  {
+    font-size: 1.1em;
+}
+
+.entry h6 {
+    font-size: 1em;
+}
+
+.entry p {
+    margin-top: .5em;
+    margin-bottom: 0;
+    text-align: left;
+    line-height: normal;
+}
+
+.entry pre, var, code {
+    font-family: 'Cascadia Code', Consolas, monospace;
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.entry figure {
+    text-align: center;
+}
+
+.entry figure figcaption {
+    font-size: 14px;
+    color: rgb(84, 84, 84);
+}
+
+.math {
+    color: #333;
+}
+
+::selection {
+    background: var(--search-select-bg-color);
+    color: var(--search-select-text-color) !important;
+    text-shadow: none;
+}
+
+.entry mark {
+    background: #fff387;
+}
+
+.entry td, 
+.entry th {
+    border: 1px solid;
+    padding-left: 1ch;
+    padding-right: 1ch;
+}
+
+.entry th {
+    border-bottom: 0;
+    padding-top: 2px;
+    background: #575c61;
+    border-color: #333;
+    color: #f3f3f3;
+}
+
+.entry blockquote {
+	border: 1px solid #a2a9b1;
+	border-radius: 4px;
+	box-shadow: 1px 1px 1px #ccc;
+    background-color: #f3f3f3;
+    padding: 5px;
+    margin: 0.75em;
+    position: relative;
+    left: 0px;
+}
+
+.entry blockquote li::after {
+    position: initial;
+}
+
+.entry > blockquote {
+    padding: 5px 30px 5px 10px;
+	margin-left: -10px;
+    width: calc(100% + 20px);
+}
+
+.entry >  .md-fences-with-lineno {
+    margin-left: -33px;
+    color: black;
+}
+
+.entry li { margin: 0; }
+
+.entry ol, ul { padding-left: 30px; }
+
+.entry ol ol li > *    { font-weight: normal; }
+.entry ol ol ol li > * { font-weight: normal; }
+
+.entry ol                   { list-style-type: decimal; }
+.entry ol ol                { list-style-type: upper-alpha; }
+.entry ol ol ol             { list-style-type: lower-roman; }
+.entry ol ol ol ol          { list-style-type: decimal; }
+.entry ol ol ol ol ol       { list-style-type: lower-alpha; }
+.entry ol ol ol ol ol ol    { list-style-type: lower-roman; }
+.entry ol ol ol ol ol ol ol { list-style-type: decimal; }
+
+/* li blockquote {
+    margin-left: -34px;
+    width: calc(100% + 44px);
+}
+
+li li blockquote {
+    margin-left: -59px;
+    width: calc(100% + 69px);
+}
+
+li li li blockquote {
+    margin-left: -84px;
+    width: calc(100% + 94px);
+}
+
+li li li li blockquote {
+    margin-left: -109px;
+    width: calc(100% + 119px);
+}
+
+li li li li li blockquote {
+    margin-left: -134px;
+    width: calc(100% + 144px);
+}
+
+li li li li li li blockquote {
+    margin-left: -159px;
+    width: calc(100% + 169px);
+}
+
+li li li li li li li blockquote {
+    margin-left: -184px;
+    width: calc(100% + 194px);
+} */
+
+#toc ul {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+div.vscode-block {
+    font-family: 'Cascadia Code', Consolas, monospace;
+    font-weight: 300;
+    line-height: 19px;
+    font-size: 0.92rem;
+    padding: 5px;
+    border: 1px solid black;
+}
+
+div.codeblock.code-console {
+    font-family: 'Cascadia Mono', Consolas, monospace;
+    font-weight: 300;
+    line-height: 19px;
+    font-size: 0.92rem;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+
+div.codeblock.code-console {
+    color: white;
+    background-color: rgb(59, 59, 59);
+}
+
+
+
+var.file { color: #005CC5; }
+
+span.codetoken.command { color: rgb(244, 161, 119); }
+span.codetoken.option { color: lightgray; }
+span.codetoken.input { color: rgb(230, 141, 230); }
+
+section.codeblock.compare {
+    display: table;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+
+section.codeblock.compare > * {
+    width: 50%;
+    display: table-cell;
+}
+
+/* section.codeblock.compare > *:first-child {
+    float: left;
+}
+
+section.codeblock.compare > *:last-child {
+    margin-left: auto;
+} */
+
+section.codeblock.compare > * {
+    margin: 10px;
+}
+
+section.codeblock.compare:after {
+    clear: both;
+}

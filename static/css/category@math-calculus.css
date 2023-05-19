@@ -1,0 +1,9 @@
+
+.entry .text-frame {
+    border: 1px solid black; 
+    padding: 4px;
+}
+
+.entry strong {
+    color: #486eb4;
+}

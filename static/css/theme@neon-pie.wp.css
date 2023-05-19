@@ -1,0 +1,433 @@
+:root {
+    --side-bar-bg-color: #ffffff;
+    --control-text-color: #777777;
+    --select-text-bg-color: #faa295;
+    --active-file-text-color: #262626;
+    --active-file-border-color: #f22f27;
+
+    /* --active-file-bg-color: #fff3f0; */
+    --primary-color: #2760f2;
+
+    /* 中性色 */
+    --mid-1: #ffffff;
+    --mid-2: #fafafa;
+    --mid-3: #f5f5f5;
+    --mid-4: #f0f0f0;
+    --mid-5: #d9d9d9;
+    --mid-6: #bfbfbf;
+    --mid-7: #8c8c8c;
+    --mid-8: #595959;
+    --mid-9: #434343;
+    --mid-10: #262626;
+    --mid-11: #1f1f1f;
+    --mid-12: #141414;
+    --mid-13: #000000;
+
+    /* 主题色 */
+    --main-1: #f0f1ff;
+    --main-2: #ccd5ff;
+    --main-3: #a3a6ff;
+    --main-4: #7a85ff;
+    --main-5: #527aff;
+    --main-6: #272ef2;
+    --main-7: #1637cc;
+    --main-8: #0a39a6;
+    --main-9: #011d80;
+    --main-10: #002270;
+}
+
+/* .entry {
+    max-width: 1080px;
+    padding: 20px 30px 100px;
+    margin: 0 auto;
+} */
+
+.entry p {
+    word-spacing: 0.05rem;
+    text-align: justify;
+}
+
+.entry ol li {
+    margin-left: -4px;
+}
+
+.entry ol li p {
+    margin-left: 4px;
+}
+
+.entry ul {
+    line-height: 2rem;
+}
+
+article>ul:first-child,
+article>ol:first-child {
+    margin-top: 30px;
+}
+
+/* 链接 */
+.entry a {
+    color: var(--main-6);
+    text-decoration: none;
+    border-bottom: 1px solid var(--main-6);
+}
+
+/* 链接内容为空时直接啥也不显示，比如锚点的地方 */
+.entry a:empty {
+    font-size: 0;
+    border: none;
+}
+
+.entry a:hover {
+    color: var(--main-7);
+    border-bottom: 2px solid var(--main-6);
+}
+
+.entry a,
+.entry a:hover {
+    box-shadow: none;
+}
+
+.entry h1,
+.entry h2,
+.entry h3,
+.entry h4,
+.entry h5,
+.entry h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+
+.entry h1:hover a.anchor,
+.entry h2:hover a.anchor,
+.entry h3:hover a.anchor,
+.entry h4:hover a.anchor,
+.entry h5:hover a.anchor,
+.entry h6:hover a.anchor {
+    text-decoration: none;
+}
+
+.entry h1 tt,
+.entry h1 code,
+.entry h2 tt,
+.entry h2 code,
+.entry h3 tt,
+.entry h3 code,
+.entry h4 tt,
+.entry h4 code,
+.entry h5 tt,
+.entry h5 code,
+.entry h6 tt,
+.entry h6 code {
+    font-size: inherit !important;
+}
+
+.entry h2 a,
+.entry h3 a {
+    color: var(--mid-9);
+}
+
+.entry h1 {
+    padding-bottom: 0.3em;
+    margin: 2.4em auto 1.2em;
+    font-size: 2em;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.entry h1::after {
+    display: block;
+    width: 100px;
+    height: 2px;
+    margin: 0.2em auto 0;
+    content: '';
+    border-bottom: 2px dashed var(--main-6);
+}
+
+.entry h2 {
+    padding-left: 6px;
+    margin: 2em auto 1.4em;
+    font-size: 1.6em;
+    line-height: 1.4;
+    border-left: 6px solid var(--main-6);
+}
+
+.entry > h2:first-child {
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.entry h3 {
+    margin: 1.6em auto 1.2em;
+    font-size: 1.35em;
+    line-height: 1.43;
+}
+
+/* --- 三级标题左边的小圆点 --- */
+.entry h3::before {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-right: 6px;
+    margin-bottom: 0.18em;
+    line-height: 1.43;
+    vertical-align: middle;
+    content: '';
+    background-color: var(--main-5);
+    border-radius: 50%;
+}
+
+.entry h4 {
+    margin-top: 1.4em;
+    font-size: 1.2em;
+}
+
+/* --- 四级标题左边的小短线 --- */
+.entry h4::before {
+    display: inline-block;
+    width: 6px;
+    height: 2px;
+    margin-right: 8px;
+    margin-bottom: 0.18em;
+    vertical-align: middle;
+    content: '';
+    background-color: var(--main-4);
+}
+
+.entry h5 {
+    font-size: 1em;
+}
+
+.entry h6 {
+    font-size: 1em;
+    color: var(--mid-7);
+}
+
+.entry p,
+.entry blockquote,
+.entry ul,
+.entry ol,
+.entry dl,
+.entry table {
+    margin: 0.8em 0;
+}
+
+.entry li>ol,
+.entry li>ul {
+    margin: 0;
+}
+
+.entry hr {
+    box-sizing: content-box;
+    width: 100%;
+    height: 1px;
+    padding: 0;
+    margin: 10px auto 10px;
+    overflow: hidden;
+    background-color: var(--main-4);
+    border: 0;
+}
+
+.entry a:first-child h1,
+.entry a:first-child h2,
+.entry a:first-child h3,
+.entry a:first-child h4,
+.entry a:first-child h5,
+.entry a:first-child h6 {
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.entry h1 p,
+.entry h2 p,
+.entry h3 p,
+.entry h4 p,
+.entry h5 p,
+.entry h6 p {
+    margin-top: 0;
+}
+
+.entry li p.first {
+    display: inline-block;
+}
+
+.entry ul,
+.entry ol {
+    padding-left: 30px;
+}
+
+.entry ul:first-child,
+.entry ol:first-child {
+    margin-top: 0;
+}
+
+.entry ul:last-child,
+.entry ol:last-child {
+    margin-bottom: 0;
+}
+
+/* --- 引用块 --- */
+.entry blockquote {
+    position: relative;
+    padding: 24px 16px 12px;
+    margin: 24px 0 36px;
+    font-size: 1em;
+    font-style: normal;
+    line-height: 1.6;
+    color: var(--mid-7);
+    text-indent: 0;
+    border: none;
+    border-left: 2px solid var(--main-6);
+}
+
+.entry blockquote blockquote {
+    padding-right: 0;
+}
+
+.entry blockquote a {
+    color: var(--main-4);
+}
+
+.entry blockquote h2,
+.entry blockquote h3,
+.entry blockquote h4 {
+    margin: 0;
+}
+
+.entry blockquote .math {
+    color: rgb(115, 104, 161);
+}
+
+.entry blockquote::before {
+    position: absolute;
+    top: 0;
+    left: 12px;
+    font-family: Arial, serif;
+    font-size: 2em;
+    font-weight: 700;
+    line-height: 1em;
+    color: var(--main-6);
+    content: '“';
+}
+
+article>table {
+    padding: 0;
+    margin: 18px auto;
+    word-break: initial;
+}
+
+article>table tr {
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid #dfe2e5;
+}
+
+article>table tr:nth-child(2n),
+article>thead {
+    background-color: var(--mid-3);
+}
+
+article>table tr th {
+    padding: 6px 13px;
+    margin: 0;
+    font-weight: bold;
+    text-align: left;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+}
+
+article>table tr td {
+    padding: 6px 13px;
+    margin: 0;
+    text-align: left;
+    border: 1px solid #dfe2e5;
+}
+
+article>table tr th:first-child,
+article>table tr td:first-child {
+    margin-top: 0;
+}
+
+article>table tr th:last-child,
+article>table tr td:last-child {
+    margin-bottom: 0;
+}
+
+.entry table thead th {
+    text-align: center;
+    background-color: #f2f2f2;
+}
+
+.entry strong {
+    color: green;
+    padding: 0 1px;
+}
+
+.entry em {
+    padding: 0 5px 0 2px;
+}
+
+
+.entry code,
+tt {
+    padding: 2px 4px 1px;
+    margin: 0 2px;
+    font-family: Consolas, "Courier New", Courier, monospace;
+    font-size: 0.92rem;
+    color: var(--main-5);
+    background-color: var(--main-1);
+    border-radius: 3px;
+}
+
+.entry code {
+    vertical-align: 0.5px;
+}
+
+.entry code em,
+.entry code strong {
+    padding: 0;
+}
+
+.entry figure figcaption,
+.entry figure {
+    text-align: center;
+}
+
+/* heighlight. */
+.entry mark {
+    padding: 2px 4px;
+    margin: 0 2px;
+    font-weight: 500;
+    color: #222222;
+    background-color: var(--main-4);
+    border-radius: 2px;
+    border-radius: 4px;
+}
+
+.entry del {
+    padding: 1px 2px;
+}
+
+div.codeblock,
+div.vscode-block {
+    font-family: Consolas, 'Courier New', monospace;
+    line-height: 19px;
+    font-size: 14px;
+    padding: 5px;
+    margin-bottom: 15px;
+    overflow-wrap: anywhere;
+}
+
+div.vscode-block {
+    border: 1px solid gray;
+    margin: 20px auto;
+}
+
+div.codeblock.code-console {
+    color: rgb(248, 242, 255);
+    background-color: rgb(27, 27, 27);
+    white-space: pre-wrap;
+}

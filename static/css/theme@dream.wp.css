@@ -1,0 +1,45 @@
+
+
+
+.entry code {
+    font-family: Consolas, 'Courier New', monospace;
+    background-color: rgb(246, 246, 246);
+    border-radius: 3px;
+    color: rgb(18, 18, 18);
+    font-size: 14px;
+    margin-left: 4px;
+    margin-right: 4px;
+    padding: 3px 4px;
+}
+
+.entry figure {
+    text-align: center;
+}
+
+
+.entry var,
+.entry table td.cell-code {
+    font-family: Consolas, 'Courier New', monospace;
+    font-size: 14px;
+}
+
+
+.entry var {
+    font-style: normal;
+    color: rgb(0, 119, 255); 
+}
+
+blockquote {
+    border-left: 4px solid lightgrey;
+    padding-left: 15px;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    color: grey;
+}
+blockquote p {
+    color: grey
+}
+
+
+
+
