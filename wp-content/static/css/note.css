@@ -42,7 +42,15 @@ div.code-console {
     white-space: pre-wrap;
 }
 div.code-console span.token-venv { color: lightgreen; }
+div.code-console span.token-succ { color: lightgreen; }
 div.code-console span.token-comd { color: yellow;     }
+div.code-console span.token-label { color: skyblue; }
+
+.token-file  { color: rgb(0, 119, 255); }
+.token-error { color: red; }
+
+
+
 
 
 .entry figure.parallel div { 
