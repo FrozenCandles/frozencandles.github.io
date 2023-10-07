@@ -1,0 +1,922 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Python数据分析-pandas04:索引与缺失值 - 冰封残烛的个人小站</title>
+	<meta name="description" content="当在两个 Series 或 DataFrame 对象上做计算时，pandas 会按照索引值配对计算元素，而不是按位置配对，这就是索引对齐现象。numpy 提供了缺失值 NaN，是一种按照 IEEE 754 标准设计的特殊浮点数，pandas 提供了处理该缺失值有关的完整工具。" />
+	<link rel="canonical" href="/data-science/via-python/pandas04-missing-values/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Python数据分析-pandas04:索引与缺失值 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="当在两个 Series 或 DataFrame 对象上做计算时，pandas 会按照索引值配对计算元素，而不是按位置配对，这就是索引对齐现象。numpy 提供了缺失值 NaN，是一种按照 IEEE 754 标准设计的特殊浮点数，pandas 提供了处理该缺失值有关的完整工具。" />
+	<meta property="og:url" content="/data-science/via-python/pandas04-missing-values/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2023-03-17T09:55:47+00:00" />
+	<meta property="article:modified_time" content="2023-10-07T03:23:48+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2023/03/Python数据分析-pandas04索引与缺失值.jpg" />
+	<meta property="og:image:width" content="1400" />
+	<meta property="og:image:height" content="1000" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="5分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/data-science/via-python/pandas04-missing-values/#primaryimage",
+	            "url": "/wp-content/uploads/2023/03/Python数据分析-pandas04索引与缺失值.jpg",
+	            "contentUrl": "/wp-content/uploads/2023/03/Python数据分析-pandas04索引与缺失值.jpg",
+	            "width": 1400,
+	            "height": 1000
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/data-science/via-python/pandas04-missing-values/#webpage",
+	            "url": "/data-science/via-python/pandas04-missing-values/",
+	            "name": "Python数据分析-pandas04:索引与缺失值 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/data-science/via-python/pandas04-missing-values/#primaryimage"
+	            },
+	            "datePublished": "2023-03-17T09:55:47+00:00",
+	            "dateModified": "2023-10-07T03:23:48+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "当在两个 Series 或 DataFrame 对象上做计算时，pandas 会按照索引值配对计算元素，而不是按位置配对，这就是索引对齐现象。numpy 提供了缺失值 NaN，是一种按照 IEEE 754 标准设计的特殊浮点数，pandas 提供了处理该缺失值有关的完整工具。",
+	            "breadcrumb": {
+	                "@id": "/data-science/via-python/pandas04-missing-values/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/data-science/via-python/pandas04-missing-values/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/data-science/via-python/pandas04-missing-values/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "Python数据分析-pandas04:索引与缺失值"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/1054" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=1054' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fdata-science%2Fvia-python%2Fpandas04-missing-values%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fdata-science%2Fvia-python%2Fpandas04-missing-values%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script>
+<link rel="stylesheet" href="/wp-content/static/css/theme@pie.wp.css">
+<style>
+    .math { color:blue; font-size: 13px; }
+    div.vscode-block { color: #90A4AE; }
+    div.vscode-block span[token="symbol"]  { color: #39adb5; }
+    div.vscode-block span[token="number"]  { color: #f76d47; }
+    div.vscode-block span[token="keyword"] { color: #39adb5; font-weight: bold; }
+
+    div.codeblock.code-console span.ipython-in   { color: lightgreen; }
+    div.codeblock.code-console span.ipython-out  { color: red;   }
+    div.codeblock.code-console span.ipython-hint { background-color: grey; line-height: 1em; }
+</style>
+<script src="/wp-content/static/js/note.js"></script>
+<script>
+    window.onload = function() {
+        setTimeout(function() {
+            addJupyterMarker();
+        }, 500)
+    }
+</script>
+
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-1054 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-1054" class="post-1054 post type-post status-publish format-standard has-post-thumbnail hentry category-via-python">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">Python数据分析-pandas04:索引与缺失值</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/data-science/via-python/" rel="category tag">Python数据处理</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2023年3月17日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+
+
+
+
+
+<p><a class="link-internal">上一节</a>介绍了 pandas 中的索引，本节补充关于索引对齐的更多内容。</p>
+
+<p>在 <var type="module">numpy</var> 中对两个数组做运算，如果它们形状既不完全一致，也不满足广播规则，那么会产生错误：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>a01 <span style="color: #7c4dff;">=</span> np<span style="color: #39adb5;">.</span>arange<span style="color: #39adb5;">(</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">5</span><span style="color: #39adb5;">)</span></div><div>a02 <span style="color: #7c4dff;">=</span> np<span style="color: #39adb5;">.</span>linspace<span style="color: #39adb5;">(</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">5</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">5</span><span style="color: #39adb5;">)</span></div><div><span style="color: #39adb5;font-weight: bold;">try</span><span style="color: #39adb5;">:</span></div><div>&#160; &#160; a01 <span style="color: #7c4dff;">+</span> a02</div><div><span style="color: #39adb5;font-weight: bold;">except</span> <span style="color: #8796b0;">ValueError</span> <span style="color: #39adb5;font-weight: bold;">as</span> e<span style="color: #39adb5;">:</span></div><div>&#160; &#160; <span style="color: #6182b8;">print</span><span style="color: #39adb5;">(</span>e<span style="color: #39adb5;">)</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">operands could not be broadcast together with shapes (4,) (5,) </div>
+</div>
+
+<p>但是对两个类似的 <code>Series</code> 对象做运算时，就不会产生这种错误：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s01 <span style="color: #7c4dff;">=</span> pd<span style="color: #39adb5;">.</span>Series<span style="color: #39adb5;">(</span>np<span style="color: #39adb5;">.</span>arange<span style="color: #39adb5;">(</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">5</span><span style="color: #39adb5;">))</span></div><div>s02 <span style="color: #7c4dff;">=</span> pd<span style="color: #39adb5;">.</span>Series<span style="color: #39adb5;">(</span>np<span style="color: #39adb5;">.</span>linspace<span style="color: #39adb5;">(</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">5</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">5</span><span style="color: #39adb5;">))</span></div><div>s01 <span style="color: #7c4dff;">+</span> s02</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">0    2.0
+1    4.0
+2    6.0
+3    8.0
+4    NaN
+dtype: float64</div>
+</div>
+
+<p>虽然不会产生错误，但是注意到得到的 <code>Series</code> 包含 5 个元素，并且最后一个元素似乎不是数值数据。同时结果的类型由整数变为了浮点数。</p>
+
+<p>这两个现象就包含了本节的内容。接下来逐一介绍。</p>
+
+<h2>索引对齐</h2>
+
+<p>当在两个 <code>Series</code> 或 <code>DataFrame</code> 对象上做计算时，<var type="module">pandas</var> 会按照索引值配对计算元素，而不是按位置配对：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>np<span style="color: #39adb5;">.</span>divide<span style="color: #39adb5;">(</span>pd<span style="color: #39adb5;">.</span>Series<span style="color: #39adb5;">(</span><span style="color: #6182b8;">range</span><span style="color: #39adb5;">(</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">5</span><span style="color: #39adb5;">),</span> <span style="color: #e53935;">index</span><span style="color: #7c4dff;">=</span><span style="color: #8796b0;">list</span><span style="color: #39adb5;">(</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">ABCD</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">)),</span></div><div>&#160; &#160; &#160; &#160; &#160; pd<span style="color: #39adb5;">.</span>Series<span style="color: #39adb5;">(</span><span style="color: #6182b8;">range</span><span style="color: #39adb5;">(</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">5</span><span style="color: #39adb5;">),</span> <span style="color: #e53935;">index</span><span style="color: #7c4dff;">=</span><span style="color: #8796b0;">list</span><span style="color: #39adb5;">(</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">ACBD</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">)))</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">A    1.000000
+B    0.666667
+C    1.500000
+D    1.000000
+dtype: float64</div>
+</div>
+
+<p>这实际上是由于 <var type="module">pandas</var> 会在计算过程中对齐两个对象的索引。索引对齐确保计算可以得到合理的结果，并且当处理不完整的数据时也更方便。</p>
+
+<p>例如，以下根据现有的地区面积和人口数据，计算人口密度：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>territory <span style="color: #7c4dff;">=</span> pd<span style="color: #39adb5;">.</span>Series<span style="color: #39adb5;">(</span></div><div>&#160; &#160; <span style="color: #39adb5;">{</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">D0</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">1708</span><span style="color: #39adb5;">,</span> <span style="color: #39adb5;">'</span><span style="color: #91b859;">D1</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">9403</span><span style="color: #39adb5;">,</span> <span style="color: #39adb5;">'</span><span style="color: #91b859;">D2</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">3640</span><span style="color: #39adb5;">,</span> <span style="color: #39adb5;">'</span><span style="color: #91b859;">D3</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">3360</span><span style="color: #39adb5;">},</span></div><div>&#160; &#160; <span style="color: #e53935;">name</span><span style="color: #7c4dff;">=</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">territory</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">)</span></div><div>population <span style="color: #7c4dff;">=</span> pd<span style="color: #39adb5;">.</span>Series<span style="color: #39adb5;">(</span></div><div>&#160; &#160; <span style="color: #39adb5;">{</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">D0</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">14300</span><span style="color: #39adb5;">,</span> <span style="color: #39adb5;">'</span><span style="color: #91b859;">D2</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">13900</span><span style="color: #39adb5;">,</span> <span style="color: #39adb5;">'</span><span style="color: #91b859;">D3</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">33280</span><span style="color: #39adb5;">},</span></div><div>&#160; &#160; <span style="color: #e53935;">name</span><span style="color: #7c4dff;">=</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">population</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">)</span></div><div>population <span style="color: #7c4dff;">/</span> territory</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">D0    8.372365
+D1         NaN
+D2    3.818681
+D3    9.904762
+dtype: float64</div>
+</div>
+
+<p>结果数组的索引是两个输入数组索引的并集，并用索引相同的元素做运算。这样一来不需要使两个 <code>Series</code> 都是完整且顺序一致的，也能根据索引完成配对元素的计算。</p>
+
+<p>在计算两个 <code>DataFrame</code> 时，类似的索引对齐规则也同样会出现在列索引中：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #39adb5;">(</span>pd<span style="color: #39adb5;">.</span>DataFrame<span style="color: #39adb5;">(</span>np<span style="color: #39adb5;">.</span>arange<span style="color: #39adb5;">(</span><span style="color: #f76d47;">6</span><span style="color: #39adb5;">).</span>reshape<span style="color: #39adb5;">(</span><span style="color: #f76d47;">3</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">2</span><span style="color: #39adb5;">),</span> <span style="color: #e53935;">columns</span><span style="color: #7c4dff;">=</span><span style="color: #8796b0;">list</span><span style="color: #39adb5;">(</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">AB</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">))</span> <span style="color: #7c4dff;">+</span> </div><div>&#160;pd<span style="color: #39adb5;">.</span>DataFrame<span style="color: #39adb5;">(</span>np<span style="color: #39adb5;">.</span>arange<span style="color: #39adb5;">(</span><span style="color: #f76d47;">9</span><span style="color: #39adb5;">).</span>reshape<span style="color: #39adb5;">(</span><span style="color: #f76d47;">3</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">3</span><span style="color: #39adb5;">),</span> <span style="color: #e53935;">columns</span><span style="color: #7c4dff;">=</span><span style="color: #8796b0;">list</span><span style="color: #39adb5;">(</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">BAC</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">)))</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><table class="pandas-dataframe">
+        <tr>
+            <th></th><th>A</th><th>B</th><th>C</th>
+        </tr>
+        <tr>
+            <td>0</td><td>1</td><td>1</td><td>NaN</td>
+        </tr>
+        <tr>
+            <td>1</td><td>6</td><td>6</td><td>NaN</td>
+        </tr>
+        <tr>
+            <td>2</td><td>11</td><td>11</td><td>NaN</td>
+        </tr>
+    </table></div>
+</div>
+
+<p>因此，索引对齐就是在计算时根据配对的索引完成元素的运算。如果有一个运算对象缺少该索引，该位置的数据会用 <code>NaN</code> 填充。这是 <var type="module">pandas</var> 表示缺失值的方法，接下来会介绍缺失值的处理方法。</p>
+
+<h2>处理缺失值</h2>
+
+<h3>认识缺失值</h3>
+
+<p>在 Python 中，空值一般用 <code>None</code> 对象表示。它是一个特殊的 Python <code>object</code> 对象 ，由 Python 解释器提供并处理。</p>
+
+<p><code>None</code> 作为一个 Python 对象，并不能兼容任何 <var type="module">numpy</var> 的原生类型。如果在创建数组时包含 <code>None</code> ，那么数组的类型会被强制提升为 <code>object</code> ：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>a1 <span style="color: #7c4dff;">=</span> np<span style="color: #39adb5;">.</span>array<span style="color: #39adb5;">([</span><span style="color: #f76d47;">0</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">3</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">None</span><span style="color: #39adb5;">])</span></div><div>a1</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">array([0, 1, 3, None], dtype=object)</div>
+</div>
+
+<p>然而，使用 <code>object</code> 作为数组类型会严重拖慢计算速度，因为它在底层不但占用更多空间，并且无法通过向量化加速运算：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>a2 <span style="color: #7c4dff;">=</span> np<span style="color: #39adb5;">.</span>array<span style="color: #39adb5;">(</span><span style="color: #6182b8;">range</span><span style="color: #39adb5;">(</span><span style="color: #f76d47;">10000</span><span style="color: #39adb5;">),</span> <span style="color: #e53935;">dtype</span><span style="color: #7c4dff;">=</span>np<span style="color: #39adb5;">.</span>int32<span style="color: #39adb5;">)</span></div><div>a3 <span style="color: #7c4dff;">=</span> np<span style="color: #39adb5;">.</span>array<span style="color: #39adb5;">(</span><span style="color: #6182b8;">range</span><span style="color: #39adb5;">(</span><span style="color: #f76d47;">10000</span><span style="color: #39adb5;">),</span> <span style="color: #e53935;">dtype</span><span style="color: #7c4dff;">=</span><span style="color: #8796b0;">object</span><span style="color: #39adb5;">)</span></div><div><span style="color: #7c4dff;">%</span>timeit a2 <span style="color: #7c4dff;">/</span> <span style="color: #f76d47;">2</span></div><div><span style="color: #7c4dff;">%</span>timeit a3 <span style="color: #7c4dff;">/</span> <span style="color: #f76d47;">2</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">9.99 µs ± 51.7 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
+199 µs ± 1.35 µs per loop (mean ± std. dev. of 7 runs, 10,000 loops each)</div>
+</div>
+
+<p>可以看到即便对于简单的除法运算，两者都有 20 倍的速度差异。除此之外，数组中一旦包含 <code>None</code> 值，那么它就无法参与各种运算，因为 Python 并没有实现 <code>None</code> 和其它类型的运算方法。</p>
+
+<p>不过好在 <var type="module">numpy</var> 提供了另一种缺失值：<code>NaN</code> 。它全称 Not a Number ，即非数字，是一种按照 IEEE 754 标准设计的特殊<em>浮点数</em>：（有关 <code>NaN</code> 与浮点数的更多底层设计可以参见<a href="https://en.wikipedia.org/wiki/NaN">维基百科</a>）</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>np<span style="color: #39adb5;">.</span>array<span style="color: #39adb5;">([</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> np<span style="color: #39adb5;">.</span>nan<span style="color: #39adb5;">,</span> <span style="color: #f76d47;">2</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">3</span><span style="color: #39adb5;">])</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">array([ 1., nan,  2.,  3.])</div>
+</div>
+
+<p><code>NaN</code> 作为一种浮点数，在大多数编程语言中都可以被处理。浮点类型使得含 <code>NaN</code> 的数组可以使用向量化计算，获得很快的运算速度。</p>
+
+<p><code>NaN</code> 的一个特性是：它与任何数字的运算结果都是它本身。也就是说无论 <code>NaN</code> 参与何种运算，最终结果都是 <code>NaN</code> ：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>np<span style="color: #39adb5;">.</span>nan <span style="color: #7c4dff;">+</span> <span style="color: #f76d47;">1</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">nan</div>
+
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>np<span style="color: #39adb5;">.</span>nan <span style="color: #7c4dff;">/</span> np<span style="color: #39adb5;">.</span>nan <span style="color: #7c4dff;">*</span> <span style="color: #f76d47;">0</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">nan</div>
+</div>
+
+<p>这种特性使得在对含有 <code>NaN</code> 的数组做聚合处理时，虽然不会引起异常，但结果不一定有效：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>a5 <span style="color: #7c4dff;">=</span> np<span style="color: #39adb5;">.</span>array<span style="color: #39adb5;">([</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> np<span style="color: #39adb5;">.</span>nan<span style="color: #39adb5;">,</span> <span style="color: #f76d47;">2</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">3</span><span style="color: #39adb5;">])</span></div><div>a5<span style="color: #39adb5;">.</span>sum<span style="color: #39adb5;">(),</span> a5<span style="color: #39adb5;">.</span>max<span style="color: #39adb5;">()</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">(nan, nan)</div>
+</div>
+
+<p>为此，<var type="module">numpy</var> 提供了一些以 <var>nan</var> 开头的特殊累计函数，它们可以忽略数组中的缺失值：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>np<span style="color: #39adb5;">.</span>nansum<span style="color: #39adb5;">(</span>a5<span style="color: #39adb5;">),</span> np<span style="color: #39adb5;">.</span>nanmax<span style="color: #39adb5;">(</span>a5<span style="color: #39adb5;">)</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">(6.0, 3.0)</div>
+</div>
+
+<h3>处理缺失值</h3>
+
+<p><code>NaN</code> 虽然不像 <code>None</code> 的问题那么明显，但也容易出现奇怪的问题。接下来看看 <var type="module">pandas</var> 中对 <code>NaN</code> 的处理方式。</p>
+
+<p>考虑到空值 <code>None</code> 的副作用太过明显，<var type="module">pandas</var> 会将空值自动转换为 <code>NaN</code> ：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s03 <span style="color: #7c4dff;">=</span> pd<span style="color: #39adb5;">.</span>Series<span style="color: #39adb5;">([</span><span style="color: #f76d47;">0</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">None</span><span style="color: #39adb5;">,</span> np<span style="color: #39adb5;">.</span>nan<span style="color: #39adb5;">,</span> <span style="color: #f76d47;">1</span><span style="color: #39adb5;">])</span></div><div>s03</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">0    0.0
+1    NaN
+2    NaN
+3    1.0
+dtype: float64</div>
+</div>
+
+<p><code>Series</code> 和 <code>DataFrame</code> 均可以使用 <code>.isnull()</code> 和 <code>.notnull()</code> 方法来发现缺失值，它们像通用函数一样返回布尔数组，例如：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s03<span style="color: #39adb5;">.</span>isnull<span style="color: #39adb5;">()</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">0    False
+1     True
+2     True
+3    False
+dtype: bool</div>
+</div>
+
+<p>这种布尔数组可以配合数组索引直接修改缺失值：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s03<span style="color: #39adb5;">[</span>s03<span style="color: #39adb5;">.</span>isnull<span style="color: #39adb5;">()]</span> <span style="color: #7c4dff;">=</span> <span style="color: #f76d47;">2</span></div><div>s03</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">0    0.0
+1    2.0
+2    2.0
+3    1.0
+dtype: float64</div>
+</div>
+
+<p><var type="module">pandas</var> 还提供了两种很好用的缺失值处理方式，分别是 <code>.dropna()</code> 和 <code>.fillna()</code> 方法，分别用于剔除缺失值和填充缺失值。在 <code>Series</code> 上使用这些方法比较易懂：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s03<span style="color: #39adb5;">.</span>dropna<span style="color: #39adb5;">()</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">0    0.0
+3    1.0
+dtype: float64</div>
+</div>
+
+<p>更复杂的情况涉及对 <code>DataFrame</code> 的缺失值处理，因为 <code>DataFrame</code> 增删的最小单元是一行或一列。默认情况下，<code>DataFrame.dropna()</code> 会剔除任何包含缺失值的整行数据。可以设置按不同的坐标轴剔除缺失值，比如 <code>axis=1</code>（或 <code>axis='columns'</code> ）会剔除任何包含缺失值的整列数据：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>df01 <span style="color: #7c4dff;">=</span> pd<span style="color: #39adb5;">.</span>DataFrame<span style="color: #39adb5;">([[</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> np<span style="color: #39adb5;">.</span>nan<span style="color: #39adb5;">,</span> <span style="color: #f76d47;">2</span><span style="color: #39adb5;">],</span> <span style="color: #39adb5;">[</span><span style="color: #f76d47;">2</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">3</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">5</span><span style="color: #39adb5;">],</span> <span style="color: #39adb5;">[</span>np<span style="color: #39adb5;">.</span>nan<span style="color: #39adb5;">,</span> <span style="color: #f76d47;">4</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">6</span><span style="color: #39adb5;">]])</span></div><div>df01<span style="color: #39adb5;">.</span>dropna<span style="color: #39adb5;">()</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><table class="pandas-dataframe">
+        <tr>
+            <th></th><th>0</th><th>1</th><th>2</th>
+        </tr>
+        <tr>
+            <td>1</td><td>2.0</td><td>3.0</td><td>5</td>
+        </tr>
+    </table></div>
+</div>
+
+<p>这种做法会把非缺失值一并剔除。有时候可能只需要剔除缺失值较多的行或列，这种需求可以通过以下两个参数来满足：</p>
+
+<ul>
+    <li><code><em>how</em></code> 参数的默认值是 <code>'any'</code> ，表示只要有缺失值就剔除整行或整列。还可以传入 <code>'all'</code> ，从而剔除全部是缺失值的行或列</li>
+    <li><code><em>thresh</em></code> 参数用于设置需要保留的行或列中非缺失值的最小数量</li>
+</ul>
+
+<p>剔除缺失值时只关注特定的列也是一种常见的需求，因为有时 <code>DataFrame</code> 只有部分列会参与运算，而其它列无论是否包含缺失值都想保留下了。这时可以通过向 <code><em>subset</em></code> 参数传入包含列名的列表来指定剔除缺失值时只关注表的哪些部分。</p>
+
+<p>除此之外，<code><em>inplace</em></code> 当然也是 <code>.dropna()</code> 方法具有的参数，说明该方法默认情况下也不修改原有表，而是得到一个剔除缺失值后的副本。</p>
+
+<p><code>.fillna()</code> 方法用于填充缺失值。对于 <code>Series</code> 而言，该方法就是一个简单的替换：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s03<span style="color: #39adb5;">.</span>fillna<span style="color: #39adb5;">(</span><span style="color: #f76d47;">3</span><span style="color: #39adb5;">)</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">0    0.0
+1    3.0
+2    3.0
+3    1.0
+dtype: float64</div>
+</div>
+
+<p>对于 <code>DataFrame</code> 而言，除了用单个值填充所有的缺失位置外，还可以使用字典为不同列指定不同的填充值：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>df01<span style="color: #39adb5;">.</span>fillna<span style="color: #39adb5;">({</span><span style="color: #f76d47;">0</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">10</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">1</span><span style="color: #39adb5;">:</span> <span style="color: #f76d47;">20</span><span style="color: #39adb5;">})</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><table class="pandas-dataframe">
+        <tr>
+            <th></th><th>0</th><th>1</th><th>2</th>
+        </tr>
+        <tr>
+            <td>0</td><td>1.0</td><td>20.0</td><td>2</td>
+        </tr>
+        <tr>
+            <td>1</td><td>2.0</td><td>3.0</td><td>5</td>
+        </tr>
+        <tr>
+            <td>2</td><td>10.0</td><td>4.0</td><td>6</td>
+        </tr>
+    </table></div>
+</div>
+
+<p><code>.fillna()</code> 方法还有以下两个常用参数：</p>
+
+<ul>
+    <li><code><em>method</em></code> ：参数指定填充的方法，例如 <code>"pad"</code> 或 <code>"ffill"</code> 用缺失值前或上面的有效值填充；<code>"bfill"</code> 或 <code>"backfill"</code> 用缺失值后或下面的有效值填充。默认用自定义行为填充</li>
+    <li><code><em>limit</em></code> ：填充的最大数量</li>
+</ul>
+
+<!-- 可以用适当的对象方法代替运算符，并使用参数 <code><em>fill_value</em></code> 填充缺失的数据后再参与运算。 -->
+
+<h3>可空类型</h3>
+
+<p>最后要说明的是，尽管 <var type="module">pandas</var> 为处理 <code>NaN</code> 提供了很多便利的工具，但是尽可能不要向表中引入 <code>NaN</code> 。因为一旦表中出现一个 <code>NaN</code> ，会使得一列的数据类型都变成浮点数：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>df02 <span style="color: #7c4dff;">=</span> pd<span style="color: #39adb5;">.</span>DataFrame<span style="color: #39adb5;">(</span>np<span style="color: #39adb5;">.</span>arange<span style="color: #39adb5;">(</span><span style="color: #f76d47;">12</span><span style="color: #39adb5;">).</span>reshape<span style="color: #39adb5;">(</span><span style="color: #f76d47;">3</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">4</span><span style="color: #39adb5;">),</span> <span style="color: #e53935;">dtype</span><span style="color: #7c4dff;">=</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">int32</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">)</span></div><div>df02<span style="color: #39adb5;">.</span>iloc<span style="color: #39adb5;">[</span><span style="color: #f76d47;">2</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">1</span><span style="color: #39adb5;">]</span> <span style="color: #7c4dff;">=</span> np<span style="color: #39adb5;">.</span>nan</div><div>df02</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><table class="pandas-dataframe">
+        <tr>
+            <th></th><th>0</th><th>1</th><th>2</th><th>3</th>
+        </tr>
+        <tr>
+            <td>0</td><td>0</td><td>1.0</td><td>2</td><td>3</td>
+        </tr>
+        <tr>
+            <td>1</td><td>4</td><td>5.0</td><td>6</td><td>7</td>
+        </tr>
+        <tr>
+            <td>2</td><td>8</td><td>NaN</td><td>10</td><td>11</td>
+        </tr>
+    </table></div>
+</div>
+
+<p>浮点数可能使得表在处理时出现问题。例如，如果一个整型或布尔数组出现了一个浮点数，那么它便无法用于索引。</p>
+
+<p>为此，<var type="module">pandas</var> 提供了一类特别的可空类型，向可空类型中引入空值并不会使 <code>Series</code> 变为浮点数。目前 <var type="module">pandas</var> 具有的可空类型包括各种长度的 <code>Int</code> 和 <code>Float</code> 类型（注意首字母大写）、<code>string</code> 类型和 <code>boolean</code> 类型。</p>
+
+<p>如果在创建 <code>Series</code> 时使用 <code><em>dtype</em></code> 参数指定类型为以上这些可空类型，那么其中的缺失值便会使用特别的缺失值指示器 <code>pd.NA</code> 代替：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s04 <span style="color: #7c4dff;">=</span> pd<span style="color: #39adb5;">.</span>Series<span style="color: #39adb5;">([</span><span style="color: #f76d47;">0</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">None</span><span style="color: #39adb5;">,</span> np<span style="color: #39adb5;">.</span>nan<span style="color: #39adb5;">,</span> pd<span style="color: #39adb5;">.</span>NA<span style="color: #39adb5;">,</span> <span style="color: #f76d47;">1</span><span style="color: #39adb5;">],</span> </div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #e53935;">dtype</span><span style="color: #7c4dff;">=</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">Int32</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">)</span></div><div>s04</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">0       0
+1    &lt;NA&gt;
+2    &lt;NA&gt;
+3    &lt;NA&gt;
+4       1
+dtype: Int32</div>
+</div>
+
+<p><code>pd.NA</code> 不代表任何实际的值，因此可以用在任何数组中而不会改变其原有类型。例如，如果创建一个类型为 <code>boolean</code> 的可空布尔数组，那么它便可用于索引，并且其中的 <code>pd.NA</code> 会被当做 <code>False</code> 用于索引：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #90a4ae;">s05 </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> pd</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">Series</span><span style="color: #39adb5;">([</span><span style="color: #f76d47;">True</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> </span><span style="color: #f76d47;">None</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> np</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">nan</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> </span><span style="color: #f76d47;">False</span><span style="color: #39adb5;">],</span><span style="color: #90a4ae;"> </span><span style="color: #e53935;">dtype</span><span style="color: #7c4dff;">=</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">boolean</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">)</span></div></div>
+
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>s01<span style="color: #39adb5;">[</span>s05<span style="color: #39adb5;">]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">0    1
+dtype: int32</div>
+</div>
+
+<p>但截至 pandas 1.5 ，该功能似乎仍然处于实验阶段。</p>
+
+
+
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-fp/05-recursions/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程05-函数的递归-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/05/Python函数式编程05-函数的递归-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-300x169.jpg 300w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-1024x576.jpg 1024w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-768x432.jpg 768w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-1536x864.jpg 1536w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-950x534.jpg 950w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-fp/05-recursions/" rel="bookmark">Python函数式编程05 函数的递归</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-fp/01-function-fundamentals/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程01-函数的基本概念-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/05/Python函数式编程01-函数的基本概念-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程01-函数的基本概念-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-fp/01-function-fundamentals/" rel="bookmark">Python函数式编程01 函数的基本概念</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/embedded/mcu-application/stm32-u8g2-library/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/U8g2图形库与STM32移植-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/U8g2图形库与STM32移植-520x293.jpg 520w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植-300x169.jpg 300w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植-1024x576.jpg 1024w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植-768x432.jpg 768w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植-1536x864.jpg 1536w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植-950x534.jpg 950w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/embedded/mcu-application/stm32-u8g2-library/" rel="bookmark">U8g2图形库与STM32移植</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/programming/python-oop/04-methods/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>Python面向对象编程04-类与实例的方法</span></a></li>
+		<li class="previous"><a href="/data-science/via-python/pandas03-the-index/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>pandas03:深入认识索引</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/" aria-current="page">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

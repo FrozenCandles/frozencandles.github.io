@@ -1,0 +1,851 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>数据结构02-链表 - 冰封残烛的个人小站</title>
+	<meta name="description" content="本节介绍链表(linked list)的概念，链表的实现是一种非连续的存储，在每项元素中都指出下一项元素的位置。链表在插入和删除时表的整体或部分无需全部移动，避免了线性开销。并具有很好地扩展能力，广泛应用在各种数据结构中。" />
+	<link rel="canonical" href="/computer-science/data-structure/02-linked-list/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="数据结构02-链表 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="本节介绍链表(linked list)的概念，链表的实现是一种非连续的存储，在每项元素中都指出下一项元素的位置。链表在插入和删除时表的整体或部分无需全部移动，避免了线性开销。并具有很好地扩展能力，广泛应用在各种数据结构中。" />
+	<meta property="og:url" content="/computer-science/data-structure/02-linked-list/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2022-08-01T09:27:05+00:00" />
+	<meta property="article:modified_time" content="2023-10-06T04:13:11+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2022/08/数据结构02-链表.jpg" />
+	<meta property="og:image:width" content="1053" />
+	<meta property="og:image:height" content="707" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="7分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/computer-science/data-structure/02-linked-list/#primaryimage",
+	            "url": "/wp-content/uploads/2022/08/数据结构02-链表.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/08/数据结构02-链表.jpg",
+	            "width": 1053,
+	            "height": 707
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/computer-science/data-structure/02-linked-list/#webpage",
+	            "url": "/computer-science/data-structure/02-linked-list/",
+	            "name": "数据结构02-链表 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/computer-science/data-structure/02-linked-list/#primaryimage"
+	            },
+	            "datePublished": "2022-08-01T09:27:05+00:00",
+	            "dateModified": "2023-10-06T04:13:11+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "本节介绍链表(linked list)的概念，链表的实现是一种非连续的存储，在每项元素中都指出下一项元素的位置。链表在插入和删除时表的整体或部分无需全部移动，避免了线性开销。并具有很好地扩展能力，广泛应用在各种数据结构中。",
+	            "breadcrumb": {
+	                "@id": "/computer-science/data-structure/02-linked-list/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/computer-science/data-structure/02-linked-list/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/computer-science/data-structure/02-linked-list/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "数据结构02-链表"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/592" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=592' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fcomputer-science%2Fdata-structure%2F02-linked-list%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fcomputer-science%2Fdata-structure%2F02-linked-list%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><link rel="stylesheet" href="/wp-content/static/css/theme@neon-pie.wp.css">
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['\\\\(','\\\\)']],
+            displayMath: [["\\\\[","\\\\]"]]
+        }
+    });
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<style>
+    div.vscode-block {
+        color: #D6DEEB;
+        background-color: #011627;
+    }
+    .math { color:blue; font-size: 13px; }
+    span[token="keyword"]  { color: #c792ea; font-weight: bold; }
+    span[token="type"]     { color: #d6deeb; text-decoration: underline; }
+    span[token="variable"] { color: #c5e478; }
+    span[token="number"]   { color: #f78c6c; }
+    span[token="func"]     { color: #82aaff; }
+    span[token="property"] { color: #7fdbca; }
+    span[token="operator"] { color: #c792ea; }
+</style>
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-592 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-592" class="post-592 post type-post status-publish format-standard has-post-thumbnail hentry category-data-structure">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">数据结构02-链表</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/computer-science/data-structure/" rel="category tag">数据结构与算法</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年8月1日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+
+
+
+
+<h2>单链表</h2>
+
+<h3>链表的概念</h3>
+
+<p>上一节介绍了线性表的概念，同时使用数组实现顺序存储方式的线性表。使用顺序存储方式的线性表的特点是逻辑关系上相邻的两个元素在物理位置上也相邻，因此元素的存储与访问都比较简单，各种操作也很直观。</p>
+
+<p>然而，顺序存储结构也存在一定缺点，例如：</p>
+
+<ul>
+    <li>在表的中间插入或删除时，后面的元素会被频繁地移来移去，产生线性开销，浪费大量时间；</li>
+    <li>表的尺寸是有限值的，当达到尺寸限值时若还需要插入元素，需要重新申请内存空间并移动所有元素</li>
+</ul>
+
+<p>为了避免以上缺点，这就要求插入元素时元素的位置可以任意存放，这样就无需移动元素，也无需在尺寸不够时需要重新申请一大块内存并移动所有元素。</p>
+
+<p>然而，为了能够将表项关联为一个整体，需要有一种方法能找到表的每项元素的位置。这里提出了<strong>链表</strong>(linked list)的概念。链表的实现是一种非连续的存储，在每项元素中都指出下一项元素的位置。</p>
+
+<p>下图表达了链表的思想：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/02-linklist-structure.png" alt="" width="430">
+</figure>
+
+<p>从上图可以看到，链表的每一个结构都由两部分组成：</p>
+
+<ol>
+    <li><strong>数据域</strong>：数据元素本身</li>
+    <li><strong>指针域</strong>：指针 <code>next</code> 指向该元素的后继元素结构</li>
+</ol>
+
+<p>特别地，最后一个单元的 <code>next</code> 指针指向 <code>NULL</code> ，代表链表的结束。</p>
+
+<p>因此，链表节点结构的定义如下：</p>
+
+<div class="vscode-block"><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">linkedlist_node</span> {</div><div>&#160; &#160; <span token="type">elemtype</span> <span style="color: #7fdbca;">elem</span>;</div><div>&#160; &#160; <span token="keyword">struct</span> <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">next</span>;</div><div>} <span token="type">linkedlist_node</span>, <span style="color: #7fdbca;">*</span> <span token="type">linkedlist</span>;</div></div>
+
+<p>为了执行打印表或查找等遍历操作，只需要用一个指针记录该表的第一个元素，然后不断用 <code>next</code> 指针获取后继元素即可访问链表的每一项。</p>
+
+<p>链表在插入和删除时表的整体或部分无需全部移动，避免了线性开销。删除命令只需要通过修改一个指针实现：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/02-linklist-delete.png" alt="" width="430">
+</figure>
+
+<p>在遍历表时，<span class="math">\\( A_3 \\)</span> 元素由于没有指针指向它，不会被访问到，便会直接忽略，达到删除的效果。</p>
+
+<p>插入命令只需要通过一次 <code>malloc()</code> 调用从系统中获得一个新节点结构，并调整周围的指针：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/02-linklist-insert.png" alt="" width="460">
+</figure>
+
+<p>仔细研究上图可以发现，以上实现仍然存在一些问题，主要涉及首节点元素：它的插入和删除方式都比较特殊，因为不涉及修改调整前指针。</p>
+
+<p>为了方便起见，需要留出一个标志节点元素，称为表头节点。通过表头可以很容易地管理表元素：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/02-linklist-header.png" alt="" width="520">
+</figure>
+
+<p>接下来演示链表的具体操作。</p>
+
+<h3>链表的具体操作</h3>
+
+<p>根据链表的定义，测试一个链表是否是空链表是很容易的：</p>
+
+<div class="vscode-block"><div><span style="color: #82aaff;">bool</span> <span style="color: #82aaff;">LinkedList_IsEmpty</span>(<span token="type">linkedlist</span> <span style="color: #d7dbe0;">list</span>) {</div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>;</div><div>}</div></div>
+
+<p>该函数也可以用于测试一个节点位置是否已经位于链表的末尾。线性表作为一个整体拥有表示长度的成员信息，但链表没有。在遍历时为了防止越界，必须不断判断是否遍历到链表的末尾。</p>
+
+<p>线性表在查找元素时必须一个个元素挨个判断过去，链表也不例外。只需要从表头或任意链表位置开始，不断向后查询节点，直到找到所需要的元素即可。链表的查找操作如下：</p>
+
+<div class="vscode-block"><div><span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #82aaff;">LinkedList_GetNode</span>(<span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">node</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&#160; &#160; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">nxt</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">node</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&#160; &#160; <span token="keyword">while</span> (<span token="variable">nxt</span> <span style="color: #c792ea;">!=</span> <span style="color: #82aaff;">NULL</span> <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">nxt</span>-&gt;<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">!=</span> <span style="color: #d7dbe0;">value</span>)</div><div>&#160; &#160; &#160; &#160; <span token="variable">nxt</span> <span style="color: #c792ea;">=</span> <span token="variable">nxt</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">nxt</span>;</div><div>}</div></div>
+
+<p><code>while</code> 判断条件利用了 <code>&&</code> 运算符的短路原理，一旦发现到达结尾，就不再判断值的存在性。</p>
+
+<p>上面介绍过链表的删除和插入原理，接下来尝试使用代码实现。删除节点的操作相对容易实现，只需要找到节点的前驱节点 <code>previous</code> ，再通过调整一个指针指向：</p>
+
+<div class="codeblock code-template">
+    previous->next=previous->next->next;
+</div>
+
+<p>即可完成删除。不过该操作的难点在于节点只保存下一个节点的位置，因此无法通过一个现有节点简单获取前一个节点的位置。为了找到前驱元素，需要额外编写一个函数来寻找它：</p>
+
+<div class="vscode-block"><div><span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #82aaff;">LinkedList_GetPrevNode</span>(<span token="type">linkedlist</span> <span style="color: #d7dbe0;">list</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&#160; &#160; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">prev</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">list</span>;</div><div>&#160; &#160; <span token="keyword">while</span> (<span token="variable">prev</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">!=</span> <span style="color: #82aaff;">NULL</span> <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">prev</span>-&gt;<span style="color: #7fdbca;">next</span>-&gt;<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">!=</span> <span style="color: #d7dbe0;">value</span>)</div><div>&#160; &#160; &#160; &#160; <span token="variable">prev</span> <span style="color: #c792ea;">=</span> <span token="variable">prev</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">prev</span>;</div><div>}</div></div>
+
+<p>两种查找整体实现类似，只不过它直接跨节点查找，以确保不丢失上一个节点的信息。</p>
+
+<p>配合该例程以及上文的介绍，可以很容易编写出删除链表元素的函数：</p>
+
+<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">LinkedList_Remove</span>(<span token="type">linkedlist</span> <span style="color: #d7dbe0;">list</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&#160; &#160; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">prev</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">LinkedList_GetPrevNode</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">list</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">value</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span style="color: #82aaff;">LinkedList_IsLast</span><span style="color: #82aaff;">(</span><span token="variable">prev</span><span style="color: #82aaff;">)</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">temp</span> <span style="color: #c792ea;">=</span> <span token="variable">prev</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&#160; &#160; &#160; &#160; <span token="variable">prev</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span token="variable">temp</span>-&gt;<span style="color: #7fdbca;">next</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> bypass deleted cell</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">free</span><span style="color: #82aaff;">(</span><span token="variable">temp</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="number">0</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">return</span> <span token="number">1</span>;</div><div>}</div></div>
+
+<p>在查找前驱节点时，可能发生找不到的情况，此时返回的是最后一个节点，要对这种情况加以判断。</p>
+
+<p>插入比删除略复杂。观察以上插入图示可以看出，为了保证链表在任何时候不断裂，插入的步骤需要按以下顺序进行：</p>
+
+<ol>
+    <li>将新节点的 <code>next</code> 指针顺着旧节点指向下一个元素</li>
+    <li>断开旧节点的 <code>next</code> 指针，指向新节点</li>
+</ol>
+
+<p>这两个步骤不能反过来，否则后续节点的位置信息就丢失了。相应的C语言实现如下：</p>
+
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">LinkedList_InsertAfter</span>(<span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">prev</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&#160; &#160; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">temp</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">linkedlist_node</span><span style="color: #82aaff;">))</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span token="variable">temp</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>) {</div><div><span style="color: #a8a8a8;">&#160; &#160; &#160; &#160; /* fail to allocate memory for node */</span></div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="variable">temp</span>-&gt;<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">value</span>;</div><div>&#160; &#160; <span token="variable">temp</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">prev</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&#160; &#160; <span style="color: #d7dbe0;">prev</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span token="variable">temp</span>;</div><div>}</div></div>
+
+<p>从以上代码可以看出，链表在增删时需要不断调用 <code>malloc()</code> 和 <code>free()</code> 来管理内存，因此链表是动态的，它无需一次性分配一大段内存，可以在需要的时候再申请一小部分。</p>
+
+<p>除去查找外，链表的插入和删除的时间复杂度是常数级 <span class="math">\\( O(1) \\)</span> 的。不过链表的缺点只记录下<em>一个</em>元素的信息，因此如果只是访问特定位置的元素时，顺序存储结构可以直接偏移地址，但链表需要一个个按线索找出后续元素，因此链表的随机访问具有线性时间消耗。</p>
+
+<p>尽管链表之间是单向连接的，不过可以使用一种很简单的算法反转单向链表：顺序遍历该链表，并将每个元素依次插入反转表的开头。这样的反转算法只需要消耗线性时间，并且无需额外的存储空间：</p>
+
+<div class="vscode-block"><div><span token="type">linkedlist</span> <span style="color: #82aaff;">LinkedList_Reverse</span>(<span token="type">linkedlist</span> <span style="color: #d7dbe0;">list</span>) {</div><div>&#160; &#160; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">header</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">linkedlist_node</span><span style="color: #82aaff;">))</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span token="variable">header</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #82aaff;">NULL</span>;</div><div>&#160; &#160; <span token="variable">header</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">NULL</span>;</div><div>&#160; &#160; <span token="keyword">while</span> (<span style="color: #d7dbe0;">list</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">next</span>) {</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">LinkedList_InsertAfter</span><span style="color: #82aaff;">(</span><span token="variable">header</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">list</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">elem</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">header</span>;</div><div>}</div></div>
+
+<h2>静态链表(游标实现)</h2>
+
+<h3>静态链表的概念</h3>
+
+<p>并不是所有语言都支持指针。如果想不使用指针或引用实现链表，就需要使用静态链表。这种链表是通过游标访问元素的。</p>
+
+<p>链表的指针实现中有两个必须实现的特性：</p>
+
+<ol>
+    <li>每个节点都是一个结构，一个结构包含数据以及指向下一个结构体的指针</li>
+    <li>一个新的节点可以调用 <code>malloc()</code> 从内存中得到，并可以通过 <code>free()</code> 释放</li>
+</ol>
+
+<p>游标方法必须能够模仿这两条特性。</p>
+
+<p>下图展示了游标方法实现静态链表的原理：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/03-cursorlist-structure.png" alt="" width="128">
+</figure>
+
+<p>满足条件 1 的逻辑方式是要有一个全局的结构体数组，对于该数组中的单元，其数组下标可以用来代表一个地址，从而模拟指针。</p>
+
+<p>下面给出了静态链表的游标实现的声明：</p>
+
+<div class="vscode-block"><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">slinkedlist_node</span> {</div><div>&#160; &#160; <span token="type">elemtype</span> <span style="color: #7fdbca;">elem</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span style="color: #7fdbca;">cursor</span>;</div><div>} <span token="type">slinkedlist_node</span>;</div><br><div><span style="color: #c792ea;">#</span><span token="keyword">define</span> &#160;<span style="color: #82aaff;">SLINKEDLIST_SIZE</span> <span token="number">1024</span></div><div><span token="type">slinkedlist_node</span> <span token="variable">linkedspace</span>[<span style="color: #82aaff;">SLINKEDLIST_SIZE</span>];</div></div>
+
+<p>模拟条件 2 的方法是，除了数据本身通过游标组成的链表外，在静态链表空间中还需要有一条连接各个空闲位置的链表，称为<strong>备用链表</strong>。</p>
+
+<p>备用链表 <code>freedspace</code> 数组中的闲置单元可以执行 <code>malloc()</code> 和 <code>free()</code> 。对于 <code>cursor</code> 游标，0 的值等价于 <code>NULL</code> 指针。</p>
+
+<ul>
+    <li>为了执行 <code>malloc()</code> 功能，将表头后面的第一个元素从 <code>freedspace</code> 表中删除</li>
+    <li>为了执行 <code>free()</code> 功能，将该单元放在 <code>freedspace</code> 表的前段</li>
+</ul>
+
+<p>通常将 <code>linkedspace[0]</code> 作为备用链表的表头使用，<code>linkspace[1]</code> 作为数据链表的表头使用。这样，对应的C语言代码为：</p>
+
+<div class="vscode-block"><div><span token="keyword">int</span> <span style="color: #82aaff;">SLinkedList_Alloc</span>(<span token="keyword">void</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">pos</span> <span style="color: #c792ea;">=</span> <span token="variable">linkspace</span>[<span token="number">0</span>].<span token="variable">cursor</span>;</div><div>&#160; &#160; <span token="variable">linkedspace</span>[<span token="number">0</span>].<span style="color: #7fdbca;">cursor</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span token="variable">pos</span>].<span style="color: #7fdbca;">cursor</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">pos</span>;</div><div>}</div><div><span token="keyword">void</span> <span style="color: #82aaff;">SLinkedList_Free</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">pos</span>) {</div><div>&#160; &#160; <span token="variable">linkedspace</span>[pos].<span token="variable">cursor</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span token="number">0</span>].<span token="variable">cursor</span>;</div><div>&#160; &#160; <span token="variable">linkedspace</span>[<span token="number">0</span>].<span token="variable">cursor</span> <span style="color: #c792ea;">=</span> pos;</div><div>}</div></div>
+
+<p>注意，如果没有可分配的空间，它会正确返回位置 0 以供判断。下图展示了某一时刻的静态链表：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/03-cursorlist-concept.png" alt="" width="340">
+</figure>
+
+<p>由于静态链表的游标充当后向指针，判断一个静态链表是否为空，或一个节点是否位于静态链表末尾和普通链表相似：</p>
+
+<div class="vscode-block"><div><span style="color: #82aaff;">bool</span> <span style="color: #82aaff;">SLinkedList_IsEmpty</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">list</span>) {</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">linkedspace</span>[<span style="color: #d7dbe0;">list</span>].<span style="color: #7fdbca;">cursor</span> <span style="color: #c792ea;">==</span> <span token="number">0</span>;</div><div>}</div><div><span style="color: #82aaff;">bool</span> <span style="color: #82aaff;">SLinkedList_IsLast</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">pos</span>) {</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">linkedspace</span>[<span style="color: #d7dbe0;">pos</span>].<span style="color: #7fdbca;">cursor</span> <span style="color: #c792ea;">==</span> <span token="number">0</span>;</div><div>}</div></div>
+
+<h3>静态链表的操作</h3>
+
+<p>静态链表的操作和普通链表具有相似性。例如查找例程，它通过从数据链表的表头逐个遍历 <code>cursor</code> 指向的静态链表空间位置来访问下一个元素：</p>
+
+<div class="vscode-block"><div><span token="keyword">int</span> <span style="color: #82aaff;">SLinkedList_Find</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">list</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">elem</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">pos</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span style="color: #d7dbe0;">list</span>].<span style="color: #7fdbca;">cursor</span>;</div><div>&#160; &#160; <span token="keyword">while</span> (<span token="variable">pos</span> <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">linkedspace</span>[<span token="variable">pos</span>].<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">!=</span> <span style="color: #d7dbe0;">elem</span>)</div><div>&#160; &#160; &#160; &#160; <span token="variable">pos</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span token="variable">pos</span>].<span style="color: #7fdbca;">cursor</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">pos</span>;</div><div>}</div></div>
+
+<p>删除的原理和指针链表一致，即找出前驱元素的位置 <code>prev</code> ，通过跨越节点：</p>
+
+<div class="codeblock code-template">
+    linkedspace[prev].cursor = linkedspace[linkspace[prev].cursor].cursor
+</div>
+
+<p>即可完成删除。删除后还需要释放节点占用的空间。</p>
+
+<p>查询前驱元素节点的函数实现为：</p>
+
+<div class="vscode-block"><div><span token="keyword">int</span> <span style="color: #82aaff;">SLinkedList_FindPrevPos</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">list</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">elem</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">prev</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span style="color: #d7dbe0;">list</span>].<span style="color: #7fdbca;">cursor</span>;</div><div>&#160; &#160; <span token="keyword">while</span> (<span token="variable">prev</span> <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">linkedspace</span>[<span token="variable">linkedspace</span>[<span token="variable">prev</span>].<span style="color: #7fdbca;">cursor</span>].<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">!=</span> <span style="color: #d7dbe0;">elem</span>)</div><div>&#160; &#160; &#160; &#160; <span token="variable">prev</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span token="variable">prev</span>].<span style="color: #7fdbca;">cursor</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">prev</span>;</div><div>}</div></div>
+
+<p>那么删除的程序实现为：</p>
+
+<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">SLinkedList_Remove</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">list</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">elem</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">temp</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">pos</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">SLinkedList_FindPrevPos</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">list</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">elem</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span style="color: #82aaff;">SLinkedList_IsLast</span><span style="color: #82aaff;">(</span><span token="variable">pos</span><span style="color: #82aaff;">)</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="variable">temp</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span token="variable">pos</span>].<span style="color: #7fdbca;">cursor</span>;</div><div>&#160; &#160; &#160; &#160; <span token="variable">linkedspace</span>[<span token="variable">pos</span>].<span style="color: #7fdbca;">cursor</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span token="variable">temp</span>].<span style="color: #7fdbca;">cursor</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">SLinkedList_Free</span><span style="color: #82aaff;">(</span><span token="variable">temp</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="number">0</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">return</span> <span token="number">1</span>;</div><div>}</div></div>
+
+<p>注意比较与指针链表的异同点。指针链表的 <code>this->next</code> 等价于静态链表的 <code>linkedspace[this].cursor</code> 。</p>
+
+<p>因此，类比一下指针链表的插入，静态链表的插入实现为：</p>
+
+<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">SLinkedList_InsertAfter</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">prev</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">elem</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">temp</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">SLinkedList_Alloc</span><span style="color: #82aaff;">()</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span token="variable">temp</span> <span style="color: #c792ea;">==</span> <span token="number">0</span>) {</div><div><span style="color: #a8a8a8;">&#160; &#160; &#160; &#160; /* fail to allocate memory */</span></div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="number">1</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="variable">linkedspace</span>[<span token="variable">temp</span>].<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">=</span> value;</div><div>&#160; &#160; <span token="variable">linkedspace</span>[<span token="variable">temp</span>].<span style="color: #7fdbca;">cursor</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span style="color: #d7dbe0;">prev</span>].<span style="color: #7fdbca;">cursor</span>;</div><div>&#160; &#160; <span token="variable">linkedspace</span>[<span style="color: #d7dbe0;">prev</span>].<span style="color: #7fdbca;">cursor</span> <span style="color: #c792ea;">=</span> <span token="variable">temp</span>;</div><div>}</div></div>
+
+<p>指针链表的核心是 <code>node*</code> 指针，用来在内存中找出下一个节点所在的位置。静态链表的核心是 <code>int</code> 值，用来在 <code>linkedspace</code> 中找出下一个节点所在的位置。因此可以认为静态链表在程序中维护了自己的一段“内存”，进而自行制造了指针这一概念。理解了这一点，便不难理解指针链表与静态链表的关系了。</p>
+
+<h2>更多链表模型</h2>
+
+<p>链表是一种非常经典的数据结构，它提供了一种非顺序的关联结构，借由一个指针可以指向其关联的任意元素。从链表开始，数据结构的两个项之间的关系开始变得语义化。</p>
+
+<p>通过增加节点指针的个数，可以使节点之间拥有一对多的关系。</p>
+
+<p>链表有几种典型的扩展，使链表可以适应更多场景。接下来简要介绍。</p>
+
+<h3>双链表</h3>
+
+<p>有时需要倒序扫描链表或局部倒序后退节点，但是普通链表的实现却非常复杂。这里提出<strong>双链表</strong>(doubly linked list)的概念，本质上就是在链表的基础上增加了一个前向指针 <code>prev</code> ，使链表节点间可以双向连接。</p>
+
+<p>下图展示了双链表的原理：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/04-doubly-linklist-structure.png" alt="" width="550">
+</figure>
+
+<p>双链表可以使向前检索变得更便利，但代价是一个附加的链，增加了空间的需求，同时也增加了插入和删除的开销，因为有更多指针需要调整。</p>
+
+<p>首先看双链表的插入。如果需要向双链表中插入元素，需要完成以下几个工作：</p>
+
+<ul>
+    <li>调整前一节点的 <code>next</code> 指针和后一节点的 <code>prev</code> 指针</li>
+    <li>为当前节点的 <code>next</code> 和 <code>prev</code> 指针建立连接</li>
+</ul>
+
+操作的图示为：
+
+<p>双链表的插入只需要给出前面或后面的节点作为定位即可。这里以给出前面的节点为例编写代码：</p>
+
+<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">DuLinkedList_InsertAfter</span>(<span token="type">dulinkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">previous</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&#160; &#160; <span token="type">dulinkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">next</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">previous</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&#160; &#160; <span token="type">dulinkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">temp</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">dulinkedlist_node</span><span style="color: #82aaff;">))</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span token="variable">temp</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="number">1</span>;</div><div>&#160; &#160; <span token="variable">temp</span>-&gt;<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">value</span>;</div><div>&#160; &#160; <span token="variable">temp</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span token="variable">next</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> adjusting between this and next</span></div><div>&#160; &#160; <span token="variable">next</span>-&gt;<span style="color: #7fdbca;">prev</span> <span style="color: #c792ea;">=</span> <span token="variable">temp</span>;</div><div>&#160; &#160; <span token="variable">temp</span>-&gt;<span style="color: #7fdbca;">prev</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">previous</span>;<span style="color: #637777;"> &#160; </span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> adjusting between this and prev</span></div><div>&#160; &#160; <span style="color: #d7dbe0;">previous</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span token="variable">temp</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="number">0</span>;</div><div>}</div></div>
+
+<p>双链表在删除时，需要调整的指针个数比单链表更多。但是双链表的删除操作比单链表简单，因为前驱元素的信息是现成的。</p>
+
+下图展示了双链表的删除操作：
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/04-doubly-linklist-delete.png" alt="" width="510">
+</figure>
+
+<p>可以正序扫描双链表以找出所需元素，也可以倒序扫描。以下示例使用倒序扫描删除链表的最后一个找出的节点。为了判断倒序扫描结束，需要不断判断当前位置是否为表头：</p>
+
+<div class="vscode-block"><div><span style="color: #82aaff;">bool</span> <span style="color: #82aaff;">DuLinkedList_IsHeader</span>(<span token="type">dulinkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">node</span>) {</div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">node</span>-&gt;<span style="color: #7fdbca;">prev</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>;</div><div>}</div><div><span token="keyword">void</span> <span style="color: #82aaff;">DuLinkedList_DeleteLast</span>(<span token="type">dulinkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">last</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&#160; &#160; <span token="type">dulinkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">tmp</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">last</span>;</div><div>&#160; &#160; <span token="keyword">while</span> (<span token="variable">tmp</span> <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">tmp</span>-&gt;<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">!=</span> <span style="color: #d7dbe0;">value</span>)</div><div>&#160; &#160; &#160; &#160; <span token="variable">tmp</span> <span style="color: #c792ea;">=</span> <span token="variable">tmp</span>-&gt;<span style="color: #7fdbca;">prev</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span token="variable">tmp</span> <span style="color: #c792ea;">&amp;&amp;</span> <span style="color: #c792ea;">!</span><span style="color: #82aaff;">DuLinkedList_IsHeader</span><span style="color: #82aaff;">(</span><span token="variable">tmp</span><span style="color: #82aaff;">)</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="variable">tmp</span>-&gt;<span style="color: #7fdbca;">prev</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span token="variable">tmp</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&#160; &#160; &#160; &#160; <span token="variable">tmp</span>-&gt;<span style="color: #7fdbca;">next</span>-&gt;<span style="color: #7fdbca;">prev</span> <span style="color: #c792ea;">=</span> <span token="variable">tmp</span>-&gt;<span style="color: #7fdbca;">prev</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">free</span><span style="color: #82aaff;">(</span><span token="variable">tmp</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; }</div><div>}</div></div>
+
+<p>双链表是一种特殊的链表，除了原生支持倒序查找外，其余的操作例如查找或遍历，都与普通的单链表并没有太大区别。</p>
+
+<h3>循环链表</h3>
+
+<p>链表的后继指针可以指向任何符合语义的节点元素，这也就意味着一个修改后的链表可以不是线性的，而是拥有各种不同的形态。</p>
+
+<p>例如，可以让链表的最后一个元素指向第一个元素或表头，由此整个链表会发生闭合，形成<strong>循环链表</strong>(circular linked list)。下图展示了一个有表头的单链循环链表：</p>
+
+<figure><img decoding="async" src="/wp-content/uploads/image/category@data-structure/04-circle-linklist-structure.png" alt="" width="435"></figure>
+
+<p>循环链表的操作和普通链表一致，差别仅在于判断遍历终止的条件为是否回到表头或首元素而不是遇到 <code>NULL</code> 。</p>
+
+<p>循环链表也可以和双链表组合在一起，形成双向循环链表。下图展示了一个没有表头的双链循环链表：</p>
+
+<figure><img decoding="async" src="/wp-content/uploads/image/category@data-structure/04-circle-doubly-linklist-structure.png" alt="" width="430"></figure>
+
+<p>由此可见，链表只需要对节点做一些调整，就能适应多种多样的场景。有些时候需要经常获取链表的长度，但遍历链表显然是个低效的做法，此时可以为表头提供一个特殊的节点定义，它包含链表的长度信息，并在增加或删除结点时实时更新长度。</p>
+
+<p>又或是有时需要频繁地在链表的结尾位置增加或删除数据，由于链表不能直接通过地址偏移找到末尾节点的位置，那么可以在表头添加一个指向尾部节点的指针域，通过该域可以快速访问链表的末尾位置。</p>
+
+<p>下图展示了修改后的链表模型：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/04-linkedlist-final.png" alt="" width="520">
+</figure>
+
+<p>这样并没有为单次操作增加多少工作量，却可以很好地避免某些操作产生的线性开销。后续介绍的许多数据结构，例如树和图，都与链表的思想密不可分。</p>
+
+
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-fp/03-functional-programming/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-fp/03-functional-programming/" rel="bookmark">Python函数式编程03 高阶函数与匿名函数</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/embedded/mcu-application/lvgl-02-quick-start/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/LVGL库入门教程02-基本控件与交互-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/LVGL库入门教程02-基本控件与交互-520x293.jpg 520w, /wp-content/uploads/2022/06/LVGL库入门教程02-基本控件与交互-300x169.jpg 300w, /wp-content/uploads/2022/06/LVGL库入门教程02-基本控件与交互-1024x576.jpg 1024w, /wp-content/uploads/2022/06/LVGL库入门教程02-基本控件与交互-768x432.jpg 768w, /wp-content/uploads/2022/06/LVGL库入门教程02-基本控件与交互-1536x864.jpg 1536w, /wp-content/uploads/2022/06/LVGL库入门教程02-基本控件与交互-950x534.jpg 950w, /wp-content/uploads/2022/06/LVGL库入门教程02-基本控件与交互.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/embedded/mcu-application/lvgl-02-quick-start/" rel="bookmark">LVGL库入门教程02-基本控件与交互</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-fp/09-decorators/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/Python函数式编程09-闭包与装饰器-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/Python函数式编程09-闭包与装饰器-520x293.jpg 520w, /wp-content/uploads/2022/06/Python函数式编程09-闭包与装饰器-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-fp/09-decorators/" rel="bookmark">Python函数式编程09 闭包和装饰器</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/computer-science/data-structure/03-stack-and-queue/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>数据结构03-栈和队列</span></a></li>
+		<li class="previous"><a href="/computer-science/data-structure/01-linear-list/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>数据结构01-基本概念与线性表</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

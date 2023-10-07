@@ -3,6 +3,11 @@
     --mathbook-main-color: #486eb4;
 }
 
+.entry img {
+    height: revert-layer;
+}
+
+
 /* mathbook */
 
 .mathbook-widget-def {
@@ -14,8 +19,10 @@
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     background-color: var(--mathbook-main-color);
-    color: whitesmoke;
     padding: 3px 12px;
+}
+.mathbook-widget-def__title h5 {
+    color: whitesmoke;
 }
 .mathbook-widget-def__content {
     border: 3px solid var(--mathbook-main-color);
@@ -31,8 +38,19 @@
 }
 
 
+.mathbook-example__no {
+    color: var(--mathbook-main-color);
+    font-weight: bold;
+}
 
+.mathbook-example__solve {
+    color: var(--mathbook-main-color);
+    font-weight: bold;
+}
 
+.math-firstline-align {
+    vertical-align: top;
+}
 
 
 

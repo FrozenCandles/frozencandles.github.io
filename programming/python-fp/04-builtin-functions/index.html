@@ -1,0 +1,942 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Python函数式编程04 常用内置函数 - 冰封残烛的个人小站</title>
+	<meta name="description" content="本节介绍了Python中的常用处理集合的函数，它们可以被划分为以下三类：映射、过滤和归约。map、filter和reduce是这三类的代表，明白了它们的用法，就可以明白更多函数的用法，例如all、enumerate、zip、sorted、sum、revered、min等等" />
+	<link rel="canonical" href="/programming/python-fp/04-builtin-functions/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Python函数式编程04 常用内置函数 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="本节介绍了Python中的常用处理集合的函数，它们可以被划分为以下三类：映射、过滤和归约。map、filter和reduce是这三类的代表，明白了它们的用法，就可以明白更多函数的用法，例如all、enumerate、zip、sorted、sum、revered、min等等" />
+	<meta property="og:url" content="/programming/python-fp/04-builtin-functions/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2022-05-23T02:13:40+00:00" />
+	<meta property="article:modified_time" content="2023-10-05T02:54:17+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2022/05/Python函数式编程04-常用内置函数.jpg" />
+	<meta property="og:image:width" content="1920" />
+	<meta property="og:image:height" content="1080" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="6分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/programming/python-fp/04-builtin-functions/#primaryimage",
+	            "url": "/wp-content/uploads/2022/05/Python函数式编程04-常用内置函数.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/05/Python函数式编程04-常用内置函数.jpg",
+	            "width": 1920,
+	            "height": 1080
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/programming/python-fp/04-builtin-functions/#webpage",
+	            "url": "/programming/python-fp/04-builtin-functions/",
+	            "name": "Python函数式编程04 常用内置函数 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/programming/python-fp/04-builtin-functions/#primaryimage"
+	            },
+	            "datePublished": "2022-05-23T02:13:40+00:00",
+	            "dateModified": "2023-10-05T02:54:17+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "本节介绍了Python中的常用处理集合的函数，它们可以被划分为以下三类：映射、过滤和归约。map、filter和reduce是这三类的代表，明白了它们的用法，就可以明白更多函数的用法，例如all、enumerate、zip、sorted、sum、revered、min等等",
+	            "breadcrumb": {
+	                "@id": "/programming/python-fp/04-builtin-functions/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/programming/python-fp/04-builtin-functions/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/programming/python-fp/04-builtin-functions/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "Python函数式编程04 常用内置函数"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/239" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=239' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython-fp%2F04-builtin-functions%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython-fp%2F04-builtin-functions%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><link rel="stylesheet" href="/wp-content/static/css/theme@pie.wp.css">
+<style>
+    .math { color:blue; font-size: 13px; }
+    div.vscode-block { color: #405C79; background-color: #F7F9FB; }
+</style>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['\\\\(','\\\\)']],
+            displayMath: [["\\\\[","\\\\]"]]
+        }
+    });
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-239 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-239" class="post-239 post type-post status-publish format-standard has-post-thumbnail hentry category-python-fp">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">Python函数式编程04 常用内置函数</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/programming/python-fp/" rel="category tag">Python函数式编程</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年5月23日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+
+
+
+<p>Python 中的函数大体可分为以下两类：</p>
+
+<ul>
+    <li>标量函数：作用于单个值，并返回单个值，例如 abs()、pow() 、divmod() 以及整个 math 模块中的函数都是标量函数。</li>
+    <li>集合函数：作用于一个集合或序列</li>
+</ul>
+
+<p>标量函数比较简单，这里就不再做额外的介绍。集合函数根据作用的效果，又可以细分为以下三类。</p>
+
+<ol>
+    <li>映射：函数将运算作用于集合的每个元素，作为结果返回的集合与输入集合长度相同</li>
+    <li>过滤：函数将判断作用于集合的每个元素，以此舍弃一部分元素，返回的集合是输入集合的子集</li>
+    <li>归约：函数将集合内元素汇聚在一起，生成单个值作为结果，也称为累积</li>
+</ol>
+
+<p>这三种类型的函数在 Python 中都有典型的代表，下面先介绍这几个典型代表。</p>
+
+<h2>典型高阶函数：map、filter和reduce</h2>
+
+<h3>map：映射</h3>
+
+<p>标量函数将数值从定义域映射到值域。例如 math.sqrt() 函数做的标量映射就为将一个浮点数 x 映射为另一个浮点数 y ，它们满足映射关系 <span class="math">\\( y \Leftarrow \sqrt{x} \\)</span> 。</p>
+
+<p><code>map()</code> 是一个 Python 内置的集合映射函数，它接收一个函数和若干个列表（或者其他能够用 for 循环遍历的对象），并通过函数依次作用在列表的每个元素上，得到一个新的列表并返回。例如：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; map(abs, [-1, 2, -3, 4, -5])
+&lt;map object at 0x00000252852182B0&gt;</div>
+
+<p>不过该函数的返回结果比较让人疑惑，它提醒得到了一个“map对象”，却不告诉具体包含了哪一些值。</p>
+
+<p>这是因为 <code>map()</code> 得到的结果是一个可迭代对象。关于可迭代对象，这里暂时不做介绍，只需要知道它不是序列，因此直接打印它不会像序列一样可以直接观察其包含的每一个元素。</p>
+
+<blockquote>
+    <p>在以后介绍到 Python 的面向对象编程时，将会详细介绍可迭代对象的概念和实质。</p>
+</blockquote>
+
+<p>后续会介绍 Python 中的生成器，从生成器的角度就可以明白可迭代对象的作用了。不过目前只需要明白以下两点就可以了：</p>
+
+<ol>
+    <li>可迭代对象可以使用 <code>list()</code> 等转化为一个序列</li>
+    <li>可迭代对象可以使用 <code>for</code> 循环依次取出其包含的每一个值</li>
+</ol>
+
+<p>因此，可迭代对象有序列的特征。将其转换为列表，就可以很清楚地观察到结果了：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; list(map(abs, [-1, 2, -3, 4, -5]))
+[1, 2, 3, 4, 5]</div>
+
+<p><code>map()</code> 的作用原理，可以用下图很清晰地表示出来：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@python-fp/04-function-map.jpg" alt="" width="340">
+</figure>
+
+<p><code>map()</code> 将函数作用于序列中的每一个元素，并得到作用后的结果，因此表示一种映射关系。map 在英文中也有映射的意思。</p>
+
+<p><code>lambda</code> 匿名函数特别适合作为 <code>map()</code> 所需要的函数，因为它只需要在传参的过程中用一下，然后就丢弃了。</p>
+
+<p>例如，以下实现了这样一个集合映射：将集合中每一个为偶数的元素的值变为其一半，非偶数的元素的值变为其平方：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">seq = [</span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">3</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">5</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">7</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">8</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">9</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">10</span><span style="color: #405c79;">]</span></div><div><span style="color: #405c79;">result = </span><span style="color: #8b56bf;">map</span><span style="color: #405c79;">(</span><span style="color: #bf568b;font-weight: bold;">lambda</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">elem</span><span style="color: #405c79;">: elem / </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;"> </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> elem % </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;"> == </span><span style="color: #bf8b56;">0</span><span style="color: #405c79;"> </span><span style="color: #bf568b;font-weight: bold;">else</span><span style="color: #405c79;"> elem ** </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">, seq)</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #bf568b;">list</span><span style="color: #405c79;">(result))</span></div></div>
+
+<p>结果为：</p>
+
+<div class="codeblock code-console">python -u demo.py
+[1.0, 9, 25, 49, 4.0, 81, 5.0]</div>
+
+<p><code>map()</code> 函数也可以作用于多个可迭代对象，这种情况下其传入的函数会依次接收每一个可迭代对象中的元素作为参数，由多个参数得到一个结果。</p>
+
+<p>以下示例，使用一个列表中的元素作为底数，另一个列表中的元素作为指数，使用映射关系得到每一组元素的幂：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; map(pow, range(3, 7), range(6, 2, -1))
+&lt;map object at 0x00000252852061D0&gt;
+&gt;&gt;&gt; list(_)
+[729, 1024, 625, 216]</div>
+
+<p>如果不同序列长度不一样，那么结果的长度会被截断，只执行到可以映射一部分：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; list(map(lambda x, y: x + y, range(5), range(10)))
+[0, 2, 4, 6, 8]</div>
+
+<h3>filter：过滤</h3>
+
+<p><code>filter()</code> 函数的作用是把一个测试函数应用于集合中的每个值。如果测试结果为真，则保留该值，否则将其舍弃，最终根据结果得到一个子集。</p>
+
+<p>以下给出了一个简单的示例，将一个整数列表中所有奇数剔除：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; filter(lambda n: n % 2 == 0, [1, 9, 4, 6, 25, 6])
+&lt;filter object at 0x0000025285218278&gt;
+&gt;&gt;&gt; list(_)
+[4, 6, 6]</div>
+
+<p>注意 <code>filter()</code> 函数得到的结果也是一个可迭代对象，需要将其转换为列表才能观察包含的内容。</p>
+
+<p>下图表示了 <code>filter()</code> 函数的作用原理：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@python-fp/04-function-filter.jpg" alt="" width="390">
+</figure>
+
+<p><code>filter()</code> 函数就像一个闸门，测试函数是闸门的控制杆，它决定了每个元素是否可以通过测试。</p>
+
+<h3>reduce：归约</h3>
+
+<p>相比前两个函数，<code>reduce()</code> 的作用可能稍微难理解。该函数不是 Python 内置函数，它存在于标准库中，需要提前将其导入进来：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">from</span><span style="color: #405c79;"> functools </span><span style="color: #bf568b;font-weight: bold;">import</span><span style="color: #405c79;"> reduce</span></div></div>
+
+<p><code>reduce()</code> 传入的函数必须接收两个参数，<code>reduce()</code> 对可迭代对象中的每两个相邻元素反复调用传入的函数并得到一个结果，并返回最终生成的结果值。</p>
+
+<p>下图表示了 <code>reduce()</code> 函数的作用原理：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@python-fp/04-function-reduce.jpg" alt="" width="300">
+</figure>
+
+<p>注意，<code>reduce()</code> 函数是返回一个具体的值，而不是可迭代对象。可以看出 <span class="math">\\( reduce(f, [x_1, x_2, x_3, x_4, \dots ]) \\)</span> 等价于 <span class="math">\\( f( \dots (f(f(x_1, x_2), x_3), x_4) \dots ) \\)</span> 这种形式。</p>
+
+<p>下面通过两个具体的示例来介绍该函数的用法。更高级的用法在介绍了 <code>functools</code> 的其余实用函数后再介绍。</p>
+
+<p>从一个高维列表中找出某一个元素，则需要若干次取值操作，每次取值都取出一个高维列表中的某一个子列表，从而将维度降低一级，若干次降维之后即可得到零维的元素。如果将以上行为翻译成<code>reduce()</code> 操作，则可以表示为对一个列表执行取值操作，再对得到子列表再次重复这一操作直至结束。相应的代码可以表示为：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">import</span><span style="color: #405c79;"> numpy </span><span style="color: #bf568b;font-weight: bold;">as</span><span style="color: #405c79;"> np</span></div><div><span style="color: #405c79;">space = np.arange(</span><span style="color: #bf8b56;">10</span><span style="color: #405c79;"> ** </span><span style="color: #bf8b56;">4</span><span style="color: #405c79;">).reshape((</span><span style="color: #bf8b56;">10</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">10</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">10</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">10</span><span style="color: #405c79;">))</span></div><div><span style="color: #405c79;">coordinate = [</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">5</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">7</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">]</span></div><br><div><span style="color: #405c79;">elem = reduce(np.ndarray.</span><span style="color: #8b56bf;">__getitem__</span><span style="color: #405c79;">, [space] + coordinate)</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(elem)</span></div></div>
+
+<p>如果不熟悉第三方库 NumPy 也不要紧，只需要知道它将 10<sup>0</sup> 到 10<sup>4</sup>-1 的所有数值按顺序重新排列成了一个 4 维的数组，每个维度的数组都具有 10 个元素。如果对传入的函数不太理解，可以改写成 <code>lambda arr, n: arr[n]</code> 这种直接的取值形式。以上函数的执行结果为：</p>
+
+<div class="codeblock code-console">python -u demo.py
+1572</div>
+
+<p>这与直接逐个取值的结果是一样的：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; space[1][5][7][2]
+1572</div>
+
+<p>如果要对一个列表内的元素逐个相乘，并得到累积结果，这一过程可以表示为：对列表内每两个相邻元素相乘，将得到的结果再与下一个元素相乘。那么，用代码就可以表示为：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; reduce(lambda x, y: x * y, [6, 2, 9, 7, 3])
+2268</div>
+
+<h2>其它常用内置函数</h2>
+
+<p>接下来介绍一些常用的内置函数。由于它们已经被细分好了用途，因此它们并不都是高阶函数。同时，这些函数按照特点，都可以使用 <code>map()</code> 、<code>filter()</code> 和 <code>reduce()</code> 表示。</p>
+
+<h3>映射函数</h3>
+
+<h4>reverse：反序映射</h4>
+
+<p>反转序列是一种比较常用到的操作。使用 <code>reversed()</code> 函数可以快速反转序列。</p>
+
+<p>以下给出了一个简单的示例：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; reversed((1, 2, 3, 4, 5))
+&lt;reversed object at 0x00000252852181D0&gt;
+&gt;&gt;&gt; list(_)
+[5, 4, 3, 2, 1]</div>
+
+<p>从结果中可以看到 <code>reversed()</code> 就像 <code>map()</code> 和 <code>filter()</code> 一样，不会立即得到结果，需要显式将结果转化为序列。</p>
+
+<p><code>reversed()</code> 函数不能用于可迭代对象，只能用于序列。也就是说，<code>map()</code> 和 <code>filter()</code> 等函数的返回结果不能使用该函数反转值的顺序。</p>
+
+<p>也可以使用切片 <code>[::-1]</code> 实现反序，但是切片会立即得到结果，有时候无法满足要求。</p>
+
+<h4>enumerate：包含索引值映射</h4>
+
+<p><code>enumerate()</code> 函数将输入序列的每一个元素扩展为一个二元组，其中第一个元素是索引值，另一个是原始输入元素。使用该函数可以为序列或者可迭代对象添加索引值信息。</p>
+
+<p>以下给出了一个简单的示例：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; enumerate(['a', 'b', 'hello', 600])
+&lt;enumerate object at 0x0000025285216AB0&gt;
+&gt;&gt;&gt; list(_)
+[(0, 'a'), (1, 'b'), (2, 'hello'), (3, 600)]</div>
+
+<p><code>enumerate()</code> 函数有一个非常常用的情景就是既需要用到一个序列的元素，又需要用到一个元素的索引值，此时就完全可以用它来取代</p>
+
+<div class="codeblock code-template">
+    <strong>for</strong> i <strong>in</strong> range(len(<em>sequence</em>)):<br>
+    &nbsp; &nbsp; i, sequence[i]<br>
+    &nbsp; &nbsp; ...
+</div>
+
+<p>这种别扭的形式。因此，<code>enumerate()</code> 函数常用在循环中，写作：</p>
+
+<div class="codeblock code-template">
+    <strong>for</strong> i, elem <strong>in</strong> enumerate(<em>sequence</em>):<br>
+    &nbsp; &nbsp; ...
+</div>
+
+<p>以下给出了这样一个示例函数，用于从一个序列中寻找一个元素：如果找到，它返回元素的索引值；否则，返回空值 <code>None</code> ：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">find_element</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">seq</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">target</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i, elem in </span><span style="color: #8b56bf;">enumerate</span><span style="color: #405c79;">(seq):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> elem == target:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> i</span></div></div>
+
+<h3>归约函数</h3>
+
+<h4>all和any：布尔规约</h4>
+
+<p><code>all()</code> 函数用于判断一个集合内的所有元素是否<strong>都</strong>为真：如果都为真，它也返回真 <code>True</code> ；如果有一个不为真，它就返回假 <code>False</code> 。</p>
+
+<p>它等价于以下函数：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">all</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">iterable</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> element in iterable:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> not element:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">False</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">True</span></div></div>
+
+<p><code>any()</code> 函数用于判断一个集合内的所有元素是否<strong>存在</strong>真值：只要有一个真，它就返回真 <code>True</code> ；如果没有真值，它就返回假 <code>False</code> 。</p>
+
+<p>它等价于以下函数：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">any</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">iterable</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> element in iterable:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> element:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">True</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">False</span></div></div>
+
+<p>从它们的描述上可以看到，它们都是归约函数，将一个集合的元素归约成单个布尔值 <code>True</code> 或 <code>False</code> 。<code>all()</code> 函数对集合中的所有元素使用 and 归约，相当于在各个值之间加上 <code>and</code> 运算符。any() 函数使用 or 归约，相当于加上 or 运算符。</p>
+
+<p>这两个函数与数理逻辑密切相关，<code>all()</code> 等效于全称量词 <span class="math">\\( \forall \\)</span> ，其运算可以表现为如下公式：</p>
+
+<div class="math">
+\\[
+    (\forall _{x \in s })\, x \equiv \text{True}
+\\]
+</div>
+
+<p>由数理逻辑上的概念，可以研究一个有趣的命题：对一个空序列调用以上函数，即 <code>all([])</code> 的结果如何？该命题可以把对空集的归约和对非空集的归约放在一起做交集来解决。</p>
+
+<p>首先研究对空集和非空集的归约做逻辑与运算：</p>
+
+<div class="math">
+\\[
+    (\forall _{x \in \emptyset })\, x \equiv \text{True} \land (\forall _{x \in s })\, x \equiv \text{True}
+\\]
+</div>
+
+<p>使用集合的分配律，可以将两个结果的与运算符改为两个集合做并集运算的形式：</p>
+
+<div class="math">
+\\[
+    (\forall _{x \in \emptyset \cup s })\, x \equiv \text{True}
+\\]
+</div>
+
+<p>注意到 <span class="math">\\( \emptyset \cup s \\)</span> 就等价于 <span class="math">\\( \emptyset \cup s \\)</span> ，也就是说对空集和非空集的归约做逻辑与运算的结果和空集无关，由此可以得出结论：对空集的 all 归约为布尔值真 <code>True</code>（真和另一值的与运算都取决于另一值）。</p>
+
+<p>同理，<code>any()</code> 等效于存在量词 <span class="math">\\( \exists \\)</span> ，研究方法与以上类似，不过要对空集和非空集的归约做逻辑或运算，这样才满足集合的分配律，可以让两个归约取并集。得到的逻辑或运算的结果仍然和空集无关，对空集的 any 归约为布尔值真 <code>False</code>（假和另一值的或运算都取决于另一值）。</p>
+
+<p>可以验证 Python 的行为满足以上规则：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; all([])
+True
+&gt;&gt;&gt; any(())
+False</div>
+
+<p>这是 <code>all()</code> 和 <code>any()</code> 函数初看可能比较违反直觉的一点。不过仔细查看两者的等价函数，可以发现其实现实际上是满足该规则的。</p>
+
+<h4>len和sum：汇聚归约</h4>
+
+<p><code>len()</code> 函数用于计算序列中所有值的个数，即序列的长度。<code>sum()</code> 函数用于计算所有值的总数，即对序列的所有元素求和。</p>
+
+<p>这两个函数在数学上意义相近：<code>len()</code> 函数把序列中每个元素看作 1（取 0 次方），然后返回所有元素的和；sum() 函数则把序列中每个元素看作实际值（取 1 次方），然后返回所有元素的和。</p>
+
+<p>但在 Python 中的实现方法却有很大差别：<code>sum()</code> 函数可用于任何可迭代对象，<code>len()</code> 函数不能用于可迭代对象，只能用于序列。</p>
+
+<p>这种实现方法上的不对等可能会导致在某些情况下遇到类型错误，因此注意在编写相关代码时为了扩展使用场景，需要在用到 <code>len()</code> 之前将参数转换为序列对象，例如：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">average</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">iterable</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; seq = </span><span style="color: #bf568b;">tuple</span><span style="color: #405c79;">(iterable)</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">sum</span><span style="color: #405c79;">(seq) / </span><span style="color: #8b56bf;">len</span><span style="color: #405c79;">(seq)</span></div></div>
+
+<h4>zip：结构化和平铺序列</h4>
+
+<p><code>zip()</code> 函数将来自多个集合的数据交叉组合在一起，将 n 个带有元素的集合转换为 n 元组。例如：</p>
+
+<p class="hidden">注：原文表述有误，不知道是不是翻译的锅</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; ls01 = [1, 2, 3, 4]
+&gt;&gt;&gt; ls02 = [0.5, 1, 2, 4]
+&gt;&gt;&gt; zip(ls01, ls02)
+&lt;zip object at 0x0000025284CB3CC8&gt;
+&gt;&gt;&gt; list(_)
+[(1, 0.5), (2, 1), (3, 2), (4, 4)]</div>
+
+<p>以上示例用 <code>zip()</code> 函数将两个集合的数据组合在一起，生成了一个二元组序列。并且可以看到 <code>zip()</code> 同样不会立即得到结果，需要显式将结果转化为序列。</p>
+
+<p>如果只给 <code>zip()</code> 函数传入一个集合，那么得到的结果是只有一个元素的元组，这也符合逻辑。</p>
+
+<p>对于归约函数，都需要知道归约空序列（即传入一个空序列作为参数）的结果，即归约时的<strong>单位元</strong>是什么。例如对于上文提到的几个函数，<code>any()</code> 的单位元是布尔值 <code>False</code> ，sum() 的单位元是数值 <code>0</code> 。可以通过代码检查 <code>zip()</code> 的单位元：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; list(zip([]))
+[]</div>
+
+<p>结果表明 <code>zip()</code> 的单位元是无数据，并且可以被转换为一个空序列。</p>
+
+<p><code>zip()</code> 有几个很常见的应用场景，例如，从两个序列构造成一个字典，此时就可以使用 <code>zip()</code> 将一个键值对合在一起：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; keys = [1, 2, 3, 'a']
+&gt;&gt;&gt; values = ['a', 'b', ['hello'], 123]
+&gt;&gt;&gt; dict(zip(keys, values))
+{1: 'a', 2: 'b', 3: ['hello'], 'a': 123}</div>
+
+<p>zip 在英文中也表示拉链，可以认为该函数像拉链一样将两个序列并排缝合在了一起。</p>
+
+<p>可以将其推广到更一般的应用场景。假设有许多个序列，它们在相同位置处表达的是同一个结构在同一维度上的信息，例如：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">names = [</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">John</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">Tim</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">Marry</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">...</span><span style="color: #405c79;">]</span></div><div><span style="color: #405c79;">ages = [</span><span style="color: #bf8b56;">14</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">12</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">13</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">...</span><span style="color: #405c79;">]</span></div><div><span style="color: #405c79;">scores = [</span><span style="color: #bf8b56;">74</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">79</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">86</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">...</span><span style="color: #405c79;">]</span></div></div>
+
+<p>如果要处理各个结构的信息，那么一种朴素的方法就是使用 <code>for</code> 循环依次按索引值来处理每个元素：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i in </span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #8b56bf;">len</span><span style="color: #405c79;">(names)):</span></div><div><span style="color: #405c79;">&#160; &#160; names[i], ages[i], scores[i]</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf8b56;">...</span></div></div>
+
+<p>使用 <code>zip()</code> 函数，可以将不同维度的信息按索引值组成一个整体，然后在遍历时可以按整体代替索引值，这样处理逻辑更清晰：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> name, age, score in </span><span style="color: #8b56bf;">zip</span><span style="color: #405c79;">(names, ages, scores):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf8b56;">...</span></div></div>
+
+<p>不过，<code>zip()</code> 函数使用时有一点需要注意：如果不同序列长度不一样，那么它们会被截断以保证长度相同：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; ls2 = [2, 2]
+&gt;&gt;&gt; ls3 = [3, 3, 3]
+&gt;&gt;&gt; ls4 = [4, 4, 4, 4]
+&gt;&gt;&gt; list(zip(ls2, ls3, ls4))
+[(2, 3, 4), (2, 3, 4)]</div>
+
+<p>这个特性有时也会造成一定的困扰。不过 Python 的标准库提供了一种替代的解决方案，这点留到后续介绍。</p>
+
+<h3>高阶函数</h3>
+
+<h4>max与min：寻找最值</h4>
+
+<p><code>max()</code> 函数和 <code>min()</code> 函数就像表明上的含义一样，用来寻找最大值或最小值的。这两个函数可以接收可变个输入参数，找出其中的最值；也可以接收一个集合，寻找其中的最值。例如：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; max(1, 7, 4, 6)
+7
+&gt;&gt;&gt; min([1, 7, 4, 6])
+1</div>
+
+<p>注意，这两个函数默认情况下没有单位元，因为传入空序列是会发生错误的。不过它们都有一个关键字形式的默认参数 <code>default</code> ，用于表示当传入空序列时默认返回的值：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; max([], default=10)
+10</div>
+
+<p>当 <code>max()</code> 函数和 <code>min()</code> 函数接收一个集合时，它们可以用作高阶函数，它的关键字参数 <code>key</code> 可以传入一个函数，该函数指定如何从集合中的每一个对象获取需要比较的值。</p>
+
+<p>例如，给定以下包含元组的序列：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">students = [(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">John</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">14</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">74</span><span style="color: #405c79;">, ), (</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">Tim</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">12</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">79</span><span style="color: #405c79;">), </span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; (</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">Marry</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">13</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">86</span><span style="color: #405c79;">), (</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">Hans</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">13</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">81</span><span style="color: #405c79;">)]</span></div></div>
+
+<p>每个元组中，最后一个元素代表分数。如果要找出列表中分数的最大值，可以这样设计 <code>key</code> 的函数：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; max(students, key=lambda x: x[-1])
+('Marry', 13, 86)</div>
+
+<p><code>key</code> 代表的函数需要是标量函数（作用于一个值，返回一个值）。</p>
+
+<p>以下再给出一个示例，可以获取一个序列中绝对值最大的元素：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; max([1, 4, -5, 3, -7], key=abs)
+-7</div>
+
+<h4>sorted：数据排序</h4>
+
+<p><code>sorted()</code> 函数用于将数据排序。以下给出了一个简单示例：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; sorted([6, 2, 9, 7, 3])
+[2, 3, 6, 7, 9]</div>
+
+<p>该函数不同于以上介绍的其它函数，它会直接返回列表对象。也可以使用列表对象的 <code>.sort()</code> 方法将列表排序，但是使用 <code>sorted()</code> 函数的优点在于它不会改动原有列表，而是返回一个新列表，因此该函数是无副作用的。</p>
+
+<p>该函数可以将任意可迭代对象排序，返回的结果都是列表。它和 <code>max()</code> 函数一样都有参数 <code>key</code> ，与列表的 <code>.sort()</code> 方法一样都有参数 <code>reversed</code> 用于指定是否降序排列。</p>
+
+<h2>参考资料</h2>
+
+<p><a href="https://docs.python.org/3/library/functions.html">https://docs.python.org/3/library/functions.html</a></p>
+
+<p>Python3 官方文档关于内置函数的介绍</p>
+
+<!-- finished(all):2022-05-23 -->
+
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/computer-science/data-structure/08-graph/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/09/数据结构08-图-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/09/数据结构08-图-520x293.jpg 520w, /wp-content/uploads/2022/09/数据结构08-图-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/computer-science/data-structure/08-graph/" rel="bookmark">数据结构08-图</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/web/web-scraping/xpath-tutorial/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/11/XPath简单入门-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/11/XPath简单入门-520x293.jpg 520w, /wp-content/uploads/2022/11/XPath简单入门-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/web/web-scraping/xpath-tutorial/" rel="bookmark">XPath简单入门</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/computer-science/data-structure/04-trees/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/08/数据结构04-树与二叉树-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/08/数据结构04-树与二叉树-520x293.jpg 520w, /wp-content/uploads/2022/08/数据结构04-树与二叉树-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/computer-science/data-structure/04-trees/" rel="bookmark">数据结构04-树与二叉树</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/programming/python-fp/03-functional-programming/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>Python函数式编程03 高阶函数与匿名函数</span></a></li>
+		<li class="previous"><a href="/programming/python-fp/02-parameter-handling/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>Python函数式编程02 函数参数设计与处理</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

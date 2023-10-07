@@ -1,0 +1,832 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>LVGL库入门教程02-基本控件与交互 - 冰封残烛的个人小站</title>
+	<meta name="description" content="LVGL 本质上是一个 GUI 库，它包含大量的控件。LVGL 和大多数 GUI 库的工作方式都是类似的。如果之前有 GUI 库的使用经验的话，应该可以比较容易明白 LVGL 代码的编写思路。本节介绍 LVGL 库的基本使用方法。" />
+	<link rel="canonical" href="/embedded/mcu-application/lvgl-02-quick-start/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="LVGL库入门教程02-基本控件与交互 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="LVGL 本质上是一个 GUI 库，它包含大量的控件。LVGL 和大多数 GUI 库的工作方式都是类似的。如果之前有 GUI 库的使用经验的话，应该可以比较容易明白 LVGL 代码的编写思路。本节介绍 LVGL 库的基本使用方法。" />
+	<meta property="og:url" content="/embedded/mcu-application/lvgl-02-quick-start/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2022-06-14T08:49:13+00:00" />
+	<meta property="article:modified_time" content="2023-10-05T13:19:24+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2022/06/LVGL库入门教程02-基本控件与交互.jpg" />
+	<meta property="og:image:width" content="1920" />
+	<meta property="og:image:height" content="1080" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="7分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/embedded/mcu-application/lvgl-02-quick-start/#primaryimage",
+	            "url": "/wp-content/uploads/2022/06/LVGL库入门教程02-基本控件与交互.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/06/LVGL库入门教程02-基本控件与交互.jpg",
+	            "width": 1920,
+	            "height": 1080
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/embedded/mcu-application/lvgl-02-quick-start/#webpage",
+	            "url": "/embedded/mcu-application/lvgl-02-quick-start/",
+	            "name": "LVGL库入门教程02-基本控件与交互 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/embedded/mcu-application/lvgl-02-quick-start/#primaryimage"
+	            },
+	            "datePublished": "2022-06-14T08:49:13+00:00",
+	            "dateModified": "2023-10-05T13:19:24+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "LVGL 本质上是一个 GUI 库，它包含大量的控件。LVGL 和大多数 GUI 库的工作方式都是类似的。如果之前有 GUI 库的使用经验的话，应该可以比较容易明白 LVGL 代码的编写思路。本节介绍 LVGL 库的基本使用方法。",
+	            "breadcrumb": {
+	                "@id": "/embedded/mcu-application/lvgl-02-quick-start/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/embedded/mcu-application/lvgl-02-quick-start/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/embedded/mcu-application/lvgl-02-quick-start/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "LVGL库入门教程02-基本控件与交互"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/316" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=316' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fembedded%2Fmcu-application%2Flvgl-02-quick-start%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fembedded%2Fmcu-application%2Flvgl-02-quick-start%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><link rel="stylesheet" href="/wp-content/static/css/markdown@arduino.css">
+<style>
+    .math { color:blue; font-size: 13px; }
+    div.vscode-block { color: #403F53; background-color: #FBFBFB; }
+</style>
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-316 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-316" class="post-316 post type-post status-publish format-standard has-post-thumbnail hentry category-mcu-application">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">LVGL库入门教程02-基本控件与交互</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/embedded/mcu-application/" rel="category tag">单片机与应用</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年6月14日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+
+<p>LVGL 本质上是一个 GUI 库，它包含大量的控件(widget)，即按钮、标签、滑块、菜单栏这种具有一定人机交互特征的组合图形。LVGL 在设计时，采用了一定面向对象编程的设计思路，有效降低了代码编写的难度。</p>
+<p>LVGL 和大多数 GUI 库的工作方式都是类似的，其代码编写的基础思路为：</p>
+<ul>
+<li>创建 GUI 根窗体对象</li>
+<li>在窗体上绘制各种控件</li>
+<li>为控件编写响应函数函数</li>
+<li>在主事件循环中等待用户触发事件响应</li>
+</ul>
+<p>如果之前有 GUI 库的使用经验的话，应该可以比较容易明白 LVGL 代码的编写思路。</p>
+<h2>标签</h2>
+<p>标签(label)应该是 GUI 最简单也是最基础的控件之一。标签的作用就是显示一小段说明文字。接下来通过介绍标签来介绍 LVGL 控件的创建、布局与设置属性。</p>
+<h3>标签的创建</h3>
+<p>通过以下函数可以创建一个标签：</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">lv_obj_t</span>* <span class="hljs-title">lv_label_create</span><span class="hljs-params">(<span class="hljs-keyword">lv_obj_t</span>* parent)</span></span>;
+</pre></div>
+<p><code>lv_obj_t</code> 是 LVGL 所有控件的通用类型，包括根窗体在内的所有控件都使用该结构描述。</p>
+<p>参数 <code>parent</code> 指定了标签需要被放在哪一个父容器中。由于一个较大的项目内会存在许多控件，因此往往需要将一个较大的窗口划分为若干结构，每一个结构放入用途相似的的控件，使用户更易熟悉如何操作。例如，一个文本编辑器窗口可能会按功能分为顶层菜单栏、侧边导航栏、底部状态栏以及中间的编辑区，每个区域的控件都可以安排在各栏内统一调整。</p>
+<p>最基本的父容器就是整个显示屏窗口对象，可以使用 <code>lv_scr_act()</code> 函数获取当前的窗口对象。操作系统上的窗口可以设置一些属性，例如窗口大小、标题文字、图标等，不过嵌入式屏幕往往是固定的，因此窗口对象一般只作控件的父容器使用。</p>
+<p>使用以下代码就可以在当前窗口中创建一个标签了：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">lv_obj_t</span>* label01 = <span class="hljs-built_in">lv_label_create</span>(<span class="hljs-built_in">lv_scr_act</span>());
+</pre></div>
+<p>创建得到的标签没有任何可显示的内容，可以调用 <code>lv_label_set_text()</code> 为标签添加上文字：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_label_set_text</span>(label01, <span class="hljs-string">&quot;Hello, world!&quot;</span>);
+</pre></div>
+<p>这样就可以在屏幕中显示一些文本了。LVGL 支持直接显示 Unicode 文字，只要在源文件使用 UTF-8 编码即可。如果要显示变量的值，LVGL 也提供了 <code>lv_label_set_text_fmt()</code> 函数，可以直接格式化文本。</p>
+<p>接下来编译工程并下载，就可以看到显示的效果了：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-02-getstart-label-create.jpg" alt="-" width="320"></figure>
+<h3>标签的布局</h3>
+<p>以上创建的标签默认放在屏幕的左上角，并且如果创建多个标签等控件，它们都会被重叠放置在左上角。如果需要将控件安排到合适的位置，就需要安排它们的布局。一般情况下，可以用以下函数重新调整一个控件的布局：</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lv_obj_align</span><span class="hljs-params">(<span class="hljs-keyword">lv_obj_t</span>* obj, <span class="hljs-keyword">lv_align_t</span> align, <span class="hljs-keyword">lv_coord_t</span> x_ofs, <span class="hljs-keyword">lv_coord_t</span> y_ofs)</span></span>;
+</pre></div>
+<p><code>align</code> 指定了控件的对齐方式，可以检查枚举类型 <code>lv_align_t</code> 来获取支持的对齐方式。<code>x_ofs</code> 和 <code>y_ofs</code> 是对齐后的额外偏移量，正值表示额外向右下偏移。</p>
+<blockquote>
+<p>LVGL 包含了许多枚举类型，如果不知道该如何传值，可以查看头文件包含的枚举值。</p>
+<p>和大多数 GUI 库一样，屏幕的左上角为坐标原点 (0, 0) ，往右为 x 轴正向，往下为 y 轴正向，坐标的单位为像素或分辨率。</p>
+</blockquote>
+<p>例如，如果额外给以上标签添加对齐：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_obj_align</span>(label01, LV_ALIGN_CENTER, <span class="hljs-number">0</span>, <span class="hljs-number">-30</span>);
+</pre></div>
+<p>那么它就会出现在屏幕中间向上 30 像素的位置：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-02-getstart-label-align.jpg" alt="-"></figure>
+<p>如果要创建更灵活的布局，可以使用 <code>lv_obj_create()</code> 创建一个基本对象。这种直接创建的基本对象一般用作框架，然后通过嵌套框架的形式组织对齐，例如：</p>
+<div class="hljs codeblock"><pre><span class="hljs-comment">/* outer widget align */</span>
+<span class="hljs-keyword">lv_obj_t</span>* cont_top = <span class="hljs-built_in">lv_obj_create</span>(<span class="hljs-built_in">lv_scr_act</span>());
+<span class="hljs-keyword">lv_obj_t</span>* cont_bottom = <span class="hljs-built_in">lv_obj_create</span>(<span class="hljs-built_in">lv_scr_act</span>());
+<span class="hljs-built_in">lv_obj_align</span>(cont_top, LV_ALIGN_TOP_LEFT, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+<span class="hljs-built_in">lv_obj_align</span>(cont_bottom, LV_ALIGN_BOTTOM_RIGHT, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+<span class="hljs-comment">/* inner widget align */</span>
+<span class="hljs-keyword">lv_obj_t</span>* label_top = <span class="hljs-built_in">lv_label_create</span>(cont_top);
+<span class="hljs-built_in">lv_label_set_text</span>(label_top, <span class="hljs-string">&quot;At Top Left&quot;</span>);
+<span class="hljs-built_in">lv_obj_align</span>(label_top, LV_ALIGN_CENTER, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+<span class="hljs-keyword">lv_obj_t</span>* label_bottom = <span class="hljs-built_in">lv_label_create</span>(cont_bottom);
+<span class="hljs-built_in">lv_label_set_text</span>(label_bottom, <span class="hljs-string">&quot;At Bottom Right&quot;</span>);
+<span class="hljs-built_in">lv_obj_align</span>(label_bottom, LV_ALIGN_CENTER, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+</pre></div>
+<p>这里先将外层的框架在屏幕上对齐，然后再在框内创建标签，让标签在框架内对齐。效果为：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-02-getstart-object-align.jpg" alt="!" width="320"></figure>
+<p>通过这种嵌套的对齐方式，可以先让一些基础控件在框架内对齐，然后再让框架之间相对对齐。这种对齐方式更灵活，而且方便日后调整各个控件的相对位置。</p>
+<p>LVGL 的所有控件都是以这种相对位置的形式组织的。官方文档提供了一张图片，可以很清楚地描述所有的相对对齐方式：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-02-align.png" alt="alt" width="600"></figure>
+<p>由于居中对齐经常用到，可以直接使用 <code>lv_obj_center(*obj*)</code> 函数设置无偏移的居中对齐。</p>
+<p>默认的基本控件是有样式的，并且注意到它们长宽都是固定的，如果包含的控件过长，它还会提供一个滚动条。如果需要调整控件的尺寸，可以使用函数，<code>lv_obj_set_width()</code> 和 <code>lv_obj_set_height()</code> 分别调整长宽，或使用 <code>lv_obj_set_size()</code> 一并调整：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">lv_obj_t</span>* cont = <span class="hljs-built_in">lv_obj_create</span>(<span class="hljs-built_in">lv_scr_act</span>());
+<span class="hljs-keyword">lv_obj_t</span>* label = <span class="hljs-built_in">lv_label_create</span>(cont);
+<span class="hljs-built_in">lv_label_set_text</span>(label, <span class="hljs-string">&quot;Helllllo, world!&quot;</span>);
+<span class="hljs-built_in">lv_obj_set_size</span>(cont, <span class="hljs-number">160</span>, <span class="hljs-number">50</span>);
+<span class="hljs-built_in">lv_obj_center</span>(cont);
+<span class="hljs-built_in">lv_obj_center</span>(label);
+</pre></div>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-02-getstart-object-resize.jpg" alt="!" width="320"></figure>
+<p>所有的控件都具有宽度和高度基本属性，因此这几个函数对任意的控件都有效。</p>
+<h3>标签的长模式和颜色调整</h3>
+<p>框架包含的控件过长会提供一个滚动条，确保包含的内容都可见。标签在创建时，它的宽度会适应包含文本的宽度。如果给一个标签重新调整尺寸，使得它的宽度小于文本的宽度，那么它包含的文本就会自动折叠：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">lv_obj_t</span>* label01 = <span class="hljs-built_in">lv_label_create</span>(<span class="hljs-built_in">lv_scr_act</span>());
+<span class="hljs-built_in">lv_label_set_text</span>(label01, <span class="hljs-string">&quot;A very loooooooooooooooong text&quot;</span>);
+<span class="hljs-built_in">lv_obj_set_width</span>(label01, <span class="hljs-number">100</span>);
+</pre></div>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-02-label-too-long.jpg" alt="!" width="170"></figure>
+<p>如果文本确实过长，超过了标签的长宽极限，那么可以使用函数</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lv_label_set_long_mode</span><span class="hljs-params">(<span class="hljs-keyword">lv_obj_t</span> * obj, <span class="hljs-keyword">lv_label_long_mode_t</span> long_mode)</span></span>;
+</pre></div>
+<p>给标签设置一个长模式。标签一共有 5 种长模式，每种模式的表现形式如下：</p>
+<table>
+<thead>
+<tr>
+<th>枚举值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LV_LABEL_LONG_WRAP</code></td>
+<td>将过宽的文本换行，以多行的方式显示所有文本</td>
+</tr>
+<tr>
+<td><code>LV_LABEL_LONG_DOT</code></td>
+<td>将过长的文本隐藏并以省略号代替</td>
+</tr>
+<tr>
+<td><code>LV_LABEL_LONG_SCROLL</code></td>
+<td>将文本来回滚动显示</td>
+</tr>
+<tr>
+<td><code>LV_LABEL_LONG_SCROLL_CIRCULAR</code></td>
+<td>将文本循环滚动显示</td>
+</tr>
+<tr>
+<td><code>LV_LABEL_LONG_CLIP</code></td>
+<td>去除过长部分的文本</td>
+</tr>
+</tbody>
+</table>
+<p>如果文本显示时有多行，那么可以使用</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lv_obj_set_style_text_align</span><span class="hljs-params">(<span class="hljs-keyword">lv_obj_t</span>* obj, <span class="hljs-keyword">lv_text_align_t</span> value, <span class="hljs-keyword">lv_style_selector_t</span> selector)</span></span>;
+</pre></div>
+<p>将文本垂直对齐。第三个参数 <code>selector</code> 是设置样式用的，这里可以暂时不用理会。</p>
+<p>以下动图展示了三种长模式：显示省略号、换行并居中对齐，以及循环滚动：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-02-label-long-mode.gif" alt="!" width="300"></figure>
+<blockquote>
+<p>需要注意的是，除了滚动以外的其它模式如果没有明确高度，都会在文本过长时优先尝试调整标签高度。</p>
+</blockquote>
+<p>滚动是一种特殊的动画，在后续介绍到动画时还可以创建更丰富的动画效果，可以自行调整文本的滚动行为。</p>
+<hr>
+<p>标签的文本可以改变颜色。LVGL 里，调整颜色是通过特殊格式的文本作用的。为了改变颜色，首先需要启用这一模式：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_label_set_recolor</span>(label01, <span class="hljs-literal">true</span>);
+</pre></div>
+<p>重新调整颜色的文本格式为：</p>
+<div class="hljs codeblock"><pre>#RRGGBB <em>text</em>#
+</pre></div>
+<p>这样 <em><code>text</code></em> 对应的文本就会显示为 <code>#RRGGBB</code> 对应的色值。如果屏幕使用的是 16bit 的颜色也不要紧，LVGL 会自动转换颜色。</p>
+<p>例如：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_label_set_text</span>(label01, <span class="hljs-string">&quot;#0000ff Re-color# #ff00ff text# #ff0000 of a# label.&quot;</span>);
+</pre></div>
+<p>显示效果为：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-02-label-recolor.jpg" alt="alt" width="220"></figure>
+<h2>按钮</h2>
+<p>按钮(button)也是一个比较基础的控件。按钮除了可以显示一些提示文字外，还可以点击并获取响应。接下来通过介绍按钮来介绍为控件绑定事件的一般方式。</p>
+<h3>按钮的创建和事件绑定</h3>
+<p>按钮的创建和布局方式都与标签类似：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">lv_obj_t</span>* btn01 = <span class="hljs-built_in">lv_btn_create</span>(<span class="hljs-built_in">lv_scr_act</span>());
+<span class="hljs-built_in">lv_obj_align</span>(btn01, LV_ALIGN_CENTER, <span class="hljs-number">0</span>, <span class="hljs-number">-40</span>);
+</pre></div>
+<p>但是注意，创建得到的按钮只是一个简单的形状。为了给它添加说明文本，需要在其中创建一个标签：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">lv_obj_t</span>* label01 = <span class="hljs-built_in">lv_label_create</span>(btn01);
+<span class="hljs-built_in">lv_label_set_text</span>(label01, <span class="hljs-string">&quot;Button&quot;</span>);
+<span class="hljs-built_in">lv_obj_center</span>(label01);
+</pre></div>
+<p>显示的效果为：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-02-button-create.jpg" alt="alt" width="210"></figure>
+<p>按钮不同于框架，按钮会自动调整宽高来适应其包含的标签大小。</p>
+<p>创建的按钮已经默认具有点击动画，不过还无法对点击作出回应。接下来需要给按钮添加回调函数。可以使用以下函数为按钮绑定回调函数：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_obj_add_event_cb</span>(<span class="hljs-keyword">lv_obj_t</span>* obj, <span class="hljs-keyword">lv_event_cb_t</span> event_cb, <span class="hljs-keyword">lv_event_code_t</span> filter, <span class="hljs-keyword">void</span>* user_data);
+</pre></div>
+<p>任意可交互控件都可以使用该函数添加回调函数。这里不用管该函数的返回值。<code>event_cb</code> 是事件的回调函数，<code>filter</code> 决定按钮会对哪些事件作出响应，可以在 <code>user_data</code> 传入一些自定义的数据。</p>
+<p>检查类型 <code>lv_event_cb_t</code> 的定义就可以明白如何编写回调函数。回调函数有且仅有一个 <code>lv_event_t</code> 类型的参数。该类型是一个比较复杂的结构类型，目前只需要明白它包括的结构成员包括自定义数据 <code>user_data</code> 即可。</p>
+<p>例如，以下创建了一个简单的回调函数：</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">button_clicked_cb</span><span class="hljs-params">(<span class="hljs-keyword">lv_event_t</span>* e)</span> </span>{
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">uint8_t</span> count = <span class="hljs-number">0</span>;
+    count++;
+    <span class="hljs-built_in">lv_label_set_text_fmt</span>((<span class="hljs-keyword">lv_obj_t</span>*)e-&gt;user_data, <span class="hljs-string">&quot;Clicked: %d&quot;</span>, count);
+}
+</pre></div>
+<p>这里通过自定义参数来修改外部标签的文本。那么在绑定时，就需要这样传入参数：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_obj_add_event_cb</span>(btn01, button_simple_cb, LV_EVENT_CLICKED, label01);
+</pre></div>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-02-button-click.gif" alt="alt" width="230"></figure>
+<p>这里让按钮只对点击事件产生响应。如果要让按钮对多个事件响应的话，需要先让按钮对所有事件 <code>LV_EVENT_ALL</code> 产生响应的话，然后在回调函数内进一步判断事件类型：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">lv_event_code_t</span> code = <span class="hljs-built_in">lv_event_get_code</span>(e);
+<span class="hljs-keyword">if</span> (code == LV_EVENT_CLICKED) {
+    <span class="hljs-comment">/* ... event handler ... */</span>
+}
+</pre></div>
+<p>这就像在中断函数内判断中断源一样。</p>
+<p>不过以上回调还可以使用另一种不传入用户参数的形式完成。首先，通过</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">lv_obj_t</span>* <span class="hljs-title">lv_event_get_target</span><span class="hljs-params">(<span class="hljs-keyword">lv_event_t</span>* e)</span></span>;
+</pre></div>
+<p>可以获取产生事件的控件，然后通过</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">lv_obj_t</span>* <span class="hljs-title">lv_obj_get_child</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">lv_obj_t</span>* obj, <span class="hljs-keyword">int32_t</span> id)</span></span>;
+</pre></div>
+<p>获取该控件的子控件。在创建控件时，需要传入父容器控件，创建时父容器也会通过 <code>id</code> 记录包含的子控件，创建最早的控件 id 就是 0 ，第二早的 id 是 1 ，最晚的 id 还可以表示为 -1 等。这样就可以在事件回调函数内获取被点击按钮的标签控件对象了。</p>
+<h3>控件的通用行为</h3>
+<p>LVGL 中，可以通过</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lv_obj_add_flag</span><span class="hljs-params">(<span class="hljs-keyword">lv_obj_t</span>* obj, <span class="hljs-keyword">lv_obj_flag_t</span> f)</span></span>;
+</pre></div>
+<p>为控件设置一些通用的标志，来改变控件的行为。</p>
+<p>例如，以上按钮都是普遍的按钮，它们通过点击来触发响应。但是还有一部分按钮，像控制键是通过点击来切换启用/关闭状态的。那么此时就可以给按钮添加一个这样的标志：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">lv_obj_t</span>* btn02 = <span class="hljs-built_in">lv_btn_create</span>(<span class="hljs-built_in">lv_scr_act</span>());
+<span class="hljs-built_in">lv_obj_add_flag</span>(btn02, LV_OBJ_FLAG_CHECKABLE);
+</pre></div>
+<p>这样创建的按钮可以对 <code>LV_EVENT_VALUE_CHANGED</code> 这个特殊的事件响应，而普通的按钮不行。不仅如此，切换之后的部分样式也会发生改变：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-02-button-toggle.gif" alt="alt" width="230"></figure>
+<p>可以给一个控件添加多个标志，只需要使用按位或运算符 <code>|</code> 连接起来即可。还可以清除一个控件的标志。例如，如果给一个框架清除可滚动的标志，那么当它包含长文本时就不再可以滚动显示全部内容：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">lv_obj_t</span>* cont = <span class="hljs-built_in">lv_obj_create</span>(<span class="hljs-built_in">lv_scr_act</span>());
+<span class="hljs-keyword">lv_obj_t</span>* label = <span class="hljs-built_in">lv_label_create</span>(cont);
+<span class="hljs-built_in">lv_obj_clear_flag</span>(cont, LV_OBJ_FLAG_SCROLLABLE);
+<span class="hljs-built_in">lv_label_set_text</span>(label, <span class="hljs-string">&quot;A label contains very long text&quot;</span>);
+<span class="hljs-built_in">lv_obj_set_size</span>(cont, <span class="hljs-number">160</span>, <span class="hljs-number">50</span>);
+</pre></div>
+<p>效果为：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-02-obj-unscrollable.jpg" alt="alt" width="230"></figure>
+<p>标志是一个很重要的内容，通过为控件加上各种标志，可以自定义更多抽象的控件类型。例如，具有 <code>LV_OBJ_FLAG_CLICKABLE</code> 标志的控件可以响应点击事件，这种响应不仅包括回调函数，还关系着点击时的动画效果。LVGL 一共提供了 27 个独立的标志，其中有 8 个可供用户自定义。可以检查 <code>lv_obj_flag_t</code> 枚举定义来查看包含的所有标志位。</p>
+<h2>开关</h2>
+<h3>开关的创建</h3>
+<p>以上创建的通过点击来切换启用/关闭状态的按钮可以使用开关(switch)代替。创建开关和创建其它控件类似：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">lv_obj_t</span>* sw = <span class="hljs-built_in">lv_switch_create</span>(<span class="hljs-built_in">lv_scr_act</span>());
+</pre></div>
+<p>开关的效果如下，通过单击可以切换开关状态：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-02-switch-create.gif" alt="alt" width="220"></figure>
+<p>开关具有标志 <code>LV_OBJ_FLAG_CHECKABLE</code> ，因此可以响应事件 <code>LV_EVENT_VALUE_CHANGED</code> 。</p>
+<h3>开关的状态</h3>
+<p>一个控件可以具有多种标志，标志就是控件的抽象接口，决定了控件具有哪些行为。控件还具有多种不同的状态，在每种状态下，它的样式都是不一样的。可以通过</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lv_obj_add_state</span><span class="hljs-params">(<span class="hljs-keyword">lv_obj_t</span>* obj, <span class="hljs-keyword">lv_state_t</span> state)</span></span>;
+</pre></div>
+<p>给一个控件设置不同的状态来切换样式。例如，如果给开关设置状态 <code>LV_STATE_CHECKED</code> ，它会表现出打开的状态。不同状态下控件接收的响应也不一样，例如如果给开关加上 <code>LV_STATE_DISABLED</code> 的状态，点击时它就无法接收任何响应，连样式也不会再切换了。</p>
+<p>可以在响应函数内通过 <code>lv_obj_has_state(obj, state)</code> 来判断一个控件处于什么状态，从而决定执行什么样的代码。这种方式更贴合控件的行为。</p>
+<p>每个控件都有 9 种独立的状态，还有 4 种状态可以由用户自由定义，这些状态都被放在头文件 <code>lv_obj.h</code> 中。可以使用按位与运算符 <code>|</code> 给一个控件添加多个状态。例如，可以给一个开关设置为既开启又只读 <code>LV_STATE_CHECKED | LV_STATE_DISABLED</code> ，那么它的样式就会表现为：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-02-switch-check-disable.jpg" alt="alt" width="130"></figure>
+<p>状态是在标志之上的概念，在不同的状态下控件可能具有不同的标志。</p>
+<h2>基本交互控件</h2>
+<h3>下拉列表</h3>
+<p>下拉列表(drop-down list)也是一个非常简单的控件。下拉列表在点击后会出现一些选项，点击选择后就可以触发一些事件。</p>
+<p>可以通过 <code>lv_dropdown_set_options()</code> 为下拉列表创建列表项：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">lv_obj_t</span>* drop01 = <span class="hljs-built_in">lv_dropdown_create</span>(<span class="hljs-built_in">lv_scr_act</span>());
+<span class="hljs-built_in">lv_dropdown_set_options</span>(drop01, <span class="hljs-string">&quot;STM32F1\n&quot;</span>
+                                <span class="hljs-string">&quot;STM32F4\n&quot;</span>
+                                <span class="hljs-string">&quot;STM32H7\n&quot;</span>
+                                <span class="hljs-string">&quot;STM8&quot;</span>);
+</pre></div>
+<p>LVGL 会自动拆分多行本文的每一行并分别创建一个列表项。下拉列表默认的行为是展示第一个列表项，并通过用户选择来切换展示的列表项：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-02-dropdown-create.gif" alt="alt" width="230"></figure>
+<p>下拉列表在选择列表项时会触发 <code>LV_EVENT_VALUE_CHANGED</code> 事件，可以通过</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">uint16_t</span> <span class="hljs-title">lv_dropdown_get_selected</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">lv_obj_t</span>* obj)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lv_dropdown_get_selected_str</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">lv_obj_t</span>* obj, <span class="hljs-keyword">char</span>* buf, <span class="hljs-keyword">uint32_t</span> buf_size)</span></span>;
+</pre></div>
+<p>来获取当前选中列表项索引或文本，如果要获取文本的话需要自行准备一个文本缓冲区。</p>
+<p>下拉列表可以通过</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lv_dropdown_set_text</span><span class="hljs-params">(<span class="hljs-keyword">lv_obj_t</span>* obj, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* txt)</span>
+</span></pre></div>
+<p>给它设置一个固定的文本，这样的下拉列表可以充当下拉菜单使用。</p>
+<p>下拉列表还可以通过</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lv_dropdown_set_dir</span><span class="hljs-params">(<span class="hljs-keyword">lv_obj_t</span>* obj, <span class="hljs-keyword">lv_dir_t</span> dir)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lv_dropdown_set_symbol</span><span class="hljs-params">(<span class="hljs-keyword">lv_obj_t</span>* obj, <span class="hljs-keyword">const</span> <span class="hljs-keyword">void</span>* symbol)</span></span>;
+</pre></div>
+<p>修改列表项出现的位置和下拉列表右侧的符号，由此可以组合出上拉列表、左拉列表等。</p>
+<h3>滚动列表</h3>
+<p>滚动列表(roller)和下拉列表类似，不过它是通过滚动来切换选择的列表项的。</p>
+<p>滚动列表的创建、事件响应和获取选中值的方式都和下拉列表类似。以下是滚动列表的创建方式：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">lv_obj_t</span>* roller01 = <span class="hljs-built_in">lv_roller_create</span>(<span class="hljs-built_in">lv_scr_act</span>());
+<span class="hljs-built_in">lv_roller_set_options</span>(roller01,
+                      <span class="hljs-string">&quot;Monday\nTuesday\nWednesday\n&quot;</span>
+                      <span class="hljs-string">&quot;Thursday\nFriday\nSaturday\nSunday&quot;</span>,
+                      LV_ROLLER_MODE_INFINITE);
+</pre></div>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-02-roller-create.gif" alt="alt" width="240"></figure>
+<p>在设置列表项时滚动列表多了一个参数，代表滚动到底后需要停止还是循环往复。滚动列表非常适合用于列表项稍微有些多，没有足够的空间展示所有列表项的情况。因此，滚动列表还可以使用函数</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lv_roller_set_visible_row_count</span><span class="hljs-params">(<span class="hljs-keyword">lv_obj_t</span> *obj, <span class="hljs-keyword">uint8_t</span> row_cnt)</span></span>;
+</pre></div>
+<p>设置可见的列表项个数。如果设置为偶数，那么会有两个列表项只显示一半，就像动图中展示的一样。</p>
+<h2>参考资料/延伸阅读</h2>
+<p><a href="https://docs.lvgl.io/master/widgets/index.html">https://docs.lvgl.io/master/widgets/index.html</a></p>
+<p>LVGL 官方文档——控件。在此可以查看更多文中没有提到的控件类型和使用细节，并查看官方编写的示例代码。</p>
+
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/data-science/via-python/numpy03-slices/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/10/Python数据分析-numpy03数组索引与切片-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/10/Python数据分析-numpy03数组索引与切片-520x293.jpg 520w, /wp-content/uploads/2022/10/Python数据分析-numpy03数组索引与切片-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/data-science/via-python/numpy03-slices/" rel="bookmark">numpy03:数组索引与切片</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/embedded/esp32/01-setting-up-development/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-520x293.jpg 520w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-300x169.jpg 300w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-1024x576.jpg 1024w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-768x432.jpg 768w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-1536x864.jpg 1536w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-950x534.jpg 950w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/embedded/esp32/01-setting-up-development/" rel="bookmark">ESP32与MicroPython入门-01 搭建开发环境</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-fp/04-builtin-functions/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-300x169.jpg 300w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-1024x576.jpg 1024w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-768x432.jpg 768w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-1536x864.jpg 1536w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-950x534.jpg 950w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-fp/04-builtin-functions/" rel="bookmark">Python函数式编程04 常用内置函数</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+					
+<div id="comments" class="themeform">
+	
+	
+					<!-- comments closed, no comments -->
+			
+		
+	
+</div><!--/#comments-->					
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/embedded/mcu-application/lvgl-03-layouts/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>LVGL库入门教程03-布局方式</span></a></li>
+		<li class="previous"><a href="/embedded/mcu-application/lvgl-01-migration/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>LVGL库入门教程01-移植到STM32</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

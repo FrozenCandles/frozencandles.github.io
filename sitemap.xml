@@ -1,23 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="/main-sitemap.xsl"?>
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="/wp-content/plugins/wordpress-seo/css/main-sitemap.xsl"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<sitemap>
 		<loc>/post-sitemap.xml</loc>
-		<lastmod>2023-05-18T03:00:18+00:00</lastmod>
+		<lastmod>2023-10-07T04:03:33+00:00</lastmod>
 	</sitemap>
 	<sitemap>
 		<loc>/page-sitemap.xml</loc>
 		<lastmod>2023-03-30T09:20:50+00:00</lastmod>
 	</sitemap>
 	<sitemap>
-		<loc>/e-landing-page-sitemap.xml</loc>
-	</sitemap>
-	<sitemap>
 		<loc>/category-sitemap.xml</loc>
-		<lastmod>2023-05-18T03:00:18+00:00</lastmod>
-	</sitemap>
-	<sitemap>
-		<loc>/post_tag-sitemap.xml</loc>
-		<lastmod>2023-05-11T15:19:15+00:00</lastmod>
+		<lastmod>2023-10-07T04:03:33+00:00</lastmod>
 	</sitemap>
 	<sitemap>
 		<loc>/author-sitemap.xml</loc>

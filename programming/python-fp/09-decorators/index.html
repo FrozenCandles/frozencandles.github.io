@@ -1,0 +1,847 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Python函数式编程09 闭包和装饰器 - 冰封残烛的个人小站</title>
+	<meta name="description" content="函数在定义内部内可以嵌套定义函数，如果返回的函数包含外部函数绑定的变量，则称为闭包。装饰器 是Python的一大特性，在不修改函数本义的情况下，可以通过简单的代码增加函数的功能，有效增加了代码的复用性，并使写出的代码结构更清晰。" />
+	<link rel="canonical" href="/programming/python-fp/09-decorators/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Python函数式编程09 闭包和装饰器 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="函数在定义内部内可以嵌套定义函数，如果返回的函数包含外部函数绑定的变量，则称为闭包。装饰器 是Python的一大特性，在不修改函数本义的情况下，可以通过简单的代码增加函数的功能，有效增加了代码的复用性，并使写出的代码结构更清晰。" />
+	<meta property="og:url" content="/programming/python-fp/09-decorators/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2022-06-03T03:07:51+00:00" />
+	<meta property="article:modified_time" content="2023-10-05T03:11:57+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2022/06/Python函数式编程09-闭包与装饰器.jpg" />
+	<meta property="og:image:width" content="2250" />
+	<meta property="og:image:height" content="1080" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="5分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/programming/python-fp/09-decorators/#primaryimage",
+	            "url": "/wp-content/uploads/2022/06/Python函数式编程09-闭包与装饰器.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/06/Python函数式编程09-闭包与装饰器.jpg",
+	            "width": 2250,
+	            "height": 1080
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/programming/python-fp/09-decorators/#webpage",
+	            "url": "/programming/python-fp/09-decorators/",
+	            "name": "Python函数式编程09 闭包和装饰器 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/programming/python-fp/09-decorators/#primaryimage"
+	            },
+	            "datePublished": "2022-06-03T03:07:51+00:00",
+	            "dateModified": "2023-10-05T03:11:57+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "函数在定义内部内可以嵌套定义函数，如果返回的函数包含外部函数绑定的变量，则称为闭包。装饰器 是Python的一大特性，在不修改函数本义的情况下，可以通过简单的代码增加函数的功能，有效增加了代码的复用性，并使写出的代码结构更清晰。",
+	            "breadcrumb": {
+	                "@id": "/programming/python-fp/09-decorators/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/programming/python-fp/09-decorators/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/programming/python-fp/09-decorators/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "Python函数式编程09 闭包和装饰器"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/276" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=276' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython-fp%2F09-decorators%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython-fp%2F09-decorators%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><link rel="stylesheet" href="/wp-content/static/css/theme@pie.wp.css">
+<style>
+    .math { color:blue; font-size: 13px; }
+    div.vscode-block { color: #405C79; background-color: #F7F9FB; }
+</style>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['\\\\(','\\\\)']],
+            displayMath: [["\\\\[","\\\\]"]]
+        }
+    });
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-276 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-276" class="post-276 post type-post status-publish format-standard has-post-thumbnail hentry category-python-fp">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">Python函数式编程09 闭包和装饰器</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/programming/python-fp/" rel="category tag">Python函数式编程</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年6月3日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+
+
+
+<h2>闭包</h2>
+
+<h3>闭包的概念</h3>
+
+<p>在<a class="link-internal" link="python-fp@03" href="/archives/246">第 3 节</a>中，介绍了高阶函数的概念，一个高阶函数可以返回另一个函数。但实际上，Python 的函数定义还有另一个有意思的地方：一个函数的定义可以嵌套在另一个函数之内，也就是说，如下所示的定义：</p>
+
+<div class="codeblock code-template">
+    <strong>def</strong> func(...):<br>
+    &nbsp; &nbsp; ...<br>
+    &nbsp; &nbsp; <strong>def</strong> inner_func(...):<br>
+    &nbsp; &nbsp; &nbsp; &nbsp; ...<br>
+    &nbsp; &nbsp; ...
+</div>
+
+<p>是完全可以的。这种情况下，内部定义的函数会视为在函数内创建了一个类型为函数的局部对象。</p>
+
+<p>嵌套定义的函数有一个特别的地方在于，嵌套函数可以使用函数内定义的局部变量；并且如果嵌套函数被当做结果返回时，如果调用这个返回结果，它可以访问到内部定义的局部变量。</p>
+
+<p>以下展示了一个这样的情形，注意到在调用函数后，就将这个函数给删除了：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">func</span><span style="color: #405c79;">():</span></div><div><span style="color: #405c79;">&#160; &#160; n = </span><span style="color: #bf8b56;">10</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">inner_n</span><span style="color: #405c79;">():</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> n</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> inner_n</span></div><br><div><span style="color: #405c79;">inner_func = func()</span></div><div><span style="color: #bf568b;font-weight: bold;">del</span><span style="color: #405c79;"> func</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(inner_func())</span></div></div>
+
+<p>结果为：</p>
+
+<div class="codeblock code-console">python -u demo.py
+10</div>
+
+<p>可以看到，即便函数被删除后，内部函数依旧记录着函数提供的局部变量的信息。这种返回的函数包含外部函数绑定的变量，称为<strong>闭包</strong>(closure)。</p>
+
+<p>闭包能够让内部函数记录局部变量的信息，本质上通过在内部函数中使用 <code>__closure__</code> 属性保存这些数据。</p>
+
+<p>闭包的一个用途就是通过函数批量生成所需的参数。例如，以下函数利用闭包的特性，可以批量生成多项式函数：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">from</span><span style="color: #405c79;"> itertools </span><span style="color: #bf568b;font-weight: bold;">import</span><span style="color: #405c79;"> starmap</span></div><br><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">polinomial</span><span style="color: #405c79;">(*</span><span style="color: #bf8b56;">coeffs</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">inner</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">x</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">sum</span><span style="color: #405c79;">(starmap(</span><span style="color: #bf568b;font-weight: bold;">lambda</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">i</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">coeff</span><span style="color: #405c79;">: coeff * x ** i,</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;</span><span style="color: #8b56bf;">enumerate</span><span style="color: #405c79;">(</span><span style="color: #8b56bf;">reversed</span><span style="color: #405c79;">(coeffs)))</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;)</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> inner</span></div></div>
+
+<p>这样可以通过控制几个参数得到不同的函数：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; regr = polinomial(2, 1)
+&gt;&gt;&gt; regr(3)
+7
+&gt;&gt;&gt; polinomial(4, 3, 7, 2)
+&lt;function polinomial.&lt;locals&gt;.inner at 0x0000023B89B85A60&gt;</div>
+
+<h3>闭包和nonlocal声明</h3>
+
+<p>函数内可能会处理全局变量，同理嵌套在其他函数中的函数也可能需要处理不在全局作用域中的外部变量：如果在嵌套函数内对不在全局作用域中的外部变量重新赋值，那么影响范围只会局限于嵌套函数中。</p>
+
+<p>一般的函数使用 <code>global</code> 关键字来在函数内将一个变量声明为全局变量；Python3 引入了关键字 <code>nonlocal</code> ，它的作用效果类似：<code>nonlocal</code> 关键字可以声明一个变量为一个不在全局作用域中的外部变量声明，使得对该变量的重新赋值或修改的影响范围不局限于嵌套函数体内部。</p>
+
+<h2>装饰器</h2>
+
+<h3>装饰器的基本概念</h3>
+
+<p><strong>装饰器</strong>(decorator)是 Python 的语法糖，其作用是增强函数的功能。在编写大型项目时，需要给很多函数加上某个相似功能，或是一些函数的某个基本功能需要重复使用，又或者需要将函数内某部分内容独立出来便于维护和更新，这些便可以使用函数的装饰器来实现。</p>
+
+<p>装饰器可以在不改变函数原有的结构下，增强函数的功能。装饰器适用于以下两个场景：</p>
+
+<ol>
+    <li>增强被装饰函数的功能</li>
+     
+    <li>代码复用</li>
+</ol>
+
+<p>装饰器的思路可以从高阶函数开始。假设有函数：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">demo01</span><span style="color: #405c79;">():</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">hello</span><span style="color: #405c79;">'</span><span style="color: #405c79;">)</span></div><br><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">demo02</span><span style="color: #405c79;">():</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">hello</span><span style="color: #405c79;">'</span></div></div>
+
+<p>在某个比较大的项目内，可能不知道这两个函数是在哪里执行的。现在需要增加这两个函数的功能，能让函数在调用时，显示函数名、调用时间、保存的局部变量等信息，但又希望不要逐个修改函数结构，否则这样会让工程量大大增加，而且容易出现疏忽。</p>
+
+<p>这个时候，很自然地就会想到利用高阶函数。即新定义一个函数，它能够利用传入的函数对象输出其基本信息，然后再执行该函数。也就是说，对于这个高阶函数的需求有：</p>
+ 
+<ul>
+    <li>它需要接受一个函数作为参数，这样在函数体内输出该函数的函数名</li>
+     
+    <li>考虑到函数是要被调用的，所以高阶函数不能影响函数正常的调用功能，这就要求高阶函数返回结果必须要是传入的函数</li>
+</ul>
+
+<p>那么关于该提供调试信息的高阶函数便可以是这样：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">log</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">func</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; result = func()</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">'[</span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">strftime(</span><span style="color: #405c79;">"</span><span style="color: #56bf8b;">%H:%M:%S</span><span style="color: #405c79;">"</span><span style="color: #405c79;">, localtime())</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">]'</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">' </span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">func.</span><span style="color: #8b56bf;">__name__</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;"> returns </span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">result</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">'</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> result</span></div></div>
+
+<p>测试运行的效果为：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; log(demo01)
+hello
+[21:31:49] demo01 returns None
+&gt;&gt;&gt; type(log(demo02))
+[21:31:50] demo02 returns hello
+&lt;class 'str'&gt;</div>
+
+<p>该函数基本实现了要求的功能，即不修改原函数的定义、不影响原函数的调用，同时又可以输出原函数名。</p>
+
+<p>不过以上定义的高阶函数存在一定问题，例如对于以下这些函数：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">double = polinomial(</span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">triple = polinomial(</span><span style="color: #bf8b56;">3</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">)</span></div></div>
+
+<p>这些函数是含有参数的，如果使用原先的高阶函数，则会因为高阶函数传入的参数不再是一个函数名了，而是一个返回值而出错。因此，这样一来对高阶函数的需求又增加了：高阶函数应该能支持函数的传入参数功能。</p>
+
+<p>这就可以使用之前介绍闭包时提到过的批量生产函数的用法：可以让函数在生产时不改变其用法，只输出基本信息，也就是说在高阶函数内部定义一个嵌套函数，让高阶函数传入的参数来供嵌套函数使用，再由返回的嵌套函数来执行需要的传参功能。因此，该高阶函数便可以是：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">log</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">func</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">inner_func</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">x</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; result = func()</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">'[</span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">strftime(</span><span style="color: #405c79;">"</span><span style="color: #56bf8b;">%H:%M:%S</span><span style="color: #405c79;">"</span><span style="color: #405c79;">, localtime())</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">]'</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">' </span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">func.</span><span style="color: #8b56bf;">__name__</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;"> returns </span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">result</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">'</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> result</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> inner_func</span></div></div>
+
+<p>注意到定义装饰器函数时，其传参是依靠内层函数来完成的，因此嵌套函数的参数应该与装饰器函数的内层函数的参数数量相一致。这里使用可变参数 <code>*args</code> 和 <code>**kwargs</code> 组合，就可以表示任意的传参情况。接下来的一个技巧就是使用覆盖原有的函数定义，使用添加功能后的同名函数：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">double = log(double)</span></div><div><span style="color: #405c79;">triple = log(triple)</span></div></div>
+
+<p>这样不但可以正常地进行传参功能，还可以利用生产得到的具有更多功能的函数替换原有函数，来执行更高级的效果：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; triple(3) * 8
+[21:41:34] inner returns 9
+72</div>
+
+<p>如果不需要这些功能了，就把生成与覆盖的过程去掉即可。</p>
+
+<p>这就是装饰器的基本思路，使用嵌套函数实现的生产函数效果来替换原有函数，实现更丰富的功能。不过这种使用高阶函数的方式略显复杂，而且还需要定义很多新函数来执行传入参数功能。实际上，Python 中可以使用装饰器来很好地实现以上操作。相对于赋值创建一个新函数的方法去改变原有函数的功能，可以在函数定义的前一行，通过 <code>@</code> 符号加上高阶函数名，来作为一个函数的装饰器。例如，以上修改后的高阶函数便可以作为一个装饰器来装饰函数：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">@</span><span style="color: #8b56bf;">log</span></div><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">four_times</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">x</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> x * </span><span style="color: #bf8b56;">4</span></div></div>
+
+<p>是 Python 提供的一种更简洁的写法。也就是说，函数的装饰器使用下列形式来装饰一个函数：</p>
+
+<div class="codeblock code-template">
+    @decorator<br>
+    <strong>def</strong> function():<br>
+    &nbsp; &nbsp; ... 
+</div>
+
+<p>等价于下面这种普通形式：</p>
+
+<div class="codeblock code-template">
+    <strong>def</strong> function():<br>
+    &nbsp; &nbsp; ...<br>
+    function = decorator(function) 
+</div>
+
+<p>装饰器实际上就是一个函数，它将一个函数装饰成一个它修改之后的新的函数。需要注意的是，装饰器的函数是一个高阶函数，且必须要有一个位置参数。</p>
+
+<p>可以看出，<mark>装饰器可以在不影响函数结果的同时，为函数增加一些新的功能</mark>，也就是“装饰”的字面意义。</p>
+
+<p>下图表达了这种装饰的思路，可以看到装饰器就像一张图片的花边，让图片内容变得更丰富，但又不改变图片原有的含义：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@python-fp/09-decorator-concept.jpg" alt="" width="330">
+    <figcaption>图片素材来源于网络</figcaption>
+</figure>
+
+<p>例如，以下实现了一个装饰器 <code>@timer</code> ，可以在调用函数时同时检查函数运行的时间，从而统计出是哪一个函数拖慢了程序的运行：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">timer</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">func</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">wrapper</span><span style="color: #405c79;">(*</span><span style="color: #bf8b56;">args</span><span style="color: #405c79;">, **</span><span style="color: #bf8b56;">kwargs</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; start = perf_counter()</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; result = func(*args, **kwargs)</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">'</span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">func.</span><span style="color: #8b56bf;">__name__</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;"> execs </span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">perf_counter() - start</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;"> second(s)'</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> result</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> wrapper</span></div></div>
+
+<p>一个函数的定义可以使用多个装饰器，结果与装饰器的位置顺序有关。例如：</p>
+
+<div class="codeblock code-template">
+    @outer_decor<br>
+    @inner_decor<br>
+    <strong>def</strong> func(..):<br>
+    &nbsp; &nbsp; ... 
+</div>
+
+<p>它等价于：</p>
+
+<div class="codeblock code-template">
+    <strong>def</strong> func(...):<br>
+    &nbsp; &nbsp; ... <br>
+    func = outer_decor(inner_decor(func))
+</div>
+
+<p>每一次添加装饰器，函数的功能就又丰富了一层。</p>
+
+<h3>带参数的装饰器</h3>
+
+<p>由于装饰器的本质就是高阶函数，当然可以在装饰函数时就加上参数。让装饰器加上参数可以进一步丰富装饰器的功能。</p>
+
+<p>前文说过，装饰器</p>
+
+<div class="codeblock code-template">
+    @decorator<br>
+    <strong>def</strong> function():<br>
+    &nbsp; &nbsp; ... 
+</div>
+
+<p>等价于下面这种普通形式：</p>
+
+<div class="codeblock code-template">
+    <strong>def</strong> function():<br>
+    &nbsp; &nbsp; ...<br>
+    function = decorator(function) 
+</div>
+
+<p>如果此时让装饰器加上一个参数，例如 <code>@decorator(<em>arg</em>)</code> 。那么此时，真正作为高阶函数的表达式应该是 <code>@decorator(<em>arg</em>)</code> ，这个表达式可以接收一个函数作为参数，并且生成一个新的函数。也就是说，这个高阶函数再次嵌套了一个函数。</p>
+
+<p>例如，以下修改之前定义的 <code>log</code> 函数，使它能够在装饰函数时可以通过参数自由控制显示的内容。这样，该函数便可以再嵌套一次，以完成二次传参作用：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">log</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">time</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">True</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">check_arg</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">False</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">outer_wrapper</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">func</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">inner_wrapper</span><span style="color: #405c79;">(*</span><span style="color: #bf8b56;">args</span><span style="color: #405c79;">, **</span><span style="color: #bf8b56;">kwargs</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; result = func(*args, **kwargs)</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> time:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">'[</span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">strftime(</span><span style="color: #405c79;">"</span><span style="color: #56bf8b;">%H:%M:%S</span><span style="color: #405c79;">"</span><span style="color: #405c79;">, localtime())</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">]'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">end</span><span style="color: #405c79;">=</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;"> </span><span style="color: #405c79;">'</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(func.</span><span style="color: #8b56bf;">__name__</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">end</span><span style="color: #405c79;">=</span><span style="color: #405c79;">''</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> check_arg:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">(</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, *args, *[</span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">'</span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">k</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">=</span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">v</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">'</span><span style="color: #405c79;"> </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> k, v in kwargs.items()], </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">)</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">end</span><span style="color: #405c79;">=</span><span style="color: #405c79;">''</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">' returns </span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">result</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">'</span><span style="color: #405c79;">)</span></div><br><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> result</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> inner_wrapper</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> outer_wrapper</span></div></div>
+
+<p>先分析一下该函数，当该函数作为装饰器装饰 <code>function</code> 函数时，等价于这种形式：</p>
+
+<div class="codeblock code-template">
+    function = log(<em>time</em>, <em>check_arg</em>)(function)
+</div>
+
+<p>该函数自左向右执行，首先将 <code>log(<em>time</em>, <em>check_arg</em>)</code> 返回 <code>outer_wrapper</code> ，变成 <code>outer_wrapper(function)</code> ，进一步执行返回 <code>inner_wrapper</code> ，赋值给变量 <code>function</code> ，因此传参和执行都由 <code>inner_wrapper</code> 来完成，该函数在执行时，会调用 <code>log(<em>time</em>, <em>check_arg</em>)</code> 接收的参数，并给函数增加更为复杂的功能。</p>
+
+<p>以下编写了两个函数：<code>isprime()</code> 用于判断一个数是否为质数；<code>prime_factorization()</code> 则根据结果将一个大数分解为它的质因数。如果给第一个函数加上 <code>@log</code> 装饰器，那么在调用函数时就可以很清楚地看到程序执行的过程：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">@</span><span style="color: #8b56bf;">log</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">check_arg</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">True</span><span style="color: #405c79;">)</span></div><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">isprime</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">number</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">int</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i in </span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">, number // </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> number % i == </span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">False</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">True</span></div><br><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">prime_factorization</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">number</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">int</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; factors = []</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">while</span><span style="color: #405c79;"> not isprime(number):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i in </span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">, number // </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> number % i == </span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; factors.append(i)</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; number //= i</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">break</span></div><div><span style="color: #405c79;">&#160; &#160; factors.append(number)</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> factors</span></div><br><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(prime_factorization(</span><span style="color: #bf8b56;">6108984</span><span style="color: #405c79;">))</span></div></div>
+
+<p>通过结果可以观察到质因数的分解过程：</p>
+
+<div class="codeblock code-console">python -u demo.py
+[11:05:32] isprime( 6108984 ) returns False
+[11:05:32] isprime( 3054492 ) returns False
+[11:05:32] isprime( 1527246 ) returns False
+[11:05:32] isprime( 763623 ) returns False
+[11:05:32] isprime( 254541 ) returns False
+[11:05:32] isprime( 84847 ) returns False
+[11:05:32] isprime( 12121 ) returns False
+[11:05:32] isprime( 713 ) returns False
+[11:05:32] isprime( 31 ) returns True
+[2, 2, 2, 3, 3, 7, 17, 23, 31]</div>
+
+<p>当然，以上编写的程序运行效率还有许多优化空间，不过对于较小的数字还算够用。</p>
+
+<h3>完善装饰器</h3>
+
+<p>装饰器的基本结构已经大致完成，但是仍然有一些小缺陷。例如，以下装饰器可以将任意函数的返回值包装成 HTML 标签：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">html_tag</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">tag</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">str</span><span style="color: #405c79;">, **</span><span style="color: #bf8b56;">attrs</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">outer_func</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">func</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">inner_func</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">contain</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">str</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; attr = </span><span style="color: #405c79;">''</span><span style="color: #405c79;">.join([</span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">' </span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">k</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">="</span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">v</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">"'</span><span style="color: #405c79;"> </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> k, v in attrs.items()])</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">&lt;</span><span style="color: #bf8b56;">{0}{1}</span><span style="color: #56bf8b;">&gt;</span><span style="color: #bf8b56;">{2}</span><span style="color: #56bf8b;">&lt;/</span><span style="color: #bf8b56;">{0}</span><span style="color: #56bf8b;">&gt;</span><span style="color: #405c79;">'</span><span style="color: #405c79;">.format(tag, attr, func(contain))</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> inner_func</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> outer_func</span></div></div>
+
+<p>这个装饰器本身没有任何问题，以下是一个装饰示例：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">@</span><span style="color: #8b56bf;">html_tag</span><span style="color: #405c79;">(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">p</span><span style="color: #405c79;">'</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">@</span><span style="color: #8b56bf;">html_tag</span><span style="color: #405c79;">(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">a</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">href</span><span style="color: #405c79;">=</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">javascript: upload(this);</span><span style="color: #405c79;">'</span><span style="color: #405c79;">)</span></div><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">legalize</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">string</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #405c79;">"""</span><span style="color: #56bf8b;">Make the string a valid filename</span><span style="color: #405c79;">"""</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> sub(</span><span style="color: #bf568b;font-weight: bold;">r</span><span style="color: #405c79;">'</span><span style="color: #bf8b56;">[</span><span style="color: #568bbf;">\\\/</span><span style="color: #bf8b56;">:*?"&lt;&gt;|]</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;"> </span><span style="color: #405c79;">'</span><span style="color: #405c79;">, string)</span></div><br><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(legalize(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">&lt;User&gt;: name</span><span style="color: #405c79;">'</span><span style="color: #405c79;">))</span></div></div>
+
+<p>这里为函数提供了帮助文档。运行结果为：</p>
+
+<div class="codeblock code-console">python -u demo.py
+&lt;p&gt;&lt;a href="javascript: upload(this);"&gt; User   name&lt;/a&gt;&lt;/p&gt;</div>
+
+<p>但是如果查看它的帮助文档，结果就变得奇怪了：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; help(legalize)
+Help on function inner_func in module __main__:
+
+inner_func(contain: str)</div>
+
+<p>这个帮助文档看起来根本不是之前编写的函数。这是因为，当装饰器装饰函数后，被装饰函数被当做一个参数传递给了装饰器，然后就被同名变量取代了，实际上执行的是装饰器提供的 <code>inner_func()</code> 函数，因此获取的是这个函数的帮助文档。</p>
+
+<p>要想完善该问题，可以在装饰器函数内部返回 inner_func 前进行一些改动，手动将原有函数的属性拷贝给返回的函数：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">html_tag</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">tag</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">str</span><span style="color: #405c79;">, **</span><span style="color: #bf8b56;">attrs</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">outer_func</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">func</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">inner_func</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">contain</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">str</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf8b56;">...</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; inner_func.</span><span style="color: #8b56bf;">__name__</span><span style="color: #405c79;"> = func.</span><span style="color: #8b56bf;">__name__</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; inner_func.</span><span style="color: #8b56bf;">__doc__</span><span style="color: #405c79;"> = func.</span><span style="color: #8b56bf;">__doc__</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #a8a8a8;"># too many attributes need to update</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> inner_func</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> outer_func</span></div></div>
+
+<p>这样的做法稍显复杂，因为函数的属性实际上是非常多的（例如，<code>__dict__</code> 包含了各种额外属性，如果不更新会导致这些属性丢失）。实际上，Python 提供了一种方法，可以快速拷贝函数对象的所有属性给另一个函数，通过使用 <code>functools</code> 模块的 <code>@wraps()</code> 装饰器来完成该操作：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">from</span><span style="color: #405c79;"> functools </span><span style="color: #bf568b;font-weight: bold;">import</span><span style="color: #405c79;"> wraps</span></div><br><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">html_tag</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">tag</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">str</span><span style="color: #405c79;">, **</span><span style="color: #bf8b56;">attrs</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">outer_func</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">func</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; @</span><span style="color: #8b56bf;">wraps</span><span style="color: #405c79;">(func)</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">inner_func</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">contain</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">str</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf8b56;">...</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> inner_func</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> outer_func</span></div></div>
+
+<p>这样再次检查帮助文档的结果就正确了：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; help(legalize)
+Help on function legalize in module __main__:
+
+legalize(string)
+    Make the string a valid filename</div>
+
+<p>至此，装饰器便已经非常完善了。装饰器作为在不修改函数本义的情况下，可以增加函数的功能，有效增加了代码的复用性，并使写出的代码结构更清晰。在一些大型框架中，通过编写强大的装饰器，只需要非常简短的函数就可以装饰出非常丰富的功能，大大降低了编程的复杂程度。</p>
+
+<p>例如，以下是第三方框架 Flask 的一个非常简单的示例：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">from</span><span style="color: #405c79;"> flask </span><span style="color: #bf568b;font-weight: bold;">import</span><span style="color: #405c79;"> Flask, render_template</span></div><br><div><span style="color: #405c79;">app = Flask(</span><span style="color: #8b56bf;">__name__</span><span style="color: #405c79;">)</span></div><br><div><span style="color: #405c79;">@</span><span style="color: #8b56bf;">app</span><span style="color: #405c79;">.</span><span style="color: #8b56bf;">route</span><span style="color: #405c79;">(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">/</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">methods</span><span style="color: #405c79;">=[</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">GET</span><span style="color: #405c79;">'</span><span style="color: #405c79;">])</span></div><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">main</span><span style="color: #405c79;">():</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> render_template(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">index.html</span><span style="color: #405c79;">'</span><span style="color: #405c79;">)</span></div><br><div><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">__name__</span><span style="color: #405c79;"> == </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">__main__</span><span style="color: #405c79;">'</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&#160; &#160; app.run(</span><span style="color: #bf8b56;">debug</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">True</span><span style="color: #405c79;">)</span></div></div>
+
+<p>只需要一个装饰器，便可以将一个只有两行的函数变成一个网络应用，当在浏览器中访问本地端口时就会将 <code>index.html</code> 中的内容显示在浏览器上，但在代码中几乎完全不用涉及这方面的内容，这就是装饰器的强大之处。</p>
+
+<!-- finished(all):2022-06-01 -->
+
+
+
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/data-science/machine-learning/02-logistic-regression/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/12/机器学习-逻辑回归-520x293.png" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/12/机器学习-逻辑回归-520x293.png 520w, /wp-content/uploads/2022/12/机器学习-逻辑回归-950x534.png 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/data-science/machine-learning/02-logistic-regression/" rel="bookmark">机器学习-逻辑回归</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-fp/04-builtin-functions/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-300x169.jpg 300w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-1024x576.jpg 1024w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-768x432.jpg 768w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-1536x864.jpg 1536w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-950x534.jpg 950w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-fp/04-builtin-functions/" rel="bookmark">Python函数式编程04 常用内置函数</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/data-science/machine-learning/03-naive-bayes/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/12/机器学习-朴素贝叶斯-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/12/机器学习-朴素贝叶斯-520x293.jpg 520w, /wp-content/uploads/2022/12/机器学习-朴素贝叶斯-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/data-science/machine-learning/03-naive-bayes/" rel="bookmark">机器学习-朴素贝叶斯</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/computer-science/character-encoding/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>字节、字符与字符编码</span></a></li>
+		<li class="previous"><a href="/programming/python-fp/08-library-itertools/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>Python函数式编程08 itertools模块：更多迭代器</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

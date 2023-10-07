@@ -1,0 +1,1174 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>LVGL库入门教程04-样式 - 冰封残烛的个人小站</title>
+	<meta name="description" content="在 LVGL 中，样式都是以对象的方式存在，一个对象可以描述一种样式。每个控件都可以独立添加样式，创建的样式之间互不影响。本节介绍如何创建样式并添加给控件，并介绍了常用的样式属性，最后介绍 LVGL 中的直线和圆弧及其样式" />
+	<link rel="canonical" href="/embedded/mcu-application/lvgl-04-styles/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="LVGL库入门教程04-样式 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="在 LVGL 中，样式都是以对象的方式存在，一个对象可以描述一种样式。每个控件都可以独立添加样式，创建的样式之间互不影响。本节介绍如何创建样式并添加给控件，并介绍了常用的样式属性，最后介绍 LVGL 中的直线和圆弧及其样式" />
+	<meta property="og:url" content="/embedded/mcu-application/lvgl-04-styles/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2022-06-18T02:53:33+00:00" />
+	<meta property="article:modified_time" content="2023-10-05T13:21:57+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2022/06/LVGL库入门教程04-样式.jpg" />
+	<meta property="og:image:width" content="1920" />
+	<meta property="og:image:height" content="1080" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="8分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/embedded/mcu-application/lvgl-04-styles/#primaryimage",
+	            "url": "/wp-content/uploads/2022/06/LVGL库入门教程04-样式.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/06/LVGL库入门教程04-样式.jpg",
+	            "width": 1920,
+	            "height": 1080
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/embedded/mcu-application/lvgl-04-styles/#webpage",
+	            "url": "/embedded/mcu-application/lvgl-04-styles/",
+	            "name": "LVGL库入门教程04-样式 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/embedded/mcu-application/lvgl-04-styles/#primaryimage"
+	            },
+	            "datePublished": "2022-06-18T02:53:33+00:00",
+	            "dateModified": "2023-10-05T13:21:57+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "在 LVGL 中，样式都是以对象的方式存在，一个对象可以描述一种样式。每个控件都可以独立添加样式，创建的样式之间互不影响。本节介绍如何创建样式并添加给控件，并介绍了常用的样式属性，最后介绍 LVGL 中的直线和圆弧及其样式",
+	            "breadcrumb": {
+	                "@id": "/embedded/mcu-application/lvgl-04-styles/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/embedded/mcu-application/lvgl-04-styles/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/embedded/mcu-application/lvgl-04-styles/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "LVGL库入门教程04-样式"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/361" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=361' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fembedded%2Fmcu-application%2Flvgl-04-styles%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fembedded%2Fmcu-application%2Flvgl-04-styles%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><link rel="stylesheet" href="/wp-content/static/css/markdown@arduino.css">
+<style>
+    .math { color:blue; font-size: 13px; }
+    div.vscode-block { color: #403F53; background-color: #FBFBFB; }
+</style>
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-361 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-361" class="post-361 post type-post status-publish format-standard has-post-thumbnail hentry category-mcu-application">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">LVGL库入门教程04-样式</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/embedded/mcu-application/" rel="category tag">单片机与应用</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年6月18日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+
+<h2>LVGL样式概述</h2>
+<h3>创建样式</h3>
+<p>在 LVGL 中，样式都是以对象的方式存在，一个对象可以描述一种样式。每个控件都可以独立添加样式，创建的样式之间互不影响。</p>
+<p>可以使用 <code>lv_style_t</code> 类型创建一个样式并初始化：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_style_t</span> style;
+<span class="hljs-built_in">lv_style_init</span>(&amp;style);
+</pre></div>
+<p>样式是延迟渲染的，因此需要使用 <code>static</code> 存储类别说明符或将其声明为全局变量。</p>
+<p>样式是多方面的，不仅包括颜色和形状，还包括边距、边框，甚至动画变换效果等细节。</p>
+<blockquote>
+<p>LVGL 中的样式从 CSS 中吸取了很多灵感，因此对样式的操作都类似 CSS</p>
+</blockquote>
+<p>接下来，可以对得到的样式对象设置一些样式规则：</p>
+<div class="hljs codeblock"><pre><span class="hljs-comment">/* ... create and init style ... */</span>
+<span class="hljs-built_in">lv_style_set_radius</span>(&amp;style_btn_safe, <span class="hljs-number">15</span>);
+<span class="hljs-built_in">lv_style_set_bg_opa</span>(&amp;style_btn_safe, LV_OPA_COVER);
+<span class="hljs-built_in">lv_style_set_bg_color</span>(&amp;style_btn_safe, <span class="hljs-built_in">lv_palette_main</span>(LV_PALETTE_GREEN));
+<span class="hljs-built_in">lv_style_set_border_width</span>(&amp;style_btn_safe, <span class="hljs-number">5</span>);
+</pre></div>
+<p>所有的设置样式函数都是 <code>lv_style_set_...()</code> 形式，完整的样式规则将在之后介绍。未指定的样式规则将保持控件的默认样式。</p>
+<p>然后就可以将样式分配给控件，例如，以下创建了一个按钮并利用 <code>lv_obj_add_style()</code> 函数设置其样式为刚才创建的样式了：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">lv_obj_t</span>* btn = <span class="hljs-built_in">lv_btn_create</span>(<span class="hljs-built_in">lv_scr_act</span>());
+<span class="hljs-built_in">lv_obj_set_size</span>(btn, <span class="hljs-number">120</span>, <span class="hljs-number">50</span>);
+<span class="hljs-keyword">lv_obj_t</span>* label = <span class="hljs-built_in">lv_label_create</span>(btn);
+<span class="hljs-built_in">lv_label_set_text</span>(label, <span class="hljs-string">&quot;Button&quot;</span>);
+<span class="hljs-built_in">lv_obj_add_style</span>(btn, &amp;style_btn_safe, <span class="hljs-number">0</span>);
+</pre></div>
+<p>这样按钮的外观就会被改变了，效果为：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-04-style-init.jpg" alt="image" width="160"></figure>
+<p>以上修改了按钮的颜色，如果对颜色的创建过程不太理解也不要紧，以后会介绍颜色的代码描述。可以简单地将 GREEN 改成其它颜色名来改变不同的颜色。设置样式的函数最后有一个参数 <code>0</code> ，它代表的是样式的选择器，将会在接下来介绍。</p>
+<p>一个文件内可以创建多种不同的样式对象，这样同一个界面中按钮可以表现出多种不同的样式。</p>
+<h3>样式的级联</h3>
+<p>所谓“级联”(cascading)，指的是将多个样式分配给一个对象。此时如果多个样式间设置的样式属性有重复，那么将使用最后设置的样式值。也就是说，后设置的样式具有更高的优先级。</p>
+<p>控件在创建时可以视为同时添加了一个默认的样式，因此在代码中指定的任意样式都会覆盖默认的样式。</p>
+<p>还有一种特殊的局部样式(local styles)，局部样式具有最高的优先级，但只对单个控件有效。局部样式的创建类似如下：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_obj_set_style_bg_color</span>(btn, <span class="hljs-built_in">lv_palette_main</span>(LV_PALETTE_RED), <span class="hljs-number">0</span>);
+</pre></div>
+<p>它们都是 <code>lv_obj_set_style_...()</code> 形式的函数。</p>
+<p>局部样式一旦被设置，只能再次通过局部样式修改回来。因此，局部样式需要谨慎使用。</p>
+<h3>选择器</h3>
+<p>LVGL 的选择器(selector)与 CSS 不同。在 CSS 中，样式通过选择器选择需要作用的元素；而 LVGL 中，样式通过选择器作用于控件的部分。</p>
+<p>要明白什么是控件的部分，需要分析控件的组成。例如，以下代码可以创建一个滑块(slider)控件：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">lv_obj_t</span>* slider01 = <span class="hljs-built_in">lv_slider_create</span>(<span class="hljs-built_in">lv_scr_act</span>());
+</pre></div>
+<p>滑块是一种调整类型的控件，用户可以通过拖动它的把手(knob)来调节滑块当前的数值。滑块默认的表现形式为：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-02-slider-create.gif" alt="alt" width="280"></figure>
+<p>仔细观察滑块的组成，滑块可以由主体外形、把手(knob)和进度指示条(indicator)组成。可以通过选择器单独设置这三个构成部分的样式。例如，假设需要更改这三个部分的样式，就可以通过选择器分别指定修改的结构：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_style_t</span> style_slider_main;
+<span class="hljs-built_in">lv_style_init</span>(&amp;style_slider_main);
+<span class="hljs-built_in">lv_style_set_bg_opa</span>(&amp;style_slider_main, LV_OPA_COVER);
+<span class="hljs-built_in">lv_style_set_bg_color</span>(&amp;style_slider_main, <span class="hljs-built_in">lv_palette_main</span>(LV_PALETTE_YELLOW));
+<span class="hljs-comment">/* using selectors */</span>
+<span class="hljs-built_in">lv_obj_add_style</span>(slider01, &amp;style_slider_main, LV_PART_MAIN);
+<span class="hljs-built_in">lv_obj_set_style_radius</span>(slider01, <span class="hljs-number">0</span>, LV_PART_KNOB);
+<span class="hljs-built_in">lv_obj_set_style_bg_color</span>(slider01, <span class="hljs-built_in">lv_palette_main</span>(LV_PALETTE_RED), LV_PART_INDICATOR);
+</pre></div>
+<p>这里分别使用全局样式和局部样式修改控件的各个部分。修改之后，把手部分变成了方形，主体和进度进度的颜色都发生了变化：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-04-slider-style.jpg" alt="image" width="280"></figure>
+<p>选择器的一个更妙的用途是和控件状态做按位或运算，从而可以修改某个部分在某个状态下的样式。例如，选择器</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_obj_add_style</span>(slider01, &amp;style_slider_main, 
+                 LV_PART_MAIN | LV_STATE_PRESSED);
+</pre></div>
+<p>使滑块的主体只有在按下时才会使用该样式（颜色被改变）：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-04-slider-state-style.gif" alt="image" width="280"></figure>
+<p>LVGL 的选择器在表现形式上效果非常像 CSS 的伪元素和伪类选择器。</p>
+<p>滑块在拖动过程中，会不断触发 <code>LV_EVENT_VALUE_CHANGED</code> 事件，可以使用函数</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">inline</span> <span class="hljs-keyword">int32_t</span> <span class="hljs-title">lv_slider_get_value</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">lv_obj_t</span>* obj)</span></span>;
+</pre></div>
+<p>获取当前获取的滑块数值（介于 0~100 ）。更多的滑块 API 可以参考官方文档的介绍。</p>
+<p>接下来详细地介绍样式可以设置的一些属性。</p>
+<h2>样式属性</h2>
+<h3>尺寸和位置</h3>
+<p>要理解尺寸和位置是如何起作用的，首先要理解 LVGL 的盒子模型。官方文档给出了一张图，可以很好地描述一个控件的框架结构：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-04-boxmodel.png" alt="image" width="460"></figure>
+<p>在设置尺寸的时候，长和宽指的是包括边框(border)厚度的长宽，也就是不包括轮廓(outline)的总长宽。</p>
+<p>在设置位置的时候，设置的坐标指的是 border 左上角相对父容器的 Content area 的坐标，也就是说如果设置坐标为 0 的话，轮廓(outline)可能会被父容器的边框(border)遮盖。</p>
+<p>下表总结了尺寸与位置有关的可用属性有：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>width</code></td>
+<td>宽度</td>
+<td>由控件类别决定</td>
+</tr>
+<tr>
+<td><code>min_width</code></td>
+<td>最小宽度</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>max_width</code></td>
+<td>最大宽度</td>
+<td>屏幕的宽度</td>
+</tr>
+<tr>
+<td><code>height</code></td>
+<td>高度</td>
+<td>由控件类别决定</td>
+</tr>
+<tr>
+<td><code>min_height</code></td>
+<td>最小宽度</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>max_height</code></td>
+<td>最大宽度</td>
+<td>屏幕的高度</td>
+</tr>
+<tr>
+<td><code>align</code></td>
+<td>对齐方式</td>
+<td>左上方</td>
+</tr>
+<tr>
+<td><code>x</code></td>
+<td>对齐后在水平方向的偏移量</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>y</code></td>
+<td>对齐后在竖直方向的偏移量</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>注意这里有一个最小或最大的宽度和高度，在上一节介绍 flex 和 grid 布局时就展示过控件宽度随布局自动调整的情况，因此可以给它们提供一个阈值防止过大或过小。</p>
+<p>不过上一节还有一个地方没有提到：在设置宽度和高度时，除了使用确定的数值外，还可以使用百分比值 <code>lv_pct(x)</code> 来设置控件相对父容器的 Content area 的大小或位置。例如，样式</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_style_set_width</span>(&amp;style, <span class="hljs-built_in">lv_pct</span>(<span class="hljs-number">25</span>));
+<span class="hljs-built_in">lv_style_set_x</span>(&amp;style, <span class="hljs-built_in">lv_pct</span>(<span class="hljs-number">50</span>));
+</pre></div>
+<p>可以让一个控件的水平尺寸占据父容器的 1/2~3/4 的位置：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-04-position-pct.jpg" alt="image" width="360"></figure>
+<p>对于父容器而言，还可以使用 <code>LV_SIZE_CONTENT</code> 特殊单位调整其尺寸至可以容纳所有包含控件的合适值。例如，按钮就是一个这样的容器，它的默认样式就通过该值使得其宽度和高度可以自动适应包含的标签尺寸。</p>
+<h3>边框和边距</h3>
+<p>上图展示的文本框就有一个深灰色的边框。边框就无需额外描述了，与边框有关的样式属性有：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>border_width</code></td>
+<td>边框宽度，只能用绝对宽度描述</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>border_side</code></td>
+<td>绘制哪些部分的边框</td>
+<td><code>LV_SIDE_ALL</code></td>
+</tr>
+<tr>
+<td><code>border_post</code></td>
+<td>绘制顺序，设置 <code>true</code> 表示包含的子控件绘制完成了再绘制边框</td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td>...</td>
+<td>与颜色有关的属性将在之后介绍</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>边框和主体部分之间被边距(padding)隔开。和边距有关的样式属性有：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pad_top</td>
+<td>上边距</td>
+<td>0</td>
+</tr>
+<tr>
+<td>pad_bottom</td>
+<td>下边距</td>
+<td>0</td>
+</tr>
+<tr>
+<td>pad_left</td>
+<td>左边距</td>
+<td>0</td>
+</tr>
+<tr>
+<td>pad_right</td>
+<td>右边距</td>
+<td>0</td>
+</tr>
+<tr>
+<td>pad_row</td>
+<td>当控件拥有布局时，每行间的间距</td>
+<td>0</td>
+</tr>
+<tr>
+<td>pad_column</td>
+<td>当控件拥有布局时，每列间的间距</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>不过在设置布局时，还提供了几个简写属性：可以使用 <code>...pad_all()</code> 一并设置上下左右的边距；或使用 <code>...pad_hor()</code> 和 <code>...pad_ver()</code> 设置水平和垂直的边距；还可以使用 <code>...pad_gap()</code> 设置行和列的间距。</p>
+<h3>轮廓</h3>
+<p>轮廓(outline)类似边框，但轮廓并不算在一个控件的主体内，因此设置坐标、尺寸等属性时都不包含轮廓的尺寸。</p>
+<p>轮廓可设置的属性远比边框少。下表列出了轮廓的一些属性：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>outline_width</code></td>
+<td>轮廓宽度</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>outline_pad</code></td>
+<td>轮廓到主体的间距</td>
+<td>0</td>
+</tr>
+<tr>
+<td>...</td>
+<td>与颜色有关的属性将在之后介绍</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>轮廓和边框最根本的差异是两者不是同一个东西，因此可以在同一个元素同时使用不同样式的轮廓的边框来实现一些有趣的效果，例如：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_style_set_radius</span>(&amp;style, <span class="hljs-number">0</span>);
+<span class="hljs-built_in">lv_style_set_border_color</span>(&amp;style, <span class="hljs-built_in">lv_palette_main</span>(LV_PALETTE_GREY));
+<span class="hljs-built_in">lv_style_set_border_width</span>(&amp;style, <span class="hljs-number">5</span>);
+<span class="hljs-built_in">lv_style_set_border_opa</span>(&amp;style, LV_OPA_COVER);
+<span class="hljs-built_in">lv_style_set_border_side</span>(&amp;style, LV_BORDER_SIDE_BOTTOM | LV_BORDER_SIDE_RIGHT);
+<span class="hljs-built_in">lv_style_set_outline_width</span>(&amp;style, <span class="hljs-number">4</span>);
+<span class="hljs-built_in">lv_style_set_outline_pad</span>(&amp;style, <span class="hljs-number">1</span>);
+<span class="hljs-built_in">lv_style_set_outline_color</span>(&amp;style, <span class="hljs-built_in">lv_palette_lighten</span>(LV_PALETTE_GREY, <span class="hljs-number">1</span>));
+</pre></div>
+<p>表现效果为：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-04-outline-style.jpg" alt="image" width="230"></figure>
+<h3>阴影</h3>
+<p>阴影可以使控件看起来有立体感。下表列出了设置阴影的一些属性：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>shadow_width</code></td>
+<td>设置阴影的模糊半径</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>shadow_ofs_x</code></td>
+<td>设置阴影的水平偏移量</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>shadow_ofs_y</code></td>
+<td>设置阴影的垂直偏移量</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>shadow_spread</code></td>
+<td>设置阴影的放大量</td>
+<td>0</td>
+</tr>
+<tr>
+<td>...</td>
+<td>与颜色有关的属性将在之后介绍</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>例如，以下设置模糊半径为 50 的蓝色阴影：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_style_set_shadow_width</span>(&amp;style, <span class="hljs-number">50</span>);
+<span class="hljs-built_in">lv_style_set_shadow_color</span>(&amp;style, <span class="hljs-built_in">lv_palette_main</span>(LV_PALETTE_BLUE));
+</pre></div>
+<p>效果为：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-04-shadow-style-1.jpg" alt="image" width="200"></figure>
+<p>以下设置放大有偏移的红色阴影：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_style_shadow_color</span>(&amp;style, <span class="hljs-built_in">lv_palette_main</span>(LV_PALETTE_RED))
+<span class="hljs-built_in">lv_style_set_shadow_width</span>(&amp;style, <span class="hljs-number">15</span>)
+<span class="hljs-built_in">lv_style_set_shadow_ofs_x</span>(&amp;style, <span class="hljs-number">10</span>)
+<span class="hljs-built_in">lv_style_set_shadow_ofs_y</span>(&amp;style, <span class="hljs-number">20</span>)
+<span class="hljs-built_in">lv_style_set_shadow_spread</span>(&amp;style, <span class="hljs-number">10</span>)
+</pre></div>
+<p>效果为：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-04-shadow-style.jpg" alt="image" width="220"></figure>
+<p>LVGL 中无法给同一个控件设置多个阴影叠加，从而实现更复杂的效果，这是比较可惜的一点。</p>
+<h3>文本样式</h3>
+<p>在创建控件时经常要使用文字，下表列出了能影响文字效果的一些属性：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text_font</code></td>
+<td>设置文字的字体</td>
+<td>默认字体</td>
+</tr>
+<tr>
+<td><code>text_letter_space</code></td>
+<td>字符间隔</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>text_line_space</code></td>
+<td>设置多行文本的行间距</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>text_decor</code></td>
+<td>设置文本装饰（下划线或删除线）</td>
+<td><code>LV_TEXT_DECOR_NONE</code></td>
+</tr>
+<tr>
+<td><code>text_align</code></td>
+<td>设置文本对齐方式</td>
+<td><code>LV_TEXT_ALIGN_AUTO</code></td>
+</tr>
+<tr>
+<td>...</td>
+<td>与颜色有关的属性将在之后介绍</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>需要注意的是，文本的样式是可继承的，意思是如果子控件没有特别指定的话，它会使用父容器设置的文本样式。</p>
+<p>在一段文本内可能存在许多种样式，对此，可以使用类似 CSS 的 span 来拆分样式在文本内的作用域。为了创建 span ，首先需要创建一个 span-group ：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">lv_obj_t</span>* spangroup = <span class="hljs-built_in">lv_spangroup_create</span>(<span class="hljs-built_in">lv_scr_act</span>());
+<span class="hljs-built_in">lv_obj_set_size</span>(spangroup, <span class="hljs-number">160</span>, LV_SIZE_CONTENT);
+</pre></div>
+<p>创建的 span-group 和一般的控件没什么区别，可以给它添加一些样式：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_obj_set_style_border_color</span>(spangroup, <span class="hljs-built_in">lv_palette_main</span>(LV_PALETTE_BLUE), <span class="hljs-number">0</span>);
+<span class="hljs-built_in">lv_obj_set_style_border_width</span>(spangroup, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>);
+<span class="hljs-built_in">lv_obj_set_style_pad_all</span>(spangroup, <span class="hljs-number">5</span>, <span class="hljs-number">0</span>);
+</pre></div>
+<p>span-group 提供的以下函数使得它相比标签更适合用来处理大段的文本：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lv_spangroup_set_align(obj, align)</code></td>
+<td>设置文本的对齐</td>
+</tr>
+<tr>
+<td><code>lv_spangroup_set_overflow(obj, overflow)</code></td>
+<td>控制溢出文本的处理方式</td>
+</tr>
+<tr>
+<td><code>lv_spangroup_set_indent(obj, indent)</code></td>
+<td>设置文本的首行缩进，单位为像素</td>
+</tr>
+<tr>
+<td><code>lv_spangroup_set_mode(obj, mode)</code></td>
+<td>设置对多行文本的折行处理，可以参见枚举 <code>lv_span_mode_t</code></td>
+</tr>
+</tbody>
+</table>
+<p>有了 span-group 以后，可以使用以下代码从中创建一个 span 并设置文本：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">lv_span_t</span>* span = <span class="hljs-built_in">lv_spangroup_new_span</span>(spangroup);
+<span class="hljs-built_in">lv_span_set_text</span>(span, <span class="hljs-string">&quot;LVGL is an open-source graphics library&quot;</span>);
+</pre></div>
+<p>每一个 span 都提供了一个独立的样式接口，可以单独设置范围内文本的样式：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_style_set_text_color</span>(&amp;span-&gt;style, <span class="hljs-built_in">lv_palette_main</span>(LV_PALETTE_BLUE));
+</pre></div>
+<p>一个 span-group 可以创建多个 span ，并且它们的样式效果互不影响：</p>
+<div class="hljs codeblock"><pre>span = <span class="hljs-built_in">lv_spangroup_new_span</span>(spangroup);
+<span class="hljs-built_in">lv_span_set_text</span>(span, <span class="hljs-string">&quot;providing everything&quot;</span>);
+<span class="hljs-built_in">lv_style_set_text_decor</span>(&amp;span-&gt;style, LV_TEXT_DECOR_UNDERLINE);
+<span class="hljs-built_in">lv_style_set_text_font</span>(&amp;span-&gt;style, &amp;lv_font_montserrat_20);
+<span class="hljs-comment">/* ... */</span>
+span = <span class="hljs-built_in">lv_spangroup_new_span</span>(spangroup);
+<span class="hljs-built_in">lv_span_set_text</span>(span, <span class="hljs-string">&quot;to create embedded GUI&quot;</span>);
+</pre></div>
+<p>效果为：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-04-spangroup.jpg" alt="image" width="210"></figure>
+<p>可以注意到默认的 span-group 是没什么样式的。span-group 还有很多的 API ，具体可以参照官方文档的相关介绍。</p>
+<h3>其它样式</h3>
+<p>下表列出了一些其它的样式属性：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>radius</code></td>
+<td>设置控件的圆角，该属性会一并影响边框和轮廓</td>
+<td>0，即无圆角</td>
+</tr>
+<tr>
+<td><code>clip_corner</code></td>
+<td>如果有圆角，是否要将 Content-aera 超出圆角的部分去除</td>
+<td>否</td>
+</tr>
+<tr>
+<td><code>layout</code></td>
+<td>设置控件的布局方式</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>base_dir</code></td>
+<td>设置文字的书写方向，它会同时影响布局的方向</td>
+<td>默认书写方向</td>
+</tr>
+<tr>
+<td>...</td>
+<td>与颜色有关的属性将在之后介绍</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>在设置半径时可以使用百分数，例如 <code>lv_pct(50)</code> 将使控件变成圆形。</p>
+<p>以上列出了大部分的样式属性，但是除了颜色外还有许多样式没有介绍，例如变换、动画、渐变等，这些留到之后介绍。LVGL 中还存在一些特殊的样式，它们是为相应的控件设计的，接下来介绍这些控件及样式。</p>
+<h2>基本图形：直线和弧线</h2>
+<h3>直线</h3>
+<p>LVGL 中的直线(line)实际上指的是折线，因为它可以一次性连续绘制多条相接的线段。为了绘制折线，首先要准备一些端点的坐标：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_point_t</span> line_points[] = { {<span class="hljs-number">217</span>, <span class="hljs-number">36</span>}, {<span class="hljs-number">35</span>, <span class="hljs-number">49</span>}, {<span class="hljs-number">281</span>, <span class="hljs-number">163</span>}, {<span class="hljs-number">110</span>, <span class="hljs-number">162</span>}, {<span class="hljs-number">257</span>, <span class="hljs-number">111</span>} };
+</pre></div>
+<p>然后可以通过这些端点来创建折线：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">lv_obj_t</span>* line1 = <span class="hljs-built_in">lv_line_create</span>(<span class="hljs-built_in">lv_scr_act</span>());
+<span class="hljs-built_in">lv_line_set_points</span>(line1, line_points, <span class="hljs-number">5</span>);
+</pre></div>
+<p>效果为：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-04-line-create.jpg" alt="image" width="220"></figure>
+<p>创建的折线作为一个整体，实际上也是一个控件，当然可以给它加上各种属性：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">static</span> <span class="hljs-keyword">lv_style_t</span> style_line;
+<span class="hljs-built_in">lv_style_init</span>(&amp;style_line);
+<span class="hljs-built_in">lv_style_set_align</span>(&amp;style_line, LV_ALIGN_TOP_MID);
+<span class="hljs-built_in">lv_style_set_border_width</span>(&amp;style_line, <span class="hljs-number">4</span>);
+<span class="hljs-built_in">lv_obj_add_style</span>(line01, &amp;style_line, <span class="hljs-number">0</span>);
+</pre></div>
+<p>效果为：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-04-line-style.jpg" alt="image" width="220"></figure>
+<p>折线拥有一些特殊的样式属性，是其它控件所没有的。下表列出了折线的特殊属性：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>line_width</code></td>
+<td>设置线段宽度</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>line_dash_width</code></td>
+<td>设置虚线实部分的距离</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>line_dash_gap</code></td>
+<td>设置虚线虚部分的距离</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>line_rounded</code></td>
+<td>设置线段端点是否为圆角</td>
+<td>否</td>
+</tr>
+<tr>
+<td><code>line_color</code></td>
+<td>设置线段颜色</td>
+<td>黑色</td>
+</tr>
+<tr>
+<td><code>line_opa</code></td>
+<td>设置颜色透明度</td>
+<td>不透明</td>
+</tr>
+</tbody>
+</table>
+<p>注意，虚线只对水平和垂直的线段有效，并且只有两个属性都不为 0 才有虚线的效果。</p>
+<p>例如，样式：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_style_set_line_color</span>(&amp;style_line, <span class="hljs-built_in">lv_palette_main</span>(LV_PALETTE_BLUE));
+<span class="hljs-built_in">lv_style_set_line_width</span>(&amp;style_line, <span class="hljs-number">8</span>);
+</pre></div>
+<p>表现效果为：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-04-style-line-1.jpg" alt="image" width="260"></figure>
+<p>如果再添加上：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_style_set_line_dash_width</span>(&amp;style_line, <span class="hljs-number">10</span>)
+<span class="hljs-built_in">lv_style_set_line_dash_gap</span>(&amp;style_line, <span class="hljs-number">5</span>)
+<span class="hljs-built_in">lv_style_set_line_rounded</span>(&amp;style_line, <span class="hljs-literal">true</span>);
+</pre></div>
+<p>那么效果就变成：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-04-style-line-2.jpg" alt="image" width="260"></figure>
+<p>关于折线还有一个函数 <code>lv_line_set_y_invert(lv_obj_t *obj, bool en)</code> 可以用来控制绘制的折线垂直翻转（即翻转 y 轴）。除此之外折线并没有什么可以介绍的。在后续还会介绍图表，可以绘制更美观的折线效果。</p>
+<h3>圆弧</h3>
+<p>LVGL 中的圆弧(arc)尽管和直线同属于基础控件，但圆弧的功能远比直线丰富，甚至 API 比起滑块这些复杂的控件都多。</p>
+<p>首先简单创建一个圆弧，查看它的默认效果：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">lv_obj_t</span>* arc01 = <span class="hljs-built_in">lv_arc_create</span>(<span class="hljs-built_in">lv_scr_act</span>());
+</pre></div>
+<p>默认的效果为：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-04-arc-create.jpg" alt="image" width="140"></figure>
+<p>可以看出圆弧的在默认情况下，它的表现形式实际上就是弧形的滑块。如果想要得到纯粹的圆弧，可以将圆弧的把手删除：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_obj_remove_style</span>(arc01, <span class="hljs-literal">NULL</span>, LV_PART_KNOB);
+<span class="hljs-built_in">lv_obj_clear_flag</span>(arc01, LV_OBJ_FLAG_CLICKABLE);
+</pre></div>
+<p>这里做了两件事：首先是将把手的样式删除，这里第二个参数 <code>NULL</code> 表示删去全部样式；其次将圆弧的可点击标志位清除，使它不再能接收用户的点击事件。这样圆弧看起来就纯粹多了：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-04-arc-remove-knob.jpg" alt="image" width="140"></figure>
+<p>还可以进一步删去圆弧的指示条(indicator)，让它更像传统的圆弧。</p>
+<p>默认的圆弧是开口向下的 270° 圆弧。为了设置圆弧的形状，可以使用函数</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lv_arc_set_angles</span><span class="hljs-params">(<span class="hljs-keyword">lv_obj_t</span> *obj, <span class="hljs-keyword">uint16_t</span> start, <span class="hljs-keyword">uint16_t</span> end)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">lv_arc_set_bg_angles</span><span class="hljs-params">(<span class="hljs-keyword">lv_obj_t</span> *obj, <span class="hljs-keyword">uint16_t</span> start, <span class="hljs-keyword">uint16_t</span> end)</span></span>;
+</pre></div>
+<p>分别修改前景和背景的圆弧起止范围，单位为角度。注意，圆弧的角度 0° 是正右方向，90° 是正下方向，以此类推。这两个函数都有单独设置起或止位置的版本。例如，设置</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_arc_set_bg_angles</span>(arc01, <span class="hljs-number">0</span>, <span class="hljs-number">270</span>);
+<span class="hljs-built_in">lv_arc_set_end_angle</span>(arc01, <span class="hljs-number">180</span>);
+</pre></div>
+<p>可以将圆弧的角度调整为：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-04-arc-angles.jpg" alt="image" width="140"></figure>
+<p>圆弧也像直线一样具有特殊的样式，下表列出了圆弧具有的样式属性：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>arc_width</code></td>
+<td>设置圆弧宽度</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>arc_rounded</code></td>
+<td>设置圆弧端点是否为圆角</td>
+<td>否</td>
+</tr>
+<tr>
+<td><code>arc_color</code></td>
+<td>设置圆弧颜色</td>
+<td>黑色</td>
+</tr>
+<tr>
+<td><code>arc_opa</code></td>
+<td>设置圆弧透明度</td>
+<td>不透明</td>
+</tr>
+<tr>
+<td><code>arc_img_src</code></td>
+<td>设置圆弧填充图片</td>
+<td>无填充图片</td>
+</tr>
+</tbody>
+</table>
+<p>以上是官方文档的介绍，但这个默认值显然与实际不符。之所以会这样，原因是在 <code>lv_conf.h</code> 大约 514 行，启用过默认的样式：</p>
+<div class="hljs codeblock"><pre><span class="hljs-comment">/*A simple, impressive and very complete theme*/</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> LV_USE_THEME_DEFAULT 1</span>
+</pre></div>
+<p>而该样式在初始化时，就会修改包括圆弧在内的一些样式，因此圆弧、按钮等控件才默认表现为这个模样。</p>
+<p>圆弧可以作为一个基准让控件对齐。例如，可以使用</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_arc_rotate_obj_to_angle</span>(arc01, label, <span class="hljs-number">25</span>);
+</pre></div>
+<p>让一个标签旋转对齐圆弧的把手，第三个参数为半径的偏移量，效果为：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-04-arc-align.jpg" alt="image" width="140"></figure>
+<p>与其说是对齐把手，更准确的说法是对齐圆弧当前的值。例如，可以通过以下函数改变圆弧的值：</p>
+<div class="hljs codeblock"><pre><span class="hljs-built_in">lv_arc_set_value</span>(arc01, <span class="hljs-number">20</span>);
+</pre></div>
+<p>这样效果就很明显了：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@embedded-application/lvgl-04-arc-rotate-align.jpg" alt="image" width="140"></figure>
+<p>圆弧默认的取值范围是 0~100 ，也可以通过 <code>lv_arc_set_range(obj, min, max)</code> 函数修改这一取值范围。除此之外，还有另一个函数 <code>lv_arc_align_obj_to_angle(obj, obj_to_align, r_offset)</code> 只对齐控件而不发生旋转。另外需要注意，应该先对齐圆弧后，再设置标签的对齐，否则标签会因为不是包含关系而不随之更新位置。</p>
+<p>总体来说，圆弧因为不是纯粹的圆弧，因此它具有滑块的各种特征，例如可以响应 <code>LV_EVENT_VALUE_CHANGED </code> 事件，可以使用 <code>lv_arc_get_value(obj)</code> 获取值等。</p>
+
+<h2>参考资料/延伸阅读</h2>
+<p><a href="https://docs.lvgl.io/master/overview/style.html">https://docs.lvgl.io/master/overview/style.html</a></p>
+<p>官方文档——样式简介</p>
+<p><a href="https://docs.lvgl.io/master/overview/style-props.html">https://docs.lvgl.io/master/overview/style-props.html</a></p>
+<p>官方文档——所有的样式属性简介</p>
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/data-science/via-python/numpy03-slices/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/10/Python数据分析-numpy03数组索引与切片-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/10/Python数据分析-numpy03数组索引与切片-520x293.jpg 520w, /wp-content/uploads/2022/10/Python数据分析-numpy03数组索引与切片-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/data-science/via-python/numpy03-slices/" rel="bookmark">numpy03:数组索引与切片</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-fp/06-tuple-handling/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-300x169.jpg 300w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-1024x576.jpg 1024w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-768x432.jpg 768w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-1536x864.jpg 1536w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-950x534.jpg 950w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-fp/06-tuple-handling/" rel="bookmark">Python函数式编程06 元组与命名元组</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/data-science/via-python/numpy06-advanced-data-types/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/10/Python数据分析-numpy06高级数据类型-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/10/Python数据分析-numpy06高级数据类型-520x293.jpg 520w, /wp-content/uploads/2022/10/Python数据分析-numpy06高级数据类型-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/data-science/via-python/numpy06-advanced-data-types/" rel="bookmark">numpy06:高级数据类型</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/embedded/mcu-application/lvgl-05-color-and-image/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>LVGL库入门教程05-颜色和图像</span></a></li>
+		<li class="previous"><a href="/embedded/mcu-application/lvgl-03-layouts/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>LVGL库入门教程03-布局方式</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

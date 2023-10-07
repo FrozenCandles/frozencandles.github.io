@@ -1,0 +1,783 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>数据结构05-散列 - 冰封残烛的个人小站</title>
+	<link rel="canonical" href="/computer-science/data-structure/05-hash/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="数据结构05-散列 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="散列的概念 散列简介 前文介绍的树或链表都是一种链式&#046;&#046;&#046;" />
+	<meta property="og:url" content="/computer-science/data-structure/05-hash/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2022-08-10T02:50:08+00:00" />
+	<meta property="article:modified_time" content="2023-10-06T04:17:47+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2022/08/数据结构05-散列.jpg" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="826" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="7分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/computer-science/data-structure/05-hash/#primaryimage",
+	            "url": "/wp-content/uploads/2022/08/数据结构05-散列.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/08/数据结构05-散列.jpg",
+	            "width": 1200,
+	            "height": 826
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/computer-science/data-structure/05-hash/#webpage",
+	            "url": "/computer-science/data-structure/05-hash/",
+	            "name": "数据结构05-散列 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/computer-science/data-structure/05-hash/#primaryimage"
+	            },
+	            "datePublished": "2022-08-10T02:50:08+00:00",
+	            "dateModified": "2023-10-06T04:17:47+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "breadcrumb": {
+	                "@id": "/computer-science/data-structure/05-hash/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/computer-science/data-structure/05-hash/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/computer-science/data-structure/05-hash/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "数据结构05-散列"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/653" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=653' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fcomputer-science%2Fdata-structure%2F05-hash%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fcomputer-science%2Fdata-structure%2F05-hash%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><link rel="stylesheet" href="/wp-content/static/css/theme@neon-pie.wp.css">
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['\\\\(','\\\\)']],
+            displayMath: [["\\\\[","\\\\]"]]
+        }
+    });
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<style>
+    div.vscode-block {
+        color: #D6DEEB;
+        background-color: #011627;
+    }
+    .math { color:blue; font-size: 13px; }
+    span[token="keyword"]  { color: #c792ea; font-weight: bold; }
+    span[token="type"]     { color: #d6deeb; text-decoration: underline; }
+    span[token="variable"] { color: #c5e478; }
+    span[token="number"]   { color: #f78c6c; }
+    span[token="func"]     { color: #82aaff; }
+    span[token="property"] { color: #7fdbca; }
+    span[token="operator"] { color: #c792ea; }
+</style>
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-653 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-653" class="post-653 post type-post status-publish format-standard has-post-thumbnail hentry category-data-structure">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">数据结构05-散列</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/computer-science/data-structure/" rel="category tag">数据结构与算法</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年8月10日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+
+
+
+
+<h2>散列的概念</h2>
+
+<h3>散列简介</h3>
+
+<p>前文介绍的树或链表都是一种链式存储结构，在获取某个位置的节点时都需要沿着路径依次查找下一个节点的位置，而不能直接定位。</p>
+
+<p>数组（或者说顺序存储的线性表）则支持直接定址，如果知道一个元素在数组中的位置，则可以直接通过地址偏移得到，该过程可以以常数级且非常快的时间运行。例如，假设将某班学生的信息按学号排序放在数组中，那么只需要知道学生学号，就可以立即访问数组的对应位置，从而获取学生信息。</p>
+
+<p><strong>散列表</strong>(hash table)就是根据该原理实现的。散列表也叫哈希表，可以为不同值（这个值可以是任意类型的，包括浮点数、字符串等）在散列表中分配一个地址，但这个值不能直接得到，而是要经由一定计算从而转换为整数。该映射关系由<strong>散列函数</strong>计算。</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/08-hashtable-module.png" alt="">
+</figure>
+
+<p>理想的情况下每个元素的映射关系易于计算，且每个元素都能被分配到唯一的地址。例如假设机器中拥有一个很长的结构数组，索引值位置存放身份证号对应的个人信息，那么可以根据一定规律计算得到身份证号，再根据身份证号就可以直接找到存放个人信息的单元。然而这是不可能的，因为单元的数目总是有限的，但是要存储的元素可能是无法穷举的。</p>
+
+<h3>散列函数</h3>
+
+<p>散列函数需要谨慎编写，一个好的散列函数应该能尽可能给不同的值分配不同的地址，同时又可以避免地址被浪费。除此之外，如果两个关键字计算出的地址一致，发生<strong>冲突</strong>(collision)，散列函数应当额外采取一些动作来确保散列表都能容纳它们。</p>
+
+<p>考虑要为一些英文单词计算分配散列表中的地址。字符串无法直接转换为整数，需要采取一个算法。</p>
+
+<p>一种简单的实现是使用字符串的 ASCII 累计值作为散列值，这样做实现简单且计算很快。不过英文字符的 ASCII 累计值一般低于 2000（只考虑小写英文字符）；而实用的英文词汇至少也得几万个，平均下来每个位置都有十多个词汇发生冲突。这显然不是一种有效的散列函数。</p>
+
+<p>那么可以给每位字符的 ASCII 值乘上一个权重，且越靠后的字符权重越高。例如，可以使用多项式函数：</p>
+
+<div class="math">
+\\[
+    h_k = k_1 + 27 k_2 + 27^2 k_3 \,\dots
+\\]
+</div>
+
+<p>这样可以就可以增加字符间联系的作用。相应的代码实现如下：</p>
+
+<div class="vscode-block"><div><span style="color: #c792ea;">typedef</span> <span token="keyword">unsigned</span> <span token="keyword">int</span> <span token="type">index</span>;</div><br><div><span token="type">index</span> <span style="color: #82aaff;">HashWord</span>(<span token="keyword">const</span> <span token="keyword">char</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">key</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">table_size</span>) {</div><div>&#160; &#160; <span token="keyword">unsigned</span> <span token="keyword">long</span> <span token="variable">val</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&#160; &#160; <span token="keyword">while</span> (<span style="color: #7fdbca;">*</span><span style="color: #d7dbe0;">key</span> <span style="color: #c792ea;">!=</span> <span style="color: #d9f5dd;">'</span><span token="number">\0</span><span style="color: #d9f5dd;">'</span>)</div><div>&#160; &#160; &#160; &#160; <span token="variable">val</span> <span style="color: #c792ea;">=</span> (<span token="variable">val</span> <span style="color: #c792ea;">&lt;&lt;</span> <span token="number">5</span>) <span style="color: #7fdbca;">+</span> <span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">key</span><span style="color: #c792ea;">++</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">val</span> <span style="color: #7fdbca;">%</span> <span style="color: #d7dbe0;">table_size</span>;</div><div>}</div></div>
+
+<p>程序使用如下变式计算多项式的和：</p>
+
+<div class="math">
+\\[
+    h_k = (( \dots k_3) \times 27 + k_2 ) \times 27 + k_1 
+\\]
+</div>
+
+<p>使用 32 代替 27 的原因是可以通过移位加速运算。使用取模可以减少表长度，同时提升表的利用率。使用该算法时，部分计算出的对应关系如下：</p>
+
+<div class="codeblock code-template">
+    "hello"->28423<br>
+    "world"->34135<br>
+    "algorithm"->36119
+</div>
+
+<p>当然，该算法还是存在许多问题，不过今天的重点不是散列算法，而是需要提出一种合适的数据结构，使得发生冲突时能有相应的解决方案。接下来就介绍两种常用的方法。</p>
+
+<h2>碰撞解决方法</h2>
+
+<h3>分离链接法</h3>
+
+<p><strong>分离链接法</strong>(separator chaining)将散列到同一个值的所有元素保留到一个表中。下图展示了使用<a href="http://frozencandles.fun/archives/592">链表模型</a>下的分离链接法：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/08-separator-chain.png" alt="">
+</figure>
+
+<p>除了使用链表，还可以使用其余任意的表、二叉树，甚至是另一个散列表来保存冲突的元素。</p>
+
+<p>为了执行查找，散列函数指出应该使用哪一个表。如果表的个数较多且散列结果较平均，遍历表并不需要检查多少元素，总体效率还是不错的。</p>
+
+<p>为了执行插入，同样需要遍历表以确认元素是否已经在表中；如果还未存在，则可以插入表的任意位置，取决于使用场景。</p>
+
+<p>分离链接散列表的类型声明如下：</p>
+
+<div class="vscode-block"><div><span style="color: #c792ea;">typedef</span> <span token="type">linkedlist</span> <span token="type">hashsep_node</span>;</div><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">hashsep_table</span> {</div><div>&#160; &#160; <span token="keyword">int</span> <span style="color: #7fdbca;">size</span>;</div><div>&#160; &#160; <span token="type">hashsep_node</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">list</span>;</div><div>} <span style="color: #7fdbca;">*</span> <span token="type">hashsep_table</span>;</div></div>
+
+<p>以上定义有些混乱，可以结合上面图示理解：<code>hashsep_table</code> 指针指向一个分离链接散列表；<code>list</code> 域指向表的主体部分，注意，它是一个指向指针的二重指针；<code>hashsep_node</code> 是一个链表，指向具体节点。下图有助于理解它们的关系：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/08-separator-chain-structure.png" alt="">
+</figure>
+
+<p>因此，分离链接散列表的创建过程为：</p>
+
+<div class="vscode-block"><div><span token="type">hashsep_table</span> <span style="color: #82aaff;">HashSepTable_New</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">size</span>) {</div><div>&#160; &#160; <span token="type">hashsep_table</span> <span token="variable">table</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span token="keyword">struct</span><span style="color: #82aaff;"> </span><span style="color: #82aaff;text-decoration: underline;">hashsep_table</span><span style="color: #82aaff;">))</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span token="variable">table</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #82aaff;">NULL</span>;<span style="color: #637777;"> &#160; &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of memory</span></div><div>&#160; &#160; <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">size</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">size</span>;</div><div>&#160; &#160; <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">list</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">hashsep_node</span><span style="color: #82aaff;">) </span><span style="color: #7fdbca;">*</span><span style="color: #82aaff;"> </span><span token="variable">table</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">size</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span token="variable">table</span>-&gt;<span style="color: #7fdbca;">list</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #82aaff;">NULL</span>;<span style="color: #637777;"> &#160; &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of memory</span></div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span token="variable">i</span>] <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">linkedlist_node</span><span style="color: #82aaff;">))</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span token="variable">i</span>] <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #82aaff;">NULL</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of memory</span></div><div>&#160; &#160; &#160; &#160; <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span token="variable">i</span>]-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">NULL</span>;</div><div>&#160; &#160; } &#160; &#160;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">table</span>;</div><div>}</div></div>
+
+<p>程序中需要为散列表、散列表链表组、散列表链表组每个链表的首个节点都分配内存。定义时链表使用了表头，因此对每个链表都需要单独调整表头。</p>
+
+<p>查找操作将返回一个包含元素的链表单元。在通过散列函数取得合适的链表后，接下来的查找等同于链表的查找：</p>
+
+<div class="vscode-block"><div><span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #82aaff;">HashSepTable_Find</span>(<span token="type">hashsep_table</span> <span style="color: #d7dbe0;">table</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">key</span>) {</div><div>&#160; &#160; <span token="type">linkedlist</span> <span token="variable">list</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span style="color: #82aaff;">Hash</span>(<span style="color: #d7dbe0;">key</span>, table_size)];</div><div>&#160; &#160; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">node</span> <span style="color: #c792ea;">=</span> <span token="variable">list</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&#160; &#160; <span token="keyword">while</span> (<span token="variable">node</span> <span style="color: #c792ea;">!=</span> <span style="color: #82aaff;">NULL</span> <span style="color: #c792ea;">&amp;&amp;</span> <span style="color: #c792ea;">!</span><span style="color: #82aaff;">Equals</span><span style="color: #82aaff;">(</span><span token="variable">node</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">elem</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">key</span><span style="color: #82aaff;">)</span>)</div><div>&#160; &#160; &#160; &#160; <span token="variable">node</span> <span style="color: #c792ea;">=</span> <span token="variable">node</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">node</span>;</div><div>}</div></div>
+
+<p>注意，由于使用散列时元素的值未必可以直接比较，因此这里抽象为 <code>Equals()</code> 函数，字符串的具体实现可以使用 <code>strcmp()</code> 。</p>
+
+<p>接下来是插入，如果插入的项已经存在，则什么都不用做；否则，将其插入链表的前端：</p>
+
+<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">HashSepTable_Insert</span>(<span token="type">hashsep_table</span> <span style="color: #d7dbe0;">table</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">key</span>) {</div><div>&#160; &#160; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">node</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">HashSepTable_Find</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">table</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">key</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span token="variable">node</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>) {<span style="color: #637777;"> &#160; </span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> key not found</span></div><div>&#160; &#160; &#160; &#160; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">new_node</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">linkedlist_node</span><span style="color: #82aaff;">))</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">new_node</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="number">2</span>;<span style="color: #637777;"> &#160; &#160; </span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of memory</span></div><div>&#160; &#160; &#160; &#160; <span token="type">linkedlist</span> <span token="variable">list</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span style="color: #82aaff;">Hash</span>(<span style="color: #d7dbe0;">key</span>, table_size)];</div><div>&#160; &#160; &#160; &#160; <span token="variable">new_node</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span token="variable">list</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">Assign</span><span style="color: #82aaff;">(</span><span token="variable">new_node</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">elem</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">key</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span token="variable">list</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span token="variable">new_node</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="number">0</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">return</span> <span token="number">1</span>;</div><div>}</div></div>
+
+<p>插入链表前端的实现是最方便且高效的，并且有时候最新插入的元素可能最先被访问。不过该函数在查找和插入时两次调用了散列函数，如果将其合并可能会更快一些。</p>
+
+<p>删除操作和链表的删除一致。很多时候散列表都没必要删除，那么不使用表头操作还会更简单一些。</p>
+
+<p>如果定义散列表的<strong>装填因子</strong>(load factor) <span class="math">\\( \lambda \\)</span> 为散列表中元素个数与表大小的比值。表的平均长度为 <span class="math">\\( \lambda \\)</span> ，执行一次查找需要的时间为计算散列值以及遍历表所用的时间：如果不存在该元素，则遍历的链接数平均为 <span class="math">\\( \lambda \\)</span>（不包括 <code>NULL</code> 链接）；存在该元素时，需要遍历 <span class="math">\\( 1 + \lambda / 2 \\)</span> 个链接。</p>
+
+<p>装填因子直接影响查找的效率。在以上链表实现的分离链接散列表中，要求 <span class="math">\\( \lambda \sim 1 \\)</span> ，如果比 1 大，说明元素较多，不可避免地会加长链表；如果比 1 小的多，那么表的大小不能充分利用。</p>
+
+<p>除此之外，使用素数作为表的长度也能使元素更分散一些，比如不会使相同比例的数值分到同一个模。<a href="https://stackoverflow.com/questions/1145217/why-should-hash-functions-use-a-prime-number-modulus">stackoverflow 有一个问题</a>就是关于它的，有兴趣可以看一看里面的回答。</p>
+
+<h3>开放定址法</h3>
+
+<p>分离链接法的缺点是需要指针，且新单元分配内存需要时间。<strong>开放定址散列法</strong>(open addressing hashing)是另外一种用链表解决冲突的方法。该方法在遇到冲突时，尝试选择另外的单元，直到找到可用的空单元。因此所有元素都需要直接放入表中，开放定址散列法所需要的表更大，且装填因子也不能过大。</p>
+
+<p>开放定址法的查找也是如此，当发现对应位置不是该元素时，它沿着相同的选择路径继续，直到发现空的位置，就说明该元素根本没有被插入过。</p>
+
+<p>更一般地，当散列函数计算出结果 <span class="math">\\( h_0(X) \\)</span> 但发现该位置被占用时，它就重新计算出 <span class="math">\\( h_1(X), h_2(X) \\)</span> 等，其中：</p>
+
+<div class="math">
+\\[
+    h_i(X) = (\text{hash}(X) + F(i))\mod size
+\\]
+</div>
+
+<p>函数 <span class="math">\\( F \\)</span> 用于解决冲突。下面介绍几个典型的函数选择。</p>
+
+<ul>
+    <li><strong>线性探测法</strong></li>
+</ul>
+
+<p>线性探测法中，函数 <span class="math">\\( F \\)</span> 是线性函数。下图展示了这一原理：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/08-open-addressing-linear.png" alt="">
+</figure>
+
+<p>这样做的缺点是碰撞时单元会形成一些区块，导致一次<strong>聚集</strong>(primary clustering)。下一次散列到该聚集区块的值往往又需要多次线性探测，且会加重聚集区块。</p>
+
+<p>计算结果表明线性探测的预期探测次数对插入和不成功的查找而言大约为 <span class="math">\\( 0.5(1 + 1 / (1- \lambda)^2) \\)</span> ，对成功的查找为 <span class="math">\\( 0.5(1 + 1 / (1 - \lambda)) \\)</span> 。因此线性探测法要求 <span class="math">\\( \lambda < 0.5 \\)</span> ，否则当表快满时线性探测要往下找很多个节点才能找到一个空余的，浪费较多时间。</p>
+
+<ul>
+    <li><strong>平方探测法</strong></li>
+</ul>
+
+<p>平方探测可以解决线性探测的聚集问题。平方探测就是将冲突函数改为二次函数，下图说明了为何此过程不会聚集：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/08-open-addressing-quadratic.png" alt="">
+</figure>
+
+<p>可以证明，如果使用平方探测，且表的大小是<em>素数</em>，那么当表至少有一半是空的时候，总是能插入一个元素。</p>
+
+<blockquote>
+    <p>该结论的证明需要通过一定数学公式推导。这里可以简单这么理解：当表长是素数时，在任何位置插入元素后，在不断绕回寻找可用节点时至少会有半个表被遍历到，因此只要表有一半是空的，总能找到一个合适的位置。</p>
+</blockquote>
+
+<p>不过平方探测的缺点是当表被填满超过一半时，有时甚至会出现一个合适的位置都找不到的情况。这就要求其装填因子应该低于 0.5 。</p>
+
+<p>以平方探测法为例，开放定址法的散列表结构声明为：</p>
+
+<div class="vscode-block"><div><span token="keyword">enum</span> <span token="type">hashquad_status</span> { </div><div>&#160; &#160; <span token="variable">HASHQUAD_USED</span>, <span token="variable">HASHQUAD_EMPTY</span>, <span token="variable">HASHQUAD_DELETED</span> };</div><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">hashquad_node</span> {</div><div>&#160; &#160; <span token="type">elemtype</span> <span style="color: #7fdbca;">elem</span>;</div><div>&#160; &#160; <span token="keyword">enum</span> <span token="type">hashquad_status</span> <span style="color: #7fdbca;">status</span>;</div><div>} <span token="type">hashquad_node</span>;</div><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">hashquad_table</span> {</div><div>&#160; &#160; <span token="keyword">int</span> <span style="color: #7fdbca;">size</span>;</div><div>&#160; &#160; <span token="type">hashquad_node</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">list</span>;</div><div>} <span style="color: #7fdbca;">*</span> <span token="type">hashquad_table</span>;</div></div>
+
+<p>在开放定址散列表中，不能直接删除元素，否则会使定址关系断裂；如果要删除，需要使用懒惰删除策略，在定义中也增加了对懒惰删除的支持。</p>
+
+<p>初始化开放定址散列表和初始化分离链接散列表的过程类似。由于不使用链表，因此这部分内容会简化一些：</p>
+
+<div class="vscode-block"><div><span token="type">hashquad_table</span> <span style="color: #82aaff;">HashQuadTable_New</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">size</span>) {</div><div>&#160; &#160; <span token="type">hashquad_table</span> <span token="variable">table</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span token="keyword">struct</span><span style="color: #82aaff;"> </span><span style="color: #82aaff;text-decoration: underline;">hashquad_table</span><span style="color: #82aaff;">))</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span token="variable">table</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #82aaff;">NULL</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of memory</span></div><div>&#160; &#160; <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">size</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">size</span>;</div><div>&#160; &#160; <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">list</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">hashquad_node</span><span style="color: #82aaff;">) </span><span style="color: #7fdbca;">*</span><span style="color: #82aaff;"> </span><span token="variable">table</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">size</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span token="variable">table</span>-&gt;<span style="color: #7fdbca;">list</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #82aaff;">NULL</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of memory</span></div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>)</div><div>&#160; &#160; &#160; &#160; <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span token="variable">i</span>].<span style="color: #7fdbca;">status</span> <span style="color: #c792ea;">=</span> <span token="variable">HASHQUAD_EMPTY</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">table</span>;</div><div>}</div></div>
+
+<p>为了执行查找操作，在查找到对应对应的表单元时，会沿着平方路径继续查找，直到找到对应的单元或发现已经到路径的结尾。结尾的标志为遇到一个 <code>EMPTY</code> 的项：</p>
+
+<div class="vscode-block"><div><span token="type">index</span> <span style="color: #82aaff;">HashQuadTable_Find</span>(<span token="type">hashquad_table</span> <span style="color: #d7dbe0;">table</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">key</span>) {</div><div>&#160; &#160; <span token="type">index</span> <span token="variable">pos</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Hash</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">key</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">table</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">size</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">collision</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&#160; &#160; <span token="keyword">while</span> (<span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span token="variable">pos</span>].<span style="color: #7fdbca;">status</span> <span style="color: #c792ea;">!=</span> <span token="variable">HASHQUAD_EMPTY</span> <span style="color: #c792ea;">&amp;&amp;</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160;<span style="color: #c792ea;">!</span><span style="color: #82aaff;">Equals</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">table</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">list</span><span style="color: #82aaff;">[</span><span token="variable">pos</span><span style="color: #82aaff;">].</span><span style="color: #7fdbca;">elem</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">key</span><span style="color: #82aaff;">)</span>) {</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">pos</span> <span style="color: #c792ea;">+=</span> <span token="number">2</span> <span style="color: #7fdbca;">*</span> <span style="color: #c792ea;">++</span><span token="variable">collision</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">pos</span> <span style="color: #c792ea;">&gt;=</span> <span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">size</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">pos</span> <span style="color: #c792ea;">-=</span> <span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">size</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">pos</span>;</div><div>}</div></div>
+
+<p>两个判断条件不能写反，否则当发现元素匹配时，判断短路会忽视了该位置应该不可用的事实。程序中使用平方间的关系 <span class="math">\\( (i+1)^2 = (i)^2 + 2i - 1 \\)</span> 来加速运算，并在必要的时候执行绕回。</p>
+
+<p>查找发现不存在时，函数会返回路径上的最后一个位置，插入例程可在返回值的基础上做插入：</p>
+
+<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">HashQuadTable_Insert</span>(<span token="type">hashquad_table</span> <span style="color: #d7dbe0;">table</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">key</span>) {</div><div>&#160; &#160; <span token="type">index</span> <span token="variable">pos</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">HashQuadTable_Find</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">table</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">key</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span token="variable">pos</span>].<span style="color: #7fdbca;">status</span> <span style="color: #c792ea;">!=</span> <span token="variable">HASHQUAD_USED</span>) {</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span token="variable">pos</span>].<span style="color: #7fdbca;">status</span> <span style="color: #c792ea;">=</span> <span token="variable">HASHQUAD_USED</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">Assign</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">&amp;</span><span style="color: #d7dbe0;">table</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">list</span><span style="color: #82aaff;">[</span><span token="variable">pos</span><span style="color: #82aaff;">].</span><span style="color: #7fdbca;">elem</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">key</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="number">0</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">return</span> <span token="number">1</span>;</div><div>}</div></div>
+
+<p>如果元素已经存在，那么就什么都不做。</p>
+
+<ul>
+    <li><strong>双散列</strong></li>
+</ul>
+
+<p>平方探测排除了一次聚集，但缺点是散列到同一位置上的元素将继续寻找同样的备选单元，形成<strong>二次聚集</strong>(secondary clustering)，还是会拖慢查找速度。</p>
+
+<p>另一种解决冲突的方法是使用<strong>双散列</strong>(double hashing)，使用第二个散列函数往下寻找新的备选单元。这样做的优点是散列到同一位置的元素会再次散列到不同位置。</p>
+
+<p>使用双散列需要谨慎选取第二个散列函数，并且会额外花费一些计算时间。</p>
+
+<h3>再散列</h3>
+
+<p>开放定址散列法要求装填因子不应超过 0.5 ，否则某些操作运行的时间将很长，甚至可能出现失败。如果当装填因子快达到该值，为了能将其降低，需要扩充表长。但不能直接对原表做扩容，否则绕回操作将会变化而导致单元间的联系断裂。</p>
+
+<p>因此，需要新建一个更大的表，使用相关的新散列函数扫描原始散列表，计算每个存在的元素的新散列值并将其插入新表中。这一过程称为<strong>再散列</strong>(rehashing)，它需要耗费 <span class="math">\\( O(N) \\)</span> 的时间，因此该操作只应该在必要的时候进行，例如当装填因子到达某一个特定值。</p>
+
+<p>再散列的实现比较简单，只需要创建一个更大（例如两倍大）的表，然后将原表内的所有元素重新插入新表内即可：</p>
+
+<div class="vscode-block"><div><span token="type">hashquad_table</span> <span style="color: #82aaff;">HashQuadTable_Rehash</span>(<span token="type">hashquad_table</span> <span style="color: #d7dbe0;">table</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">old_size</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">size</span>;</div><div>&#160; &#160; <span token="type">hashquad_node</span><span style="color: #7fdbca;">*</span> <span token="variable">old_list</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">list</span>;</div><div>&#160; &#160; <span style="color: #d7dbe0;">table</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">HashQuadTable_New</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;">NextPrime</span><span style="color: #82aaff;">(</span><span token="variable">old_size</span><span style="color: #82aaff;"> </span><span style="color: #7fdbca;">*</span><span style="color: #82aaff;"> </span><span token="number">2</span><span style="color: #82aaff;">))</span>;</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span token="variable">old_size</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">old_list</span>[<span token="variable">i</span>].<span style="color: #7fdbca;">status</span> <span style="color: #c792ea;">!=</span> <span token="variable">HASHQUAD_USED</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #82aaff;">HashQuadTable_Insert</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">table</span><span style="color: #82aaff;">, </span><span token="variable">old_list</span><span style="color: #82aaff;">[</span><span token="variable">i</span><span style="color: #82aaff;">].</span><span style="color: #7fdbca;">elem</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span style="color: #82aaff;">free</span><span style="color: #82aaff;">(</span><span token="variable">old_list</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">table</span>;</div><div>}</div></div>
+
+<!-- ignored:可扩散列 -->
+
+<!-- finished:2022-08-06 -->
+
+
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/web/web-scraping/xpath-tutorial/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/11/XPath简单入门-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/11/XPath简单入门-520x293.jpg 520w, /wp-content/uploads/2022/11/XPath简单入门-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/web/web-scraping/xpath-tutorial/" rel="bookmark">XPath简单入门</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/computer-science/data-structure/01-linear-list/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/数据结构01-基本概念与线性表-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/07/数据结构01-基本概念与线性表-520x293.jpg 520w, /wp-content/uploads/2022/07/数据结构01-基本概念与线性表-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/computer-science/data-structure/01-linear-list/" rel="bookmark">数据结构01-基本概念与线性表</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/embedded/esp32/02-basic-peripheral/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-520x293.jpg 520w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-300x169.jpg 300w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-1024x576.jpg 1024w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-768x432.jpg 768w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-1536x864.jpg 1536w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-950x534.jpg 950w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/embedded/esp32/02-basic-peripheral/" rel="bookmark">ESP32与MicroPython入门-02 基本外设操作</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/computer-science/computer-networking/mqtt-tutorial/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>MQTT协议简介</span></a></li>
+		<li class="previous"><a href="/computer-science/data-structure/04-trees/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>数据结构04-树与二叉树</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,898 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>机器学习-数据聚类与分群 - 冰封残烛的个人小站</title>
+	<meta name="description" content="聚类就是将样本划分为由具有类似的特征组成的多个类。在实际分析一堆数据时，往往会只给出这些数据的特征变量，但不知道这些数据应该如何分类，这就需要对已有数据根据性质分组。本节介绍两种常用的聚类算法：KMeans 和 DBSCAN 。" />
+	<link rel="canonical" href="/data-science/machine-learning/10-clustering/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="机器学习-数据聚类与分群 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="聚类就是将样本划分为由具有类似的特征组成的多个类。在实际分析一堆数据时，往往会只给出这些数据的特征变量，但不知道这些数据应该如何分类，这就需要对已有数据根据性质分组。本节介绍两种常用的聚类算法：KMeans 和 DBSCAN 。" />
+	<meta property="og:url" content="/data-science/machine-learning/10-clustering/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2022-11-21T08:09:06+00:00" />
+	<meta property="article:modified_time" content="2023-10-06T11:39:27+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2022/11/机器学习-聚类算法.jpg" />
+	<meta property="og:image:width" content="1754" />
+	<meta property="og:image:height" content="1240" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="7分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/data-science/machine-learning/10-clustering/#primaryimage",
+	            "url": "/wp-content/uploads/2022/11/机器学习-聚类算法.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/11/机器学习-聚类算法.jpg",
+	            "width": 1754,
+	            "height": 1240
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/data-science/machine-learning/10-clustering/#webpage",
+	            "url": "/data-science/machine-learning/10-clustering/",
+	            "name": "机器学习-数据聚类与分群 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/data-science/machine-learning/10-clustering/#primaryimage"
+	            },
+	            "datePublished": "2022-11-21T08:09:06+00:00",
+	            "dateModified": "2023-10-06T11:39:27+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "聚类就是将样本划分为由具有类似的特征组成的多个类。在实际分析一堆数据时，往往会只给出这些数据的特征变量，但不知道这些数据应该如何分类，这就需要对已有数据根据性质分组。本节介绍两种常用的聚类算法：KMeans 和 DBSCAN 。",
+	            "breadcrumb": {
+	                "@id": "/data-science/machine-learning/10-clustering/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/data-science/machine-learning/10-clustering/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/data-science/machine-learning/10-clustering/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "机器学习-数据聚类与分群"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/851" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=851' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fdata-science%2Fmachine-learning%2F10-clustering%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fdata-science%2Fmachine-learning%2F10-clustering%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><script>
+    MathJax = {
+        tex: {
+            inlineMath: [['\\\\(', '\\\\)']],
+            displayMath: [["\\\\[","\\\\]"]]
+        },
+        startup: {
+            ready: () => {
+                MathJax.startup.defaultReady();
+                MathJax.startup.promise.then(() => {
+                    console.log('MathJax initial typesetting complete');
+                    addJupyterMarker();
+                });
+            }
+        },
+        options: {
+            enableMenu: false,
+        }
+    };
+</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+
+
+<link rel="stylesheet" href="/wp-content/static/css/theme@pie.wp.css">
+<script src="/wp-content/static/js/note.js"></script>
+<style>
+    .math { color: blue; font-size: 14px; }
+    .entry blockquote .math { color: rgb(0, 0, 160); }
+    .vscode-block {
+        color: #90A4AE;
+    }
+    div.vscode-block span[token="symbol"]  { color: #39adb5; }
+    div.vscode-block span[token="string"]  { color: #91b859; }
+    div.vscode-block span[token="number"]  { color: #f76d47; }
+    div.vscode-block span[token="keyword"] { color: #39adb5; font-weight: bold; }
+</style>
+<script>
+    window.onload = function() {
+        setTimeout(function() {
+            addJupyterMarker();
+        }, 500)
+    }
+</script>
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-851 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-851" class="post-851 post type-post status-publish format-standard has-post-thumbnail hentry category-machine-learning">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">机器学习-数据聚类与分群</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/data-science/machine-learning/" rel="category tag">机器学习</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年11月21日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+
+
+
+
+<p>聚类就是将样本划分为由具有类似的特征组成的多个类。在实际分析一堆数据时，往往会只给出这些数据的特征变量，但不知道这些数据应该如何分类，这就需要对已有数据根据性质分组。</p>
+
+<p>聚类有两种常用的算法：KMeans 和 DBSCAN 。</p>
+
+<h2>KMeans算法</h2>
+
+<h3>算法原理</h3>
+
+<p><strong>KMeans 算法</strong>是最简单、最容易理解的聚类算法，其中 <em>K</em> 代表数据，<em>Means</em> 代表每个类别内样本的均值。顾名思义，它是用数据的均值对其分类。</p>
+
+<p>例如，对于如下散点的分布，可以比较清晰地看出来它大致聚为四个集群：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/10-output-KMeans-points.png" width="360" alt="">
+</figure>
+
+<p>之所以可以看出它们形成了四个集群，因为每个集群都围绕着一个<em>中心点</em>分布，如果点离这个中心的<em>距离</em>更近，那么就容易看出该点属于这个集群。</p>
+
+<p>这就是 KMeans 算法的原理，KMeans 算法以距离作为样本间相似度的度量标准，将距离相近的样本分配至同一个类别。通常可以采用两点间的直线距离（欧几里得距离）来度量各样本间的距离。</p>
+
+<p>KMeans 算法最重要的就是计算中心点。直接计算中心点的话计算量很大，而且处理较为复杂。因此，KMeans 使用一种称为<strong>期望最大化</strong>(expectation-maximization, E-M)的算法来处理这个问题。期望最大化算法应用于数据科学的很多场景中，KMeans 是该算法的一个非常简单并且易于理解的应用。</p>
+
+<p>期望最大化算法包含以下步骤：</p>
+
+<ol>
+    <li>期望步骤(E-step)：将样本点分配给最近的集群中心点代表的类别，更新每个点是属于哪一个集群的<em>期望</em>值</li>
+    <li>最大化步骤(M-step)：将集群中心点设置为该集群所有点坐标的平均值，得到集群关于中心点拟合函数<em>最大化</em>时对应的坐标</li>
+</ol>
+
+<p>最开始的中心点可以通过在现有点中随机选取得到。每一次重复期望最大化步骤都将会得到更好的聚类效果，直到前后两次分类结果没有差别为止。</p>
+
+<p>下图展示了 KMeans 聚类时的可视化迭代过程：</p>
+
+<figure class="mid">
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/10-output-KMeans-Iterations.png" width="650" alt="">
+</figure>
+
+<p>也可以借助可视化网站 <a href="https://www.naftaliharris.com/blog/visualizing-k-means-clustering/">https://www.naftaliharris.com/blog/visualizing-k-means-clustering/</a> 交互式查看 KMeans 算法聚类的过程。该网站还给出了许多其它算法的交互式演示，包括接下来介绍的 DBSCAN 聚类算法。</p>
+
+<h3>代码实现</h3>
+
+<p>以上介绍了 KMeans 的原理。在实际应用中，可以直接使用 Scikit-Learn 提供的工具完成 KMeans 聚类，它与 Scikit-Learn 其它工具的接口是一致的。KMeans 模型的主要参数 <code>n_clusters</code> 即 K 值，表示样本聚成的类数：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span> sklearn<span style="color: #39adb5;">.</span>cluster <span style="color: #39adb5;font-weight: bold;">import</span> KMeans</div><div>kms <span style="color: #7c4dff;">=</span> KMeans<span style="color: #39adb5;">(</span><span style="color: #e53935;">n_clusters</span><span style="color: #7c4dff;">=</span><span style="color: #f76d47;">7</span><span style="color: #39adb5;">)</span></div><div>kms<span style="color: #39adb5;">.</span>fit<span style="color: #39adb5;">(</span>points<span style="color: #39adb5;">)</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">KMeans(n_clusters=7)</div>
+</div>
+
+<p>当聚类完成后，可以使用 <code>.labels_</code> 属性获取聚类结果，<code>.cluster_centers_</code> 属性获取每一个类别的中心点。</p>
+
+<p>以下将所有样本点和聚类的中心点以散点图的形式表现出来，并根据聚合成的不同类别以不同颜色区分结果：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>plt<span style="color: #39adb5;">.</span>scatter<span style="color: #39adb5;">(</span>X<span style="color: #39adb5;">[:,</span> <span style="color: #f76d47;">0</span><span style="color: #39adb5;">],</span> X<span style="color: #39adb5;">[:,</span> <span style="color: #f76d47;">1</span><span style="color: #39adb5;">],</span> <span style="color: #e53935;">c</span><span style="color: #7c4dff;">=</span>cluster<span style="color: #39adb5;">.</span>labels_<span style="color: #39adb5;">,</span> <span style="color: #e53935;">cmap</span><span style="color: #7c4dff;">=</span><span token="string">'Wistia'</span><span style="color: #39adb5;">)</span></div><div>centers <span style="color: #7c4dff;">=</span> cluster<span style="color: #39adb5;">.</span>cluster_centers_</div><div>plt<span style="color: #39adb5;">.</span>scatter<span style="color: #39adb5;">(</span>centers<span style="color: #39adb5;">[:,</span> <span style="color: #f76d47;">0</span><span style="color: #39adb5;">],</span> centers<span style="color: #39adb5;">[:,</span> <span style="color: #f76d47;">1</span><span style="color: #39adb5;">],</span> <span style="color: #e53935;">c</span><span style="color: #7c4dff;">=</span><span token="string">'b'</span><span style="color: #39adb5;">,</span> <span style="color: #e53935;">s</span><span style="color: #7c4dff;">=</span><span style="color: #f76d47;">200</span><span style="color: #39adb5;">,</span> <span style="color: #e53935;">alpha</span><span style="color: #7c4dff;">=</span><span style="color: #f76d47;">0.5</span><span style="color: #39adb5;">)</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><img decoding="async" class="matplotlib-output" src="/wp-content/uploads/image/category@machine-learning/10-output-KMeans-result.png" alt=""></div>
+</div>
+
+<p>结果整体来说划分良好。</p>
+
+<h3>结果分析</h3>
+
+<p>由于 KMeans 算法是一种期望最大化算法，它会在每一步中改进结果以向着更优解的方向移动，但是这并不保证可以到达全局最优解。初始中心点的选择会在较大程度上影响聚类结果，某些随机值带来的初始中心点可能会导致仅收敛到局部最优解，但整体聚类结果并不理想：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/10-output-KMeans-bad-situation.png" width="540" alt="">
+    <figcaption>不好的随机种子带来的不好收敛结果</figcaption>
+</figure>
+
+<p>基于此，Scikit-Learn 的 KMeans 模型提供了 <code>n_init</code> 参数，用于多次使用不同的随机种子运行模型，并选取最好的结果。该参数的默认值是 10 ，即从 10 次不同的测试中选择最好结果。</p>
+
+<p>多次运行还需要分析哪个是最好结果，评价 KMeans 模型的一项常用的指标是各个点到聚类中心距离的平方和，称为惯性(inertia)或 WSS(Within-Cluster-Sum of Squared)。在聚合成相同数量的集群时，WSS 越小，则说明模型越好。在建立模型后，可以使用 <code>.inertia_</code> 属性检查当前模型的 WSS 值。</p>
+
+<p>下图对比了不同聚类结果下的 WSS 值：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/10-output-seed-WSS.png" width="540" alt="">
+</figure>
+
+<p>在之前的模型建立中，通过绘制散点图来观察数据大致可以被聚合成的类别数量。但在没有提前指定数据类别数量的情况下，如果数据维度很高或者数据量过大，那么就无法以直观的形式检查它可能的类别数量。</p>
+
+<p>有些时候即便以可视化的形式展现出来，也未必能很好地判断聚合类别数。例如，考虑以下数据点集合在不同聚类数下的结果：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/10-output-KMeans-diff-k.png" width="540" alt="">
+</figure>
+
+<p>检查结果可以发现，当聚合成 2 、3 、4 类时的结果似乎都有一定道理。</p>
+
+<p>可以使用 WSS 来判断最好的结果，但是随着聚类个数的增加，聚类中心也变多了，各个点到聚类中心的距离肯定更近。如果将不同聚类数以及对应的最好的 WSS 值绘制在图表上，会得到以下折线：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/10-output-KMeans-K-WSS.jpg" width="480" alt="">
+</figure>
+
+<p>在折线上通常会出现一个拐点，这个拐点称为“肘”(elbow)。在肘部对应的 K 值之前，每增加一个分类数可以使 WSS 快速下降；但在肘部之后，更多的分类数对 WSS 的影响并不明显。在不清楚合适分类数的情况下，肘部对应的 K 值是一个不错的选择。</p>
+
+<p>如果将折线的两端连成一条直线，那么肘部在 <span class="math">\\( y \\)</span> 方向上离这条直线的距离一般最远。因此，可以使用以下代码计算肘部对应的 K 值：</p>
+
+<div class="vscode-block"><div>slope <span style="color: #7c4dff;">=</span> <span style="color: #39adb5;">(</span>WSS<span style="color: #39adb5;">[</span><span style="color: #f76d47;">0</span><span style="color: #39adb5;">]</span> <span style="color: #7c4dff;">-</span> WSS<span style="color: #39adb5;">[</span><span style="color: #7c4dff;">-</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">])</span> <span style="color: #7c4dff;">/</span> <span style="color: #39adb5;">(</span>Krange<span style="color: #39adb5;">[</span><span style="color: #f76d47;">0</span><span style="color: #39adb5;">]</span> <span style="color: #7c4dff;">-</span> Krange<span style="color: #39adb5;">[</span><span style="color: #7c4dff;">-</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">])</span></div><div>intercept <span style="color: #7c4dff;">=</span> WSS<span style="color: #39adb5;">[</span><span style="color: #f76d47;">0</span><span style="color: #39adb5;">]</span> <span style="color: #7c4dff;">-</span> slope <span style="color: #7c4dff;">*</span> Krange<span style="color: #39adb5;">[</span><span style="color: #f76d47;">0</span><span style="color: #39adb5;">]</span></div><div>y <span style="color: #7c4dff;">=</span> Krange <span style="color: #7c4dff;">*</span> slope <span style="color: #7c4dff;">+</span> intercept</div><div>best_k <span style="color: #7c4dff;">=</span> Krange<span style="color: #39adb5;">[(</span>y <span style="color: #7c4dff;">-</span> WSS<span style="color: #39adb5;">).</span>argmax<span style="color: #39adb5;">()]</span></div></div>
+
+<p>这种方式比较简单，但结果比较粗糙。一种更精确但也更复杂的方法是使用<strong>轮廓系数</strong>(silhouette value)。样本点轮廓系数的计算公式为：</p>
+
+<div class="math">
+\\[
+    s(i) = \frac{b(i) - a(i)}{\max \{ a(i), b(i) \}}
+\\]
+</div>
+
+<p>其中 <span class="math">\\( a(i) \\)</span> 是样本 <span class="math">\\( i \\)</span> 与同一集群中其它样本的平均距离，<span class="math">\\( b(i) \\)</span> 是平均最近集群距离（即到不包括自身集群的最近集群实例的平均距离）。轮廓系数的取值范围是 <span class="math">\\( [-1, +1] \\)</span> ，该值越接近 +1 ，表示对应的样本点越好地位于自身的集群中，并且远离其它集群；接近 0 的轮廓系数表示它接近一个集群的边界；接近 -1 的系数意味着样本点可能分配给了错误的集群。</p>
+
+<p>可以使用以下代码计算轮廓分数（所有实例的平均轮廓系数）：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span> sklearn<span style="color: #39adb5;">.</span>metrics <span style="color: #39adb5;font-weight: bold;">import</span> silhouette_score</div><div>silhouette_score<span style="color: #39adb5;">(</span>X<span style="color: #39adb5;">,</span> cluster<span style="color: #39adb5;">.</span>labels_<span style="color: #39adb5;">)</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">0.320434040824261</div>
+</div>
+
+<p>将不同聚类数的轮廓分数以折线图的形式绘制出来，结果为：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/10-output-KMeans-silhouette-scores.png" width="480" alt="">
+</figure>
+
+<p>从结果中可以看到，虽然使用肘点判断结果为 <span class="math">\\( k=3 \\)</span> 时效果最好，但轮廓系数判断该值使得一个集群可能会被不合理地拆分，使得许多样本点落在了它们的分界线上，说明 <span class="math">\\( k=2 \\)</span> 可能是一个更好的集群数。</p>
+
+<p>Scikit-Learn 还提供了 KMeans 算法的一个变种，它在每次迭代中采用随机抽样的方法选择小批量的数据子集，在减小计算时间的同时能够尽可能的拟合原始的数据。这在数据集过大时可以显著提升算法的速度，并且可以处理内存无法容纳的超大数据集。可以使用 <code>MiniBatchKMeans</code> 类调用该算法，使用方式和 <code>KMeans</code> 类是一致的：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span> sklearn<span style="color: #39adb5;">.</span>cluster <span style="color: #39adb5;font-weight: bold;">import</span> MiniBatchKMeans</div></div>
+    <div class="jupyter-separator"></div>
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #7c4dff;">%%</span>timeit</div><div>cluster <span style="color: #7c4dff;">=</span> KMeans<span style="color: #39adb5;">(</span><span style="color: #e53935;">n_clusters</span><span style="color: #7c4dff;">=</span><span style="color: #f76d47;">12</span><span style="color: #39adb5;">)</span></div><div>cluster<span style="color: #39adb5;">.</span>fit<span style="color: #39adb5;">(</span>X<span style="color: #39adb5;">)</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">744 ms ± 81.8 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)</div>
+    <div class="jupyter-separator"></div>
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #7c4dff;">%%</span>timeit</div><div>cluster <span style="color: #7c4dff;">=</span> MiniBatchKMeans<span style="color: #39adb5;">(</span><span style="color: #e53935;">n_clusters</span><span style="color: #7c4dff;">=</span><span style="color: #f76d47;">12</span><span style="color: #39adb5;">)</span></div><div>cluster<span style="color: #39adb5;">.</span>fit<span style="color: #39adb5;">(</span>X<span style="color: #39adb5;">)</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">392 ms ± 74.1 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)</div>
+</div>
+
+<p>KMeans 是一种经典的聚类算法，它适用于任意维度数据的聚类，但在聚类时需要提前知道或判断 K 值。KMeans 的聚类依据是更接近的集群中心点，这使得在实际聚类时每个集群边界总是线性的。使用 Voronoi 图可以很清晰地表现这一原理，图中落在由中心点确定的多边形内的样本会被归为该类：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/10-KMeans-Voronoi-diagram.jpg" width="480" alt="">
+</figure>
+
+<p>由于只能确定线性聚类边界，当集群呈现非线性的复杂形状时，KMeans 往往会不起作用，例如以下数据：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/10-output-KMeans-Cons.png" alt="" width="480">
+    <figcaption>KMeans 算法无法处理非线性边界</figcaption>
+</figure>
+
+<p>这时候就不能使用 KMeans 了。不过有一种算法可以很好地处理这种形式的聚类问题：DBSCAN。</p>
+
+<h2>DBSCAN算法</h2>
+
+<h3>算法原理</h3>
+
+<p>DBSCAN 算法全称 Density-Based Spatial Clustering of Applications with Noise ，是一种以密度为基础的空间聚类算法，可以用密度的形式发现任意形状的集群。该算法将集群定义为具有足够密度的连续区域，因此可以处理任意形状的边界，如下图所示：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/10-output-DBSCAN-density.jpg" width="480" alt="">
+</figure>
+
+<p>DBSCAN 算法的基本步骤为：先随机选取一个点，以该样本点为圆心，按照设定的半径作圆。如果圆内的样本数大于等于设定的阈值（密度），则将这些样本归为一类。接着选定圆内的其它样本点，继续作圆；如果某个圆内的样本数小于阈值，则放弃该圆的绘制。不断重复以上步骤直到没有可画的圆为止，并将这些圆内的样本点归为一个集群。</p>
+
+<p>下图展示了该算法的原理：</p>
+
+<figure class="mid">
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/10-DBSCAN-algorithm.jpg" height="230" alt="">
+</figure>
+
+<p>注意，以上两图内都存在不属于高密度集群内的点（游离点），因此这也是 DBSCAN 算法的优势之一，即可以使用密度的概念剔除不属于任一类别的噪点。</p>
+
+<h3>代码实现</h3>
+
+<p>DBSCAN 算法的实现与 KMeans 算法遵循同样的接口。它可以调整的参数有 <code>eps</code>（作圆的半径）和 <code>min_samples</code>（圆内的最少样本数），以此来控制密度：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span> sklearn<span style="color: #39adb5;">.</span>cluster <span style="color: #39adb5;font-weight: bold;">import</span> DBSCAN</div><div>cluster <span style="color: #7c4dff;">=</span> DBSCAN<span style="color: #39adb5;">(</span><span style="color: #e53935;">eps</span><span style="color: #7c4dff;">=</span><span style="color: #f76d47;">0.2</span><span style="color: #39adb5;">,</span> <span style="color: #e53935;">min_samples</span><span style="color: #7c4dff;">=</span><span style="color: #f76d47;">5</span><span style="color: #39adb5;">)</span></div><div>cluster<span style="color: #39adb5;">.</span>fit<span style="color: #39adb5;">(</span>X<span style="color: #39adb5;">)</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">DBSCAN(eps=0.2, min_samples=5)</div>
+</div>
+
+<p>聚类的结果也可以通过 <code>.labels_</code> 属性检查。之前说过 DBSCAN 算法可以判断噪点的存在，噪点在 <code>.labels_</code> 结果内对应的标签均为 -1 ，因此可以用类型以下的形式在散点图中标出噪点，效果与上文展示的图片类似：</p>
+
+<div class="vscode-block"><div>plt<span style="color: #39adb5;">.</span>scatter<span style="color: #39adb5;">(</span>X<span style="color: #39adb5;">[:,</span> <span style="color: #f76d47;">0</span><span style="color: #39adb5;">][</span>cluster<span style="color: #39adb5;">.</span>labels_ <span style="color: #7c4dff;">==</span> <span style="color: #7c4dff;">-</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">],</span> X<span style="color: #39adb5;">[:,</span> <span style="color: #f76d47;">1</span><span style="color: #39adb5;">][</span>cluster<span style="color: #39adb5;">.</span>labels_ <span style="color: #7c4dff;">==</span> <span style="color: #7c4dff;">-</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">],</span> </div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #e53935;">s</span><span style="color: #7c4dff;">=</span><span style="color: #f76d47;">30</span><span style="color: #39adb5;">,</span> <span style="color: #e53935;">c</span><span style="color: #7c4dff;">=</span><span token="string">'g'</span><span style="color: #39adb5;">,</span> <span style="color: #e53935;">marker</span><span style="color: #7c4dff;">=</span><span token="string">'x'</span><span style="color: #39adb5;">)</span></div></div>
+
+<p>DBSCAN 的结果还包含了 <code>.components_</code> 属性，可以得到半径内包含足够样本的核心实例本身，或者可以使用 <code>.core_sample_indices_</code> 属性获取它们的索引。</p>
+
+<p>虽然 <code>DBSCAN</code> 的接口遵循 Scikit-Learn 接口的标准，但它没有 <code>.predict()</code> 方法。这是由于聚类算法不一定适合用于分类：有时候预测一个新样本分类的难度可能和重新聚类差别不大，尤其是 DBSCAN 可能出现同时被划分到两个类别且难以判断哪个是更好的情况。因此聚类完成后可以将结果应用到其余的分类器中，例如 KMeans 算法的思路就和 <span class="math">\\( K=1 \\)</span> 的 <a>K 近邻算法</a>很像。</p>
+
+<h3>结果分析</h3>
+
+<p>和 KMeans 一样，DBSCAN 的参数 <code>eps</code> 和 <code>min_samples</code> 也并不好直接确定。若密度选取过小，两个邻近集群可能被合并；若密度选择过大，则一个集群可能会被拆分。</p>
+
+<p>参数 <code>min_samples</code> 可以使用以下的原则确定：</p>
+
+<div class="math">
+    \\[
+        \text{min points} \geq \text{dim} + 1
+    \\]
+</div>
+
+<p><code>eps</code> 的值可以使用绘制 K-距离曲线的方式得到。K-距离表示每个样本第 K 个最近邻样本距离。将数据集所有点对应的 K 近邻距离按照降序方式排序，便可以绘制出 K 距离图线。</p>
+
+<p>可以通过以下方式得到所有样本点排序后的 K-距离：</p>
+
+<div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span> sklearn<span style="color: #39adb5;">.</span>neighbors <span style="color: #39adb5;font-weight: bold;">import</span> NearestNeighbors</div><br><div>neighbors <span style="color: #7c4dff;">=</span> NearestNeighbors<span style="color: #39adb5;">(</span><span style="color: #e53935;">n_neighbors</span><span style="color: #7c4dff;">=</span><span style="color: #f76d47;">4</span><span style="color: #39adb5;">)</span></div><div>distances<span style="color: #39adb5;">,</span> indices <span style="color: #7c4dff;">=</span> neighbors<span style="color: #39adb5;">.</span>fit<span style="color: #39adb5;">(</span>X<span style="color: #39adb5;">).</span>kneighbors<span style="color: #39adb5;">(</span>X<span style="color: #39adb5;">)</span></div><br><div>distances <span style="color: #7c4dff;">=</span> np<span style="color: #39adb5;">.</span>sort<span style="color: #39adb5;">(</span>distances<span style="color: #39adb5;">,</span> <span style="color: #e53935;">axis</span><span style="color: #7c4dff;">=</span><span style="color: #f76d47;">0</span><span style="color: #39adb5;">)[:,</span> <span style="color: #f76d47;">1</span><span style="color: #39adb5;">][::</span><span style="color: #7c4dff;">-</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">]</span></div></div>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/10-output-K-distance.png" width="460" alt="">
+</figure>
+
+<p>曲线图明显拐点位置为对应较好的参数。在本示例中，<code>eps</code> 可以取 1.0 左右。</p>
+
+<p>最后要注意的是，虽然这种方式比起随机选择的参数具有一定的合理性，但是得到的参数仍然未必是合理的。</p>
+
+<p>下图对比了 KMeans 算法与 DBSCAN 算法对同一批数据的聚类结果。对比结果可以发现：DBSCAN 算法在聚类时可以发现任意形状的簇将其聚为一类，而 KMeans 算法只是机械地将距离近的数据归到同一组：</p>
+
+<figure class="mid">
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/10-cluster-algorithm-compare.png" height="170" alt="">
+    <figcaption>图片来源于网络</figcaption>
+</figure>
+
+<p>总的来说，DBSCAN 算法不需要事先知道集群数，并且可以发现任意形状的集群，初始中心点选择也不影响聚类结果。但它的特点决定了不适用于密度变化较大的数据，参数也难以确实最优值。因此如果难以通过可视化等方式检查数据并确定合适的参数的话，尽量还是谨慎选用该算法。</p>
+
+<h2>示例：图像颜色聚合</h2>
+
+<p>接下来通过一个具体的示例介绍聚类算法的使用。这里通过聚类算法分析一张图片的主要颜色组成，将其提取出来并用于压缩图像颜色。</p>
+
+<p>一个图像由若干像素点组成，一般在网络上传输的图像每一个像素点都使用 RGB 色值表示，每一个色值占据一个字节。那么这样的一个图像可以使用形状为 <code>(image_height, image_width, 3)</code> 的数组描述。可以使用以下代码获取这样的数值：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span> PIL <span style="color: #39adb5;font-weight: bold;">import</span> Image</div><div>image <span style="color: #7c4dff;">=</span> np<span style="color: #39adb5;">.</span>array<span style="color: #39adb5;">(</span>Image<span style="color: #39adb5;">.</span>open<span style="color: #39adb5;">(</span><span style="color: #7c4dff;font-weight: bold;">r</span><span style="color: #39adb5;">'images\image-03.jpg'</span><span style="color: #39adb5;">))</span></div></div>
+</div>
+
+<p>考虑到这里只关注像素的 RGB 通道，对像素的位置不感兴趣，因此可以将其转为自变量为 RGB 值的二维数据：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>X <span style="color: #7c4dff;">=</span> image<span style="color: #39adb5;">.</span>reshape<span style="color: #39adb5;">(</span><span style="color: #7c4dff;">-</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">3</span><span style="color: #39adb5;">)</span></div></div>
+</div>
+
+<p>然后利用以上数据建立聚类模型。由于自变量的密度不好确定且可能改变，并且为了便于使用中心值描述每一类的结果，在已知 K 值的情况下，使用 KMeans 是一个更好的选择：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>model <span style="color: #7c4dff;">=</span> KMeans<span style="color: #39adb5;">(</span><span style="color: #e53935;">n_clusters</span><span style="color: #7c4dff;">=</span><span style="color: #f76d47;">6</span><span style="color: #39adb5;">)</span></div><div>model<span style="color: #39adb5;">.</span>fit<span style="color: #39adb5;">(</span>X<span style="color: #39adb5;">)</span></div><div>colors <span style="color: #7c4dff;">=</span> model<span style="color: #39adb5;">.</span>cluster_centers_ </div><div><span style="color: #6182b8;">print</span><span style="color: #39adb5;">(</span>colors<span style="color: #39adb5;">)</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">[[130.67128133  83.12713456  79.94169614]
+ [  3.56554958  26.66450421  36.41714522]
+ [219.65209098 126.73938314  97.28939034]
+ [191.28186172  90.94572996  72.60806672]
+ [ 67.96981169  62.53358817  67.36300707]
+ [241.93716223 157.78285689 119.45559918]]</div>
+</div>
+
+<p>以下展示了部分示例图片聚合得到的主要颜色值：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/10-clusted-colors.jpg" alt="" width="600">
+</figure>
+
+<p>可以根据结果，将一批图像通过二次聚类的方式按颜色分类，还可以用于将图像包含的颜色压缩。颜色压缩也很简单，只需要将每一类颜色都填充其中心点的色值即可：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>segmented_image <span style="color: #7c4dff;">=</span> model<span style="color: #39adb5;">.</span>cluster_centers_<span style="color: #39adb5;">[</span>model<span style="color: #39adb5;">.</span>labels_<span style="color: #39adb5;">]</span> &#160; <span style="color: #39adb5;">\</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;<span style="color: #39adb5;">.</span>reshape<span style="color: #39adb5;">(</span>image<span style="color: #39adb5;">.</span>shape<span style="color: #39adb5;">)</span> &#160; &#160; &#160; &#160; &#160; &#160; &#160;<span style="color: #39adb5;">\</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;<span style="color: #39adb5;">.</span>astype<span style="color: #39adb5;">(</span>np<span style="color: #39adb5;">.</span>uint8<span style="color: #39adb5;">)</span></div><div>plt<span style="color: #39adb5;">.</span>imshow<span style="color: #39adb5;">(</span>segmented_image<span style="color: #39adb5;">)</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">&lt;matplotlib.image.AxesImage at 0x25a800741f0></div>
+</div>
+
+<p>以下对比了同一图像在不同颜色数下图像压缩的结果：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/10-segmented-color.jpg" alt="" width="840">
+</figure>
+
+
+
+
+
+
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/data-science/via-python/numpy05-statistics/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/10/Python数据分析-numpy05数组统计与排序-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/10/Python数据分析-numpy05数组统计与排序-520x293.jpg 520w, /wp-content/uploads/2022/10/Python数据分析-numpy05数组统计与排序-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/data-science/via-python/numpy05-statistics/" rel="bookmark">numpy05:数组统计与排序</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/embedded/stm32/esp8266-controlling/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/STM32与物联网02-网络数据收发-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/07/STM32与物联网02-网络数据收发-520x293.jpg 520w, /wp-content/uploads/2022/07/STM32与物联网02-网络数据收发-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/embedded/stm32/esp8266-controlling/" rel="bookmark">STM32与物联网02-网络数据收发</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/computer-science/data-structure/01-linear-list/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/数据结构01-基本概念与线性表-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/07/数据结构01-基本概念与线性表-520x293.jpg 520w, /wp-content/uploads/2022/07/数据结构01-基本概念与线性表-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/computer-science/data-structure/01-linear-list/" rel="bookmark">数据结构01-基本概念与线性表</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/data-science/machine-learning/01-linear-regression/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>机器学习-线性回归</span></a></li>
+		<li class="previous"><a href="/web/web-scraping/xpath-tutorial/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>XPath简单入门</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1074 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>机器学习-线性回归 - 冰封残烛的个人小站</title>
+	<meta name="description" content="线性回归(linear regression)根据特征变量来预测因变量。只有一个特征变量的线性回归模型称为一元线性回归，多个特征变量则称为多元线性回归。多项式的曲线数据可以通过基函数变换为多元线性回归的情况。为了防止多项式次数过大出现过拟合，可以加上正则化项约束模型。" />
+	<link rel="canonical" href="/data-science/machine-learning/01-linear-regression/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="机器学习-线性回归 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="线性回归(linear regression)根据特征变量来预测因变量。只有一个特征变量的线性回归模型称为一元线性回归，多个特征变量则称为多元线性回归。多项式的曲线数据可以通过基函数变换为多元线性回归的情况。为了防止多项式次数过大出现过拟合，可以加上正则化项约束模型。" />
+	<meta property="og:url" content="/data-science/machine-learning/01-linear-regression/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2022-12-03T13:09:02+00:00" />
+	<meta property="article:modified_time" content="2023-10-06T11:36:26+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2022/12/机器学习-线性回归.png" />
+	<meta property="og:image:width" content="1920" />
+	<meta property="og:image:height" content="1357" />
+	<meta property="og:image:type" content="image/png" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="8分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/data-science/machine-learning/01-linear-regression/#primaryimage",
+	            "url": "/wp-content/uploads/2022/12/机器学习-线性回归.png",
+	            "contentUrl": "/wp-content/uploads/2022/12/机器学习-线性回归.png",
+	            "width": 1920,
+	            "height": 1357
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/data-science/machine-learning/01-linear-regression/#webpage",
+	            "url": "/data-science/machine-learning/01-linear-regression/",
+	            "name": "机器学习-线性回归 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/data-science/machine-learning/01-linear-regression/#primaryimage"
+	            },
+	            "datePublished": "2022-12-03T13:09:02+00:00",
+	            "dateModified": "2023-10-06T11:36:26+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "线性回归(linear regression)根据特征变量来预测因变量。只有一个特征变量的线性回归模型称为一元线性回归，多个特征变量则称为多元线性回归。多项式的曲线数据可以通过基函数变换为多元线性回归的情况。为了防止多项式次数过大出现过拟合，可以加上正则化项约束模型。",
+	            "breadcrumb": {
+	                "@id": "/data-science/machine-learning/01-linear-regression/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/data-science/machine-learning/01-linear-regression/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/data-science/machine-learning/01-linear-regression/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "机器学习-线性回归"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/880" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=880' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fdata-science%2Fmachine-learning%2F01-linear-regression%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fdata-science%2Fmachine-learning%2F01-linear-regression%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><script>
+    MathJax = {
+        tex: {
+            inlineMath: [['\\\\(', '\\\\)']],
+            displayMath: [["\\\\[","\\\\]"]]
+        },
+        startup: {
+            ready: () => {
+                MathJax.startup.defaultReady();
+                MathJax.startup.promise.then(() => {
+                    console.log('MathJax initial typesetting complete');
+                    addJupyterMarker();
+                });
+            }
+        },
+        options: {
+            enableMenu: false,
+        }
+    };
+</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+
+
+<link rel="stylesheet" href="/wp-content/static/css/theme@pie.wp.css">
+<script src="/wp-content/static/js/note.js"></script>
+<style>
+    .math { color: blue; font-size: 14px; }
+    .entry blockquote .math { color: rgb(0, 0, 160); }
+    .vscode-block {
+        color: #90A4AE;
+    }
+    div.vscode-block span[token="symbol"]  { color: #39adb5; }
+    div.vscode-block span[token="string"]  { color: #91b859; }
+    div.vscode-block span[token="number"]  { color: #f76d47; }
+    div.vscode-block span[token="keyword"] { color: #39adb5; font-weight: bold; }
+</style>
+<script>
+    window.onload = function() {
+        setTimeout(function() {
+            addJupyterMarker();
+        }, 500)
+    }
+</script>
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-880 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-880" class="post-880 post type-post status-publish format-standard has-post-thumbnail hentry category-machine-learning">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">机器学习-线性回归</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/data-science/machine-learning/" rel="category tag">机器学习</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年12月3日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+
+
+
+
+<h2>一元线性回归</h2>
+
+<p><strong>线性回归</strong>(linear regression)应该是最简单的机器学习模型了。例如，以下是 1965~2021 年一次能源消耗量变化：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/01-output-linear-data.png" alt="" width="480">
+    <figcaption>数据来源：<a href="https://www.bp.com/">bp company</a></figcaption>
+</figure>
+
+<p>容易看出自变量（年份）与因变量（一次能源消耗量）之间大致沿一条直线分布。线性回归模型就是利用线性拟合的方式，寻找自变量与因变量背后的<strong>回归直线</strong>（趋势线），再利用回归直线做简单的分析和预测。</p>
+
+<p>线性回归根据特征变量（自变量）来预测反应变量（因变量）。由于以上的特征变量只有一个（一次能源消耗量），因此这种线性回归模型称为一元线性回归。在本文最后会考虑多元线性回归的情况。</p>
+
+<h3>数学原理</h3>
+
+<p>以上的样本分布规律大致成一条直线，因此可以使用直线的公式来描述它们：</p>
+
+<div class="math">
+\\[
+    y = ax + b
+\\]
+</div>
+
+<p>其中 <span class="math">\\( x \\)</span>为自变量，<span class="math">\\( y \\)</span> 为因变量，<span class="math">\\( a \\)</span> 为回归系数（斜率），<span class="math">\\( b \\)</span> 为截距。</p>
+
+<p>为了发现自变量与因变量之间的关系，需要提供一系列因变量的实际值来拟合。对于每个自变量，其实际的因变量值 <span class="math">\\( y_i \\)</span> 与预测值 <span class="math">\\( \hat y_i \\)</span> 之间的接近程度可以用它们的<strong>残差平方和</strong>(Sum of Squares for Error, SSE)，即差值的平方来衡量：</p>
+
+<div class="math">
+\\[
+    \sum (y_i - \hat y_i) ^ 2
+\\]
+</div>
+
+<p>如果将上式展开，可以得到：</p>
+
+<div class="math">
+\\[
+    \sum (y_i - (ax_i + b)) ^ 2
+\\]
+</div>
+
+<p>当残差平方和最小时，说明该拟合直线最能描述实际样本的线性关系。通过对上式求导并令导数为 0 ，可以得到最小的残差平方和，即拟合最优时的回归系数 <span class="math">\\( a \\)</span> 和截距 <span class="math">\\( b \\)</span> 。</p>
+
+<p>这种求导的过程非常简单，即便手工计算也非常方便。以上计算回归直线的方法称为<strong>最小二乘法</strong>。接下来看看如何使用代码搭建线性回归模型。</p>
+
+<h3>代码实现：使用Scikit-Learn工具包</h3>
+
+<p>Python 有许多提供各种机器学习算法的第三方库，<a href="http://scikit-learn.org">Scikit-Learn</a> 是使用最广泛的一个。相比其它的机器学习库，它具有以下优点：</p>
+
+<ul>
+    <li>模型广泛，涵盖目前各种主流机器学习算法</li>
+    <li>使用 NumPy 实现，在计算效率很高的同时能很好地融入 Python 科学计算的生态中</li>
+    <li>完善的在线文档，帮助初学者快速入门</li>
+    <li>设计得当 API 。Scikit-Learn 的所有模型都遵循几乎相同的面向对象接口，这种高度统一的 API 让使用者无需记住每一个模型是如何实现的，只需要知道算法原理和需要设置的参数即可。许多新提出的模型也采用了相同的 API 设计，从而避免了用户熟悉库操作的成本</li>
+</ul>
+ 
+<p>通过 Scikit-Learn 库可以便捷地调用一元线性回归模型。该库可以直接通过 <code>pip</code> 命令安装：</p>
+
+<div class="codeblock code-console"><span class="token-venv">(sci)</span> PS D:\MachineLearning\demo> <span class="token-comd">pip</span> install sklearn</div>
+
+<p>然后可以在命令行中导入并检查安装的版本：</p>
+
+<div class="codeblock code-console">>>> import sklearn
+>>> sklearn.__version__
+'1.1.3' 
+</div>
+
+<p>在 Scikit-Learn 中，用于建立模型的基本数据集以二维数组表示，其中每一行表示数据集中的每个样本，而列表示构成每个样本的相关特征。因此这样的数组具有形状 <code>(n_samples, n_features)</code> ，也称为<strong>特征矩阵</strong>(features matrix)。这和 Pandas 的 <code>DataFrame</code> 是一致的，因此可以直接使用 <code>DataFrame</code> 来表示数据集。</p>
+
+<p>特征矩阵常用变量 <code>X</code> 来表示。以上数据中自变量是一个一维数据，如果要将这些数据使用 Scikit-Learn 的线性回归模型处理，需要将每一个元素变成一个单元素数组：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>X <span style="color: #7c4dff;">=</span> x<span style="color: #39adb5;">.</span>reshape<span style="color: #39adb5;">(</span><span style="color: #7c4dff;">-</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">1</span><span style="color: #39adb5;">)</span></div><div>X<span style="color: #39adb5;">[</span><span style="color: #f76d47;">0</span><span style="color: #39adb5;">]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">array([14.17022005])</div>
+</div>
+
+<p>包括线性回归在内的许多模型都需要通过研究自变量和因变量的关系，来预测新加入样本的值。因此除了特征矩阵 <code>X</code> 之外，还需要为每个样本准备一个对应的结果（目标数组），通常简记为 <code>y</code>。目标数组一般是一维数组，其长度就是样本总数 <code>n_samples</code> ，因此可以使用一维的 NumPy 数组或 Pandas 的 <code>Series</code> 表示。</p>
+
+<p>有了数据以后，就可以用其建立模型了。在 Scikit-Learn 中，每个模型都是一个 Python 类。在建立模型前，需要从对应的模块中导入需要的类：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span> sklearn<span style="color: #39adb5;">.</span>linear_model <span style="color: #39adb5;font-weight: bold;">import</span> LinearRegressor</div></div>
+</div>
+
+<p>建立一个具体的模型就是实例化类。有一些重要的模型参数必须在应用于数据集前便确定好，这些参数通常被称为超参数，通常在初始化方法中作为参数传入。</p>
+
+<p>一个模型的超参数可能有几十个，好在 Scikit-Learn 为大多不常用的超参数都提供了合适的默认值。只要调整少量的主要超参数即可。例如，假设线性回归模型需要一并拟合直线的截距，可以在初始化时设置超参数 <code>fit_intercept</code> 为 <code>True</code> ：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>model <span style="color: #7c4dff;">=</span> LinearRegression<span style="color: #39adb5;">(</span><span style="color: #e53935;">fit_intercept</span><span style="color: #7c4dff;">=</span><span style="color: #f76d47;">True</span><span style="color: #39adb5;">)</span></div></div>
+</div>
+
+<p>在初始化模型以后，需要将数据集应用到其中。这一步可以通过模型的 <code>.fit()</code> 方法实现：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>model<span style="color: #39adb5;">.</span>fit<span style="color: #39adb5;">(</span>X<span style="color: #39adb5;">,</span> y<span style="color: #39adb5;">)</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><div class="sklearn-model"><p>LinearRegression()</p></div></div>
+</div>
+
+<p>该方法会根据提供的特征矩阵和目标数组完成必要的计算，计算完成后可以得到一些模型参数。这些模型参数一般都以单下划线结尾的实例属性表示，例如线性回归模型常用的结果有回归直线的斜率和截距：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>model<span style="color: #39adb5;">.</span>coef_</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">array([7.57467915])</div>
+
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>model<span style="color: #39adb5;">.</span>intercept_</div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">-14726.826081799325</div>
+</div>
+
+<p>利用搭建好的模型，可以使用 <code>.predict()</code> 方法根据一个新的自变量预测因变量的值：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>model<span style="color: #39adb5;">.</span>predict<span style="color: #39adb5;">([[</span><span style="color: #f76d47;">2030</span><span style="color: #39adb5;">],</span> <span style="color: #39adb5;">[</span><span style="color: #f76d47;">2050</span><span style="color: #39adb5;">],</span> <span style="color: #39adb5;">[</span><span style="color: #f76d47;">2100</span><span style="color: #39adb5;">]])</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">array([ 649.77260241,  801.26618551, 1180.00014325])</div>
+</div>
+
+<p>这一步等价于将新的 <span class="math">\\( x_i \\)</span> 代入方程 <span class="math">\\( y=ax+b \\)</span> 中求解。注意自变量同样需要写成二维数组的模式。从预测结果中可以看到 10 年、50 年和 100 年后的一次能源消耗量。</p>
+
+<p>如果在一个区间内尝试预测足够多的点，并将预测结果绘制出来，就可以看到一条趋势线了：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>X_fit <span style="color: #7c4dff;">=</span> np<span style="color: #39adb5;">.</span>linspace<span style="color: #39adb5;">(</span><span style="color: #f76d47;">10</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">20</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">1000</span><span style="color: #39adb5;">).</span>reshape<span style="color: #39adb5;">((</span><span style="color: #7c4dff;">-</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">1</span><span style="color: #39adb5;">))</span></div><div>y_fit <span style="color: #7c4dff;">=</span> model<span style="color: #39adb5;">.</span>predict<span style="color: #39adb5;">(</span>X_fit<span style="color: #39adb5;">)</span></div><div>plt<span style="color: #39adb5;">.</span>plot<span style="color: #39adb5;">(</span>X_fit<span style="color: #39adb5;">,</span> y_fit<span style="color: #39adb5;">)</span></div><div>plt<span style="color: #39adb5;">.</span>scatter<span style="color: #39adb5;">(</span>x<span style="color: #39adb5;">,</span> y<span style="color: #39adb5;">,</span> <span style="color: #e53935;">s</span><span style="color: #7c4dff;">=</span><span style="color: #f76d47;">30</span><span style="color: #39adb5;">)</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><img decoding="async" class="matplotlib-output" src="/wp-content/uploads/image/category@machine-learning/01-output-linear-predict.png" alt=""></div>
+</div>
+
+<p>可以看到模型中 <code>.predict()</code> 依据的原理就是从趋势线上选择对应的点。</p>
+
+<h3>结果分析</h3>
+
+<p>以上建立了线性回归的模型并对新的数据作出预测。但是还需要对模型的结果做一些分析。</p>
+
+<p>首要的问题是数据能否应用与线性回归模型。以上的数据较为清晰地呈现出一条直线，但很多时候却未必。例如，以下是一个对看似为线性的数据应用线性回归模型的结果：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/01-output-linear-uncertain.png" alt="" width="460">
+    <figcaption>一个可能呈现为直线的数据</figcaption>
+</figure>
+
+<p>线性回归的模型评估主要以3个值进行作为评价标准：R-square（即 <span class="math">\\( R^2 \\)</span> ）、Adj. R-square（即 <span class="math">\\( \text{Adjusted}\, R^2 \\)</span>） 和 <span class="math">\\( P \\)</span> 值。对于一元线性回归，主要关心的是它的 <span class="math">\\( R^2 \\)</span> 值。</p>
+
+<p>设 <span class="math">\\( Y_\text{i} \\)</span> 为实际值，<span class="math">\\( Y_{\text{fitted}} \\)</span> 为预测值，<span class="math">\\( Y_{\text{mean}} \\)</span> 为所有散点的平均值，则数据的整体平方和 <span class="math">\\( \text{TSS} \\)</span> 、残差平方和 <span class="math">\\( \text{RSS} \\)</span> 以及解释平方和 <span class="math">\\( \text{ESS} \\)</span> 可以根据以下公式计算：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/01-linear-R-square.png" alt="" width="500">
+</figure>
+
+<p>对 <span class="math">\\( R^2 \\)</span> ，有如下计算公式：</p>
+
+<div class="math">
+\\[
+    R^2 = 1 - \frac{\text{RSS}}{\text{TSS}}
+\\]
+</div>
+
+<p>对于线性回归模型，如果拟合度较高，则残差平方和 <span class="math">\\( \text{RSS} \\)</span> 需要尽可能小，即 <span class="math">\\( R^2 \\)</span> 尽可能大。为了避免数据的数量级对结果的影响，需要将其与整体平方和 <span class="math">\\( \text{TSS} \\)</span> 对比，当 <span class="math">\\( R^2 \\)</span> 趋向 1 时，说明 <span class="math">\\( \text{RSS} \\)</span> 远小于 <span class="math">\\( \text{TSS} \\)</span> ，即基本所有点落在回归直线上。</p>
+
+<p>Scikit-Learn 自带的函数就可以计算 R-square 值，如下：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span> sklearn.metrics <span style="color: #39adb5;font-weight: bold;">import</span> r2_score</div><div>r2_score<span style="color: #39adb5;">(</span>Y, model.predict<span style="color: #39adb5;">(</span>X<span style="color: #39adb5;">))</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">0.986</div>
+</div>
+
+<p><code>metrics</code> 是 Scikit-Learn 包含的一个模块，里面有各种计算用的函数。为了后续分析其它指标的方便，接下来再介绍一个用于分析模型的工具。</p>
+
+<p><a href="https://www.statsmodels.org/stable/index.html">statsmodels</a> 是一个探究数据统计模型的 Python 第三方库。可以通过 <code>pip</code> 直接安装它：</p>
+
+<div class="codeblock code-console"><span class="token-venv">(sci)</span> PS D:\MachineLearning\demo> <span class="token-comd">pip</span> install statsmodels</div>
+
+<p>然后可以通过以下代码分析搭建回归模型的各种数据信息：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">import</span> statsmodels<span style="color: #39adb5;">.</span>api <span style="color: #39adb5;font-weight: bold;">as</span> sm</div><div>est <span style="color: #7c4dff;">=</span> sm<span style="color: #39adb5;">.</span>OLS<span style="color: #39adb5;">(</span>y<span style="color: #39adb5;">,</span> sm<span style="color: #39adb5;">.</span>add_constant<span style="color: #39adb5;">(</span>x<span style="color: #39adb5;">)).</span>fit<span style="color: #39adb5;">()</span></div><div>est<span style="color: #39adb5;">.</span>summary<span style="color: #39adb5;">()</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><table class="pandas-dataframe">
+        <caption>OLS Regression Results</caption>
+        <tr>
+            <th>Dep. Variable:</th><td>consumption</td><th class="emphasis">R-squared:</th><td class="emphasis">0.986</td>
+        </tr>
+        <tr>
+            <th>Model:</th><td>OLS</td><th class="emphasis">Adj. R-squared:</th><td class="emphasis">0.986</td>
+        </tr>
+        <tr>
+            <th>Method:</th><td>Least Squares</td><th>F-statistic:</th><td>3962.</td>
+        </tr>
+        <tr>
+            <th>Date:</th><td>Sat, 26 Nov 2022</td><th>Prob (F-statistic):</th><td>6.12e-53</td>
+        </tr>
+    </table><table class="pandas-dataframe">
+        <tr>
+            <th></th><th class="emphasis">coef</th><th>std err</th><th>t</th><th class="emphasis">P>|t|</th><th>[0.025</th><th>0.975]</th>
+        </tr>
+        <tr>
+            <td>const</td><td class="emphasis">-1.473e+04</td><td>239.859</td><td>-61.398</td><td class="emphasis">0.000</td><td>-1.52e+04</td><td>-1.42e+04</td>
+        </tr>
+        <tr>
+            <td>year</td><td class="emphasis">7.5747</td><td>0.120</td><td>62.941</td><td class="emphasis">0.000</td><td>7.333</td><td>7.816</td>
+        </tr>
+    </table><table class="pandas-dataframe">
+        <tr>
+            <th>Skew:</th><td>-0.436</td><th>Prob(JB):</th><td>0.151</td>
+        </tr>
+        <tr>
+            <th>Kurtosis:</th><td>2.087</td><th>Cond. No.</th><td>2.41e+05</td>
+        </tr>
+    </table><span class="notes">Notes:</span>
+<span class="notes">[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</span>
+<span class="notes">[2] The condition number is large, 2.41e+05. This might indicate that there are strong multicollinearity or other numerical problems.</span></div>
+</div>
+
+<p><code>OLS</code> 表示普通最小二乘法(Ordinary Least Squares)，用于分析线性回归模型的各种统计值。<code>sm.add_constant()</code> 函数是为了给原来的特征变量 <code>X</code> 添加常数项，即公式 <span class="math">\\( y=ax+b \\)</span> 中的截距 <span class="math">\\( b \\)</span> 。</p>
+
+<p>以上结果省略了部分不重要的数据，主要的结果已经用红色强调出了。在左上角就是模型的 R-square 值。在不同应用场合下 R-square 值的标准也不一样，一般在 0.7 以上就可以认为具有较好的线性相关性，0.9 线性相关性已经很强了。本数据的 R-square 达到了 0.98 ，完全可以认为一次能源消耗量和年份有着很强的线性关系。</p>
+
+<h2>线性回归模型的拓展</h2>
+
+<h3>多元线性回归</h3>
+
+<p>除了一个自变量的直线拟合，还可以处理多个自变量的线性回归模型。<strong>多元线性回归</strong>是推广到多个特征变量的线性回归模型，可以考虑多个因素对目标结果的影响。</p>
+
+<p>多元线性回归可以表示为如下所示的公式：</p>
+
+<div class="math">
+\\[
+    y = \theta_0 + \theta_1x_1 + \theta_2x_2 + \dots + \theta_nx_n + \dots
+\\]
+</div>
+
+<p>其中 <span class="math">\\( x_i \\)</span> 为不同的特征变量，<span class="math">\\( \theta_i \\)</span> 为这些特征变量前的系数（影响因素），<span class="math">\\( \theta_0 \\)</span> 为常数项。这个数学公式表示的是三维空间中的一个平面，或者是更高维度的一个超平面。</p>
+
+<p>多元线性回归也可以表示为如下的矩阵形式：</p>
+
+<div class="math">
+    \\[
+        y = \boldsymbol{\theta} \cdot \boldsymbol{X} 
+    \\]
+</div>
+    
+<p>这里 <span class="math">\\( \boldsymbol{\theta} \\)</span> 是模型的参数矩阵，<span class="math">\\( \boldsymbol{X} \\)</span> 是特征变量向量。因此多元线性回归的模型和一元线性回归是类似的，只是训练时用的 <code>X</code> 每个数组内的元素不止一个而已。</p>
+
+<p>多元线性回归模型的的原理也是取合适系数，使残差平方和</p>
+
+<div class="math">
+\\[
+    \sum (y_i - \hat y_i)^2
+\\]
+</div>
+
+<p>最小。</p>
+
+<p>数学上主要通过最小二乘法和梯度下降法来计算合适的系数。</p>
+
+<p>接下来通过一个具体的示例介绍多元线性回归的分析。假设某公司不同时期的利润（因变量）与各成本（自变量）之间的关系为：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/01-output-multilinear-factors.png" width="460" alt="">
+    <figcaption>（数据是瞎编的）</figcaption>
+</figure>
+
+<p>在建立模型前，首先需要分析数据是否可以建立多元线性回归模型。对于多元线性回归，衡量结果好坏的评估值还有两个：Adj. R-square 和 <span class="math">\\( P \\)</span> 值。</p>
+
+<p>Adj. R-square 是改进的 R-square ，目的是防止选取特征变量过多导致 R-square 值虚高。Adj. R-square 在 R-square 的基础上考虑了特征变量的数量这一因素，其公式为：</p>
+
+<div class="math">
+\\[
+    \bar{R^2} = 1 - \frac{(1 - R^2)(n - 1)}{n - k - 1}
+\\]
+</div>
+
+<p>其中 <span class="math">\\( n \\)</span> 为样本数量，<span class="math">\\( k \\)</span> 为特征变量数量。因此选择的特征变量越多，对 Adj. R-square 影响便越大。</p>
+
+<p><span class="math">\\( P \\)</span> 值是统计学假设检验的一个概念，表示假定特征变量与目标变量有显著相关性时，所得到的样本出现不符合假设的结果概率：若概率越大，则 <span class="math">\\( P \\)</span> 值越大，说明特征变量与目标变量有显著相关性的可能性便越小；若 <span class="math">\\( P \\)</span> 值越小，说明更可能有显著相关性。统计学中通常以 <span class="math">\\( P \\)</span> 值 0.05 为特征变量与目标变量是否有显著相关性的阈值。</p>
+
+<p>总体来说，线性拟合常用的几个评价标准为：</p>
+
+<ul>
+    <li>R-square 和 Adj. R-square 衡量线性拟合的优劣</li>
+    <li><span class="math">\\( P \\)</span> 值衡量特征变量的显著性</li>
+</ul>
+
+<p>接下来使用 statsmodels 来检验多元线性回归的数据：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>sm<span style="color: #39adb5;">.</span>OLS<span style="color: #39adb5;">(</span>y_mul<span style="color: #39adb5;">,</span> sm<span style="color: #39adb5;">.</span>add_constant<span style="color: #39adb5;">(</span>X_mul<span style="color: #39adb5;">)).</span>fit<span style="color: #39adb5;">().</span>summary<span style="color: #39adb5;">()</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><table class="pandas-dataframe">
+        <caption>OLS Regression Results</caption>
+        <tr>
+            <th>Dep. Variable:</th><td>Profit</td><th class="emphasis">R-squared:</th><td class="emphasis">0.952</td>
+        </tr>
+        <tr>
+            <th>Model:</th><td>OLS</td><th class="emphasis">Adj. R-squared:</th><td class="emphasis">0.948</td>
+        </tr>
+        <tr>
+            <th>Method:</th><td>Least Squares</td><th>F-statistic:</th><td>222.3</td>
+        </tr>
+    </table><table class="pandas-dataframe">
+        <tr>
+            <th></th><th>coef</th><th>std err</th><th>t</th><th class="emphasis">P>|t|</th><th>[0.025</th><th>0.975]</th>
+        </tr>
+        <tr>
+            <td>const</td><td>5.009e+04</td><td>6571.034</td><td>7.622</td><td class="emphasis">0.000</td><td>3.69e+04</td><td>6.33e+04</td>
+        </tr>
+        <tr>
+            <td>R&D Spend</td><td>0.7762</td><td>0.054</td><td>14.442</td><td class="emphasis">0.000</td><td>0.668</td><td>0.885</td>
+        </tr>
+        <tr>
+            <td>Administration</td><td>-0.0280</td><td>0.051</td><td>-0.548</td><td class="emphasis">0.586</td><td>-0.131</td><td>0.075</td>
+        </tr>
+        <tr>
+            <td>Marketing Spend</td><td>0.0270</td><td>0.016</td><td>1.639</td><td class="emphasis">0.108</td><td>-0.006</td><td>0.060</td>
+        </tr>
+        <tr>
+            <td>Production</td><td>1.2157</td><td>1.204</td><td>1.010</td><td class="emphasis">0.318</td><td>-1.209</td><td>3.641</td>
+        </tr>
+    </table></div>
+</div>
+
+<p>在以上结果中，R-square 和 Adj. R-square 都达到了 0.9 以上，说明模型的线性拟合程度很好。在几个特征变量内，只有 R&D Spend 的 <span class="math">\\( P \\)</span> 值达到了阈值 0.05 以内，说明利润与研发费用具有很强的线性相关性；产量和管理费用的 <span class="math">\\( P \\)</span> 值都很大，说明它们与利润不太可能有线性相关性，在建立回归模型时可以忽略它们。</p>
+
+<!-- 
+有一个可以直接得出结果的数学方程：
+
+<div class="math">
+\\[
+    \boldsymbol{\hat K} = (\boldsymbol X ^T \boldsymbol X)^{-1} \boldsymbol X ^T y
+\\]
+</div>
+
+不过这种方法时间复杂度有点高：<span class="math">\\( O(N^{2.4}) \\)</span> 到 <span class="math">\\( O(N^3) \\)</span> 。
+-->
+
+<h3>多项式回归</h3>
+
+<p>很多时候数据在散点图中未必表现为一条直线，那么就不能使用直线的方程去描述它，否则会产生<strong>欠拟合</strong>：模型没有捕捉到数据的特征，不能用于拟合数据，如图所示：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/01-output-polynomial-bad.png" width="440" alt="">
+    <figcaption>曲线数据不能用直线拟合</figcaption>
+</figure>
+
+<p>对于曲线数据，可以通过基函数对原始数据添加新的特征，使其由 <span class="math">\\( [ \, x \, ] \\)</span> 变换为形如 <span class="math">\\( [ \, 1, \, x, \, x^2, \dots, x^n \, ] \\)</span> 的多项式组合形式，从而将变量间的线性回归模型转换为非线性回归模型。其中第一列 1 为常数项，它的值对分析结果没有影响。</p>
+
+<p><code>preprocessing</code> 是 Scikit-Learn 的一个模块，提供数据预处理所需要的工具，其中就包含多项式变换的功能：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span> sklearn<span style="color: #39adb5;">.</span>preprocessing <span style="color: #39adb5;font-weight: bold;">import</span> PolynomialFeatures</div><div>poly <span style="color: #7c4dff;">=</span> PolynomialFeatures<span style="color: #39adb5;">(</span><span style="color: #e53935;">degree</span><span style="color: #7c4dff;">=</span><span style="color: #f76d47;">2</span><span style="color: #39adb5;">)</span></div><div>X_poly <span style="color: #7c4dff;">=</span> poly<span style="color: #39adb5;">.</span>fit_transform<span style="color: #39adb5;">(</span>X<span style="color: #39adb5;">)</span></div><div>X_poly<span style="color: #39adb5;">[</span><span style="color: #f76d47;">0</span><span style="color: #39adb5;">]</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">array([ 1.        , -0.36537882,  0.13350168])</div>
+</div>
+
+<p>可以将变换得到的数据应用到线性回归模型中：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div>good_model <span style="color: #7c4dff;">=</span> LinearRegression<span style="color: #39adb5;">()</span></div><div>good_model<span style="color: #39adb5;">.</span>fit<span style="color: #39adb5;">(</span>X_poly<span style="color: #39adb5;">,</span> y<span style="color: #39adb5;">)</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><div class="sklearn-model"><p>LinearRegression()</p></div></div>
+</div>
+
+<p>这样得到的回归趋势线就是一条拟合程度较好的曲线了：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/01-output-polynomial-good.png" width="440" alt="">
+</figure>
+
+<p>除此之外，还可以将预处理和建立模型结合起来，使用 Scikit-Learn 提供的管道操作组合成一个模型，这样便无需频繁处理数据了：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span> sklearn<span style="color: #39adb5;">.</span>pipeline <span style="color: #39adb5;font-weight: bold;">import</span> make_pipeline</div><br><div>model <span style="color: #7c4dff;">=</span> make_pipeline<span style="color: #39adb5;">(</span>PolynomialFeatures<span style="color: #39adb5;">(</span><span style="color: #f76d47;">3</span><span style="color: #39adb5;">),</span> </div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; LinearRegression<span style="color: #39adb5;">())</span></div><div>model<span style="color: #39adb5;">.</span>fit<span style="color: #39adb5;">(</span>x<span style="color: #39adb5;">.</span>reshape<span style="color: #39adb5;">(</span><span style="color: #7c4dff;">-</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">1</span><span style="color: #39adb5;">),</span> y<span style="color: #39adb5;">)</span></div></div>
+</div>
+
+<h3>正则化线性模型</h3>
+
+<p>多项式回归等曲线回归模型都存在一个问题，那就是曲线的形状不易确定。例如，多项式回归的次数往往不易确定，如果设置了过高的多项式次数，可能会导致很糟糕的拟合结果。</p>
+
+<p>例如，以下是对一组曲线数据分别应用 3 次和 16 次多项式的拟合结果：</p>
+
+<figure class="parallel">
+    <div>
+        <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/01-output-polynomial-uncertain.png" width="370" alt="">
+        <figcaption>3 次多项式的拟合结果</figcaption>
+    </div>
+    <div>
+        <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/01-output-polynomial-worse.png" width="370" alt="">
+        <figcaption>16 次多项式的拟合结果</figcaption>
+    </div>
+</figure>
+
+<p>尽管 16 次多项式拟合后曲线更贴近原始数据，但并不能说明这就是一个合适的趋势线：不能为了盲目增加 <span class="math">\\( R^2 \\)</span> 而增加回归曲线的次数，否则可能发生<strong>过拟合</strong>，这是一个与欠拟合相对应的概念，得出的数据不具有推广性。特别是在横坐标接近 0 的位置曲线有很大幅度的变动，这显然是不合理的。</p>
+
+<!-- 
+<div class="math">
+\\[
+    \text{MSE} = \frac 1 n \sum_{i=1}^{n} (\boldsymbol{\theta}^T\boldsymbol{x}_i-y_i)^2
+\\]
+</div> 
+-->
+
+<p>由于残差平方无法判断是否会发生过拟合，减少过拟合的一个方法是对该公式添加额外的约束项，即正则化(regularization)：更多的约束可以防止模型的某些参数不正确地过分增大而发生过拟合。</p>
+
+<p>正则化的常用方法有两个：岭回归和 Lasso 回归。</p>
+
+<p>岭回归(ridge regression)也称为 Tikhonov 正则化，它在描述模型最优方案的公式（残差平方和）额外添加了一个约束项：</p>
+
+<div class="math">
+\\[
+    \alpha \sum_{i=1}^{n} \theta_i^2
+\\]
+</div>
+
+<p>参数 <span class="math">\\( \alpha \\)</span> 用于控制约束效果：趋向于 0 的参数约束的力度更小。从公式上看，使用岭回归可以避免线性模型为了盲目贴近数据而采用很大的多项式系数 <span class="math">\\( \theta_i \\)</span> 而导致曲线过于陡峭。</p>
+
+<p>岭回归也和线性回归放在同样的模块内，并遵循类似的接口规则：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span> sklearn<span style="color: #39adb5;">.</span>linear_model <span style="color: #39adb5;font-weight: bold;">import</span> Ridge</div><div>model <span style="color: #7c4dff;">=</span> Ridge<span style="color: #39adb5;">(</span><span style="color: #e53935;">alpha</span><span style="color: #7c4dff;">=</span><span style="color: #f76d47;">0.2</span><span style="color: #39adb5;">)</span></div><div>model<span style="color: #39adb5;">.</span>fit<span style="color: #39adb5;">(</span>X_poly<span style="color: #39adb5;">,</span> y<span style="color: #39adb5;">)</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><div class="sklearn-model"><p>Ridge(alpha=0.2)</p></div></div>
+</div>
+
+<p>下图展示了不同参数下岭回归的结果：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/01-output-ridge-results.png" width="440" alt="">
+</figure>
+
+<p>另一种常用的正则化是 Lasso 正则化，它的约束项为：</p>
+
+<div class="math">
+    \\[
+        \alpha \sum_{i=1}^{n} |\theta_i|
+    \\]
+</div>
+
+<p>从公式上看，Lasso 回归与岭回归差别不大，但 Lasso 回归在数学上更倾向于将特征系数设置为 0 。假设有两个特征变量，那么 Lasso 回归在降低正则化项的和时，更容易接近坐标轴而使某个系数趋近 0 ，如下图所示：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/01-lasso-losses-zero.png" width="780" alt="">
+</figure>
+
+<p>可以从同样的地方导入 <code>Lasso</code> 类建立模型。下图展示了不同参数下 Lasso 回归的结果，可以看到都比较趋近于 3 次多项式：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/01-output-lasso-results.png" width="440" alt="">
+</figure>
+
+<p>总的来说，线性回归作为统计学中常用的一个工具，它的数学原理已经被研究得很透彻了，因此模型的可解释性很强，且计算速度快，对于线性数据的预测结果很好。但是线性回归不适用于非线性数据，且无法处理分类问题，因此需要提前判断数据是否有线性关系。</p>
+
+
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python/python3-string-format/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/02/Night-Street-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/02/Night-Street-520x293.jpg 520w, /wp-content/uploads/2022/02/Night-Street-300x169.jpg 300w, /wp-content/uploads/2022/02/Night-Street-1024x576.jpg 1024w, /wp-content/uploads/2022/02/Night-Street-768x432.jpg 768w, /wp-content/uploads/2022/02/Night-Street-1536x864.jpg 1536w, /wp-content/uploads/2022/02/Night-Street-950x534.jpg 950w, /wp-content/uploads/2022/02/Night-Street.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python/python3-string-format/" rel="bookmark">Python3 字符串格式化</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-fp/07-generators/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程07-生成器-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/05/Python函数式编程07-生成器-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程07-生成器-300x169.jpg 300w, /wp-content/uploads/2022/05/Python函数式编程07-生成器-1024x576.jpg 1024w, /wp-content/uploads/2022/05/Python函数式编程07-生成器-768x432.jpg 768w, /wp-content/uploads/2022/05/Python函数式编程07-生成器-1536x864.jpg 1536w, /wp-content/uploads/2022/05/Python函数式编程07-生成器-950x534.jpg 950w, /wp-content/uploads/2022/05/Python函数式编程07-生成器.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-fp/07-generators/" rel="bookmark">Python函数式编程07 生成器</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python/python3-with-statement-context-manager/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/Python-with语句和上下文管理器-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/07/Python-with语句和上下文管理器-520x293.jpg 520w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-300x169.jpg 300w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-1024x576.jpg 1024w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-768x432.jpg 768w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-1536x864.jpg 1536w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-950x534.jpg 950w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python/python3-with-statement-context-manager/" rel="bookmark">Python3 with语句和上下文管理器</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/data-science/machine-learning/03-naive-bayes/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>机器学习-朴素贝叶斯</span></a></li>
+		<li class="previous"><a href="/data-science/machine-learning/10-clustering/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>机器学习-数据聚类与分群</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

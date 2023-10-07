@@ -182,11 +182,16 @@ span.inline-color.violet { color: violet; }
     font-family: Consolas, 'Courier New', monospace;
 }
 
+
+.entry .text-indent {
+    padding-left: 2em;
+} 
+
 /* 
 .entry .text-indent {
     padding-left: attr(css-text-indent);
 } 
-*/
+ */
 
 
 

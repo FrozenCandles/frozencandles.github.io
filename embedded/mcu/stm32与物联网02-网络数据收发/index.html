@@ -1,0 +1,763 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>STM32与物联网02-网络数据收发 - 冰封残烛的个人小站</title>
+	<link rel="canonical" href="/embedded/stm32/esp8266-controlling/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="STM32与物联网02-网络数据收发 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="在上一节中，介绍了 ESP8266 的使用方法。不过&#046;&#046;&#046;" />
+	<meta property="og:url" content="/embedded/stm32/esp8266-controlling/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2022-07-15T02:13:17+00:00" />
+	<meta property="article:modified_time" content="2023-10-07T01:36:22+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2022/07/STM32与物联网02-网络数据收发.jpg" />
+	<meta property="og:image:width" content="1920" />
+	<meta property="og:image:height" content="1536" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="4分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/embedded/stm32/esp8266-controlling/#primaryimage",
+	            "url": "/wp-content/uploads/2022/07/STM32与物联网02-网络数据收发.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/07/STM32与物联网02-网络数据收发.jpg",
+	            "width": 1920,
+	            "height": 1536
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/embedded/stm32/esp8266-controlling/#webpage",
+	            "url": "/embedded/stm32/esp8266-controlling/",
+	            "name": "STM32与物联网02-网络数据收发 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/embedded/stm32/esp8266-controlling/#primaryimage"
+	            },
+	            "datePublished": "2022-07-15T02:13:17+00:00",
+	            "dateModified": "2023-10-07T01:36:22+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "breadcrumb": {
+	                "@id": "/embedded/stm32/esp8266-controlling/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/embedded/stm32/esp8266-controlling/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/embedded/stm32/esp8266-controlling/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "STM32与物联网02-网络数据收发"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/519" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=519' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fembedded%2Fstm32%2Fesp8266-controlling%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fembedded%2Fstm32%2Fesp8266-controlling%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><link rel="stylesheet" href="/wp-content/static/css/theme@haru.wp.css">
+<link rel="stylesheet" href="/wp-content/static/css/hljs@night-owl-light.css">
+<style>
+    div.vscode-block { color: #403F53; background-color: #FBFBFB }
+</style>
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-519 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-519" class="post-519 post type-post status-publish format-standard has-post-thumbnail hentry category-stm32">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">STM32与物联网02-网络数据收发</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/embedded/stm32/" rel="category tag">STM32</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年7月15日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+<p>在<a class="link-internal" link="" href="/archives/496">上一节</a>中，介绍了 ESP8266 的使用方法。不过上一节中都是通过串口调试工具手动发送信息的方式来操作 ESP8266 ，这肯定不能用于实际开发。因此，本节介绍如何编写合适的程序来和 ESP8266 交互，从而收发并解析网络数据。</p>
+<h2>TCP服务器</h2>
+<p>在 TCP 服务器下，可以使用移动设备主动连接 ESP8266 提供的 WiFi 。如果编写正确的程序，那么可以使用移动设备控制 ESP8266 。</p>
+<h3>建立TCP服务器</h3>
+<p>从上一节的介绍可以了解到，程序和 ESP8266 的交互主要是通过发送 AT 指令完成的，因此程序中首要的任务就是编写合适的程序向 ESP8266 发送指令。</p>
+<p>不过在发送指令后，可能还需要判断指令是否被成功接收。一般来说，ESP8266 执行失败时可能返回各种信息，但在成功执行指令后都会返回 OK 。发送指令可以通过以下函数完成：</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">uint8_t</span> <span class="hljs-title">ESP8266_SendCmd</span><span class="hljs-params">(<span class="hljs-keyword">char</span>* cmd, <span class="hljs-keyword">uint8_t</span> timeout)</span> </span>{
+    ESP8266_Buffer.Length = <span class="hljs-number">0</span>;
+    <span class="hljs-built_in">memset</span>(ESP8266_Buffer.Body, <span class="hljs-number">0</span>, USART_RX_BUF_SIZE);
+    <span class="hljs-built_in">USART_printf</span>(USART3, <span class="hljs-string">&quot;%s\r\n&quot;</span>, cmd);
+    <span class="hljs-keyword">while</span> (timeout--) {
+        <span class="hljs-built_in">delay_ms</span>(<span class="hljs-number">100</span>);
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strstr</span>(ESP8266_Buffer.Body, <span class="hljs-string">&quot;OK&quot;</span>))
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+}
+</pre></div>
+<p>由于不同指令处理的时间也不一致，因此在程序中引入了一个倒计时器，在倒计时结束前不断检查接收到的信息中是否包含 <code>&quot;OK&quot;</code> ，如果是则结束当前倒计时，这样可以确保在指令执行完后就可以立即退出延时，提高程序执行效率。</p>
+<p>程序中与 ESP8266 交互基本是都采用这种方式。例如，在程序下载后若希望使 ESP8266 也重启，则可以通过拉低 RST 引脚复位 ESP8266 ，复位后会接到 <code>&quot;ready&quot;</code> 信息，则可以编写以下函数：</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">uint8_t</span> <span class="hljs-title">ESP8266_Reset</span><span class="hljs-params">(<span class="hljs-keyword">uint16_t</span> timeout)</span> </span>{
+    <span class="hljs-built_in">ESP8266_RST</span>(RESET);
+    <span class="hljs-built_in">delay_ms</span>(<span class="hljs-number">500</span>);
+    <span class="hljs-built_in">ESP8266_RST</span>(SET);
+    <span class="hljs-keyword">while</span> (timeout--) {
+        <span class="hljs-built_in">delay_ms</span>(<span class="hljs-number">100</span>);
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strstr</span>(ESP8266_Buffer.Body, <span class="hljs-string">&quot;ready&quot;</span>))
+            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+}
+</pre></div>
+<p>如果某条指令有其余回复的情况，只需要参照以上略做修改即可。</p>
+<p>有了以上函数后，就可以编写代码，逐条发送指令了。这里将 ESP8266 设置为 AP 模式，使其变成一个 WiFi 热点，使计算机可以直接连接上 ESP8266 并收发信息，因此首先需要发送 <code>AT+CWMODE=2</code> 指令：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">if</span> (<span class="hljs-built_in">ESP8266_Reset</span>(<span class="hljs-number">50</span>))
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+<span class="hljs-keyword">if</span> (<span class="hljs-built_in">ESP8266_SendCmd</span>(<span class="hljs-string">&quot;AT+CWMODE=2&quot;</span>, <span class="hljs-number">50</span>))
+    <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+</pre></div>
+<p>然后可以使用 <code>AT+CWSAP=&quot;&lt;ssid&gt;&quot;,&quot;&lt;password&gt;&quot;,&lt;chl&gt;,&lt;enc&gt;</code> 设置 WiFi 参数，一般来说通道号和加密类型都设置为 4 即可：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">char</span> cmd[<span class="hljs-number">64</span>];
+<span class="hljs-built_in">sprintf</span>(cmd, <span class="hljs-string">&quot;AT+CWSAP=\&quot;%s\&quot;,\&quot;%s\&quot;,%d,%d\r\n&quot;</span>, SSID, PASSWORD, <span class="hljs-number">4</span>, WPA_WPA2_PSK);
+<span class="hljs-keyword">if</span> (<span class="hljs-built_in">ESP8266_SendCmd</span>(cmd, <span class="hljs-number">50</span>))
+    <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>;
+</pre></div>
+<p>可以将这些参数设置为宏定义以方便修改。接下来的许多设置都和以上代码类似，可以以此为模板替换为其它命令，因此不再展示代码，仅介绍主要命令。</p>
+<p>如果要设置固定的局域网 IP ，可以通过 <code>AT+CIPAP=&quot;&lt;ip&gt;&quot;</code> 完成。</p>
+<p>接下来可以通过指令 <code>AT+CIPMODE=&lt;mode&gt;</code> 设置 ESP8266 的传输模式。该命令可以设置 ESP8266 的两种传输模式：</p>
+<ol start="0">
+<li>普通传输模式(Normal Transmission Mode)，该模式下，用户可以通过 AT 指令发送 TCP 数据，同时 ESP8266 也会将接收到的数据以 +IPD 等指令的形式返回</li>
+<li>透传接收模式(Passthrough Receiving Mode)：该模式下，ESP8266 无法发送 TCP 数据，同时 ESP8266 会将接收到的数据以原始的形式返回给 STM32</li>
+</ol>
+<p>透传接收模式一般用于开启透传模式。关于透传模式会在后续介绍。</p>
+<p>ESP8266 支持多路连接，即一个 TCP 端口可以建立多个连接。通过 <code>AT+CIPMUX=1</code> 可以启用多连接，每个连接到端口上的客户端通过 <code>&lt;id&gt;</code> 标识，连接的数量最后为 5 个，因此 <code>&lt;id&gt;</code> 的取值范围为 0~4 。</p>
+<p>多连接必须在所有连接都断开且服务器也关闭时才可以设置，并且只有普通传输模式下才能设置为多连接。</p>
+<p>接下来，可以通过 <code>AT+CIPSERVER=1,8266</code> 开启一个位于端口 8266 上的 TCP 服务器。根据以上步骤，TCP 服务器便建立完成，可以准备接收客户端发来的数据了。</p>
+<h3>数据获取与解析</h3>
+<p>在建立了 TCP 服务器后，ESP8266 便会等待客户端的连接。</p>
+<p>TCP 客户端在接到客户端的数据时，会以 <code>+IPD,&lt;id&gt;,&lt;len&gt;:&lt;data&gt;</code> 的指令形式转交数据给 STM32 。由于以上开启了多路连接，因此接收的数据中多了一个字段 <code>&lt;id&gt;</code> 。</p>
+<p>因此判断是否有数据收到也很简单，只需要判断接收缓冲区内是否有子串 <code>&quot;+IPD&quot;</code> 即可：</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">ESP8266_HasData</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span> </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">strstr</span>(ESP8266_Buffer.Body,<span class="hljs-string">&quot;+IPD&quot;</span>) 
+        &amp;&amp; <span class="hljs-built_in">strstr</span>(ESP8266_Buffer.Body,<span class="hljs-string">&quot;:&quot;</span>);
+}
+</pre></div>
+<p>以上同时查找子串 <code>&quot;:&quot;</code> 确保数据有效性。根据以上格式，拆解该字符串并截取有效数据如下：</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">int8_t</span> <span class="hljs-title">ESP8266_MuxGetData</span><span class="hljs-params">(<span class="hljs-keyword">char</span>* data, <span class="hljs-keyword">uint16_t</span>* len)</span> </span>{
+    <span class="hljs-keyword">uint8_t</span> id;
+    <span class="hljs-keyword">char</span>* data_ptr = <span class="hljs-built_in">strstr</span>(ESP8266_Buffer.Body, <span class="hljs-string">&quot;+IPD&quot;</span>);
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">sscanf</span>(data_ptr,<span class="hljs-string">&quot;+IPD,%d,%d&quot;</span>, &amp;id, len) == <span class="hljs-number">2</span>) {
+        <span class="hljs-built_in">memcpy</span>(data, <span class="hljs-built_in">strstr</span>(data_ptr, <span class="hljs-string">&quot;:&quot;</span>) + <span class="hljs-number">1</span>, *len);
+        data[*len] = <span class="hljs-string">&#x27;\0&#x27;</span>;
+        ESP8266_Buffer.Length = <span class="hljs-number">0</span>;
+        <span class="hljs-built_in">memset</span>(ESP8266_Buffer.Body, <span class="hljs-number">0</span>, USART_RX_BUF_SIZE);
+        <span class="hljs-keyword">return</span> id;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+}
+</pre></div>
+<p>以上函数略显复杂。之所以要这么复杂，主要有以下两个方面的原因：<code>scanf()</code> 类函数使用字符串转换说明时，它在读入数据时如果遇到一个空格或回车符，会丢弃后面的所有数据，这显然不能用于截取用户数据。</p>
+<p>另外上一节说过工程中接收串口传来的不定长数据的方式是使用串口空闲中断，然而空闲中断接收的一包数据并不都是符合期望的一包数据：在接收到 TCP 连接时，ESP8266 会发送 <code>&lt;id&gt;,CONNECT</code> 表示连接已建立，如果此时建立的连接接收到任何数据，ESP8266 也会立即转发该数据。因此如果连接建立后马上收到数据，那么两次发送的数据时间相隔过短，可能会没有引起空闲中断而被 STM32 认为是同一包数据。在连接取消时，也有同样的问题。</p>
+<p>不过发送数据的函数可能更加复杂：</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">uint8_t</span> <span class="hljs-title">ESP8266_MuxSendData</span><span class="hljs-params">(<span class="hljs-keyword">uint8_t</span>* data, <span class="hljs-keyword">uint16_t</span> length, <span class="hljs-keyword">uint8_t</span> id, <span class="hljs-keyword">uint8_t</span> timeout)</span> </span>{
+    <span class="hljs-built_in">ESP8266_ClearBuffer</span>();
+    <span class="hljs-built_in">USART_printf</span>(USART3, <span class="hljs-string">&quot;AT+CIPSEND=%d,%d\r\n&quot;</span>, id, length);
+    <span class="hljs-keyword">while</span> (timeout--) {
+        <span class="hljs-built_in">delay_ms</span>(<span class="hljs-number">10</span>);
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strstr</span>(ESP8266_Buffer.Body, <span class="hljs-string">&quot;&gt;&quot;</span>))
+            <span class="hljs-keyword">break</span>;
+    }
+    <span class="hljs-keyword">if</span> (timeout &gt; <span class="hljs-number">0</span>) {
+        <span class="hljs-built_in">ESP8266_ClearBuffer</span>();
+        <span class="hljs-built_in">USART_SendBytes</span>(USART3, data, length);
+        <span class="hljs-keyword">while</span> (timeout--) {
+            <span class="hljs-built_in">delay_ms</span>(<span class="hljs-number">10</span>);
+            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strstr</span>(ESP8266_Buffer.Body, <span class="hljs-string">&quot;SEND OK&quot;</span>)) {
+                <span class="hljs-built_in">ESP8266_ClearBuffer</span>();
+                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+            }
+            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strstr</span>(ESP8266_Buffer.Body, <span class="hljs-string">&quot;link is not valid&quot;</span>)) {
+                <span class="hljs-built_in">ESP8266_ClearBuffer</span>();
+                <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+            }
+        }
+        <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>;
+    }
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+}
+</pre></div>
+<p>上一节介绍了发送数据主要使用 <code>AT+CIPSEND</code> 指令完成（多连接下需要一个额外的字段指示发送给的 <code>&lt;id&gt;</code> ），如果可以发送 ESP8266 会返回 <code>&quot;&gt; &quot;</code> 作提示。如果发送成功，ESP8266 会返回 <code>&quot;SEND OK&quot;</code> ，通过返回提示就可以知道发送状态。</p>
+<p>有了以上函数以后，就可以着手编写主程序了。主程序的处理逻辑非常简单，在建立 TCP 服务器后，便不断判断是否有数据到达，如果有那么便读取数据并回复信息：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">char</span> ipd_data[<span class="hljs-number">512</span>];
+<span class="hljs-keyword">int8_t</span> ipd_id;
+<span class="hljs-keyword">uint16_t</span> ipd_len;
+<span class="hljs-keyword">while</span> (<span class="hljs-built_in">ESP8266_CreateTcpServer</span>())
+    <span class="hljs-built_in">delay_ms</span>(<span class="hljs-number">200</span>);
+<span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">ESP8266_HasData</span>()) {
+        ipd_id = <span class="hljs-built_in">ESP8266_MuxGetData</span>(ipd_data, &amp;ipd_len);
+        <span class="hljs-built_in">ESP8266_MuxSendData</span>(<span class="hljs-string">&quot;Acknowledge&quot;</span>, <span class="hljs-number">12</span>, ipd_id, <span class="hljs-number">30</span>);
+    }
+    <span class="hljs-built_in">delay_ms</span>(<span class="hljs-number">500</span>);
+}
+</pre></div>
+<p>可以将得到的数据显示在串口中。在计算机客户端，编写如下套接字程序：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">import</span> socket, time
+client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client.connect((<span class="hljs-string">&#x27;192.168.10.1&#x27;</span>, <span class="hljs-number">8266</span>))
+client.send(time.ctime().encode())
+message = client.recv(<span class="hljs-number">1024</span>)
+<span class="hljs-built_in">print</span>(message.decode())
+client.close()
+</pre></div>
+<p>将计算机连接到 ESP8266 创建的 WiFi 上并运行该套接字程序，即可观察到实验现象。如果为程序编写合适的用户界面并在 STM32 上进一步解析数据，那么便可以实现手机端控制 STM32 了。</p>
+<h2>TCP客户端与HTTP请求</h2>
+<p>TCP 客户端的建立与 TCP 服务器类似，这里先使 ESP8266 连接到路由器，借助路由器访问公网上的服务器。</p>
+<p>前几步操作与 TCP 客户端类似：在复位 ESP8266 后，首先通过指令 <code>AT+CWMODE=1</code> 设置 Sta 模式，然后通过 <code>AT+CWJAP=&quot;&lt;ssid&gt;&quot;,&quot;&lt;password&gt;&quot;</code> 连接到路由器中。由于客户端无需多个连接，可以使用 <code>AT+CIPMUX=0</code> 关闭多连接。</p>
+<p>本次采用透传模式(Passthrough Mode)来收发数据。透传模式是一种特殊的收发数据模式，在透传模式下，用户不能发送 AT 指令，发送的任何数据都会作为原始的数据发送到传输对端；从传输对端收到的数据也会不经由任何 <code>+IPD</code> 封装而原封不动地返回给 STM32 。</p>
+<p>使用 <code>AT+CIPMODE=1</code> 可以设置传输模式为透传模式。通过 <code>AT+CIPSTART</code> 连接上服务器后，直接执行 <code>AT+CIPSEND</code> ，待 ESP8266 返回 <code>&quot;&gt; &quot;</code> 后就进入了透传模式。透传模式下，每包数据以 20ms 间隔区分，每包最大 2048 字节，发送和接收数据都不需要封装成指令，方便处理。</p>
+<p>正常退出透传模式的唯一方式就是单独发送一包发送指令 <code>+++</code> 。</p>
+<p>根据以上原理，可以使用 STM32 发送相应指令，连接到服务器后进入透传模式，并准备发送相应的数据。其代码和上文服务端类似，例如：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">if</span> (<span class="hljs-built_in">ESP8266_Reset</span>(<span class="hljs-number">50</span>))
+    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>);
+<span class="hljs-keyword">if</span> (<span class="hljs-built_in">ESP8266_SendCmd</span>(<span class="hljs-string">&quot;AT+CWMODE=1&quot;</span>, <span class="hljs-number">20</span>))
+    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>);
+<span class="hljs-keyword">if</span> (<span class="hljs-built_in">ESP8266_SendCmd</span>(<span class="hljs-string">&quot;AT+CWJAP=\&quot;TP_LINK\&quot;,\&quot;abc123456\&quot;&quot;</span>, <span class="hljs-number">100</span>))
+    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>);
+<span class="hljs-comment">// ... and so on</span>
+</pre></div>
+<p>当然，考虑到一些指令执行成功时不总是返回 <code>OK</code> ，并且为了使程序逻辑更清晰，可以将一些指令封装成函数。例如，以下函数根据地址（可以是 IP 地址或域名，DNS 解析将自动完成）和端口号，连接到特定的 TCP 服务器中并进入透传模式：</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">uint8_t</span> <span class="hljs-title">ESP8266_ConnectServer</span><span class="hljs-params">(<span class="hljs-keyword">char</span>* address, <span class="hljs-keyword">uint16_t</span> port, <span class="hljs-keyword">uint8_t</span> timeout)</span> </span>{
+    <span class="hljs-built_in">ESP8266_ClearBuffer</span>();
+    <span class="hljs-built_in">USART_printf</span>(USART3, <span class="hljs-string">&quot;AT+CIPSTART=\&quot;TCP\&quot;,\&quot;%s\&quot;,%d\r\n&quot;</span>, address, port);
+    <span class="hljs-keyword">while</span> (timeout--) {
+        <span class="hljs-built_in">delay_ms</span>(<span class="hljs-number">100</span>);
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strstr</span>(ESP8266_Buffer.Body, <span class="hljs-string">&quot;CONNECT&quot;</span>)) {
+            <span class="hljs-built_in">ESP8266_ClearBuffer</span>();
+            <span class="hljs-built_in">USART_printf</span>(USART3, <span class="hljs-string">&quot;AT+CIPSEND\r\n&quot;</span>);
+            <span class="hljs-keyword">while</span> (timeout--) {
+                <span class="hljs-built_in">delay_ms</span>(<span class="hljs-number">100</span>);
+                <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strstr</span>(ESP8266_Buffer.Body, <span class="hljs-string">&quot;\r\nOK\r\n\r\n&gt;&quot;</span>))
+                    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+            }
+            <span class="hljs-keyword">return</span> <span class="hljs-number">4</span>;
+        }
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strstr</span>(ESP8266_Buffer.Body, <span class="hljs-string">&quot;CLOSED&quot;</span>))
+            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">strstr</span>(ESP8266_Buffer.Body, <span class="hljs-string">&quot;ALREADY CONNECTED&quot;</span>))
+            <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>;
+}
+</pre></div>
+<p>可以仿照该函数将其它指令封装成具有抽象功能的对应函数。</p>
+<p>在本示例中，在使用 TCP 连接到远程服务器的 80 端口的基础上，手动构造合适的 HTTP 请求并发送：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) {
+    <span class="hljs-built_in">USART_SendString</span>(USART3, <span class="hljs-string">&quot;GET /api/temperature?time=now HTTP/1.1\r\n&quot;</span>
+                            <span class="hljs-string">&quot;Connection: keep-alive\r\n&quot;</span>
+                            <span class="hljs-string">&quot;Host: 192.168.1.105:80\r\n\r\n&quot;</span>);
+    <span class="hljs-built_in">delay_s</span>(<span class="hljs-number">5</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>, ESP8266_Buffer.Body);
+}
+</pre></div>
+<p>这里 5 秒钟便查询一次数据。如果间隔过长，连接可能断开，那么可以先主动断开连接，等需要查询时再发起 TCP 连接。</p>
+<p>通过 HTTP 服务器提供的合适接口，ESP8266 便可以从互联网中获取到非常广泛的数据。在测试用的服务器中，该接口返回一个 json 响应并被转发到 STM32 中，串口调试工具中显示的原始数据如下：</p>
+
+<div class="codeblock code-console">HTTP/1.1 200 OK
+Date: Wed, 13 Jul 2022 10:57:48 GMT
+Server: WSGIServer/0.2 CPython/3.9.1
+Content-Type: application/json
+X-Frame-Options: DENY
+Content-Length: 93
+X-Content-Type-Options: nosniff
+Referrer-Policy: same-origin
+
+{&quot;temperature&quot;: {&quot;high&quot;: 37.6, &quot;low&quot;: 28.1, &quot;now&quot;: 36.7}, &quot;humidity&quot;: &quot;50%&quot;, &quot;wind&quot;: &quot;11mph&quot;}
+</div>
+<p>通过解析请求头 <code>Content-Length</code> 就可以获取数据的长度，然后查找子串 <code>&quot;{&quot;</code> 的位置便可以提取出接口返回的 json 数据，并可以使用 cJSON 等第三方库解析其中的数据。互联网中存在许多类似的接口，只需要构造合适的请求头，便可以抓取很多有用的信息，不过这需要有一定的抓包或爬虫的基础。</p>
+<p>通过路由器可以接入互联网，在 TCP 服务的基础上，构造出合适的 HTTP 等应用层协议的封装，便可以采集互联网中的各种数据，或者向服务器报告自身传感器的数据，由此真正实现物联网的基础。</p>
+<p>例如，可以向 HTTP 服务器提供的接口发送 POST 请求，将传感器数据作为参数发送给服务器，服务器解析 POST 请求并更新数据库，然后便可以显示在前端上，这样便可以在任何地点查看 STM32 的状态了。不过由于其实现涉及到的知识点过于广泛，无论是环境的配置还是程序的编写都不是一篇文章能完整介绍的，这里便不再涉及。</p>
+<p>一个比较有趣的实现是利用 SMTP 发送电子邮件，可以阅读<a href="http://frozencandles.fun/archives/403#email">这篇文章</a>了解 SMTP 应用层协议的原理与基本报文格式，文章中附带了 Python 套接字程序实现，它和 AT 指令的思路具有一定相似性，移植到 STM32 的主要难点是使用 base64 编码完成身份验证，有兴趣的读者可以尝试自行实现。</p>
+<h2>参考资料/延伸阅读</h2>
+<p><a href="https://docs.espressif.com/projects/esp-at/en/release-v2.2.0.0_esp8266/AT_Command_Set/TCP-IP_AT_Commands.html">https://docs.espressif.com/projects/esp-at/en/release-v2.2.0.0_esp8266/AT_Command_Set/TCP-IP_AT_Commands.html</a><br>TCP/IP 相关 AT 指令集的官方文档。<!-- 讲道理使用 AT 指令真的该读读文档，我 google 时发现很多关于 ESP8266 使用的介绍都是错误的。 --></p>
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python/python3-with-statement-context-manager/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/Python-with语句和上下文管理器-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/07/Python-with语句和上下文管理器-520x293.jpg 520w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-300x169.jpg 300w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-1024x576.jpg 1024w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-768x432.jpg 768w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-1536x864.jpg 1536w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-950x534.jpg 950w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python/python3-with-statement-context-manager/" rel="bookmark">Python3 with语句和上下文管理器</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/computer-science/data-structure/08-graph/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/09/数据结构08-图-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/09/数据结构08-图-520x293.jpg 520w, /wp-content/uploads/2022/09/数据结构08-图-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/computer-science/data-structure/08-graph/" rel="bookmark">数据结构08-图</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/data-science/machine-learning/10-clustering/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/11/机器学习-聚类算法-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/11/机器学习-聚类算法-520x293.jpg 520w, /wp-content/uploads/2022/11/机器学习-聚类算法-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/data-science/machine-learning/10-clustering/" rel="bookmark">机器学习-数据聚类与分群</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/computer-science/computer-networking/05-transmission-control-protocol/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>计算机网络05-面向连接的运输：TCP</span></a></li>
+		<li class="previous"><a href="/programming/python/python3-with-statement-context-manager/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>Python3 with语句和上下文管理器</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

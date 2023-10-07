@@ -1,0 +1,895 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Python标准库re：使用正则表达式 - 冰封残烛的个人小站</title>
+	<link rel="canonical" href="/programming/python/library-re/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Python标准库re：使用正则表达式 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="关于正则表达式的预备知识，可以参见：正则表达式简单入&#046;&#046;&#046;" />
+	<meta property="og:url" content="/programming/python/library-re/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2022-03-21T09:59:22+00:00" />
+	<meta property="article:modified_time" content="2023-10-05T12:22:54+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2022/03/Python3标准库re.jpg" />
+	<meta property="og:image:width" content="1920" />
+	<meta property="og:image:height" content="1080" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="6分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/programming/python/library-re/#primaryimage",
+	            "url": "/wp-content/uploads/2022/03/Python3标准库re.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/03/Python3标准库re.jpg",
+	            "width": 1920,
+	            "height": 1080
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/programming/python/library-re/#webpage",
+	            "url": "/programming/python/library-re/",
+	            "name": "Python标准库re：使用正则表达式 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/programming/python/library-re/#primaryimage"
+	            },
+	            "datePublished": "2022-03-21T09:59:22+00:00",
+	            "dateModified": "2023-10-05T12:22:54+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "breadcrumb": {
+	                "@id": "/programming/python/library-re/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/programming/python/library-re/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/programming/python/library-re/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "Python标准库re：使用正则表达式"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/144" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=144' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython%2Flibrary-re%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython%2Flibrary-re%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><link rel="stylesheet" href="/wp-content/static/css/theme@pie.wp.css">
+<style>
+    .math { color:blue; font-size: 13px; }
+    div.vscode-block { color: #405C79; background-color: #F7F9FB; }
+    /*div.code-console { white-space: normal; }*/
+</style>
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-144 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-144" class="post-144 post type-post status-publish format-standard has-post-thumbnail hentry category-python">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">Python标准库re：使用正则表达式</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/programming/python/" rel="category tag">Python</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年3月21日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+<p>关于正则表达式的预备知识，可以参见：<a class="link-internal" href="/archives/124">正则表达式简单入门</a></p>
+
+<p>本文介绍正则表达式在Python中的应用，主要通过标准库 <code>re</code> 提供的函数实现。</p>
+
+<h2>使用 re 库的预备知识</h2>
+
+<h3>字符转义问题</h3>
+
+<p>由于正则表达式使用反斜杠 <code>\</code> 来转义字符，而 Python 也使用 <code>\</code> 来转义字符。而在这种情况下，两者的转义可能发生冲突：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">expr01 = </span><span style="color: #405c79;">'</span><span style="color: #568bbf;">\b</span><span style="color: #56bf8b;">on</span><span style="color: #405c79;">'</span></div><div><span style="color: #405c79;">expr02 = </span><span style="color: #405c79;">'</span><span style="color: #568bbf;">\\</span><span style="color: #56bf8b;">bon</span><span style="color: #405c79;">'</span></div><div><span style="color: #405c79;">target_string = </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">turn on</span><span style="color: #405c79;">'</span></div></div>
+
+<p>由于 Python 会先将正则表达式编译成一个字符串，再利用 <code>re</code> 库的正则表达式语法去匹配一个字符串如 <code>target_string</code> ，所以 Python 的转义级别要高于正则表达式的。因此在本例中：</p>
+
+<ol>
+    <li>Python 会先将表达式 <code>expr01</code> 中的 <code>"\b"</code> 转义成一个退格符，再将 <code>"退格符on"</code> 作为一个正则表达式去匹配目标字符串，因此得到的结果是什么也匹配不到。</li>
+    <li>Python 会先将表达式 <code>expr02</code> 中的 <code>"\\"</code> 转义成反斜杠 <code>"\"</code> ，再将 <code>"\bon"</code> 作为一个正则表达式，而正则表达式又将 <code>"\b"</code> 转义成单词的边界，即完整的表达式为 <code>"单词的边界on"</code> 去匹配目标字符串，因此匹配的结果是 <code>"on"</code></li>
+</ol>
+
+<p>在上例可以看出，Python 和正则表达式的转义混合会引起混乱。为了避免这种情况发生，强烈建议使用 Python 的原始字符串，它通过在字符串字面量加上 <code>r</code> 前缀来表明原始字符， 该前缀会忽略 Python 的转义，从而可以准确地表达一个正则表达式。因此，上例可以写成：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">raw_expr = </span><span style="color: #bf568b;font-weight: bold;">r</span><span style="color: #405c79;">'</span><span style="color: #568bbf;">\b</span><span style="color: #56bf8b;">on</span><span style="color: #405c79;">'</span></div><div><span style="color: #405c79;">target_string = </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">turn on</span><span style="color: #405c79;">'</span></div></div>
+
+<h3>常用参数</h3>
+
+<p>要用上正则表达式，应该要提供一个正则表达式和待匹配的文本。<code>re</code> 库的函数通常都有以下三个常用的参数：<code>pattern</code> 、<code>string</code> 和 <code>flag</code> ：</p>
+
+<ul>
+    <li><code>pattern</code> ：一个代表正则表达式的字符串，建议使用 r 不转义。</li>
+    <li><code>string</code> ：需要匹配的字符串，如果字符串过长（如 HTML 源码），一般使用变量指向该字符串。</li>
+    <li><code>flags</code> ：匹配模式。常见 <code>flags</code> 的取值及含义如下：</li>
+</ul>
+
+<figure class="wp-block-table">
+    <table>
+        <tbody>
+            <tr>
+                <td><code>re.I<br>re.IGNORECAS</code></td><td>忽略大小写模式</td>
+            </tr>
+            <tr>
+                <td><code>re.M<br>re.MULTILINE</code></td><td>多行模式，使 <code>^</code> 和 <code>$</code> 能够作用于每行的开始和结尾。该模式下便有了 <code>^</code><code></code> 和 <code>\A</code> 以及 <code>$</code> 和 <code>\Z</code> 的区别。</td>
+            </tr>
+            <tr>
+                <td><code>re.S<br>re.DOTALL</code></td><td>单行模式，使 <code>.</code> 所匹配的任意字符包含换行符</td>
+            </tr>
+            <tr>
+                <td><code>re.X<br>re.VERBOSE</code></td><td>冗长模式，忽略空格，并允许用 <code>#</code> 号添加注释</td>
+            </tr>
+            <tr>
+                <td><code>re.A<br>re.ACSII</code></td><td>使用 ASCII 字符集中定义的 <code>\w</code> 、<code>\W</code> 、<code>\b</code> 、<code>\B</code> 、<code>\s</code> 、<code>\S</code> ，而不是默认的 Unicode 字符集。</td>
+            </tr>
+            <tr>
+                <td><code>re.L<br>re.LOCALE</code></td><td>本地化模式，使用当前本地化语言字符集中定义的 <code>\w</code> 、<code>\W</code> 、<code>\b</code> 、<code>\B</code> 、<code>\s</code> 、<code>\S</code>（用于多语言操作系统）</td>
+            </tr>
+            <tr>
+                <td><code>re.U<br>re.UNICODE</code></td><td>使用 Unicode 字符集中定义的 <code>\w</code> 、<code>\W</code> 、<code>\b</code> 、<code>\B</code> 、<code>\s</code> 、<code>\S</code> ，默认的情况</td>
+            </tr>
+        </tbody>
+    </table>
+</figure>
+
+<p>如果要同时设置多个匹配模式，使用按位或运算符 <code>|</code> 号将其隔开。例如 <code>flags=re.M|re.X</code> 。</p>
+
+<h2>基本用法：匹配和搜索</h2>
+
+<h3>匹配</h3>
+
+<p><code>match(<em>pattern</em>, <em>string</em>, <em>flags</em>=0)</code> 函数使用 <code><em>pattern</em></code> 传入的正则表达式按 <code><em>flags</em></code> 匹配模式，从字符串的起始位置逐一匹配字符串 <code><em>string</em></code> 。若匹配成功，返回一个 <code>Match</code> 对象；若匹配不成功，返回一个空值 <code>None</code> 。例如：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">import</span><span style="color: #405c79;"> re</span></div><br><div><span style="color: #405c79;">target01 = </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">010-123456</span><span style="color: #405c79;">'</span></div><div><span style="color: #405c79;">target02 = </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">010 123456</span><span style="color: #405c79;">'</span></div><div><span style="color: #405c79;">regex01 = </span><span style="color: #bf568b;font-weight: bold;">r</span><span style="color: #405c79;">'</span><span style="color: #568bbf;">\d</span><span style="color: #405c79;">{3}</span><span style="color: #568bbf;">-\d</span><span style="color: #405c79;">{3,6}'</span></div><br><div><span style="color: #405c79;">result01 = re.match(</span><span style="color: #bf8b56;">pattern</span><span style="color: #405c79;">=regex01, </span><span style="color: #bf8b56;">string</span><span style="color: #405c79;">=target01)</span></div><div><span style="color: #405c79;">result02 = re.match(</span><span style="color: #bf8b56;">pattern</span><span style="color: #405c79;">=regex01, </span><span style="color: #bf8b56;">string</span><span style="color: #405c79;">=target02)</span></div><br><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(result01)</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(result02)</span></div></div>
+
+<p>结果为：</p>
+
+<div class="code-console">$ python -u regex.py
+&lt;re.Match object; span=(0, 10), match='010-123456'&gt;
+None
+</div>
+
+<p>由于 Python 默认一个对象在条件判断时代表布尔值 <code>True</code> ，而空值代表布尔值 <code>False</code> ，为了防止匹配失败造成的影响，可以使用 <code>if</code> 语句来判断 <code>match()</code> 函数的匹配是否成功。</p>
+
+<p>如果 <code>match()</code> 函数匹配成功，它将返回一个 <code>Match</code> 对象。对于这个 <code>Match</code> 对象，可以使用一些方法来获取正则表达式匹配的信息。</p>
+
+<p>当匹配的表达式中有用到圆括号 <code>( )</code> 或 <code>(?P&lt;name&gt;)</code> 进行分组时，可以使用 <code>.group()</code> 方法用来获取各组匹配到的字符串。括号内传入的参数为代表组序号的整数，或代表组名称的字符串（只需要名称就够了，不需要别的修饰符）。如果不传入参数或传入 <code>0</code> ，则代表获取整个匹配结果。如果传入的值没有对应的组，会发生 <code class="error">IndexError</code> 错误。例如：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">target03 = </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">e is the base of the Natural Logarithms.</span><span style="color: #405c79;">'</span></div><div><span style="color: #405c79;">regex02 = </span><span style="color: #bf568b;font-weight: bold;">r</span><span style="color: #405c79;">'(</span><span style="color: #568bbf;">.</span><span style="color: #405c79;">*)</span><span style="color: #568bbf;"> is the </span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">?P&lt;what&gt;</span><span style="color: #568bbf;">.</span><span style="color: #405c79;">*)</span><span style="color: #568bbf;">\.$</span><span style="color: #405c79;">'</span></div><div><span style="color: #405c79;">result03 = re.match(</span><span style="color: #bf8b56;">pattern</span><span style="color: #405c79;">=regex02,</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf8b56;">string</span><span style="color: #405c79;">=target03)</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(result03.group())</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(result03.group(</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">))</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(result03.group(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">what</span><span style="color: #405c79;">'</span><span style="color: #405c79;">))</span></div></div>
+
+<p>结果为：</p>
+
+<div class="code-console">$ python -u regex.py
+e is the base of the Natural Logarithms.
+e
+base of the Natural Logarithms
+</div>
+
+<p>类似地，还可以使用 <code>.groups()</code> 方法得到分组匹配到的字符串元组，或者通过 <code>.groupdict()</code> 方法得到一个以自定义名称作为键、匹配结果作为值的字典。如果匹配的表达式中没有自定义名称的分组，后者返回一个空字典。</p>
+
+<p>以下给出了这样一个示例：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">target04 = </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">www.python.org</span><span style="color: #405c79;">'</span></div><div><span style="color: #405c79;">regex03 = </span><span style="color: #bf568b;font-weight: bold;">r</span><span style="color: #405c79;">'(</span><span style="color: #568bbf;">www</span><span style="color: #405c79;">)</span><span style="color: #568bbf;">\.</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">?P&lt;name&gt;</span><span style="color: #568bbf;">.</span><span style="color: #405c79;">+)</span><span style="color: #568bbf;">\.</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">?P&lt;domain&gt;</span><span style="color: #568bbf;">.</span><span style="color: #405c79;">+)'</span></div><div><span style="color: #405c79;">result04 = re.match(</span><span style="color: #bf8b56;">pattern</span><span style="color: #405c79;">=regex03,</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf8b56;">string</span><span style="color: #405c79;">=target04)</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(result04.groups())</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(result04.groupdict())</span></div></div>
+
+<p>结果为：</p>
+
+<div class="code-console">$ python -u regex.py
+('www', 'python', 'org')
+{'name': 'python', 'domain': 'org'}
+</div>
+
+<p>该对象还有以下常用的方法：</p>
+
+<ul>
+    <li><code>.start(<em>group</em>)</code> ：返回对应组开始的匹配位置，整个字符串的开头位置为 0 向后类推。忽略 <em><code>group</code> </em>参数相当于返回整个匹配结果的表达式的开头位置。由于 <code>match()</code> 函数会从整个字符串的开头匹配，所以不带参数或者带参数 0 时会返回 0 。</li>
+    <li><code>.end(<em>group</em>)</code> ：返回对应组结尾的匹配位置，整个字符串的开头位置为 0 向后类推。忽略 <em><code>group</code> </em>参数相当于返回整个匹配结果的表达式的结尾位置。</li>
+    <li><code>.span(<em>group</em>)</code> ：以元组的形式返回对应组的开头和结尾的匹配位置，相当于 <code>(.start(<em>group</em>), .stop(<em>group</em>))</code></li>
+</ul>
+
+<p>它的一些属性可以反过来查找匹配时用到的信息：</p>
+
+<ul>
+    <li><code>re</code> ：匹配时使用的正则表达式对象</li>
+    <li><code>string</code> ：待匹配的文本</li>
+    <li><code>pos</code> ：正则表达式搜索文本的开始位置</li>
+    <li><code>endpos</code> ：正则表达式搜索文本的结束位置</li>
+    <li><code>lastindex</code> ：正则表达式最后的组序号</li>
+    <li><code>lastgroup</code> ：正则表达式最后的组名</li>
+</ul>
+
+<hr class="wp-block-separator has-css-opacity"/>
+
+<p><code>fullmatch(<em>pattern</em>, <em>string</em>, <em>flags</em>=0)</code> 函数和 <code>match()</code> 函数相似，只不过 <code>fullmatch()</code> 函数用来检查正则表达式和目标字符串是否完全匹配，而不是部分匹配。</p>
+
+<p>如果完全匹配，则 <code>fullmatch()</code> 函数返回一个 <code>Match</code> 对象，否则便返回空值。</p>
+
+<p>其参数、<code>Match</code> 对象的属性等都和 <code>match()</code> 函数几乎一致。</p>
+
+<p>但是有一个例外：在懒惰匹配模式下，如果其完整的匹配结果是原字符串，则 <code>fullmatch()</code> 也能够成功匹配。这是由于懒惰匹配必须要先匹配完整的字符串，再回溯选取最少的结果。以下给出了一个简单的演示：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">import</span><span style="color: #405c79;"> re</span></div><div><span style="color: #405c79;">target05 = </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">Python is ...</span><span style="color: #405c79;">'</span></div><div><span style="color: #405c79;">result05 = re.fullmatch(</span><span style="color: #bf8b56;">pattern</span><span style="color: #405c79;">=</span><span style="color: #bf568b;font-weight: bold;">r</span><span style="color: #405c79;">'</span><span style="color: #568bbf;">.</span><span style="color: #405c79;">+'</span><span style="color: #405c79;">,</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf8b56;">string</span><span style="color: #405c79;">=target05)</span></div><div><span style="color: #405c79;">result06 = re.fullmatch(</span><span style="color: #bf8b56;">pattern</span><span style="color: #405c79;">=</span><span style="color: #bf568b;font-weight: bold;">r</span><span style="color: #405c79;">'</span><span style="color: #568bbf;">.</span><span style="color: #405c79;">{3,}?'</span><span style="color: #405c79;">,</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf8b56;">string</span><span style="color: #405c79;">=target05)</span></div><div><span style="color: #405c79;">result07 = re.fullmatch(</span><span style="color: #bf8b56;">pattern</span><span style="color: #405c79;">=</span><span style="color: #bf568b;font-weight: bold;">r</span><span style="color: #405c79;">'</span><span style="color: #568bbf;">.</span><span style="color: #405c79;">{3,6}'</span><span style="color: #405c79;">,</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf8b56;">string</span><span style="color: #405c79;">=target05)</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(result05)</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(result06)</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(result07)</span></div></div>
+
+<p>结果为：</p>
+
+<div class="code-console">$ python -u regex.py
+&lt;_sre.SRE_Match object; span=(0, 13), match='Python is ...'&gt;
+&lt;_sre.SRE_Match object; span=(0, 13), match='Python is ...'&gt;
+None
+</div>
+
+<h3>搜索</h3>
+
+<p>相比与匹配，搜索可能应用更多一些。<code>search(<em>pattern</em>, <em>string</em>, <em>flags</em>=0)</code> 函数也和 <code>match()</code> 函数相似，该函数会检索整个字符串来寻找目标表达式的匹配对象。</p>
+
+<p><code>search()</code> 函数和 <code>match()</code> 函数的区别在于配对位置。<code>match()</code> 函数只会匹配字符串的开始，如果字符串的开始不符合正则表达式，便匹配失败。而 <code>search()</code> 函数会检索整个字符串来判断里面是否有结果满足正则表达式，如果字符串的某一部分符合正则表达式，便匹配成功。</p>
+
+<p>该函数也会得到一个 <code>Match</code> 对象。</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">regex04 = </span><span style="color: #bf568b;font-weight: bold;">r</span><span style="color: #405c79;">'</span><span style="color: #568bbf;">\b</span><span style="color: #405c79;">(?:</span><span style="color: #bf8b56;">[01]</span><span style="color: #568bbf;">\d</span><span style="color: #405c79;">|</span><span style="color: #568bbf;">2</span><span style="color: #bf8b56;">[0-3]</span><span style="color: #405c79;">)</span><span style="color: #568bbf;">:</span><span style="color: #bf8b56;">[0-5]</span><span style="color: #568bbf;">\d:</span><span style="color: #bf8b56;">[0-5]</span><span style="color: #568bbf;">\d\b</span><span style="color: #405c79;">'</span></div><div><span style="color: #405c79;">target06 = </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">Now it</span><span style="color: #568bbf;">\'</span><span style="color: #56bf8b;">s 22:32:15.</span><span style="color: #405c79;">'</span></div><div><span style="color: #405c79;">result08 = re.search(regex04, target06)</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(result08)</span></div></div>
+
+<p>结果为：</p>
+
+<div class="code-console">$ python -u regex.py
+&lt;_sre.SRE_Match object; span=(9, 17), match='22:32:15'>
+</div>
+
+<p>可以看到，得到的结果可以通过 <code>.span()</code> 方法来得到匹配字符串的位置，或者通过 <code>.group()</code> 方法得到完整的匹配字符串。</p>
+
+<p>注意：<code>search()</code> 函数虽然可以搜索整个字符串，但是它只会返回第一个匹配成功的结果，例如：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">result09 = re.search(</span><span style="color: #bf568b;font-weight: bold;">r</span><span style="color: #405c79;">'</span><span style="color: #568bbf;">ca.</span><span style="color: #405c79;">+?</span><span style="color: #568bbf;">\b</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">A cat catches a cap.</span><span style="color: #405c79;">'</span><span style="color: #405c79;">)</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(result09)</span></div></div>
+
+<p>结果为：</p>
+
+<div class="code-console">$ python -u regex.py
+&lt_sre.SRE_Match object; span=(2, 5), match='cat'>
+</div>
+
+<p>尽管上例按照正则表达式的匹配方式来说，<code>"cat"</code>、<code>"catches"</code>、<code>"cab"</code> 都可以成功匹配。</p>
+
+<hr class="wp-block-separator has-css-opacity"/>
+
+<p>如果想到获取所有的匹配结果，可以使用 <code>findall(<em>pattern</em>, <em>string</em>, <em>flags</em>=0)</code> 函数。该函数可以在字符串中找到正则表达式所匹配的所有子串，并返回一个包含所有结果的列表。如果没有找到匹配的结果，则返回空列表；若 <code><em>pattern</em></code> 中包含组，则返回各组匹配结果的列表。</p>
+
+<p>以下给出了这样一个示例：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">target07 = </span><span style="color: #405c79;">'''</span></div><div><span style="color: #56bf8b;">&nbsp; &nbsp; &lt;link rel="stylesheet" href="/static/style.css"&gt;</span></div><div><span style="color: #56bf8b;">&nbsp; &nbsp; &lt;link rel="stylesheet" href="/static/font.css"&gt;</span></div><div><span style="color: #56bf8b;">&nbsp; &nbsp; &lt;script src="/static/jquery.js"&gt;&lt;/script&gt;</span></div><div><span style="color: #56bf8b;">&nbsp; &nbsp; &lt;script src="/static/doctools.js"&gt;&lt;/script&gt;</span></div><div><span style="color: #56bf8b;">&nbsp; &nbsp; &lt;script src="/static/locale.js"&gt;&lt;/script&gt;</span><span style="color: #405c79;">'''</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(re.findall(</span><span style="color: #bf568b;font-weight: bold;">r</span><span style="color: #405c79;">'</span><span style="color: #568bbf;">/static/</span><span style="color: #405c79;">(</span><span style="color: #568bbf;">.</span><span style="color: #405c79;">+</span><span style="color: #568bbf;">\.js</span><span style="color: #405c79;">)'</span><span style="color: #405c79;">, target07))</span></div></div>
+
+<p>结果为：</p>
+
+<div class="code-console">$ python -u regex.py
+['jquery.js', 'doctools.js', 'locale.js']
+</div>
+
+<p>对于以上这种每个正则表达式只包含一个分组时的情况，<code>findall()</code> 返回的列表中的每个元素都是该唯一分组匹配到的字符串。如果包含两个或以上分组，那么每个分组匹配到的字符串就以元组的形式排开了。</p>
+
+<p><code>finditer(<em>pattern</em>, <em>string</em>, <em>flags</em>=0)</code> 函数的作用与 <code>f</code>findall() 函数类似。只不过当被匹配的对象很长（如一个大型网站的 HTML 源码），可能会匹配出非常多的结果。这个时候不希望直接返回一个很长的列表，便需要用到 <code>finditer()</code> 函数返回一个生成器来存储匹配结果，其中每个迭代元素都是 <code>Match</code> 对象。</p>
+
+<p>以下给出了一个这样的示例：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">import</span><span style="color: #405c79;"> requests</span></div><div><span style="color: #405c79;">html = requests.get(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">https://www.python.org/</span><span style="color: #405c79;">'</span><span style="color: #405c79;">).text</span></div><div><span style="color: #405c79;">result = re.finditer(</span><span style="color: #bf568b;font-weight: bold;">r</span><span style="color: #405c79;">'</span><span style="color: #568bbf;">https://</span><span style="color: #bf8b56;">[-A-Za-z0-9+&amp;@#/%?=~_|!:,.;]</span><span style="color: #405c79;">+</span><span style="color: #bf8b56;">[-A-Za-z0-9+&amp;@#/%=~_|]</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, html)</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(result)</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #8b56bf;">next</span><span style="color: #405c79;">(result))</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #8b56bf;">next</span><span style="color: #405c79;">(result))</span></div></div>
+
+<p>结果为：</p>
+
+<div class="code-console">$ python -u regex.py
+&lt;callable_iterator object at 0x018690D0&gt;
+&lt;re.Match object; span=(1303, 1368), match='https://media.ethicalads.io/media/client/v1.4.0/e&gt;
+&lt;re.Match object; span=(3759, 3815), match='https://www.python.org/static/opengraph-icon-200x&gt;
+</div>
+
+<h2>替换与分隔</h2>
+
+<h3>替换</h3>
+
+<p>正则表达式可以用来替换字符串中不符合要求的部分。使用 <code>sub(<em>pattern</em>, <em>repl</em>, <em>string</em>, <em>count</em>=0, <em>flags</em>=0)</code> 函数可以实现该效果。以下是该函数的参数说明：</p>
+
+<ul>
+    <li><code>pattern</code> ：一个符合正则表达式的要替换字符串</li>
+    <li><code>repl</code> ：用来替换的字符串，也可为一个函数</li>
+    <li><code>string</code> ：被查找并替换的原始字符串</li>
+    <li><code>count</code> ：模式匹配后从前向后替换的最大次数，默认为 0 ，表示替换所有的匹配</li>
+    <li><code>flags</code> ：编译时用的匹配模式</li>
+</ul>
+
+<p>该函数返回替换后的结果。以下给出了这样一个示例：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">code_segment = </span><span style="color: #405c79;">'''</span><span style="color: #56bf8b;">/* hello world application */</span></div><div><span style="color: #56bf8b;">&nbsp; &nbsp; int main(/* command line arguments */int argc, char* argv[]) {</span></div><div><span style="color: #56bf8b;">&nbsp; &nbsp; &nbsp; &nbsp; printf("Hello, world!"); /* print function */</span></div><div><span style="color: #56bf8b;">&nbsp; &nbsp; } </span><span style="color: #405c79;">'''</span></div><div><span style="color: #405c79;">result = re.sub(</span><span style="color: #bf568b;font-weight: bold;">r</span><span style="color: #405c79;">'</span><span style="color: #568bbf;">/\*.</span><span style="color: #405c79;">*?</span><span style="color: #568bbf;">\*/</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #405c79;">''</span><span style="color: #405c79;">, code_segment)</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(result)</span></div></div>
+
+<p>结果为：</p>
+
+<div class="code-console">$ python -u regex.py
+ &nbsp; &nbsp;int main(int argc, char* argv[]) {
+ &nbsp; &nbsp; &nbsp; &nbsp;printf("Hello, world!");
+ &nbsp; &nbsp;}
+</div>
+
+<p>一种常见的需求就是对捕获到的结果做一些小改动，而不是完全替换为一个毫不相干的结果。这可以通过引用组实现。<code><em>repl</em></code> 参数内，可以通过 <code>\g&lt;group&gt;</code> 的形式引用一个分组的匹配结果。</p>
+
+<p>以下给出了这样的一个示例：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">name_list = </span><span style="color: #405c79;">'''</span><span style="color: #56bf8b;"> name: John ... name: Smith ....</span></div><div><span style="color: #56bf8b;">&nbsp; &nbsp; name: Peter .. name: James ...</span><span style="color: #405c79;">'''</span></div><div><span style="color: #405c79;">result = re.sub(</span><span style="color: #bf568b;font-weight: bold;">r</span><span style="color: #405c79;">'</span><span style="color: #568bbf;">name: </span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">?P&lt;name&gt;</span><span style="color: #568bbf;">\w</span><span style="color: #405c79;">+)'</span><span style="color: #405c79;">, </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">\g&lt;name&gt;@example.mail</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, name_list)</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(result)</span></div></div>
+
+<p>结果为：</p>
+
+<div class="code-console">$ python -u regex.py
+John@example.com ... Smith@example.com ....
+&nbsp; &nbsp;Peter@example.com .. James@example.com ...
+</div>
+
+<p><code><em>repl</em></code> 参数有一种特殊情况就是它为一个函数对象。这时这个函数需要有且仅有这样一个参数，代表匹配结果的 <code>Match</code> 对象。因此可以将需要将要替换的字符分组，再用 <code>Match</code> 对象的 <code>.group()</code> 方法取出需要替换的字符串的组，并在函数内部进行运算。例如：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">from</span><span style="color: #405c79;"> random </span><span style="color: #bf568b;font-weight: bold;">import</span><span style="color: #405c79;"> choice</span></div><div><span style="color: #405c79;">cards = [a + b </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> a in </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">♠♥♣♦</span><span style="color: #405c79;">'</span><span style="color: #405c79;"> </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> b in </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">A23456789JQK</span><span style="color: #405c79;">'</span><span style="color: #405c79;">]</span></div><div><span style="color: #405c79;">this_round = </span><span style="color: #405c79;">'''</span><span style="color: #56bf8b;">... got ♠6 . ♥4 and ♣K ... ♥9 ♦5 .. ♥A ♣4</span><span style="color: #405c79;">'''</span></div><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">get_random_card</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">before</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; after = choice(cards)</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> after != before.group():</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> after</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">else</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> get_random_card(before)</span></div><div><span style="color: #405c79;">result = re.sub(</span><span style="color: #bf568b;font-weight: bold;">r</span><span style="color: #405c79;">'(</span><span style="color: #bf8b56;">[♠♥♣♦][A2-9JQK]</span><span style="color: #405c79;">)'</span><span style="color: #405c79;">, get_random_card, this_round)</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(result)</span></div></div>
+
+<p>结果为：</p>
+
+<div class="code-console">$ python -u regex.py
+... got ♣3 . ♦2 and ♦9 ... ♠7 ♠5 .. ♥5 ♣6
+</div>
+
+<p>这种使用函数来处理如何完成替换的方式非常灵活。</p>
+
+<hr class="wp-block-separator has-css-opacity"/>
+
+<p><code>subn(<em>pattern</em>, <em>repl</em>, <em>string</em>, <em>count</em>=0, <em>flags</em>=0)</code> 函数和 <code>sub()</code> 函数功能类似，唯一不同的是 <code>subn()</code> 函数的返回结果是一个包含 <code>(result, count)</code> 的元组，即可以同时获取正则替换的完整结果与替换次数。</p>
+
+<h3 class="wp-block-heading" id="分割">分割</h3>
+
+<p>Python 内置了一个 <code>.split()</code> 方法，可以用来分割字符串：</p>
+
+<div class="code-console">&gt;&gt;&gt; data = '0.2682, 0.1266, 0.0942, 0.5178, 0.9459'
+&gt;&gt;&gt; data.split(', ')
+['0.2682', '0.1266', '0.0942', '0.5178', '0.9459']
+</div>
+
+<p>但是该方法有一个缺点，那就是对于复杂情况下的分割效果不够理想：</p>
+
+<div class="code-console">&gt;&gt;&gt; row_data = '0.2682 0.1266   0.0942  0.5178    0.9459'
+&gt;&gt;&gt; row_data.split(' ')
+['0.2682', '0.1266', '', '', '0.0942', '', '0.5178', '', '', '', '0.9459']
+</div>
+
+<p>上例中，<code><code>.split()</code></code> 方法无法识别出多个空格，导致多个空格的分割出现了未达到预期的效果。</p>
+
+<p>这个时候，便可以使用 <code>re</code> 库中的分割函数 <code>split(<em>pattern</em>, <em>string</em>, <em>maxsplit</em>=0, <em>flags</em>=0)</code> ，该函数的效果是将 <code><em>pattern</em></code> 代表的正则表达式为分割标识，将 <code><em>string</em></code> 位于分割标识两侧的字符串拆分成列表。通俗地说，就是相比内置的 <code>.split</code> 方法，该函数可以用正则表达式作为分割标识了。因此相比内置的 <code>.split()</code> 方法，<code>re</code> 库中的 <code>split()</code> 函数分割更加的灵活。</p>
+
+<p>例如，以上使用内置 <code>.split()</code> 分割失败的情况，可以使用 <code>split()</code> 函数这么处理：</p>
+
+<div class="code-console">&gt;&gt;&gt; from re import split
+&gt;&gt;&gt; split(r'\s+', row_data)
+['0.2682', '0.1266', '0.0942', '0.5178', '0.9459']
+</div>
+
+<p>可以看到正则表达式很完美地识别了多个空格并完成了拆分。</p>
+
+<h2>其它内容</h2>
+
+<h3>正则表达式对象</h3>
+
+<p>当在 Python 中使用正则表达式进行匹配时，<code>re</code> 模块会执行两个步骤：</p>
+
+<ol>
+    <li>将输入的正则表达式编译成一个正则表达式对象。如果正则表达式的字符串本身不合法，会产生 <code class="error">re.error</code> 错误。</li>
+    <li>用编译后的正则表达式去匹配字符串。</li>
+</ol>
+
+<p>因此当要进行匹配大量数据时，需要重复使用一个正则表达式几百上千次。此时，出于效率的考虑，可以先预编译该正则表达式为一个正则表达式对象，再利用正则表达式对象的方法去匹配字符串，这样便省略了步骤 1 ，很好地提升了效率。</p>
+
+<p>使用 <code>re.compile(pattern, flags=0)</code> 函数可以生成一个正则表达式对象：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">import</span><span style="color: #405c79;"> re</span></div><div><span style="color: #405c79;">pattern = re.compile(</span><span style="color: #bf568b;font-weight: bold;">r</span><span style="color: #405c79;">'</span><span style="color: #568bbf;">^\d</span><span style="color: #405c79;">{6}</span><span style="color: #568bbf;">$</span><span style="color: #405c79;">'</span><span style="color: #405c79;">)</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(pattern, </span><span style="color: #bf568b;">type</span><span style="color: #405c79;">(pattern))</span></div></div>
+
+<p>结果为：</p>
+
+<div class="code-console">$ python -u regex.py
+re.compile('^\\d{6}$') &lt;class 're.Pattern'&gt;
+</div>
+
+<p>对于一个已经预编译完成的正则表达式对象，可以使用对象的一些方法来完成匹配。正则表达式对象方法有：</p>
+
+<ul>
+    <li><code>.match(<em>string</em>, <em>pos</em>, <em>endpos</em>)</code></li>
+    <li><code>.fullmatch(<em>string</em>, <em>pos</em>, <em>endpos</em>)</code></li>
+    <li><code>.search(<em>string</em>, <em>pos</em>, <em>endpos</em>)</code></li>
+    <li><code>.finall(<em>string</em>, <em>pos</em>, <em>endpos</em>)</code></li>
+    <li><code>.finditer(<em>string</em>, <em>pos</em>, <em>endpos</em>)</code></li>
+    <li><code>.sub(<em>repl</em>, <em>string</em>, <em>count</em>)</code></li>
+    <li><code>.subn(<em>repl</em>, <em>string</em>, <em>count</em>)</code></li>
+    <li><code>.split(<em>string</em>, <em>maxsplit</em>)</code></li>
+</ul>
+
+<p>其中 <code>pos</code> 和 <code>endpos</code> 参数可以指定正则表达式的搜索位置。除此之外，这些方法与各自对应的函数的使用方法基本一致。</p>
+
+<h2>附录</h2>
+
+<h3>参考资料</h3>
+
+<p><a href="https://docs.python.org/3/library/re.html">https://docs.python.org/3/library/re.html</a></p>
+
+<p>Python3 re库官方文档</p>
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/computer-science/computer-networking/02-the-application-layer/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/计算机网络02-应用层概览-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/06/计算机网络02-应用层概览-520x293.jpg 520w, /wp-content/uploads/2022/06/计算机网络02-应用层概览-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/computer-science/computer-networking/02-the-application-layer/" rel="bookmark">计算机网络02-应用层概览与SMTP电子邮件发送</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/data-science/machine-learning/03-naive-bayes/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/12/机器学习-朴素贝叶斯-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/12/机器学习-朴素贝叶斯-520x293.jpg 520w, /wp-content/uploads/2022/12/机器学习-朴素贝叶斯-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/data-science/machine-learning/03-naive-bayes/" rel="bookmark">机器学习-朴素贝叶斯</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python/python3-string-format/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/02/Night-Street-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/02/Night-Street-520x293.jpg 520w, /wp-content/uploads/2022/02/Night-Street-300x169.jpg 300w, /wp-content/uploads/2022/02/Night-Street-1024x576.jpg 1024w, /wp-content/uploads/2022/02/Night-Street-768x432.jpg 768w, /wp-content/uploads/2022/02/Night-Street-1536x864.jpg 1536w, /wp-content/uploads/2022/02/Night-Street-950x534.jpg 950w, /wp-content/uploads/2022/02/Night-Street.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python/python3-string-format/" rel="bookmark">Python3 字符串格式化</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/programming/python/library-time/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>Python标准库time：处理时间</span></a></li>
+		<li class="previous"><a href="/programming/other/regular-expression-tutorial/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>正则表达式简单入门</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

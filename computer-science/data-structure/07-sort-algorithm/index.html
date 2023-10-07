@@ -1,0 +1,810 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>数据结构07-排序算法 - 冰封残烛的个人小站</title>
+	<meta name="description" content="本节研究排序这个经典的算法问题，并讨论各种排序算法(sort algorithm)的特点。选择排序与插入排序简单易于理解，但效率较低；希尔排序利用了选择排序的优点加以改进；堆排序将数据结构二叉堆的性质应用在算法之中；归并排序和快速排序是一种典型的分治算法" />
+	<link rel="canonical" href="/computer-science/data-structure/07-sort-algorithm/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="数据结构07-排序算法 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="本节研究排序这个经典的算法问题，并讨论各种排序算法(sort algorithm)的特点。选择排序与插入排序简单易于理解，但效率较低；希尔排序利用了选择排序的优点加以改进；堆排序将数据结构二叉堆的性质应用在算法之中；归并排序和快速排序是一种典型的分治算法" />
+	<meta property="og:url" content="/computer-science/data-structure/07-sort-algorithm/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2022-09-09T03:09:22+00:00" />
+	<meta property="article:modified_time" content="2023-10-06T04:21:03+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2022/09/数据结构07-排序算法.jpg" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="664" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="9分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/computer-science/data-structure/07-sort-algorithm/#primaryimage",
+	            "url": "/wp-content/uploads/2022/09/数据结构07-排序算法.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/09/数据结构07-排序算法.jpg",
+	            "width": 1200,
+	            "height": 664
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/computer-science/data-structure/07-sort-algorithm/#webpage",
+	            "url": "/computer-science/data-structure/07-sort-algorithm/",
+	            "name": "数据结构07-排序算法 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/computer-science/data-structure/07-sort-algorithm/#primaryimage"
+	            },
+	            "datePublished": "2022-09-09T03:09:22+00:00",
+	            "dateModified": "2023-10-06T04:21:03+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "本节研究排序这个经典的算法问题，并讨论各种排序算法(sort algorithm)的特点。选择排序与插入排序简单易于理解，但效率较低；希尔排序利用了选择排序的优点加以改进；堆排序将数据结构二叉堆的性质应用在算法之中；归并排序和快速排序是一种典型的分治算法",
+	            "breadcrumb": {
+	                "@id": "/computer-science/data-structure/07-sort-algorithm/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/computer-science/data-structure/07-sort-algorithm/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/computer-science/data-structure/07-sort-algorithm/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "数据结构07-排序算法"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/735" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=735' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fcomputer-science%2Fdata-structure%2F07-sort-algorithm%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fcomputer-science%2Fdata-structure%2F07-sort-algorithm%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><link rel="stylesheet" href="/wp-content/static/css/theme@neon-pie.wp.css">
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['\\\\(','\\\\)']],
+            displayMath: [["\\\\[","\\\\]"]]
+        }
+    });
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<style>
+    div.vscode-block {
+        color: #D6DEEB;
+        background-color: #011627;
+    }
+    .math { color:blue; font-size: 13px; }
+    span[token="keyword"]  { color: #c792ea; font-weight: bold; }
+    span[token="type"]     { color: #d6deeb; text-decoration: underline; }
+    span[token="variable"] { color: #c5e478; }
+    span[token="number"]   { color: #f78c6c; }
+    span[token="func"]     { color: #82aaff; }
+    span[token="property"] { color: #7fdbca; }
+    span[token="operator"] { color: #c792ea; }
+</style>
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-735 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-735" class="post-735 post type-post status-publish format-standard has-post-thumbnail hentry category-data-structure">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">数据结构07-排序算法</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/computer-science/data-structure/" rel="category tag">数据结构与算法</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年9月9日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+
+
+
+
+<p>本节暂时不讨论数据结构，而是研究算法。排序是一个经典的算法问题，有许多算法都可以用于排序，但是它们各有优缺点。本节讨论各种排序算法并分析其特点。</p>
+
+<p>为了方便起见，本节介绍的排序算法都用于将数组内的元素排序，只要知道其原理就可以将其应用到其余需要的数据结构中。排序的依据是元素的大小。也就是说两个元素可以直接做比较。</p>
+
+<h2>排序算法</h2>
+
+<h3>选择排序</h3>
+
+<p><strong>选择排序</strong>(selection sort)应该是最易于理解的排序算法，早在<a href="http://frozencandles.fun/archives/586">第一节</a>中就已经介绍过其原理，这里再次重复一遍：先找出数组的最小元素并移动到数组的起始位置，然后每次都从剩余未排序元素中<em>选择</em>最小元素并放到已排序序列的末尾，直到没有待排序元素为止。</p>
+
+<p>根据以上介绍，选择排序的代码实现如下：</p>
+
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">SelectionSort</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">arr</span><span token="keyword">[]</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">len</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">min</span>;</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">len</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="variable">min</span> <span style="color: #c792ea;">=</span> <span token="variable">i</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">j</span> <span style="color: #c792ea;">=</span> <span token="variable">i</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span>; <span token="variable">j</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">len</span>; <span token="variable">j</span><span style="color: #c792ea;">++</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">arr</span>[<span token="variable">j</span>] <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">min</span>])</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">min</span> <span style="color: #c792ea;">=</span> <span token="variable">j</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">array_swap</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span token="variable">min</span><span style="color: #82aaff;">, </span><span token="variable">i</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; }</div><div>}</div></div>
+
+<p>选择排序是一个典型的时间复杂度为 <span class="math">\\( O(N^2) \\)</span> 的排序算法，因为代码中有两层嵌套的循环，每层循环的次数都与 <span class="math">\\( N \\)</span> 有关，并且循环不会中断。</p>
+
+<p>从原理上理解，不管原始数组如何，代码都需要花费线性时间找出数组的最小值，然后又花费线性时间找出数组的次小值，一共有线性个元素需要寻找，因此时间复杂度为 <span class="math">\\( O(N^2) \\)</span> 。</p>
+
+<p>这种排序算法平平无奇，很难有改进的余地，接下来再看一个同样简单的排序算法：插入排序。</p>
+
+<h3>插入排序</h3>
+
+<p><strong>插入排序</strong>(insertion sort)同样是一种简单的排序算法，其原理是：顺序扫描整个数组，将扫描的每个元素依次<em>插入</em>已排序序列的适当位置。</p>
+
+<p>插入排序的代码实现为：</p>
+
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">InsertionSort</span>(<span token="type">elemtype</span> <span style="color: #d7dbe0;">arr</span><span token="keyword">[]</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">len</span>) {</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">len</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="type">elemtype</span> <span token="variable">temp</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">i</span>];</div><div>&#160; &#160; &#160; &#160; <span token="keyword">int</span> <span token="variable">j</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="variable">j</span> <span style="color: #c792ea;">=</span> <span token="variable">i</span>; <span token="variable">j</span> <span style="color: #c792ea;">&gt;</span> <span token="number">0</span> <span style="color: #c792ea;">&amp;&amp;</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">j</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>] <span style="color: #c792ea;">&gt;</span> <span token="variable">temp</span>; <span token="variable">j</span><span style="color: #7fdbca;">--</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">arr</span>[<span token="variable">j</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">j</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>];</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">arr</span>[<span token="variable">j</span>] <span style="color: #c792ea;">=</span> <span token="variable">temp</span>;</div><div>&#160; &#160; }</div><div>}</div></div>
+
+<p>插入排序也有两层嵌套的循环，且每层循环也和 <span class="math">\\( N \\)</span> 有关。但是内层循环是可能终止的：如果待排序元素比已排序序列末尾（最大）的元素还大，那么它就无需移动，放在原位就可以作为已排序序列的一部分，这就避免了插入时需要找到合适位置的线性复杂度。</p>
+
+<p>在极端情况下，如果一个数组本身就是有序的，那么顺序扫描整个数组时，程序会发现数组与之前的序列总是能直接构成有序序列，这样每一个元素都无需移动，时间复杂度可以达到 <span class="math">\\( O(N) \\)</span> 。</p>
+
+<p>如果原始数组越有序，那么无需移动的元素个数也越多，排序需要花费的时间也越短。在平均情况下，如果数组完全是随机的，那么显然需要移动的元素个数随着数组的大小线性增长，而移动又要花费线性时间，因此插入排序的平均时间复杂度仍然为 <span class="math">\\( O(N^2) \\)</span> 。</p>
+
+<h3>希尔排序</h3>
+
+<p><strong>希尔排序</strong>(Shell sort)是最早突破二次时间屏障的算法之一，它利用了插入排序在数组偏向有序时效率会更高的特点。</p>
+
+<p>希尔排序使用一个<strong>增量序列</strong>(increment sequence) <span class="math">\\( h_1, h_2, \dots, h_t \\)</span> ，在使用 <span class="math">\\( h_k \\)</span> 做一次排序之后，数组中所有相隔为 <span class="math">\\( h_k \\)</span> 的元素都被排序。也就是说，将 <span class="math">\\( h_k, h_k + 1, \dots, N-1 \\)</span> 每个位置的元素使用插入排序放到 <span class="math">\\( i, i-h_k, i-2h_k, \dots \\)</span> 中的正确位置上。</p>
+
+<p>提出者 Donald Shell 建议的增量序列的选择为：</p>
+
+<div class="math">
+\\[
+    h_1 = \lfloor N / 2 \rfloor \\
+    h_{k+1} = \lfloor h_k / 2 \rfloor
+\\]
+</div>
+
+<p>该增量并不是效率最高的增量，但是比较流行。使用该增量编写的希尔排序如下：</p>
+
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">ShellSort</span>(<span token="type">elemtype</span> <span style="color: #d7dbe0;">arr</span><span token="keyword">[]</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">len</span>) {</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">inc</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">len</span> <span style="color: #7fdbca;">/</span> <span token="number">2</span>; <span token="variable">inc</span> <span style="color: #c792ea;">&gt;</span> <span token="number">0</span>; <span token="variable">inc</span> <span style="color: #c792ea;">/=</span> <span token="number">2</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="variable">inc</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">len</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) {</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="type">elemtype</span> <span token="variable">temp</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">i</span>];</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">int</span> <span token="variable">j</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="variable">j</span> <span style="color: #c792ea;">=</span> <span token="variable">i</span>; <span token="variable">j</span> <span style="color: #c792ea;">&gt;=</span> <span token="variable">inc</span>; <span token="variable">j</span> <span style="color: #c792ea;">-=</span> <span token="variable">inc</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">temp</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">j</span> <span style="color: #7fdbca;">-</span> <span token="variable">inc</span>])</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">arr</span>[<span token="variable">j</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">j</span> <span style="color: #7fdbca;">-</span> <span token="variable">inc</span>];</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">else</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">break</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">arr</span>[<span token="variable">j</span>] <span style="color: #c792ea;">=</span> <span token="variable">temp</span>;</div><div>&#160; &#160; &#160; &#160; }</div><div>}</div></div>
+
+<p>有了以上函数，就可以分析其复杂度了。虽然以上函数有三层嵌套循环，但并不意味着时间复杂度就为三次函数。希尔排序在条件最差的情况下，其时间复杂度为 <span class="math">\\( O(N^2) \\)</span> 。</p>
+
+<p>在增量为 <span class="math">\\( h_k \\)</span> 时，需要有 <span class="math">\\( h_k \\)</span> 组，每组 <span class="math">\\( N / h_k \\)</span> 个元素做插入排序。假设这些插入排序都是平均或最坏情况的二次时间，那么该增量下排序的总时间花费为：</p>
+
+<div class="math">
+\\[
+    O(h_k \dot (N/h_k)^2) = O(N^2/h_k)
+\\]
+</div>
+
+<p>对所有增量下排序的时间总和为：</p>
+
+<div class="math">
+\\[
+    O(\sum_{i=1}^{t}N^2/h_i)=O(N^2\sum_{i=1}^{t} 1/h_i)
+\\]
+</div>
+
+<p>由于 <span class="math">\\( h_t \\)</span> 的取值为 1 ，其余值应该大于前一个值的两倍，因此该数列是一个等比数列，总和小于 2 ，故时间复杂度为 <span class="math">\\( O(N^2) \\)</span> 。</p>
+
+<p>希尔排序的时间复杂度是一个复杂的问题，甚至许多增量下平均情况的时间复杂度都还没解决。目前还不能确定取什么增量具有最好的时间复杂度，不过它确实有优于二次函数的时间复杂度：当增量序列取用 <span class="math">\\( 2^k-1, \dots, 7, 3, 1 \\)</span> 时，其时间复杂度为 <span class="math">\\( O(N^{3/2}) \\)</span> ，不过证明该结论需要一定数论知识。</p>
+
+<p>还有许多不同的增量序列可供选取，例如 <span class="math">\\( 2^{k-1} + 1, \dots, 9, 5, 3, 2, 1 \\)</span> 或 <span class="math">\\( 0.5(3^{k-1}-1), \dots, 40, 13, 4, 1 \\)</span> 等。在选取增量序列时需要注意序列的最后一个值需要为 1 ，使数组最终要让所有元素都一起参与排序；并且序列中的值不要有除 1 以外的其它公因数，否则这些位置上的值会多次一并参与排序，影响效率。</p>
+
+<h3>堆排序</h3>
+
+<p>在<a href="http://frozencandles.fun/archives/717">上一节</a> 中介绍了堆的概念。二叉堆能以 <span class="math">\\( O(1) \\)</span> 的时间做插入，并以 <span class="math">\\( O(\log N) \\)</span> 的时间删除最小值。</p>
+
+<p>删除是有序的，因此可以借由该性质完成排序：如果将数组内的每个元素插入二叉堆中，然后再按值的大小顺序出队，那么就可以得到一个有序的结果。</p>
+
+<p>单个插入需要 <span class="math">\\( O(1) \\)</span> 的时间，插入所有元素就需要 <span class="math">\\( O(N) \\)</span> 的时间。删除最小值并放到数组中的合适位置需要花费 <span class="math">\\( O(\log N) \\)</span> 的时间，将所有元素依次删除就需要花费 <span class="math">\\( O(N\log N) \\)</span> 的时间。两者是先后执行的关系，总的时间复杂度也是二者之和，因此总的时间复杂度为 <span class="math">\\( O(N\log N) \\)</span> 。</p>
+
+<p>这是目前为止效率最好的排序算法，不过它需要一个额外的数组来构建二叉树，因此需要 <span class="math">\\( O(N) \\)</span> 的空间复杂度。</p>
+
+<p>可以对二叉堆做一定调整来避免额外的线性空间要求：注意到二叉堆在删除一个元素时，堆的最后一个元素空缺了出来，并且随着删除的继续，数组从后向前腾出空间。如果将每次删除的元素放在因删除而空缺出的位置上，就可以利用单个数组构建二叉堆并排序为数组。</p>
+
+<p>不过这样得到的最终数组后面位置的元素小而前面位置的元素大。如果想得到升序排列的数组，可以对二叉堆做一定改进，使其每次在删除时，删除的是最大的元素而不是最小的元素。</p>
+
+<p>这种堆称为 max-堆。它的堆序性质与上一节介绍的二叉堆是相反的：大的元素在上，小的元素在下。下图展示了一个 max-堆的结构：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/10-max-heap.png" alt="">
+</figure>
+
+<p>除此之外，max-堆的操作思路都与普通的二叉堆相同。例如，可以将堆中的任意一个元素调整到合适的位置上：</p>
+
+<div class="vscode-block"><div><span style="color: #c792ea;">#</span><span token="keyword">define</span> <span style="color: #82aaff;">leftchild</span><span style="color: #d9f5dd;">(</span><span style="color: #d7dbe0;">pos</span><span style="color: #d9f5dd;">)</span> (<span token="number">2</span> <span style="color: #7fdbca;">*</span> (pos) <span style="color: #7fdbca;">+</span> <span token="number">1</span>)</div><br><div><span token="keyword">static</span> <span token="keyword">void</span> <span style="color: #82aaff;">PercolateDown</span>(<span token="type">elemtype</span> <span style="color: #d7dbe0;">arr</span><span token="keyword">[]</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">len</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">pos</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">child</span>;</div><div>&#160; &#160; <span token="type">elemtype</span> <span token="variable">temp</span>;</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="variable">temp</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">pos</span>]; <span style="color: #82aaff;">leftchild</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">pos</span><span style="color: #82aaff;">)</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">len</span>; <span style="color: #d7dbe0;">pos</span> <span style="color: #c792ea;">=</span> <span token="variable">child</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="variable">child</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">leftchild</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">pos</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">child</span> <span style="color: #c792ea;">!=</span> <span style="color: #d7dbe0;">len</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span> <span style="color: #c792ea;">&amp;&amp;</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">child</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span>] <span style="color: #c792ea;">&gt;</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">child</span>])</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">child</span><span style="color: #c792ea;">++</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">temp</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">child</span>])</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">pos</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">child</span>];</div><div>&#160; &#160; &#160; &#160; <span token="keyword">else</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">break</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">pos</span>] <span style="color: #c792ea;">=</span> <span token="variable">temp</span>;</div><div>}</div></div>
+
+<p>注意：使用堆对数组排序时，索引值为 0 的位置上是有元素的，因此左子节点的计算方式略有不同。</p>
+
+<p>堆的构建与删除都是基于该基本操作实现的：</p>
+
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">HeapSort</span>(<span token="type">elemtype</span> <span style="color: #d7dbe0;">arr</span><span token="keyword">[]</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">len</span>) {</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">len</span> <span style="color: #7fdbca;">/</span> <span token="number">2</span>; <span token="variable">i</span> <span style="color: #c792ea;">&gt;=</span> <span token="number">0</span>; <span token="variable">i</span><span style="color: #7fdbca;">--</span>)</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">PercolateDown</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">len</span><span style="color: #82aaff;">, </span><span token="variable">i</span><span style="color: #82aaff;">)</span>;<span style="color: #637777;"> </span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> build heap</span></div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">len</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>; <span token="variable">i</span> <span style="color: #c792ea;">&gt;</span> <span token="number">0</span>; <span token="variable">i</span><span style="color: #7fdbca;">--</span>) {</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">array_swap</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span token="number">0</span><span style="color: #82aaff;">, </span><span token="variable">i</span><span style="color: #82aaff;">)</span>;<span style="color: #637777;"> &#160; &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> delete max</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">PercolateDown</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span token="variable">i</span><span style="color: #82aaff;">, </span><span token="number">0</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; }</div><div>}</div></div>
+
+<p>在构建堆时，只需要将前半个数组的元素调整到合适的高度上，后半个数组的元素会在此过程中自动调整，且它们没有子节点，无需做进一步的调整。</p>
+
+<h3>归并排序</h3>
+
+<p><strong>归并排序</strong>(merge sort)同样是一种很快的排序算法。它的基本思想是合<em>并</em>：如果给定两个已排序的子数组，如果要将其合并为一个数组，只需要顺序遍历两个数组，不断将较小值放入合并数组的下一个位置即可。</p>
+
+<p>假设要将一个数组的左右两部分合并成一个完整的数组：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/10-merge-array.png" alt="">
+</figure>
+
+<p>那么合并的代码实现如下：</p>
+
+<div class="vscode-block"><div><span token="keyword">static</span> <span token="keyword">void</span> <span style="color: #82aaff;">Merge</span>(<span token="type">elemtype</span> <span style="color: #d7dbe0;">arr</span><span token="keyword">[]</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">temp</span><span token="keyword">[]</span>, </div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">int</span> <span style="color: #d7dbe0;">left</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">right</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">end</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">leftend</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">right</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">elems</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">end</span> <span style="color: #7fdbca;">-</span> <span style="color: #d7dbe0;">left</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">curpos</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">left</span>;</div><br><div>&#160; &#160; <span token="keyword">while</span>(<span style="color: #d7dbe0;">left</span> <span style="color: #c792ea;">&lt;=</span> <span token="variable">leftend</span> <span style="color: #c792ea;">&amp;&amp;</span> <span style="color: #d7dbe0;">right</span> <span style="color: #c792ea;">&lt;=</span> <span style="color: #d7dbe0;">end</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">left</span>] <span style="color: #c792ea;">&lt;=</span> <span style="color: #d7dbe0;">arr</span>[ <span style="color: #d7dbe0;">right</span> ])</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">temp</span>[<span token="variable">curpos</span><span style="color: #c792ea;">++</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">left</span><span style="color: #c792ea;">++</span>];</div><div>&#160; &#160; &#160; &#160; <span token="keyword">else</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">temp</span>[<span token="variable">curpos</span><span style="color: #c792ea;">++</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">right</span><span style="color: #c792ea;">++</span>];</div><br><div>&#160; &#160; <span token="keyword">while</span> (<span style="color: #d7dbe0;">left</span> <span style="color: #c792ea;">&lt;=</span> <span token="variable">leftend</span>)<span style="color: #637777;"> </span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> Copy rest of first half</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">temp</span>[<span token="variable">curpos</span><span style="color: #c792ea;">++</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">left</span><span style="color: #c792ea;">++</span>];</div><div>&#160; &#160; <span token="keyword">while</span> (<span style="color: #d7dbe0;">right</span> <span style="color: #c792ea;">&lt;=</span> <span style="color: #d7dbe0;">end</span>)<span style="color: #637777;"> &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> Copy rest of second half</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">temp</span>[<span token="variable">curpos</span><span style="color: #c792ea;">++</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">right</span><span style="color: #c792ea;">++</span>];</div><br><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span token="variable">elems</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>, <span style="color: #d7dbe0;">end</span><span style="color: #7fdbca;">--</span>)</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">end</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">temp</span>[<span style="color: #d7dbe0;">end</span>];<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> Copy temp back</span></div><div>}</div></div>
+
+<p>程序中需要考虑处理完一个数组的情况，此时只需要将另一个数组剩余的部分全部拼接到合并数组的末尾即可。</p>
+
+<p>归并排序很适合使用递<em>归</em>的方式解决：只需要一开始将每个元素都看作一个有序的子数组，然后不断对有序的子数组之间两两合并，就可以逐渐将小数组合并为大数组，直至合并为一个完整的有序数组。</p>
+
+<p>递归实现下，使用代码描述非常简单：</p>
+
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">_MergeSort</span>(<span token="type">elemtype</span> <span style="color: #d7dbe0;">arr</span><span token="keyword">[]</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">temp</span><span token="keyword">[]</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">left</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">right</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">left</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">right</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="keyword">int</span> <span token="variable">center</span> <span style="color: #c792ea;">=</span> (<span style="color: #d7dbe0;">left</span> <span style="color: #7fdbca;">+</span> <span style="color: #d7dbe0;">right</span>) <span style="color: #7fdbca;">/</span> <span token="number">2</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">_MergeSort</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">temp</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">left</span><span style="color: #82aaff;">, </span><span token="variable">center</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">_MergeSort</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">temp</span><span style="color: #82aaff;">, </span><span token="variable">center</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">right</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">Merge</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">temp</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">left</span><span style="color: #82aaff;">, </span><span token="variable">center</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">right</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; }</div><div>}</div></div>
+
+<p>先将待排序数组尽量均分，然后递归地对这两部分实施归并排序，最后再将两个排序完成的子数组合并起来。</p>
+
+<p>该函数一般不用于直接执行，还需要一个入口函数驱动它：</p>
+
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">MergeSort</span>(<span token="type">elemtype</span> <span style="color: #d7dbe0;">arr</span><span token="keyword">[]</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">len</span>) {</div><div>&#160; &#160; <span token="type">elemtype</span><span style="color: #7fdbca;">*</span> <span token="variable">temp</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">elemtype</span><span style="color: #82aaff;">) </span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">len</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span token="variable">temp</span>) {</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">_MergeSort</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span token="variable">temp</span><span style="color: #82aaff;">, </span><span token="number">0</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">len</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">free</span><span style="color: #82aaff;">(</span><span token="variable">temp</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; }</div><div>}</div></div>
+
+<p>从直观上看，每一次合并主要花费的时间在于顺序遍历数组，因此对数组做一次（影响每个元素的）排序并合并需要花费线性时间。第一次排序可以将单独元素的数组合并为两个元素的数组，第二次合并将两个元素的数组合并为 4 个元素的数组，那么最终经过对数次数的合并，就可以将其合并为包含所有元素的数组，因此归并排序的时间复杂度为 <span class="math">\\( O(N \log N) \\)</span> 。</p>
+
+<p>此外，归并排序必须使用一个辅助数组用于存储排序的中间结果。不过需要的额外空间不会超过原始数组大小，因此归并排序的空间复杂度为 <span class="math">\\( O(N) \\)</span> 。</p>
+
+<h3>快速排序</h3>
+
+<p>和它的名字一样，<strong>快速排序</strong>(quick sort)速度很快。快速排序的思想是首先从数列中随机选出一个元素作为<strong>枢纽元</strong>(pivot)，将比枢纽元大的元素放在它的左端，将比枢纽元小的元素放在它的右端，此时枢纽元就相对它的左右端有序，再递归地将左端和右端按这种方式排序即可。</p>
+
+<p>归并排序将小数组合并为大数组，而快速排序将大数组分割为小数组再互相排序。当数组足够小（如元素个数小于等于 3 个）时已经无需划分，可以使用其余比较简单的排序方式（如插入排序）即可。</p>
+
+<p>枢纽元的选取非常重要，因为它应该能反映一个比较中间的位置，如果选取的是数组内元素的最值，那么它将花费线性的时间将其它元素都移到它的同一边，且一次只能将一个元素排到合适的位置，使快速排序达到最坏的情况 <span class="math">\\( O(N^2) \\)</span> 。</p>
+
+<p>一个比较合理且速度较快的方法是<strong>三数中值分割法</strong>(median-of-three partitioning)，即随机选取三个数并取用它们的中值。不过一般不会随机选取，而是取用数组的首端、末端和中间端的元素，再取它们的中值。三数中值分割法的代码实现如下：</p>
+
+<div class="vscode-block"><div><span token="keyword">static</span> <span token="type">elemtype</span> <span style="color: #82aaff;">Median3</span>(<span token="type">elemtype</span> <span style="color: #d7dbe0;">arr</span><span token="keyword">[]</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">left</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">right</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">center</span> <span style="color: #c792ea;">=</span> (<span style="color: #d7dbe0;">left</span> <span style="color: #7fdbca;">+</span> <span style="color: #d7dbe0;">right</span>) <span style="color: #7fdbca;">/</span> <span token="number">2</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">left</span>] <span style="color: #c792ea;">&gt;</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">center</span>])</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">array_swap</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">left</span><span style="color: #82aaff;">, </span><span token="variable">center</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">left</span>] <span style="color: #c792ea;">&gt;</span> <span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">right</span>])</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">array_swap</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">left</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">right</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">arr</span>[<span token="variable">center</span>] <span style="color: #c792ea;">&gt;</span> <span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">right</span>])</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">array_swap</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span token="variable">center</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">right</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span style="color: #82aaff;">array_swap</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span token="variable">center</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">right</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span><span style="color: #82aaff;">)</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> hide pivot</span></div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">arr</span>[<span style="color: #d7dbe0;">right</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>];<span style="color: #637777;"> &#160; &#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> return pivot</span></div><div>}</div></div>
+
+<p>以上在寻找中值时将涉及到的元素放在合适的位置，方便后续程序处理。</p>
+
+<p>快速排序的主要实现如下：</p>
+
+<div class="vscode-block"><div><span style="color: #c792ea;">#</span><span token="keyword">define</span> <span style="color: #82aaff;">QUICKSORT_CUTOFF</span> (<span token="number">3</span>)</div><br><div><span token="keyword">static</span> <span token="keyword">void</span> <span style="color: #82aaff;">_QuickSort</span>(<span token="type">elemtype</span> <span style="color: #d7dbe0;">arr</span><span token="keyword">[]</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">left</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">right</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">left</span> <span style="color: #7fdbca;">+</span> <span style="color: #82aaff;">QUICKSORT_CUTOFF</span> <span style="color: #c792ea;">&lt;=</span> <span style="color: #d7dbe0;">right</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="type">elemtype</span> <span token="variable">pivot</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Median3</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">left</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">right</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">left</span>; </div><div>&#160; &#160; &#160; &#160; <span token="keyword">int</span> <span token="variable">j</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">right</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">while</span> (<span token="number">1</span>) {</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">while</span> (<span style="color: #d7dbe0;">arr</span>[<span style="color: #c792ea;">++</span><span token="variable">i</span>] <span style="color: #c792ea;">&lt;</span> <span token="variable">pivot</span>) <span token="keyword">continue</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">while</span> (<span style="color: #d7dbe0;">arr</span>[<span style="color: #7fdbca;">--</span><span token="variable">j</span>] <span style="color: #c792ea;">&gt;</span> <span token="variable">pivot</span>) <span token="keyword">continue</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span token="variable">j</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #82aaff;">array_swap</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span token="variable">i</span><span style="color: #82aaff;">, </span><span token="variable">j</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">else</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">break</span>;</div><div>&#160; &#160; &#160; &#160; }</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">array_swap</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span token="variable">i</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">right</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span><span style="color: #82aaff;">)</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> restore pivot</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">_QuickSort</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">left</span><span style="color: #82aaff;">, </span><span token="variable">i</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">_QuickSort</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span token="variable">i</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">right</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">else</span><span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> do an insertion sort on the subarray</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">InsertionSort</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span> <span style="color: #7fdbca;">+</span> <span style="color: #d7dbe0;">left</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">right</span> <span style="color: #7fdbca;">-</span> <span style="color: #d7dbe0;">left</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span><span style="color: #82aaff;">)</span>;</div><div>}</div></div>
+
+<p>每一趟排序中，程序从左右两边向中间扫描，并将左边较大的元素和右边较小的元素交换位置，两边交汇的位置即为枢纽元应该位于的中值位置，该位置左边的元素都比枢纽元小，右边的元素都比枢纽元大。由于在寻找枢纽元时将其移动到了数组的末端，因此最后一步需要将其移动到合适的位置。</p>
+
+<p>每一趟排序涉及数组内的每一个元素，因此需要花费线性时间；平均上看来，第一次排序将一个元素放在合适的位置，并分割为左右两端的子数组再排序，而下一次排序又将左右两端的子数组的各一个元素放在合适的位置，并再次分割为四个子数组。由此可见平均情况下已排序的元素将随着每趟排序指数增长，总的时间是两者之积 <span class="math">\\( O(N\log N) \\)</span> 。</p>
+
+<p>尽管时间复杂度都是 <span class="math">\\( O(N\log N) \\)</span> ，但快速排序在多数情况下比堆排序和归并排序快。这是由于快速排序在每趟排序中，基本上只有一半左右的元素需要移动，而归并排序在每趟排序时每个元素都需要参与合并的移动；堆排序在插入和删除时也涉及所有元素的移动，因此它们的操作都比快速排序复杂，使得函数的常数项比快速排序大，相对来说运行的时间没有快速排序快。</p>
+
+<!-- <div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">QuickSort</span>(<span token="type">elemtype</span> <span style="color: #d7dbe0;">arr</span><span token="keyword">[]</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">len</span>) {</div><div>&#160; &#160; <span style="color: #82aaff;">_QuickSort</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">arr</span><span style="color: #82aaff;">, </span><span token="number">0</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">len</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span><span style="color: #82aaff;">)</span>;</div><div>}</div></div> -->
+
+<p>最后，总结一下本节涉及到的所有排序算法的特点：</p>
+
+<table>
+    <tr>
+        <th>排序算法</th>
+        <th>最好运行时间</th>
+        <th>平均运行时间</th>
+        <th>最坏运行时间</th>
+        <th>额外空间需求</th>
+    </tr>
+    <tr>
+        <td>选择排序</td>
+        <td><span class="math">\\( O(N^2) \\)</span></td>
+        <td><span class="math">\\( O(N^2) \\)</span></td>
+        <td><span class="math">\\( O(N^2) \\)</span></td>
+        <td><span class="math">\\( O(1) \\)</span></td>
+    </tr>
+    <tr>
+        <td>插入排序</td>
+        <td><span class="math">\\( O(N) \\)</span></td>
+        <td><span class="math">\\( O(N^2) \\)</span></td>
+        <td><span class="math">\\( O(N^2) \\)</span></td>
+        <td><span class="math">\\( O(1) \\)</span></td>
+    </tr>
+    <tr>
+        <td>希尔排序</td>
+        <td><span class="math">\\( O(N) \\)</span></td>
+        <td><span class="math">\\( O(N^{5/4}) \\)</span>（与增量选取有关）</td>
+        <td><span class="math">\\( O(N^{3/2}) \\)</span>（与增量选取有关）</td>
+        <td><span class="math">\\( O(1) \\)</span></td>
+    </tr>
+    <tr>
+        <td>堆排序</td>
+        <td><span class="math">\\( O(N\log N) \\)</span></td>
+        <td><span class="math">\\( O(N\log N) \\)</span></td>
+        <td><span class="math">\\( O(N\log N) \\)</span></td>
+        <td><span class="math">\\( O(1) \\)</span></td>
+    </tr>
+    <tr>
+        <td>归并排序</td>
+        <td><span class="math">\\( O(N\log N) \\)</span></td>
+        <td><span class="math">\\( O(N\log N) \\)</span></td>
+        <td><span class="math">\\( O(N\log N) \\)</span></td>
+        <td><span class="math">\\( O(N) \\)</span></td>
+    </tr>
+    <tr>
+        <td>快速排序</td>
+        <td><span class="math">\\( O(N\log N) \\)</span></td>
+        <td><span class="math">\\( O(N\log N) \\)</span></td>
+        <td><span class="math">\\( O(N^2) \\)</span></td>
+        <td><span class="math">\\( O(1) \\)</span></td>
+    </tr>
+</table>
+
+<p>排序算法有非常多种，本节只介绍了其中几个比较典型的排序算法。堆排序将数据结构二叉堆的性质应用在算法之中，建立了数据结构与算法之间的联系。</p>
+
+<p>归并排序和快速排序是一种典型的分治(divide-and-conquer)算法：它将一个大的问题（数组排序）分成一系列较小的问题（数组的一部分排序），再将得到的各个部分合并为一个完整的答案，因此分治问题非常适合使用递归来实现。</p>
+
+
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-fp/03-functional-programming/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-fp/03-functional-programming/" rel="bookmark">Python函数式编程03 高阶函数与匿名函数</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/data-science/machine-learning/01-linear-regression/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/12/机器学习-线性回归-520x293.png" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/12/机器学习-线性回归-520x293.png 520w, /wp-content/uploads/2022/12/机器学习-线性回归-950x534.png 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/data-science/machine-learning/01-linear-regression/" rel="bookmark">机器学习-线性回归</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/embedded/esp32/02-basic-peripheral/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-520x293.jpg 520w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-300x169.jpg 300w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-1024x576.jpg 1024w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-768x432.jpg 768w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-1536x864.jpg 1536w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-950x534.jpg 950w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/embedded/esp32/02-basic-peripheral/" rel="bookmark">ESP32与MicroPython入门-02 基本外设操作</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/computer-science/data-structure/08-graph/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>数据结构08-图</span></a></li>
+		<li class="previous"><a href="/embedded/esp32/02-basic-peripheral/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>ESP32与MicroPython入门-02 基本外设操作</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

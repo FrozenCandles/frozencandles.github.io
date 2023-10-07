@@ -1,0 +1,940 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>数据结构04-树与二叉树 - 冰封残烛的个人小站</title>
+	<meta name="description" content="树(tree)是一种典型的一对多关系，本节介绍树的递归定义，并提出二叉查找树(binary search tree)的概念：二叉查找树提出了一种对数级的、较为高效的查找解决方案。本节介绍二叉查找树的代码实现并对比其优缺点，以此提出了二叉查找树的一种改进实现：AVL 树" />
+	<link rel="canonical" href="/computer-science/data-structure/04-trees/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="数据结构04-树与二叉树 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="树(tree)是一种典型的一对多关系，本节介绍树的递归定义，并提出二叉查找树(binary search tree)的概念：二叉查找树提出了一种对数级的、较为高效的查找解决方案。本节介绍二叉查找树的代码实现并对比其优缺点，以此提出了二叉查找树的一种改进实现：AVL 树" />
+	<meta property="og:url" content="/computer-science/data-structure/04-trees/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2022-08-06T18:33:00+00:00" />
+	<meta property="article:modified_time" content="2023-10-06T04:16:45+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2022/08/数据结构04-树与二叉树.jpg" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="874" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="13分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/computer-science/data-structure/04-trees/#primaryimage",
+	            "url": "/wp-content/uploads/2022/08/数据结构04-树与二叉树.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/08/数据结构04-树与二叉树.jpg",
+	            "width": 1200,
+	            "height": 874
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/computer-science/data-structure/04-trees/#webpage",
+	            "url": "/computer-science/data-structure/04-trees/",
+	            "name": "数据结构04-树与二叉树 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/computer-science/data-structure/04-trees/#primaryimage"
+	            },
+	            "datePublished": "2022-08-06T18:33:00+00:00",
+	            "dateModified": "2023-10-06T04:16:45+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "树(tree)是一种典型的一对多关系，本节介绍树的递归定义，并提出二叉查找树(binary search tree)的概念：二叉查找树提出了一种对数级的、较为高效的查找解决方案。本节介绍二叉查找树的代码实现并对比其优缺点，以此提出了二叉查找树的一种改进实现：AVL 树",
+	            "breadcrumb": {
+	                "@id": "/computer-science/data-structure/04-trees/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/computer-science/data-structure/04-trees/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/computer-science/data-structure/04-trees/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "数据结构04-树与二叉树"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/622" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=622' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fcomputer-science%2Fdata-structure%2F04-trees%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fcomputer-science%2Fdata-structure%2F04-trees%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><link rel="stylesheet" href="/wp-content/static/css/theme@neon-pie.wp.css">
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['\\\\(','\\\\)']],
+            displayMath: [["\\\\[","\\\\]"]]
+        }
+    });
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<style>
+    div.vscode-block {
+        color: #D6DEEB;
+        background-color: #011627;
+    }
+    .math { color:blue; font-size: 13px; }
+    span[token="keyword"]  { color: #c792ea; font-weight: bold; }
+    span[token="type"]     { color: #d6deeb; text-decoration: underline; }
+    span[token="variable"] { color: #c5e478; }
+    span[token="number"]   { color: #f78c6c; }
+    span[token="func"]     { color: #82aaff; }
+    span[token="property"] { color: #7fdbca; }
+    span[token="operator"] { color: #c792ea; }
+</style>
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-622 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-622" class="post-622 post type-post status-publish format-standard has-post-thumbnail hentry category-data-structure">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">数据结构04-树与二叉树</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/computer-science/data-structure/" rel="category tag">数据结构与算法</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年8月7日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+
+
+
+<h2>树的概念</h2>
+
+<h3>树的结构</h3>
+
+<p><strong>树</strong>(tree)是一种典型的一对多关系，下图展示了一棵具体的树：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-tree-concrete.png" width="272">
+</figure>
+
+<p>将上图倒过来看就是生活中常见的树。树从一个主干开始，随着一对多指数级分裂，向上逐渐变茂盛。</p>
+
+<p>可以用多种方式定义树。常见的定义方式是递归：一棵树是一些节点的集合：若集合非空，则一棵树由<strong>根</strong>(root)节点 <span class="math">\\( r \\)</span> 以及 0 个或多个非空子树 <span class="math">\\( T_1,T_2,\dots,T_k \\)</span> 组成。每棵子树的根都被来自根 <span class="math">\\( r \\)</span> 的一条有向的<strong>边</strong>(edge)所连接。</p>
+
+<p>下图表示这种树的思想：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-tree-model.png" alt="" width="255">
+</figure>
+
+<p>每一棵子树的根称为根 <span class="math">\\( r \\)</span> 的<strong>子</strong>(child)节点，而 <span class="math">\\( r \\)</span> 是每一棵子树根的<strong>父</strong>(parent)节点。</p>
+
+<p>子树 <span class="math">\\( T_1,T_2,\dots,T_k \\)</span> 也采用同样的方式定义，因此说这种定义是递归的。这种定义下，一棵树是 <span class="math">\\( N \\)</span> 个节点和 <span class="math">\\( N-1 \\)</span> 条边的集合（根节点 <span class="math">\\( r \\)</span> 没有对应的边）。</p>
+
+<p>以上展示的具体的树中，根为节点 A ，每一个节点可以有任意多个子节点，包括 0 个。没有子节点的节点称为<strong>叶</strong>(leaf)，具有相同父节点的节点称为<strong>兄弟</strong>(sibling)。类似地可以定义<strong>祖父</strong>(grandparent)节点和<strong>子孙</strong>(grandchild)节点关系。</p>
+
+<p>从节点 <span class="math">\\( n_1 \\)</span> 到节点 <span class="math">\\( n_k \\)</span> 的<strong>路径</strong>(path)定义为节点 <span class="math">\\( n_1,n_2,\dots,n_k \\)</span> 的一个序列，使得对于 <span class="math">\\( 1 \leq i < k \\)</span> ，节点 <span class="math">\\( n_i \\)</span> 是 <span class="math">\\( n_{i+1} \\)</span> 的父节点。这个路径的<strong>长</strong>(length)为该路径上边的条数，即 <span class="math">\\( n-1 \\)</span> 。从每一个节点到它自己有一条长为 0 的路径，从根到每一个节点存在且仅存在一条路径。</p>
+
+<p>任意节点 <span class="math">\\( n_i \\)</span> 的<strong>深度</strong>(depth)为从根到该节点的唯一路径的长，根的深度为 0 ；<strong>高</strong>(height)是从 <span class="math">\\( n_i \\)</span> 到一片树叶的最长路径的长，因此所有树叶的高度都是 0 。</p>
+
+<p>一棵树的高等于它根的高；深度等于它最深树叶的深度，且等于树的高。</p>
+
+<p>如果存在从 <span class="math">\\( n_1 \\)</span> 到 <span class="math">\\( n_2 \\)</span> 的一条路径，称 <span class="math">\\( n_1 \\)</span> 为 <span class="math">\\( n_2 \\)</span> 的<strong>祖先</strong>(ancestor)节点，而 <span class="math">\\( n_2 \\)</span> 是 <span class="math">\\( n_1 \\)</span> 的<strong>后裔</strong>(descendant)节点。如果同时 <span class="math">\\( n_1 \neq n_2 \\)</span> ，那么 <span class="math">\\( n_1 \\)</span> 是 <span class="math">\\( n_2 \\)</span> 的一位真祖先(proper ancestor)，而 <span class="math">\\( n_2 \\)</span> 是 <span class="math">\\( n_1 \\)</span> 的一个真后裔(proper descendant)。</p>
+
+<p>以上定义看似多余且非常不直观，但它对于分析树的性能是有帮助的。后续会介绍多种不同类型的树，它们是树的实现子集，并在某些场景上可以提升效率。</p>
+
+<h3>树的简单实现</h3>
+
+<p>树的应用非常广泛，其中之一就是操作系统的文件结构。在操作系统中，一个目录可能包含几个子目录或文件，子目录中又可能包含子目录或文件，这种一对多且递归的关系就可以使用树来表示。在 Windows 系统中，在命令行中显示当前目录的体系结构使用的命令就为 <code>tree</code> ：</p>
+
+<div class="codeblock code-console"><span class="codetoken prompt">D:\sources\data-science></span> <span class="codetoken command">tree</span>
+Folder PATH listing for volume Enormous
+Volume serial number is C61A-4BF3
+D:.
+└───data-science
+    ├───articles
+    │   ├───chapter01
+    │   ├───chapter02
+    │   ├───chapter03
+    │   ├───chapter04
+    │   └───chapter05
+    ├───assets
+    └───images
+</div>
+
+<p>以上就是一个典型的树状结构。</p>
+
+<p>树的节点在逻辑上存在对应关系，那么就可以借用链表的思想，在节点中使用一些指针指向它包含的每一个子节点。只需要增加节点中指针的个数就可以从一对一连接变成一对多连接，符合树的定义。</p>
+
+<p>然而实际情况下，子节点的数量不定且可能变化，因此不能直接建立对应到每个子节点的指针。既然使用链表的思想，那么可以再重新安排一下树的结构，变成如下模型：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-tree-concrete-linkedlist.png" alt="" width="267">
+</figure>
+
+<p>该模型下，每个结点都需要两个固定的指针：一个指针指向子树，一个指针指向兄弟节点。这样就可以以确定的方式串联起整棵树的节点了，且可以很方便地管理所有的子节点。</p>
+
+<p>不过这种树的实现不具备研究价值。下面介绍一种树的子集：二叉查找树，它是一种特定的树的实现，主要优化了查找的方式，效率比表快得多。</p>
+
+<h2>二叉查找树</h2>
+
+<h3>二叉树的概念</h3>
+
+<p><strong>二叉树</strong>(binary tree)是一棵树，符合树的通用定义，但它要求其中每个节点都不能有多于两个的子节点。</p>
+
+<p>下图展示了一个二叉树的模型，其中 <span class="math">\\( T_L \\)</span> 和 <span class="math">\\( T_R \\)</span> 均可能为空：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-tree-binary-model.png" alt="" width="226">
+</figure>
+
+<p>二叉树的重要性质是二叉树的平均深度为 <span class="math">\\( O(\sqrt{N}) \\)</span> （二叉树节点不总是左右都有节点，因此二叉树的节点一般会随着深度线性增长），不过最坏情况（都只有一边有子节点）下深度可以达到 <span class="math">\\( N-1 \\)</span> 。</p>
+
+<p>由于该性质，二叉树在查找中很有用。</p>
+
+<h3>二叉查找树</h3>
+
+<p><strong>二叉查找树</strong>(binary search tree)又是一种特殊的二叉树，它满足二叉树的所有要求，但同时规定：对于树中的每个节点 <span class="math">\\( X \\)</span> ，它的左子树中的所有值小于 <span class="math">\\( X \\)</span> 中的值，而它的右子树中的所有值大于 <span class="math">\\( X \\)</span> 的值。</p>
+
+<p>这意味着该树可以用某种统一的方式排序。在<a href="http://frozencandles.fun/archives/586">第一节</a>就介绍了二分查找法，并指出二分查找法有远低于线性查找的时间开销。然而二分查找必须要求结构是有序的，而对线性表的排序会涉及表项的移动，移动表项总是要消耗线性的时间，因此线性表不适合直接使用二分查找。</p>
+
+<p>然而二叉查找树天然是有序的，它具有链表一样的常数级插入删除开销。理想的二叉查找树左右子节点都能尽可能利用，使得节点可以随着深度指数级增长，从而使平均深度达到 <span class="math">\\( O(\log N) \\)</span> 。</p>
+
+<p>有了以上对二叉树模型的描述，二叉树的节点定义为：</p>
+
+<div class="vscode-block"><div><span token="operator">typedef</span> <span token="keyword">struct</span> <span token="type">bsearchtree_node</span> {</div><div>&#160; &#160; <span token="type">elemtype</span> <span token="property">elem</span>;</div><div>&#160; &#160; <span token="keyword">struct</span> <span token="type">bsearchtree_node</span><span token="property">*</span> <span token="property">left</span>;</div><div>&#160; &#160; <span token="keyword">struct</span> <span token="type">bsearchtree_node</span><span token="property">*</span> <span token="property">right</span>;</div><div>} <span token="type">bsearchtree_node</span>, <span token="property">*</span> <span token="type">bsearchtree</span>;</div></div>
+
+<p>由于二叉树最多只有两个子节点，因此不需要使用链表的方式管理子节点，可以在指针域中直接定位子节点。</p>
+
+<p>树是一种一对多的关系，因此树的很多操作都需要沿着多个方向分裂执行。这种特点使树的操作比较复杂，并可能无法及时停止。</p>
+
+<p>前面介绍的树是使用递归的方式定义的，那么也可以使用递归的方式操作树。这样做虽然不够直观，但可以完美贴合树的定义。</p>
+
+<p>例如清空一棵树的操作，为了清空一棵树需要清空它的所有节点，但为了使树不发生断裂，需要逐层清空叶节点。如果采用循环的方式不能很好地执行回退操作，此时可以考虑使用递归。递归的实现非常简单：</p>
+
+<div class="vscode-block"><div><span token="type">bsearchtree</span> <span token="func">BinSearchTree_Clear</span>(<span token="type">bsearchtree</span> <span style="color: #d7dbe0;">tree</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">!=</span> <span token="func">NULL</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="func">BinSearchTree_Clear</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">)</span>;</div><div>&#160; &#160; &#160; &#160; <span token="func">BinSearchTree_Clear</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">)</span>;</div><div>&#160; &#160; &#160; &#160; <span token="func">free</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">)</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">return</span> <span token="func">NULL</span>;</div><div>}</div></div>
+
+<p>在删除一棵树时，需要先删除它的左右子节点：如果存在左右子节点，就说明有子树，那么就进入左右子树递归删除；否则就说明该节点已经是树叶了，被删除也没有影响。在确保子树都被删除了以后，再删除节点自身。考虑到这里使用了双递归，还不是尾递归，因此无法很轻松地改写为循环。</p>
+
+<p>递归实现下，终止条件非常重要。在清空例程中，递归的终止条件为不存在子节点，那么就停止递归，返回上一步。由于二叉搜索树的平均深度为 <span class="math">\\( O(\log N) \\)</span> ，递归消耗的空间资源增长率也与其类似，不易发送空间不够的情况。</p>
+
+<p>根据这种思想，可以实现查找。查找操作一般需要返回指向树中含有对应值的节点的指针（而不是一个索引）。如果这样的节点不存在，则返回空指针。</p>
+
+<p>根据二叉查找树的定义，如果查找的值比当前节点的值小，那么可能的值存在于它的左子树中，就去它左子树中查找；如果值比当前节点的值大，那么就去它右子树中查找，这也很适合用递归的方式实现：</p>
+
+<div class="vscode-block"><div><span token="type">bsearchtree_node</span><span token="property">*</span> <span token="func">BinSearchTree_Find</span>(<span token="type">bsearchtree</span> <span style="color: #d7dbe0;">tree</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">==</span> <span token="func">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="func">NULL</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">value</span> <span token="operator">&lt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="func">BinSearchTree_Find</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">, </span><span style="color: #d7dbe0;">value</span><span token="func">)</span>;</div><div>&#160; &#160; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">value</span> <span token="operator">&gt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="func">BinSearchTree_Find</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">, </span><span style="color: #d7dbe0;">value</span><span token="func">)</span>;</div><div>&#160; &#160; <span token="keyword">else</span></div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">tree</span>;</div><div>}</div></div>
+
+<p>注意测试的顺序，关键问题是需要首先测试当前位置是否为空树，否则后续的查找会出现问题。同时还需要将最不可能的情况，也就是正好找到的情况放在最后一步执行。</p>
+
+<p>这里同样遵循树的递归定义，并且使用的是单个的尾递归，因此可以方便地使用 <code>while</code> 循环实现。</p>
+
+<p>可以使用类似的方法查找树的最值。由于如果存在左子树，左子树上的值总是比当前节点的值小的，因此如果要找到最小值，可以不断递归遍历左子树，直到达到最大深度为止。最大值可也用类似的方式找出。</p>
+
+<p>下面给出了分别用递归和循环实现的查找最值：</p>
+
+<div class="vscode-block"><div><span token="type">bsearchtree_node</span><span token="property">*</span> <span token="func">BinSearchTree_FindMin</span>(<span token="type">bsearchtree</span> <span style="color: #d7dbe0;">tree</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">==</span> <span token="func">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="func">NULL</span>;</div><div>&#160; &#160; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span> <span token="operator">==</span> <span token="func">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">tree</span>;</div><div>&#160; &#160; <span token="keyword">else</span></div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="func">BinSearchTree_FindMin</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">)</span>;</div><div>}</div><div><span token="type">bsearchtree_node</span><span token="property">*</span> <span token="func">BinSearchTree_FindMax</span>(<span token="type">bsearchtree</span> <span style="color: #d7dbe0;">tree</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">!=</span> <span token="func">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">while</span> (<span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span> <span token="operator">!=</span> <span token="func">NULL</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">tree</span>;</div><div>}</div></div>
+
+<p>查找最值的要点与普通查找类似，都要注意终止条件是树已经到达最深的位置了。除此之外，最好判断一下一开始传入的树是否为空树。</p>
+
+<h3>插入与删除操作</h3>
+
+<p>二叉查找树的插入和删除比较复杂。二叉查找树为了维持有序结构，插入和删除都不像链表那么简单，而是要将待插入的内容插入到正确的位置，这个位置一般是确定的。</p>
+
+<p>插入稍微简单一些。不过需要注意的是，之前在介绍二叉查找树时都假定树中的元素都有着不同的值，如果待插入的值与某个节点的值相同，那么就要根据实际情况安排它：要么将其丢弃，要么用别的方式记录它。</p>
+
+<p>插入的实现如下，一个插入例程可以在查找的基础上编写：如果找到与待插入元素相同的节点，那么就什么也不用做；否则沿着应有的路径继续向下查找，并将其插入到查找路径的最后一点上。</p>
+
+<p>下图展示了这种插入思路：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-tree-insert.png" alt="" height="200">
+</figure>
+
+<p>为了插入元素 5 ，尝试沿着路径搜索 5 ：6(向左找)→2(向右找)→4(向右找)→找到底了，那么这个位置满足二叉查找树的要求，就将其插入这个位置上。</p>
+
+<p>可见插入都是在叶节点上完成，既然使用查找的方式寻找合适的插入位置，那么下一次查找、插入时也可以顺利找到该节点，且不会使树存在重复的元素。</p>
+
+<p>如果经常发生重复插入的情况，或者需要允许元素重复，可以在节点中附加一个记录频率的字段来保存该信息。这样做的优点是在删除时可以直接将频率字段减 1 ，而不需要真正移除节点，降低了实现的难度。</p>
+
+<p>根据该原理，以下是插入的例程，注意还是用递归的方式实现的：</p>
+
+<div class="vscode-block"><div><span token="type">bsearchtree</span> <span token="func">BinSearchTree_Insert</span>(<span token="type">bsearchtree</span> <span style="color: #d7dbe0;">tree</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">==</span> <span token="func">NULL</span>) {<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> empty tree, should create first</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span token="func">malloc</span><span token="func">(</span><span token="property">sizeof</span><span token="func">(</span><span style="color: #82aaff;text-decoration: underline;">bsearchtree_node</span><span token="func">))</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">==</span> <span token="func">NULL</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="func">NULL</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> fail to allocate memory</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span> <span token="operator">=</span> <span style="color: #d7dbe0;">value</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span> <span token="operator">=</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span> <span token="operator">=</span> <span token="func">NULL</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">value</span> <span token="operator">&lt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span>)</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span> <span token="operator">=</span> <span token="func">BinSearchTree_Insert</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">, </span><span style="color: #d7dbe0;">value</span><span token="func">)</span>;</div><div>&#160; &#160; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">value</span> <span token="operator">&gt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span>)</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span> <span token="operator">=</span> <span token="func">BinSearchTree_Insert</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">, </span><span style="color: #d7dbe0;">value</span><span token="func">)</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">tree</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> value is in the tree already</span></div><div>}</div></div>
+
+<p>每一次递归时，都尝试到子树中执行插入；真正的插入发送在子树为空的情况（到达边缘位置了），那么就在原地创建一个新的节点并容纳插入值。为了让新的节点成为树的一部分，将该函数写成返回一个指向新根节点的指针，并在递归回退时重新建立路径上的所有指针。</p>
+
+<p>删除显然是最困难的过程，为了确保删除时维持树的稳定，要考虑多种不同的情况：</p>
+
+<ul>
+    <li>待删除的节点是一片树叶：这种情况下删除并不会影响树的其余部分，可以立即删除</li>
+    <li>待删除的节点只有一个子节点：这种删除类似链表删除，只需要调整父节点的指针绕过该节点，指向子节点即可</li>
+</ul>
+
+<p>下图展示了删除的节点只有一个子节点的情况：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-single-delete.png" height="200" alt="">
+</figure>
+
+<p>删除前后，整个树的结构仍然符合二叉查找树的定义。</p>
+
+<ul>
+    <li>待删除的节点有两个子节点：这是真正复杂的一种情况，因为不但要删除对应节点，还需要安排它的两个子节点到合适的位置</li>
+</ul>
+
+<p>这种情况下，一般的删除方法是用其右子树中最小的数据代替该结点的数据，然后再递归去除右子树中该最小数据。由于右子树中最小的数据也比左子树中的任意节点大，因此这样的操作既能去除该节点，同时符合二叉查找树的定义。</p>
+
+<p>下图展示了从一棵较为复杂的树中删除值 4 的情况：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-tree-delete-complex.png" alt="">
+</figure>
+
+<p>该删除分几步：首先找到节点 4 ，并用右子树中最小数据 6 代替；然后还需要删除右子树中重复数据 6 ，那么继续沿着该路径查找 6 ，找到后以相同的方式删除 6 。这里右子树中的 6 只有一个子节点，因此只需要像链表一样删除即可。</p>
+
+<p>删除完成之后，总体看下来，仍然符合二叉查找树的定义。</p>
+
+<p>二叉查找树删除的原理其实不算太复杂，但难点在于如何实现。每一步不仅需要分析子节点个数，总体还需要满足递归的要求。</p>
+
+<p>二叉查找树删除的例程如下：</p>
+
+<div class="vscode-block"><div><span token="type">bsearchtree_node</span><span token="property">*</span> <span token="func">BinSearchTree_Remove</span>(<span token="type">bsearchtree</span> <span style="color: #d7dbe0;">tree</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">==</span> <span token="func">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="func">NULL</span>;<span style="color: #637777;"> &#160; &#160; &#160; &#160; &#160; &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> element not found</span></div><div>&#160; &#160; <span token="type">bsearchtree_node</span><span token="property">*</span> <span token="variable">temp</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">value</span> <span token="operator">&lt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span>)<span style="color: #637777;"> &#160; &#160; &#160; </span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> go left</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span> <span token="operator">=</span> <span token="func">BinSearchTree_Remove</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">, </span><span style="color: #d7dbe0;">value</span><span token="func">)</span>;</div><div>&#160; &#160; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">value</span> <span token="operator">&gt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span>)<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> go right</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span> <span token="operator">=</span> <span token="func">BinSearchTree_Remove</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">, </span><span style="color: #d7dbe0;">value</span><span token="func">)</span>;</div><div>&#160; &#160; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span> <span token="operator">&amp;&amp;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span>) {<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> element found with 2 children</span></div><div><span style="color: #a8a8a8;">&#160; &#160; &#160; &#160; /* replace by min value in right subtree */</span></div><div>&#160; &#160; &#160; &#160; <span token="variable">temp</span> <span token="operator">=</span> <span token="func">BinSearchTree_FindMin</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">)</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span> <span token="operator">=</span> <span token="variable">temp</span>-&gt;<span token="property">elem</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span> <span token="operator">=</span> <span token="func">BinSearchTree_Remove</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">, </span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">elem</span><span token="func">)</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">else</span> {<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> element found with 0 or 1 children</span></div><div>&#160; &#160; &#160; &#160; <span token="variable">temp</span> <span token="operator">=</span> <span style="color: #d7dbe0;">tree</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span> <span token="operator">==</span> <span token="func">NULL</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span> <span token="operator">==</span> <span token="func">NULL</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span>;</div><div>&#160; &#160; &#160; &#160; <span token="func">free</span><span token="func">(</span><span token="variable">temp</span><span token="func">)</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">tree</span>;</div><div>}</div></div>
+
+<p>以上函数可以分为几个部分：最前面用于递归查找待删除元素，如果找到了判断子节点个数：如果有两个子节点，查找右侧最小值替换该位置，并再次递归地查找、删除该最小值；如果有 0 个或 1 个子节点，那么就按正常的方式删除。</p>
+
+<p>可以预见的是，删除过程会越来越向深的方向进行，并总会遇到边缘位置（不全有两个子节点），这也就是递归终止的条件。</p>
+
+<p>以上程序中，每次删除时还需要先查找出最小值替换节点，然后还要查找删除该最小值。这两步有些重复了，可以将其结合以提高运行效率，不过程序可能还会复杂一些。</p>
+
+<h3>效率分析</h3>
+
+<p>直观上看，除了清空操作外，对二叉查找树的搜索、插入、删除（插入与删除都基于查找实现）都花费 <span class="math">\\( O(\log N) \\)</span> 的时间。因为每次用常数时间在树中降低一层时，就会排除剩余的一半节点。</p>
+
+<p>严格来说，二叉查找树的时间花费与深度相关，如果 <span class="math">\\( d \\)</span> 是包含访问值的节点深度，那么操作将花费 <span class="math">\\( O(d) \\)</span> 时间。然而，实际情况下看，二叉查找树的深度并没有达到理想的平均情况。其原因出在删除操作，该操作总是用右子树中的一个节点代替原有节点，这就会造成：</p>
+
+<ul>
+    <li>右子树少了一个节点，并且随着递归删除，删除节点的位置越来越往右下</li>
+    <li>原先节点的值变大，下一次插入的位置可能会变到左边</li>
+</ul>
+
+<p>因此，该删除操作有助于使左子树变深，右子树变浅。在足够多的随机插入和删除操作下，一棵树会不可避免地左沉：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-tree-left-lean.png" alt="">
+</figure>
+
+<p>左沉使右侧节点的利用率变低，不能很好地利用两个子节点位置。一种极端的情况是每个节点的右节点都没有值，那么二叉树将会退化为有序的链表，使得深度变为 <span class="math">\\( N-1 \\)</span> 。可以证明，如果随机交替插入和删除 <span class="math">\\( N^2 \\)</span> 次，那么树的期望深度为 <span class="math">\\( \sqrt{N} \\)</span> 。</p>
+
+<p>如果能对左沉的树重新编排节点的位置，那么有助于缓解这一情况。例如，对以上删除示例中使用到的左沉的树重新排列节点后，树的深度从 6 减少为了 4 ：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-tree-left-lean-example.png" alt="">
+</figure>
+
+<p>如果在删除时随机选择右子树的最小元素或左子树的最大元素来代替它，确实有助于缓解倾斜问题。不过在条件不好的情况下，还是可能发现倾斜。这就要求树必须要能够有简单的方式做调整，使得后面操作效率更高。</p>
+
+<p>下面介绍一种二叉查找树的改进版本，它优化了对自调整的支持，</p>
+
+<!-- finished:2022-08-03 -->
+
+<h2>AVL树</h2>
+
+<h3>AVL树的概念</h3>
+
+<p><strong>AVL</strong>(Adelson-Velskii and Landis)树是带有平衡条件的二叉查找树。平衡意味着每个节点子树的高度要相近（完全等高太严格也难以实现），使整棵树不会明显倾斜，拥有接近 <span class="math">\\( \log N \\)</span> 的高度。</p>
+
+<p>一棵 AVL 树每个节点的左子树和右子树的高度最多差 1（空树的高度定义为 -1 ），并在每一个节点中保留高度信息。</p>
+
+<p>调整树会消耗一定时间，这就要求不能太过频繁地调整，或一次只调整树的一部分。插入操作一定会破坏 AVL 树的完整性，因此可以在插入后对周围的节点做一定的调整，使其恢复 AVL 树的性质。对 AVL 树的修正可以使用<strong>旋转</strong>(rotation)来完成。</p>
+
+<p>下图是一棵平衡的 AVL（子）树，因为左右子树的高度只差 1 。然而，对左侧子树的插入会破坏该平衡。插入有两种情况：一种是发生在“外侧”的插入，另一种是发生在“内侧”的插入。对右子树的插入实质上的对称的，虽然需要使用不同的代码处理。</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-avltree-unbalance.png" alt="">
+</figure>
+
+<p>发生在“外侧”的插入可以通过对树的一次<strong>单旋转</strong>(single rotation)调整，发生在“内侧”的插入可以通过对树的一次<strong>双旋转</strong>(single rotation)调整。本节介绍旋转的基本原理，并给出简单的代码实现。</p>
+
+<p>首先，采用以下代码实现 AVL 树并计算节点的高度：</p>
+
+<div class="vscode-block"><div><span token="operator">typedef</span> <span token="keyword">struct</span> <span token="type">avltree_node</span> {</div><div>&#160; &#160; <span token="type">elemtype</span> <span token="property">elem</span>;</div><div>&#160; &#160; <span token="keyword">struct</span> <span token="type">avltree_node</span><span token="property">*</span> <span token="property">left</span>;</div><div>&#160; &#160; <span token="keyword">struct</span> <span token="type">avltree_node</span><span token="property">*</span> <span token="property">right</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span token="property">height</span>;</div><div>} <span token="type">avltree_node</span>, <span token="property">*</span> <span token="type">avltree</span>;</div><br><div><span token="keyword">static</span> <span token="keyword">int</span> <span token="func">AvlTree_Height</span>(<span token="keyword">const</span> <span token="type">avltree_node</span><span token="property">*</span> <span style="color: #d7dbe0;">node</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">node</span> <span token="operator">==</span> <span token="func">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="property">-</span><span token="number">1</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> empty tree</span></div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">node</span>-&gt;<span token="property">height</span>;</div><div>}</div></div>
+
+<p>接下来介绍旋转操作。</p>
+
+<h3>AVL树的旋转</h3>
+
+<p>AVL 树的旋转分为单旋转和双旋转两种，分别调整不同的不平衡情况。</p>
+
+<ul>
+    <li><strong>单旋转</strong></li>
+</ul>
+
+<p>下图展示了一个不平衡树的抽象模型，对 <span class="math">\\( X \\)</span> 节点的插入使 <span class="math">\\( Z \\)</span> 明显不平衡：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-avltree-single-rotate.png" alt="">
+</figure>
+
+<p>为了恢复树的平衡，需要调整两者的位置。但是为了满足二叉查找树的定义，不能直接交换它们，而是需要调整节点间的指向关系，使水平位置满足 <span class="math">\\( [X, k_1, k_2, Z] \\)</span> 的顺序。</p>
+
+<p>可以将单旋转看成一个不平衡的杠杆，为了使其恢复平衡，需要将支点的位置移到更靠近重心处。</p>
+
+<p>以下给出了单旋转的代码实现：</p>
+
+<div class="vscode-block"><div><span token="keyword">static</span> <span token="type">avltree_node</span><span token="property">*</span> <span token="func">AvlTree_LeftSingleRotate</span>(<span token="type">avltree_node</span><span token="property">*</span> <span style="color: #d7dbe0;">k2</span>) {</div><div>&#160; &#160; <span token="type">avltree_node</span><span token="property">*</span> <span style="color: #c5e478;">k1</span> <span token="operator">=</span> <span style="color: #d7dbe0;">k2</span>-&gt;<span token="property">left</span>;</div><div>&#160; &#160; <span style="color: #d7dbe0;">k2</span>-&gt;<span token="property">left</span> <span token="operator">=</span> <span style="color: #c5e478;">k1</span>-&gt;<span token="property">right</span>;</div><div>&#160; &#160; <span style="color: #c5e478;">k1</span>-&gt;<span token="property">right</span> <span token="operator">=</span> <span style="color: #d7dbe0;">k2</span>;</div><div>&#160; &#160; <span style="color: #d7dbe0;">k2</span>-&gt;<span token="property">height</span> <span token="operator">=</span> <span token="func">max</span><span token="func">(</span><span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #d7dbe0;">k2</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">), </span><span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #d7dbe0;">k2</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">))</span> <span token="property">+</span> <span token="number">1</span>;</div><div>&#160; &#160; <span style="color: #c5e478;">k1</span>-&gt;<span token="property">height</span> <span token="operator">=</span> <span token="func">max</span><span token="func">(</span><span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #c5e478;">k1</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">), </span><span style="color: #d7dbe0;">k2</span><span token="func">-&gt;</span><span token="property">height</span><span token="func">)</span> <span token="property">+</span> <span token="number">1</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #c5e478;">k1</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> new root</span></div><div>}</div></div>
+
+<p>对指针指向的修改可以参照旋转模型实现。在修改后还要调整节点高度，为子节点最大高度多一层。</p>
+
+<p>以上介绍的是左侧插入的单旋转，另一侧的单旋转可以通过镜像操作实现。</p>
+
+<ul>
+    <li><strong>双旋转</strong></li>
+</ul>
+
+<p>单旋转对“内侧”的插入无效，下面通过实际情况展示了这样失败的原因：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-avltree-single-rotate-failure.png" alt="">
+</figure>
+
+<p>“内侧”插入模型可以看作一个天平，不平衡之处发生在中心，因此不能通过调整两端节点达到平衡。</p>
+
+<p>以下模型展示了使用双旋转修复 AVL 树的方法：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-avltree-double-rotate.png" alt="">
+</figure>
+
+<p>插入可能发生在 <span class="math">\\( B \\)</span> 或 <span class="math">\\( C \\)</span> 位置。为了重新平衡，必须让靠“中间”的节点，即 <span class="math">\\( k_2 \\)</span> 作为新的根。</p>
+
+<p>双旋转操作下，不管插入的位置发生在 <span class="math">\\( B \\)</span> 还是 <span class="math">\\( C \\)</span> ，旋转之后树总是平衡的。</p>
+
+<p>双旋转操作可以以一种简洁的形式完成。下图展示的树由于插入了节点 3 ，而使 10 的两个子节点高度差 2 变得不平衡。但如果对 10 的左节点做一次右单旋转：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-avltree-double-rotate-example-1.png" alt="">
+</figure>
+
+<p>尽管还是没有平衡，但是这次的不平衡好像插入变到了“外侧”去了，那么只需要再对 10 做一次单旋转即可维持平衡：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-avltree-double-rotate-example-2.png" alt="">
+</figure>
+
+<p>因此，代码可以以一种很简单的形式实现：</p>
+
+<div class="vscode-block"><div><span token="keyword">static</span> <span token="type">avltree_node</span><span token="property">*</span> <span token="func">AvlTree_LeftDoubleRotate</span>(<span token="type">avltree_node</span><span token="property">*</span> <span style="color: #d7dbe0;">k3</span>) {</div><div>&#160; &#160; <span style="color: #d7dbe0;">k3</span>-&gt;<span token="property">left</span> <span token="operator">=</span> <span token="func">AvlTree_RightSingleRotate(</span><span style="color: #d7dbe0;">k3</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">)</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="func">AvlTree_LeftSingleRotate</span><span token="func">(</span><span style="color: #d7dbe0;">k3</span><span token="func">)</span>;</div><div>}</div></div>
+
+<p>所有的旋转都只需要调整几个指针和高度，都是常数级的。</p>
+
+<p>有了旋转的操作之后，就可以对 AVL 树做插入。插入毫无疑问非常复杂，因为它是在二叉查找树的插入基础上完善的。为了将 <span class="math">\\( X \\)</span> 节点插入到一棵 AVL 树 <span class="math">\\( T \\)</span> 中，需要递归地将其插入 <span class="math">\\( T \\)</span> 的子树 <span class="math">\\( T_{LR} \\)</span> 中。如果 <span class="math">\\( T_{LR} \\)</span> 的高度不变，那么插入完成；否则出现高度不平衡的情况，要适当做旋转。</p>
+
+<p>下面展示了插入的代码实现：</p>
+
+<div class="vscode-block"><div><span token="type">avltree</span> <span token="func">AvlTree_Insert</span>(<span token="type">avltree</span> <span style="color: #d7dbe0;">tree</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">elem</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">==</span> <span token="func">NULL</span>) {<span style="color: #637777;"> &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> create and return a one-node tree</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span token="func">malloc(</span><span token="property">sizeof</span><span token="func">(</span><span style="color: #82aaff;text-decoration: underline;">avltree_node</span><span token="func">))</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">==</span> <span token="func">NULL</span>)<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of memory</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="func">NULL</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span> <span token="operator">=</span> <span style="color: #d7dbe0;">elem</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">height</span> <span token="operator">=</span> <span token="number">0</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span> <span token="operator">=</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span> <span token="operator">=</span> <span token="func">NULL</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">elem</span> <span token="operator">&lt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span>) {</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span> <span token="operator">=</span> <span token="func">AvlTree_Insert</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">, </span><span style="color: #d7dbe0;">elem</span><span token="func">)</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">)</span> <span token="property">-</span> <span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">)</span> <span token="operator">==</span> <span token="number">2</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">elem</span> <span token="operator">&lt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span>-&gt;<span token="property">elem</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span token="func">AvlTree_LeftSingleRotate</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">)</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">else</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span token="func">AvlTree_LeftDoubleRotate</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">)</span>;</div><div>&#160; &#160; } &#160; &#160;</div><div>&#160; &#160; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">elem</span> <span token="operator">&gt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span>) {</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span> <span token="operator">=</span> <span token="func">AvlTree_Insert</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">, </span><span style="color: #d7dbe0;">elem</span><span token="func">)</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">)</span> <span token="property">-</span> <span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">)</span> <span token="operator">==</span> <span token="number">2</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">elem</span> <span token="operator">&gt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span>-&gt;<span token="property">elem</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span token="func">AvlTree_RightSingleRotate(</span><span style="color: #d7dbe0;">tree</span><span token="func">)</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">else</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span token="func">AvlTree_RightDoubleRotate</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">)</span>;</div><div>&#160; &#160; }</div><div><span style="color: #a8a8a8;">&#160; &#160; /* elem is in the tree already */</span></div><div>&#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">height</span> <span token="operator">=</span> <span token="func">max</span><span token="func">(</span><span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">), </span><span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">))</span> <span token="property">+</span> <span token="number">1</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">tree</span>;</div><div>}</div></div>
+
+<p>以上使用递归实现，代码是在二叉查找树的基础上扩充实现的，主要增加了高度的计算和旋转的操作，旋转发生的条件可以参考模型。</p>
+
+<p>对 AVL 树删除的实现很复杂，因此这里不再介绍。如果删除不频繁的情况下，一般采取<strong>懒惰删除</strong>(lazy deletion)的方式，即在节点中附加一个额外的域，当删除时在该域中做标记或使频次减 1 。</p>
+
+<h3>树的遍历</h3>
+
+<p>由于前文介绍了树的清空操作，它就是一种遍历。因此遍历打印树可以通过类似的方式完成。</p>
+
+<p>下面给出了一种至少能看的打印操作：</p>
+
+<div class="vscode-block"><div><span token="keyword">static</span> <span token="keyword">void</span> <span style="color: #82aaff;">AvlTree_PrintNode</span>(<span token="type">avltree_node</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">node</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">depth</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">node</span> <span style="color: #c792ea;">&amp;&amp;</span> <span style="color: #d7dbe0;">node</span>-&gt;<span style="color: #7fdbca;">height</span> <span style="color: #c792ea;">&gt;</span> <span token="number">0</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span style="color: #c5e478;">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span style="color: #c5e478;">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">depth</span>; <span style="color: #c5e478;">i</span><span style="color: #c792ea;">++</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #82aaff;">printf(</span><span style="color: #d9f5dd;">"</span><span style="color: #ecc48d;">—</span><span style="color: #d9f5dd;">"</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">printf(</span><span style="color: #d9f5dd;">"</span> <span style="color: #82aaff;">%d</span><span token="number">\n</span><span style="color: #d9f5dd;">"</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">node</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">elem</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; }</div><div>}</div><div><span token="keyword">void</span> <span style="color: #82aaff;">AvlTree_Print</span>(<span token="type">avltree</span> <span style="color: #d7dbe0;">tree</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">depth</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span>) {</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">AvlTree_Print</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">tree</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">left</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">depth</span><span style="color: #82aaff;"> </span><span style="color: #7fdbca;">+</span><span style="color: #82aaff;"> </span><span token="number">1</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">AvlTree_PrintNode</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">tree</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">depth</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">AvlTree_Print</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">tree</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">right</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">depth</span><span style="color: #82aaff;"> </span><span style="color: #7fdbca;">+</span><span style="color: #82aaff;"> </span><span token="number">1</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; }</div><div>}</div><div><span style="color: #c792ea;">#</span><span token="keyword">define</span> <span style="color: #82aaff;">avltree_print</span><span style="color: #d9f5dd;">(</span><span style="color: #d7dbe0;">avl</span><span style="color: #d9f5dd;">)</span> <span style="color: #82aaff;">AvlTree_Print</span>(avl, <span token="number">0</span>)</div></div>
+
+<p>将相邻层顶点之间用线连接，即可看到一棵抽象的二叉查找树：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-avltree-print.png" alt="">
+</figure>
+
+<p>打印结果从上到下是有序的，说明二叉查找树也是有序的，因此可以换来大量数据时很快的查找效率。并且不管节点间深度有什么关系，值小的节点一定排在值大的节点的左边（图中表示为上面），因此对二叉查找树的修改一定也要维持这种规律。</p>
+
+<p>打印的遍历是先处理左边节点，然后处理自身再处理右边节点，这种遍历称为<strong>中序遍历</strong>(inorder traversal)，其特点是元素可以按顺序处理；而清空的遍历需要处理完两个子树后再处理自身，这种遍历称为<strong>后序遍历</strong>(postorder traversal)，特点是从下向上逐层遍历。</p>
+
+<p>第三种常用的遍历方式是<strong>先序遍历</strong>(preorder traversal)，当前节点在子节点前优先处理，可以用来利用节点深度标志标志每一个节点：</p>
+
+<div class="vscode-block"><div><span token="keyword">int</span> <span style="color: #82aaff;">AvlTree_Height</span>(<span token="type">avltree</span> <span style="color: #d7dbe0;">tree</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #7fdbca;">-</span><span token="number">1</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="number">1</span> <span style="color: #7fdbca;">+</span> <span style="color: #82aaff;">max</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;">AvlTree_Height</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">tree</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">left</span><span style="color: #82aaff;">), </span><span style="color: #82aaff;">AvlTree_Height</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">tree</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">right</span><span style="color: #82aaff;">))</span>;</div><div>}</div></div>
+
+<p>总的来说，二叉查找树是一种比较经典的数据结构，它提出了一种较为高效的查找解决方案。二叉查找树并不是唯一的查找树，还有许多类似的、甚至更高效的查找树实现。不过对树的介绍暂时告一段落，接下来研究散列表，它实现了一种更快速的、常数级的查找，不过其限制也更大。</p>
+
+
+
+
+
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python/library-time/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/03/Python3标准库time-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/03/Python3标准库time-520x293.jpg 520w, /wp-content/uploads/2022/03/Python3标准库time-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python/library-time/" rel="bookmark">Python标准库time：处理时间</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/data-science/machine-learning/04-support-vector-machine/">
+											<img width="520" height="293" src="/wp-content/uploads/2023/01/机器学习-支持向量机-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2023/01/机器学习-支持向量机-520x293.jpg 520w, /wp-content/uploads/2023/01/机器学习-支持向量机-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/data-science/machine-learning/04-support-vector-machine/" rel="bookmark">机器学习-支持向量机</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/computer-science/data-structure/07-sort-algorithm/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/09/数据结构07-排序算法-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/09/数据结构07-排序算法-520x293.jpg 520w, /wp-content/uploads/2022/09/数据结构07-排序算法-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/computer-science/data-structure/07-sort-algorithm/" rel="bookmark">数据结构07-排序算法</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/computer-science/data-structure/05-hash/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>数据结构05-散列</span></a></li>
+		<li class="previous"><a href="/computer-science/data-structure/03-stack-and-queue/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>数据结构03-栈和队列</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

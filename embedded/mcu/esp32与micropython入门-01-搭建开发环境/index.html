@@ -1,0 +1,671 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>ESP32与MicroPython入门-01 搭建开发环境 - 冰封残烛的个人小站</title>
+	<link rel="canonical" href="/embedded/esp32/01-setting-up-development/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="ESP32与MicroPython入门-01 搭建开发环境 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="ESP32简单入门 ESP32简介 ESP32 是上&#046;&#046;&#046;" />
+	<meta property="og:url" content="/embedded/esp32/01-setting-up-development/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2022-08-15T03:20:50+00:00" />
+	<meta property="article:modified_time" content="2023-10-07T02:29:17+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境.jpg" />
+	<meta property="og:image:width" content="1920" />
+	<meta property="og:image:height" content="1080" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="6分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/embedded/esp32/01-setting-up-development/#primaryimage",
+	            "url": "/wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境.jpg",
+	            "width": 1920,
+	            "height": 1080
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/embedded/esp32/01-setting-up-development/#webpage",
+	            "url": "/embedded/esp32/01-setting-up-development/",
+	            "name": "ESP32与MicroPython入门-01 搭建开发环境 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/embedded/esp32/01-setting-up-development/#primaryimage"
+	            },
+	            "datePublished": "2022-08-15T03:20:50+00:00",
+	            "dateModified": "2023-10-07T02:29:17+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "breadcrumb": {
+	                "@id": "/embedded/esp32/01-setting-up-development/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/embedded/esp32/01-setting-up-development/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/embedded/esp32/01-setting-up-development/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "ESP32与MicroPython入门-01 搭建开发环境"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/673" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=673' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fembedded%2Fesp32%2F01-setting-up-development%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fembedded%2Fesp32%2F01-setting-up-development%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><link rel="stylesheet" href="/wp-content/static/css/markdown@arduino.css">
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-673 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-673" class="post-673 post type-post status-publish format-standard has-post-thumbnail hentry category-esp32">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">ESP32与MicroPython入门-01 搭建开发环境</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/embedded/esp32/" rel="category tag">ESP32</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年8月15日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+
+<h1>ESP32简单入门</h1>
+<h2>ESP32简介</h2>
+<p>ESP32 是上海乐鑫公司开发的一款比较新的32位微控制器，它集成了WiFi及蓝牙等功能，有着性能稳定、功耗低、价格低廉等特点，非常适用于物联网开发，但也可以作为普通的MCU使用。</p>
+<p>ESP8266 也是乐鑫公司开发的一种非常流行的WiFi芯片。相比 ESP8266 ，ESP32 更加强大。<a href="https://makeradvisor.com/esp32-vs-esp8266/">这篇文章</a> 比较了 ESP8266 和 ESP32 之间的差别。</p>
+<p>ESP32的主要芯片种类有ESP32-C系列、ESP32-S系列和ESP32系列。这些芯片的参数和功能略有差异，例如ESP32-S2就不支持蓝牙功能。在选型时注意检查芯片型号。</p>
+<p>完整的芯片型号对比可以参考官方网站的介绍：<a href="https://www.espressif.com/zh-hans/products/socs">https://www.espressif.com/zh-hans/products/socs</a></p>
+<p><strong>模块</strong>是基于ESP32芯片，按照一定功能封装了基本的外设等形成的集成芯片。乐鑫提供的ESP32模块主要可分为WROOM系列、WROVER系列以及MINI系列，完整的介绍及对比可以参见官方网站：<a href="https://www.espressif.com/zh-hans/products/modules">https://www.espressif.com/zh-hans/products/modules</a> 。模块参数的详细PDF文档可以从 <a href="https://www.espressif.com/zh-hans/products/modules/esp32">https://www.espressif.com/zh-hans/products/modules/esp32</a> 处下载。</p>
+<p>而<strong>开发板</strong>则是由ESP32模块和USB口、复位开关等组成的完整开发套件。开发板的厂商较多，使用时需要查看对应的开发板电路连接原理图，并注意开发板提供的功能。乐鑫提供的官方开发板介绍可以参见 <a href="https://www.espressif.com/zh-hans/products/devkits">https://www.espressif.com/zh-hans/products/devkits</a> 。</p>
+<p>这里选择 DOIT ESP32 DEVKIT V1 作为开发板。该开发板的特点为：</p>
+<ol>
+<li>尺寸很小（约 52mm x 28mm ）</li>
+<li>价格低廉（仅需 ￥20 左右，相比乐鑫官方动辄 60+ 非常亲民）</li>
+<li>板载一个蓝色 LED 灯，方便在无额外元器件时便可以调试</li>
+<li>远销海外（ platformIO 甚至还有该开发板专门的介绍文档）</li>
+</ol>
+<p>其外观如下。事实上很多商家的 ESP32 的开发板结构都非常类似。在选择开发板时只需注意主要结构及功能即可。</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@esp32-micropython/01-esp32-devkits.jpg" alt="开发板外观"></figure>
+<h2>MicroPython简介</h2>
+<h3>什么是MicroPython</h3>
+<p>MicroPython是基于Python实现的简易版本，用于在嵌入式系统中运行，例如树莓派、ARM单片机和ESP32。它兼容大部分Python3语法，因此只要熟悉Python3就能无障碍上手MicroPython。</p>
+<p>相比Python3，MicroPython精简了许多实现细节，并且删去了许多标准库以及标准库里的内容。不过，MicroPython却额外包含了能够操作底层GPIO等外设的标准库，这些是对底层寄存器的高度封装。</p>
+<h3>建立MicroPython开发环境</h3>
+<p>目前来说，有 3 个比较常用的 MicroPython 开发环境，它们都是免费、开源且跨平台的。它们分别为：</p>
+<ul>
+<li><strong>uPyCraft IDE</strong></li>
+</ul>
+<p>uPyCraft IDE 是一个简单并且对入门 MicroPython 友好的集成开发环境，它自身可以直接烧入 MicroPython 到 ESP32 中，并且支持从编写程序到串口调试的所有基本功能。除此之外，它还内置了许多示例代码，可以直接运行这些示例代码查看效果。</p>
+<p>uPyCraft 的 GitHub 地址为：<a href="https://github.com/DFRobot/uPyCraft">https://github.com/DFRobot/uPyCraft</a> 。可以从中下载软件与查看官方文档。</p>
+<ul>
+<li><strong>Thonny IDE</strong></li>
+</ul>
+<p>Thonny IDE 是一个 Python 的集成开发环境，不过它同时也支持直接开发 MicroPython 。Thonny IDE 功能丰富，支持各种调试方式，，并且可以加上插件进一步扩展功能。</p>
+<p>Thonny IDE 的官方网站为：<a href="https://thonny.org">https://thonny.org</a> ，GitHub 仓库地址为：<a href="https://github.com/thonny/thonny">https://github.com/thonny/thonny</a> 。</p>
+<ul>
+<li><strong>Visual Studio Code</strong></li>
+</ul>
+<p>大名鼎鼎的 VSCode 想必许多人都有所耳闻。VSCode 想要开发 MicroPython ，主要依靠插件的支持。</p>
+<p>这里推荐将 Thonny IDE 作为开发环境，主要是出于以下考虑：</p>
+<ol>
+<li>VSCode 相对 MicroPython 入门来说，还是有些过于重量级。并且 VSCode 主要依赖于插件来开发 MicroPython ，并不能很好地用到 VSCode 的所有优势，而且开发环境的配置也对入门级别不是很友好，因此除非日后需要利用到一些进阶功能，否则并是很不推荐将 VSCode 作为入门开发环境。</li>
+<li>uPyCraft 尽管是专门支持 MicroPython 的开发环境，但是它目前版本还比较低，不仅功能很少，而且使用者也很少，许多功能没有得到广泛的测试，可能存在许多 bug 未能得到解决。</li>
+<li>相比之下，Thonny IDE 非常轻量级，却也支持许多高级的功能。由于有足够多的使用者，现版本的 Thonny 已经非常稳定，完全可以满足 MicroPython 的全流程开发。</li>
+</ol>
+<p>由于 Thonny 不支持烧入功能，因此需要额外下载烧入工具。在烧入之前，需要安装 CP210x 串口转 USB 驱动，让设备识别到 ESP32 。</p>
+<p>该驱动可以在 <a href="https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers">https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers</a> 处下载，打开网站后点击 DOWNLOAD 页面，选择对应系统的驱动下载即可：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@esp32-micropython/01-download-driver.jpg" alt="下载页面"></figure>
+<p>下载完成驱动后，安装对应的驱动文件即可，安装方式就和一般的软件一致：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@esp32-micropython/01-install-driver.jpg" alt="安装程序"></figure>
+<p>接下来需要下载 Flash 烧入工具，用来将 MicroPython 烧入到 ESP32 内。烧入软件可以选用乐鑫官方提供的 Flash 下载工具，下载地址在 <a href="https://www.espressif.com/zh-hans/support/download/other-tools">https://www.espressif.com/zh-hans/support/download/other-tools</a> ，或在乐鑫官网找到<strong>支持</strong>→<strong>相关下载</strong>→<strong>工具</strong>：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@esp32-micropython/01-download-flash-tool.jpg" alt="下载页面"></figure>
+<p>解压下载得到的文件夹即可。</p>
+<p>最后一步是下载 MicroPython 固件。下载的地址为：<a href="https://micropython.org/download/esp32/">https://micropython.org/download/esp32/)</a> ，或在 MicroPython 官网首页找到 <strong>Download</strong>→<strong>ESP32</strong> ：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@esp32-micropython/01-download-micropython.jpg" alt="下载页面"></figure>
+<p>一般来说，推荐下载第二新的固件版本。注意下载的是 <code>.bin</code> 格式的固件。</p>
+<p>接下来就可以准备将 MicroPython 烧入到 ESP32 设备中。</p>
+<p>将 ESP32 使用 microusb 线连接到计算机上，如果 ESP32 开发板上的红色灯亮起，同时计算机的设备检测到串口信息，则证明连接正常：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@esp32-micropython/01-download-step-2.jpg" alt="设备管理器窗口"></figure>
+<p>打开 ESP32 的 Flash 烧入工具，在第一个下拉菜单芯片类型中选择 ESP32：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@esp32-micropython/01-download-step-1.jpg" alt="软件操作界面"></figure>
+<p>接下来进入到烧入配置界面，其中几个关键的选项已经在图中标示出来了：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@esp32-micropython/01-download-step-3.jpg" alt="软件操作界面"></figure>
+<ol>
+<li>烧入的固件文件，可在右侧省略号按钮选取文件</li>
+<li>烧入地址为 <code>0x1000</code></li>
+<li>记得勾上要烧入的文件</li>
+<li>这些选项保持图示的默认选项即可</li>
+<li>波特率以 921600 为佳，上方的端口号注意和 ESP32 的端口号匹配</li>
+</ol>
+<p>接下来就可以下载固件了。下载前需要先擦除原有内容，<em>按住</em>开发板上的“BOOT”按键，然后点击下载工具左下角的“ERASE”按钮。刚点击时上方绿色矩形里的文字会从“等待/IDLE”变成“等待上电同步/SYNC”，如果文字再次变成“下载中/DOWNLOAD”，那么便可以松开开发板上的“BOOT”按键了。等到文字再次变为“完成/FINISH”，则说明擦除成功。</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@esp32-micropython/01-download-step-4.jpg" alt="BOOT按键位置"></figure>
+<p>接下来点击下载工具左下角的“START”按钮，类似上一步，在开始下载前也需要按住开发板上的“BOOT”按键。在下载时，下载工具最下方的进度条将会显示当前下载进度。</p>
+<p>这样，MicroPython 就烧入完毕了。接下来可以建立第一个MicroPython 工程，同时测试烧入是否正确。</p>
+<h3>建立第一个工程</h3>
+<p>这里使用 Thonny IDE 作为开发环境。首先可以在官网下载该软件：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@esp32-micropython/01-download-step-5.jpg" alt="下载页面"></figure>
+<p>也可以在 GitHub 仓库里找到 Release 版本。这些地址在上文都提到过。</p>
+<p>安装成功 Thonny 后，打开软件，接下来还需要进行一些初始化配置。</p>
+<p>首先，在菜单栏里找到<strong>运行</strong>→<strong>选择解释器</strong>。之前说过 Thonny 主要用于进行常规 Python 开发，因此如果要将其用于 MicroPython 开发需要修改解释器选项：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@esp32-micropython/01-config-step-1.jpg" alt="配置界面"></figure>
+<p>修改解释器为 MicroPython (ESP32) 。该页面中同时可以修改端口配置，如果有时发现识别出现问题，不妨检查一下端口号是否正确。</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@esp32-micropython/01-config-step-2.jpg" alt="配置界面"></figure>
+<p>接下来，将 ESP32 接入计算机，然后点击功能按钮栏里的“停止/重启后端进程(Ctrl+F2)”：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@esp32-micropython/01-config-step-3.jpg" alt="配置界面"></figure>
+<p>如果此时在下方的终端(Shell)内看到如下所示的 Python 解释器提示，则说明与 MicroPython 的连接成功：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@esp32-micropython/01-config-step-4.jpg" alt="配置界面"></figure>
+<p>如果在打开 Thonny 前就维持着 ESP32 与计算机的连接，那么进入 Thonny 时应该就能看到该提示信息。“停止/重启后端进程(Ctrl+F2)”用于重新使计算机与 ESP32 里的 MicroPython 连接，在每次插拔 ESP32 后都需要这样手动使两者重新连接。</p>
+<p>终端(Shell)允许在串口通信中使用 MicroPython 命令行交互窗口。例如：</p>
+<div class="hljs codeblock"><pre>MicroPython v1<span class="hljs-number">.17</span> on <span class="hljs-number">2021</span>-09-02; ESP32 module <span class="hljs-keyword">with</span> ESP32
+<span class="hljs-type">Type</span> <span class="hljs-string">&quot;help()&quot;</span> <span class="hljs-keyword">for</span> more information.
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Hello, world!&#x27;</span>)
+Hello, world!
+</pre></div>
+<p><code>print()</code> 函数可以让 ESP32 向计算机通过串口发送调试信息。</p>
+<p>MicroPython 还支持以文件的形式运行。新建一个文件后，点击保存（如果 Thonny 成功连接上了 ESP32 的 MicroPython ），那么此时就会出现两个选项，可以将 <code>.py</code> 文件保存在计算机上，还可以将其保存在 ESP32 里：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@esp32-micropython/01-first-py.jpg" alt="软件界面"></figure>
+<p>选择将文件保存在 ESP32 内，此时会发现 ESP32 内已经有一个 <code>boot.py</code> 文件了。这里，将文件命名为 <code>main.py</code> 保存。<code>boot.py</code> 和 <code>main.py</code> 是 MicroPython 里的两个比较特殊的文件，将在之后详细介绍。</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@esp32-micropython/01-save-py.jpg" alt="软件界面"></figure>
+<p>在 <code>main.py</code> 内编写以下代码后保存：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">from</span> machine <span class="hljs-keyword">import</span> Pin
+<span class="hljs-keyword">import</span> time
+led = Pin(<span class="hljs-number">2</span>, Pin.OUT)
+<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    led.value(<span class="hljs-number">0</span>)
+    time.sleep(<span class="hljs-number">0.5</span>)
+    led.value(<span class="hljs-number">1</span>)
+    time.sleep(<span class="hljs-number">0.5</span>)
+</pre></div>
+<p>点击功能按钮栏里的“运行当前脚本(F5)”，即可运行以上代码。运行成功后，可以看到开发板上蓝色的 LED 灯以 0.5 秒为间隔闪烁，说明运行成功。</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@esp32-micropython/01-led-flash.jpg" alt="成功截图"></figure>
+<p><code>while</code> 循环可以通过在交互式控制台内按下 <kbd>CTRL+C</kbd> 触发键盘中断退出。如果再次将 ESP32 接入计算机后重启后台进程，一直显示 ESP32 处于繁忙状态或无显示，则可能是由于 ESP32 一直在执行代码导致的，可以通过键盘中断强制停止 MicroPython 的执行。</p>
+
+
+
+
+<p></p>
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-oop/03-inheritances/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/Python面向对象编程03-类的继承-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/07/Python面向对象编程03-类的继承-520x293.jpg 520w, /wp-content/uploads/2022/07/Python面向对象编程03-类的继承-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-oop/03-inheritances/" rel="bookmark">Python面向对象编程03-类的继承</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/data-science/via-python/numpy01-create-arrays/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/09/Python数据分析-numpy01数组操作-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/09/Python数据分析-numpy01数组操作-520x293.jpg 520w, /wp-content/uploads/2022/09/Python数据分析-numpy01数组操作-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/data-science/via-python/numpy01-create-arrays/" rel="bookmark">numpy01:数组操作</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python/library-time/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/03/Python3标准库time-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/03/Python3标准库time-520x293.jpg 520w, /wp-content/uploads/2022/03/Python3标准库time-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python/library-time/" rel="bookmark">Python标准库time：处理时间</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/computer-science/data-structure/06-heap/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>数据结构06-优先队列(堆)</span></a></li>
+		<li class="previous"><a href="/computer-science/computer-networking/mqtt-tutorial/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>MQTT协议简介</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

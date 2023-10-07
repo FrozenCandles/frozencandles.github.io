@@ -6,19 +6,22 @@ const getTextNode = (node) => {
   }
 
 
-function checkArticle(checkConfig) {
-    [article] = document.getElementsByClassName('entry');
+// function checkArticle(checkConfig) {
+//     const [article] = document.getElementsByClassName('entry');
 
-    button = document.createElement('button');
-    button.innerHTML = 'Check Article';
-    button.onclick = onCheckArticle
-    document.body.insertBefore(button, article);
+//     const assist_elem = document.getElementById('assist');
+//     if (assist_elem === null) return;
 
-}
+//     button = document.createElement('button');
+//     button.innerHTML = 'Check Article';
+//     button.onclick = onCheckArticle
+//     document.insertBefore(button, assist_elem);
+
+// }
 
 function onCheckArticle(checkConfig) {
 
-    [article] = document.getElementsByClassName('entry')
+    const [article] = document.getElementsByClassName('entry')
 
     for (let elem of article.getElementsByTagName('A')) {
         if (!elem.hasAttribute('href')) {
@@ -35,6 +38,39 @@ function onCheckArticle(checkConfig) {
     
 }
 
+
+
+function addAssistButton(title, action) {
+    const assist_elem = document.getElementById('assist');
+    if (assist_elem === null) 
+        return;
+    const button = document.createElement('button');
+    button.style.display = 'block';
+    button.className = 'button action';
+    button.style.margin = '5px 15px';
+
+    button.innerHTML = title;
+    button.onclick = action;
+    assist_elem.insertBefore(button, assist_elem.firstChild);
+}
+
+
+// function addCloseImageScalar() {
+    
+//     const assist_elem = document.getElementById('assist');
+//     if (assist_elem === null) return;
+//     const button = document.createElement('button');
+//     button.innerHTML = 'Close Image Scalar';
+//     button.onclick = function() {
+//         for (let elem of document.getElementsByClassName('imagescalar-content')) {
+//             elem.style.display = 'none';
+
+//         }
+//     }
+//     assist_elem.parentNode.insertBefore(button, assist_elem);
+
+
+// }
 
 function addImageScalar() {
 
@@ -127,3 +163,4 @@ function addImageScalar() {
 
     }
 }
+

@@ -1,0 +1,1091 @@
+<br />
+<b>Warning</b>:  Undefined array key "url" in <b>E:\www\wordpress-local\wp-includes\https-detection.php</b> on line <b>187</b><br />
+<br />
+<b>Warning</b>:  Undefined array key "url" in <b>E:\www\wordpress-local\wp-includes\cron.php</b> on line <b>932</b><br />
+<br />
+<b>Warning</b>:  Undefined array key "args" in <b>E:\www\wordpress-local\wp-includes\cron.php</b> on line <b>932</b><br />
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>机器学习-支持向量机 - 冰封残烛的个人小站</title>
+	<meta name="description" content="支持向量机(Support Vector Machine)是一种可解释性强的分类模型，并可以用作回归。它使用大间隔作为分类依据，在引入核函数后可以处理非线性数据。主要参数只取决于是它的少数支持向量，因此占用内存少，预测速度也较快。" />
+	<link rel="canonical" href="/data-science/machine-learning/04-support-vector-machine/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="机器学习-支持向量机 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="支持向量机(Support Vector Machine)是一种可解释性强的分类模型，并可以用作回归。它使用大间隔作为分类依据，在引入核函数后可以处理非线性数据。主要参数只取决于是它的少数支持向量，因此占用内存少，预测速度也较快。" />
+	<meta property="og:url" content="/data-science/machine-learning/04-support-vector-machine/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2023-01-20T03:41:31+00:00" />
+	<meta property="article:modified_time" content="2023-10-06T11:49:29+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2023/01/机器学习-支持向量机.jpg" />
+	<meta property="og:image:width" content="1280" />
+	<meta property="og:image:height" content="904" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="9分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/data-science/machine-learning/04-support-vector-machine/#primaryimage",
+	            "url": "/wp-content/uploads/2023/01/机器学习-支持向量机.jpg",
+	            "contentUrl": "/wp-content/uploads/2023/01/机器学习-支持向量机.jpg",
+	            "width": 1280,
+	            "height": 904
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/data-science/machine-learning/04-support-vector-machine/#webpage",
+	            "url": "/data-science/machine-learning/04-support-vector-machine/",
+	            "name": "机器学习-支持向量机 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/data-science/machine-learning/04-support-vector-machine/#primaryimage"
+	            },
+	            "datePublished": "2023-01-20T03:41:31+00:00",
+	            "dateModified": "2023-10-06T11:49:29+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "支持向量机(Support Vector Machine)是一种可解释性强的分类模型，并可以用作回归。它使用大间隔作为分类依据，在引入核函数后可以处理非线性数据。主要参数只取决于是它的少数支持向量，因此占用内存少，预测速度也较快。",
+	            "breadcrumb": {
+	                "@id": "/data-science/machine-learning/04-support-vector-machine/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/data-science/machine-learning/04-support-vector-machine/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/data-science/machine-learning/04-support-vector-machine/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "机器学习-支持向量机"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/993" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=993' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fdata-science%2Fmachine-learning%2F04-support-vector-machine%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fdata-science%2Fmachine-learning%2F04-support-vector-machine%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><script>
+    MathJax = {
+        tex: {
+            inlineMath: [['\\\\(', '\\\\)']],
+            displayMath: [["\\\\[","\\\\]"]]
+        },
+        startup: {
+            ready: () => {
+                MathJax.startup.defaultReady();
+                MathJax.startup.promise.then(() => {
+                    console.log('MathJax initial typesetting complete');
+                    addJupyterMarker();
+                });
+            }
+        },
+        options: {
+            enableMenu: false,
+        }
+    };
+</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+
+
+<link rel="stylesheet" href="/wp-content/static/css/theme@pie.wp.css">
+<script src="/wp-content/static/js/note.js"></script>
+<style>
+    .math { color: blue; font-size: 14px; }
+    .entry blockquote .math { color: rgb(0, 0, 160); }
+    .vscode-block {
+        color: #90A4AE;
+    }
+    div.vscode-block span[token="symbol"]  { color: #39adb5; }
+    div.vscode-block span[token="string"]  { color: #91b859; }
+    div.vscode-block span[token="number"]  { color: #f76d47; }
+    div.vscode-block span[token="keyword"] { color: #39adb5; font-weight: bold; }
+</style>
+<script>
+    window.onload = function() {
+        setTimeout(function() {
+            addJupyterMarker();
+        }, 500)
+    }
+</script>
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-993 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-993" class="post-993 post type-post status-publish format-standard has-post-thumbnail hentry category-machine-learning">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">机器学习-支持向量机</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/data-science/machine-learning/" rel="category tag">机器学习</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2023年1月20日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+
+
+
+
+<h2>支持向量机的概念</h2>
+
+<h3>边界问题</h3>
+
+<p>在<a class="link-internal" link="data-science/machine-learning@02-logistic-regression" href="/archives/966">逻辑回归模型</a>中介绍了决策边界的概念，一个好的模型决策边界要将两个类别完全区分开，例如以下这些决策边界都是合理的：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-about-boundary.png" alt="" width="250">
+</figure>
+
+<p>那么这就引出了一个问题，即如何在其中选择最佳的决策边界。在逻辑回归中，这条边界线的参数是通过求代价函数的最小值得到的。但直观上理解，一个好的决策边界应该离每个分类群体都尽可能远，这样在引入新的样本时不至于轻易地落到决策边界的另一边。</p>
+
+<p><strong>支持向量机</strong>(support vector machine)使用了一种<em>边界(margin)最大化</em>的思路来解决这个问题，具体来说就是确定这样一条决策边界线，使它到两个分类的距离最远，那么它应该落在两个分类最中间的位置，因此这样的决策边界可以很好地分隔开两个分类，就像这样：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-boundary-margin.png" alt="" width="250">
+</figure>
+
+<h3>支持向量机的参数确定</h3>
+
+<p>接下来介绍支持向量机的数学原理，这样可以明确模型到底需要求解什么。支持向量机的原理是让边界最大化，因此优化的最终目标就是求解最大的间距：</p>
+
+<div class="math">
+\\[
+    \max \quad \text{margin} 
+\\]
+</div>
+
+<p>这就需要从距离的角度建立模型。在平面中，点到一条直线的距离可以使用公式 <span class="math">\\( \displaystyle{d=\frac{|Ax_0+By_0+C|}{\sqrt{A^2+B^2} }} \\)</span> 计算。该公式可以推广到 3 维及更高维空间中，即点到 n 维度超平面的距离的计算公式为：</p>
+
+<div class="math">
+\\[
+\begin{align}
+    d &= \frac{|w_nx_n+\cdots+w_2x_2+w_1x_1+b|}{\sqrt{w_n^2+\cdots+w_2^2+w_1^2}}\\
+      &= \frac{|\boldsymbol{w}^T\boldsymbol{x}+b|}{\|\boldsymbol{w}\|}
+\end{align}
+\\]
+</div>
+
+<p>在 SVM 中，需要确定这样一个直线或平面 <span class="math">\\( \boldsymbol{w}^T\boldsymbol{x}+b=0 \\)</span> ，使得它到两类样本的间距相同且最大，那么间距的计算公式为：</p>
+
+<div class="math">
+\\[
+    \text{margin} = \underset{i}{\min} \frac{|\boldsymbol{w}^T\boldsymbol{x}_i+b|}{\|\boldsymbol{w}\|} > 0
+\\]
+</div>
+
+<p>这里最小的意思是间距只取决于离决策边界最近点的计算结果。然后需要找出具有最大边界时的参数 <span class="math">\\( \boldsymbol{w}, b \\)</span> ，那么就需要求解以下目标：</p>
+
+<div class="math">
+\\[
+    \underset{\boldsymbol{w}, b}{\mathrm{argmax}} \quad \text{margin} \quad \Rightarrow \quad
+    \underset{\boldsymbol{w}, b}{\mathrm{argmax}}\frac{1}{\|\boldsymbol{w}\|}(\underset{i}{\min} |\boldsymbol{w}^T\boldsymbol{x}_i+b|)
+\\]
+</div>
+
+<p>计算最小值时参数向量已经确定了，不影响最小值的计算结果，因此可以将其移到外面处理。因此 SVM 的优化目标为：</p>
+
+<div class="math">
+    \\[
+        \underset{\boldsymbol{w}, b}{\mathrm{argmax}} \frac{1}{\|\boldsymbol{w}\|}
+    \\]
+</div>
+
+<blockquote>
+    <h4>SVM的优化目标是如何得到的</h4>
+
+    <p>为了明白 SVM 的优化目标为什么是这个，需要弄清到底在求什么。求解的目标就是最大间距，但是间距有两个约束条件：</p>
+
+    <ol>
+        <li>所有样本都在间距外，即样本离决策边界最近的距离不小于间距</li>
+        <li>决策平面需要落在两类样本之间，能将两类样本区分开</li>
+    </ol>
+
+    <p>因此有如下公式及约束条件：</p>
+
+    <div class="math">
+    \\[
+    \begin{align}
+        & \underset{\boldsymbol{w}, b}{\mathrm{argmax}} \quad d \\
+        & \text{s.t.} \quad \frac{|\boldsymbol{w}^T\boldsymbol{x}_i+b|}{\|\boldsymbol{w}\|} \geq d > 0 \quad \text{and} \quad
+        \begin{cases}
+            \boldsymbol{w}^T\boldsymbol{x}_i+b > 0 \quad y_i = +1 \\
+            \boldsymbol{w}^T\boldsymbol{x}_i+b < 0 \quad y_i = -1
+        \end{cases}
+    \end{align}
+    \\]
+    </div>
+
+    <p>这里将两个分类记作 +1 和 -1，因为分类代表的数字只是一个记号而已，并且这样做可以将第二个约束条件改写为：</p>
+
+    <div class="math">
+    \\[
+        y_i(\boldsymbol{w}^T\boldsymbol{x}_i+b) > 0
+    \\]
+    </div>
+
+    <p>这样就可以将约束条件合并为一个：</p>
+
+    <div class="math">
+    \\[
+        \text{s.t.} \quad \frac{y_i(\boldsymbol{w}^T\boldsymbol{x}_i+b)}{\|\boldsymbol{w}\|} \geq d
+    \\]
+    </div>
+
+    <p>如果令 <span class="math">\\( k=d \|\boldsymbol{w} \| \\)</span> ，那么有：</p>
+
+    <div class="math">
+        \\[
+        \begin{align}
+            & \underset{\boldsymbol{w}, b}{\mathrm{argmax}} \quad \frac{k}{\|\boldsymbol{w}\|} \\
+            & \text{s.t.} \quad y_i(\boldsymbol{w}^T\boldsymbol{x}_i+b) \geq k
+        \end{align}
+        \\]
+    </div>
+
+    <p>可以给参数 <span class="math">\\( \boldsymbol{w}, b \\)</span> 同时乘上 <span class="math">\\( k \\)</span> 从而消去该参数，这样就得到了以上的优化目标。而对参数 <span class="math">\\( \boldsymbol{w}, b \\)</span> 的同步放缩并不会改变优化目标，因为放缩后 <span class="math">\\( \displaystyle{k\boldsymbol{w}^T\boldsymbol{x}_i+kb = 0} \\)</span> 代表的是相同的决策边界，就像 <span class="math">\\( x+2y-3=0 \\)</span> 和 <span class="math">\\( 2x+4y-6=0 \\)</span> 代表的是同一条直线一样。</p>
+</blockquote>
+
+<p>就像代价函数一样，一般来说都将最大值问题转换为最小值问题分析，因此最终的目标就是解决以下问题：</p>
+
+<div class="math">
+\\[
+    \begin{align}
+        & \underset{\boldsymbol{w}, b}{\mathrm{argmin}} \, \|\boldsymbol{w}\| \\
+        & \text{s.t.} \quad y_i(\boldsymbol{w}^T\boldsymbol{x}_i+b) \geq 1
+    \end{align}
+\\]
+</div>
+
+<p>解决带约束的最值问题一般使用的方法是拉格朗日乘子法。在<a href="#refrence">附录</a>中列出几篇文章，里面有更详细的证明。</p>
+
+<h3>使用SVM</h3>
+
+<p>在 Scikit-Learn 中，支持向量机模型位于 <code>svm</code> 模块中：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span><span style="color: #90a4ae;"> sklearn</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">svm </span><span style="color: #39adb5;font-weight: bold;">import</span><span style="color: #90a4ae;"> SVC</span></div></div>
+</div>
+
+<p><code>SVC</code> 即支持向量分类器(classifier)，如果要让它产生线性的决策边界，需要指定参数 <code><em>kernel</em></code> 为 <code>"linear"</code> ：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #90a4ae;">model </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> SVC</span><span style="color: #39adb5;">(</span><span style="color: #e53935;">kernel</span><span style="color: #7c4dff;">=</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">linear</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">)</span></div><div><span style="color: #90a4ae;">model</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">fit</span><span style="color: #39adb5;">(</span><span style="color: #90a4ae;">data</span><span style="color: #39adb5;">[[</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">x</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> </span><span style="color: #39adb5;">'</span><span style="color: #91b859;">y</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">]]</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> data</span><span style="color: #39adb5;">[</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">label</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">])</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><div class="sklearn-model"><p>SVC(kernel='linear')</p></div></div>
+</div>
+
+<p>之后还会遇到非线性的决策边界。除了 <code>SVC</code> 外，Scikit-Learn 中还提供了 <code>LinearSVC</code> 类，它是专用于线性边界的支持向量分类器，并且带有正则化惩罚项，计算效率比 <code>SVC(<em>kernel</em>="linear")</code> 更快。</p>
+
+<p>之前在介绍模型的原理时介绍过，间距是根据离决策边界最近的样本确定的，这些离决策边界最近的样本称为<strong>支持向量</strong>(support vectors)，所有的支持向量决定了支持向量机所具有的参数。至此可以明白支持向量机的名称由来，这些支持向量一起<em>支撑</em>起了分隔超平面的参数<em>向量</em>。不管模型的样本有多少，只要支持向量不变，那么模型便不发生改变：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-support-vectors.png" alt="" width="640">
+    <figcaption>支持向量决定了模型的特点</figcaption>
+</figure>
+
+<p>在 Scikit-Learn 中，可以通过 <code>.support_vectors_</code> 参数得到建立模型的所有支持向量，或者通过 <code>.support_</code> 参数得到支持向量在样本中的索引：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #90a4ae;">vects </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> model</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">support_vectors_</span></div><div><span style="color: #90a4ae;">vects</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">array([[4.11666667, 0.21666667],
+       [2.61666667, 4.7       ],
+       [6.18333333, 0.03333333]])</div>
+</div>
+
+<h2>支持向量机的注意事项</h2>
+
+<p>支持向量机的原理较为简单，但在使用时也有一些问题需要注意。</p>
+
+<h3>数据标准化</h3>
+
+<p>支持向量机作为一种需要计算距离的模型，可能发生不同特征变量因为量纲级别相差过大导致的问题。为了更好地说明这个问题，以下是一个这样的示例：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-scale-affect.jpg" alt="" width="330">
+</figure>
+
+<p>直观上看，深绿色的边界应该能更好地区分两组样本，但计算结果却显示紫色是最好的边界。这是由于纵坐标的量纲明显远大于横坐标的量纲，对距离的影响权重也更大。因此在使用 SVM 之前，需要做<strong>数据标准化</strong>处理，主要目的是使不同特征的量纲级别统一，计算距离时拥有相同的权重。</p>
+
+<p>常用的数据标准化方法有以下两个：</p>
+
+<ol>
+    <li>min-max 标准化</li>
+</ol>
+
+<p>min-max 标准化也称<strong>离差标准化</strong>，它利用原始数据的最大值和最小值把原始数据转换到 <span class="math">\\( [0,1] \\)</span> 区间内，具体的转换公式为：</p>
+
+<div class="math">
+\\[
+    x^*=\frac {x-\min}{\max-\min}
+\\]
+</div>
+
+<p>其中 <span class="math">\\( \max \\)</span> 和 <span class="math">\\( \min \\)</span> 分别为原始数据的最大值和最小值。</p>
+
+<ol start="2">
+    <li>z-score 标准化</li>
+</ol>
+
+<p>min-max 标准化处理方便，但有一个关键的缺点：如果数据中有远超正常数据取值范围的异常数据的话，那么会使得其它的正常数据被压缩在一个更小的区间内，反而不利于处理。z-score 标准化也称<strong>标准差标准化</strong>，通过原始数据的均值和标准差对数据执行标准化处理。</p>
+
+<p>z-score 标准化后的数据符合标准正态分布，即均值为 0 ，标准差为 1 。它所使用的转换公式如下：</p>
+
+<div class="math">
+\\[
+    x^* = \frac {x-\text{mean}}{\text{std}}
+\\]
+</div>
+
+<p>其中 <span class="math">\\( \text{mean} \\)</span> 和 <span class="math">\\( \text{std} \\)</span> 分别为原始数据的均值和标准差。</p>
+
+<p>使用代码对数据做标准化处理的步骤与为数据添加多项式特征的步骤一致：（ min-max 标准化也是一样的，只不过需要用到 <code>MinMaxScaler</code> 类）</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span><span style="color: #90a4ae;"> sklearn</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">preprocessing </span><span style="color: #39adb5;font-weight: bold;">import</span><span style="color: #90a4ae;"> StandardScaler</span></div><br><div><span style="color: #90a4ae;">scalar </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> StandardScaler</span><span style="color: #39adb5;">()</span></div><div><span style="color: #90a4ae;">X_standard </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> scalar</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">fit_transform</span><span style="color: #39adb5;">(</span><span style="color: #90a4ae;">X</span><span style="color: #39adb5;">)</span></div></div>
+</div>
+
+<p>经过标准化处理得到的数据可以被 SVM 更好地划分了：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-standard-scaled.png" alt="" width="360">
+</figure>
+
+<h3>软间隔</h3>
+
+<p>以上介绍的支持向量机要求两个类别能够被直线分开（线性可分），但有的时候样本未必能被直线完全分开，或者分开的效果并不好。</p>
+
+<p>下图展示了两种这样的情况：左图中由于一个异常样本使得决策边界被大幅改变，而右图中的异常点使得根本不存在这样一个边界能将两类样本完美区分：</p>
+
+<figure class="parallel">
+    <div>
+        <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-worse-situation.png" alt="" width="340">
+        <figcaption>异常样本使边界被不合理地改变</figcaption>
+    </div>
+    <div>
+        <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-worst-situation.png" alt="" width="370">
+        <figcaption>异常样本使边界不存在</figcaption>
+    </div>
+</figure>
+
+<p>相比让间隔完全分开两个类别（硬间隔），适当允许一些样本存在间隔中甚至另一边可以缓解由异常值导致的问题。这种情况下，模型的间隔不再要求一定要硬性分隔两个类别，因此称为软间隔。</p>
+
+<p>为了衡量一个样本与正常分类间隔的偏离程度，需要引入了松弛变量 <span class="math">\\( \xi \\)</span> 。一个样本离它应在的区域越远，则对应的 <span class="math">\\( \xi \\)</span> 也就越大：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-soft-margin-xi.jpg" alt="" width="360">
+</figure>
+
+<p>引入松弛变量后，模型的参数需要重新确定，软间隔 SVM 的基本数学形式如下：</p>
+
+<div class="math">
+    \\[
+        \begin{align}
+            & \underset{\boldsymbol{w}, b, \xi}{\mathrm{argmin}} \, \|\boldsymbol{w}\| + C \sum_{i=1}^{n}\xi_i \\
+            & \text{s.t.} \quad y_i(\boldsymbol{w}^T\boldsymbol{x}_i+b) \geq 1 - \xi_i , \quad \xi_i \geq 0
+        \end{align}
+    \\]
+</div>
+
+<p>参数 <span class="math">\\( C \\)</span> 用于控制模型的软硬程度：越大的 <span class="math">\\( C \\)</span> 值会使模型的约束更大，<span class="math">\\( \xi_i \\)</span> 也需要更小一些，样本不能超过间隔太多；若 <span class="math">\\( C \\)</span> 为无穷大，则 <span class="math">\\( \xi_i \\)</span> 只能无限接近于 0 ，样本只能在间隔的两边，此时 SVM 变回了硬间隔 SVM 。</p>
+
+<p>在 Scikit-Learn 中，同名超参数 <code><em>C</em></code> 用于控制模型的软硬程度：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-parameter-C.jpg" alt="" width="600">
+    <figcaption>超参数 C 用于控制模型的软硬程度</figcaption>
+</figure>
+
+<p>通过设置一定的 <code><em>C</em></code> 值，可以使模型更加灵活，避免异常数据带来的不利影响。</p>
+
+<h3>核化SVM</h3>
+
+<p>之前介绍的 SVM 都具有线性边界，但有些时候样本并不能用直线分开，例如：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-poly-boundary-1.png" alt="" width="400">
+</figure>
+
+<p>即使将模型设置得足够软，使用直线也无法完全分开两个类别。这时，可以使用在<a href="/archives/966">逻辑回归</a>中提及的方法，为模型添加上非线性特征项，例如多项式特征项：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #90a4ae;">model </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> make_pipeline</span><span style="color: #39adb5;">(</span><span style="color: #90a4ae;">PolynomialFeatures</span><span style="color: #39adb5;">(</span><span style="color: #e53935;">degree</span><span style="color: #7c4dff;">=</span><span style="color: #f76d47;">2</span><span style="color: #39adb5;">),</span></div><div><span style="color: #90a4ae;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; StandardScaler</span><span style="color: #39adb5;">(),</span><span style="color: #90a4ae;"> </span></div><div><span style="color: #90a4ae;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; SVC</span><span style="color: #39adb5;">(</span><span style="color: #e53935;">C</span><span style="color: #7c4dff;">=</span><span style="color: #f76d47;">6</span><span style="color: #39adb5;">))</span></div></div>
+</div>
+
+<p>此时模型的划分效果为：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-poly-boundary-3.jpg" alt="" width="400">
+</figure>
+
+<p>添加非线性特征实现简单，但如果添加的特征较多，会在计算 <span class="math">\\( \boldsymbol{x}_i^\mathrm{T}\boldsymbol{x}_j \\)</span>（参见附录 SVM 的求解）向量内积时速度变慢。</p>
+
+<p>因此这种变换并不是任意的，通过特定的<strong>核函数</strong>(kernel function)可以在为数据添加许多特征后，并没有引入额外特征的计算。具体而言，就是找出这样的函数 <span class="math">\\( k(\boldsymbol{x}, \boldsymbol{y}) = \phi(\boldsymbol{x})^\mathrm{T}\phi(\boldsymbol{y}) \\)</span> ，使得数据由 <span class="math">\\( \boldsymbol{x} \\)</span> 变为 <span class="math">\\( \phi(\boldsymbol{x}) \\)</span> 后，计算 <span class="math">\\( \phi(\boldsymbol{x})^\mathrm{T}\phi(\boldsymbol{y}) \\)</span> 可以化简为计算 <span class="math">\\( \boldsymbol{x}^\mathrm{T}\boldsymbol{y} \\)</span> ，从而使复杂度相同或相近。在使用时只需要定义具体的核函数，这样就不需要定义映射函数 <span class="math">\\( \phi(\boldsymbol{x}) \\)</span> ，从而只需要计算变换后的向量内积，省去了变换过程的开销。</p>
+
+<p>在之前的线性 SVM 中，使用参数 <code><em>kernel</em>="linear"</code> 表示使用线性核函数 <span class="math">\\( k(\boldsymbol{x}, \boldsymbol{y}) = \boldsymbol{x}^\mathrm{T} \boldsymbol{y} \\)</span> ，即不添加任何特征。线性核函数计算速度快，且还存在许多优化算法（例如 <code>LinearSVC</code> 使用的算法），是初次处理数据的首选算法。</p>
+
+<p>除了线性核函数，对于之前的非线性数据可以使用多项式核函数 <span class="math">\\( k(\boldsymbol{x}, \boldsymbol{y}) = (\gamma\boldsymbol{x}^\mathrm{T} \boldsymbol{y} + c)^d \\)</span> 。多项式核函数的特点是可以通过使用不同的 <span class="math">\\( d \\)</span> 控制最高项的次数，从而控制特征映射的复杂度。但一般不建议使用过高的次数，因为这可能使核函数的结果太大或太小。</p>
+
+<p>在 <code>SVC</code> 中，通过指定超参数 <code><em>kernel</em></code> 为 <code>"poly"</code> 可以使用多项式核函数。如果使用多项式核函数，通过超参数 <code><em>degree</em></code> 可以控制最高项的次数（默认为三次）；通过超参数 <code><em>gamma</em></code> 可以控制同名系数；通过超参数 <code><em>coef0</em></code> 可以控制常数项。例如，以下是最高项次数为二次的多项式 <code>SVC</code> 分类边界：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-poly-boundary-2.png" alt="" width="400">
+</figure>
+
+<p>要注意的是，为数据引入非线性特征的目的并不是为了得到非线性的分隔面，因为点到曲面的距离难以求得。引入非线性特征的实质是将数据变换到高维空间中，使得变换后的数据在高维空间中线性可分。</p>
+
+<p>为了更好地说明这个问题，接下来看一组示例数据：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-kernelize-explain-1.jpg" alt="" width="400">
+</figure>
+
+<p>对于这样的数据，可以采用径向基函数核(Radial Basis Function, RBF，也称高斯核) <span class="math">\\( k(\boldsymbol{x}, \boldsymbol{y}) = \exp(-\gamma\|\boldsymbol{x}-\boldsymbol{y}\|^2) \\)</span> 将其变换到高维空间。高斯核函数的特点是可以映射到无限维的空间中，因此具有很强的表示能力，但是相应的计算速度更慢，也更容易出现过拟合现象。</p>
+
+<p>通过指定超参数 <code><em>kernel</em></code> 为 <code>"rbf"</code> 可以使用高斯核函数，这也是 <code>SVC</code> 默认采用的核函数。采用高斯核函数将原有数据映射到三维空间中，便可以在三维空间中看到数据可以由平面分隔开了：</p>
+
+<figure class="parallel">
+    <div>
+        <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-kernelize-explain-2.jpg" alt="" width="370">
+        <figcaption>将数据用径向基函数核映射到三维使其线性可分</figcaption>
+    </div>
+    <div>
+        <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-kernelize-explain-3.png" alt="" width="370">
+        <figcaption>一个更好的视角说明两类样本是如何被线性划分的</figcaption>
+    </div>
+</figure>
+
+<p>对于更高维的情况也是同理，因为实际数据的维度总是有限的，那么就肯定存在更高维的映射，使数据在更高维的空间中可以被超平面合理地分开。</p>
+
+<p>高斯核函数的另一个优点是可供调节的参数相比多项式核函数更少。唯一的参数 <span class="math">\\( \gamma \\)</span> 用于控制高斯核的平滑程度：越大的 <span class="math">\\( \gamma \\)</span> 将会使高斯核函数变化更剧烈，虽然能更好的拟合数据但会使过拟合风险增大。这对应于 <code>SVC</code> 的 <code><em>gamma</em></code> 参数，下图展示了不同参数取值情况下的分类边界：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-parameter-gamma.jpg" alt="" width="680">
+</figure>
+
+<h3>支持向量回归</h3>
+
+<p>支持向量机不仅可以用作分类，还可以用于回归。在用作分类任务时，要求支持向量机规划一条最好的分类边界，使得它尽可能分开两类样本。而用作回归分析时，工作原理则相反：这时要求支持向量机规划一条最好的拟合边界，使得它尽可能包括所有的样本，就像这样：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-svr-concept.png" alt="" width="400">
+</figure>
+
+<p>但通过包括所有样本来确定回归直线显然是不合理的，因为受到异常数据的影响很大。为了防止异常值的影响，要求边界不需要包含所有的样本，而是让所有样本都不要偏移边界内太多。</p>
+
+<p>假设分隔面与两边界面的常数项相差 <span class="math">\\( \epsilon \\)</span> ，那么一个样本与边界的偏离程度可以使用以下公式衡量：</p>
+
+<div class="math">
+\\[
+    \xi_i = \max(|\boldsymbol{w}^\mathrm{T}\boldsymbol{x}_i+b-y|-\epsilon, 0)
+\\]
+</div>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-svr-cost.png" alt="" width="310">
+</figure>
+
+<p>如果样本位于边界以内，那么就不算偏离。总的代价函数每一个样本偏离程度的和，再包括正则项：</p>
+
+<div class="math">
+    \\[
+        \underset{\boldsymbol{w}, b}{\mathrm{argmin}} \quad C \sum_{i=1}^{n} \max(|\boldsymbol{w}^\mathrm{T}\boldsymbol{x}_i+b-y|-\epsilon, 0) + \frac 1 2 \|\boldsymbol{w}\|^2
+    \\]
+</div>
+
+<p>包含正则项后的 SVR 代价函数和 SVC 的代价函数较为相似，可以使用类似的方式求解。</p>
+
+<p>在 Scikit-Learn 中，<code>SVR</code> 和 <code>LinearSVR</code> 是支持向量机的回归版本，后者针对线性模型做了额外的优化。从上文介绍中可以看出，它们有两个较为重要的超参数：</p>
+
+<ul>
+    <li><code><em>epsilon</em></code> ：分隔面与两边界的距离（实际上不是距离，而是常数项的差值）</li>
+</ul>
+
+<p>由于落在两边界之内的样本不算偏离，对代价函数没有作用，因此 SVR 的支持向量是落在边界之外的样本，所有边界之外的样本才决定了边界的参数。参数 <code><em>epsilon</em></code> 可以看作模型对偏离数据的容忍程度，越大的参数值将会使边界内包含更偏离的数据，但这些不好的数据也会影响回归直线，使其对数据的拟合程度下降。</p>
+
+<p>下图展示了不同 <code><em>epsilon</em></code> 取值下对数据的拟合程度：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-svr-parameter-epsilon.jpg" alt="" width="610">
+</figure>
+
+<p>因此一般来说应选用尽量小的 <code><em>epsilon</em></code> 值。<code>SVR</code> 给出的默认值为 0.1 ；而 <code>LinearSVR</code> 给出的默认值为 0.0 ，这时所有数据的偏离程度都需要考虑，支持向量回归退化为和线型回归很相似的模型了。</p>
+
+<ul>
+    <li><code><em>C</em></code> ：模型的正则化强度。注意公式中的 <span class="math">\\( C \\)</span> 不是正则项的系数，因此它的值越大正则化程度越低</li>
+</ul>
+
+<p>下图展示了不同 <code><em>C</em></code> 取值下对数据的拟合程度：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-svr-parameter-C.jpg" alt="" width="610">
+</figure>
+
+<p>取值过小时正则化太强，容易发生欠拟合；反之容易发生过拟合。</p>
+
+<p>总的来说，支持向量机是一种可解释性强的分类模型，并可以用作回归。尽管没有用到统计方法，但它有严格的数学理论支撑，在实践中表现良好。支持向量机只取决于是它的少数支持向量，因此占用内存较少，预测新样本的速度也较快。核函数的引入使其不但可以处理各种类型的非线性数据，也可以很好地处理高维数据。</p>
+
+<p>不过支持向量机也有训练时间长，对参数选择依赖较大等缺点，因此一般只在小批量样本上使用它。</p>
+
+<h2 id="appendix">附录</h2>
+
+<h3>SVM求解</h3>
+
+<p>本节简单介绍 SVM 目标问题的求解方法。在<a href="#refrence">参考文献</a>中列出几篇文章，里面有更详细的证明。</p>
+
+<p>首先回顾优化目标：</p>
+
+<div class="math">
+\\[
+    \begin{align}
+        & \underset{\boldsymbol{w}, b}{\mathrm{min}} \, \frac 1 2 \boldsymbol{w}^\mathrm{T}\boldsymbol{w} \\
+        & \text{s.t.} \quad 1 - y_i(\boldsymbol{w}^T\boldsymbol{x}_i+b) \leq 0
+    \end{align}
+\\]
+</div>
+
+<p>这是一个有约束条件的最值问题，一般使用拉格朗日乘子法处理这种问题，拉格朗日函数如下：</p>
+
+<div class="math">
+\\[
+    L(\boldsymbol{w}, b, \lambda) = \frac 1 2 \boldsymbol{w}^\mathrm{T}\boldsymbol{w} + \sum_{i=1}^{n} \lambda_i(1 - y_i(\boldsymbol{w}^T\boldsymbol{x}_i+b))
+\\]
+</div>
+
+<p>问题转换为求解 <span class="math">\\( \underset{\boldsymbol{w}, b}{\min} \underset{\lambda}{\max} L(\boldsymbol{w}, b, \lambda) \\)</span> 。由于 SVM 满足 KKT 条件，因此它的对偶问题与原问题等价，也就是说可以交换里外的求最值顺序：</p>
+
+<div class="math">
+\\[
+    \underset{\boldsymbol{w}, b}{\min} \underset{\lambda}{\max} L(\boldsymbol{w}, b, \lambda)
+    \Rightarrow
+    \underset{\lambda}{\max} \underset{\boldsymbol{w}, b}{\min} L(\boldsymbol{w}, b, \lambda)
+\\]
+</div>
+
+<p>交换后内侧的最小值问题是对 <span class="math">\\( \boldsymbol{w}, b \\)</span> 的无约束优化问题，可以通过令偏导为零的方式得到：</p>
+
+<div class="math">
+\\[
+    \begin{align}
+        \frac {\partial L}{\partial w} &= 0 \Rightarrow w = \sum_{i=1}^{n} \lambda_i y_i \boldsymbol{x_i} \\
+        \frac {\partial L}{\partial b} &= 0 \Rightarrow 0 = \sum_{i=1}^{n} \lambda_i y_i
+    \end{align}
+\\]
+</div>
+
+<p>这时将求解 <span class="math">\\( \boldsymbol{w}, b \\)</span> 的过程转换成与 <span class="math">\\( \lambda \\)</span> 相关的问题，虽然没有得到 <span class="math">\\( b \\)</span> 和 <span class="math">\\( \lambda \\)</span> 的关系，但是可以将该等于作为约束项求解问题。</p>
+
+<p>接下来将结果代入拉格朗日函数中，化简可得优化问题的最终形式：</p>
+
+<div class="math">
+\\[
+    \begin{align}
+        & \underset{\lambda}{\max} \quad L(\boldsymbol{w}, b, \lambda) = \sum_{i=1}^{n}\lambda_i - \frac 1 2 \sum_{i=1}^{n} \sum_{j=1}^{n} \lambda_i \lambda_j y_i y_j \boldsymbol{x}_i^\mathrm{T}\boldsymbol{x}_j \\
+        & \text{s.t.} \quad \sum_{i=1}^{n} \lambda_i y_i = 0 \quad \text{and} \quad \lambda_i \geq 0
+    \end{align}
+\\]
+</div>
+
+<p>得到最终结果后，只需将 <span class="math">\\( \boldsymbol{x} \\)</span> 代入，即可得到有关 <span class="math">\\( \lambda_i \\)</span> 的公式。要得到最大的结果，只需要对每个 <span class="math">\\( \lambda_i \\)</span> 求偏导，并令结果等于 0 ，借助约束条件 <span class="math">\\( \displaystyle{\sum_{i=1}^{n} \lambda_i y_i = 0} \\)</span> 就可以得到合适的 <span class="math">\\( \lambda_i \\)</span> 值。从公式中也可以看出，主要的计算量在 <span class="math">\\( \boldsymbol{x}_i^\mathrm{T}\boldsymbol{x}_j \\)</span> 上。</p>
+
+<p>根据得到的 <span class="math">\\( \lambda_i \\)</span> ，代入之前公式就可以计算 <span class="math">\\( \boldsymbol{w} \\)</span> ，而再利用一个支持向量就可以计算参数 <span class="math">\\( b \\)</span> 。</p>
+
+<h3 id="refrence">参考资料/延伸阅读</h3>
+
+<p>
+    <a href="https://zhuanlan.zhihu.com/p/480302399">https://zhuanlan.zhihu.com/p/480302399</a><br>
+    一份非常非常详细的 SVM 从零推导过程
+</p>
+
+<p>
+    <a href="https://zhuanlan.zhihu.com/p/24638007">https://zhuanlan.zhihu.com/p/24638007</a><br>
+    一篇不错的关于 SVM 原理推导的文章
+</p>
+
+
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-fp/05-recursions/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程05-函数的递归-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/05/Python函数式编程05-函数的递归-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-300x169.jpg 300w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-1024x576.jpg 1024w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-768x432.jpg 768w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-1536x864.jpg 1536w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-950x534.jpg 950w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-fp/05-recursions/" rel="bookmark">Python函数式编程05 函数的递归</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/computer-science/data-structure/02-linked-list/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/08/数据结构02-链表-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/08/数据结构02-链表-520x293.jpg 520w, /wp-content/uploads/2022/08/数据结构02-链表-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/computer-science/data-structure/02-linked-list/" rel="bookmark">数据结构02-链表</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/data-science/via-python/numpy03-slices/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/10/Python数据分析-numpy03数组索引与切片-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/10/Python数据分析-numpy03数组索引与切片-520x293.jpg 520w, /wp-content/uploads/2022/10/Python数据分析-numpy03数组索引与切片-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/data-science/via-python/numpy03-slices/" rel="bookmark">numpy03:数组索引与切片</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/data-science/machine-learning/05-decision-tree/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>机器学习-决策树</span></a></li>
+		<li class="previous"><a href="/data-science/machine-learning/02-logistic-regression/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>机器学习-逻辑回归</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/" aria-current="page">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

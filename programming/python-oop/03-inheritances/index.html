@@ -1,0 +1,805 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Python面向对象编程03-类的继承 - 冰封残烛的个人小站</title>
+	<link rel="canonical" href="/programming/python-oop/03-inheritances/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Python面向对象编程03-类的继承 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="类的继承 什么是继承 在 Python 中，有些时候&#046;&#046;&#046;" />
+	<meta property="og:url" content="/programming/python-oop/03-inheritances/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2022-07-28T14:08:34+00:00" />
+	<meta property="article:modified_time" content="2023-10-07T02:14:59+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2022/07/Python面向对象编程03-类的继承.jpg" />
+	<meta property="og:image:width" content="1920" />
+	<meta property="og:image:height" content="1280" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="5分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/programming/python-oop/03-inheritances/#primaryimage",
+	            "url": "/wp-content/uploads/2022/07/Python面向对象编程03-类的继承.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/07/Python面向对象编程03-类的继承.jpg",
+	            "width": 1920,
+	            "height": 1280
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/programming/python-oop/03-inheritances/#webpage",
+	            "url": "/programming/python-oop/03-inheritances/",
+	            "name": "Python面向对象编程03-类的继承 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/programming/python-oop/03-inheritances/#primaryimage"
+	            },
+	            "datePublished": "2022-07-28T14:08:34+00:00",
+	            "dateModified": "2023-10-07T02:14:59+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "breadcrumb": {
+	                "@id": "/programming/python-oop/03-inheritances/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/programming/python-oop/03-inheritances/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/programming/python-oop/03-inheritances/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "Python面向对象编程03-类的继承"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/579" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=579' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython-oop%2F03-inheritances%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython-oop%2F03-inheritances%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script>
+<link rel="stylesheet" href="/wp-content/static/css/theme@evernote.wp.css">
+
+<style>
+    div.vscode-block { color: #657B83; background-color: #FDF6E3; }
+</style>
+
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-579 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-579" class="post-579 post type-post status-publish format-standard has-post-thumbnail hentry category-python-oop">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">Python面向对象编程03-类的继承</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/programming/python-oop/" rel="category tag">Python面向对象编程</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年7月28日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+<h2>类的继承</h2>
+
+<h3>什么是继承</h3>
+
+<p>在 Python 中，有些时候会遇到一个已经写好的类，这个类实现了一些基本的功能、方法，但是并不完善。例如，假设要编写一个游戏，在游戏中实现了怪物类 <code>Monster</code> ，它具有一些基本的属性和交互逻辑：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Monster</span><span style="color: #657b83;">:</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__init__</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">, </span><span style="color: #657b83;">hp</span><span style="color: #657b83;">, </span><span style="color: #657b83;">damage</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #268bd2;">self</span><span style="color: #657b83;">.</span><span style="color: #268bd2;">max_hp</span> <span style="color: #859900;">=</span> <span style="color: #268bd2;">self</span><span style="color: #657b83;">.</span><span style="color: #268bd2;">__hp</span> <span style="color: #859900;">=</span> <span style="color: #657b83;">hp</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #268bd2;">self</span><span style="color: #657b83;">.</span><span style="color: #268bd2;">__damage</span> <span style="color: #859900;">=</span> <span style="color: #657b83;">damage</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">attack</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">, </span><span style="color: #657b83;">target</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #657b83;">target</span><span style="color: #657b83;">.hp </span><span style="color: #859900;">-=</span> <span style="color: #268bd2;">self</span><span style="color: #657b83;">.</span><span style="color: #268bd2;">__damage</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">cure</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">, </span><span style="color: #657b83;">hp</span><span style="color: #859900;">=</span><span style="color: #b58900;">None</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #859900;font-weight: bold;">if</span> <span style="color: #657b83;">hp</span> <span style="color: #859900;">is</span> <span style="color: #b58900;">None</span> <span style="color: #859900;">or</span> <span style="color: #268bd2;">self</span><span style="color: #657b83;">.</span><span style="color: #268bd2;">__hp</span> <span style="color: #859900;">+</span> <span style="color: #657b83;">hp</span> <span style="color: #859900;">&gt;</span> <span style="color: #268bd2;">self</span><span style="color: #657b83;">.</span><span style="color: #268bd2;">max_hp</span><span style="color: #657b83;">:</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #268bd2;">self</span><span style="color: #657b83;">.</span><span style="color: #268bd2;">__hp</span> <span style="color: #859900;">=</span> <span style="color: #268bd2;">self</span><span style="color: #657b83;">.</span><span style="color: #268bd2;">max_hp</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #859900;font-weight: bold;">else</span><span style="color: #657b83;">:</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #268bd2;">self</span><span style="color: #657b83;">.</span><span style="color: #268bd2;">__hp</span> <span style="color: #859900;">+=</span> <span style="color: #268bd2;">self</span><span style="color: #657b83;">.hp</span></div></div>
+
+<p>通过实例化该类，就可以往合适的位置添加一些怪物，并且每只怪物都可以拥有独立的攻击力等属性。</p>
+
+<p>然而，游戏中往往存在许多类型的怪物，同类怪物还可以细分为许多不同的形态，如果要为每一种怪物都从头编写一个类，考虑到这些基础的属性及方法的定义都不会改变，就必须将这些重复的代码片段复制过来，就像：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Slime</span><span style="color: #657b83;">:</span></div><div>&#160; &#160; <span style="color: #a8a8a8;"># ...</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">attack</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">, </span><span style="color: #657b83;">target</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #657b83;">target</span><span style="color: #657b83;">.hp </span><span style="color: #859900;">-=</span> <span style="color: #268bd2;">self</span><span style="color: #657b83;">.__damage</span></div><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Zombie</span><span style="color: #657b83;">:</span></div><div>&#160; &#160; <span style="color: #a8a8a8;"># ...</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">attack</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">, </span><span style="color: #657b83;">target</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #657b83;">target</span><span style="color: #657b83;">.hp </span><span style="color: #859900;">-=</span> <span style="color: #268bd2;">self</span><span style="color: #657b83;">.__damage</span></div><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Guardian</span><span style="color: #657b83;">:</span></div><div>&#160; &#160; <span style="color: #a8a8a8;"># ...</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">attack</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">, </span><span style="color: #657b83;">target</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #657b83;">target</span><span style="color: #657b83;">.hp </span><span style="color: #859900;">-=</span> <span style="color: #268bd2;">self</span><span style="color: #657b83;">.__damage</span></div></div>
+
+<p>这很明显是一种低效的方法：一个实现了基本功能的类可能有上百行代码，如果将所有代码复制过来，显然不方便调整和修改，容易产生疏漏，而且一旦游戏的底层逻辑被更新（例如增加了护甲这一概念），那么要为涉及的所有类重写方法，显然非常不合适。</p>
+
+<p>在面向对象编程中，<strong>继承</strong>(inheritance)机制经常用于创建和现有类功能类似的新类，又或是新类只需要在现有类基础上添加一些成员（属性和方法），此时可以不用直接复制代码，而是通过<mark>继承获取被继承类拥有的属性与方法</mark>，从而轻松实现类的复用。</p>
+
+<p>在 Python 中，定义类的时候如果在类名称后面加上一个小括号，里面传入需要继承的类名，表示这个类是继承基于已定义的类的：</p>
+
+<div class="codeblock code-template">
+    <strong>class</strong> <em>DerivedType</em>(BaseType):<br>
+    &nbsp; &nbsp; ...
+</div>
+
+<p>这里的 <code>DerivedType</code> 是继承自 <code>BaseType</code> ，它拥有 <code>BaseType</code> 的所有属性和方法。被继承的类称为<strong>父类</strong>或超类，继承得到的对象称为<strong>子类</strong>(subclass)。在明确父类的定义后，子类通过继承获得的所有属性与方法实现均与父类相同。</p>
+
+<p>由于子类继承的方法实际上是对父类方法的引用，因此当父类方法更新时，子类的调用结果也会随之改变。</p>
+
+<p>对于上述类 <code>Monster</code> ，可以通过继承它来创建一个新的类，例如：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Goblin</span><span style="color: #657b83;">(</span><span style="color: #cb4b16;">Monster</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">enrage</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #268bd2;">self</span><span style="color: #657b83;">.</span><span style="color: #268bd2;">__damage</span> <span style="color: #859900;">*</span> <span style="color: #d33682;">2</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #268bd2;">self</span><span style="color: #657b83;">.</span><span style="color: #268bd2;">max_hp</span> <span style="color: #859900;">*</span> <span style="color: #d33682;">1.25</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #268bd2;">self</span><span style="color: #657b83;">.</span><span style="color: #268bd2;">cure</span><span style="color: #657b83;">()</span></div></div>
+
+<p>子类无需额外编写包括初始化在内的所有方法，就可以直接使用父类提供的属性操作，不仅省时省力，还降低了出现疏漏的可能。</p>
+
+<h3>继承与面向对象</h3>
+
+<p>面向对象编程思想的最终目的就包括使程序灵活性、重用性和可扩展性得以提升，而类的继承便很好地满足了该目的。</p>
+
+<p>继承使子类可以拥有父类所有的属性和方法，在实际应用时，往往会提前写好一些具有基本功能的<strong>基类</strong>，在使用时要做的就是继承它们，然后添加上合适的业务功能，使开发效率可以大幅提升。</p>
+
+<p>例如，以下是第三方库 SQLAlchemy 的使用示例。SQLAlchemy 用于处理 SQL 数据库，它已经提前编写好了数据表操作的基类，通过继承该基类，可以创建一个自定义的数据表：</p>
+
+<div class="vscode-block"><div><span style="color: #859900;font-weight: bold;">import</span> <span style="color: #cb4b16;">sqlalchemy</span> <span style="color: #859900;font-weight: bold;">as</span> <span style="color: #cb4b16;">sa</span></div><div><span style="color: #859900;font-weight: bold;">from</span> <span style="color: #cb4b16;">sqlalchemy</span><span style="color: #657b83;">.</span><span style="color: #cb4b16;">ext</span><span style="color: #657b83;">.</span><span style="color: #cb4b16;">declarative</span> <span style="color: #859900;font-weight: bold;">import</span> <span style="color: #268bd2;">declarative_base</span></div><div><span style="color: #268bd2;">Base</span> <span style="color: #859900;">=</span> <span style="color: #268bd2;">declarative_base</span><span style="color: #657b83;">()</span></div><br><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">User</span><span style="color: #657b83;">(</span><span style="color: #268bd2;">Base</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; <span style="color: #268bd2;">__tablename__</span> <span style="color: #859900;">=</span> <span style="color: #2aa198;">'user'</span></div><div>&#160; &#160; <span style="color: #268bd2;">id</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">sa</span><span style="color: #657b83;">.</span><span style="color: #cb4b16;">Column</span><span style="color: #657b83;">(</span><span style="color: #cb4b16;">sa</span><span style="color: #657b83;">.</span><span style="color: #cb4b16;">Integer</span><span style="color: #657b83;">, primary_key</span><span style="color: #859900;">=</span><span style="color: #b58900;">True</span><span style="color: #657b83;">, autoincrement</span><span style="color: #859900;">=</span><span style="color: #b58900;">True</span><span style="color: #657b83;">)</span></div><div>&#160; &#160; <span style="color: #268bd2;">username</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">sa</span><span style="color: #657b83;">.</span><span style="color: #cb4b16;">Column</span><span style="color: #657b83;">(</span><span style="color: #cb4b16;">sa</span><span style="color: #657b83;">.</span><span style="color: #cb4b16;">String</span><span style="color: #657b83;">(</span><span style="color: #d33682;">64</span><span style="color: #657b83;">), unique</span><span style="color: #859900;">=</span><span style="color: #b58900;">True</span><span style="color: #657b83;">)</span></div><div>&#160; &#160; <span style="color: #268bd2;">password</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">sa</span><span style="color: #657b83;">.</span><span style="color: #cb4b16;">Column</span><span style="color: #657b83;">(</span><span style="color: #cb4b16;">sa</span><span style="color: #657b83;">.</span><span style="color: #cb4b16;">String</span><span style="color: #657b83;">(</span><span style="color: #d33682;">64</span><span style="color: #657b83;">))</span></div><div>&#160; &#160; <span style="color: #268bd2;">email</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">sa</span><span style="color: #657b83;">.</span><span style="color: #cb4b16;">Column</span><span style="color: #657b83;">(</span><span style="color: #cb4b16;">sa</span><span style="color: #657b83;">.</span><span style="color: #cb4b16;">String</span><span style="color: #657b83;">(</span><span style="color: #d33682;">128</span><span style="color: #657b83;">), unique</span><span style="color: #859900;">=</span><span style="color: #b58900;">True</span><span style="color: #657b83;">)</span></div></div>
+
+<p>继承得到的类只需要考虑数据表具有什么样的字段，而无需知道如何与数据库交互。在合适的时候，基类的方法会被调用，自动执行数据的更新或查找等操作，而无需考虑这些方法到底如何实现。</p>
+
+<p>当有一个现有的、功能已经相当完善的类时，有些时候为了扩展这些类的功能，也会继承它并定义一些新方法，这样可以在保留原有类的优点时丰富它的功能。Python 标准库中的类都是很好的继承对象。</p>
+
+<p>以字典类为例，可以基于它实现一个自己的字典：</p>
+
+<div class="vscode-block"><div><span style="color: #859900;font-weight: bold;">from</span> <span style="color: #cb4b16;">collections</span> <span style="color: #859900;font-weight: bold;">import</span> <span style="color: #cb4b16;">OrderedDict</span></div><br><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">SortableDict</span><span style="color: #657b83;">(</span><span style="color: #cb4b16;">OrderedDict</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">sort_value</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">, </span><span style="color: #657b83;">reverse</span><span style="color: #859900;">=</span><span style="color: #b58900;">False</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #268bd2;">item_list</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">list</span><span style="color: #657b83;">(</span><span style="color: #268bd2;">self</span><span style="color: #657b83;">.</span><span style="color: #268bd2;">items</span><span style="color: #657b83;">())</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #268bd2;">item_list</span><span style="color: #657b83;">.</span><span style="color: #268bd2;">sort</span><span style="color: #657b83;">(</span><span style="color: #657b83;">key</span><span style="color: #859900;">=</span><span style="color: #586e75;font-weight: bold;">lambda</span> <span style="color: #657b83;">x</span><span style="color: #657b83;">: </span><span style="color: #657b83;">x</span><span style="color: #657b83;">[</span><span style="color: #d33682;">1</span><span style="color: #657b83;">])</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #859900;font-weight: bold;">if</span> <span style="color: #657b83;">reverse</span><span style="color: #657b83;">:</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #268bd2;">item_list</span><span style="color: #657b83;">.</span><span style="color: #268bd2;">reverse</span><span style="color: #657b83;">()</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #cb4b16;">OrderedDict</span><span style="color: #657b83;">(</span><span style="color: #268bd2;">item_list</span><span style="color: #657b83;">)</span></div></div>
+
+<p>对于这一个继承的字典类，它保留了字典的所有性质，并可以通过方法 <code>.sort_value()</code> 对值进行排序。它完全可以像字典一样使用：</p>
+
+<div class="codeblock code-console">>>> scores = SortableDict(John=72, Tom=83, Joe=75, Emma=92)
+>>> scores.sort_value(reverse=True)
+OrderedDict([('Emma', 92), ('Tom', 83), ('Joe', 75), ('John', 72)])</div>
+
+<p>子类也可以被继承，类可以这样无限继承下去，每继承一次，它的功能就更丰富了一层。</p>
+
+<p>事实上，在 Python3 中定义一个类时，如果没有明确类是继承自哪一个类的，那么这个类便自动继承自内置类 <code>object</code> 。<code>object</code> 是 Python 类的基础，它实现了一些最基本的方法例如分配资源、名称表示等，可以说任何定义的类最终都是它的子类。</p>
+
+<p>方法重写也是面向对象编程常用的一种手段。尽管有一些类已经实现了某个方法，但为了适应不同的业务逻辑，有时也需要重写父类提供的方法。</p>
+
+<p>例如，以下是第三方库 Scrapy 的一个简单示例，通过继承 <code>scrapy.Spider</code> 基类，可以创建一个网络爬虫类。该类已经写好了完整了爬虫处理过程并在合适的时候调用相应的方法，而用户要做的就是重写关键的方法来适应当前爬虫业务。例如替换要爬取的网站等关键信息，以及重写 <code>.parse()</code> 方法来处理数据的解析流程：</p>
+
+<div class="vscode-block"><div><span style="color: #859900;font-weight: bold;">import</span><span style="color: #657b83;"> scrapy</span></div><br><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">BookSpider</span><span style="color: #657b83;">(</span><span style="color: #cb4b16;">scrapy</span><span style="color: #657b83;">.</span><span style="color: #6c71c4;">Spider</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; <span style="color: #268bd2;">name</span> <span style="color: #859900;">=</span> <span style="color: #2aa198;">'books'</span></div><div>&#160; &#160; <span style="color: #268bd2;">start_urls</span> <span style="color: #859900;">=</span><span style="color: #657b83;"> [</span><span style="color: #2aa198;">'https://scrapy.org/resources/'</span><span style="color: #657b83;">]</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">parse</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">, </span><span style="color: #657b83;">response</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #859900;font-weight: bold;">for</span> <span style="color: #268bd2;">resource</span> <span style="color: #859900;">in</span> <span style="color: #657b83;">response</span><span style="color: #657b83;">.css(</span><span style="color: #2aa198;">'div.resource'</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #268bd2;">link</span> <span style="color: #859900;">=</span> <span style="color: #268bd2;">resource</span><span style="color: #657b83;">.xpath(</span><span style="color: #2aa198;">'./div/a/@href'</span><span style="color: #657b83;">).extract_first()</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #268bd2;">title</span> <span style="color: #859900;">=</span> <span style="color: #268bd2;">resource</span><span style="color: #657b83;">.xpath(</span><span style="color: #2aa198;">'./div/a/text()'</span><span style="color: #657b83;">).extract_first()</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #859900;font-weight: bold;">yield</span><span style="color: #657b83;"> {</span></div><div><span style="color: #657b83;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #2aa198;">'link'</span><span style="color: #657b83;">: </span><span style="color: #268bd2;">link</span><span style="color: #657b83;">,</span></div><div><span style="color: #657b83;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #2aa198;">'title'</span><span style="color: #657b83;">: </span><span style="color: #268bd2;">title</span><span style="color: #657b83;">,</span></div><div><span style="color: #657b83;">&#160; &#160; &#160; &#160; &#160; &#160; }</span></div></div>
+
+<p>重写之后该方法就可以替换原有流程的数据解析部分，而执行请求、解析数据等方法可以让父类提供，也可以通过重写实现自己的要求。</p>
+
+<p>继承和重写使类的设计更模块化，在编写类的时候可以将整个过程拆解为一个个的方法，如果需要修改过程中的某一步，只需要继承该类并重写对应的方法，只要方法的参数和返回值等符合上下文调用的需求，即可简洁、清晰地做局部调整。</p>
+
+<p>继承和重写也符合面向对象编程中<strong>多态</strong>的概念，即当多个类继承某一个类时，如果这些类都重写了某些方法，那么对不同的类调用相同的方法，就可以得到不同的结果。例如对以上的爬虫类，对不同的爬虫调用 <code>.parse()</code> 方法，解析数据的方式也不尽相同。</p>
+
+<p>在 Python 中，继承还有一个很典型的应用场景就是异常。通过继承异常类型，可以逐步缩减异常涉及的范围，从而易于通过 <code>except</code> 语句捕获不同异常。</p>
+
+<h3>多继承</h3>
+
+<p>在 Python 中，一个类可以继承自多个类，只需要在代表继承的括号中输入多个类名：</p>
+
+<div class="codeblock code-template">
+    <strong>class</strong> <em>DerivedType</em>(BaseType01, BaseType02, ...):<br>
+    &nbsp; &nbsp; ...
+</div>
+
+<p>这个新的子类就会保留继承的所有父类的属性和方法，同时兼具继承的所有类的特性。</p>
+
+<p>对于多个父类中包含同名的类属性与方法，Python 会根据子类继承时圆括号中父类的前后次序决定，括号中排在前面的属性与方法会覆盖后面的同名属性与方法。</p>
+
+<p>在使用多继承时，往往将其中一部分类用作接口。接口类定义了这些类中需要具有什么特性，也就是说需要拥有什么属性与方法。</p>
+
+<p>在继承时，可以编写一种特殊的抽象基类。抽象基类不具有实际含义，不能被实例化，仅用于在继承时提示被继承的类具有什么特性，这种抽象基类往往被用于接口。<code>collections.abc</code> 模块提供了基础的抽象基类，继承该模块的抽象基类提示该类应该实现某些方法来实现特殊操作。</p>
+
+<p>例如，以下的 <code>Directory</code> 类继承自 <code>Path</code> 类，提示它拥有路径的一些操作（例如切换目录、计算相对路径等），同时它还继承自 <code>Iterable</code> 类，这说明该类<em>应该</em>实现了某些方法，从而变成一个可迭代对象，</p>
+
+<div class="vscode-block"><div><span style="color: #859900;font-weight: bold;">from</span> <span style="color: #cb4b16;">collections</span><span style="color: #657b83;">.</span><span style="color: #cb4b16;">abc</span> <span style="color: #859900;font-weight: bold;">import</span> <span style="color: #cb4b16;">Iterable</span></div><br><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Path</span><span style="color: #657b83;">:</span></div><div>&#160; &#160; <span style="color: #cb4b16;">...</span></div><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Directory</span><span style="color: #657b83;">(</span><span style="color: #cb4b16;">Path</span><span style="color: #657b83;">, </span><span style="color: #cb4b16;">Iterable</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; <span style="color: #cb4b16;">...</span></div><div>&#160; &#160; <span style="color: #a8a8a8;"># Some methods need to be implemented to support for loop</span></div></div>
+
+<p>可以使用 <code>for</code> 循环从该类中迭代每一个成员（例如目录中的每一个文件或子目录）。关于可迭代对象的概念将会在后续介绍。</p>
+
+<h2>继承与super类</h2>
+
+<h3>为什么要使用super类</h3>
+
+<p>前文中介绍了多继承，多继承允许一个类使用所有父类的属性与方法。然而这样做有一个很严重的问题：那就是父类之间的方法或属性标识符可能会冲突，从而相互之间发生覆盖造成一定问题。</p>
+
+<p>考虑以下简单示例：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Sequence</span><span style="color: #657b83;">:</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__init__</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">): </span><span style="color: #268bd2;">self</span><span style="color: #657b83;">.</span><span style="color: #268bd2;">size</span> <span style="color: #859900;">=</span> <span style="color: #d33682;">11</span></div><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Window</span><span style="color: #657b83;">:</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__init__</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">): </span><span style="color: #268bd2;">self</span><span style="color: #657b83;">.</span><span style="color: #268bd2;">size</span> <span style="color: #859900;">=</span><span style="color: #657b83;"> (</span><span style="color: #d33682;">400</span><span style="color: #657b83;">, </span><span style="color: #d33682;">300</span><span style="color: #657b83;">)</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">create</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">): </span></div><div>&#160; &#160; &#160; &#160; <span style="color: #268bd2;">print</span><span style="color: #657b83;">(</span><span style="color: #586e75;font-weight: bold;">f</span><span style="color: #2aa198;">'window created with size </span><span style="color: #cb4b16;">{</span><span style="color: #268bd2;">self</span><span style="color: #657b83;">.</span><span style="color: #268bd2;">size</span><span style="color: #cb4b16;">}</span><span style="color: #2aa198;">'</span><span style="color: #657b83;">)</span></div></div>
+
+<p>这两个类在单独编写或继承时，并没有什么问题。但是在多继承时，便会产生问题了：</p>
+
+<div class="codeblock code-console">>>> class Windows(Sequence, Window):
+...     pass
+...
+>>> Windows().create()
+window created with size 11</div>
+
+<p>两个类的初始化方法发生了覆盖，造成同名变量的赋值也被覆盖，这种覆盖是十分危险的。由于初始化方法需要为实例准备一些必要的属性，如果缺失这一步会造成缺少方法需要的资源，从而产生错误。</p>
+
+<p>一种更复杂的继承情况涉及单继承和多继承的结合，这种情况下，多次调用同一方法也可能造成一定问题。例如，考虑以下继承关系：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span><span style="color: #cb4b16;">A</span><span style="color: #657b83;">:</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span><span style="color: #268bd2;">identify</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">): </span><span style="color: #268bd2;">print</span><span style="color: #657b83;">(</span><span style="color: #2aa198;">'This is A'</span><span style="color: #657b83;">)</span></div><div><span style="color: #586e75;font-weight: bold;">class</span><span style="color: #cb4b16;">B</span><span style="color: #657b83;">(</span><span style="color: #cb4b16;">A</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span><span style="color: #268bd2;">identify</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #cb4b16;">A</span><span style="color: #657b83;">.</span><span style="color: #268bd2;">identify</span><span style="color: #657b83;">(</span><span style="color: #268bd2;">self</span><span style="color: #657b83;">)</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #268bd2;">print</span><span style="color: #657b83;">(</span><span style="color: #2aa198;">'This is B'</span><span style="color: #657b83;">)</span></div><div><span style="color: #586e75;font-weight: bold;">class</span><span style="color: #cb4b16;">C</span><span style="color: #657b83;">(</span><span style="color: #cb4b16;">A</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span><span style="color: #268bd2;">identify</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #cb4b16;">A</span><span style="color: #657b83;">.</span><span style="color: #268bd2;">identify</span><span style="color: #657b83;">(</span><span style="color: #268bd2;">self</span><span style="color: #657b83;">)</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #268bd2;">print</span><span style="color: #657b83;">(</span><span style="color: #2aa198;">'This is C'</span><span style="color: #657b83;">)</span></div><div><span style="color: #586e75;font-weight: bold;">class</span><span style="color: #cb4b16;">D</span><span style="color: #657b83;">(</span><span style="color: #cb4b16;">B</span><span style="color: #657b83;">, </span><span style="color: #cb4b16;">C</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span><span style="color: #268bd2;">identify</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #cb4b16;">B</span><span style="color: #657b83;">.</span><span style="color: #268bd2;">identify</span><span style="color: #657b83;">(</span><span style="color: #268bd2;">self</span><span style="color: #657b83;">)</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #cb4b16;">C</span><span style="color: #657b83;">.</span><span style="color: #268bd2;">identify</span><span style="color: #657b83;">(</span><span style="color: #268bd2;">self</span><span style="color: #657b83;">)</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #268bd2;">print</span><span style="color: #657b83;">(</span><span style="color: #2aa198;">'This is D'</span><span style="color: #657b83;">)</span></div></div>
+
+<p>这种继承关系如下所示，箭头之间构成了一个菱形，因此有时也称为菱形继承：</p>
+
+<div class="codeblock code-console">   A
+ ↗  ↖
+B      C
+ ↖  ↗
+   D</div>
+
+<p>在菱形继承中，各种类方法之间复杂地纠缠在一起，稍不注意就可能产生混乱的调用问题。在以上示例中，尝试调用 <code>D</code> 类的方法：</p>
+
+<div class="codeblock code-console">D().identify()
+This is A 
+This is B 
+This is A 
+This is C 
+This is D</div>
+
+<p>从中可以看出，调用两个父类的方法时都各自调用了一遍 <code>A</code> 类的方法。当继承关系进一步变复杂时，调用还会更加混乱。</p>
+
+<p>这种时候，可以使用 Python 内置的 <code>super</code> 类。</p>
+
+<h3>使用super类</h3>
+
+<p><code>super(<em>type</em>, <em>object_or_type</em>)</code> 将得到一个父类或同级类的代理对象(proxy object)，用于访问已在类中重写的继承方法。</p>
+
+<p>其中，参数 <code><em>type</em></code> 是一个类名，而 <code><em>object_or_type</em></code> 必须是一个该类或该类的子类的实例化对象。</p>
+
+<p>如果用在在类的实例方法内部，<code>super()</code> 函数的两个参数是可以省略的。这种情况下该类代表父类，可以用该类得到的实例来调用父类的方法，例如：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span><span style="color: #cb4b16;">A</span><span style="color: #657b83;">:</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span><span style="color: #268bd2;">m</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #268bd2;">print</span><span style="color: #657b83;">(</span><span style="color: #2aa198;">'=> A.m &lt;='</span><span style="color: #657b83;">)</span></div><div><span style="color: #586e75;font-weight: bold;">class</span><span style="color: #cb4b16;">B</span><span style="color: #657b83;">(</span><span style="color: #cb4b16;">A</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span><span style="color: #268bd2;">m</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #268bd2;">sth</span><span style="color: #859900;">=</span><span style="color: #cb4b16;">super</span><span style="color: #657b83;">()</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #268bd2;">sth</span><span style="color: #657b83;">.</span><span style="color: #268bd2;">m</span><span style="color: #657b83;">()</span></div></div>
+
+<p>那么此时如果调用 <code>B().m()</code> ，通过 <code>super</code> 类就可以调用父类的方法，在控制台中打印提示文本。</p>
+
+<p>在这个最简单的使用场景中，<code>super</code> 类充当了对父类的一个隐式引用，通过它来调用父类的方法。当然也可以直接使用父类调用父类的方法，不过采用 <code>super</code> 类含义更加明确，也更不容易出现疏漏。</p>
+
+<p>在许多继承场合中，都需要额外调用父类的初始化方法来准备一些必要的属性，例如 Python 用于编写简易用户界面的标准库 tkinter 中，如果想继承一个控件类实现自己的控件，就需要调用这些类的初始化方法，为界面绘制提供参数：</p>
+
+<div class="vscode-block"><div><span style="color: #859900;font-weight: bold;">import</span><span style="color: #657b83;"> </span><span style="color: #cb4b16;">tkinter</span><span style="color: #657b83;"> </span><span style="color: #859900;font-weight: bold;">as</span><span style="color: #657b83;"> </span><span style="color: #cb4b16;">tk</span></div><br><div><span style="color: #586e75;font-weight: bold;">class</span><span style="color: #657b83;"> </span><span style="color: #cb4b16;">MainPanel</span><span style="color: #657b83;">(</span><span style="color: #cb4b16;">tk</span><span style="color: #657b83;">.</span><span style="color: #cb4b16;">Frame</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span><span style="color: #657b83;"> </span><span style="color: #268bd2;">__init__</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">, </span><span style="color: #657b83;">master</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #cb4b16;">super</span><span style="color: #657b83;">().</span><span style="color: #268bd2;">__init__</span><span style="color: #657b83;">(</span><span style="color: #657b83;">master</span><span style="color: #657b83;">) &#160;</span><span style="color: #a8a8a8;"># ignore this will cause an error</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #cb4b16;">...</span></div></div>
+
+<p>当然也可以直接通过父类调用初始化方法 <code>tk.Frame.__init__(self, master)</code> 。</p>
+
+<h3>super类与多继承</h3>
+
+<p>以上对 <code>super</code> 类的应用似乎可有可无。解决多继承问题才是该类提出的根本目的。</p>
+
+<p>在介绍 <code>super</code> 类处理多继承前，需要先了解 Python 的 MRO 。MRO(Method Resolution Order, 方法解析顺序)是 Python 中定义类的继承顺序的依据，用来处理多继承时的继承顺序。</p>
+
+<p>在创建一个类时，Python 都会自动为该类创建一个 <code>.__mro__</code> 属性，这个属性就是 Python 的 MRO 机制生成的。可以通过类的 <code>.__mro__</code> 属性或类的 <code>.mro()</code> 方法来查看上面菱形继承的 <code>D</code> 类的 <code>__mro__</code> 属性值：</p>
+
+<div class="codeblock code-console">>>> D.__mro__
+    (&lt;class '__main__.D'>, &lt;class '__main__.B'>, &lt;class '__main__.C'>, &lt;class '__main__.A'>, &lt;class 'object'>)
+</div>
+
+<p><code>.mro()</code> 方法除了返回的结果是列表而不是元组外，结果是相同的。</p>
+
+<blockquote>
+    <p>目前 Python3 采用 C3 算法来获取类的 MRO 信息，该算法的细节可以在 <a href="https://www.python.org/download/releases/2.3/mro/">https://www.python.org/download/releases/2.3/mro/</a> 查询到，这里对此做简要介绍，仅供了解所用。</p>
+    
+    <p>如下是一个复杂的继承关系，箭头指向父类，并且先继承的类位于左侧：</p>
+
+    <figure>
+        <img decoding="async" src="/wp-content/uploads/image/category@python-oop/mro.png" alt="" width="140">
+    </figure>
+    
+    <p>当要生成 F 的继承顺序时，C3 算法过程如下：首先将被指向箭头数量为 0 的节点（没有被继承的类）F 放入 MRO 列表，并将这些节点及与有关箭头从继承树中删除；接下来继续找相似特征的节点，此时如果同时找到符合条件的类，则取左侧优先放入 MRO 列表并从树中删除下一步查找满足的节点有 A 和 E ，根据左侧优先取出 A ，按如此顺序得到的 MRO 为 <code>F,D,A,E,B,C</code> 。不过注意，Python 所有类都有一个共同的父类 <code>object</code> ，因此最后会将 <code>object</code> 放入列表末尾。</p>
+
+    <p>最终生成列表中元素顺序为：<code>F→D→A→E→B→C→object</code> 。感兴趣的话可以编写代码验证。</p>
+</blockquote>
+
+<p>当用 super 调用父类的方法时，会按照 __mro__ 属性中的元素顺序逐个查找方法，<code><em>object_or_type</em></code> 对应的类负责确定 <code>__mro__</code> 属性，而 <code><em>type</em></code> 参数在 <code>__mro__</code> 中寻找上一个类作为父类。</p>
+
+<p>如果不是很理解这个表述，请看以下复杂继承的示例：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span><span style="color: #657b83;"> </span><span style="color: #cb4b16;">A</span><span style="color: #657b83;">:</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span><span style="color: #657b83;"> </span><span style="color: #268bd2;">identify</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">): </span><span style="color: #268bd2;">print</span><span style="color: #657b83;">(</span><span style="color: #2aa198;">'This is A'</span><span style="color: #657b83;">)</span></div><div><span style="color: #586e75;font-weight: bold;">class</span><span style="color: #657b83;"> </span><span style="color: #cb4b16;">B</span><span style="color: #657b83;">:</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span><span style="color: #657b83;"> </span><span style="color: #268bd2;">identify</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">): </span><span style="color: #268bd2;">print</span><span style="color: #657b83;">(</span><span style="color: #2aa198;">'This is B'</span><span style="color: #657b83;">)</span></div><div><span style="color: #586e75;font-weight: bold;">class</span><span style="color: #657b83;"> </span><span style="color: #cb4b16;">C</span><span style="color: #657b83;">:</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span><span style="color: #657b83;"> </span><span style="color: #268bd2;">identify</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">): </span><span style="color: #268bd2;">print</span><span style="color: #657b83;">(</span><span style="color: #2aa198;">'This is C'</span><span style="color: #657b83;">)</span></div><div><span style="color: #586e75;font-weight: bold;">class</span><span style="color: #657b83;"> </span><span style="color: #cb4b16;">D</span><span style="color: #657b83;">(</span><span style="color: #cb4b16;">A</span><span style="color: #657b83;">, </span><span style="color: #cb4b16;">B</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span><span style="color: #657b83;"> </span><span style="color: #268bd2;">identify</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">): </span><span style="color: #268bd2;">print</span><span style="color: #657b83;">(</span><span style="color: #2aa198;">'This is D'</span><span style="color: #657b83;">)</span></div><div><span style="color: #586e75;font-weight: bold;">class</span><span style="color: #657b83;"> </span><span style="color: #cb4b16;">E</span><span style="color: #657b83;">(</span><span style="color: #cb4b16;">B</span><span style="color: #657b83;">, </span><span style="color: #cb4b16;">C</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span><span style="color: #657b83;"> </span><span style="color: #268bd2;">identify</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">): </span><span style="color: #268bd2;">print</span><span style="color: #657b83;">(</span><span style="color: #2aa198;">'This is E'</span><span style="color: #657b83;">)</span></div><div><span style="color: #586e75;font-weight: bold;">class</span><span style="color: #657b83;"> </span><span style="color: #cb4b16;">F</span><span style="color: #657b83;">(</span><span style="color: #cb4b16;">D</span><span style="color: #657b83;">, </span><span style="color: #cb4b16;">E</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span><span style="color: #657b83;"> </span><span style="color: #268bd2;">identify</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">): </span><span style="color: #268bd2;">print</span><span style="color: #657b83;">(</span><span style="color: #2aa198;">'This is F'</span><span style="color: #657b83;">)</span></div><div><span style="color: #cb4b16;">super</span><span style="color: #657b83;">(</span><span style="color: #cb4b16;">A</span><span style="color: #657b83;">, </span><span style="color: #cb4b16;">F</span><span style="color: #657b83;">()).identify()</span></div><div><span style="color: #cb4b16;">super</span><span style="color: #657b83;">(</span><span style="color: #cb4b16;">B</span><span style="color: #657b83;">, </span><span style="color: #cb4b16;">F</span><span style="color: #657b83;">()).identify()</span></div><div><span style="color: #cb4b16;">super</span><span style="color: #657b83;">(</span><span style="color: #cb4b16;">D</span><span style="color: #657b83;">, </span><span style="color: #cb4b16;">F</span><span style="color: #657b83;">()).</span><span style="color: #268bd2;">identify</span><span style="color: #657b83;">()</span></div><div><span style="color: #cb4b16;">super</span><span style="color: #657b83;">(</span><span style="color: #cb4b16;">E</span><span style="color: #657b83;">, </span><span style="color: #cb4b16;">F</span><span style="color: #657b83;">()).</span><span style="color: #268bd2;">identify</span><span style="color: #657b83;">()</span></div><div><span style="color: #cb4b16;">super</span><span style="color: #657b83;">(</span><span style="color: #cb4b16;">F</span><span style="color: #657b83;">, </span><span style="color: #cb4b16;">F</span><span style="color: #657b83;">()).</span><span style="color: #268bd2;">identify</span><span style="color: #657b83;">()</span></div></div>
+
+<p>以上代码一共得到了 5 种不同的代理对象，它们的指代分别为：</p>
+
+<div class="codeblock code-console">This is E
+This is C
+This is A
+This is B
+This is D</div>
+
+<p>尽管 <code>A</code> 类看起来与 <code>E</code> 类没有任何关系，但是代表的却是 E 类的实例。回顾一下这种继承关系得到的 MRO 顺序：</p>
+
+<div class="codeblock code-template">
+    F→D→A→E→B→C→object
+</div>
+
+<p>结果不言而喻了。记住，<code><em>type</em></code> 参数确定的父类的是 <code><em>object_or_type</em></code> 参数在 MRO 中指向的后一个类。</p>
+
+<blockquote>
+    <p>之前说过 <code>super()</code> 的第二个参数也可以是一个类，不过这是对于调用类方法而言的。有关类方法的内容将会在下一节介绍</p>
+</blockquote>
+
+<p>回到之前提出的第二个问题，如果采用 <code>super</code> 类来调用父类方法：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span><span style="color: #657b83;"> </span><span style="color: #cb4b16;">A</span><span style="color: #657b83;">:</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span><span style="color: #657b83;"> </span><span style="color: #268bd2;">identify</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">): </span><span style="color: #268bd2;">print</span><span style="color: #657b83;">(</span><span style="color: #2aa198;">'This is A'</span><span style="color: #657b83;">)</span></div><div><span style="color: #586e75;font-weight: bold;">class</span><span style="color: #657b83;"> </span><span style="color: #cb4b16;">B</span><span style="color: #657b83;">(</span><span style="color: #cb4b16;">A</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span><span style="color: #657b83;"> </span><span style="color: #268bd2;">identify</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #cb4b16;">super</span><span style="color: #657b83;">().</span><span style="color: #268bd2;">identify</span><span style="color: #657b83;">()</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #268bd2;">print</span><span style="color: #657b83;">(</span><span style="color: #2aa198;">'This is B'</span><span style="color: #657b83;">)</span></div><div><span style="color: #586e75;font-weight: bold;">class</span><span style="color: #657b83;"> </span><span style="color: #cb4b16;">C</span><span style="color: #657b83;">(</span><span style="color: #cb4b16;">A</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span><span style="color: #657b83;"> </span><span style="color: #268bd2;">identify</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #cb4b16;">super</span><span style="color: #657b83;">().</span><span style="color: #268bd2;">identify</span><span style="color: #657b83;">()</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #268bd2;">print</span><span style="color: #657b83;">(</span><span style="color: #2aa198;">'This is C'</span><span style="color: #657b83;">)</span></div><div><span style="color: #586e75;font-weight: bold;">class</span><span style="color: #657b83;"> </span><span style="color: #cb4b16;">D</span><span style="color: #657b83;">(</span><span style="color: #cb4b16;">B</span><span style="color: #657b83;">, </span><span style="color: #cb4b16;">C</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span><span style="color: #657b83;"> </span><span style="color: #268bd2;">identify</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">):</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #cb4b16;">super</span><span style="color: #657b83;">().</span><span style="color: #268bd2;">identify</span><span style="color: #657b83;">()</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #268bd2;">print</span><span style="color: #657b83;">(</span><span style="color: #2aa198;">'This is D'</span><span style="color: #657b83;">)</span></div></div>
+
+<p>那么就不会出现重复调用的情况了：</p>
+
+<div class="codeblock code-console">>>> D().identify()
+This is A 
+This is C 
+This is B 
+This is D</div>
+
+<p>任意复杂的继承情况，每一个类在 MRO 中只会出现一次，因此这样避免了方法的重复调用，使得复杂的继承也不容易出错。</p>
+
+<h2>参考资料/延伸阅读</h2>
+
+<p>
+    <a href="https://docs.python.org/3/tutorial/classes.html#inheritance">https://docs.python.org/3/tutorial/classes.html#inheritance</a><br>
+    Python3 官方文档对继承的介绍，不过这部分比较简洁
+</p>
+
+<p>
+    <a href="https://docs.python.org/3/library/functions.html#super">https://docs.python.org/3/library/functions.html#super</a><br>
+    Python3 官方文档对内置函数 <code>super</code> 的介绍
+</p>
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/computer-science/data-structure/07-sort-algorithm/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/09/数据结构07-排序算法-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/09/数据结构07-排序算法-520x293.jpg 520w, /wp-content/uploads/2022/09/数据结构07-排序算法-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/computer-science/data-structure/07-sort-algorithm/" rel="bookmark">数据结构07-排序算法</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/data-science/via-python/numpy02-reshape-arrays/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/10/Python数据分析-numpy02数组变形与组合-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/10/Python数据分析-numpy02数组变形与组合-520x293.jpg 520w, /wp-content/uploads/2022/10/Python数据分析-numpy02数组变形与组合-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/data-science/via-python/numpy02-reshape-arrays/" rel="bookmark">numpy02:数组变形与组合</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/embedded/mcu-application/stm32-u8g2-library/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/U8g2图形库与STM32移植-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/U8g2图形库与STM32移植-520x293.jpg 520w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植-300x169.jpg 300w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植-1024x576.jpg 1024w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植-768x432.jpg 768w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植-1536x864.jpg 1536w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植-950x534.jpg 950w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/embedded/mcu-application/stm32-u8g2-library/" rel="bookmark">U8g2图形库与STM32移植</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/computer-science/data-structure/01-linear-list/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>数据结构01-基本概念与线性表</span></a></li>
+		<li class="previous"><a href="/computer-science/computer-networking/06-internet-protocol/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>计算机网络06-网络层概述与网际协议IP</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

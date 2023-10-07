@@ -1,0 +1,930 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>机器学习-逻辑回归 - 冰封残烛的个人小站</title>
+	<meta name="description" content="逻辑回归(logistic regression)是处理二分类问题的基本算法，它使用 sigmoid 函数描述样本的分类概率。代价函数用于衡量模型的误差程度，一般使用梯度下降法计算逻辑回归代价函数的最小值，以此选择最好的拟合参数。" />
+	<link rel="canonical" href="/data-science/machine-learning/02-logistic-regression/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="机器学习-逻辑回归 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="逻辑回归(logistic regression)是处理二分类问题的基本算法，它使用 sigmoid 函数描述样本的分类概率。代价函数用于衡量模型的误差程度，一般使用梯度下降法计算逻辑回归代价函数的最小值，以此选择最好的拟合参数。" />
+	<meta property="og:url" content="/data-science/machine-learning/02-logistic-regression/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2022-12-23T02:51:10+00:00" />
+	<meta property="article:modified_time" content="2023-10-06T11:47:19+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2022/12/机器学习-逻辑回归.png" />
+	<meta property="og:image:width" content="1528" />
+	<meta property="og:image:height" content="1080" />
+	<meta property="og:image:type" content="image/png" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="7分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/data-science/machine-learning/02-logistic-regression/#primaryimage",
+	            "url": "/wp-content/uploads/2022/12/机器学习-逻辑回归.png",
+	            "contentUrl": "/wp-content/uploads/2022/12/机器学习-逻辑回归.png",
+	            "width": 1528,
+	            "height": 1080
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/data-science/machine-learning/02-logistic-regression/#webpage",
+	            "url": "/data-science/machine-learning/02-logistic-regression/",
+	            "name": "机器学习-逻辑回归 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/data-science/machine-learning/02-logistic-regression/#primaryimage"
+	            },
+	            "datePublished": "2022-12-23T02:51:10+00:00",
+	            "dateModified": "2023-10-06T11:47:19+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "逻辑回归(logistic regression)是处理二分类问题的基本算法，它使用 sigmoid 函数描述样本的分类概率。代价函数用于衡量模型的误差程度，一般使用梯度下降法计算逻辑回归代价函数的最小值，以此选择最好的拟合参数。",
+	            "breadcrumb": {
+	                "@id": "/data-science/machine-learning/02-logistic-regression/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/data-science/machine-learning/02-logistic-regression/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/data-science/machine-learning/02-logistic-regression/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "机器学习-逻辑回归"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/966" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=966' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fdata-science%2Fmachine-learning%2F02-logistic-regression%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fdata-science%2Fmachine-learning%2F02-logistic-regression%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><script>
+    MathJax = {
+        tex: {
+            inlineMath: [['\\\\(', '\\\\)']],
+            displayMath: [["\\\\[","\\\\]"]]
+        },
+        startup: {
+            ready: () => {
+                MathJax.startup.defaultReady();
+                MathJax.startup.promise.then(() => {
+                    console.log('MathJax initial typesetting complete');
+                    addJupyterMarker();
+                });
+            }
+        },
+        options: {
+            enableMenu: false,
+        }
+    };
+</script>
+<script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+
+
+<link rel="stylesheet" href="/wp-content/static/css/theme@pie.wp.css">
+<script src="/wp-content/static/js/note.js"></script>
+<style>
+    .math { color: blue; font-size: 14px; }
+    .entry blockquote .math { color: rgb(0, 0, 160); }
+    .vscode-block {
+        color: #90A4AE;
+    }
+    div.vscode-block span[token="symbol"]  { color: #39adb5; }
+    div.vscode-block span[token="string"]  { color: #91b859; }
+    div.vscode-block span[token="number"]  { color: #f76d47; }
+    div.vscode-block span[token="keyword"] { color: #39adb5; font-weight: bold; }
+</style>
+<script>
+    window.onload = function() {
+        setTimeout(function() {
+            addJupyterMarker();
+        }, 500)
+    }
+</script>
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-966 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-966" class="post-966 post type-post status-publish format-standard has-post-thumbnail hentry category-machine-learning">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">机器学习-逻辑回归</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/data-science/machine-learning/" rel="category tag">机器学习</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年12月23日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+<h2>分类算法</h2>
+
+<p><a class="link-internal" link="data-science/machine-learning@02-logistic-regression" href="/archives/880">上一节</a>介绍了线性回归，线性回归是一种经典的<em>回归</em>算法，它可以根据一系列自变量来预测因变量的值。</p>
+
+<p><strong>分类</strong>(classification)也是一种常见的需求。分类问题并不要求预测具体的值，而是需要判断样本属于的类别。例如分析一株植物属于哪个物种，或者判断一封邮件是否是垃圾邮件等。分类问题的因变量是离散的，因此无法通过简单的计算阐述结果。</p>
+
+<p>二分类是比较常见的一种分类情况，二分类下每个样本只有两种分类情况（例如某件事是否会发生），因此可以使用布尔值 0 和 1 来描述分类。类似地有多分类，每个样本有多种分类情况。</p>
+
+<p>有许多经典的算法都可以处理分类问题，本节介绍最简单的分类算法之一：逻辑回归。</p>
+
+<h2>逻辑回归</h2>
+
+<h3>逻辑回归的概念</h3>
+
+<p>首先先看一个典型的分类场景。假设有如下的一系列数据，横坐标代表样本某个特征的值，纵坐标代表样本的分类，并且是离散的：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-logistic-intro-1.png" alt="" width="260">
+</figure>
+
+<p>在以上示例中，可以很明显看到分类为“ 0 ”的样本特征变量的值都小于 300 ，而分类为“ 1 ”的样本特征变量的都大于 300 。那么就可以用特征变量的值是否大于 300 作为样本分类的依据。</p>
+
+<p>但在稍微复杂一点的场景中，这种简单的逻辑就会失效。例如，考虑以下数据：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-logistic-intro-2.png" alt="" width="260">
+</figure>
+
+<p>在 300 附近，样本可能属于分类“ 0 ”也可能属于分类“ 1 ”。但是数据仍然具有这样的规律：当特征变量的值小于 300 较多时，该样本属于分类“ 0 ”；当特征变量的值大于 300 较多时，它属于分类“ 1 ”；但特征变量的值在 300 附近时，它同时可能属于其中的任何一个分类。</p>
+
+<p>那么此时就无法直接确定某些范围样本的分类了。相比起死板地直接分为两类（硬分类），可以使用另一种思路解决这个问题：确定样本属于分类的概率（软分类）。显然，远大于 300 的样本属于分类“ 1 ”的概率更大，远小于 300 的样本属于分类“ 0 ”的概率更大，而接近 300 的样本属于两个样本的概率相差不大。</p>
+
+<p>这就是<strong>逻辑回归</strong>(logistic regression)的基本思路。逻辑回归通过建立一条 <span class="math">\\( y \\)</span> 值分布在 0~1 之间的函数来计算样本的分类概率：<span class="math">\\( y \\)</span> 值表示样本属于分类“ 1 ”的概率，那么 <span class="math">\\( 1-y \\)</span> 就表示样本属于分类“ 0 ”的概率，从而将分类问题转换为回归问题。最终样本的分类也容易确定：如果 <span class="math">\\( y > 0.5 \\)</span> ，那么说明样本更可能属于分类“ 1 ”，反之说明样本更可能属于分类“ 0 ”。</p>
+
+<p>可以使用线性回归拟合一条范围在 0~1 内的直线作为概率函数，类似这样：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-logistic-intro-3.png" alt="" width="260">
+</figure>
+
+<p>但是直线比较僵硬，不但不能表示在分界区域概率密度的变化过程，还要在两端将其约束到 0~1 的范围内。一般来说，逻辑回归最常用的概率函数为 sigmoid 函数，这个函数的表达式为：</p>
+
+<div class="math">
+\\[
+    f(y) = \frac{1}{1 + e^{-y}}
+\\]
+</div>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-sigmoid-function.png" alt="" width="380">
+</figure>
+
+<p>该函数的特点是当 <span class="math">\\( y \\)</span> 离 0 较远时，<span class="math">\\( f(y) \\)</span> 值十分趋近 0 或 1 ；而当 <span class="math">\\( y \\)</span> 接近 0 时，函数由 0 到 1 有一个较为平缓的过渡。并且该函数是中心对称的，因此比较贴近真实情况下的概率分布。</p>
+
+<blockquote>
+    <p>逻辑回归使用 sigmoid 函数是经过严格推导后得到的结果，这个 <a href="https://www.quora.com/Logistic-Regression-Why-sigmoid-function/answer/Roi-Yehoshua?target_type=answer">Quora 上的回答</a>从概率分布的角度解释了为什么。</p>
+</blockquote>
+
+<h3>决策边界</h3>
+
+<p>注意到 sigmoid 函数在 <span class="math">\\( y=0 \\)</span> 处取得概率 0.5 ，而在两端概率分别小于 0.5 和大于 0.5 ，因此可以说 <span class="math">\\( y=0 \\)</span> 是一个<strong>决策边界</strong>(decision boundary)，位于边界两端的样本将会被分到不同的类别。</p>
+
+<p>在实际应用中，<span class="math">\\( y=0 \\)</span> 并不一定就是区分两个类别的边界条件，而且特征变量的个数也不止一个。这个时候可以使用换元法将自变量变换到实际模型中，由实际情况下的特征变量及其参数组合确定：</p>
+
+<div class="math">
+\\[
+    y = \theta_n x^n + \theta_{n-1} x^{n-1} + \cdots + \theta_1 x + \theta_0
+\\]
+</div>
+
+<p>那么实际情况下的概率 <span class="math">\\( h_\theta(y) \\)</span> 将由以下公式确定：</p>
+
+<div class="math">
+\\[
+\begin{align}
+    h_\theta(y) &= \frac{1}{1 + {\large e}^{\displaystyle{-(\theta_n x^n + \theta_{n-1} x^{n-1} + \cdots + \theta_1 x + \theta_0)}}}\\
+                &= \frac{1}{1 + {\large e}^{\displaystyle{-\boldsymbol{\theta}^T \boldsymbol{x}}}}
+\end{align}
+\\]
+</div>
+
+<p>此时 <span class="math">\\( \boldsymbol{\theta}^T \boldsymbol{x} = 0 \\)</span> 就是实际情况的一个决策边界：当 <span class="math">\\( \boldsymbol{\theta}^T \boldsymbol{x} > 0 \\)</span> 时，可以预测样本属于类别“ 1 ”；当 <span class="math">\\( \boldsymbol{\theta}^T \boldsymbol{x} < 0 \\)</span> 时，则可以预测样本属于类别“ 0 ”。</p>
+
+<p>通过取用合适的参数 <span class="math">\\( \boldsymbol{\theta} \\)</span> ，可以得到不同的决策边界，从而适应不同的实际情况。例如，对于以下具有两个特征的数据集：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-decision-boundary-intro-1.png" alt="" width="260">
+</figure>
+
+<p>可以看出，在这个二维平面上可以作出这样一条直线 <span class="math">\\( \theta_2x_2+\theta_1x_1+\theta_0=0 \\)</span> ，将两种类别的样本分隔在直线两侧，就像这样：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-decision-boundary-intro-2.png" alt="" width="260">
+</figure>
+
+<p>但有时候边界可能比较复杂，并不能用直线描述，例如：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-decision-boundary-intro-3.png" alt="" width="260">
+</figure>
+
+<p>那么这个时候，可以像在线性回归中处理非线性数据一样，通过引入非线性特征项，在平面上使用曲线例如二次多项式曲线 <span class="math">\\( \theta_2x_2+\theta_{12}x_1^2+\theta_{11}x_1+\theta_0=0 \\)</span> 作为决策边界，将两种类别的样本分隔在曲线两侧，就像这样：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-decision-boundary-intro-4.png" alt="" width="260">
+</figure>
+
+<p>这也就说明了线性回归和逻辑回归之间的联系：线性回归主要是拟合实际的数据，而逻辑回归主要是拟合实际的决策边界。逻辑回归模型可以通过设计复杂的曲线，来表达复杂的决策边界，从而适应各种复杂的模型。</p>
+
+<h2>代价函数</h2>
+
+<h3>代价函数的概念</h3>
+
+<p>以上基本已经介绍了逻辑回归模型的基本概念，但是目前还有一个问题没有解决，那就是参数 <span class="math">\\( \boldsymbol{\theta} \\)</span> 还没有确定。</p>
+
+<p>在线性回归中，确定参数的方式是让拟合的直线最贴近原始的数据，使预测值和真实值的差异（即<em>残差</em>）平方和最小。之所以要附加一个平方，是因为残差可正可负，通过平方可以消除符号带来的影响。</p>
+
+<p>使用残差平方和，可以建立一个具体的指标来描述数据和模型的拟合程度：当残差平方和最小，说明预测值和真实值的差异最小，回归直线的拟合更好。并且这个指标是具体的，易于通过程序计算最小值。</p>
+
+<p>这种衡量模型与实际样本误差指标的函数称为成本函数或<strong>代价函数</strong>(cost function)，当代价函数取值最小时，说明模型与实际值的误差就最小，那么模型拟合效果就最好。</p>
+
+<p>为了确定最好的逻辑回归模型，也需要一个类似的代价函数去描述它的误差。类似线性回归，同样可以使用预测值和真实值的差值作为样本的误差，只不过预测值是连续的概率，而真实值是连续的类型。这样，每个样本的代价函数定义为：</p>
+
+<div class="math">
+\\[
+    \mathrm{cost}(h_\theta (\boldsymbol{x}), y) = \begin{cases}
+        -\log(h_\theta (\boldsymbol{x})) & \text{if} \quad y = 1 \\
+        -\log(1 - h_\theta (\boldsymbol{x})) & \text{if} \quad y = 0
+    \end{cases}
+\\]
+</div>
+
+<p>逻辑回归计算的概率是相对类型“ 1 ”而言的，因此对于类型“ 0 ”的概率要用 1 减去该值。取对数的原因是为了让概率接近 1（与实际分类结果接近）时，误差将变得很小；而概率接近 0（完全分错类了）时，误差将变得非常大，从而防止为了让边界上的一些样本取得更大的概率错误地挪动边界，而将某个样本置于明显错误的位置的情况。最后考虑到误差越小，代价函数也应该越小，再给对数结果取相反值。</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-cost-function-why-log.png" alt="" width="440">
+    <figcaption>为什么要取对数：严格的计算表明不取对数时会使用不好的决策边界</figcaption>
+</figure>
+
+<p>最终整个模型的代价函数是每个样本代价函数的和，有时再除去样本个数：</p>
+
+<div class="math">
+\\[
+    J(\boldsymbol{\theta}) = \frac 1 n \sum_{i=1}^{n} \mathrm{cost}(h_\theta (\boldsymbol{x_i}), y_i)
+\\]
+</div>
+
+<p>为了让模型最贴近实际样本，需要让代价函数最小，也就是让代价函数的导数等于 0 。但是没有直接得出结果的公式（闭式解），因此需要别的方法来得出最小值。下面介绍一个使用最广泛的方法：梯度下降法。</p>
+
+<h3>梯度下降</h3>
+
+<p>假设一个人被困在遍布密林的深山中，无法判断当前所处的位置，那么快速下山的一种策略就是沿着最陡的方向下坡。这就是<strong>梯度下降</strong>(gradient descent)法的基本原理：通过计算当前参数 <span class="math">\\( \boldsymbol{\theta} \\)</span> 下代价函数的局部梯度，并不断沿着降低梯度的方向调整参数 <span class="math">\\( \boldsymbol{\theta} \\)</span> ，直到梯度降为 0 ，说明代价函数取得极小值：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-gradient-descent.png" alt="" width="440">
+    <figcaption>图片来源于网络</figcaption>
+</figure>
+
+<p>第一个 <span class="math">\\( \boldsymbol{\theta} \\)</span> 值可以随机选择，每次执行梯度下降都会使代价函数降低一些。最终收敛得到一个极小值：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-gradient-descent-steps.png" alt="" width="300">
+</figure>
+
+<p>不同的梯度下，参数沿着能让代价函数下降方向改变的步长也不一样：如果梯度较平缓，那么步长应该小一些，以免错过了极小值。步长的改变量取决于<strong>学习率</strong>(learning rate)，学习率越高则参数的改变程度也越大，具体由以下公式确定：</p>
+
+<div class="math">
+    \\[
+        \theta_j \Leftarrow \theta_j - \alpha \frac{\partial}{\partial \theta_j}J(\theta)
+    \\]
+</div>
+
+<p>可以看出，学习率对梯度下降结果很重要：低下的学习率将会使算法需要太多次迭代才能达到极值点，而过高的学习率则可能使算法直接越过极值点到达对坡面，甚至在这一过程中发散而永远无法到达极值点：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-gradient-descent-steps-bad-1.png" alt="" width="540">
+</figure>
+
+<p>并且梯度下降得到的是极值点，但未必是最值点，下图展示了这种情况：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-gradient-descent-steps-bad-2.png" alt="" width="320">
+</figure>
+
+<p>这就要求代价函数尽量是一个凸(convex)函数，它的极值就是最值。凸函数也便于自动计算合适的学习率。可以证明逻辑回归的代价函数是一个凸函数，它求偏导的结果如下：（省略过程）</p>
+
+<div class="math">
+\\[
+    \frac{\partial}{\partial \theta_j}J(\theta)=\frac 1 n \sum_{i=1}^{n}[h_\theta(x_i)-y_i]x_{i(j)}
+\\]
+</div>
+
+<p>因此逻辑回归可以很好地使用梯度下降算法得到具有最小误差的最好模型。下图展示了一个逻辑回归模型是如何从最开始的随机参数，经由梯度下降收敛到最优参数的：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-output-gradient-descent-steps.jpg" alt="" width="380">
+</figure>
+
+<p>总的来说，梯度下降是一种非常通用的优化算法，适用于很多找最优解的问题中。梯度下降也有许多改进版本，进一步拓宽了它的适用范围。</p>
+
+<h3>正则化下的逻辑回归模型</h3>
+
+<p>在线性回归模型中介绍过在拟合现有数据时可能因为设置太高次项而导致的过拟合问题，在逻辑回归中也可能存在这种情况。例如，以下是某个逻辑回归模型中因为异常数据而带来的过拟合：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-logistic-overfitting.jpg" alt="" width="390">
+</figure>
+
+<p>这个决策边界显然是不合理的。可以像线性回归一样给代价函数加上正则化约束项，从而防止决策边界取得过大的参数而过于复杂。</p>
+
+<p>具体来说，常用的正则化项有如下两个：</p>
+
+<ol>
+    <li>L1 正则化项：<span class="math">\\( \displaystyle{\frac{\alpha}{2n}\sum_{j=0}^{n}\theta_j^2} \\)</span></li>
+    <li>L2 正则化项：<span class="math">\\( \displaystyle{\frac{\alpha}{2n}\sum_{j=0}^{n}|\theta_j|} \\)</span></li>
+</ol>
+
+<p>这实际上就是线性回归中介绍的岭回归和 LASSO 回归使用的正则化项。以下是使用正则化项后的模型，可以看到过拟合的情况明显改善了很多：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-logistic-overfitting-prevent.jpg" alt="" width="390">
+</figure>
+
+<h3>Scikit-Learn中的逻辑回归模型</h3>
+
+<p>最后简单介绍使用 Scikit-Learn 建立逻辑回归模型的方法，它和线型回归模型遵循同样的接口，例如建立模型：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span><span style="color: #90a4ae;"> sklearn</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">linear_model </span><span style="color: #39adb5;font-weight: bold;">import</span><span style="color: #90a4ae;"> LogisticRegression</span></div><br><div><span style="color: #90a4ae;">model </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> LogisticRegression</span><span style="color: #39adb5;">()</span></div><div><span style="color: #90a4ae;">model</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">fit</span><span style="color: #39adb5;">(</span><span style="color: #90a4ae;">X</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> y</span><span style="color: #39adb5;">)</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output"><div class="sklearn-model"><p>LogisticRegression()</p></div></div>
+</div>
+
+<p>以及对新的样本作出预测，由于逻辑回归是解决分类问题，因此预测得到的是一个离散的结果：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #90a4ae;">model</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">predict</span><span style="color: #39adb5;">([[</span><span style="color: #f76d47;">270</span><span style="color: #39adb5;">],</span><span style="color: #90a4ae;"> </span><span style="color: #39adb5;">[</span><span style="color: #f76d47;">295</span><span style="color: #39adb5;">],</span><span style="color: #90a4ae;"> </span><span style="color: #39adb5;">[</span><span style="color: #f76d47;">305</span><span style="color: #39adb5;">],</span><span style="color: #90a4ae;"> </span><span style="color: #39adb5;">[</span><span style="color: #f76d47;">320</span><span style="color: #39adb5;">]])</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">array([0, 0, 1, 1])</div>
+</div>
+
+<p>逻辑回归的特点就是使用概率确定所属的分类，在代码中可以使用 <code>.predict_proba()</code> 方法来获取这个概率：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #90a4ae;">model</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">predict_proba</span><span style="color: #39adb5;">([[</span><span style="color: #f76d47;">270</span><span style="color: #39adb5;">],</span><span style="color: #90a4ae;"> </span><span style="color: #39adb5;">[</span><span style="color: #f76d47;">297</span><span style="color: #39adb5;">],</span><span style="color: #90a4ae;"> </span><span style="color: #39adb5;">[</span><span style="color: #f76d47;">300</span><span style="color: #39adb5;">],</span><span style="color: #90a4ae;"> </span><span style="color: #39adb5;">[</span><span style="color: #f76d47;">320</span><span style="color: #39adb5;">]])</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">array([[9.99411784e-01, 5.88216310e-04],
+       [6.59217705e-01, 3.40782295e-01],
+       [4.76691144e-01, 5.23308856e-01],
+       [5.97572205e-03, 9.94024278e-01]])</div>
+</div>
+
+<p>相比线性回归，逻辑回归模型多了很多超参数，其中许多参数都涉及本文介绍的内容，接下来介绍其中的一部分：</p>
+
+<div class="codeblock code-template">
+LogisticRegression(<br>
+&nbsp; &nbsp; <em>penalty</em>="l2",<br>
+&nbsp; &nbsp; <em>l1_ratio</em>=None,<br>
+&nbsp; &nbsp; <em>C</em>=1.0,<br>
+&nbsp; &nbsp; <em>tol</em>=1e-4,<br>
+&nbsp; &nbsp; <em>max_iter</em>=100,<br>
+&nbsp; &nbsp; <em>verbose</em>=0,<br>
+&nbsp; &nbsp; <em>multi_class</em>="auto"<br>
+)
+</div>
+
+<p>参数 <code><em>penalty</em></code> 指定使用的正则化项，如果设置为 <code>"none"</code> 代表不使用正则化。除了前面介绍的 <code>"l1"</code> 和 <code>"l2"</code> 两种正则化之外，还可以使用一种称为“弹性网络” <code>"elasticnet"</code> 的正则化项，它是 L1 和 L2 的混合形式，参数 <code><em>l1_ratio</em></code> 就控制着这种混合比例。参数 <code><em>C</em></code> 是大于 0 的正则化强度，但注意它不是系数，在这里值越小代表正则化效果越强。</p>
+
+<p>前文介绍了逻辑回归使用梯度下降的方式优化系数。但浮点运算并不是完全精确的，往往不会出现导数正好为 0 的情况。参数 <code><em>tol</em></code> 决定了它的收敛条件：如果相邻两次计算的步长小于这个值，说明结果已经足够精确，可以不继续算下去。如果达到了 <code><em>max_iter</em></code> 代表的最大迭代次数还是无法找到这样一个收敛条件，那么说明模型可能存在问题，则停止继续计算。</p>
+
+<p><code><em>verbose</em></code> 是一个较为通用的参数，启用后会输出一些运算过程信息，并且数字越大，信息也越多。</p>
+
+<p>以上介绍的逻辑回归只能处理二分类问题，但无法解决多个分类的情况，原因在于所使用的概率函数不能同时描述多个分类的概率。如果尝试使用 Scikit-Learn 中的逻辑回归模型处理多分类问题，会发现它仍然可以正常工作并得到较为正确的结果：</p>
+
+<div class="jupyter codeblock">
+    <div class="jupyter-mark-in"></div>
+    <div class="vscode-block"><div><span style="color: #90a4ae;">X </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> np</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">array</span><span style="color: #39adb5;">([</span><span style="color: #f76d47;">267</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> </span><span style="color: #f76d47;">273</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> </span><span style="color: #f76d47;">278</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> </span><span style="color: #f76d47;">319</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> </span><span style="color: #f76d47;">325</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> </span><span style="color: #f76d47;">333</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> </span><span style="color: #f76d47;">435</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> </span><span style="color: #f76d47;">447</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> </span><span style="color: #f76d47;">456</span><span style="color: #39adb5;">]).</span><span style="color: #90a4ae;">reshape</span><span style="color: #39adb5;">(</span><span style="color: #7c4dff;">-</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> </span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">)</span></div><div><span style="color: #90a4ae;">y </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> np</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">array</span><span style="color: #39adb5;">([</span><span style="color: #f76d47;">0</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> </span><span style="color: #f76d47;">0</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> </span><span style="color: #f76d47;">0</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> </span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> </span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> </span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> </span><span style="color: #f76d47;">2</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> </span><span style="color: #f76d47;">2</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> </span><span style="color: #f76d47;">2</span><span style="color: #39adb5;">])</span></div><div><span style="color: #90a4ae;">model </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> LogisticRegression</span><span style="color: #39adb5;">().</span><span style="color: #90a4ae;">fit</span><span style="color: #39adb5;">(</span><span style="color: #90a4ae;">X</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> y</span><span style="color: #39adb5;">)</span></div><div><span style="color: #90a4ae;">model</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">predict</span><span style="color: #39adb5;">([[</span><span style="color: #f76d47;">270</span><span style="color: #39adb5;">],</span><span style="color: #90a4ae;"> </span><span style="color: #39adb5;">[</span><span style="color: #f76d47;">320</span><span style="color: #39adb5;">],</span><span style="color: #90a4ae;"> </span><span style="color: #39adb5;">[</span><span style="color: #f76d47;">440</span><span style="color: #39adb5;">]])</span></div></div>
+    <div class="jupyter-mark-out"></div>
+    <div class="jupyter-output">array([0, 1, 2])</div>
+</div>
+
+<p>参数 <code><em>multi_class</em></code> 就是为了解决多分类问题而设置的。接下来介绍如何使用逻辑回归处理多分类问题。</p>
+
+<h2>多分类下的逻辑回归</h2>
+
+<h3>一对多方法</h3>
+
+<p>为了实现多分类，可以使用一种简单的变换方法：将多分类模型转换为多个二分类模型。具体来说，假设有 A 、B 、C 三个分类，那么可以使用以下三个模型描述它：</p>
+
+<ol>
+    <li>属于(1)和不属于(0)分类 A</li>
+    <li>属于(1)和不属于(0)分类 B</li>
+    <li>属于(1)和不属于(0)分类 C</li>
+</ol>
+
+<p>可以单独建立这几个二分类模型，对于每个模型都将另外两类看成一个整体，然后组合它们得到的结果：如果在模型 1 中“属于(1)”的分数比模型 2 和 3 的“属于(1)”都高，那么说明更可能属于分类 A 。</p>
+
+<p>这等价于参数 <code><em>multi_class</em>="ovr"</code> 。</p>
+
+<h3>softmax回归</h3>
+
+<p>还有一种方法也可以处理多分类情况：既然之前使用的概率函数不能同时描述多个分类的概率，那么也可以更换一个概率函数。具体说来，可以将概率函数转换为更贴近概率定义的分数形式：</p>
+
+<div class="math">
+\\[
+    P(y=k)=\frac{\displaystyle{{\Large e}^{\displaystyle{s_k(\boldsymbol{x})}}}}{\displaystyle{\sum_{j=1}^{K} {\Large e}^{\displaystyle{s_j(\boldsymbol{x})}}}}
+\\]
+</div>
+
+<p>这种形式的逻辑回归称为 softmax 回归，它本质上是逻辑回归的推广形式。对于每一个类别，softmax 回归都使用不同的参数去表示它的概率形式：</p>
+
+<div class="math">
+\\[
+    s_k(\boldsymbol{x}) = \boldsymbol{x}^T\boldsymbol{\theta}_k
+\\]
+</div>
+
+<p>这等价于参数 <code><em>multi_class</em>="multinomial"</code> 。但很明显，这种新的概率函数不能再用之前的代价函数去描述它的误差了，并且新的代价函数也不能像之前的函数那么定义：概率最多就为 1 ，根据无法表达与类别“ 2 ”的误差。一般来说，softmax 回归使用交叉熵作为它的代价函数，其公式如下：</p>
+
+<div class="math">
+\\[
+    J(\boldsymbol{\Theta}) = - \frac 1 n \sum_{i=1}^{n}\sum_{k=1}^{K} y_k^{(i)}\log (P(y^{(i)} = k))
+\\]
+</div>
+
+<p>注意这里使用参数矩阵 <span class="math">\\( \boldsymbol{\Theta} \\)</span> 来存储每个类别的参数向量 <span class="math">\\( \boldsymbol{\theta} \\)</span> 。如果想知道为什么 softmax 回归这样定义以及为什么使用交叉熵作为代价函数，请参阅相关资料。</p>
+
+<p>总的来说，逻辑回归作为一种简单的分类算法，模型简单且数学上易于分析，具有运算速度快，对预处理要求少，可以得出概率便于进一步分析等优点。不过逻辑回归的实际分类准确率并不高，特别是可能无法处理一个分类形成多个群落的情况，因此一般只用于处理简单的分类问题。</p>
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/embedded/mcu-application/lvgl-01-migration/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/LVGL库入门教程01-移植到STM32-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/06/LVGL库入门教程01-移植到STM32-520x293.jpg 520w, /wp-content/uploads/2022/06/LVGL库入门教程01-移植到STM32-300x169.jpg 300w, /wp-content/uploads/2022/06/LVGL库入门教程01-移植到STM32-1024x576.jpg 1024w, /wp-content/uploads/2022/06/LVGL库入门教程01-移植到STM32-768x432.jpg 768w, /wp-content/uploads/2022/06/LVGL库入门教程01-移植到STM32-1536x864.jpg 1536w, /wp-content/uploads/2022/06/LVGL库入门教程01-移植到STM32-950x534.jpg 950w, /wp-content/uploads/2022/06/LVGL库入门教程01-移植到STM32.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/embedded/mcu-application/lvgl-01-migration/" rel="bookmark">LVGL库入门教程01-移植到STM32</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python/python3-string-format/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/02/Night-Street-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/02/Night-Street-520x293.jpg 520w, /wp-content/uploads/2022/02/Night-Street-300x169.jpg 300w, /wp-content/uploads/2022/02/Night-Street-1024x576.jpg 1024w, /wp-content/uploads/2022/02/Night-Street-768x432.jpg 768w, /wp-content/uploads/2022/02/Night-Street-1536x864.jpg 1536w, /wp-content/uploads/2022/02/Night-Street-950x534.jpg 950w, /wp-content/uploads/2022/02/Night-Street.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python/python3-string-format/" rel="bookmark">Python3 字符串格式化</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-fp/03-functional-programming/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-fp/03-functional-programming/" rel="bookmark">Python函数式编程03 高阶函数与匿名函数</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/data-science/machine-learning/04-support-vector-machine/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>机器学习-支持向量机</span></a></li>
+		<li class="previous"><a href="/data-science/machine-learning/03-naive-bayes/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>机器学习-朴素贝叶斯</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

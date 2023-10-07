@@ -1,0 +1,797 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Python函数式编程07 生成器 - 冰封残烛的个人小站</title>
+	<meta name="description" content="在 Python 中，如果一个函数使用yield关键字得到数据，那么该函数就称为生成器函数。生成器是一种特殊的数据类型，生成器只在需要的时候，才会产生具体的值；生成器在产生一个值时，会将上一次产生的值抛弃。生成器是 Python 的一大特性，使用生成器可以让代码变得更加简洁、优雅。" />
+	<link rel="canonical" href="/programming/python-fp/07-generators/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Python函数式编程07 生成器 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="在 Python 中，如果一个函数使用yield关键字得到数据，那么该函数就称为生成器函数。生成器是一种特殊的数据类型，生成器只在需要的时候，才会产生具体的值；生成器在产生一个值时，会将上一次产生的值抛弃。生成器是 Python 的一大特性，使用生成器可以让代码变得更加简洁、优雅。" />
+	<meta property="og:url" content="/programming/python-fp/07-generators/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2022-05-29T04:55:09+00:00" />
+	<meta property="article:modified_time" content="2023-10-05T02:59:26+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2022/05/Python函数式编程07-生成器.jpg" />
+	<meta property="og:image:width" content="1920" />
+	<meta property="og:image:height" content="1080" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="3分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/programming/python-fp/07-generators/#primaryimage",
+	            "url": "/wp-content/uploads/2022/05/Python函数式编程07-生成器.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/05/Python函数式编程07-生成器.jpg",
+	            "width": 1920,
+	            "height": 1080
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/programming/python-fp/07-generators/#webpage",
+	            "url": "/programming/python-fp/07-generators/",
+	            "name": "Python函数式编程07 生成器 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/programming/python-fp/07-generators/#primaryimage"
+	            },
+	            "datePublished": "2022-05-29T04:55:09+00:00",
+	            "dateModified": "2023-10-05T02:59:26+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "在 Python 中，如果一个函数使用yield关键字得到数据，那么该函数就称为生成器函数。生成器是一种特殊的数据类型，生成器只在需要的时候，才会产生具体的值；生成器在产生一个值时，会将上一次产生的值抛弃。生成器是 Python 的一大特性，使用生成器可以让代码变得更加简洁、优雅。",
+	            "breadcrumb": {
+	                "@id": "/programming/python-fp/07-generators/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/programming/python-fp/07-generators/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/programming/python-fp/07-generators/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "Python函数式编程07 生成器"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/262" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=262' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython-fp%2F07-generators%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython-fp%2F07-generators%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><link rel="stylesheet" href="/wp-content/static/css/theme@pie.wp.css">
+<style>
+    .math { color:blue; font-size: 13px; }
+    div.vscode-block { color: #405C79; background-color: #F7F9FB; }
+</style>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['\\\\(','\\\\)']],
+            displayMath: [["\\\\[","\\\\]"]]
+        }
+    });
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-262 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-262" class="post-262 post type-post status-publish format-standard has-post-thumbnail hentry category-python-fp">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">Python函数式编程07 生成器</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/programming/python-fp/" rel="category tag">Python函数式编程</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年5月29日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+
+
+
+<h2>生成器的概念</h2>
+
+<h3>为什么需要生成器</h3>
+
+<p>在 Python 中，如果一个函数不使用 <code>return</code> 关键字返回数据，而是使用 <code>yield</code> 关键字得到数据，那么该函数就称为<strong>生成器函数</strong>。也就是说，生成器函数的特征为：</p>
+
+<div class="codeblock code-template">
+    <strong>def</strong> function(...):<br>
+    &nbsp; &nbsp; ...  # statements <br>
+    &nbsp; &nbsp; <strong>yield</strong> expression
+</div>
+
+<p>既然可以使用返回值，为什么需要生成器这种奇怪的语法？下面通过一个示例来说明函数存在的不足。</p>
+
+<p>重新回到之前编写的生成斐波那契数列的函数，该函数的代码如下：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">fibonacci</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">n</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; result = []</span></div><div><span style="color: #405c79;">&#160; &#160; a, b = </span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">1</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">while</span><span style="color: #405c79;"> a &lt; n:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; result.append(a)</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; a, b = b, a + b</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> result</span></div></div>
+
+<p>既然编写了这个函数，那么它肯定就会有用得到的地方。例如，假设要从斐波那契数列中找到是否存在一个完全平方数，那么可以再编写一个函数 <code>issquare()</code> ，然后使用以下代码判断：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i in fibonacci(</span><span style="color: #bf8b56;">1000</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> issqare(i):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #a8a8a8;"># do something</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">break</span></div></div>
+
+<p>这种形式有一个明显的不足，注意在程序中，调用了两次循环：一次用于挨个生成斐波那契数列的元素，另一次用于从得到的斐波那契数列中挨个判断是否满足条件，这就会造成有一半的时间都会浪费在重复地将一个无用的元素塞入列表，然后再取出上。</p>
+
+<p>除此之外，这个函数还返回了一个列表，这是另一个问题：如果要判断的数据量很多，那么这个列表也势必很大，但是真正要用到的值只有一个，那么这个列表又浪费了太多无用的空间。而且必须得等到列表生成完毕以后，再去列表中取值；但问题是在生成列表时，还不知道结果是多少，那么也不知道生成的列表到底要多大，这样要么得到的列表长度不足，其中不包含结果；要么得到的列表结果过大，其中包含了许多压根不会用上的元素。</p>
+
+<p>这样的缺点不仅降低了效率，还可能招致严重的问题。</p>
+
+<p>如果是在命令式编程，那么只需要在同一个循环内，在生成元素的时候顺便判断一下结果是否满足就行了。当然也可以把它封装成一个函数，但是如果判断斐波那契数列中是否存在平方数这种宏观的问题都需要用一个函数处理的话，那么判断斐波那契数列中素数的个数是否大于 10 个是否也要编写一个函数？这种问题塞到一个函数显然不够合适，因为它处理的问题太过细致了，这种函数显然不会用很多次，如果程序中都是这样不太能复用的函数，那么肯定不够合适。</p>
+
+<p>生成器就是为了解决以上问题的。接下来先介绍生成器的特征，这样可以更好地明白使用生成器解决上述问题的优点所在。</p>
+
+<h3>什么是生成器</h3>
+
+<p>首先看看 <code>yield</code> 关键字会得到什么样的结果，以下编写了一个最基本的生成器函数：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">func</span><span style="color: #405c79;">():</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">yield</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">3</span></div></div>
+
+<p>然后检查一下函数对象：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; func
+&lt;function func at 0x0000013CD9737C10&gt;
+</div>
+
+<p>结果表明函数依旧是函数，这点没有发生改变。那么再试着调用一下函数：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; func()
+&lt;generator object func at 0x0000013CD934F890&gt;</div>
+
+<p>调用函数的结果显示，该函数返回了一个生成器对象。</p>
+
+<p><strong>生成器</strong>(generator)是一种特殊的数据类型，生成器只在需要的时候，才会产生具体的值，这就避免了时间上的浪费；生成器在产生一个值时，会将上一次产生的值抛弃，这就避免了空间上的浪费。生成器是 Python 的一大特性，使用生成器可以让代码变得更加简洁、优雅。</p>
+
+<p>以上说法可能只能让人似懂非懂，下面结合一个具体的示例说明。以下将上面的斐波那契函数改成生成器函数的形式，如下所示：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">fibonacci</span><span style="color: #405c79;">():</span></div><div><span style="color: #405c79;">&#160; &#160; a, b = </span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">1</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">while</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">True</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">yield</span><span style="color: #405c79;"> a</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; a, b = b, a + b</span></div></div>
+
+<p>一个生成器最基本、最实用的用法就是使用 <code>for</code> 循环对生成器迭代，每一次迭代过程中，如果遇到 <code>yield</code> 语句，那么<mark>后面的表达式就会被作为<em>本次迭代</em>的结果返回</mark>给中间变量如 <code>i</code> 后续利用。</p>
+
+<p>这也揭示出了生成器函数与普通函数的区别：</p>
+
+<ul>
+    <li>普通函数在执行到 <code>return</code> 语句后就终止，后面的所有语句都会被忽略；生成器函数执行到 <code>yield</code> 语句后，只是暂时将结果返回，下一次遍历时，又会从暂停的位置继续执行下去</li>
+    <li>因此，一个生成器函数在执行时，可以遇到多个<code>yield</code> 语句；普通函数虽然可以串列多个 <code>return</code> 语句，但是遇到第一个语句后就会终止</li>
+    <li>也正是因为这个特点，生成器会在迭代过程中一直保存其中的局部变量，直到迭代结束</li>
+</ul>
+
+<p>以下示例展示了生成器的用法：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i in fibonacci():</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(i, </span><span style="color: #bf8b56;">end</span><span style="color: #405c79;">=</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;"> </span><span style="color: #405c79;">'</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> i &gt; </span><span style="color: #bf8b56;">30</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">break</span></div></div>
+
+<p>以上代码的执行结果为：</p>
+
+<div class="codeblock code-console">$ python -u demo.py
+0 1 1 2 3 5 8 13 21 34</div>
+
+<p>这里简单分析一下程序的执行过程，首先生成器函数执行到 <code>yield</code> 语句时，变量 <code>a</code> 的值是 0 ，因此 0 被作为生成结果传递给迭代的中间变量 <code>i</code> ；第二次进入迭代时函数从 yield 语句后继续运行，变量的值发生改变，<code>a</code> 变成了 1 ，再次作为生成结果传递给迭代的中间变量；以此类推，第三次执行到 <code>yield</code> 时返回的结果是 1 ，第四次是 2 ……。</p>
+
+<blockquote>
+    <p>使用集成开发环境的读者可以使用 debug 功能，对程序下断点，进一步观察每一步代码是如何执行、变量的值是如何变化的。</p>
+</blockquote>
+
+<p>下图表示了这一过程：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@python-fp/07-generator-procedure.jpg" alt="" width="330">
+</figure>
+
+<p>最后，在外部使用 <code>break</code> 语句强行终止了这一过程。如果不手动终止的话，迭代会一直发生下去，生成器可以一直生成新的值出来，因此这类的生成器也称为<strong>无限生成器</strong>。这又是生成器相对普通函数的优点：普通函数不可能返回一个具有无穷长度的列表，但是生成器可以一直源源不断地计算新的结果。</p>
+
+<p>可以从这个角度理解：函数返回的是结果，而生成器返回的是<em>过程</em>。</p>
+
+<p>实际上，在第四节中介绍的内置函数 <code>map()</code> 、<code>enumerate()</code> 等，得到的结果就是一个类似生成器的对象。</p>
+
+<h3>生成器与生成器函数</h3>
+
+<p>前面介绍了生成器的概念，并通过示例展示了生成器的用法。但是注意，生成器在使用时有一些注意事项。</p>
+
+<p>以上提到了一个基本的事实：生成器函数在调用时，才会返回一个生成器。但是注意，在介绍生成器时，还提到了：<mark>生成器在产生一个值时，会将上一次产生的值抛弃</mark> 。这种性质虽然节约了空间的开销，但也使得一个生成器只能被迭代一次，一旦调用完成后该值便不再保存在内存当中，因此生成器中生成的值只能访问一次。</p>
+
+<p>为了理解这句话，给定以下生成器：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">odd</span><span style="color: #405c79;">():</span></div><div><span style="color: #405c79;">&#160; &#160; i = </span><span style="color: #bf8b56;">0</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">while</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">True</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">yield</span><span style="color: #405c79;"> i * </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;"> + </span><span style="color: #bf8b56;">1</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; i += </span><span style="color: #bf8b56;">1</span></div></div>
+
+<p>第一次对生成器迭代的结果很正常：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; for i in g1:
+...     print(i, end=' ')
+...     if i > 15:
+...         break
+...
+0 2 4 6 8 10 12 14 16</div>
+
+<p>但是第二次生成的结果就有些变化了：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; for i in g1:
+...     print(i, end=' ')
+...     if i > 30:
+...         break
+...
+18 20 22 24 26 28 30 32</div>
+
+<p>这一次，生成器是顺着上一次的结果继续执行了下去，这说明前面的值都被抛弃了，再也访问不到了。或者也可以从生成器的执行过程分析：生成器还没执行完成，只是这一过程暂停了。</p>
+
+<p>因此，以下两种使用生成器的方式：</p>
+
+<div class="vscode-block"><div><span style="color: #a8a8a8;"># 1</span></div><div><span style="color: #405c79;">g2 = odd()</span></div><div><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i in g2:</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf8b56;">...</span></div><div><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i in g2:</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf8b56;">...</span></div><div><span style="color: #a8a8a8;"># 2</span></div><div><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i in odd():</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf8b56;">...</span></div><div><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i in odd():</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf8b56;">...</span></div></div>
+
+<p>得到的是完全不同的结果，因为第一次只创建了一个生成器，第二次创建了两个生成器。</p>
+
+<p>这种特性是生成器的优点，但它有时也会带来问题。因为生成器的迭代可能是显式的，也有可能是隐式的，有些时候生成器在生成值时难以被察觉。考虑以下简单的函数：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">average</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">l</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">sum</span><span style="color: #405c79;">(l) / </span><span style="color: #8b56bf;">len</span><span style="color: #405c79;">(</span><span style="color: #bf568b;">tuple</span><span style="color: #405c79;">(l))</span></div></div>
+
+<p>该函数用于求一个序列或可迭代对象的平均值，为了弥补 <code>len()</code> 函数不可作用于可迭代对象的缺点，它在内部将其转换为元组。但是真正使用的结果可能出乎意料：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; average(map(lambda x: x ** 2, range(10)))
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+  File "&lt;stdin&gt;", line 2, in average
+ZeroDivisionError: division by zero</div>
+
+<p>这段代码直接产生了错误。不过定义的函数不长，稍微分析就能发现问题所在：序列的长度变成 0 了，因此发生了错误。</p>
+
+<p>这就是对同一个生成器两次迭代带来的后果，在第一次使用 <code>sum()</code> 函数时，它就会隐式迭代生成器，迭代完成后，生成器就变空了，因此第二次得到的是一个空序列，自然就会出错。</p>
+
+<h2>生成器的高级用法</h2>
+
+<h3>生成器与递归调用</h3>
+
+<p>普通的函数允许递归，通过在函数中调用自身是实现循环的一种方式。而生成器函数有时为了实现类似迭代生成的功能，也会需要类似递归的用法。</p>
+
+<p>考虑以下生成器，该生成器用于将一个任意嵌套的列表碾平成一维列表：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">ls = [</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">1</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, [</span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">, </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">a</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, [[</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">hello</span><span style="color: #405c79;">'</span><span style="color: #405c79;">], </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">w</span><span style="color: #405c79;">'</span><span style="color: #405c79;">], </span><span style="color: #bf8b56;">6</span><span style="color: #405c79;">], [[[</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">o</span><span style="color: #405c79;">'</span><span style="color: #405c79;">]], </span><span style="color: #bf8b56;">7</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">9</span><span style="color: #405c79;">], </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">d</span><span style="color: #405c79;">'</span><span style="color: #405c79;">]</span></div><br><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">flatten</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">nest</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i in nest:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> not </span><span style="color: #8b56bf;">isinstance</span><span style="color: #405c79;">(i, </span><span style="color: #bf568b;">list</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">yield</span><span style="color: #405c79;"> i</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">else</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf8b56;">...</span></div></div>
+
+<p>首先看看生成器该如何处理这种问题：首先生成器遍历列表的每一个元素，如果已经是一个基本的元素，那就将其生成出来。如果是一个嵌套的列表的话，那么应该将该列表内的元素生成出来，再次嵌套的列表继续作类似处理。</p>
+
+<p>上下级之间以相同的逻辑处理，这就很符合递归的一些特性。但是注意，如果按照普通函数递归的思路，可能有些人的第一印象是写作</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">yield</span><span style="color: #405c79;"> flatten(nest)</span></div></div>
+
+<p>这是完全错误的写法，因为仔细分析该语句的目的是生成出了一个生成器对象作为本次迭代的结果。回想一下，函数递归的特点是函数在函数体调用时，又在内部调用自身，是 <code>return func()</code> 这种嵌套调用的形式而不是 <code>return func</code> 直接把函数对象返回。</p>
+
+<p>类比这种特点，那么生成器在递归时，也应该是生成器函数在生成值时，包含了一个自身的生成器，并将自身生成的结果作为生成的结果。</p>
+
+<p>这种说法可能有点绕，下面借用代码说明。以下是函数递归的特性，函数在调用时，又在内部调用自身：</p>
+
+<div class="codeblock code-template">
+    func(...)&nbsp; <span class="codetoken comment"># function call</span><br>
+    <strong>=></strong> func(...)&nbsp; <span class="codetoken comment"># nested function call</span>
+</div>
+
+<p>那么，生成器函数的递归思路也是如此。生成器函数在迭代时，又在内部迭代自身：</p>
+
+<div class="codeblock code-template">
+    <strong>for</strong> i in gener(...):<br>
+    &nbsp; &nbsp; ...&nbsp; &nbsp; <span class="codetoken comment"># generator iterate</span><br>
+    <strong>=></strong> <strong>for</strong> i in gener():<br>
+    <strong>=></strong> &nbsp; &nbsp; &nbsp; ...&nbsp; <span class="codetoken comment"># nested generator iterate</span>
+</div>
+
+<p>这样，上述生成器递归部分的代码为：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> k in flatten(i):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">yield</span><span style="color: #405c79;"> k</span></div></div>
+
+<p>生成器在迭代自身时，自身的迭代过程又迭代了自身，这就是递归的过程。</p>
+
+<p>以上代码的检验结果为：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; list(flatten(ls))
+['1', 2, 'a', 'hello', 'w', 6, 'o', 7, 9, 'd']</div> 
+
+<p>可以看到它很好地完成了工作。并且这种情况下生成器比函数的递归调用方便，因为这种混乱嵌套的列表，很难将其拆解成上下级的递推关系。</p>
+
+<p>实际上，Python 中还新增了组合关键字 <code>yield from</code> ，用于生成器的递归调用。也就是说，以上递归部分可以简单地改成：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">yield from</span><span style="color: #405c79;"> flatten(i)</span></div></div>
+
+<p>这样的表述非常清晰，每次遇到一个 <code>yield from</code> ，就转从另一个生成器里面生成结果，这样就实现了生成器的递归。</p>
+
+<p>以下再次给出了一个生成器函数示例，该生成器函数从一个给定的文件夹中找出文件，如果遇到嵌套的文件夹，它便递归地从嵌套的文件夹中找出包含的文件：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">import</span><span style="color: #405c79;"> os</span></div><br><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">get_files</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">dir</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> f in os.listdir(</span><span style="color: #8b56bf;">dir</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; path = os.path.join(</span><span style="color: #8b56bf;">dir</span><span style="color: #405c79;">, f)</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> os.path.isfile(path):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">yield</span><span style="color: #405c79;"> path</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">else</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">yield from</span><span style="color: #405c79;"> get_files(path)</span></div></div>
+
+<p>这样就可以实现文件的搜索功能。</p>
+
+<h3>生成器表达式</h3>
+
+<p>除了使用函数和 <code>yield</code> 关键字创建生成器外，简短的生成器还有另一种创建方式：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">g = (i ** </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;"> </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i in </span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">1000</span><span style="color: #405c79;">) </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> isprime(i))</span></div></div>
+
+<p>熟悉列表解析语法的读者应该可以很容易理解它的语法。列表解析的介绍可以参见 <a href="javascript: alert('还没发布呢')">这篇文章</a> 。</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; g
+&lt;generator object &lt;genexpr&gt; at 0x0000013CD934F890&gt;
+&gt;&gt;&gt; type(g)
+&lt;class 'generator'&gt;</div>
+
+<p>这种最外层使用圆括号的语法不是什么元组解析，而是生成器表达式，它本质就是一个生成器。这种短小的生成器表达式一般用于简单的应用场景中。</p>
+
+<!-- finished(all):2022-05-27 -->
+
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-fp/03-functional-programming/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-fp/03-functional-programming/" rel="bookmark">Python函数式编程03 高阶函数与匿名函数</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/computer-science/data-structure/06-heap/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/08/数据结构06-优先队列堆-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/08/数据结构06-优先队列堆-520x293.jpg 520w, /wp-content/uploads/2022/08/数据结构06-优先队列堆-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/computer-science/data-structure/06-heap/" rel="bookmark">数据结构06-优先队列(堆)</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/embedded/mcu-application/lvgl-06-animations/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/LVGL库入门教程06-动画-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/LVGL库入门教程06-动画-520x293.jpg 520w, /wp-content/uploads/2022/06/LVGL库入门教程06-动画-300x169.jpg 300w, /wp-content/uploads/2022/06/LVGL库入门教程06-动画-1024x576.jpg 1024w, /wp-content/uploads/2022/06/LVGL库入门教程06-动画-768x432.jpg 768w, /wp-content/uploads/2022/06/LVGL库入门教程06-动画-1536x864.jpg 1536w, /wp-content/uploads/2022/06/LVGL库入门教程06-动画-950x534.jpg 950w, /wp-content/uploads/2022/06/LVGL库入门教程06-动画.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/embedded/mcu-application/lvgl-06-animations/" rel="bookmark">LVGL库入门教程06-动画</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/programming/python-fp/08-library-itertools/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>Python函数式编程08 itertools模块：更多迭代器</span></a></li>
+		<li class="previous"><a href="/programming/python-fp/05-recursions/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>Python函数式编程05 函数的递归</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

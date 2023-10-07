@@ -220,6 +220,11 @@ article>ol:first-child {
     margin: 0;
 }
 
+.entry ol::marker,
+.entry li::marker {
+    color: var(--primary-color);
+}
+
 .entry hr {
     box-sizing: content-box;
     width: 100%;

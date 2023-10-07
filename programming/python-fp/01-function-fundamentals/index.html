@@ -1,0 +1,824 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Python函数式编程01 函数的基本概念 - 冰封残烛的个人小站</title>
+	<link rel="canonical" href="/programming/python-fp/01-function-fundamentals/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Python函数式编程01 函数的基本概念 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="什么是函数 函数(function)是可以重复使用的&#046;&#046;&#046;" />
+	<meta property="og:url" content="/programming/python-fp/01-function-fundamentals/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2022-05-18T11:48:15+00:00" />
+	<meta property="article:modified_time" content="2023-10-05T02:34:43+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2022/05/Python函数式编程01-函数的基本概念.jpg" />
+	<meta property="og:image:width" content="2016" />
+	<meta property="og:image:height" content="1344" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="4分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/programming/python-fp/01-function-fundamentals/#primaryimage",
+	            "url": "/wp-content/uploads/2022/05/Python函数式编程01-函数的基本概念.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/05/Python函数式编程01-函数的基本概念.jpg",
+	            "width": 2016,
+	            "height": 1344
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/programming/python-fp/01-function-fundamentals/#webpage",
+	            "url": "/programming/python-fp/01-function-fundamentals/",
+	            "name": "Python函数式编程01 函数的基本概念 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/programming/python-fp/01-function-fundamentals/#primaryimage"
+	            },
+	            "datePublished": "2022-05-18T11:48:15+00:00",
+	            "dateModified": "2023-10-05T02:34:43+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "breadcrumb": {
+	                "@id": "/programming/python-fp/01-function-fundamentals/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/programming/python-fp/01-function-fundamentals/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/programming/python-fp/01-function-fundamentals/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "Python函数式编程01 函数的基本概念"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/210" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=210' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython-fp%2F01-function-fundamentals%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython-fp%2F01-function-fundamentals%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><link rel="stylesheet" href="/wp-content/static/css/theme@pie.wp.css">
+<style>
+    .math { color:blue; font-size: 13px; }
+    div.vscode-block { color: #405C79; background-color: #F7F9FB; }
+</style>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['\\\\(','\\\\)']],
+            displayMath: [["\\\\[","\\\\]"]]
+        }
+    });
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-210 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-210" class="post-210 post type-post status-publish format-standard has-post-thumbnail hentry category-python-fp">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">Python函数式编程01 函数的基本概念</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/programming/python-fp/" rel="category tag">Python函数式编程</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年5月18日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+<h2>什么是函数</h2>
+
+<p><strong>函数</strong>(function)是可以重复使用的代码片段。在不同的编程语言里，它可能有不同的称呼，例如子程序、方法、过程等。但它们的本质都是类似的。</p>
+
+<p>当经常性地遇到一种或一类的问题时，需要多次使用相同或类似的代码。这个时候，就可以将这一段代码编写成函数，利用函数来执行一种或一类功能，从而更加简洁、逻辑清晰。</p>
+
+<p>例如，考虑有以下列表：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">ls = [</span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">4</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">6</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">7</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">4</span><span style="color: #405c79;">]</span></div></div>
+
+<p>假设需要计算列表内所有元素的和，这个时候，一般来说可以编写以下代码：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">total = </span><span style="color: #bf8b56;">0</span></div><div><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i in ls:</span></div><div><span style="color: #405c79;">&#160; &#160; total += i</span></div></div>
+    
+<p>这当然没有问题。但是，如果每次遇到计算元素的和，都需要编写这样一段代码，不仅比较麻烦，而且还容易发生疏忽，编写完的程序看上去都是一些简单的命令，无法很快明白其具体用途。</p>
+
+<p>这个时候，一个更好的思路是将其抽象为一个过程，每次只需要表示需要处理一段类似的过程即可，至于具体的处理细节可以预先定义好。</p>
+
+<p>函数是具有一定功能的一些代码组成的一个抽象整体，在编写程序时往往只需要关注整体将实现哪些功能，而不需要明白具体的实现步骤如何。编程语言上的函数实质上很类似于数学上的函数。</p>
+
+<p>如果使用 Python 的内置函数(built-in functions)，以上代码可以代替为：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">total = </span><span style="color: #8b56bf;">sum</span><span style="color: #405c79;">(ls)</span></div></div>
+
+<p><code>sum()</code> 函数将一个处理逻辑抽象为了求和过程，无论是编程程序还是阅读程序，都可以很好地明白该代码的工作内容和结果。</p>
+
+<p>函数将代码分割成不同的区域，每个区域只需实现一个或一类特定的功能，让代码更模块化，在阅读代码时，如果遇到一个函数，很容易就可以明白它的功能。至于具体的实现方法，只需找到函数的位置就可以明白。因此即便有些时候，一个功能只需使用一次，也可以编写一个函数来处理这个功能。</p>
+
+<h2>Python中的函数</h2>
+
+<h3>函数与参数</h3>
+
+<p>首先来看看如何定义函数。函数的定义函数的定义需要使用关键字 <code>def</code> ，空格后紧跟一个函数名，函数名后面有一对圆括号，接着以一个冒号收尾：</p>
+
+<div class="codeblock code-template">
+    <strong>def</strong> function_name():<br>
+    &nbsp; &nbsp; ... &nbsp;<span class="codetoken comment"># function body</span>
+</div>
+    
+<p>这样就完成了一个函数的定义了。在需要的时候，便可以使用函数，来执行函数体内的代码。</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@python-fp/01-function-definition.jpg" alt="" width="300">
+</figure>
+
+<p>关于定义函数，需要注意以下几点：</p>
+
+<ul>
+    <li>函数使用关键字 <code>def</code> 声明，函数名为有效的标识符，Python 的一项提议建议函数名统一采取小写的蛇形命名法，用下划线连接不同单词</li>
+    <li><code>def</code> 关键字引导的是复合语句，冒号后面的函数体内部需要采取缩进的形式表示这些语句属于该函数的部分</li>
+    <li>一个函数创建后，它不会立即执行，只有需要时才会执行。函数名用于标识一个函数对象，可以通过一个函数名执行函数内包含的代码</li>
+    <li>正因如此，一般在编写程序时，都会将函数的定义置于主体程序的上方，统一管理</li>
+</ul>
+
+<hr>
+
+<p>为了能让函数处理过程相似、但被处理对象完全不同的逻辑，一个函数需要获取外部的变量，并根据获取的变量决定需要得到什么样的结果。考虑以上对列表求和的代码片段，如果要对不同的列表求和，往往会得到不同的结果。</p>
+
+<p>一个函数可以具有一个、多个或没有<strong>参数</strong>(argument)，参数用于接收外部数据，并根据数据的不同执行不同的处理方式。</p>
+
+<p>为了向函数传递参数，函数在设计时就必须具有容纳并处理参数的功能。具体方式是在函数定义的小括号内，使用一个或多个标识符来表示这里有参数：</p>
+
+<div class="codeblock code-template">
+    <strong>def</strong> function_name(<em>param1</em>, <em>param2</em>, ..., <em>param3</em>):<br>
+    &nbsp; &nbsp; ... &nbsp;<span class="codetoken comment"># function body</span>
+</div>
+
+<p>由于函数在定义时，还不知道具体传入的是哪个参数，因此这里先用一个标识符代表具体的参数，在函数体内处理这个标识符，就好像处理实际传入的值一样，因此函数定义中表示参数的标识符也称为<strong>形式参数</strong>，即虽然它不是一个外界传入的具体值，但在函数体内还是将其作为一个外界传入的具体值对待。</p>
+
+<p>例如，以下函数定义：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">average</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">seq</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; total = length = </span><span style="color: #bf8b56;">0</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i in seq:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; total += i</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; length += </span><span style="color: #bf8b56;">1</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">average: </span><span style="color: #405c79;">'</span><span style="color: #405c79;">, total / length)</span></div></div>
+
+<p>将标识符 <code>seq</code> 作为外界传入的参数对待，并对它调用 <code>for</code> 循环。在调用时，实际得到的参数就会替代 <code>seq</code> ，作为真正被 <code>for</code> 循环遍历的对象。</p>
+
+<h3>函数的调用与返回值</h3>
+
+<p>知道了如何创建函数，接下来是关于函数的调用。前面说过在使用 <code>def</code> 关键字创建函数后，其函数名就是一个变量，它绑定了函数体。因此，调用函数的方式为在函数名后面跟上一对圆括号，即可完成对函数的调用：</p>
+
+<div class="codeblock code-template">
+    function_name()
+</div>
+
+<p>这样，程序运行到该处，就会执行函数体内对应的语句。</p>
+
+<p>如果函数有参数，那么在调用时，需要将参数依次填入括号中，如下：</p>
+
+<div class="codeblock code-template">
+    function_name(<em>arg1</em>, <em>arg2</em>, ..., <em>arg3</em>)<br>
+</div>
+
+<p>注意参数的位置需要和定义时一致。下图展示了函数调用时，参数是如何传入与起作用的：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@python-fp/01-function-call.jpg" alt="" width="490">
+</figure>
+
+<p>在调用时传入的参数也称为<strong>实际参数</strong>。形式参数说明参数是如何参与运算的，实际参数用于计算运算的最终结果。</p>
+
+<hr>
+
+<p>既然外界可以通过参数向函数传递信息，那么函数在完成计算后，应该也可以将结果返回给外界。否则外界便无法利用其计算结果。Python 中，一个函数具有<strong>返回值</strong>，返回值用于将一个结果传递给外界，让外界收集并利用函数计算的结果。</p>
+
+<p>返回语句使用关键字 <code>return</code> 开头，后面跟随一个表达式。函数执行到 <code>return</code> 语句后，会立即退出函数的执行流畅，并将后面的表达式作为函数的运算结果：</p>
+
+<div class="codeblock code-template">
+    <strong>def</strong> function_name(<em>param1</em>, <em>param2</em>, ..., <em>param3</em>):<br>
+    &nbsp; &nbsp; ... &nbsp;<span class="codetoken comment"># function body</span><br>
+    &nbsp; &nbsp;<strong>return</strong> <em>expression</em>
+</div>
+
+<p>下面实现了这样一个 <code>get_max()</code> 函数，用于计算一个序列中元素的最大值。当遍历完序列，得到最大值后，它并没有将结果打印出来，而是作为返回值传递给外界：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">get_max</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">seq</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> not seq:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span></div><div><span style="color: #405c79;">&#160; &#160; max_value = seq[</span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">]</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i in seq:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> i &gt; max_value:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; max_value = i</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> max_value</span></div></div>
+
+<p>如果一个函数不带 <code>return</code> 语句或 <code>return</code> 语句后面不带表达式，它会返回空值 <code>None</code> 。以上函数在判断传入的序列不可循环后，使用空的 <code>return</code> 语句强制退出函数。</p>
+
+<p>可以使用赋值语句将结果保存到一个变量内：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">result = get_max([</span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">4</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">6</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">7</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">4</span><span style="color: #405c79;">])</span></div></div>
+
+<p>因此，可以认为一个函数的调用就是将一个函数替换为返回的表达式，下图表达了这种思想：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@python-fp/01-function-return.jpg" alt="" width="350">
+</figure>
+
+<p>在明白了函数、参数和返回值后，可以完全将其类比到数学概念上的函数内。假设有以下函数：</p>
+
+<div class="math">
+\\[
+    f(x, y) = e^y + \log _2 (x) \dot \sin (x) 
+\\]
+</div>
+
+<p>那么它的函数名为 <span class="math">\\( f \\)</span> ，具有两个参数 <span class="math">\\( x \\)</span> 和 <span class="math">\\( y \\)</span> ，尽管它们都不是具体的值，但是从函数的结构上，还是可以推断出该函数的定义域、值域等内容。</p>
+
+<p>一旦给定了自变量的具体值，就可以计算出函数的具体结果。例如，给定参数的具体值 <span class="math">\\( f(\frac \pi 2, 1) \\)</span> ，该函数的计算结果为 <span class="math">\\( \log _2 \pi + e -1 \\)</span> ，得到的就是函数的返回值。</p>
+
+<h3>变量的作用域</h3>
+
+<p>在介绍返回值前，或许有人会想过可以直接将结果保存在变量内，然后在函数外部引用保存的变量来获取返回结果，例如以下代码：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">length</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">seq</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; n = </span><span style="color: #bf8b56;">0</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i in seq:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; n += </span><span style="color: #bf8b56;">1</span></div><br><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(n)</span></div></div>
+
+<p>但是，这样是错误的做法，尝试运行的结果会发生错误，错误原因是变量未被定义：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; def length(seq):
+...     n = 0
+...     for i in seq:
+...         n += 1
+...
+&gt;&gt;&gt; print(n)
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+NameError: name 'n' is not defined</div>
+
+<p>虽然函数在调用时，函数体内的代码会被执行，就像将其放在函数调用的位置一样，但是在函数体内定义的变量，有一个变量的<strong>作用域</strong>的概念。简单地说，在函数内定义的变量，在函数执行完成后，会销毁所有定义的变量，释放这部分被占用的内存。</p>
+
+<p>因此，以上函数实际上的执行过程类似：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">length</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">seq</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; n = </span><span style="color: #bf8b56;">0</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i in seq:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; n += </span><span style="color: #bf8b56;">1</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">del</span><span style="color: #405c79;"> n</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span></div></div>
+
+<p>在函数内重新定义的变量，也被称为<strong>局部变量</strong>，因为它们只在函数体内有效，函数体外无法访问，对函数体外的同名变量不产生任何影响。</p>
+
+<p>实际上，函数的参数也可以看作是一个局部变量，它在参数传递的时候被创建并赋予对应的值，并在函数调用完成后被销毁。</p>
+
+<p>以下给出了这样一个示例：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">n = </span><span style="color: #bf8b56;">3</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(n) &#160; &#160; &#160;</span><span style="color: #a8a8a8;"># n 为定义的值</span></div><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">test01</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">n</span><span style="color: #405c79;">) :</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(n) &#160;</span><span style="color: #a8a8a8;"># n 为使用的参数</span></div><div><span style="color: #405c79;">&#160; &#160; n = </span><span style="color: #bf8b56;">10</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(n) &#160;</span><span style="color: #a8a8a8;"># n 为重新定义的值</span></div><div><span style="color: #405c79;">test01(</span><span style="color: #bf8b56;">5</span><span style="color: #405c79;">)</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(n) &#160; &#160; &#160;</span><span style="color: #a8a8a8;"># n 仍为函数体外定义的值</span></div></div>
+
+<p>该函数的运行结果如下，注意观察变量的值是如何反映同名变量的创建与销毁的：</p>
+
+<div class="codeblock code-console">$ python -u demo.py
+3
+5
+10
+3</div>
+
+<p>调用完函数后，外部变量的值仍然是 <code>3</code> ，说明局部变量值的修改不会影响全局变量。</p>
+
+<p>不过还存在一种情况，考虑以下冒泡排序函数：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">bubble_sort</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">seq</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i in </span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">, </span><span style="color: #8b56bf;">len</span><span style="color: #405c79;">(seq)):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> j in </span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">, </span><span style="color: #8b56bf;">len</span><span style="color: #405c79;">(seq)-i):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> seq[j] &gt; seq[j+</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">]:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; seq[j], seq[j + </span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">] = seq[j + </span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">], seq[j]</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> seq</span></div></div>
+
+<p>这是一个很简单的函数，但是如果尝试调用它，看看会发生什么：</p>
+
+<div class="codeblock code-console">$ python -u demo.py
+>>> data = [5, 1, 4, 3, 10, 4, 2, 7, 7, 9]
+>>> bubble_sort(data)
+[1, 2, 3, 4, 4, 5, 7, 7, 9, 10]
+>>> data
+[1, 2, 3, 4, 4, 5, 7, 7, 9, 10]</div>
+
+<p>调用函数之后，再次检查列表 <code>data</code> 的值，可以发现该列表的值发生了变化。但是，在函数体内，自始至终只涉及到对参数的修改。</p>
+
+<p>要解答这个问题，必须先了解 Python 中的可变对象与不可变对象的概念。</p>
+
+<h3>可变对象与不可变对象</h3>
+
+<p>Python 中的对象可以分为可变(mutable)对象与不可变(immutable)对象。不可变对象不能修改，只能重新赋值，这个过程实际上是新生成了一个对象，再让变量指向它，而旧对象被丢弃。而对可变对象的修改，则是将其中的一部分值更改，变量本身并没有修改。</p>
+
+<p>注意以上的说法：对可变对象的修改，那么之前的排序函数哪里有对可变对象的修改呢？答案就在这条语句：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">seq[j], seq[j + </span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">] = seq[j + </span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">], seq[j]</span></div></div>
+
+<p>这条语句中，将列表的某个元素与其后一个元素交换位置，这一操作就发生了对列表的修改，但是列表作为一个整体还是之前的列表，并没有变成另一个新列表。</p>
+
+<p>在 Python 中，数值、字符串和元组是不可更改的对象，对它们调用任何方法都只能得到一个新的数值、字符串和元组；而列表、集合和字典则是可以修改的对象，它们随时可以增加、改变或删除包含的某些元素。</p>
+
+<p>在 Python 中，可以通过 <code>id(<em>obj</em>)</code> 函数来查看某一变量的唯一身份标识。它接收一个变量作为参数，返回的结果是一个数值，不同对象得到的数值不同。</p>
+
+<p>以下测试函数用于检查修改可更改对象修改前后的 id 值：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">m = [</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">]</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #8b56bf;">id</span><span style="color: #405c79;">(m))</span></div><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">modify_m</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">m</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #8b56bf;">id</span><span style="color: #405c79;">(m))</span></div><div><span style="color: #405c79;">&#160; &#160; m.append(</span><span style="color: #bf8b56;">5</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #8b56bf;">id</span><span style="color: #405c79;">(m))</span></div><div><span style="color: #405c79;">modify_m(m)</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #8b56bf;">id</span><span style="color: #405c79;">(m))</span></div></div>
+
+<p>结果为：</p>
+
+<div class="codeblock code-console">$ python -u demo.py
+1980965310984
+1980965310984
+1980965310984
+1980965310984</div>
+
+<p>结果表明，在函数体内外、修改变量前后，四个 id 值都相同，指向的是同一个对象。</p>
+
+<h3>global语句</h3>
+
+<p>修改可变对象是一种在函数内部影响函数外部变量的一种方式。在函数体内，对变量重新赋值会使变量指向另一个对象，要使函数体内修改一个变量，让其指向别的对象，并且作用于函数体外，需要将其标示为全局变量。</p>
+
+<p>可以使用 <code>global</code> 语句将一个或一些变量标示为全局变量：</p>
+
+<div class="codeblock code-template">
+    <strong>def</strong> function_name(<em>param</em>, ...):<br>
+    &nbsp; &nbsp; <strong>global</strong> <em>var1</em>, <em>var2</em>, ...
+</div>
+
+<p><code>global</code> 关键字会将跟随的变量表示为全局变量，使得影响范围不局限于函数体内部，对其任意修改、赋值均会对函数内外的变量值造成改变。</p>
+
+<p><code>global</code> 关键字可以位于函数的任意位置，只有一个条件：其声明为全局的变量不能在函数体的前面被赋值。否则，编译器无法判断是否需要让前面的赋值作用到全局范围内。由于函数的形式参数会在函数调用时被赋值为实际参数的值，因此不能对形式参数使用 <code>global</code> 声明。</p>
+
+<p>以下示例检查一个 <code>global</code> 声明前后、函数内外变量的 id 值：</p>
+
+<div class="vscode-block"><div><span style="color: #405c79;">im = </span><span style="color: #bf8b56;">1</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #8b56bf;">id</span><span style="color: #405c79;">(im))</span></div><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">modify_im</span><span style="color: #405c79;">():</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">global</span><span style="color: #405c79;"> im &#160; &#160;</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #8b56bf;">id</span><span style="color: #405c79;">(im))</span></div><div><span style="color: #405c79;">&#160; &#160; im = </span><span style="color: #bf8b56;">5</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #8b56bf;">id</span><span style="color: #405c79;">(im))</span></div><div><span style="color: #405c79;">modify_im()</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #8b56bf;">id</span><span style="color: #405c79;">(im))</span></div></div>
+
+<p>结果为：</p>
+
+<div class="codeblock code-console">$ python -u demo.py
+1474521856
+1474521856
+1474521984
+1474521984</div>
+
+<p>可以看到，在对 <code>global</code> 声明的变量赋值后，全局变量指向的对象也改变了，这说明函数体内修改的是全局变量而不是局部变量。</p>
+
+<!-- finished(all):2022-05-18 -->
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/data-science/machine-learning/01-linear-regression/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/12/机器学习-线性回归-520x293.png" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/12/机器学习-线性回归-520x293.png 520w, /wp-content/uploads/2022/12/机器学习-线性回归-950x534.png 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/data-science/machine-learning/01-linear-regression/" rel="bookmark">机器学习-线性回归</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-fp/05-recursions/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程05-函数的递归-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/05/Python函数式编程05-函数的递归-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-300x169.jpg 300w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-1024x576.jpg 1024w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-768x432.jpg 768w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-1536x864.jpg 1536w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-950x534.jpg 950w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-fp/05-recursions/" rel="bookmark">Python函数式编程05 函数的递归</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-fp/09-decorators/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/Python函数式编程09-闭包与装饰器-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/Python函数式编程09-闭包与装饰器-520x293.jpg 520w, /wp-content/uploads/2022/06/Python函数式编程09-闭包与装饰器-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-fp/09-decorators/" rel="bookmark">Python函数式编程09 闭包和装饰器</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/programming/python-fp/02-parameter-handling/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>Python函数式编程02 函数参数设计与处理</span></a></li>
+		<li class="previous"><a href="/programming/python/library-time/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>Python标准库time：处理时间</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

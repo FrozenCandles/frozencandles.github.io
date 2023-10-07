@@ -1,0 +1,892 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>计算机网络06-网络层概述与网际协议IP - 冰封残烛的个人小站</title>
+	<link rel="canonical" href="/computer-science/computer-networking/06-internet-protocol/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="计算机网络06-网络层概述与网际协议IP - 冰封残烛的个人小站" />
+	<meta property="og:description" content="网络层简介 网络层的主要作用为实现网络互联，即将分组&#046;&#046;&#046;" />
+	<meta property="og:url" content="/computer-science/computer-networking/06-internet-protocol/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2022-07-24T14:34:16+00:00" />
+	<meta property="article:modified_time" content="2023-10-06T11:01:40+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2022/07/计算机网络05-网络层概述与网际协议IP.jpg" />
+	<meta property="og:image:width" content="1920" />
+	<meta property="og:image:height" content="1280" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="6分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/computer-science/computer-networking/06-internet-protocol/#primaryimage",
+	            "url": "/wp-content/uploads/2022/07/计算机网络05-网络层概述与网际协议IP.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/07/计算机网络05-网络层概述与网际协议IP.jpg",
+	            "width": 1920,
+	            "height": 1280
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/computer-science/computer-networking/06-internet-protocol/#webpage",
+	            "url": "/computer-science/computer-networking/06-internet-protocol/",
+	            "name": "计算机网络06-网络层概述与网际协议IP - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/computer-science/computer-networking/06-internet-protocol/#primaryimage"
+	            },
+	            "datePublished": "2022-07-24T14:34:16+00:00",
+	            "dateModified": "2023-10-06T11:01:40+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "breadcrumb": {
+	                "@id": "/computer-science/computer-networking/06-internet-protocol/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/computer-science/computer-networking/06-internet-protocol/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/computer-science/computer-networking/06-internet-protocol/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "计算机网络06-网络层概述与网际协议IP"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/550" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=550' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fcomputer-science%2Fcomputer-networking%2F06-internet-protocol%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fcomputer-science%2Fcomputer-networking%2F06-internet-protocol%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><link rel="stylesheet" href="/wp-content/static/css/theme@law.wp.css">
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['\\\\(','\\\\)']],
+            displayMath: [["\\\\[","\\\\]"]]
+        }
+    });
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-550 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-550" class="post-550 post type-post status-publish format-standard has-post-thumbnail hentry category-computer-networking">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">计算机网络06-网络层概述与网际协议IP</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/computer-science/computer-networking/" rel="category tag">计算机网络</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年7月24日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+
+
+
+<h2>网络层简介</h2>
+
+<p>网络层的主要作用为实现网络互联，即将分组从一台主机发送到另一台主机上。为此需要实现两种功能：</p>
+
+<ol>
+    <li><strong>转发</strong>(forwarding)：网络层将输入链路到达的分组移动到适当的一条或多条输出链路中，或者可能阻挡异常分组转发</li>
+    <li><strong>路由选择</strong>(routing)：网络层决定发送方向接收方发送分组所采用的路由或路径，因此网络层需要提供合适的路由选择算法</li>
+</ol>
+
+<p>转发一般在几纳秒内完成，通常由硬件实现。路由选择一般需要几秒完成，通常采用软件实现。</p>
+
+<p>为了实现主机互联，网络层需要庞大的遍布世界的分组交换机连接形成网络拓扑结构。分组交换机指能根据首部字段将分组从输入链路接口转移到输出接口的通用分组交换设备。某些分组交换机基于链路层帧的字段转发，称为<strong>链路层交换机</strong>(link-layer switch)，其它基于网络层数据报做转发决定的分组交换机称为<strong>路由器</strong>(router)。</p>
+
+<p>为了使分组发送到正确的位置，路由器需要选择合适的路径。每台路由器中都有<strong>转发表</strong>(forwarding table)。路由器根据到达分组首部的一个或多个字段值在其转发表中索引，确定该分组将被转发的路由器的输出链路接口：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/05-network-layer-2-planes.png" alt="" width="580">
+    <figcaption>网络层的结构</figcaption>
+</figure>
+
+<p>网络层能够被分解为两个相互作用的部分：数据平面和控制平面。数据平面主要是每台路由器的功能，决定到达路由器输入链路之一的数据报转发到哪条输出链路。控制平面控制数据报沿着从源主机到目的主机的端到端路径中路由器之间的路由方式。</p>
+
+<p><strong>网络服务模型</strong>(network service model)定义了分组在发送与接收端系统之间的端到端运输特性，包括：</p>
+
+<ul>
+    <li>分组到达目的地</li>
+    <li>时延不超过某一上界</li>
+    <li>分组有序交付</li>
+    <li>一定带宽</li>
+    <li>安全性</li>
+    <li>...</li>
+</ul>
+
+<p>网络层仅提供尽力而为服务，不能保证这些服务的质量。</p>
+
+<h2 id="router-internal">路由器工作原理</h2>
+
+<p>路由器是网络层设备，它们最高只涉及处理网络层的服务，几乎不参与处理运输层与应用层。</p>
+
+<p>下图展示了路由器的基本结构：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/05-router-internal.png" alt="" width="570">
+    <figcaption>路由器体系结构</figcaption>
+</figure>
+
+<p>路由器包含 4 个主要组件：</p>
+
+<ul>
+    <li><strong>输入端口</strong>：处理输入分组的物理层和链路层功能，并执行查找决定路由器输出端口</li>
+    <li><strong>交换结构</strong>：将路由器的输入接口与输出接口相连</li>
+    <li><strong>路由选择处理器</strong>：执行控制平面功能</li>
+    <li><strong>输出端口</strong>：存储从交换结构接收的分组，执行必要的链路层和物理层功能后发送到输出链路上</li>
+</ul>
+
+<h3>输入端口处理</h3>
+
+<p>下图展示了输入端口更详细的结构：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/05-router-input-port.png" alt="" width="410">
+    <figcaption>输入端口处理</figcaption>
+</figure>
+
+<p>在输入端口中，路由器使用转发表查找输出端口。路由器用分组目的地址的前缀匹配该表项，并向匹配项相关联的链路转发分组。当有多个匹配时，路由器使用最长前缀匹配规则，寻找最长的匹配项并转发。 </p>
+
+<p>由于在高速链路中查找需要在纳秒时间内完成，因此需要通过硬件使用快速查找算法执行。</p>
+
+<p>一旦通过查找确定了分组的输出端口，则该分组就准备进入交换结构。如果其它输入端口正使用交换结构，那么该分组将被阻塞并排队，等待稍后调度通过交换结构。</p>
+
+<p>除此之外，输入端口还会处理一些别的事务，将在后续介绍。</p>
+
+<h3>交换</h3>
+
+<p>交换结构是路由器的核心部位，可以通过三种方式完成交换：</p>
+
+<ul>
+    <li>经内存交换</li>
+</ul>
+
+<p>最简单、最早的路由器由计算机充当，到达的分组通过中断的形式通知 CPU ，使其从首部提取目的地址并通过内存复制到输出端口的缓存中。</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/05-router-exchange-memory.png" alt="" width="380">
+    <figcaption>经由内存交换</figcaption>
+</figure>
+
+<p>使用该方式需要各读写一次内存，因此吞吐量只有内存读写速率的一半，且不能同时转发两个分组。</p>
+
+<p>现代经由内存交换的路由器由输入线路卡来将分组写入适当输出端口的内存中。</p>
+
+<ul>
+    <li>经总线交换</li>
+</ul>
+
+<p>输入端口可以使用一根共享总线将分组直接传送到输出端口。通常在输入端口处使分组附加一个额外的临时首部标签，经由总线可以被所有输出端口接收，但只有标签对应的输出端口才能保留并发送该分组：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/05-router-exchange-bus.png" alt="" width="360">
+    <figcaption>经由总线交换</figcaption>
+</figure>
+
+<p>一次只有一个分组能够跨越总线，因此多个分组同时到达路由器时，只有一个分组能通行，其余必须等待。路由器的交换带宽受总线速率的限制。</p>
+
+<ul>
+    <li>经互联网络交换</li>
+</ul>
+
+<p>使用复杂的互联网络可以克服单一总线的带宽限制。纵横式交换机通过互联网络总线连接多个输入与输出端口，交叉点通过交换结构控制器控制分组通行：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/05-router-exchange-network.png" alt="" width="300">
+    <figcaption>经由总线互联网络交换</figcaption>
+</figure>
+
+<p>通过闭合合适的交叉点，就可以产生合适的通行路径，并可以转发给多个输出端口。这种交换机是可并行的，且只要不发生总线冲突，转发分组将不会被阻塞。</p>
+
+<ul>
+    <li>输出端口处理</li>
+</ul>
+
+<p>输出端口处理存放在其缓存中的分组，并将其发送到输出链路上，执行所需的链路层和物理层传输功能：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/05-router-output-port.png" alt="" width="350">
+    <figcaption>输入端口处理</figcaption>
+</figure>
+
+<h3>分组排队与调度</h3>
+
+<p>在输入端口和输出端口处都可能存在分组队列：如果交换结构处理速度比输入分组到达速度慢，在输入端口处将出现分组排队等待通过；同样如果向输出链路发送分组比到达速度慢，输出端口也可能发生排队。</p>
+
+<p>交换结构一次只允许一个分组到达指定输出端口，因此如果两个输入队列待发送分组目的一致，则其中的一个分组将被阻塞，必须在输入队列等候。并且该等候分组的排在后面的所有分组也需要等待，称为<strong>线路前部(Head-Of-the-Line, HOL)阻塞</strong>：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/05-router-HOL-congestion.png" alt="" width="440">
+    <figcaption>输入端口排队与 HOL 阻塞</figcaption>
+</figure>
+
+<p>当队列缓存耗尽时，可能产生分组丢失。路由器可以丢弃到达的分组，不过有时在队列满之前也可能主动丢弃一个分组，用于向发送方提供拥塞信号。</p>
+
+<p>多个分组可能同时准备发往同一个输出端口，并且其后的分组也可能发往该输出端口，这就需要输出端口的分组调度(packet schedular)在其中选择一个分组来传输。分组调度可以使用以下方法处理：</p>
+
+<ul>
+    <li>先进先出</li>
+</ul>
+
+<p><strong>先进先出</strong>(First-In-First-Out, FIFO)队列的抽象模型如下：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/05-packet-schedular-FIFO.png" alt="" width="180">
+</figure>
+
+<p>FIFO 调度规则按照分组到达队列的次序来选择处理分组：先到达的分组先被传输，如果链路正在传输前面的分组，则后续到达的分组要排队等待。</p>
+
+<ul>
+    <li>优先权排队</li>
+</ul>
+
+<p><strong>优先权排队</strong>(priority queuing)规则使到达的分组被分类放入不同的优先权类，通常位于各自的队列中：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/05-packet-schedular-priority-queuing.png" alt="" width="240">
+</figure>
+
+<p>多个分组准备传输时，将传输有等待分组的最高优先权类中的分组。同一优先权类的分组之间通常以 FIFO 方式完成传输。非抢占式优先权排队规则可以使低优先级分组在传输时，不会被到达的高优先级分组打断，高优先级分组只能先等待。</p>
+
+<ul>
+    <li>循环和加权公平排队</li>
+</ul>
+
+<p><strong>循环排队</strong>(round robin queuing)规则下分组同样被分类，但类之间不存在严格的服务优先权，循环调度器在这些类之间轮流传输。保持工作排队(work-conserving queuing)规则在有分组排队等候时不允许链路空闲，某个类没有分组时将立即处理下一个类。</p>
+
+<p>下图表示常用的加权公平排队(Weighted Fair Queuing, WFQ)规则，可以根据权重分配服务时间占比：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/05-packet-schedular-WFQ.png" alt="" width="250">
+</figure>
+
+<p>这样可以保证所有类都获得一定的吞吐量。</p>
+
+<h2 id="internet protocol">网际协议</h2>
+
+<h3>网际协议简介与IPv4数据报</h3>
+
+<p><strong>网际协议</strong>(Internet Protocol, IP)是网络层一个非常重要的协议，IP 协议组织了互联网上的主机，对网络层运作至关重要。</p>
+
+<p>IP 协议有两个最重要的版本，目前最常用的版本是 IPv4 。</p>
+
+<p>首先研究 IPv4 数据报，其格式为：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/05-ip-message.png" alt="" width="370">
+</figure>
+
+<p>其包含的一些关键字段如下：</p>
+
+<ul>
+    <li>版本：通过版本号可以确认数据报剩余部分的格式，IP 版本 6 的数据报格式与上图并不一样，将在后文研究</li>
+    <li>首部长度：由于选项长度可变，因此需要该字段指示首部长度。如果不包含选项，典型的 IP 数据报首部长度为 20 字节</li>
+    <li>服务类型：使不同类型的 IP 数据报区分。不同类型的 IP 数据报在路由器中往往调度方式也不同</li>
+    <li>数据报长度：数据报包括数据的完整长度</li>
+    <li>标识、标志、片偏移：与 IP 分片有关，将在后文介绍</li>
+    <li>生命周期(Time-To-Live, TTL)：确保数据报在路由环路等情况下不会永远存在。每一台路由器处理数据报时，该值便减一，减至零便被丢弃</li>
+    <li>协议：指示 IP 数据报的数据部分需要被交付给哪个运输层协议。在 <a href="http://frozencandles.fun/archives/453">UDP 协议的检验和计算实验</a>中介绍过计算检验和时需要添加伪首部，伪首部的协议类型就是该字段</li>
+    <li>源和目的 IP 地址：IP 地址用于指示主机，在前面几篇文章中都提到了该地址的作用，将在接下来详细介绍它</li>
+    <li>选项：一些额外的信息</li>
+    <li>数据：有效载荷（例如运输层报文段）</li>
+</ul>
+
+<h3>IPv4数据报分片</h3>
+
+<p>IPv4 支持的最大报文长度为 65535 字节，但是链路层未必能承载这么多字节。一个链路层帧能承载的最大数据量称为<strong>最大传送单元</strong>(Maximum Transmission Unit, MTU)。MTU 限制着数据报的长度，并且在不同的链路上该长度可能会变化。</p> 
+
+<p>为此，需要将 IP 数据报分片，用单独的链路层帧封装这些较小的 IP 数据报并发送。这些较小的数据报称为<strong>片</strong>(fragment)。</p>
+
+<p>片在其到达目的地运输层以前需要重新组装。首部的标识字段区分不同的原始数据报；原始数据报的最后一个片的标志位被置为 0 ，其它片的标志位被置 1 以提示分片接收完毕可以组装；偏移字段表示这些片位于原始数据报中的哪个位置，以避免片丢失或乱序到达。</p>
+
+<h3>IPv4编址</h3>
+
+<p>主机或路由器与物理链路之间的边界称为接口，它们为了能发送或接收数据报，要求每个接口都需要拥有一个独立的 IP 地址。IP 地址是互联网上每一台主机每一个接口 32 比特的标识符，可用的 IP 地址约有 40 亿个。</p>
+
+<p>IP 地址通常按所谓点分十进制记法(dotted-decimal notation)书写，即地址中的每个字节用十进制形式书写，各字节间以点号隔开。例如，如果一个 IP 地址为 </p>
+
+<p style="text-align: center;">01111011 00111000 01001110 10011010</p>
+
+<p>那么它通常书写为：</p>
+
+<p style="text-align: center;">123.56.78.154</p>
+
+<p>全球互联网中的每台主机和路由器上的每个接口，都必须有唯一的 IP 地址。但这些地址不能随意地选择，需要由其连接的子网来确定。</p>
+
+<p>考虑以下连接，路由器的两个接口连接两组主机。路由器的一个接口和主机的多个接口之间通过一个无路由器的网络相连，称为<strong>子网</strong>(subnet)。IP 编址为这个子网提供了一个<strong>子网掩码</strong>(network mask)，指示接入该子网的任何主机最左侧的若干比特都要相同。</p>
+
+<p>以下示例共有 3 个子网，注意两个路由器接口间也存在一个子网：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/05-ip-addressing.png" alt="" width="550">
+</figure>
+
+<p>最左侧的子网掩码可以表示为 <code>172.217.2.0/24</code> ，斜杠表示 IP 地址最左侧的 24 比特相同。互联网的地址分配策略称为<strong>无类别域间路由选择</strong>(Classless Interdomain Routing, CIDR)，它将地址分为前缀和剩余部分，一个区域通常被分配一块前缀相同的连续地址，这样路由器转发时只需匹配该前缀就可以发往正确的方向，大大减少了转发表长度。前缀越长，对应的地址块越小，地址越详细。</p>
+
+<p>还有一个特殊的 IP 地址 <code>255.255.255.255</code> ，称为广播地址。当一台主机发出的数据报具有目的地址为广播地址时，该报文会交付给同一个网络中的所有主机。</p>
+
+<p>IP 地址由互联网名字和编号分配机构(Internet Corporation for Assigned Names and Numbers, ICANN)管理，并且该组织还管理 DNS 根服务器。ICANN 向区域性互联网注册机构分配地址，从而为每一台主机提供 IP 。</p>
+
+<h3>动态主机配置协议</h3>
+
+<p>一个组织一旦获得了一块地址，它就可为本组织内的主机与路由器接口逐个分配。路由器地址一般远程手工配置，然而主机地址一般使用<strong>动态主机配置协议</strong>(Dynamic Host Configuration, DHCP)完成。DHCP 使主机每次连接到网络时，都可以自动分配一个合适的 IP 地址，并通知主机子网掩码、本地 DNS 服务器地址等信息。</p>
+
+<p>DHCP 是一个客户-服务器应用层协议，基于 UDP 提供的服务。每个子网需要有一台 DHCP 服务器或使用路由器充当网络中继代理，服务器使用端口号 67 ，客户使用端口号 68 。</p>
+
+<p>DHCP 为一台新到达的主机分配 IP 需要经历以下 4 个步骤：</p>
+
+<ul>
+    <li>DHCP 服务器发现：一台新到达的主机可以通过使用 <strong>DHCP 发现报文</strong>发现 DHCP 服务器，该报文通过目的地址 <code>255.255.255.255</code> 向子网所有节点中广播，并使用源 IP 地址 <code>0.0.0.0</code> 代表本主机</li>
+    <li>DHCP 服务器提供：DHCP 服务器收到一个 DHCP 发现报文后，使用 <strong>DHCP 提供报文</strong>作响应，向客户提供推荐的 IP 地址、网络掩码、第一跳路由器地址（<strong>默认网关</strong>）以及 DHCP 租用期等。提供报文仍然使用广播地址回应</li>
+    <li>DHCP 请求：子网中可能有不止一个 DHCP 服务器，新到达的客户从中选择一个合适的服务，并向选中的服务器提供用 <strong>DHCP 请求报文</strong>，确认配置参数</li>
+    <li>DHCP 响应：服务器使用 <strong>DHCP ACK 报文</strong>对此作出响应，证实所要求的参数</li>
+</ul>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/05-dhcp-working.png" alt="" width="530">
+    <figcaption>DHCP 工作流程</figcaption>
+</figure>
+
+<p>在广播期间，由于非新接入主机和 DHCP 服务器不提供 67 、68 端口的服务，因此不会参与 DHCP 的工作。</p>
+
+<p>一旦客户收到 DHCP ACK 后，交互便完成了，并且该客户能够在租用期内使用 DHCP 分配的 IP 地址。主机可以随时通过 DHCP 释放报文终止租用期。</p>
+
+<p>当租用期过半时，主机会重新发送 DHCP 请求，若 DHCP 服务器拒绝请求，主机必须重新执行 DHCP 服务器发现等一系列步骤；当租用期快到时，主机也会重新发送 DHCP 请求，若 DHCP 服务器未响应，则当租用期到达后，主机必须立即停止使用其租用的 IP 地址。</p>
+
+<h3>网络地址转换</h3>
+
+<p>子网中的主机数可能会增加，<strong>网络地址转换</strong>(Network Address Translation, NAT)提供了一种管理 IP 地址的典型方法。</p>
+
+<p>NAT 路由器对外界的行为就如同一个具有单一 IP 地址的单一设备，所有离开子网路由器流向互联网的报文都拥有相同的 IP 地址。NAT 使路由器对外界隐藏了专用网络(private network)的细节。</p>
+
+<p>在专用网络中，所有接口都具有相同的地址空间 <code>10.0.0.0/8</code> ，该地址是一个保留地址空间，保留地址空间仅可用于当前的专用网络，不可用于互联网中。每一个专用网络各自维护一个保留地址空间，从而管理专用网络中的主机 IP 地址。</p>
+
+<p>当专用网络中的主机要和互联网通信时，需要通过 NAT 路由器转发。NAT 路由器具有一张 <strong>NAT 转换表</strong>(NAT translation table)，在表项中包含需要转发给的 IP 地址及端口号。</p>
+
+<p>例如，专用网络主机 <code>10.0.0.1</code> 如果要向互联网上的某台服务器发送请求，它通过端口号 12000 发送给 NAT 路由器，NAT 路由器使用互联网一侧接口的 IP 地址 <code>138.76.29.7</code> 和空闲端口号 3435 替换源数据报的信息，将转换后的数据报发送到互联网上，并在 NAT 转换表中新建一个表项。当接收到服务器的响应后，根据表项的转换规则将 <code>138.76.29.7:2425</code> 换回 <code>10.0.0.1:12000</code> 。</p>
+
+<p>NAT 充当计算机网络的中间盒组件，连接了互联网的同时也易于管理内网。现今绝大多数家庭网络都使用 NAT 管理，因此平时上网时的主机无法被广域网发现，也就无法充当互联网服务器。为了突破 NAT 的限制，可以使用 NAT 穿透(NAT traversal)工具（或称内网穿透）。不过内网穿透得到的服务器不够稳定，且可能被屏蔽。</p>
+
+<h3>IPv6</h3>
+
+<p>IPv4 仅提供约 40 亿个 IP 地址，哪怕有专用网络使特定范围的 IP 可以被重复使用，也无法满足日益增长的 IP 地址的需求。为此一个新的 IP 版本 IPv6 被提出。</p>
+
+<p>IPv6 的数据报格式如下：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/05-ipv6-message.png" alt="" width="380">
+    <figcaption>IPv6 数据报格式</figcaption>
+</figure>
+
+<p>IPv6 将地址长度从 32 比特增加到 128 比特，甚至地球上每个沙粒都可以分配一个 IP 地址。除了普通地址和广播地址以外，IPv6 还引入了任播地址(anycast address)，这种地址可以使数据报交付给一组主机中的任意一个。</p>
+
+<p>IPv6 使用简化高效的 40 宇节首部，许多必要字段被舍弃，从而使路由器可以更快处理。</p>
+
+<p>IPv6 提供了一个流(flow)的支持，不过其定义还没有完全明确。</p>
+
+<p>除此之外，IPv6 还包含以下字段：</p>
+
+<ul>
+    <li>版本：通过将该字段置为 6 ，可以提醒按 IPv6 报文格式处理后续数据</li>
+    <li>流量类型：与 IPv4 报文中服务类型字段含义相同</li>
+    <li>有效载荷长度：给出 IPv6 数据报在定长 40 字节首部后面的字节数量</li>
+    <li>下一个首部：与 IPv4 报文中协议类型字段含义相同</li>
+    <li>跳限制：与 IPv4 报文中生命周期字段含义相同</li>
+</ul>
+
+<p>IPv6 不再支持分片，因为其耗时太大。如果数据报太大，则路由器将其丢弃并返回一个特殊的差错报文。</p>
+
+<p>IPv6 不再提供检验和，必要的检验已经由运输层完成了。</p>
+
+<p>IPv6 不再显式支持选项，不过其首部的“下一个首部”字段可以指向额外的选项字段位置。去除选项使 IPv6 首部成为定长的 40 字节，无需再拥有长度字段。</p>
+
+<p>由于目前公共互联网只支持 IPv4 ，要使其完全迁移到 IPv6 几乎不可能。目前可行的方式只是先迁移一部分节点，在通过 IPv4 节点时新建一个 IPv4 数据报并作为载荷通过。</p>
+
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/data-science/via-python/pandas03-the-index/">
+											<img width="520" height="293" src="/wp-content/uploads/2023/03/Python数据分析-pandas03索引-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2023/03/Python数据分析-pandas03索引-520x293.jpg 520w, /wp-content/uploads/2023/03/Python数据分析-pandas03索引-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/data-science/via-python/pandas03-the-index/" rel="bookmark">pandas03:深入认识索引</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/data-science/machine-learning/02-logistic-regression/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/12/机器学习-逻辑回归-520x293.png" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/12/机器学习-逻辑回归-520x293.png 520w, /wp-content/uploads/2022/12/机器学习-逻辑回归-950x534.png 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/data-science/machine-learning/02-logistic-regression/" rel="bookmark">机器学习-逻辑回归</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-oop/02-attributes/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-520x293.jpg 520w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-300x169.jpg 300w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-1024x576.jpg 1024w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-768x432.jpg 768w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-1536x864.jpg 1536w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-950x534.jpg 950w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-oop/02-attributes/" rel="bookmark">Python面向对象编程02-类与实例的属性</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/programming/python-oop/03-inheritances/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>Python面向对象编程03-类的继承</span></a></li>
+		<li class="previous"><a href="/computer-science/computer-networking/05-transmission-control-protocol/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>计算机网络05-面向连接的运输：TCP</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

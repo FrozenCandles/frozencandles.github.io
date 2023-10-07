@@ -1,0 +1,848 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>计算机网络03-域名系统：DNS - 冰封残烛的个人小站</title>
+	<meta name="description" content="本节介绍互联网的域名系统(Domain Name System, DNS)。DNS 是一个使主机能查询运行在 DNS 服务器上的分布式数据库的应用层协议，负责将主机名解析为 IP 地址，为日常生活中可以直接使用网址提供了便利。" />
+	<link rel="canonical" href="/computer-science/computer-networking/03-domain-name-system/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="计算机网络03-域名系统：DNS - 冰封残烛的个人小站" />
+	<meta property="og:description" content="本节介绍互联网的域名系统(Domain Name System, DNS)。DNS 是一个使主机能查询运行在 DNS 服务器上的分布式数据库的应用层协议，负责将主机名解析为 IP 地址，为日常生活中可以直接使用网址提供了便利。" />
+	<meta property="og:url" content="/computer-science/computer-networking/03-domain-name-system/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2022-06-27T14:18:47+00:00" />
+	<meta property="article:modified_time" content="2023-10-06T10:52:57+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2022/06/计算机网络03-域名系统：DNS.jpg" />
+	<meta property="og:image:width" content="1920" />
+	<meta property="og:image:height" content="1280" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="5分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/computer-science/computer-networking/03-domain-name-system/#primaryimage",
+	            "url": "/wp-content/uploads/2022/06/计算机网络03-域名系统：DNS.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/06/计算机网络03-域名系统：DNS.jpg",
+	            "width": 1920,
+	            "height": 1280
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/computer-science/computer-networking/03-domain-name-system/#webpage",
+	            "url": "/computer-science/computer-networking/03-domain-name-system/",
+	            "name": "计算机网络03-域名系统：DNS - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/computer-science/computer-networking/03-domain-name-system/#primaryimage"
+	            },
+	            "datePublished": "2022-06-27T14:18:47+00:00",
+	            "dateModified": "2023-10-06T10:52:57+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "本节介绍互联网的域名系统(Domain Name System, DNS)。DNS 是一个使主机能查询运行在 DNS 服务器上的分布式数据库的应用层协议，负责将主机名解析为 IP 地址，为日常生活中可以直接使用网址提供了便利。",
+	            "breadcrumb": {
+	                "@id": "/computer-science/computer-networking/03-domain-name-system/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/computer-science/computer-networking/03-domain-name-system/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/computer-science/computer-networking/03-domain-name-system/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "计算机网络03-域名系统：DNS"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/419" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=419' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fcomputer-science%2Fcomputer-networking%2F03-domain-name-system%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fcomputer-science%2Fcomputer-networking%2F03-domain-name-system%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><link rel="stylesheet" href="/wp-content/static/css/theme@law.wp.css">
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['\\\\(','\\\\)']],
+            displayMath: [["\\\\[","\\\\]"]]
+        }
+    });
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-419 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-419" class="post-419 post type-post status-publish format-standard has-post-thumbnail hentry category-computer-networking">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">计算机网络03-域名系统：DNS</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/computer-science/computer-networking/" rel="category tag">计算机网络</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年6月27日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+
+<h2>DNS服务</h2>
+
+<h3>DNS服务内容</h3>
+
+<p><a href="http://frozencandles.fun/archives/403">上一节</a>介绍了应用层协议的基本内容，并指出互联网上的每一个端系统都使用 IP 地址标识它的位置。根据 IP 地址，可以连接到正确的主机，并通过套接字向目的主机发送数据。</p>
+
+<p>然而，在平时使用浏览器时，如果要访问一个网页，通常都会在地址栏中输入一个比较长、带英文字符的网址，例如要访问谷歌搜索，通常会在地址栏中输入 <code>google.com</code> ，而不是 IP 地址 <code>172.217.163.46</code> ，尽管后者也能正确进入谷歌搜索页面。</p>
+
+<p>在互联网中，主机可以使用<strong>主机名</strong>(hostname)或 IP 地址标识，主机名方便用户认识并记忆，例如 <code>github.com</code> 这种名称就比 <code> 20.205.243.166</code> 方便记忆与输入。但主机名可能会变动，因此路由器只能解析 IP 地址。<strong>域名系统</strong>(Domain Name System, DNS)负责将主机名解析为 IP 地址。</p>
+
+<p>DNS 是一个使主机能查询运行在 DNS 服务器上的分布式数据库的应用层协议。它运行在 UDP 协议上，使用 53 号端口。</p>
+
+<p>DNS 的解析结果可以被其余应用层协议（如 HTTP 和 SMTP 等）利用，这也就是上一节编写邮件发送程序时并没有在代码中显式声明邮件服务器的 IP 地址的原因。当它们需要将一个报文发送到对应名称的主机上时，主要执行以下步骤：</p>
+
+<ol>
+    <li>浏览器将得到的主机名传给主机上正在运行的 DNS 客户端</li>
+    <li>DNS 客户端向 DNS 服务器发送一个包含主机名的请求</li>
+    <li>DNS 服务器返回一个包含解析得到的目标 IP 地址的回答报文</li>
+    <li>利用得到的目标 IP 地址向目的主机发送报文</li>
+</ol>
+
+<p>DNS 服务器还提供以下服务：</p>
+
+<p>当一台主机的<strong>规范主机名</strong>(canonical hostname)比较难以记忆时，它可能还有几个<strong>主机别名</strong>(host aliasing)。此时 DNS 服务器可以根据主机别名来获取主机的规范主机名及对应的 IP 地址。</p>
+
+<p>当一个大型站点被分配在多个主机上时，DNS 数据库会轮流将每个主机的 IP 地址提供给客户端，通过<strong>负载分配</strong>(load distribution)平均服务器的压力。</p>
+
+<p>DNS 服务基于大量分布式、分层形式的服务器组织。它们主要被分为 3 层：根 DNS 服务器、顶级域(Top-Level Domain, TLD) DNS 服务器以及权威 DNS 服务器。根 DNS 服务器遍及全球，提供 TLD 服务器的 IP 地址；顶级域提供权威 DNS 服务器的 IP 地址；权威 DNS 服务器提供由它管理的服务器的 IP 地址。</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/02-dns-server.jpg" alt="" width="470">
+    <figcaption>DNS 服务结构</figcaption>
+</figure>
+
+<p>每一级域名都由不区分大小写的英文字母和数字组成。多级域名由点号 <code>.</code> 隔开，且越高级的域名越靠右。例如，域名 <code>en.wikipedia.org</code> 中，顶级域名 org 提供 wikipedia.org 的 IP 地址，而 wikipedia.org 则提供 en.wikipedia.org 的 IP 地址。</p>
+
+<p>还有一类重要的<strong>本地 DNS 服务器</strong>(local DNS server)，由本地 ISP 提供，离用户较近，负责将主机发送的 DNS 请求转发到 DNS 服务器层次结构中。</p>
+
+<p>DNS 提供了两种域名解析的方式：递归查询和迭代查询。递归查询如果没有得到目的主机的 IP 地址，该服务器自身会继续向下一级 DNS 服务器查询，最后得到的 IP 地址将层层上报给本地 DNS 。而迭代查询时，DNS 服务器只会将下一级 DNS 服务器的地址交给本地 DNS ，由本地 DNS 向下一级 DNS 查询。</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/02-dns-query.jpg" alt="" width="830">
+    <figcaption>两种查询方式的比较</figcaption>
+</figure>
+
+<p>由于递归查询对于被查询的域名服务器负担太大，因此通常从请求主机到本地域名服务器的查询使用递归查询，而其余的查询则采用迭代查询。</p>
+
+<p>DNS 服务器普遍使用了 <strong>DNS 缓存</strong>(DNS caching)技术，当某个 DNS 服务器接收到一个包含主机名到 IP 地址的映射的 DNS 回答时，不管它是否属于该主机名的上一级服务器，都会被该 DNS 服务器保存在本地存储器中，这样下一次接收到相同的查询请求，该 DNS 服务器可以直接使用该缓存的结果而无需额外查询。</p>
+
+<p>由于主机名和对应 IP 的映射关系可能被改变，因此缓存将在一段时间（例如两天）后被清除。</p>
+
+<h3>DNS记录和报文</h3>
+
+<p>所有包含 DNS 分布式数据库的 DNS 服务器上都存储了<strong>资源记录</strong>(Resource Record, RR)，它提供了主机名到 IP 地址的映射，其结构是 <code>(Name, Value, Type, TTL)</code> 形式的四元组。</p>
+
+<p><code>TTL</code> 是该记录保存在缓存中的时间。<code>Name</code> 和 <code>Value</code> 的值主要取决于 <code>Type</code> 。<code>Type</code> 是记录类型，其值可以是：</p>
+
+<ul>
+    <li>如果其值为 <code>A</code> ，则 <code>Name</code> 是主机名，<code>Value</code> 是对应的 IP 地址</li>
+    <li>如果其值为 <code>NS</code> ，则 <code>Name</code> 为一个域名，<code>Value</code> 是一个知道如何获得该域名的主机的 IP 地址的权威 DNS 服务器的主机名。该记录可以沿着查询链得到 DNS 记录</li>。即将子域名指定其它的 DNS 服务器解析
+    <li>如果其值为 <code>CNAME</code> ，则 <code>Value</code> 是别名为 <code>Name</code> 的主机对应的规范主机名</li>。即将域名指向另外一个域名
+    <li>如果其值为 <code>MX</code> ，则 <code>Value</code> 是别名为 <code>Name</code> 的主机名对应的邮件服务器的规范主机名。这样一个相同的别名可以同时充当邮件服务器和其它服务器</li>
+</ul>
+
+<p>DNS 只有查询和回答两种报文，并且它们的格式相同。DNS 报文中各字段的语义为：</p>
+
+<p>前 12 字节为首部区域，第一个 2 字节的字段用于标识查询的 id ，以此区分一个 DNS 应答是哪一个 DNS 查询的回应。</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/02-dns-message.jpg" alt="" width="560">
+    <figcaption>DNS 报文</figcaption>
+</figure>
+
+<p>第二个字段含有若干标志位，各标志位的含义为：</p>
+
+<ul>
+    <li>QR ：查询/应答标志，置 1 代表是应答报文，清 0 代表是查询报文</li>
+    <li>opcode ：查询或应答的类型</li>
+    <li>AA ：置 1 表示该报文是权威 DNS 服务器的应答</li>
+    <li>TC ：截断标志，使用 UDP 发生报文时若报文过长，则将报文截断并置该位为 1</li>
+    <li>RD ：递归查询标志，置 1 为递归查询，清 0 为迭代查询</li>
+    <li>RA ：允许递归标志，应答报文置 1 代表 DNS 服务器允许递归查询</li>
+    <li>zero ：未使用，必须全部清 0 </li>
+    <li>rcode ：4 位返回码，表示应答状态</li>
+</ul>
+
+<p>其余四个字段指定了首部后四类数据区域出现的数量。</p>
+
+<p>问题区域包含正在进行的查询信息，包含名字字段（查询的主机名字）和类型字段（查询的问题类型）。回答区域对最初请求的名字的资源记录，可以包含多个 RR 。权威区域包含其它权威服务器的记录，附加区域包含了其它有帮助的记录。</p>
+
+<p>接下来，通过具体的实验来探究 DNS 查询的细节。</p>
+
+<h2>实验：DNS查询</h2>
+
+<h3>使用操作系统命令</h3>
+
+<p>为了执行 DNS 查询，首先要给出 DNS 服务器的地址。在 Linux 系统中，使用文件 <code>/etc/resolv.conf</code> 来存放 DNS 服务器的 IP 地址。该文件的内容大致为：</p>
+
+<div class="codeblock code-template"># [network]
+nameserver 8.8.8.8
+nameserver 4.2.2.2</div>
+
+<p>其中的两个 IP 地址分别是首选 DNS 服务器地址和备选 DNS 服务器地址。</p>
+
+<p><code>nslookup</code> 是一个简单的程序，可以运行在大多数 Linux 和 Windows 系统上，也可以使用在线工具如 <a href="https://www.nslookup.io/">https://www.nslookup.io/</a> 替代。它可以向任何 DNS 服务器发送 DNS 查询，并返回本次查询的结果报告。例如，以下是使用 <code>nslookup</code> 一次简单的 DNS 查询结果：</p>
+
+<div class="codeblock code-console">$ nslookup stackoverflow.com
+Server:   cache-fz.fj100110.com
+Address:  65.115.28.98
+
+Non-authoritative answer:
+Server:     stackoverflow.com
+Addresses:  151.101.1.69
+          151.101.129.69
+          151.101.65.69
+          151.101.193.69
+</div>
+
+<p>从解析结果可以看出，域名 <code>stackoverflow.com</code> 对应多台主机，在访问量较大的时候可以均衡负载。同时，由于本次查询用的 DNS 服务器并不实际管理该被查询的域名，它需要到其余 DNS 服务器中查询该域名，因此本次查询是非权威应答。</p>
+
+<p>可以使用第二个参数指定查询用的 DNS 服务器。例如，以下使用管理本域名的 DNS 服务器查询本域名的地址：</p>
+
+<div class="codeblock code-console">$ nslookup frozencandles.fun dns1.hichina.com
+Server:   UnKnown
+Address:  120.76.107.43
+
+Name:    frozencandles.fun
+Address:  123.56.83.47
+</div>
+
+<p>这时，该应答便为权威应答。</p>
+
+<p>还可以通过 <code>-q=<em>type</em></code> 参数指定查询的记录类型。例如，假设要解析一个域名对应的邮件服务器的地址，那么可以执行以下命令：</p>
+
+<div class="codeblock code-console">$ nslookup -qt=MX frozencandles.fun
+Server:  cache-fz.fj100110.com
+Address:  65.115.28.98
+
+Non-authoritative answer:
+frozencandles.fun       MX preference = 10, mail exchanger = mxw.mxhichina.com
+frozencandles.fun       MX preference = 5, mail exchanger = mxn.mxhichina.com
+</div>
+
+<!-- 
+<p><code>nslookup</code> 还提供了一种交互式的查询方式，可以使用交互式查询的方式来实现迭代查询。</p>
+
+<p>要使用交互式查询，首先需要在命令行中使用无参数的 <code>nslookup</code> 命令：</p>
+
+<div class="codeblock code-console">$ nslookup
+默认服务器:  cache-fz.fj100110.com
+Address:  65.115.28.98
+
+>
+</div>
+
+<p>为了沿着查询链得到 DNS 记录，需要获取管理该域名的上一级域名的权威名称服务器，也就是说要将类型设置为 <code>NS</code> ，这点可以通过以下命令完成：</p> 
+
+<div class="codeblock code-console">> set type=NS
+</div>
+
+首先，查询可用的根 DNS 服务器：
+
+<div class="codeblock code-console">> .
+Server:        65.115.28.98
+Address:       65.115.28.98#53
+
+Non-authoritative answer:
+.       nameserver = b.root-servers.net.
+.       nameserver = f.root-servers.net.
+....
+> server 194.169.218.72
+Default server: 194.169.218.72
+Address: 194.169.218.72#53
+> frozencandles.fun
+Server:         194.169.218.72
+Address:        194.169.218.72#53
+
+Non-authoritative answer:
+*** Can't find frozencandles.fun: No answer
+
+Authoritative answers can be found from:
+frozencandles.fun       nameserver = dns1.hichina.com.
+frozencandles.fun       nameserver = dns2.hichina.com.
+> server dns1.hichina.com.
+Default server: dns1.hichina.com.
+Address: 47.118.199.213#53
+Default server: dns1.hichina.com.
+Address: 139.224.142.123#53
+......
+> frozencandles.fun.
+Server:         dns1.hichina.com.
+Address:        47.118.199.213#53
+
+frozencandles.fun       nameserver = dns1.hichina.com.
+frozencandles.fun       nameserver = dns2.hichina.com.
+> frozencandles.fun
+Server:         dns1.hichina.com.
+Address:        47.118.199.213#53
+
+frozencandles.fun       nameserver = dns1.hichina.com.
+frozencandles.fun       nameserver = dns2.hichina.com.
+> set type=A
+> frozencandles.fun
+Server:         dns1.hichina.com.
+Address:        47.118.199.213#53
+
+Name:   frozencandles.fun
+Address: 123.56.83.47
+</div> 
+-->
+
+<p>如果想要查看更详细的 DNS 查询信息，可以使用 <code>dig</code> 命令发起一次 DNS 查询，第一个参数是 <code>Name</code> ，第二个参数是 <code>Type</code> 。该命令得到的 DNS 查询结果已经非常接近原始的 DNS 报文了：</p>
+
+<div class="codeblock code-console">$ <span class="codetoken command">dig</span> frozencandles.fun
+; <<>> DiG 9.10.3-P4-Ubuntu <<>> frozencandles.fun
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 37772
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4096
+;; QUESTION SECTION:
+;frozencandles.fun.             IN      A
+
+;; ANSWER SECTION:
+frozencandles.fun.      300     IN      A       123.56.83.47
+
+;; Query time: 6 msec
+;; SERVER: 65.115.28.98#53(65.115.28.98)
+;; WHEN: Mon May 02 14:17:47 CST 2022
+;; MSG SIZE  rcvd: 62</div>
+
+<p>从以上结果可以大致还原 DNS 报文的数据。接下来介绍使用 WireShark 获取 DNS 报文并解析的过程。实际上该过程非常简单。</p>
+
+<h3>使用WireShark分析DNS</h3>
+
+<p>在使用 WireShark 前，可以使用以下命令清除操作系统的 DNS 缓存，确保结果是由 DNS 服务器返回的：</p>
+
+<div class="codeblock code-console">$ ipconfig /flushdns
+</div>
+
+<p>然后打开 WireShark ，并在本地通过任意方式访问一个域名以执行 DNS 查询，例如使用 <code>nslookup</code> 命令。</p>
+
+<p>如果本地的网络服务比较繁忙，出现的网络数据包比较多，那么可以在下图浅绿色区域的窗口将所有 DNS 数据包过滤出来：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/02-wireshark-dns.jpg" alt="" width="670">
+    <figcaption>经过筛选的数据包</figcaption>
+</figure>
+
+<p>下半部分的文字列出了该数据包的概览。从第四行可以看到，DNS 是运行在 UDP(User Datagram Protocol) 协议之上的，并且使用 53 号端口。</p>
+
+<p>第五行表示该数据包是一个 DNS 应用层协议的数据，可以展开它进一步检查包含的内容：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/02-wireshark-dns-query.jpg" alt="" width="500">
+    <figcaption>DNS 数据包详细结构</figcaption>
+</figure>
+
+<p>第一个字段表示本次 DNS 查询的标识 id 为 0x7680 ；第二个字段的值的已经按位表示的很清楚了，说明这是一个标准的递归 DNS 查询；问题数和问题都在结果中显示出来了。</p>
+
+<p>除此之外，WireShark 还获取了 DNS 回答的数据包，其结构和查询用的数据包相差不大，因此不再展示。</p>
+
+<h2>参考资料/延伸阅读</h2>
+
+<p><a href="https://www.cloudflare.com/learning/dns/what-is-dns/">https://www.cloudflare.com/learning/dns/what-is-dns/</a></p>
+
+<p>cloudflare（一个业务包括 DNS 解析的公司）的 DNS 介绍文档</p>
+
+<p><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/nslookup">https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/nslookup</a></p>
+
+<p>MSDN 上关于 <code>nslookup</code> 命令的帮助文档</p>
+
+<p>有条件或有兴趣的话可以选择一家域名服务商购买一个域名，然后使用它们提供的 DNS 服务尝试添加一些 DNS 记录并在本地解析，这样可以快速加深对 DNS 的印象。</p>
+
+
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/data-science/machine-learning/03-naive-bayes/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/12/机器学习-朴素贝叶斯-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/12/机器学习-朴素贝叶斯-520x293.jpg 520w, /wp-content/uploads/2022/12/机器学习-朴素贝叶斯-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/data-science/machine-learning/03-naive-bayes/" rel="bookmark">机器学习-朴素贝叶斯</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/other/regular-expression-tutorial/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/02/Skyrim-River-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/02/Skyrim-River-520x293.jpg 520w, /wp-content/uploads/2022/02/Skyrim-River-300x169.jpg 300w, /wp-content/uploads/2022/02/Skyrim-River-1024x576.jpg 1024w, /wp-content/uploads/2022/02/Skyrim-River-768x432.jpg 768w, /wp-content/uploads/2022/02/Skyrim-River-1536x864.jpg 1536w, /wp-content/uploads/2022/02/Skyrim-River-2048x1152.jpg 2048w, /wp-content/uploads/2022/02/Skyrim-River-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/other/regular-expression-tutorial/" rel="bookmark">正则表达式简单入门</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/embedded/mcu-application/lvgl-01-migration/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/LVGL库入门教程01-移植到STM32-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/LVGL库入门教程01-移植到STM32-520x293.jpg 520w, /wp-content/uploads/2022/06/LVGL库入门教程01-移植到STM32-300x169.jpg 300w, /wp-content/uploads/2022/06/LVGL库入门教程01-移植到STM32-1024x576.jpg 1024w, /wp-content/uploads/2022/06/LVGL库入门教程01-移植到STM32-768x432.jpg 768w, /wp-content/uploads/2022/06/LVGL库入门教程01-移植到STM32-1536x864.jpg 1536w, /wp-content/uploads/2022/06/LVGL库入门教程01-移植到STM32-950x534.jpg 950w, /wp-content/uploads/2022/06/LVGL库入门教程01-移植到STM32.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/embedded/mcu-application/lvgl-01-migration/" rel="bookmark">LVGL库入门教程01-移植到STM32</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/embedded/mcu-application/lvgl-06-animations/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>LVGL库入门教程06-动画</span></a></li>
+		<li class="previous"><a href="/computer-science/computer-networking/02-the-application-layer/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>计算机网络02-应用层概览与SMTP电子邮件发送</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

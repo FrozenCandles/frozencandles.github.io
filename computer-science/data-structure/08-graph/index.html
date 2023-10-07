@@ -1,0 +1,905 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>数据结构08-图 - 冰封残烛的个人小站</title>
+	<meta name="description" content="本节介绍图这种典型的多对多数据结构，与图的邻接矩阵和邻接表表示方法，以及一些经典的图论算法：拓扑排序、图的遍历（深度优先搜索和广度优先搜索）、最短路径算法（包括无权图和有权图）以及最小生成树（包括 Prim 算法和 Kruskal 算法）" />
+	<link rel="canonical" href="/computer-science/data-structure/08-graph/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="数据结构08-图 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="本节介绍图这种典型的多对多数据结构，与图的邻接矩阵和邻接表表示方法，以及一些经典的图论算法：拓扑排序、图的遍历（深度优先搜索和广度优先搜索）、最短路径算法（包括无权图和有权图）以及最小生成树（包括 Prim 算法和 Kruskal 算法）" />
+	<meta property="og:url" content="/computer-science/data-structure/08-graph/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2022-09-15T03:41:15+00:00" />
+	<meta property="article:modified_time" content="2023-10-06T04:22:05+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2022/09/数据结构08-图.jpg" />
+	<meta property="og:image:width" content="1066" />
+	<meta property="og:image:height" content="802" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="11分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/computer-science/data-structure/08-graph/#primaryimage",
+	            "url": "/wp-content/uploads/2022/09/数据结构08-图.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/09/数据结构08-图.jpg",
+	            "width": 1066,
+	            "height": 802
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/computer-science/data-structure/08-graph/#webpage",
+	            "url": "/computer-science/data-structure/08-graph/",
+	            "name": "数据结构08-图 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/computer-science/data-structure/08-graph/#primaryimage"
+	            },
+	            "datePublished": "2022-09-15T03:41:15+00:00",
+	            "dateModified": "2023-10-06T04:22:05+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "本节介绍图这种典型的多对多数据结构，与图的邻接矩阵和邻接表表示方法，以及一些经典的图论算法：拓扑排序、图的遍历（深度优先搜索和广度优先搜索）、最短路径算法（包括无权图和有权图）以及最小生成树（包括 Prim 算法和 Kruskal 算法）",
+	            "breadcrumb": {
+	                "@id": "/computer-science/data-structure/08-graph/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/computer-science/data-structure/08-graph/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/computer-science/data-structure/08-graph/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "数据结构08-图"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/743" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=743' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fcomputer-science%2Fdata-structure%2F08-graph%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fcomputer-science%2Fdata-structure%2F08-graph%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><link rel="stylesheet" href="/wp-content/static/css/theme@neon-pie.wp.css">
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['\\\\(','\\\\)']],
+            displayMath: [["\\\\[","\\\\]"]]
+        }
+    });
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<style>
+    div.vscode-block {
+        color: #D6DEEB;
+        background-color: #011627;
+    }
+    .math { color:blue; font-size: 13px; }
+    span[token="keyword"]  { color: #c792ea; font-weight: bold; }
+    span[token="type"]     { color: #d6deeb; text-decoration: underline; }
+    span[token="variable"] { color: #c5e478; }
+    span[token="number"]   { color: #f78c6c; }
+    span[token="func"]     { color: #82aaff; }
+    span[token="property"] { color: #7fdbca; }
+    span[token="operator"] { color: #c792ea; }
+</style>
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-743 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-743" class="post-743 post type-post status-publish format-standard has-post-thumbnail hentry category-data-structure">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">数据结构08-图</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/computer-science/data-structure/" rel="category tag">数据结构与算法</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年9月15日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+
+
+
+
+<h2>图存储结构</h2>
+
+<h3>图结构简介</h3>
+
+<p>在之前的章节中已经见过了一对一和一对多的数据结构，它们分别可以使用<a href="http://frozencandles.fun/archives/586">线性表</a>和<a href="http://frozencandles.fun/archives/622">树</a>来描述。本节介绍一种典型的多对多数据结构：<strong>图</strong>(graph)。</p>
+
+<p>下面展示了一个简单的图结构，可以看出每两个数据之间都可能有对应关系：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-graph-concept.png" alt="">
+</figure>
+
+<p>这种对应关系使得图不能简单地使用节点和指针表示，否则一个节点需要大量空间来表示这种对多的关系。在介绍图的表示方法之前，可以了解一下图的定义。</p>
+
+<h3>图的若干定义</h3>
+
+<p>一个图 <span class="math">\\( G=(V,E) \\)</span> 由<strong>顶点</strong>(vertex)集合 <span class="math">\\( V \\)</span> 和<strong>边</strong>(edge)集合 <span class="math">\\( E \\)</span> 组成。顶点类似于树节点的概念，边是一对顶点的关联 <span class="math">\\( (v, w) \\)</span> 其中 <span class="math">\\( v, w \in V \\)</span> ，边有时也称为<strong>弧</strong>(arc)。</p>
+
+<p>有时候顶点之间并不是双向联系，而是像树一样的单方面指向，这种图称为<strong>有向图</strong>(digraph)。有向图的顶点对是有序的。下面展示了一个有向图，每两个数据之间的对应关系可能是指向也可能是被指向：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-digraph-concept.png" alt="">
+</figure>
+
+<p>有向图中顶点的<strong>入度</strong>(indegree)指的是箭头指向它的数量，而<strong>出度</strong>(outdegree)指的是它指出的箭头数量。</p>
+
+<p>两个顶点 <span class="math">\\( v \\)</span> 和 <span class="math">\\( w \\)</span> <strong>邻接</strong>(adjacent)指的是边 <span class="math">\\( (v, w) \in E \\)</span> ，即两个顶点之间有直接连接（且符合指向顺序）的边。</p>
+
+<p>一个边有时也具有<strong>值</strong>(cost)或称为<strong>权</strong>(weight)。例如在一个地图中，两个地点（顶点）之间路线（边）的权可以反映它们的距离。</p>
+
+<p>图的一条<strong>路径</strong>(path)从一个顶点到另一顶点途经的所有顶点组成的序列，用数学描述就是是一个顶点序列 <span class="math">\\( w_1, w_2, \dots, w_N \\)</span> 使得 <span class="math">\\( (w_i, w_{i+1}) \in E \\)</span> 。从一个顶点到自身可以看作一条路径，这种路径不包含边，路径长为 0 。</p>
+
+<p>如果一个顶点到其自身存在一条边 <span class="math">\\( (v, v) \\)</span> ，那么路径 <span class="math">\\( v,v \\)</span> 称为<strong>环</strong>(loop)，一般来说很少有图的应用需要有这种直接与自身有关联的顶点。</p>
+
+<p>与环相似的概念是<strong>圈</strong>(cycle)，如果路径中第一个顶点和最后一个顶点相同，且路径的长度至少为 1（至少涉及两个顶点），则这样的路径就是圈。对于无向图还要求边之间互不相同，防止在两个顶点间左右横跳被认为是圈。</p>
+
+<p>如果在一个无向图中从每一个顶点到其它顶点中都存在一条路径，则称该无向图是<strong>连通</strong>(connected)的。具有这样性质的有向图称为<strong>强连通</strong>(strongly connected)的；如果它不具备这样的性质，但它的边去掉方向所退化为的无向图是连通的，那么该有向图是<strong>弱连通</strong>(weakly connected)的。一个比较典型的实例是航空系统，如果航空网络构成的图是强连通的，那么说明从任意一个航站到另一个航站都只需要若干次换乘；否则还需要借助其它交通方式才能到达。</p>
+
+<h3>图的实现</h3>
+
+<p>下面以有向图为例说明图的实现。无向图可以看作每一条边都是双向连接的有向图。</p>
+
+<p>表示图的一种最简单的方式是使用二维数据，一个维度存储这些顶点，另一个维度存储顶点之间的对应关系：如果存在边 <span class="math">\\( (u, v) \\)</span> ，那么就置 <span class="math">\\( A[u][v] \\)</span> 为 1 或它的权；否则将其清零或使用 <span class="math">\\( \infty \\)</span> 等表示。</p>
+
+<p>这种二维数组称为<strong>邻接矩阵</strong>(adjacency matrix)，使用邻接矩阵表示图易于理解，且对无向图来说由于指向具有对称性，存储时可以采用上三角或下三角矩阵进一步压缩空间。</p>
+
+<p>然而邻接矩阵的空间要求还是太多了，它的空间复杂度为 <span class="math">\\( O(|V|^2) \\)</span> ，除非图中顶点间的关联基本都存在，否则邻接矩阵的大多数位置都不会被用到。</p>
+
+<p>如果要提高空间利用率，那么就需要只存储存在的数据而不存储不存在的数据。那么就可以使用链表这种长度可以灵活调整的数据结构：对于每一个顶点，使用一个链表存放所有邻接的顶点，这样空间需求只为 <span class="math">\\( O(|V|+|E|) \\)</span> 。这种图的表现形式称为<strong>邻接表</strong>(adjacency list)。</p>
+
+<p>以下展示了图的邻接表表示方法，左侧是图的直观结构：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-adjacency-list.png" alt="">
+</figure>
+
+<p>可以看到这种结构类似于分离链接散列表。邻接表是表示图的基本方法，接下来的操作都以邻接表为例。邻接表的定义可以参考如下：</p>
+
+<div class="vscode-block"><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">graph_arc</span> <span token="type">graph_arc</span>;</div><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">graph_vertex</span> {</div><div>&#160; &#160; <span token="type">elemtype</span> <span style="color: #7fdbca;">data</span>;</div><div>&#160; &#160; <span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">firstarc</span>;</div><div>} <span token="type">graph_vertex</span>;</div><div><span token="keyword">struct</span> <span token="type">graph_arc</span> {</div><div>&#160; &#160; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">vertex</span>;</div><div>&#160; &#160; <span token="keyword">struct</span> <span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">nextarc</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span style="color: #7fdbca;">weight</span>;</div><div>};</div><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">graph</span> {</div><div>&#160; &#160; <span token="type">graph_vertex</span><span style="color: #7fdbca;">**</span> <span style="color: #7fdbca;">vertices</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span style="color: #7fdbca;">vertex_num</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span style="color: #7fdbca;">arc_num</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span style="color: #7fdbca;">size</span>;</div><div>} <span style="color: #7fdbca;">*</span> <span token="type">graph</span>;</div></div>
+
+<p>接下来介绍几个关于图的典型问题。</p>
+
+<h2 id="top-sort">拓扑排序</h2>
+
+<p>拓扑排序是一种针对有向图顶点的一种排序，由于有向图有指向关系，因此可以通过该指向关系来为顶点安排先后顺序。</p>
+
+<p>一种典型的拓扑排序应用就是选课流程：为了确保知识的连贯性，有些课程必须学完之后才可以继续学习下一门课程，那么这些课程之间就可以按学习顺序构成一个有向图，使用拓扑排序可以确定如何安排课程。</p>
+
+<p>因此，被排序的图除了是有向的外，还要求它没有圈，不然圈上的元素没有严格的先后关系。</p>
+
+<p>例如，以下图：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-top-sort.png" alt="">
+</figure>
+
+<p>顶点的指向顺序从左向右。特别地，顶点 C 和 D 之间是并列的，没有严格的先后关系，两者任意一个排在前面都可以。因此，以上图的拓扑排序可以有两种结果：</p>
+
+<div class="codeblock code-template">
+    A→B→C→D→E<br>
+    A→B→D→C→E
+</div>
+
+<p>拓扑排序的思路也很简单：如果一个顶点可以排在最前面，那么应该没有顶点指向它，即它的入度为 0 ；那么只需要找出入度为 0 的顶点，然后将它和它指出的边暂时排除，继续寻找下一个符合条件（入度为 0 ）的顶点即可。以下展示了这一步骤：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-top-sort-steps.png" alt="">
+</figure>
+
+<p>以上算法可以做一个小的优化：每一次查找入度为 0 的顶点都花费 <span class="math">\\( O(|V|) \\)</span> 的时间，但只取出一个顶点做处理，如果下一次还是遍历图去寻找入度为 0 的顶点，会使得算法的运行时间达到了平方级 <span class="math">\\( O(|V|^2) \\)</span> 。在第一次扫描时，可以将入度为 0 的顶点放入一个表中，然后逐个取出表中的顶点，检查它指向的顶点入度减 1 后是否为 0 ：只要一个顶点的入度降为 0 ，说明去除那些指向它的顶点后它就可以作为下一位置的顶点，可以同样地将它放入表中继续处理。</p>
+
+<p>这样就只需一次扫描顶点和边并建立表，使执行时间可以变为 <span class="math">\\( O(|V|+|E|) \\)</span> 。这种表可以使用栈或队列。这里使用<a href="http://frozencandles.fun/archives/609#queue">队列</a>以实现顺序处理。</p>
+
+<p>拓扑排序的代码实现为：</p>
+
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">TopSort</span>(<span token="type">graph</span> <span style="color: #d7dbe0;">g</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">indegree</span>[<span style="color: #82aaff;">VERTEX_MAXNUM</span>];</div><div>&#160; &#160; <span style="color: #82aaff;">memset</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">&amp;</span><span token="variable">indegree</span><span style="color: #82aaff;">, </span><span token="number">0</span><span style="color: #82aaff;">, </span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;"> </span><span token="variable">indegree</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span style="color: #82aaff;">Graph_GatherInDegree</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">, </span><span token="variable">indegree</span><span style="color: #82aaff;">)</span>;</div><br><div>&#160; &#160; <span token="type">queue</span> <span token="variable">q</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Queue_New</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;">VERTEX_MAXNUM</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">indegree</span>[<span token="variable">i</span>] <span style="color: #c792ea;">==</span> <span token="number">0</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #82aaff;">Queue_Enqueue</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">vertices</span><span style="color: #82aaff;">[</span><span token="variable">i</span><span style="color: #82aaff;">]-&gt;</span><span style="color: #7fdbca;">data</span><span style="color: #82aaff;">)</span>;</div><br><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">counter</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&#160; &#160; <span token="keyword">while</span> (<span style="color: #c792ea;">!</span><span style="color: #82aaff;">Queue_IsEmpty</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">)</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span token="variable">v</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Graph_GetVertexByData</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">, </span><span style="color: #82aaff;">Queue_Dequeue</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">))</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">printf</span><span style="color: #82aaff;">(</span><span style="color: #d9f5dd;">"</span><span style="color: #82aaff;">%d</span><span style="color: #ecc48d;"> &gt;</span><span style="color: #d9f5dd;">"</span><span style="color: #82aaff;">, </span><span token="variable">v</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">data</span><span style="color: #82aaff;">)</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> print in topological order</span></div><div>&#160; &#160; &#160; &#160; <span token="variable">counter</span><span style="color: #c792ea;">++</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">v</span>-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>) {</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span token="variable">w</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #7fdbca;">--</span><span token="variable">indegree</span>[<span style="color: #82aaff;">Graph_GetVertexIndex</span>(<span style="color: #d7dbe0;">g</span>, <span token="variable">w</span>)] <span style="color: #c792ea;">==</span> <span token="number">0</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #82aaff;">Queue_Enqueue</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">, </span><span token="variable">w</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">data</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; }</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">if</span> (<span token="variable">counter</span> <span style="color: #c792ea;">!=</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertex_num</span>)</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">warning</span><span style="color: #82aaff;">(</span><span style="color: #d9f5dd;">"</span><span style="color: #ecc48d;">Graph has a cycle</span><span style="color: #d9f5dd;">"</span><span style="color: #82aaff;">)</span>;</div><br><div>&#160; &#160; <span style="color: #82aaff;">Queue_Delete</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">)</span>;</div><div>}</div></div>
+
+<p>由于图的实现比较复杂，本节涉及到的代码一般会将一些细节抽象为函数，使用类似伪代码的形式展现。如果要获取包括拓扑排序在内的完整图论算法实现，以及图的创建等其它操作实现，可以访问 <a href="https://github.com/FrozenCandles/example-code/blob/master/DataStructure/Src/graph.c">GitHub 仓库</a>。</p>
+
+<p>这个程序比较复杂，它可以分为几个部分理解。在计算入度时，由于邻接表只记录一个顶点指出的边，因此要计算入度时需要遍历所有的顶点才能完整得出指向一个顶点的所有边。这里使用一个数组 <code>indegree[]</code> 在一次遍历时便统计出所有顶点的边，加快运行的同时方便处理。</p>
+
+<p>由于图中可能存在圈，但无法通过简单的方式来判断。不过如果存在圈，圈上的顶点就不会降到 0 ，使得它们不会被排序。那么最后只需要判断排序的顶点数是否等于图中包含的顶点数，就知道图中是否存在圈了。</p>
+
+<h2>图的遍历</h2>
+
+<p>遍历也是图常用的一种操作。遍历的要求是从图中的某一个顶点开始，访问每个路径上能到达的顶点且每个顶点应该只访问一次。遍历可以用于规划路线、安排流量、计算其它数学量等。</p>
+
+<h3>深度优先搜索</h3>
+
+<p><strong>深度优先搜索</strong>(depth-first search, DFS)的原理是从某个顶点搜索时，当搜索到下一个顶点时，再递归地从下一个顶点继续搜索下一个顶点。</p>
+
+<p>下图展示了深度优先搜索某一时刻顶点的搜索情况，可以看出远处的顶点可能会被先搜索到：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-DFS.png" alt="">
+</figure>
+
+<p>深度优先搜索可以使用递归的形式来求解。另外为了让每个顶点只遍历一次，还需要有一个额外的顶点字段或数组记录顶点是否被访问过。</p>
+
+<p>以下代码是深度优先搜索的一个通用形式：</p>
+
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">Graph_DepthFirstSearch</span>(<span token="type">graph</span> <span style="color: #d7dbe0;">g</span>, <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">v</span>) {</div><div>&#160; &#160; <span token="variable">visited</span>[<span style="color: #d7dbe0;">v</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">true</span>;</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">v</span>-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span token="variable">w</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span token="variable">visited</span>[<span token="variable">w</span>-&gt;<span style="color: #7fdbca;">data</span>])</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #82aaff;">Graph_DepthFirstSearch</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">, </span><span token="variable">w</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; }</div><div>}</div></div>
+
+<p>值的注意的是，如果图是无向不连通或有向弱连通的，未必所有顶点都会在此过程中访问到。</p>
+
+<h3>广度优先搜索</h3>
+
+<p>深度优先搜索的缺点是有时要搜索的顶点可能离它较近，但程序可能会花费很多不必要的时间处理更远的顶点。这在图很大时不利于处理较近的顶点。<strong>广度优先搜索</strong>(breadth-first search)则优先处理较近的顶点，然后再处理更远的顶点。</p>
+
+<p>广度优先搜索的原理为：从某一顶点开始搜索时，遍历每一个顶点时，依次遍历其所有的邻接点，然后再从这些邻接点出发，同样依次访问它们的邻接点。按照此过程，直到图中所有被访问过的顶点的邻接点都被访问到。</p>
+
+<p>下图展示了广度优先搜索某一时刻顶点的搜索情况，搜索的顶点从起点开始向外辐射展开：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-BFS.png" alt="">
+</figure>
+
+<p>广度优先搜索需要在访问一批顶点时保存这些顶点的信息，这样下一次才能向外拓展一层。保存已访问但还没向外拓展的顶点可以使用队列来实现，并且使用队列可以让先向外拓展的顶点下一次也先向外拓展。</p>
+
+<p>以下代码是广度优先搜索的一个通用形式：</p>
+
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">Graph_BreadthFirstSearch</span>(<span token="type">graph</span> <span style="color: #d7dbe0;">g</span>, <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">v</span>) {</div><div>&#160; &#160; <span style="color: #82aaff;">bool</span> <span token="variable">visited</span>[<span style="color: #d7dbe0;">g</span>-&gt;<span token="variable">size</span>];</div><div>&#160; &#160; <span style="color: #82aaff;">memset</span><span style="color: #82aaff;">(</span><span token="variable">visited</span><span style="color: #82aaff;">, </span><span token="number">0</span><span style="color: #82aaff;">, </span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;"> </span><span token="variable">visited</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="type">queue</span> <span token="variable">q</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Queue_New</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;">VERTEX_MAXNUM</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span token="variable">visited</span>[<span style="color: #d7dbe0;">v</span>-&gt;<span style="color: #7fdbca;">data</span>]) {</div><div>&#160; &#160; &#160; &#160; <span token="variable">visited</span>[<span style="color: #d7dbe0;">v</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">true</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">Queue_Enqueue</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">v</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">data</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">while</span> (<span style="color: #c792ea;">!</span><span style="color: #82aaff;">Queue_IsEmpty</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">)</span>) {</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span token="variable">w</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Graph_GetVertexByData</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">, </span><span style="color: #82aaff;">Queue_Dequeue</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">))</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">w</span>-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span token="variable">visited</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>]) {</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">visited</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">true</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #82aaff;">Queue_Enqueue</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">, </span><span token="variable">arc</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">vertex</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">data</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; }</div><div>&#160; &#160; &#160; &#160; }</div><div>&#160; &#160; }</div><div>&#160; &#160; <span style="color: #82aaff;">Queue_Delete</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">)</span>;</div><div>}</div></div>
+
+<p>图的两种遍历方式各有侧重点，它们都有比较典型的应用。</p>
+
+<h2>最短路径算法</h2>
+
+<p>图的顶点之间会互相联系，形成一种网状结构。这个时候查找两个顶点之间的最短路径就是一个常见的问题。例如，导航和游戏在寻路时都需要在地图上的两点内规划一条最短的路线。</p>
+
+<h3>无权图的最短路径</h3>
+
+<p>无权图在寻找最短路径时只需要考虑边的条数，而不需要考虑边的权重，因此这种情况实现起来比较简单：在计算顶点 <span class="math">\\( v_1 \\)</span> 到 <span class="math">\\( v_2 \\)</span> 的最短路径时，只需要使路径上具有最少的边即可。</p>
+
+<p>无权图的最短路径可以使用广度优先搜索的思想解决：广度优先搜索每向外拓展一层，那么路径长便增加 1 ，并且第一次遇到一个顶点时的路径是离起点最短的路径。</p>
+
+<p>可以通过一个附加的顶点字段或数组记录每个顶点离起点的最短路径，并且它可以代替之前使用的 <code>visited[]</code> 数组：在起始时置所有顶点的路径为 -1（无限远），每搜索到一个顶点，只要它是无限远，那就说明没有访问过，将其路径长置为上一级顶点的路径长多 1 。</p>
+
+<p>无权图计算最短路径的实现方式和广度优先算法比较相似。接下来介绍有权图最短路径的算法实现。</p>
+
+<h3>有权图的最短路径</h3>
+
+<p>如果在计算最短路径时要考虑到边上的权，那么计算最短路径就会复杂许多，不过基本的处理思路依然可以参考无权图。</p>
+
+<p>Dijkstra 算法是一个解决有权最短路径问题的较好的算法。该算法和无权最短路径问题一样分阶段执行：每个阶段该算法选择在未访问顶点中路径长 <span class="math">\\( d_v \\)</span> 最小的顶点 <span class="math">\\( v \\)</span> ，并通过该顶点更新邻接顶点的长度：如果从 <span class="math">\\( v \\)</span> 到邻接顶点 <span class="math">\\( w \\)</span> 的路径比从其它顶点到 <span class="math">\\( w \\)</span> 的路径更短，那么就更新 <span class="math">\\( w \\)</span> 最短路径。</p>
+
+<p>例如，假设要在以下有向有权图中寻找从 <span class="math">\\( v_1 \\)</span> 到 <span class="math">\\( v_8 \\)</span> 的最短路径：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-Dijkstra-step-1.png" alt="">
+</figure>
+
+<p>那么首先从 <span class="math">\\( v_1 \\)</span> 开始，标记出从它到邻接顶点的路径，并暂时视为最短路径：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-Dijkstra-step-2.png" alt="">
+</figure>
+
+<p>然后找到未访问且具有最短路径的顶点，即顶点 <span class="math">\\( v_2 \\)</span> ，再标记出经由它到邻接顶点的路径：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-Dijkstra-step-3.png" alt="">
+</figure>
+
+<p>每次更新完邻接顶点的路径后，都继续从未访问的顶点中找出具有最短路径的顶点。</p>
+
+<p>本次找到的顶点为 <span class="math">\\( v_6 \\)</span> ，计算它邻接顶点的路径长时，发现从它到 <span class="math">\\( v_3 \\)</span> 比从已到达的顶点到 <span class="math">\\( v_3 \\)</span> 路径更短，那么就更新到 <span class="math">\\( v_3 \\)</span> 的最短路径：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-Dijkstra-step-4.png" alt="">
+</figure>
+
+<p>重复以上步骤，直到确定了 <span class="math">\\( v_1 \\)</span> 与图中所有顶点的最短路径后才结束算法。</p>
+
+<p>例如，接下来两步是处理 <span class="math">\\( v_3 \\)</span> 和 <span class="math">\\( v_4 \\)</span> 顶点并更新它们邻接顶点的路径长：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-Dijkstra-step-5.png" alt="">
+</figure>
+
+<p>Dijkstra 算法也可用于处理无向图的最短路径，甚至可以用于处理无权图的最短路径（无权图可以将每条边的权看作 1 ）。</p>
+
+<p>Dijkstra 算法的代码大致实现如下：</p>
+
+<div class="vscode-block"><div><span token="keyword">int</span> <span style="color: #82aaff;">Graph_WeightedPath_Dijkstra</span>(<span token="type">graph</span> <span style="color: #d7dbe0;">g</span>, <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">v</span>, <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">w</span>) {</div><div>&#160; &#160; <span style="color: #82aaff;">bool</span> <span token="variable">visited</span>[<span style="color: #82aaff;">VERTEX_MAXNUM</span>];</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">minpathlen</span>[<span style="color: #82aaff;">VERTEX_MAXNUM</span>];</div><div>&#160; &#160; <span style="color: #82aaff;">memset</span><span style="color: #82aaff;">(</span><span token="variable">visited</span><span style="color: #82aaff;">, </span><span token="number">0</span><span style="color: #82aaff;">, </span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;"> </span><span token="variable">visited</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #82aaff;">VERTEX_MAXNUM</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) <span token="variable">minpathlen</span>[<span token="variable">i</span>] <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">INT_MAX</span>;</div><div>&#160; &#160; </div><div>&#160; &#160; <span token="variable">minpathlen</span>[<span style="color: #d7dbe0;">v</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="variable">i</span>]) <span token="keyword">continue</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">int</span> <span token="variable">minv</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">int</span> <span token="variable">minlen</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">INT_MAX</span>;</div><br><div>&#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">j</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">j</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">j</span><span style="color: #c792ea;">++</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span token="variable">visited</span>[<span token="variable">j</span>] <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">minpathlen</span>[<span token="variable">j</span>] <span style="color: #c792ea;">&lt;</span> <span token="variable">minlen</span>) {</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">minv</span> <span style="color: #c792ea;">=</span> <span token="variable">j</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">minlen</span> <span style="color: #c792ea;">=</span> <span token="variable">minpathlen</span>[<span token="variable">minv</span>];</div><div>&#160; &#160; &#160; &#160; &#160; &#160; }</div><div>&#160; &#160; &#160; &#160; <span token="variable">visited</span>[<span token="variable">minv</span>] <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">true</span>;</div><div>&#160; &#160; &#160; &#160; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span token="variable">v_k</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Graph_GetVertexByData</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">, </span><span token="variable">minv</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">v_k</span>-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>) {</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span token="variable">u</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span token="variable">visited</span>[<span token="variable">u</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">&amp;&amp;</span> (<span token="variable">minlen</span> <span style="color: #7fdbca;">+</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">weight</span> <span style="color: #c792ea;">&lt;</span> <span token="variable">minpathlen</span>[<span token="variable">u</span>-&gt;<span style="color: #7fdbca;">data</span>]))</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">minpathlen</span>[<span token="variable">u</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span token="variable">minlen</span> <span style="color: #7fdbca;">+</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">weight</span>;</div><div>&#160; &#160; &#160; &#160; }</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">minpathlen</span>[<span style="color: #d7dbe0;">w</span>-&gt;<span style="color: #7fdbca;">data</span>];</div><div>}</div></div>
+
+<p>注意一个已计算路径最小值的顶点未必被访问过。</p>
+
+<p>Dijkstra 算法需要花费线性的时间处理完所有顶点；每处理一个顶点，接下来还需要花费线性时间查找未访问顶点的路径最小值，而所有顶点的最小路径长需要遍历所有边才能得出一个确定的结果，因此该算法的时间复杂度为 <span class="math">\\( O(|V|^2+|E|) = O(|V|^2 \\)</span> 。</p>
+
+<p>如果图较为稠密（每两个顶点间基本都有边，<span class="math">\\( |E| \approx |V|^2 \\)</span> ），那么该算法的效率基本已经是最优的了。</p>
+
+<p>否则当边较为稀疏时，以上算法还有优化的空间。优化主要体现在线性时间的最小值查找上，可以借助优先队列（堆）降低查找的时间。由于优先队列的删除最小值需要 <span class="math">\\( O(\log N) \\)</span> 时间，因此使用优先队列的 Dijkstra 算法花费的总时间为 <span class="math">\\( O(|E|\log |V| + |V|\log |V|) = O(|E| log |V|) \\)</span> ，在边数较少时可以加快运行效率。</p>
+
+<p>使用堆存储路径长的缺点是二叉堆不支持查找，难以修改一个顶点的最小路径长。要改进这个问题只能使用更高级的优先队列结构，这里暂不讨论这个问题。</p>
+
+<p>除此之外，Dijkstra 算法在某些情况下也可能失效。例如当边的权为负值的时候，那么一个已访问的顶点并不一定已经计算出最短路径，因为可能从未访问顶点有一条负值很大的路径指向它使得从更远的顶点到这里反而可能变得更短，问题是该顶点已经用于计算邻接顶点的最短路径，不能只更新该顶点的最短路径长。一个最坏的情况下，图中可能有含有负值边的圈，并且这个负值可能很大使得每走完一圈路径反而会变短。如果不处理这种情况很容易会造成无限循环。</p>
+
+<p>无权最短路径和有权最短路径的算法都可以得出最短路径：可以增加一个辅助顶点字段或数组，记录到达该顶点的最短路径的上一个顶点的信息，最后收集这些信息，就可以从目的顶点逆序到达起始顶点。</p>
+
+<h2>最小生成树</h2>
+
+<p><strong>最小生成树</strong>(minimum spanning tree)是一个主要针对无向图的问题。一个无向图的最小生成树就是由图中所有顶点和部分边构成的另一个图，且边的权重之和最小。</p>
+
+<p>例如，以上是上一节示例退化的无向图及其最小生成树：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-minimum-spanning-tree.png" alt="">
+</figure>
+
+<p>最小生成树也有典型的实际应用。例如，假设要在若干地点间建立通信路线，那么需要通过最小生成树来规划建立需要的最短线路长度或最少花费。</p>
+
+<p>最小生成树之所以称为“树”，是因为这样得到的无向图是没有圈的，因此它将退化为树形结构。如果无向图有圈，那么圈上的两个顶点之间就会有两条不一样的路径，但这是不必要的，会增加总的路径长度，只需要保留更短的路径即可。</p>
+
+<p>并且由于无向图是没有圈的，无向图边的条数为 <span class="math">\\( |V| - 1 \\)</span> ，因为除了根之外，每个顶点都需要一条边来接到图中；如果多了一条边，那么某个顶点就会接到图中两次，形成一个不必要的圈。</p>
+
+<p>具有最小生成树的图需要是连通的。计算图的最小生成树有两种常用的算法。</p>
+
+<h3>Prim算法</h3>
+
+<p>Prim 是一种易于理解的最小生成树算法。该算法先将每个顶点独立出来，然后每次从独立的顶点中选择离生成树最近的顶点，将它和它的边插入生成树中。</p>
+
+<p>一开始可以随机选择一个顶点作为生成树的根。下图展示了该算法计算以上图最小生成树的前几步：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-Prim-steps.png" alt="">
+</figure>
+
+<p>Prim 算法原理比较直观，但有一些细节需要谨慎处理。Prim 算法的实现可以参照以下思路完成：</p>
+
+<p>该思路要求每个顶点有两个字段：分别记录还不在生成树的顶点离生成树的最近路径长与离生成树最近的顶点。</p>
+
+<p>首先，任取一个顶点放入生成树中，并将其邻接的顶点视为离生成树最近的顶点，更新这些顶点的最近路径长与最近顶点：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-Prim-step-1.png" alt="">
+</figure>
+
+<p>每个顶点的最近路径长一开始被置为 <span class="math">\\( \infty \\)</span> 或 <code>INT_MAX</code> 。如果一个顶点的最近路径长为 0 ，那么说明该顶点已经位于生成树中。</p>
+
+<p>接下来每次都选取离生成树最近的顶点，将其插入到生成树中，并更新该顶点邻接的顶点信息。例如，下一次离生成树最近的顶点是 <span class="math">\\( v_2 \\)</span> ，则将其插入生成树中。更新 <span class="math">\\( v_2 \\)</span> 邻接顶点时发现 <span class="math">\\( v_3 \\)</span> 离它比离 <span class="math">\\( v_1 \\)</span> 更近，因此将该顶点的相关字段更新：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-Prim-step-2.png" alt="">
+</figure>
+
+<p>下一步继续选择离生成树最近的顶点，依照上述方式插入到生成树中并更新邻接顶点的信息：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-Prim-step-3.png" alt="">
+</figure>
+
+<p>Prim 算法的简单代码实现可以参考如下，它与 Dijkstra 算法的实现上非常相似：</p>
+
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">Graph_MinSpanTree_Prim</span>(<span token="type">graph</span> <span style="color: #d7dbe0;">g</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">min_vtx</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="number">0</span>]-&gt;<span style="color: #7fdbca;">data</span>;</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="number">0</span>]-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="variable">minpathfrom</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span token="variable">min_vtx</span>;</div><div>&#160; &#160; &#160; &#160; <span token="variable">minpathlen</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">weight</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="variable">minpathlen</span>[<span token="variable">min_vtx</span>] <span style="color: #c792ea;">=</span> <span token="number">0</span>;<span style="color: #637777;"> &#160; &#160; &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> put it in the tree</span></div><div><span style="color: #a8a8a8;">&#160; &#160; /* Add new edge ( minpathfrom[min_vtx] --- min_len --&gt; min_vtx ) */</span></div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">1</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="variable">i</span>])</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">continue</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">int</span> <span token="variable">min_len</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">INT_MAX</span>;<span style="color: #637777;"> &#160; &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> find the closest vertex</span></div><div>&#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">j</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">j</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">j</span><span style="color: #c792ea;">++</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">minpathlen</span>[<span token="variable">j</span>] <span style="color: #c792ea;">!=</span> <span token="number">0</span> <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">minpathlen</span>[<span token="variable">j</span>] <span style="color: #c792ea;">&lt;</span> <span token="variable">min_len</span>) {</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">min_len</span> <span style="color: #c792ea;">=</span> <span token="variable">minpathlen</span>[<span token="variable">j</span>];</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">min_vtx</span> <span style="color: #c792ea;">=</span> <span token="variable">j</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; }</div><div>&#160; &#160; &#160; &#160; <span token="variable">minpathlen</span>[<span token="variable">min_vtx</span>] <span style="color: #c792ea;">=</span> <span token="number">0</span>;<span style="color: #637777;"> &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> put it in the tree</span></div><div><span style="color: #a8a8a8;">&#160; &#160; &#160; &#160; /* update adjacent vertex */</span></div><div>&#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Graph_GetVertexByData</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">, </span><span token="variable">min_vtx</span><span style="color: #82aaff;">)</span>-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">minpathlen</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">!=</span> <span token="number">0</span> <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">weight</span> <span style="color: #c792ea;">&lt;</span> <span token="variable">minpathlen</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>]) {</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">minpathfrom</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span token="variable">min_vtx</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">minpathlen</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">weight</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; }</div><div>&#160; &#160; }</div><div>}</div></div>
+
+<p>该算法的复杂度分析也和 Dijkstra 算法一致：不使用优先队列时复杂度为 <span class="math">\\( O(|V|^2) \\)</span> ，使用优先队列的复杂度为 <span class="math">\\( O(|E|\log |V|) \\)</span> 。</p>
+
+<h3>Kruskal算法</h3>
+
+<p>Kruskal 是另一种计算最小生成树的算法，它的实现较为简单：同样将顶点独立出来并向其中添加边，每次都从图中的所有边选取权重最小的边，如果加上该边后的图不会形成圈，则说明该边是最小生成树的一部分。</p>
+
+<p>还是以上面那个图为例，首先选择权重最小的边加入图中：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-Kruskal-step-1.png" alt="">
+</figure>
+
+<p>然后继续选择未添加的权重最小的边尝试放入图中：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-Kruskal-step-2.png" alt="">
+</figure>
+
+<p>继续添加边，但添加边 <span class="math">\\( (v_1, v_4) \\)</span> 时发现会形成圈，因此需要抛弃该边：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-Kruskal-step-3.png" alt="">
+</figure>
+
+<p>重复以上步骤即可建立最小生成树。</p>
+
+<p>Kruskal 算法也不难理解，不过实现时也有很多细节要注意。最大的问题是如何判断添加边后是否会形成圈：如果为连通图中的某个顶点添加一条边会形成圈，那么说明该边指向的还是这一连通图。那么只需要将图中的连通部分各做一个独立的标记，如果准备插入一个边时发现该边的两端同属一个连通图，那么就说明插入该边会产生圈。</p>
+
+<p>例如，以上是某个图调用 Kruskal 算法的中间结果，它形成了三个互相独立的连通图：（这里使用不同颜色作为连通图的标记）</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-Kruskal-has-cycle.png" alt="">
+</figure>
+
+<p>如果要向顶点 <span class="math">\\( v_4 \\)</span> 和 <span class="math">\\( v_6 \\)</span> 之间插入一条边，那么就需要先判断这两个顶点的标记是否相同：如果相同，说明它们属于同一个连通图，两者已经存在了一条路径，再向它们之间插入一条边，则又增加了一条路径，使得无向图产生了一个圈。</p>
+
+<p>Kruskal 算法大致可以由以下方式实现：</p>
+
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">Graph_MinSpanTree_Kruskal</span>(<span token="type">graph</span> <span style="color: #d7dbe0;">g</span>) {</div><br><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>)<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> collect arcs</span></div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="variable">i</span>])</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="variable">i</span>]-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">arcs</span>[<span token="variable">arcs_ptr</span><span style="color: #c792ea;">++</span>] <span style="color: #c792ea;">=</span> (<span token="keyword">struct</span> <span token="type">_graph_arc</span>) {</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; .from<span style="color: #c792ea;">=</span><span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="variable">i</span>]-&gt;<span style="color: #7fdbca;">data</span>, .to<span style="color: #c792ea;">=</span><span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>, .weight<span style="color: #c792ea;">=</span><span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">weight</span> };</div><div>&#160; &#160; <span style="color: #82aaff;">qsort</span><span style="color: #82aaff;">(</span><span token="variable">arcs</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">arc_num</span><span style="color: #82aaff;">, </span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span token="keyword">struct</span><span style="color: #82aaff;"> </span><span style="color: #82aaff;text-decoration: underline;">_graph_arc</span><span style="color: #82aaff;">), </span><span style="color: #82aaff;">CompareByWeight</span><span style="color: #82aaff;">)</span>;</div><br><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">arcs_inserted</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">arc_num</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">conn_mark</span>[<span token="variable">arcs</span>[<span token="variable">i</span>].<span token="variable">from</span>] <span style="color: #c792ea;">!=</span> <span token="variable">conn_mark</span>[<span token="variable">arcs</span>[<span token="variable">i</span>].<span token="variable">to</span>]) {</div><div><span style="color: #a8a8a8;">&#160; &#160; &#160; &#160; &#160; &#160; /* insert edge (arcs[i].from &lt;-- arcs[i].weight --&gt; arcs[i].to) to tree */</span></div><div><span style="color: #a8a8a8;">&#160; &#160; &#160; &#160; &#160; &#160; /* union sets between edge */</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">k</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">k</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertex_num</span>; <span token="variable">k</span><span style="color: #c792ea;">++</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">conn_mark</span>[<span token="variable">k</span>] <span style="color: #c792ea;">==</span> <span token="variable">conn_mark</span>[<span token="variable">arcs</span>[<span token="variable">i</span>].<span token="variable">to</span>])</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">conn_mark</span>[<span token="variable">k</span>] <span style="color: #c792ea;">=</span> <span token="variable">conn_mark</span>[<span token="variable">arcs</span>[<span token="variable">i</span>].<span token="variable">from</span>];</div><br><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">arcs_inserted</span><span style="color: #c792ea;">++</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">arcs_inserted</span> <span style="color: #c792ea;">==</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertex_num</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>)<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> minimum spanning tree has created</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">break</span>;</div><div>&#160; &#160; &#160; &#160; }</div><div>&#160; &#160; }</div><div>}</div></div>
+
+<p>以上代码首先收集所有的边（注意如果用邻接表表示无向图的话每条边只应该收集一次），然后对所有边做<a href="http://frozencandles.fun/archives/735">排序</a>，以实现从小到大插入合适的边。</p>
+
+<p>在插入前需要判断边两侧顶点的标记是否相同，如果不相同便可插入，插入完成后还需更新两侧连通图的标记为同一连通图。修改标记的方式为：遍历所有顶点标记，将和边一侧顶点相同的标记修改为另一侧的标记。</p>
+
+<p>这种合并方式虽然易于理解，但效率不高。如果要使用更高效的合并，需要使用某些特殊的集合数据结构才能实现。</p>
+
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-fp/04-builtin-functions/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-300x169.jpg 300w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-1024x576.jpg 1024w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-768x432.jpg 768w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-1536x864.jpg 1536w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-950x534.jpg 950w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-fp/04-builtin-functions/" rel="bookmark">Python函数式编程04 常用内置函数</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/computer-science/data-structure/07-sort-algorithm/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/09/数据结构07-排序算法-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/09/数据结构07-排序算法-520x293.jpg 520w, /wp-content/uploads/2022/09/数据结构07-排序算法-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/computer-science/data-structure/07-sort-algorithm/" rel="bookmark">数据结构07-排序算法</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-oop/04-methods/">
+											<img width="520" height="293" src="/wp-content/uploads/2023/03/Python面向对象编程04-类与实例的方法-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2023/03/Python面向对象编程04-类与实例的方法-520x293.jpg 520w, /wp-content/uploads/2023/03/Python面向对象编程04-类与实例的方法-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-oop/04-methods/" rel="bookmark">Python面向对象编程04-类与实例的方法</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/data-science/via-python/numpy01-create-arrays/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>numpy01:数组操作</span></a></li>
+		<li class="previous"><a href="/computer-science/data-structure/07-sort-algorithm/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>数据结构07-排序算法</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

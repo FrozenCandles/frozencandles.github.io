@@ -1,0 +1,776 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Python函数式编程05 函数的递归 - 冰封残烛的个人小站</title>
+	<meta name="description" content="如果一个函数在执行时，调用了它自身，那么这个函数就会执行自身，然后执行自身时又执行了自身。这种一层一层地向下执行下去的过程称为递归。递归与循环类似，且较循环语句更简洁，但执递归行速度更慢，且占用内存明显过多。但在某些情况下，不能用简单的循环代替递归。" />
+	<link rel="canonical" href="/programming/python-fp/05-recursions/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Python函数式编程05 函数的递归 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="如果一个函数在执行时，调用了它自身，那么这个函数就会执行自身，然后执行自身时又执行了自身。这种一层一层地向下执行下去的过程称为递归。递归与循环类似，且较循环语句更简洁，但执递归行速度更慢，且占用内存明显过多。但在某些情况下，不能用简单的循环代替递归。" />
+	<meta property="og:url" content="/programming/python-fp/05-recursions/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2022-05-27T03:49:20+00:00" />
+	<meta property="article:modified_time" content="2023-10-05T02:53:33+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2022/05/Python函数式编程05-函数的递归.jpg" />
+	<meta property="og:image:width" content="1920" />
+	<meta property="og:image:height" content="1080" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="3分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/programming/python-fp/05-recursions/#primaryimage",
+	            "url": "/wp-content/uploads/2022/05/Python函数式编程05-函数的递归.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/05/Python函数式编程05-函数的递归.jpg",
+	            "width": 1920,
+	            "height": 1080
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/programming/python-fp/05-recursions/#webpage",
+	            "url": "/programming/python-fp/05-recursions/",
+	            "name": "Python函数式编程05 函数的递归 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/programming/python-fp/05-recursions/#primaryimage"
+	            },
+	            "datePublished": "2022-05-27T03:49:20+00:00",
+	            "dateModified": "2023-10-05T02:53:33+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "如果一个函数在执行时，调用了它自身，那么这个函数就会执行自身，然后执行自身时又执行了自身。这种一层一层地向下执行下去的过程称为递归。递归与循环类似，且较循环语句更简洁，但执递归行速度更慢，且占用内存明显过多。但在某些情况下，不能用简单的循环代替递归。",
+	            "breadcrumb": {
+	                "@id": "/programming/python-fp/05-recursions/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/programming/python-fp/05-recursions/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/programming/python-fp/05-recursions/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "Python函数式编程05 函数的递归"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/257" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=257' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython-fp%2F05-recursions%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython-fp%2F05-recursions%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><link rel="stylesheet" href="/wp-content/static/css/theme@pie.wp.css">
+<style>
+    .math { color:blue; font-size: 13px; }
+    div.vscode-block { color: #405C79; background-color: #F7F9FB; }
+</style>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['\\\\(','\\\\)']],
+            displayMath: [["\\\\[","\\\\]"]]
+        }
+    });
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-257 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-257" class="post-257 post type-post status-publish format-standard has-post-thumbnail hentry category-python-fp">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">Python函数式编程05 函数的递归</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/programming/python-fp/" rel="category tag">Python函数式编程</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年5月27日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+
+
+
+<h2>什么是递归</h2>
+
+<p>如果一个函数在执行时，调用了它自身，那么这个函数就会执行自身，然后执行自身时又执行了自身。这种一层一层地向下执行下去的过程称为<strong>递归</strong>(recursion)。</p>
+
+<p>也就是说，递归的特征为：</p>
+
+<div class="codeblock code-template">
+    <strong>def</strong> func(...):<br>
+    &nbsp; &nbsp; ...
+    &nbsp; &nbsp; func(...)&nbsp; <span class="codetoken command"># call itself</span>
+    &nbsp; &nbsp; ...
+</div>
+
+<p>既然递归会一直执行下去，那么必须要在合适的时候让它停止。结束递归是使用递归的难点，因为如果递归代码中没有终止递归的条件测试部分，一个调用自己的函数会无限递归。要终止一个循环只需要使用 <code>break</code> 语句；而要终止一个递归也很简单，只需要让函数不再调用自身即可。</p>
+
+<p>既然在递归时，有时候允许继续递归，有时候需要终止递归，那么肯定要在函数调用前给它一个信号。这个信号一般是用过参数的传递来作用的，因此在递归调用时，需要注意如何给调用的函数设计传入的参数，以及如何根据传入的参数中断递归。</p>
+
+<p>下面根据一个具体的示例来介绍递归的原理：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">up_and_down</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">n</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">floor</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, n) &#160;</span><span style="color: #a8a8a8;"># 1</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> n &lt; </span><span style="color: #bf8b56;">3</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; up_and_down(n + </span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">)</span><span style="color: #f7f9fb;">;</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">floor</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, n) &#160;</span><span style="color: #a8a8a8;"># 2</span></div><br><div><span style="color: #405c79;">up_and_down(</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">)</span></div></div>
+
+<p>以上调用一个可以发生递归的函数，结果为：</p>
+
+<div class="codeblock code-console">python -u demo.py
+floor 1
+floor 2
+floor 3
+floor 3
+floor 2
+floor 1</div>
+
+<p>在代码中调用了 <code>up_and_down()</code> 函数，这次调用称为“第 1 级递归”。然后 <code>up_and_down()</code> 调用自身，这次调用称为“第 2 级递归”。接着第 2 级递归调用第 3 级递归，以此类推。该示例程序共有 3 级递归。程序通过显示变量 n 的值，演示了执行的语句及变量的值。</p>
+
+<p>首先，程序调用了带参数 1 的 <code>up_and_down()</code> 函数，该函数先在 #1 处打印 floor 1 。然后，由于 n 小于 3 ，该函数调用实际参数为 n + 1（即 2 ）的 <code>up_and_down()</code> 函数，再在 #1 处打印 floor 2 。与此类似，接下来打印的是 floor 3 。当执行到第 3 级时，n 的值是 3 ，所以 <code>if</code> 测试条件为假。<code>up_and_down()</code> 函数不再调用自己。第 3 级调用接着执行打印语句 #2 ，即打印 floor 3 。此时，第 3 级调用结束，控制被传回它的主调函数，即第 2 级调用，接着执行 <code>if</code> 语句后，即 #2 处打印 floor 2 ，然后第 2 级调用结束，控制被传回第 1 级调用，以此类推。下图展示了这一过程：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@python-fp/05-recursion.jpg" alt="" width="670">
+</figure>
+
+<p>注意，每级递归的变量 n 都属于本级递归私有，这点从程序输出的变量值可以看出。因此每次调用函数时的局部变量都是互不相关的。虽然每级递归都有自己的变量，但是并没有拷贝函数的代码。程序按顺序执行函数中的代码，而递归调用就相当于又从头开始执行函数的代码。</p>
+
+<p>递归调用尤其要注意语句执行的顺序。递归函数中位于递归调用之前的语句，均按被调函数的顺序执行。因此，以上程序在 #1 处按顺序打印 1 2 3 。递归函数中位于递归调用之后的语句，均按被调函数相反的顺序执行。因此，以上程序在 #2 处打印 3 2 1 。</p>
+
+<p>递归调用的这种特性在解决涉及相反顺序的编程问题时很有用。稍后将介绍一个这样的例子。</p>
+
+<p>除了为每次递归调用创建变量外，递归调用非常类似于一个循环语句。递归比循环更直观、容易理解，但是编写出一个合适的递归语句则比较难。除此之外，递归会产生空间上的额外开销，这点放到后面详细介绍。</p>
+
+<h2>递归的用法</h2>
+
+<h3>编写合适的递归函数</h3>
+
+<p>要编写合适的递归语句，也需要像编写循环一样，考虑以下两个问题：</p>
+
+<ul>
+    <li>递归过程中，上一级函数与下一级函数的关系</li>
+    <li>什么时候退出递归</li>
+</ul>
+
+<p>例如，如果使用递归的方式计算阶乘，那么根据阶乘的定义：</p>
+
+<div class="math">
+\\[
+    n! = n (n-1) \cdots 3 \cdot 2 \cdot 1
+\\]
+</div>
+
+<p>而 <span class="math">\\( (n-1)! \\)</span> 则表示为 <span class="math">\\( (n-1)! = (n-1) \cdots 3 \cdot 2 \cdot 1 \\)</span> ，那么由此可得上一级函数与下一级函数的关系为：<span class="math">\\( (n)! = n \times (n-1)! \\)</span></p>
+
+<p>还需要注意的是阶乘的终止条件，根据阶乘的定义，阶乘的终止条件就是乘到 1 后，有 <span class="math">\\( 1!=1 \\)</span> 。因此，阶乘也可以定义为：</p>
+
+<div class="math">
+\\[
+    factorial(n) =
+    \begin{cases}
+    1,  & \text{if} n = 1 \\[2ex]
+    n \times factorial(n-1), & \text{otherwise}
+    \end{cases}
+\\]
+</div>
+
+<p>以下将其翻译成了代码语句：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">factorial</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">n</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> n == </span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> n</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">else</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> n * factorial(n-</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">)</span></div></div>
+
+<p>以上是一个很简单的示例，接下来再看一个更复杂的示例：使用递归实现二分查找法。</p>
+
+<blockquote>
+    <p>二分查找法是一种在有序序列中查找某一特定元素的查找算法，其过程如下：首先检查序列的中间元素，如果中间元素正好是待查找的元素，则<em>结束查找</em>；如果待查找的元素大于或者小于中间元素，则在序列大于或小于中间元素的那一半中<em>使用相同方式</em>查找。除此之外，找到最后发现剩下的一半序列为空，则说明待查找的元素<em>不存在</em>。</p>
+    
+    <p>二分查找法每一次递归都使查找范围缩小一半，因此特别适合在很大的序列中查找一个元素。不过二分查找法有一个前提就是序列必须是有序的。</p>
+</blockquote>
+
+<p>以上递归的要点都已经在背景资料里着重标出。根据递归的原理，相应的二分查找函数如下：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">binary_search</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">seq</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">left</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">right</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">value</span><span style="color: #405c79;">): </span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> right &gt;= left:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; mid = </span><span style="color: #bf568b;">int</span><span style="color: #405c79;">(left + (right - left) / </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> seq[mid] &lt; value: </span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> binary_search(seq, mid + </span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">, right, value) </span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">elif</span><span style="color: #405c79;"> seq[mid] &gt; value: </span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> binary_search(seq, left, mid - </span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">, value) </span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">else</span><span style="color: #405c79;">: </span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> mid </span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">else</span><span style="color: #405c79;">: </span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> -</span><span style="color: #bf8b56;">1</span></div></div>
+
+<p>具体的细节就不再重复介绍。可以自行比对背景介绍了解每一条语句的由来。</p>
+
+<h3>递归和倒序计算</h3>
+
+<p>递归在处理倒序时非常方便。在解决这类问题中，递归比循环简单，因为循环还需要对结果做反序操作。</p>
+
+<p>以下使用递归来将十进制数转换为二进制数。在给出函数前，先介绍该转换算法的原理。</p>
+
+<blockquote>
+    <p>在二进制中，对于数字 <span class="math">\\( n \\)</span> ，其二进制的最后一位是 <span class="math">\\( n \text{mod} 2 \\)</span> 。因此，计算的第一位数字实际上是待输出二进制数的最后一位。</p>
+    
+    <p>要获得下一位数字，必须把原数除以 2 。这种计算方法相当于在十进制下把小数点左移一位，然后再计算新的 <span class="math">\\( n \text{mod} 2 \\)</span> ，这样得到的就是待输出二进制数的倒数第二位。通过重复这个过程，便可以得到十进制数等价的二进制。</p>
+    
+    <p>程序停止计算的依据是当与 2 相除的结果小于 2 ，因为只要结果大于或等于 2 ，就说明还有二进制位。每次除以 2 就相当于去掉一位二进制，直到计算出最后一位为止。</p>
+</blockquote>
+
+<p>以下程序演示了上述算法：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">tobinary</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">n</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> n &lt; </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #bf568b;">str</span><span style="color: #405c79;">(n)</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">else</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> tobinary(n // </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">) + </span><span style="color: #bf568b;">str</span><span style="color: #405c79;">(n % </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">)</span></div></div>
+
+<p>检查一下编写的函数是否正确：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; tobinary(3508)
+'110110110100'</div>
+
+<p>使用系统自带的计算器验算，可以看到结果完全正确：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@python-fp/05-dec-to-bin.jpg" alt="" width="290">
+</figure>
+
+<p>如果不用递归，由于这种算法要首先计算最后一位二进制数，所以在显示结果之前必须把所有的位数都储存起来。</p>
+
+<h3>递归的缺点</h3>
+
+<p>递归既有优点也有缺点。优点是递归为某些编程问题提供了最简单的解决方案。缺点是一些递归算法会快速消耗计算机的内存资源。另外，递归函数不方便维护。</p>
+
+<p>以下函数用递归计算斐波那契数列的值，它接受正整数 n ，返回该项对应的数值。根据斐波那契数列的定义，如果 n 是 1 或 2 ，<code>fibonacci(n)</code> 应返回 1 ；对于其他数值，则应返回 <code>fibonacci(n-1) + fibonacci(n-2)</code> 。它很符合递归的条件，因此，函数可以是：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">fibonacci</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">n</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> n &gt; </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> fibonacci(n-</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">) + fibonacci(n-</span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">)</span><span style="color: #f7f9fb;">;</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">else</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">1</span><span style="color: #f7f9fb;">;</span></div></div>
+
+<p>该函数使用了双递归，即函数每一级递归都要调用本身两次。这产生了一个问题：假设 n 足够大，在第 1 级递归调用，将创建一个变量 <code>n</code> ，然后在该函数中要调用自身两次；在第 2 级递归中要分别创建 2 个变量 n ，这 2 次调用中的每次调用又会进行 2 次调用，因而在第 3 级递归中要创建 4 个名为 n 的变量。此时总共创建了 7 个变量。由于每级递归创建的变量都是上一级递归的 2 倍，所以变量的数量呈指数增长，这很快就会产生非常大的内存，消耗掉计算机的大量内存，很可能导致程序崩溃。</p>
+
+<h3>尾递归</h3>
+
+<p>如果把递归调用置于函数的末尾，即正好在 <code>return</code> 语句之前，这种形式的递归被称为<strong>尾递归</strong>(tail recursion)。以上编写的很多递归函数都是尾递归，尽管递归语句可能并不放在函数的最后一行。</p>
+
+<p>尾递归是最简单的递归形式，因为它在某种程度上可以表达为循环。除此之外，尾递归一个很大的特点是它<em>可以</em>被优化。</p>
+
+<p>递归的另一个问题在于每一次调用函数，都需要存储局部变量和参数，这会产生一定的内存开销。但是在递归发生时，函数调用并没有结束，因而这一部分内存并没有被释放，还在内存中存在，因此很深的递归会导致大量内存被占用。</p>
+
+<blockquote>
+    <p>熟悉别的编程语言的读者可能会明白函数是使用栈传递参数的，Python 也不例外，不过这里不具体展开说明。</p>
+</blockquote>
+
+<p>尾递归的特殊性在于发生递归调用时，函数已经执行到最后了，因此局部变量和参数已经不再需要，这部分内容占据的空间完全可以忽略。</p>
+
+<p>例如，以上的阶乘函数：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">factorial</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">n</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> n == </span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> n</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">else</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> n * factorial(n-</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">)</span></div></div>
+
+<p>注意，尽管很像，但是该递归并不是尾递归，因为在发送递归时，局部变量 <code>n</code> 的值还没有被利用。如果把 <code>factorial(5)</code> 递归展开，那么它会变成如下形式：</p>
+
+<div class="codeblock code-template">
+    factorial(5) <strong>=></strong><br>
+    (5 * factorial(4)) <strong>=></strong><br>
+    (5 * (4 * factorial(3)))) <strong>=></strong><br>
+    ... <strong>=></strong><br>
+    (5 * (4 * (3 * (2 * (1 * 1))))))
+</div>
+
+<p>由此可见，递归过程中产生的中间变量只有在递归结束后才会被一起利用，这就产生了大量的空间上的浪费。</p>
+
+<p>如果把以上阶乘函数改成尾递归形式，变成：</p>
+
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">factorial</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">n</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">t</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> (n == </span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">): </span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> t</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">else</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> factorial(n - </span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">, t * n)</span></div></div>
+
+<p>这就是真正的尾递归，它的调用会变成：</p>
+
+<div class="codeblock code-template">
+    factorial(5, 1) <strong>=></strong><br>
+    factorial(4, 5) <strong>=></strong><br>
+    factorial(3, 20) <strong>=></strong><br>
+    factorial(2, 60) <strong>=></strong><br>
+    factorial(1, 120) <strong>=></strong><br>
+    120
+</div>
+
+<p>这一过程中，每次的调用不再需要用到上一次调用的变量了，因此这部分中间变量完全可以抛弃。在一些语言中，尾递归会在编译阶段被编译器通过优化转换成循环语句。</p>
+
+<p>但是很遗憾，Python 并没有优化递归的功能，并且 Python 对嵌套递归的深度也有限制，递归深度上限默认为 1000 ，或者可以通过 <code>sys.setrecursionlimit()</code> 函数修改这个值。不过尾递归在编写代码时，完全可以使用循环代替，这就是手动形式的优化了。</p>
+
+<p>总的来说，递归不仅占用内存更多，并且由于每次函数调用要花费一定的时间，递归的执行速度也更慢，因此简单的递归应该使用循环代替。但递归较循环语句更简洁，而且在某些情况下，不能用简单的循环代替递归。</p>
+
+<h2>参考资料</h2>
+
+<p>本文的许多思路都来自于对《C Primer Plus》相关章节的读书笔记。</p>
+
+<!-- finished(all):2022-05-26 -->
+
+
+
+
+
+
+
+
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/embedded/stm32/esp8266-controlling/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/STM32与物联网02-网络数据收发-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/07/STM32与物联网02-网络数据收发-520x293.jpg 520w, /wp-content/uploads/2022/07/STM32与物联网02-网络数据收发-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/embedded/stm32/esp8266-controlling/" rel="bookmark">STM32与物联网02-网络数据收发</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-fp/04-builtin-functions/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-300x169.jpg 300w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-1024x576.jpg 1024w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-768x432.jpg 768w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-1536x864.jpg 1536w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-950x534.jpg 950w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-fp/04-builtin-functions/" rel="bookmark">Python函数式编程04 常用内置函数</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/embedded/esp32/02-basic-peripheral/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-520x293.jpg 520w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-300x169.jpg 300w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-1024x576.jpg 1024w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-768x432.jpg 768w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-1536x864.jpg 1536w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-950x534.jpg 950w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/embedded/esp32/02-basic-peripheral/" rel="bookmark">ESP32与MicroPython入门-02 基本外设操作</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/programming/python-fp/07-generators/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>Python函数式编程07 生成器</span></a></li>
+		<li class="previous"><a href="/programming/python-fp/06-tuple-handling/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>Python函数式编程06 元组与命名元组</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

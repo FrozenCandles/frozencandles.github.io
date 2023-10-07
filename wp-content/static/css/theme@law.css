@@ -81,20 +81,19 @@
     font-weight: bold;
     font-style: italic;
 }
-
+/* 
 .entry {
     font-family: "Lato", "STIX2Text", "Times New Roman", "serif";
-    /* line-height: 1.5em;
+    line-height: 1.5em;
     padding: 10%;
     padding-top: 5%;
-    margin-left: 150px; */
-}
-
+    margin-left: 150px;
+} */
 /* .entry {
     max-width: 860px;
     padding: 20px 30px 160px;
     margin: 0 auto;
-  } */
+} */
 
 
 .entry a, 

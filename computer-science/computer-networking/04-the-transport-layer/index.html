@@ -1,0 +1,921 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>计算机网络04-运输层概览与UDP协议 - 冰封残烛的个人小站</title>
+	<meta name="description" content="运输层" />
+	<link rel="canonical" href="/computer-science/computer-networking/04-the-transport-layer/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="计算机网络04-运输层概览与UDP协议 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="运输层" />
+	<meta property="og:url" content="/computer-science/computer-networking/04-the-transport-layer/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2022-07-08T14:49:32+00:00" />
+	<meta property="article:modified_time" content="2023-10-06T10:57:51+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2022/07/计算机网络04-运输层概率与UDP协议.jpg" />
+	<meta property="og:image:width" content="1980" />
+	<meta property="og:image:height" content="1320" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="7分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/computer-science/computer-networking/04-the-transport-layer/#primaryimage",
+	            "url": "/wp-content/uploads/2022/07/计算机网络04-运输层概率与UDP协议.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/07/计算机网络04-运输层概率与UDP协议.jpg",
+	            "width": 1980,
+	            "height": 1320
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/computer-science/computer-networking/04-the-transport-layer/#webpage",
+	            "url": "/computer-science/computer-networking/04-the-transport-layer/",
+	            "name": "计算机网络04-运输层概览与UDP协议 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/computer-science/computer-networking/04-the-transport-layer/#primaryimage"
+	            },
+	            "datePublished": "2022-07-08T14:49:32+00:00",
+	            "dateModified": "2023-10-06T10:57:51+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "运输层",
+	            "breadcrumb": {
+	                "@id": "/computer-science/computer-networking/04-the-transport-layer/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/computer-science/computer-networking/04-the-transport-layer/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/computer-science/computer-networking/04-the-transport-layer/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "计算机网络04-运输层概览与UDP协议"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/453" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=453' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fcomputer-science%2Fcomputer-networking%2F04-the-transport-layer%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fcomputer-science%2Fcomputer-networking%2F04-the-transport-layer%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><link rel="stylesheet" href="/wp-content/static/css/theme@law.wp.css">
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['\\\\(','\\\\)']],
+            displayMath: [["\\\\[","\\\\]"]]
+        }
+    });
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-453 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-453" class="post-453 post type-post status-publish format-standard has-post-thumbnail hentry category-computer-networking">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">计算机网络04-运输层概览与UDP协议</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/computer-science/computer-networking/" rel="category tag">计算机网络</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年7月8日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+
+<h2>运输层概述</h2>
+
+<p>运输层协议为运行在不同主机上的应用进程之间提供了逻辑通信(logic communication)功能，即主机之间表现得像直接相连。下图展示了这种封装思路：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-transport-layer.jpg" alt="" width="400">
+    <figcaption>运输层协议的工作原理</figcaption>
+</figure>
+
+<p>运输层协议是在主机上而不是路由器内实现的。在发送端，运输层将发送应用程序进程接收到的报文转换成运输层报文段，然后传递给网络层。</p>
+
+<p>网络应用程序可以使用多种运输层协议，互联网上主要使用的两种运输层协议是 TCP(Transmission Control Protocol, 传输控制协议)和 UDP(User Datagram Protocol, 用户数据报协议)。</p>
+
+<p>一台主机上可能同时存在若干个套接字，<strong>多路分解</strong>(demultiplexing)确保运输层报文段中的数据交付到正确的套接字。<strong>多路复用</strong>(multiplexing)则将源主机不同套接字发生的数据块封装上便于分解的首部信息，并将生成的报文段传递到网络层。</p>
+
+<p>为了实现多路复用服务，套接字需要有唯一标识，并且运输层的每个报文段具有特殊字段来指示该报文所要交付到的套接字；为了实现多路分解服务，在主机上的每个套接字能够分配一个端口号，当报文段到达主机时，运输层检查报文段中的目的端口号，并将其定向到相应的套接字。然后报文段中的数据通过套接字进入其所连接的进程。</p>
+
+<p>下图展示了多路分解与多路复用的思路：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-multiplexing.jpg" alt="" width="490">
+    <figcaption>多路复用与多路分解</figcaption>
+</figure>
+
+<p>进程的载体是操作系统，因此只能由操作系统来实现运输层协议，完成多路分解与多路复用。</p>
+
+<ul>
+    <li><strong>无连接的多路复用与多路分解</strong></li>
+</ul> 
+
+<p>在主机上运行的 Python 程序通过以下代码创建一个 UDP 套接字：</p>
+
+<div class="vscode-block"><div><span style="color: #24292e;">client</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">(</span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #24292e;">AF_INET</span><span style="color: #24292e;">, </span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #24292e;">SOCK_DGRAM</span><span style="color: #24292e;">)</span></div></div>
+
+<p>当使用这种方式创建一个 UDP 套接字时，许多操作系统的运输层会自动为该套接字从其它端口 49152~65535 内分配一个未被其它应用程序占用的端口号。当然，也可以使用套接字的 <code>.bind()</code> 方法关联一个特定的端口号：</p>
+
+<div class="vscode-block"><div><span style="color: #24292e;">client</span><span style="color: #24292e;">.bind((</span><span style="color: #032f62;">''</span><span style="color: #24292e;">, </span><span style="color: #005cc5;">13284</span><span style="color: #24292e;">))</span></div></div>
+
+<p>通常，应用程序的客户端会让运输层自动且透明地分配端口号，而服务器端则分配一个特定的端口号。</p>
+
+<p>UDP 在发送时，需要在报文中包含目的套接字的端口号。当 UDP 报文段到达时，接收主机的运输层会检查报文中的目的端口号，通过获得的端口号信息可以将每个报文段定向分解到相应的套接字，进而将报文交付给对应的应用程序。</p>
+
+<p>一个 UDP 套接字由两个元素的元组 (目的 IP 地址, 目的端口号) 标识，如果两个 UDP 报文具有相同的目的 IP 地址和目的端口号，它们将通过相同的目的套接字被定向到相同的进程。</p>
+
+<ul>
+    <li><strong>面向连接的多路复用与多路分解</strong></li>
+</ul>
+
+<p>不同于 UDP 协议，TCP 有一个初始套接字用于建立连接请求，当进程主机接收到定向到初始套接字的请求连接报文后，初始套接字根据该报文创建一个新的套接字：</p>
+
+<div class="vscode-block"><div><span style="color: #24292e;">connection</span><span style="color: #24292e;">, </span><span style="color: #24292e;">address</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">server</span><span style="color: #24292e;">.accept()</span></div></div>
+
+<p>对于每一个连接，都会创建一个单独的 TCP 套接字。因此一个 TCP 套接字由一个四个元素的元组 (源 IP 地址, 源端口号, 目的 IP 地址, 目的端口号) 标识，两个具有不同源 IP 地址或源端口号的 TCP 到达报文段（除了初始创建连接请求的报文段）时，将被定向到两个不同的套接字。</p>
+
+<blockquote>
+    <p>注意，TCP 在创建一个新的连接套接字时，并没有用到一个新的端口号。套接字还是会从之前的端口里取出报文段，并根据标识元组的内容转交给正确的连接。</p>
+</blockquote>
+
+<p>这也就揭示了为什么 TCP 套接字程序需要使用以下代码：</p>
+
+<div class="vscode-block"><div><span style="color: #24292e;">server.listen(</span><span style="color: #005cc5;">5</span><span style="color: #24292e;">)</span></div></div>
+
+<p>有时同时请求的连接数过多，服务主机需要为一个端口维持很多连接，造成负载过大，因此需要该代码控制一个 TCP 在相同时间内的最大连接数。</p>
+
+<h2>无连接运输：UDP</h2>
+
+<h3>UDP 协议概述</h3>
+
+<p>UDP 只对运输协议做最少的工作，除了复用/分解与功能以及少量错误检测外，几乎没有增加别的功能。</p>
+
+<p>UDP 从进程得到数据后，附加上用于多路复用/分解服务的源端口号字段和目的端口号字段，加上其它字段后将形成的报文段交给网络层。网络层将该运输层报文段封装到一个 IP 数据报中，然后交付给接收主机。如果该报文段到达接收主机，UDP 使用目的端口号将报文段中的数据交付给正确的进程。</p>
+
+<p>使用 UDP 时，在发送报文前，发送方和接收方的运输层之间没有任何通信，因此 UDP 被称为是<strong>无连接</strong>运输。</p>
+
+<p>UDP 主要有以下优点：</p>
+
+<ul>
+    <li>UDP 可以精确地控制发送的数据以及何时发送数据：UDP 会直接发送数据，而 TCP 为了保证数据能可靠传输，会确认目的主机接收后才进行下一次发送。在不希望数据传输会有过多延迟并且能容忍一定丢失时，可以使用 UDP 。</li>
+    
+    <li>UDP 无需建立连接，也没有连接状态，因此 UDP 不会引入建立连接的时延，操作系统也无需为了维护连接执行额外的操作并占用额外的缓存，因此可以支持更多活跃的连接数。</li>
+</ul>
+
+<p>UDP 报文段相对 TCP 更加简单。下图展示了 UDP 报文段的结构：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-udp-message.jpg" alt="" width="250">
+    <figcaption>UDP 报文段结构</figcaption>
+</figure>
+
+<p>UDP 报文段首部只有 4 个字段，每个字段由两个字节组成。端口号字段用于使目的主机执行分解功能，将数据交给正确的应用进程。由于应用数据的长度可变，因此需要用长度字段指示在 UDP 报文段的字节数（包括首部）。</p>
+
+<p>接收方使用检验和来检查该报文段是否出现差错。发送方的 UDP 对报文段中的所有 16 位数值按一定规律运算，最终得到一个 16 位的结果，再与检验和字段比较，如果结果相同，说明报文段在传输过程中应该没有发生比特差错。</p>
+
+<p>由于从源到目的地之间的所有链路并不能确保都提供差错检测服务，因此 UDP 在设计时在运输层提供该功能，从而确保应用数据不会因为差错而发生误解。</p>
+
+<h2>实验：探究UDP</h2>
+
+<h3>使用WireShark分析UDP报文</h3>
+
+<p>首先使用 WireShark 分析 UDP 数据包的结构。打开 WireShark 捕获并过滤出 UDP 分组如下：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-wireshark-udp.jpg" alt="" width="580">
+</figure>
+
+<p>有时过滤的分组还包括基于 UDP 实现的应用层协议的分组。这里手动使用代码在本地之间发送一个 UDP 分组，得到的数据如上图所示：</p>
+
+<p>从图中可以看出，UDP 分组中源端口号为 51785（操作系统随机分配的其它端口），目的端口号为 12000 ，UDP 报文长度为 20 字节（包括首部），检验和为 <code>0xE84D</code> 。在 UDP 报文体中，所发送的应用数据是 <code>Hello, world</code> 。</p>
+
+<h3>检验完整性</h3>
+
+<p>接下来通过分析 UDP 检验和字段，判断数据是否完整。</p>
+
+<p>UDP 在计算检验和字段时，会将三个部分的数据一起参与运算：伪首部、首部和数据部分。</p>
+
+<p>其中伪首部由源 IP 地址、目的 IP 地址、协议类型（UDP 协议类型使用 <code>0x11</code> 表示）和 UDP 分组长度，这部分内容会参与检验和字段的计算。它们的位置和长度如下图所示：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-udp-check-head.jpg" alt="" width="400">
+</figure>
+
+<p>然后就可以计算检验和字段了。检验和计算的步骤如下：首先结合伪首部、首部以及应用数据，将所有字节划分为每 16 位，即 2 字节的块（若应用数据中的字节数不为偶数，则需要额外在末尾填充一个全零字节）。然后，把所有 16 位的块逐块相加，考虑到结果可能不止 16 位，此时使用 32 位的值描述结果，但将这 32 位的高 16 位和低 16 位相加，抹除这个进位值（再次相加之后肯定不会再发生溢出），得到一个 16 位的回卷结果。</p>
+
+<p>按顺序将所有块相加，便可得到一个 16 位的最终结果。将这个结果的每个位都取反，便得到检验和字段的值。最后将伪首部和用于凑偶数的字节丢弃，便可得到完整的 UDP 分组。</p>
+
+<p>考虑到 C 语言操作底层字节比较方便，这里使用 C 语言验证以上结果。按照以上说明，给定一个字节数组，计算检验和的方法为：</p>
+
+<div class="vscode-block"><div><span style="color: #6f42c1;font-weight: bold;">uint16_t</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">checksum</span><span style="color: #24292e;">(</span><span style="color: #6f42c1;font-weight: bold;">uint8_t</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">*</span><span style="color: #e36209;">packet</span><span style="color: #24292e;">, </span><span style="color: #d73a49;font-weight: bold;">int</span><span style="color: #24292e;"> </span><span style="color: #e36209;">length</span><span style="color: #24292e;">) {</span></div><div><span style="color: #24292e;">&#160; &#160; </span><span style="color: #6f42c1;font-weight: bold;">uint32_t</span><span style="color: #24292e;"> </span><span style="color: #24292e;">sum</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">0</span><span style="color: #24292e;">;</span></div><div><span style="color: #24292e;">&#160; &#160; </span><span style="color: #d73a49;font-weight: bold;">for</span><span style="color: #24292e;"> (</span><span style="color: #6f42c1;font-weight: bold;">uint16_t</span><span style="color: #24292e;"> </span><span style="color: #24292e;">i</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">0</span><span style="color: #24292e;">; </span><span style="color: #24292e;">i</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">&lt;</span><span style="color: #24292e;"> </span><span style="color: #e36209;">length</span><span style="color: #24292e;">; </span><span style="color: #24292e;">i</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">+=</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">2</span><span style="color: #24292e;">) {</span></div><div><span style="color: #24292e;">&#160; &#160; &#160; &#160; </span><span style="color: #24292e;">sum</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">+=</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">*</span><span style="color: #24292e;">((</span><span style="color: #6f42c1;font-weight: bold;">uint16_t</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">*</span><span style="color: #24292e;">)(</span><span style="color: #e36209;">packet</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">+</span><span style="color: #24292e;"> </span><span style="color: #24292e;">i</span><span style="color: #24292e;">));</span></div><div><span style="color: #24292e;">&#160; &#160; &#160; &#160; </span><span style="color: #24292e;">sum</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> (</span><span style="color: #24292e;">sum</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">&gt;&gt;</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">16</span><span style="color: #24292e;">) </span><span style="color: #d73a49;">+</span><span style="color: #24292e;"> (</span><span style="color: #24292e;">sum</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">&amp;</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">0x</span><span style="color: #005cc5;">ffff</span><span style="color: #24292e;">);</span></div><div><span style="color: #24292e;">&#160; &#160; }</span></div><div><span style="color: #24292e;">&#160; &#160; </span><span style="color: #d73a49;font-weight: bold;">return</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">~</span><span style="color: #24292e;">sum</span><span style="color: #24292e;">;</span></div><div><span style="color: #24292e;">}</span></div></div>
+
+<p>程序中将两个字节当做一个块处理，每次计算后将 32 位结果的高 16 位和低 16 位相加。</p>
+
+<p>首部和数据部分可以在 WireShark 中右键下方的条目窗口，通过“导出分组字节流”以二进制的形式保存在磁盘上，保存的二进制内容为最下方十六进制查看器中蓝色高亮的部分：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-wireshark-udp-export.jpg" alt="" width="570">
+</figure>
+
+<p>这里将 UDP 首部和数据分开保存，并使用开源十六进制编辑器 ImHex 为首部添加上伪首部部分。在 ImHex 中，于 0x0 位置插入 0xC 个字节，这部分字节的内容按顺序为：源 IP 地址 <code>0x7F 00 00 01</code> ；目的 IP 地址 <code>0x7F 00 00 01</code> ；协议类型 <code>0x00 11</code> ；UDP 长度 <code>0x00 14</code> 。最后，由于此时还没有计算检验和字段，不要忘记将首部的检验和字段置为 <code>0x00 00</code> ，如下所示：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-udp-hex-head.jpg" alt="" width="570">
+</figure>
+
+<p>然后，使用程序读入保存的 UDP 首部和应用数据，并拼接在同一个数组中，计算检验和并打印：</p>
+
+<div class="vscode-block"><div><span style="color: #6f42c1;">FILE</span><span style="color: #d73a49;">*</span><span style="color: #24292e;"> </span><span style="color: #24292e;">fp_head</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">fopen</span><span style="color: #24292e;">(</span><span style="color: #032f62;">"udp-head.bin"</span><span style="color: #24292e;">, </span><span style="color: #032f62;">"r"</span><span style="color: #24292e;">);</span></div><div><span style="color: #6f42c1;">FILE</span><span style="color: #d73a49;">*</span><span style="color: #24292e;"> </span><span style="color: #24292e;">fp_body</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">fopen</span><span style="color: #24292e;">(</span><span style="color: #032f62;">"udp-body.bin"</span><span style="color: #24292e;">, </span><span style="color: #032f62;">"r"</span><span style="color: #24292e;">);</span></div><div><span style="color: #d73a49;font-weight: bold;">#define</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">UDP_HEAD_LENGTH</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">20</span></div><div><span style="color: #d73a49;font-weight: bold;">#define</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">UDP_BODY_LENGTH</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">12</span></div><div><span style="color: #6f42c1;font-weight: bold;">uint8_t</span><span style="color: #24292e;"> </span><span style="color: #24292e;">udp_packet</span><span style="color: #24292e;">[</span><span style="color: #6f42c1;">UDP_HEAD_LENGTH</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">+</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">UDP_BODY_LENGTH</span><span style="color: #24292e;">];</span></div><div><span style="color: #6f42c1;">fread</span><span style="color: #24292e;">(</span><span style="color: #24292e;">udp_packet</span><span style="color: #24292e;">, </span><span style="color: #005cc5;">1</span><span style="color: #24292e;">, </span><span style="color: #6f42c1;">UDP_HEAD_LENGTH</span><span style="color: #24292e;">, </span><span style="color: #24292e;">fp_head</span><span style="color: #24292e;">);</span></div><div><span style="color: #6f42c1;">fread</span><span style="color: #24292e;">(</span><span style="color: #24292e;">udp_packet</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">+</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">UDP_HEAD_LENGTH</span><span style="color: #24292e;">, </span><span style="color: #005cc5;">1</span><span style="color: #24292e;">, </span><span style="color: #6f42c1;">UDP_BODY_LENGTH</span><span style="color: #24292e;">, </span><span style="color: #24292e;">fp_body</span><span style="color: #24292e;">);</span></div><div><span style="color: #6f42c1;">printf</span><span style="color: #24292e;">(</span><span style="color: #032f62;">"</span><span style="color: #032f62;">0x</span><span style="color: #005cc5;">%x</span><span style="color: #032f62;">"</span><span style="color: #24292e;">, </span><span style="color: #6f42c1;">checksum</span><span style="color: #24292e;">(</span><span style="color: #24292e;">udp_packet</span><span style="color: #24292e;">, </span><span style="color: #6f42c1;">UDP_HEAD_LENGTH</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">+</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">UDP_BODY_LENGTH</span><span style="color: #24292e;">));</span></div></div>
+
+<p>计算的本次 UDP 分组检验和为：</p>
+
+<div class="codeblock code-console">$ gcc udp_checkedsum.c -o udp_checkedsum
+./udp_checkedsum
+0x4de8
+</div>
+
+<p>对比 WireShark 的捕获结果，注意到 WireShark 中的检验和字段为 <code>0xe84d</code> ，这是由于在网络发送时，一般通过 <code>htons()</code> 等函数将高字节先发送，因此得到的结果和计算出的高低字节顺序相反。</p>
+
+<blockquote>
+    <p>如果使用 WireShark 捕获到的是发送端的 UDP 分组，那么可能会出现计算结果和 WireShark 显示的结果根本不对的情况。这是由于现代的计算机计算检验和通常由网卡执行，以降低 CPU 的负担。而 WireShark 通常捕获的都是 CPU 中生成的分组，此时检验和字段还没有计算，因此与实际不符。</p>
+</blockquote>
+
+<p>尽管检验和字段不能完整地反应分组的原貌，但是分组发生比特差错的几率本身很小，如果有单个比特发生差错，那么检验和一定与实际计算结果不符；多个比特发生差错的概率很小，正好符合检验和的概率就非常小了，这种错误几乎不会影响实际的网络服务。</p>
+
+<h2>可靠数据传输原理</h2>
+
+<p>UDP 只确保数据能正确被接收，但几乎没有提供确保数据完整、有序送达的服务。下面通过研究可靠数据传输原理，讨论运输层为了实现可靠数据传输需要提供哪些服务。</p>
+
+<p>最简单的情况下，在底层信道是完全可靠的 。这种情况下，运输层只需要接受来自应用层的数据，添加首部后产生一个包含该数据的分组，并将分组发送到信道中即可。而在接收端，只需要从底层信道接收这个分组，从分组中取出数据并上传给应用层。</p>
+
+<p>在这个最简单的情况中，一个分组与一个应用数据没差别，而且所有分组是从发送方流向接收方。有了完全可靠的信道不必担心出现差错，接收端就不需要提供任何反馈信息给发送方，接收方接收数据的速率只需要与发送方发送数据的速率一样快就可以了。</p>
+
+<p>然而，实际上完全可信的底层信道是不存在的，在物理损坏、软件差错等情况下，在分组的传输、传播或缓存的过程中分组中的比特往往可能受损。此时仅考虑比特受损，但所有发送的分组将按其发送的顺序被接收，那么就需要一些额外的功能来应对比特受损的情况：</p>
+
+<ul>
+    <li><strong>差错检测</strong>：首先需要一种机制以使接收方检测到何时出现了比特差错，例如 UDP 的检验和字段正是为了这个目的。因此这就要求分组中有额外的检验和字段从发送方发送到接收方</li>
+    <li><strong>接收方反馈</strong>：为了让发送方了解接收方是否正确接收分组，接收方需要提供明确的反馈信息给发送方，例如发送<strong>肯定确认</strong>(positive acknowledgment, ACK)和<strong>否定确认</strong>(negative acknowledgment, NACK)，这种控制报文使得接收方可以让发送方知道哪些内容被正确接收，哪些内容接收有误并需要重复。在最简单的情况下，发送方每发送一个分组，就等待接收方响应是否正确接收到了分组，那么接收方的响应报文只需要一个比特长的布尔值</li>
+    <li><strong>重传</strong>：接收方收到有差错的分组时，发送方将重传该分组文</li>
+</ul>
+
+<p>在计算机网络环境中，基于这样重传机制的可靠数据传输协议称为自动重传请求(Automatic Repeat reQuest, ARQ)协议。</p>
+
+<p>使用以上差错检验时，发送端有两种状态：它可能正等待来自应用层传下来的数据，产生包含待发送数据和检验和的分组并执行发送操作；也可能等待来自接收方的反馈分组：如果收到一个 ACK 分组，则发送方知道最近发送的分组巳被正确接收，因此可以继续等待后续来自应用层的数据；如果收到 NACK 分组，该协议重传上一个分组并重复等待接方的响应分组。注意，当发送方处于等待反馈响应的状态时，它不能从应用层获得更多的数据，仅当接收到 ACK 离开该状态时才能继续接收。因此，发送方将不会发送新的数据，除非发送方确信接收方已正确接收当前分组。有着这种行为的协议被称为停等(stop-and-wait)协议</p>
+
+<p>此时接收方的处理比较简单，它只需要根据收到的分组是否受损回答 ACK 或 NACK 即可。下图展示了这种最简单的可靠数据传输协议的通信过程：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-rdt-2.0.jpg" alt="" width="380">
+</figure>
+
+<hr>
+
+<p>以上设计的具有差错检测与恢复的运输层协议看起来已经可以正常工作了，但是它存在一个致命的缺陷：该协议并没有考虑到响应分组损坏的可能性，而发送方却没有能力知道这个响应是否受损，进而无法知道接收方是否正确接收了上一块发送的数据。</p>
+
+<p>一个简单的解决方法是在发送端也引入 ACK/NACK 机制，但是这种情况下就必须在报文中增加一个字段，以区分发送方的数据和响应；而且发送方和接收方都存在 ACK/NACK ，设计不当时往往容易引起 ACK/NACK 的不断递归，形成死循环。</p>
+
+<p>或者干脆在响应不明时重传分组，但这种冗余分组(duplicate packet)无法判断是新的分组还是重传的分组。还可以增加足够的校验和比特，使发送方可以检测甚至恢复差错，不过过大的检验和字段可能会使分组过于臃肿。</p>
+
+<p>对此，现代计算机网络给出的解决方案是以上的综合。包括 TCP 在内的几乎所有现有的数据传输协议中，都在数据分组中添加一个数据分组的序号字段，接收方只需要检查序号即可确定收到的分组是否是一次重传。对于停等协议这种简单情况，只需要 1 比特标识发送方是否正在重传前一个发送分组就足够了。在信道不丢分组的情况下，发送方所接收到的 ACK/NACK 分组响应其最近发送的数据。同时，响应分组也需要加上检验和字段，以防止在传输的过程中 ACK 损坏变成 NACK 或相反情况的发生。</p>
+
+<p>由于发送方可能发送新的分组，也可能重传上一个分组，因此发送方和接收方的状态数都是以前的两倍。不过这两类状态下处理的动作是相似的，只是内容不同：当接收到正确的分组时，接收方对所接收的分组发送肯定确认；如果收到受损的分组，则接收方将发送否定确认。下图展示了改进后的可靠数据传输协议的通信过程：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-rdt-2.1.jpg" alt="" width="360">
+</figure>
+
+<p>如果不发送 NACK ，可以对上次正确接收的分组发送一个冗余ACK(duplicate ACK)，表示正确接收到被确认两次的分组后面的分组。</p>
+
+<hr>
+
+<p>除了比特受损外，实际的底层信道还会丢包，这就需要运输层提供检测丢包以及对丢包的弥补功能。</p>
+
+<p>解决丢包的方法有很多，以下采用发送方解决丢包的方式。假定发送方的分组或接收方对该分组的 ACK 发生了丢失，在这两种情况下，发送方在等待一段时间后都收不到接收方的响应，那么它就需要重传该数据分组。</p>
+
+<p>但问题在于如何确定这个超时的时间，选取的超时时长过长可能会在丢包时等待一段较长的时间才启动差错恢复。因此需要发送方选择一个合适的时间值，以判定可能发生了丢包；如果在这个时间内没有收到 ACK ，则重传该分组。这里已经可以不再使用 NACK 了，原因是接收方的 NACK 只能表示数据损坏，但不能表示数据丢失；而冗余 ACK 既可以表示数据丢失，也可以表示按正确顺序接收。</p>
+
+<p>注意到如果一个分组在网络高峰期经历了一个特别大的时延，在该数据分组及其 ACK 都没有丢失的情况下便开始重传该分组，造成一个冗余数据分组(duplicate data packet)，不过上文介绍的协议已经可以处理冗余分组。</p>
+
+<p>这种基于时间的重传机制，需要一个<strong>倒计数定时器</strong>(countdown timer)，发送方每次发送一个任意分组时都启动一个定时器，当倒计时结束后采取适当行动，例如重传。</p>
+
+<p>引入定时器后，通信原理并没有复杂多少，但过程中可能的情况变多了。首先考虑最简单的情况，底层并没有发生丢包或分组损坏，那么只需要不断根据 ACK 发送分组即可：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-rdt-3-case1.jpg" alt="" width="340">
+</figure>
+
+<p>再考虑稍微复杂一些的情况，在传输过程中发送了丢包。不论是分组丢失还是响应丢失，接收方都无法收到发送方的 ACK 响应，在倒计时结束后都会发生重传：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-rdt-3-case2-3.jpg" alt="" width="600">
+</figure>
+
+<p>接收方可能得到重复的分组，不过它可以通过判断分组序号，确定这是一个冗余分组而丢弃。</p>
+
+<p>最后是最复杂的一种情况，在传输过程中没有发生丢包，但发送方超时时间设置过短，发生过早超时而认为此时发生了丢包。此时，发送方尝试再发送一个相同分组，不过该分组会被接收方确认为冗余分组而舍弃，发送方接到重复响应后也会将其丢弃：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-rdt-3-case4.jpg" alt="" width="320">
+</figure>
+
+<p>这样便成功地构建了一种可靠数据传输协议。检验和可以验证一个分组是否受损，接收方反馈使发送方知道分组受损，重传机制可以恢复受损的内容，分组序号可以防止冗余分组的影响，超时机制用于防止通信过程中发生分组丢失。</p>
+
+<h3>流水线可靠数据传输协议</h3>
+
+<p>目前为止已经构造了一个可用的可靠数据传输协议，但是它的性能还是有很大问题：以上协议是一个停等协议，一个分组以光速在全国范围内往返通常需要十几到几十毫秒的往返时延，在得到发送方的响应或超时前，发送方无法去做其它的事情。</p>
+
+<p>考虑到一个分组不能太大，否则发生差错的概率将会指数上升。UDP 分组的长度字段有 2 个字节，因此能容纳的应用数据最多只有 65535 个字节，而一个传输速率以 Gbps 计的链路发送这么多字节也只需要几十微秒，也就是说发送方只有千分之几的时间是在工作，其余时间都在等待回复。</p>
+
+<p>为了解决该问题，可以不采用停等，而是以<strong>流水线</strong>(pipelining)的方式发送多个分组而无须等待确认，如下图所示：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-pipelining-transmission.jpg" alt="" width="520">
+</figure>
+
+<p>然而，流水线操作下，为了让接收方判断是否有冗余分组，分组的序号不再是简单的 0（一个新的分组）或 1（重复上一个分组），每个非重传的分组都必须有一个唯一的序号；并且发送方接到的响应都是之前发送的分组的，为了能够应对接收方的重传请求，发送方必须要能够缓存那些已经发送但还没有确认的分组。</p>
+
+<p>发送方需要为分组设置合适的序号范围和缓存大小，但具体按什么方式设置取决于数据传输协议如何处理丢失、损坏及延时过大的分组。解决流水线的差错恢复有两种基本方法是回退 N 步和选择重传。</p>
+
+<p><strong>回退 N 步</strong>(Go-Back-N, GBN)协议允许发送方发送多个分组而不需等待确认，但为了防止序号过大，它限制在流水线中未确认的分组数不能超过某个最大允许值 N 。</p>
+
+<p>若将基序号(base)定义为最早未确认分组的序号，后续序号(nextseqnum)定义为下个待发分组的序号，则这 N 个分组可分为 4 段：基序号之前的分组都已经发送并被确认；基序号到后续序号是已经发送但未被确认的分组；后续序号到基序号后的最大允许长度 N 内的序号能用于那些要被立即发送的分组；大于等于基序号后的最大允许长度 N 的序号暂时无法使用，直到当前流水线中出现被确认的分组为止（一般是基序号对应的分组）。下图描述了发送方的序号：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-pipelining-gobackN.jpg" alt="" width="440">
+</figure>
+
+<p>协议运行时，由有效序号标识的分组可以被看作一个长度为 N 的窗口，在序号空间向前滑动。如果分组中序号字段的长度为 k ，那么序号空间可以用重复的 0~2<sup>k</sup> 表示。</p>
+
+<p>GBN 发送方必须响应 3 种不同的事件，下图描述了 GBN 发送方的工作状态：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-pipelining-gobackN-sender.jpg" alt="" width="460">
+</figure>
+
+<p>当一个应用层准备发送数据时，发送方首先检查发送窗口是否已满（即已经发送但未被确认的分组是否达到了 N ）：如果窗口未满，则产生一个分组并发送，并相应地更新变量；如果窗口已满，发送方则返还数据并提醒应用层等候一段时间再尝试发送。或者发送方也可以先缓存这些数据，在合适的时间再发送。发送方的运输层也可以和应用层根据信号同步，让应用层仅当窗口未满时才执行发送数据。</p>
+
+<p>当接收方收到序号为 n 的分组时，它将采取<strong>累积确认</strong>(cumulative acknowlegment)的方式，表明接收方已正确按顺序接收到序号为 n 的以前且包括 n 在内的所有分组。在所有其它情况下，接收方都会丢弃该分组，并根据最近按序接收的分组重新发送 ACK 。因为一次交付给上层一个分组，如果分组 k 接收并交付，则所有序号比 k 小的分组也已经正确交付。</p>
+
+<p>因此，当出现丢失和时延过长时，发送方都会发现最早已发送但未被确认的分组响应超时。此时，发送方将重传所有已发送但还未被确认过的分组，这也就是上图中发送方接收对损坏的分组不采取任何动作的原因（因为不会接到损坏的响应，只会重复接到前面分组成功接收的响应）。上图中只用到一个定时器，如果收到 ACK 但仍有已发送但未被确认的分组，则定时器被重新启动，在倒计时内仍然可以接收到紧接而来的 ACK 。</p>
+
+<p>接收方必须按序将数据交付给应用层，由于在 GBN 协议中发送方会将除了已经按序正确接收的分组都重传，因此接收方可以丢弃所有失序分组而无需缓存，唯一要做的就是使用一个变量保存下个按序接收的分组的序号。丢弃一个正确接收的分组的缺点是随后对该分组的重传也可能会丢失或出错，因此可能需要更多的重传。</p>
+
+<p>下图表示一个窗口长度为 4 个分组的 GBN 协议的运行情况，此时发送方只能发送分组 0~3 ，直到一个或多个分组被确认才能继续发送。当接收到顺序的 ACK 时，该窗口便向前滑动，发送方便可以发送新的分组：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-pipelining-gobackN-demo.jpg" alt="" width="350">
+</figure>
+
+<p>由于窗口长度的限制，发送方只能一次性发送分组 0~3 ，在继续发送之前必须等待直到一个或多个分组被确认。当接收到每个连续的 ACK 时，该窗口便向前滑动，发送方便可以发送新的分组。分组 2 第一次传输时发生了丢失，接收方发现分组 3~5 是失序分组并丢弃，而发送方因为迟迟接不到分组 2 的响应而发生超时，在超时事件中重发当前窗口的分组 2~5 。</p>
+
+<hr>
+
+<p>改进后的 GBN 协议使发送方可以在没有接收响应时便同时发送多个分组，避免了停等协议中存在的时间利用率问题。然而 GBN 也存在一些性能问题，主要是当窗口长度和传输时延都很大时，单个分组的差错就能够引起 GBN 重传大量分组，但许多分组根本没有必要重传。随着底层通道差错率的增加，许多正确送达的分组可能会被多次不必要地重传。</p>
+
+<p><strong>选择重传</strong>(Selective Repeat, SR)协议可以让发送方仅重传可能丢失或受损的分组，而避免了不必要的重传。这种个别的、按需的重传要求接收方逐个确认正确接收的分组。接收方将确认一个正确接收的分组而不管其是否按序，失序的分组将被缓存直到所有丢失分组（序号更小的分组）都被收到为止，然后才可以将这一批分组一起交付给应用层。</p>
+
+<p>当发送方从应用层接收到数据后，将检查下个可用于该分组的序号是否位于窗口内：如果位于窗口内，则将数据打包并发送；否则要么将数据缓存，要么返还给应用层。此时接收方也需要一个长度为 N 的窗口，序号在窗口内的分组被正确接收并回送一个 ACK 。下图展示了 SR 的窗口状态：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-pipelining-selectiveRepeat-window.jpg" alt="" width="570">
+</figure>
+
+<p>当发送方收到某个分组的 ACK 时，如果该分组序号在窗口内，则发送方将该分组标记为已接收。如果该分组的序号等于发送方窗口基序号 <code>send_base</code> ，则基序号变为未确认分组的最小序号处并带动整个窗口移动，并发送落在窗口内的未发送序号。</p>
+
+<p>特别地，接收方会重新确认（而不是忽略）已收到过的序号小于当前接收窗口基序号的分组。考虑到 ACK 丢失，特别是分组 <code>send_base</code> 的 ACK 丢失，则发送方会重传该分组。然而对接收方来说，它的窗口已经滑过了该分组，如果接收方不确认该分组，则发送方窗口将永远不能向前滑动。因此在 SR 协议下，发送方和接收方的窗口并不总是一致的。</p>
+
+<p>在 SR 中，每个分组都可能发生超时，在超时事件中只能发送一个分组，因此每个分组必须拥有独立的逻辑定时器，否则不知道哪一个分组发生了超时。下图演示了 SR 是如何处理之前的情况下 GBN 遇到的问题的：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-pipelining-selectiveRepeat-demo.jpg" alt="" width="600">
+</figure>
+
+<p>至此终于得出了一个高效、可靠的数据传输协议。下表总结了该协议的一些机制，以及这些机制是如何保证协议正常运行的：</p>
+
+<table>
+    <tr>
+        <th>机制</th>
+        <th>用途</th>
+    </tr>
+    <tr>
+        <td>检验和</td>
+        <td>检测分组中是否发生比特差错</td>
+    </tr>
+    <tr>
+        <td>ACK 确认</td>
+        <td>告知发送方分组被正确接收</td>
+    </tr>
+    <tr>
+        <td>序号</td>
+        <td>用于表示分组或响应的顺序，并可以用于判断是否冗余</td>
+    </tr>
+    <tr>
+        <td>定时器</td>
+        <td>检测一个分组或响应是否在传输时发送丢失。但定时器可能引发过早超时，需要处理冗余分组或响应</td>
+    </tr>
+    <tr>
+        <td>流水线</td>
+        <td>使发送方和接收方能无需停等而继续操作，增加通信时间利用率</td>
+    </tr>
+    <tr>
+        <td>窗口</td>
+        <td>限制分组序号范围，减轻缓存压力</td>
+    </tr>
+</table>
+
+<p>下一节将介绍 TCP 协议，更详细地介绍差错检测、超时机制、流量控制等原理，并研究 TCP 是如何实现它们的。</p>
+
+<h2>延伸阅读</h2>
+
+<p>本文使用的 UDP 检验和算法参考自 OpenBSD ：<a href="https://github.com/openbsd/src/blob/master/sbin/dhclient/packet.c">https://github.com/openbsd/src/blob/master/sbin/dhclient/packet.c</a></p>
+
+
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-fp/03-functional-programming/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-fp/03-functional-programming/" rel="bookmark">Python函数式编程03 高阶函数与匿名函数</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/embedded/esp32/02-basic-peripheral/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-520x293.jpg 520w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-300x169.jpg 300w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-1024x576.jpg 1024w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-768x432.jpg 768w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-1536x864.jpg 1536w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-950x534.jpg 950w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/embedded/esp32/02-basic-peripheral/" rel="bookmark">ESP32与MicroPython入门-02 基本外设操作</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/data-science/via-python/numpy06-advanced-data-types/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/10/Python数据分析-numpy06高级数据类型-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/10/Python数据分析-numpy06高级数据类型-520x293.jpg 520w, /wp-content/uploads/2022/10/Python数据分析-numpy06高级数据类型-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/data-science/via-python/numpy06-advanced-data-types/" rel="bookmark">numpy06:高级数据类型</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/embedded/stm32/esp8266-introduction/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>STM32与物联网01-ESP8266基本操作</span></a></li>
+		<li class="previous"><a href="/programming/python-oop/02-attributes/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>Python面向对象编程02-类与实例的属性</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

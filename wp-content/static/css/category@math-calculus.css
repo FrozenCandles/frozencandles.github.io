@@ -7,3 +7,7 @@
 .entry strong {
     color: #486eb4;
 }
+
+.math { color: #486eb4; /*font-size: 14px;*/ }
+.entry blockquote p { color: #868990; }
+.entry blockquote .math { color: #5e8ce2; }

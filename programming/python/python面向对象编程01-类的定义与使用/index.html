@@ -1,0 +1,749 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Python面向对象编程01-类的定义与使用 - 冰封残烛的个人小站</title>
+	<meta name="description" content="面向对象编程 思路将一系列属性与方法作为一个整体封装成一个类。Python 是一种面向对象编程的语言，本节介绍类与对象的概念，以及如何在 Python 中定义类和实例，并介绍类和实例的属性与方法的基本操作，与特殊方法 __init__ 。" />
+	<link rel="canonical" href="/programming/python-oop/01-class-and-instance/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Python面向对象编程01-类的定义与使用 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="面向对象编程 思路将一系列属性与方法作为一个整体封装成一个类。Python 是一种面向对象编程的语言，本节介绍类与对象的概念，以及如何在 Python 中定义类和实例，并介绍类和实例的属性与方法的基本操作，与特殊方法 __init__ 。" />
+	<meta property="og:url" content="/programming/python-oop/01-class-and-instance/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2022-07-03T12:45:12+00:00" />
+	<meta property="article:modified_time" content="2023-10-07T02:04:44+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2022/07/Python面向对象编程01-类的定义与使用.jpg" />
+	<meta property="og:image:width" content="2349" />
+	<meta property="og:image:height" content="1080" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="3分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/programming/python-oop/01-class-and-instance/#primaryimage",
+	            "url": "/wp-content/uploads/2022/07/Python面向对象编程01-类的定义与使用.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/07/Python面向对象编程01-类的定义与使用.jpg",
+	            "width": 2349,
+	            "height": 1080
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/programming/python-oop/01-class-and-instance/#webpage",
+	            "url": "/programming/python-oop/01-class-and-instance/",
+	            "name": "Python面向对象编程01-类的定义与使用 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/programming/python-oop/01-class-and-instance/#primaryimage"
+	            },
+	            "datePublished": "2022-07-03T12:45:12+00:00",
+	            "dateModified": "2023-10-07T02:04:44+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "面向对象编程 思路将一系列属性与方法作为一个整体封装成一个类。Python 是一种面向对象编程的语言，本节介绍类与对象的概念，以及如何在 Python 中定义类和实例，并介绍类和实例的属性与方法的基本操作，与特殊方法 __init__ 。",
+	            "breadcrumb": {
+	                "@id": "/programming/python-oop/01-class-and-instance/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/programming/python-oop/01-class-and-instance/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/programming/python-oop/01-class-and-instance/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "Python面向对象编程01-类的定义与使用"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/442" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=442' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython-oop%2F01-class-and-instance%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython-oop%2F01-class-and-instance%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script>
+<link rel="stylesheet" href="/wp-content/static/css/theme@evernote.wp.css">
+
+<style>
+    div.vscode-block { color: #657B83; background-color: #FDF6E3; }
+</style>
+
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-442 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-442" class="post-442 post type-post status-publish format-standard has-post-thumbnail hentry category-python-oop">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">Python面向对象编程01-类的定义与使用</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/programming/python-oop/" rel="category tag">Python面向对象编程</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年7月3日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+<h2>类和对象的基本概念</h2>
+
+<h3>什么是类</h3>
+
+<p>在编程时，往往需要通过程序修改变量。但有时候多个变量间可能有很强的关联，是一个整体。此时，可以使用结构体描述这一个整体。然而，结构体只能包含数据成员，却不包含对这些数据操作所需要的函数。</p>
+
+<p>如果把需要描述并操作的某些变量和函数看成一个整体，这个整体就称为<strong>类</strong>(type)。类定义了该集合中每个对象所共有的属性和支持的操作。例如，对于每一种数据结构如链表、栈、二叉树等，每个集合可能都具有一些相同的属性例如后向指针、栈顶位置、树结点值，但还有一些操作如增(add)、删(remove)、改(update)、查(find)，不同的数据结构执行的操作也不一样。这种将一系列属性与方法作为一个整体封装成一个类的编程思路，称为 <strong>面向对象编程</strong> (object-oriented programming)。面向对象编程是一种编程思路而不是具体的编程语言，使用 C 语言照样可以编写具有面向对象编程思想的代码，只是实现起来比较麻烦。</p>
+
+<p>Python 是一种原生支持 面向对象编程 的编程语言，可以轻松实现面向对象编程的大多数要求。Python 提供了许多内置的类，例如列表就是其中之一。<code>list</code> 类的属性有各个元素（暂且可以这么认为），方法有修改，排序数据等。除此之外还可以实现自己的类，例如向量类，这个类的属性有方向和大小，它的方法有获取模长、标量放缩等。</p>
+
+<p>在 Python 中，实现一个最简单的类是这样的：</p>
+
+<div class="codeblock code-template">
+    <strong>class</strong> SomeType:<br>
+    &nbsp; &nbsp; ...
+</div>
+
+<p>类的定义以关键字 <code>class</code> 开头，之后跟着一个类名，并且以冒号和缩进确定类的主体。</p>
+
+<p>类名是一个标识符，必须符合 Python 标识符的命名规则。一般建议类的命名应该遵循大驼峰式标记，即类的任意一个英文单词都应该以大写字母开头。</p>
+
+<p>紧跟类的定义后是类的内容，并且需要缩进。由于第一个类目前并没有实际完成一些事情，因此使用了 <code>pass</code> 关键字表示类的主体暂时忽略。</p>
+
+<p>可以使用内置函数 <code>type()</code> 来查看刚刚定义的类的类型：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">SomeType</span>:</div><div>&nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">pass</span></div><div><span style="color: #268bd2;">print</span>(<span style="color: #cb4b16;">SomeType</span>, <span style="color: #cb4b16;">type</span>(<span style="color: #cb4b16;">SomeType</span>))</div></div>
+
+<p>结果为：</p>
+
+<div class="codeblock code-console">$ python -u demo.py
+    &lt;class '__main__.SomeType'&gt; &lt;class 'type'&gt; 
+</div>
+
+<p>结果表明，<code>SomeType</code> 的类型是“类”</p>
+
+<h3>什么是实例</h3>
+
+<p>有了类以后，还需要一个具体的<strong>实例</strong>(instance)来完成具体的行为。对于内置的 <code>list</code> 类，需要有一个存储了具体数据的列表来完成对列表的操作。同样，对于上述的自定义类向量，也需要一个具体的向量实例来完成取模、计算等操作。</p>
+
+<p>对于以上定义的类，获得一个类的实例的方法如下：</p>
+
+<div class="vscode-block"><div>SomeType()</div></div>
+
+<p>通过输入类名并紧跟一对小括号，便可以获得一个类的对象。这种由类创建出的具体对象称为实例(instance)。类是抽象的概念，而实例是具体的概念。</p>
+
+<p>例如，假设有一个类 Fruit(水果)，显然它有一些属性例如 taste(味道)、color(颜色) 等，但只有获得了一个实例 apple(苹果) 后，这些属性才能具体描述。</p>
+
+<p>回到上述语句，获得一个实例有点像调用一个函数，当然这实际上是根据类名生成了一个类的实例。并且由于这个类缺乏具体描述，因此小括号中暂时不需要传入参数。</p>
+
+<p>可以将实例赋值给一个变量，并且每次使用括号，都会为该类生成一个新的实例。例如，以下代码生成了两个类，并使用 <code>type()</code> 函数查看它们的类型：</p>
+
+<div class="vscode-block"><div><span style="color: #268bd2;">one_instance</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">SomeType</span>()</div><div><span style="color: #268bd2;">another_instance</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">SomeType</span>()</div><div><span style="color: #268bd2;">print</span>(<span style="color: #268bd2;">one_instance</span>, <span style="color: #cb4b16;">type</span>(<span style="color: #268bd2;">another_instance</span>))</div></div>
+
+<p>结果为：</p>
+
+<div class="codeblock code-console">$ python -u demo.py
+    &lt;__main__.SomeType object at 0x0000020644132FD0&gt; &lt;class '__main__.SomeType'&gt;
+</div>
+
+<p>观察上述结果，打印实例变量时，它输出了一个地址，这表明每一个实例之间都是独一无二的。另外，结果显示实例 <code>another_instance</code> 的类型是“当前文件的 <code>SomeType</code> 类”。</p>
+
+<h3>什么是属性</h3>
+
+<p>以上创建的类和实例看起来没有任何作用，它不包含任何数据，也不做任何事情。对于一个已经创建的类，最首要的就是明确类的<strong>属性</strong>(attribute)。</p>
+
+<p>前文说过，属性用来描述一个类有哪些特性。对于一个类，它的每个实例属性具体的值可能不太一样，但是它们都存在这个属性。</p>
+
+<p>假设将平面上的一个点看出一个类，那么可以这样定义它：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Point</span>:</div><div>&nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">pass</span></div><div><span style="color: #268bd2;">one_point</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">Point</span>()</div></div>
+
+<p>这个类 <code>Point</code> 需要描述它的坐标，可以通过点记法给一个实例赋予任意的属性。例如，可以这样描述它的属性：</p>
+
+<div class="vscode-block"><div><span style="color: #268bd2;">one_point</span>.x <span style="color: #859900;">=</span> <span style="color: #d33682;">5</span></div><div><span style="color: #268bd2;">one_point</span>.y <span style="color: #859900;">=</span> <span style="color: #d33682;">6</span></div><div><span style="color: #268bd2;">print</span>(<span style="color: #268bd2;">one_point</span>.x, <span style="color: #268bd2;">one_point</span>.y)</div></div>
+
+<p>以上描述为实例添加属性的语法为：</p>
+
+<div class="codeblock code-template">
+    instance.<em>attribute</em> = <em>value</em>
+</div>
+
+<p>这种语法称为点记法，它的赋值过程和变量的赋值是一样的，值可以是任意的，甚至是一个函数或者另一个类。</p>
+
+<p>通过在实例后面加上一个点，就可以表示它的属性，这种方式就和结构体访问字段是一样的。运行以上代码，即可打印属性值：</p>
+
+<div class="codeblock code-console">$ python -u demo.py
+    5 6
+</div>
+
+<p>这几行代码表明，<code>one_point</code> 实例被添加了两个属性，一个是代表横坐标的 <code>x</code> ，一个是代表纵坐标的 <code>y</code> 。并且它们的属性都被赋予了一个具体的整数值。</p>
+
+<h3>什么是方法</h3>
+
+<p>之前说过，类是属性和操作的集合。获得一个带属性的类以后，这个类还需要完成一些事情，来改变这些属性。改变属性的行为称为<strong>方法</strong>(method)。</p>
+
+<p>例如，对于内置类 <code>list</code> ，它有一些方法，比如增加数据(<code>append</code> 、<code>insert</code> 、<code>extend</code> )、移除数据(<code>remove</code>)等，每个具体的方法实现的效果都不一样。对于自定义的向量类，可以使用方法对它做一些放缩、运算、取模等操作。对于抽象一些的类 Fruit(水果) 来说，它也可以定义一些方法，例如 cut(把一个具体的水果切成小块) 、flavor(给水果加上调料改变味道) 等。</p>
+
+<p>从之前实现的 <code>Point</code> 类开始，可以给它添加一个叫做 <code>move_to_origin</code> 的方法，该方法用来将这个点移动到原点。包含该方法后，完整的类的定义为：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Point</span>:</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">move_to_origin</span>(self):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">x</span> <span style="color: #859900;">=</span> <span style="color: #d33682;">0</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">y</span> <span style="color: #859900;">=</span> <span style="color: #d33682;">0</span></div></div>
+
+<p>Python 中类的方法和定义一个函数类似，都以关键字 <code>def</code> 开头，然后是一个函数/方法名和一对小括号，括号内包含一些参数，以冒号引出函数/方法的主体。一般推荐方法名遵循蛇形命名规则，即名称中的单词字母全部小写并以下划线连接。</p>
+
+<p>注意方法和函数有一点不一样，所有针对实例的方法都必须包含一个参数，这个参数通常被称为 <code>self</code> ，它必须是第一个位置参数，不过它的名称不一定要是 <code>self</code> ，也可以改成 <code>this</code> 或者 <code>Hello</code> 。一般情况下，定义方法的语法为：</p>
+
+<div class="codeblock code-template">
+    <strong>def</strong> method(self, ...):<br>
+    &nbsp; &nbsp; ...
+</div>
+
+<p>一个方法中的 <code>self</code> 参数，是对调用这个方法对象的一个引用。</p>
+
+<p>不过无需手动传入这个 <code>self</code> 参数，调用一个实例方法的方式是实例名后面跟上一个点，再跟上一个方法名，后面像调用函数一样加上一个括号，即：</p>
+
+<div class="codeblock code-template">
+    instance.<em>method</em>(...)
+</div>
+
+<p>Python 会自动将一个具体的实例作为第一个参数传给 <code>self</code> 。此时，<code>self.x</code> 实际上就是 <code>instance.x</code> ，替换为实际参数后可以看出形式参数 <code>self</code> 用来代表某个具体的实例，而执行方法时将某个具体的实例对象传给这个形式参数。</p>
+
+<p>例如，以下尝试调用该方法：</p>
+
+<div class="vscode-block"><div><span style="color: #268bd2;">another_point</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">Point</span>()</div><div><span style="color: #268bd2;">another_point</span>.<span style="color: #268bd2;">x</span> <span style="color: #859900;">=</span> <span style="color: #d33682;">10</span></div><div><span style="color: #268bd2;">another_point</span>.<span style="color: #268bd2;">y</span> <span style="color: #859900;">=</span> <span style="color: #d33682;">20</span></div><div><span style="color: #268bd2;">print</span>(<span style="color: #268bd2;">another_point</span>.<span style="color: #268bd2;">x</span>, <span style="color: #268bd2;">another_point</span>.<span style="color: #268bd2;">y</span>)</div><div><span style="color: #268bd2;">another_point</span>.<span style="color: #268bd2;">move_to_origin</span>()</div><div><span style="color: #268bd2;">print</span>(<span style="color: #268bd2;">another_point</span>.<span style="color: #268bd2;">x</span>, <span style="color: #268bd2;">another_point</span>.<span style="color: #268bd2;">y</span>)</div></div>
+
+<p>结果为：</p>
+
+<div class="codeblock code-console">$ python -u demo.py
+10 20 
+0 0</div>
+
+<p>可以看出执行了 <code>.move_to_origin()</code> 方法后，该点确实被移到了原点。如果在定义方法时忘记了 <code>self</code> 参数，那么通过实例调用方法时，会产生 <code class="error">TypeError</code> ，错误信息是某方法需要 0 个参数，却传入了 1 个，这就是因为调用方法时需要参数 <code>self</code> 来代表一个具体的实例，才能通过参数去获取、更改它的属性。</p>
+
+<p>实际上也可以在类中调用这个函数，并且将类的一个实例作为实际参数传给方法：</p>
+
+<div class="vscode-block"><div><span style="color: #268bd2;">p</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">Point</span>()</div><div><span style="color: #cb4b16;">Point</span>.<span style="color: #268bd2;">move_to_origin</span>(<span style="color: #268bd2;">p</span>)</div><div><span style="color: #268bd2;">print</span>(<span style="color: #268bd2;">p</span>.<span style="color: #268bd2;">x</span>, <span style="color: #268bd2;">p</span>.<span style="color: #268bd2;">y</span>)</div></div>
+
+<p>两者是完全一样的。许多面向对象编程的语言都使用关键字 <code>this</code> 表示对实例的一个引用，而 Python 使用这种参数的形式来获取实例，加强了类与实例间的联系。</p>
+
+<p>以下定义了一个更复杂的方法 <code>scale</code> ，用来在坐标轴上按相对位置缩放一个点：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Point</span>:</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">scale</span>(self, scalar: <span style="color: #cb4b16;">float</span>, relative: <span style="color: #cb4b16;">Point</span><span style="color: #859900;">=</span><span style="color: #b58900;">None</span>):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">if</span> relative <span style="color: #859900;">is</span> <span style="color: #b58900;">None</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; relative <span style="color: #859900;">=</span> <span style="color: #cb4b16;">Point</span>()</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; relative.<span style="color: #268bd2;">x</span> <span style="color: #859900;">=</span> <span style="color: #d33682;">0</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; relative.<span style="color: #268bd2;">y</span> <span style="color: #859900;">=</span> <span style="color: #d33682;">0</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">x</span> <span style="color: #859900;">=</span> (<span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">x</span> <span style="color: #859900;">-</span> relative.<span style="color: #268bd2;">x</span>) <span style="color: #859900;">*</span> scalar</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">y</span> <span style="color: #859900;">=</span> (<span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">y</span> <span style="color: #859900;">-</span> relative.<span style="color: #268bd2;">y</span>) <span style="color: #859900;">*</span> scalar</div></div>
+
+<p>通过这个方法，可以看出方法和函数一样，都可以有多个参数，都可以有返回值，甚至可以拥有类型标注。通过实例调用一个方法就类似于直接执行一个函数，只不过第一个位置参数是自动传入的。</p>
+
+<h2>类的初始化</h2>
+
+<p>在上一节中，定义了一个类 <code>Point</code> ，并使用 <code>.x</code> 和 <code>.y</code> 属性来描述它的坐标，<code>.move_to_origin()</code> 和 <code>.scale()</code> 方法来多点执行一些操作。然而，在每次实例化一个类后，都需要给它的 <code>.x</code> 和 <code>.y</code> 属性赋一个具体值，否则会访问不到它们的属性，产生 <code class="error">AttributeError</code> 。</p>
+
+<p>最好能在实例化类时，就能给实例的属性赋予一个具体值，这样即使后续忘记赋值，也不影响程序的执行。然而，为了给实例添加上属性，只能通过 <code>self.</code> 的格式从形式参数中获取类的实例，然而只有在有实例时，该方法才能调用，也就是说还是只能在生成实例后手动为每一个实例添加属性。</p>
+
+<p>事实上，类有一个特殊的方法 <mark><code>.__init__()</code></mark> ，它是一个初始化方法，用来初始化类的属性。类还有很多类似的<strong>特殊方法</strong>(special method, or magic method)，它们都以双下划线开头，双下划线结尾，有时也被称为双下方法(dunder method)。所有的特殊方法在以后会逐一介绍。</p>
+
+<p>在创建自己的方法时，尽量不要以双下划线开头结尾，否则一旦创建了一些特殊的方法，可能会在不必要的时刻被调用，从而招致莫名其妙的错误。</p>
+
+<blockquote>
+    <p><code>.__init__()</code> 方法类似别的面向对象编程语言的构造方法，不过 Python 的构造方法另有它用，<code>.__init__()</code> 的实际效果等效于构造方法。</p>
+</blockquote>
+
+<p>一旦类拥有了这样一个初始化方法，在实例化该类时，使用类名加上一对圆括号，实际上就是在调用这个方法。假设下面有一个类 <code>Vector</code> ：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Vector</span>:</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__init__</span>(self, direction, magnitude):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">direction</span> <span style="color: #859900;">=</span> direction</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">magnitude</span> <span style="color: #859900;">=</span> magnitude</div></div>
+
+<p>在初始化时，调用 <code>Vector()</code> 实际上就是在调用它的初始化方法。由于 <code>.__init__()</code> 方法有两个参数，因此实例化时，也需要传入两个参数：</p>
+
+<div class="vscode-block"><div><span style="color: #268bd2;">v</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">Vector</span>(direction<span style="color: #859900;">=</span><span style="color: #d33682;">90</span>, magnitude<span style="color: #859900;">=</span><span style="color: #d33682;">6</span>)</div></div>
+
+<p>这样，在初始化时，就向实例传入了两个参数，这样确保了只要成功生成了一个实例，它就自动执行一些代码，生成了一些属性，无需后续再手动添加属性，减少了代码量和出错率。</p>
+
+<p>试着调用一下实例的属性：</p>
+
+<div class="vscode-block"><div><span style="color: #268bd2;">print</span>(<span style="color: #268bd2;">v</span>.<span style="color: #268bd2;">direction</span>, <span style="color: #268bd2;">v</span>.<span style="color: #268bd2;">magnitude</span>)</div></div>
+
+<div class="codeblock code-console">$ python -u demo.py
+90 6</div>
+
+<p>可以看出在初始化时，它成功地创建了一些属性。</p>
+
+<p>当然，初始化方法也不一定要添加参数，它也可以仅包含 <code>self</code> 参数，但这样就不能在创建时通过传参为每个实例添加不同的属性了。仅包含 <code>self</code> 参数的 <code>.__init__()</code> 构造方法，又称为类的默认构造方法。在有些时候只需要确定的实例属性，当然可以这么做。</p>
+
+<p>本节介绍了面向对象编程的基础和使用 Python 编写面向对象程序的基本语法。面向对象编程是一种非常实用，也应用非常广泛的编程思想，许多编程语言都提供了面向对象编程的语法支持。本节对面向对象编程的思想介绍并不深刻，有兴趣的读者可以自行去 stackoverflow 、知乎等网站搜索，许多人都对其有自己独到的理解。</p>
+
+<h2>参考资料/延伸阅读</h2>
+
+<p><a href="https://docs.python.org/3/tutorial/classes.html">https://docs.python.org/3/tutorial/classes.html</a></p>
+
+<p>Python3 官方文档对 Python 面向对象编程的简介，目前仍是 Python 面向对象编程入门的最好教程。</p>
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-fp/05-recursions/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程05-函数的递归-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/05/Python函数式编程05-函数的递归-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-300x169.jpg 300w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-1024x576.jpg 1024w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-768x432.jpg 768w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-1536x864.jpg 1536w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-950x534.jpg 950w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-fp/05-recursions/" rel="bookmark">Python函数式编程05 函数的递归</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-oop/04-methods/">
+											<img width="520" height="293" src="/wp-content/uploads/2023/03/Python面向对象编程04-类与实例的方法-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2023/03/Python面向对象编程04-类与实例的方法-520x293.jpg 520w, /wp-content/uploads/2023/03/Python面向对象编程04-类与实例的方法-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-oop/04-methods/" rel="bookmark">Python面向对象编程04-类与实例的方法</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-oop/02-attributes/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-520x293.jpg 520w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-300x169.jpg 300w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-1024x576.jpg 1024w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-768x432.jpg 768w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-1536x864.jpg 1536w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-950x534.jpg 950w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-oop/02-attributes/" rel="bookmark">Python面向对象编程02-类与实例的属性</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/programming/python-oop/02-attributes/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>Python面向对象编程02-类与实例的属性</span></a></li>
+		<li class="previous"><a href="/embedded/mcu-application/lvgl-06-animations/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>LVGL库入门教程06-动画</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

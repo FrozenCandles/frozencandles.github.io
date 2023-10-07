@@ -1,0 +1,770 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>数据结构01-基本概念与线性表 - 冰封残烛的个人小站</title>
+	<link rel="canonical" href="/computer-science/data-structure/01-linear-list/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="数据结构01-基本概念与线性表 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="什么是数据结构 在编程程序时，往往会遇到数据的存储问&#046;&#046;&#046;" />
+	<meta property="og:url" content="/computer-science/data-structure/01-linear-list/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2022-07-30T14:26:30+00:00" />
+	<meta property="article:modified_time" content="2023-10-06T04:09:26+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2022/07/数据结构01-基本概念与线性表.jpg" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="848" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="4分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/computer-science/data-structure/01-linear-list/#primaryimage",
+	            "url": "/wp-content/uploads/2022/07/数据结构01-基本概念与线性表.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/07/数据结构01-基本概念与线性表.jpg",
+	            "width": 1200,
+	            "height": 848
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/computer-science/data-structure/01-linear-list/#webpage",
+	            "url": "/computer-science/data-structure/01-linear-list/",
+	            "name": "数据结构01-基本概念与线性表 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/computer-science/data-structure/01-linear-list/#primaryimage"
+	            },
+	            "datePublished": "2022-07-30T14:26:30+00:00",
+	            "dateModified": "2023-10-06T04:09:26+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "breadcrumb": {
+	                "@id": "/computer-science/data-structure/01-linear-list/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/computer-science/data-structure/01-linear-list/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/computer-science/data-structure/01-linear-list/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "数据结构01-基本概念与线性表"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/586" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=586' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fcomputer-science%2Fdata-structure%2F01-linear-list%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fcomputer-science%2Fdata-structure%2F01-linear-list%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><link rel="stylesheet" href="/wp-content/static/css/theme@neon-pie.wp.css">
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['\\\\(','\\\\)']],
+            displayMath: [["\\\\[","\\\\]"]]
+        }
+    });
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<style>
+    div.vscode-block {
+        color: #D6DEEB;
+        background-color: #011627;
+    }
+    .math { color:blue; font-size: 13px; }
+    span[token="keyword"]  { color: #c792ea; font-weight: bold; }
+    span[token="type"]     { color: #d6deeb; text-decoration: underline; }
+    span[token="variable"] { color: #c5e478; }
+    span[token="number"]   { color: #f78c6c; }
+    span[token="func"]     { color: #82aaff; }
+    span[token="property"] { color: #7fdbca; }
+    span[token="operator"] { color: #c792ea; }
+</style>
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-586 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-586" class="post-586 post type-post status-publish format-standard has-post-thumbnail hentry category-data-structure">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">数据结构01-基本概念与线性表</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/computer-science/data-structure/" rel="category tag">数据结构与算法</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年7月30日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+
+
+
+
+<h2>什么是数据结构</h2>
+
+<p>在编程程序时，往往会遇到数据的存储问题。在一般情况下，都会使用数组存储一系列数据，然而仅仅使用数组并不能有效地组织复杂的数据。考虑以下几个典型的应用场景：</p>
+
+<p>在以分类表示数据时，一个类别可能包括众多子类别。如果仅以数组存储数据，那么类别之间就很难建立联系，如果需要按类别筛选数据，不便于查找子类别中的数据。</p>
+
+<p>在地图中存储各个地点的信息时，地点间存在空间上的关联，而数组难以体现这种关联，不方便规划路径。</p>
+
+<p>这些时候，就需要使用<strong>数据结构</strong>(data structure)。当数据量较小的时候，使用数据结构的优势并不明星；但当数据量开始变大时，数据结构的优势便体现出来。一个合适的数据结构可以在数据量很大时，将数据以规则的形式组织起来，使数据的管理更加方便高效。</p>
+
+<p><strong>抽象数据类型</strong>(Abstract Data Type, ADT)是在一个模型定义下的操作集合，操作效果只取决于特性，而与具体的数据类型无关。例如，对于数组 ADT ，它所具有的操作有获取索引值位置元素、修改索引值位置元素等，这个数组可以是整型数组、字符数组、结构数组或更复杂的嵌套数组等，但只要它是数组，就拥有这些操作或特性。</p>
+
+<p>在后续研究的数据结构都属于 ADT ，因为往往需要使用不同的数据类型来适应不同的场合。例如在使用数组时，如果要处理一系列实验数据，可以使用浮点数数组，如果要处理一段文本，可以使用字符数组，只需要研究数组本身的特性，就可以将其应用到不同的场合中。</p>
+
+<p>在第一节中，暂时只研究数组这种比较熟悉的数据结构，并分析其优缺点。这里研究的数组指的不仅仅是C语言中的数组，而是更广义的线性存储结构，一般称为线性表。</p>
+
+<h2>线性表</h2>
+
+<h3>线性表的概念</h3>
+
+<p><strong>线性表</strong>(linear list)是一组数据组成的有限序列，其中每个数据项含义相似。本节研究顺序存储结构的线性表，它常在内存中以一块地址连续的存储单元依次存储，非常类似C语言中数组的特征，因此可以使用C语言中的数组来表示线性表。</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/01-linearlist-concept.png" alt="" width="230">
+</figure>
+
+<p>采用以下定义实现线性表：</p>
+
+<div class="vscode-block"><div><span style="color: #c792ea;">typedef</span> <span token="keyword">int</span> <span token="type">elemtype</span>;</div><br><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> {</div><div>&#160; &#160; <span token="keyword">int</span> <span style="color: #7fdbca;">length</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span style="color: #7fdbca;">size</span>;<span style="color: #637777;"> &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> actual allocated size</span></div><div>&#160; &#160; <span token="type">elemtype</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">body</span>;</div><div>} <span token="type">linearlist</span>;</div></div>
+
+<p>在第一行中定义了 <code>elemtype</code> 类型，由于这里仅研究线性表 ADT ，因此不关心实际的数据项类型，它可以是任意有效的类型。C语言没有泛型，因此这里只能通过 <code>typedef</code> 用整型暂时模拟通用数据项类型。</p>
+
+<p>由于C语言中数组的功能偏弱，因此除了使用数组存储数据外，为了方便后期处理表中的数据，线性表还需要实时记录以下 2 项信息：</p>
+
+<ul>
+    <li>线性表申请的<strong>存储容量</strong></li>
+    <li>线性表的<strong>长度</strong>，也就是表中存储数据元素的个数</li>
+</ul>
+
+<p>为了确保拥有合适的空间存储数据，线性表申请的存储容量应大于期望存储的数据长度。当达到最大存储容量时，应该不能再对线性表添加新元素。</p>
+
+<p>这里采用结构的形式描述线性表，这是因为在程序中可能同时存在许多不同的线性表，使用结构易于批量生产线性表。</p>
+
+<p>在结构内存储实际数据的字段 <code>body</code> 字段是一个指针。它的用途是：通过 <code>malloc()</code> 函数动态申请到足够的存储空间，然后将其作为一个数组使用。</p>
+
+<p>因此，新创建一个顺序表的步骤为：</p>
+
+<ul>
+    <li>给 <code>body</code> 指针申请足够的内存空间</li>
+    <li>给 <code>length</code> 和 <code>size</code> 字段赋一个合适的初始值</li>
+</ul>
+
+<p>相应的C语言实现如下：</p>
+
+<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">Linearlist_Init</span>(<span token="type">linearlist</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">l</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">size</span>) {</div><div>&#160; &#160; <span style="color: #d7dbe0;">l</span>-&gt;<span style="color: #7fdbca;">body</span> <span style="color: #c792ea;">=</span> (<span token="type">elemtype</span><span style="color: #7fdbca;">*</span>) <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">elemtype</span><span style="color: #82aaff;">) </span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">size</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">l</span>-&gt;<span style="color: #7fdbca;">body</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="number">1</span>;</div><div>&#160; &#160; <span style="color: #d7dbe0;">l</span>-&gt;<span style="color: #7fdbca;">length</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&#160; &#160; <span style="color: #d7dbe0;">l</span>-&gt;<span style="color: #7fdbca;">size</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">size</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="number">0</span>;</div><div>}</div></div>
+
+<h3>线性表项操作</h3>
+
+<p>得到一个线性表后，就可以对线性表做一些操作。对线性表的操作主要是对线性表内的元素做一些改动。</p>
+
+<p>首先是插入。线性表可以向任意位置插入元素，不过如果向中间位置插入元素，需要将线性表的后续元素整体后移，为插入的元素空出位置。下图展示了这种情况：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/01-linearlist-insert.png" alt="" width="510">
+</figure>
+
+<p>因此，线性表插入数据元素的代码实现如下：</p>
+
+<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">Linearlist_InsertAt</span>(<span token="type">linearlist</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">list</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">elem</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">index</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">index</span> <span style="color: #c792ea;">&gt;</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">length</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span> <span style="color: #c792ea;">||</span> <span style="color: #d7dbe0;">index</span> <span style="color: #c792ea;">&lt;</span> <span token="number">1</span>) {</div><div><span style="color: #a8a8a8;">&#160; &#160; &#160; &#160; /* inappropriate inserting position */</span></div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="number">1</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">length</span> <span style="color: #c792ea;">==</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">size</span>) {</div><div><span style="color: #a8a8a8;">&#160; &#160; &#160; &#160; /* have no extra storage space for element */</span></div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="number">2</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">length</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>; <span token="variable">i</span> <span style="color: #c792ea;">&gt;=</span> <span style="color: #d7dbe0;">index</span>; <span token="variable">i</span><span style="color: #7fdbca;">--</span>) </div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">i</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">i</span>];</div><div>&#160; &#160; <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">body</span>[<span style="color: #d7dbe0;">index</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">elem</span>;</div><div>&#160; &#160; <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">length</span><span style="color: #c792ea;">++</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="number">0</span>;</div><div>}</div></div>
+
+<p>在插入前，需要做两次判断：插入数据的位置是否合适，以及是否还有多余的空间让数据插入。</p>
+
+<p>具体插入的方式为从最后一个元素开始，从后向前逐个将元素后移，直到将待插入位置的元素也后移了为止，这样便可以空出一个位置让数据插入。</p>
+
+<p>与插入相反的操作是删除。删除某个位置的元素只需要将目标元素的后续元素整体前移即可，待删除元素便会被直接覆盖：</p>
+
+<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">Linearlist_RemoveAt</span>(<span token="type">linearlist</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">list</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">index</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">index</span> <span style="color: #c792ea;">&gt;</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">length</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span> <span style="color: #c792ea;">||</span> <span style="color: #d7dbe0;">index</span> <span style="color: #c792ea;">&lt;</span> <span token="number">1</span>) {</div><div><span style="color: #a8a8a8;">&#160; &#160; &#160; &#160; /* inappropriate position */</span></div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="number">1</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">index</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">length</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>)</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">i</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">i</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span>];</div><div>&#160; &#160; <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">length</span><span style="color: #7fdbca;">--</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="number">0</span>;</div><div>}</div></div>
+
+查找也是线性表常用的一种操作。查找元素可以用多种算法实现，这里仅仅使用最基本的顺序查找算法，即遍历线性表的每个元素，直到找到需要的值为止。代码实现为：
+
+<div class="vscode-block"><div><span style="color: #c792ea;font-weight: bold;">int</span> <span style="color: #82aaff;">Linearlist_Find</span>(<span style="color: #d6deeb;text-decoration: underline;">linearlist</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">list</span>, <span style="color: #d6deeb;text-decoration: underline;">elemtype</span> <span style="color: #d7dbe0;">elem</span>) {</div><div>&#160; &#160; <span style="color: #c792ea;font-weight: bold;">for</span> (<span style="color: #c792ea;font-weight: bold;">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">length</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>)</div><div>&#160; &#160; &#160; &#160; <span style="color: #c792ea;font-weight: bold;">if</span> (<span style="color: #d7dbe0;">elem</span> <span style="color: #c792ea;">==</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">i</span>])</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #c792ea;font-weight: bold;">return</span> <span token="variable">i</span>;</div><div>&#160; &#160; <span style="color: #c792ea;font-weight: bold;">return</span> <span style="color: #7fdbca;">-</span><span token="number">1</span>;</div><div>}</div></div>
+
+<p>如果找到了相应的元素，它会返回该元素的索引值；如果没有找到相应的元素，则返回 <code>-1</code> 。</p>
+
+<p>如果能成功查找到一个元素，凭借返回的索引值，就能轻松修改该元素的值。</p>
+
+<h2>算法分析</h2>
+
+<p><strong>算法</strong>(algorithm)是对求解特定问题所做的一些步骤的描述。如果能够确认该步骤是有效的，那么就需要分析该算法的效率如何。例如，如果需要求解一个等差数列连续若干项的和，一种算法是逐个计算每项的值再累加，得到的结果也是正确的；也可以采取累加公式，直接由所给定的基本信息代入公式即可一步计算出结果，更加省时省力。</p>
+
+<p>因此，对一个算法最主要的评估标准就是执行的时间资源和存储中间结果的额外空间资源。</p>
+
+<h3>算法的复杂度</h3>
+
+<p>一般来说，使用某种数据结构处理某个实际问题时，随着数据项的个数变多，算法的执行时间和占用的额外空间往往也会受到变化。例如，从一个简单的记事本中查找一段文本，和从一篇很长的小说中查找一段文本，两者消耗的时间也是不同的。如果搜索的文本重复率较高，那么需要的空间资源也会更多。</p>
+
+<p>虽然不可能精确得知算法执行消耗的时间，也比较难计算占用内存的实际大小，但是可以从算法的某些特征中估算出算法的性能：当数据项个数变多时，算法消耗的资源呈什么增长率变化。</p>
+
+<p>例如，如果需要查找线性表内的某个元素，由于它可能出现在线性表内的任意位置，需要遍历线性表。重新展示代码如下：</p>
+
+<div class="vscode-block"><div><span token="keyword">int</span> <span style="color: #82aaff;">Linearlist_Find</span>(<span token="type">linearlist</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">list</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">elem</span>) {</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">length</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">elem</span> <span style="color: #c792ea;">==</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">i</span>])</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="variable">i</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #7fdbca;">-</span><span token="number">1</span>;</div><div>}</div></div>
+
+<p>如果线性表内有 <span class="math">\\( n \\)</span> 个元素，那么在最坏的情况下，算法需要做 <span class="math">\\( n \\)</span> 次判断，然后才返回一个值。如果使用数学函数表示算法的性能，参数 <span class="math">\\( n \\)</span> 表示数据结构内包含的元素个数，计算结果为每个基本操作执行的次数，那么随着数据结构内包含的元素个数增多，在最久的情况下，需要执行的操作次数为：</p>
+
+<div class="math">
+\\[
+    T(n) = 2n+1
+\\]
+</div>
+
+<p>每增加一项数据，就需要判断其值是否满足要求，还需要 <code>for</code> 多循环一次。如果假定每个操作执行的时间差不多，那么只需要知道该函数对应关系，就可以估算出一定数据量下，算法执行的大致时间。</p>
+
+<p>不过一般来说无需计算得这么详细，只需要知道算法执行时间的增长变化趋势即可，或者说算法中基本操作重复执行的次数与数据规模 <span class="math">\\( n \\)</span> 呈什么函数关系变化。算法的时间度量记作：</p>
+
+<div class="math">
+\\[
+    T(n)=O(f(n))
+\\]
+</div>
+
+<p>大写字母 O 表示随数据规模 <span class="math">\\( n \\)</span> 增大，算法执行时间的增长率主要由 <span class="math">\\( f(n) \\)</span> 的增长率主导，称为算法的<strong>渐进时间复杂度</strong>(asymptotic time complexity)，简称<strong>时间复杂度</strong>。</p>
+
+<p>在以上查找算法中，随着数据规模增大，查找所消耗的时间也普遍呈线性规模增长，因此查找时间复杂度为：</p>
+
+<div class="math">
+\\[
+    T(n) = O(n)
+\\]
+</div>
+
+<p>只需关心函数是线性变化的，至于线性系数和低项都可以省略。</p>
+
+<p>之所以时间复杂度只关心最高项，主要是为了对比各算法的执行效率。当 <span class="math">\\( n \\)</span> 足够大的时候，消耗恒定时间的返回语句对算法的时间影响可以不计，而线性系数对时间的影响远不如更换算法对时间的影响大。</p>
+
+<p>例如，以下是二分查找(binary search)算法的代码实现。二分查找算法的原理是如果数组是有序的，那么为了查找某一个值是否在数组内，只需将其与数组中间位置的元素做比较：如果数组中间位置的元素比待查找的值大，那么由于数组是有序的，数组后半部分的元素都比该值大，待查找的值不可能出现在这半部分中，那么只需再用这种方法在前半部分查找即可：</p>
+
+<div class="vscode-block"><div><span token="keyword">int</span> <span style="color: #82aaff;">binary_search</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">arr</span><span token="keyword">[]</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">len</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">elem</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> left <span style="color: #c792ea;">=</span> <span token="number">0</span>; </div><div>&#160; &#160; <span token="keyword">int</span> right <span style="color: #c792ea;">=</span> len <span style="color: #7fdbca;">-</span> <span token="number">1</span>;</div><div>&#160; &#160; <span token="keyword">while</span> (left <span style="color: #c792ea;">&lt;=</span> right) {</div><div>&#160; &#160; &#160; &#160; <span token="keyword">int</span> mid <span style="color: #c792ea;">=</span> (right <span style="color: #7fdbca;">+</span> left) <span style="color: #7fdbca;">/</span> <span token="number">2</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">arr</span>[mid] <span style="color: #c792ea;">==</span> elem)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">return</span> mid; </div><div>&#160; &#160; &#160; &#160; <span token="keyword">else</span> <span token="keyword">if</span> (<span token="variable">arr</span>[mid] <span style="color: #c792ea;">&lt;</span> elem)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; left <span style="color: #c792ea;">=</span> mid <span style="color: #7fdbca;">+</span> <span token="number">1</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">else</span> <span token="keyword">if</span> (<span token="variable">arr</span>[mid] <span style="color: #c792ea;">&gt;</span> elem)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; right <span style="color: #c792ea;">=</span> mid <span style="color: #7fdbca;">-</span> <span token="number">1</span>;</div><div>&#160; &#160; &#160; &#160; }</div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #7fdbca;">-</span><span token="number">1</span>;</div><div>}</div></div>
+
+<p>这种查找算法每一次判断都可以剔除剩余的一半查找范围，使待查找的范围呈指数级递减。运气最差的情况下，当查找 <span class="math">\\( log_2 n \\)</span> 次左右便可以将搜索范围缩减到零，此时就可以判断值是否出现在数组中了。因此，该算法的时间复杂度为：</p>
+
+<div class="math">
+\\[
+    T(n) = O(\log\, n)
+\\]
+</div>
+
+<p>当 <span class="math">\\( n \\)</span> 足够大时，根据极限的等价无穷小概念可知，该算法的执行时间是明显优于普通的查找算法的。可以通过绘制时间复杂度的函数图像比较两个算法的运行时间：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/01-time-complexity.png" alt="" width="300">
+</figure>
+
+<p>不过为了能够实现快速查找，二分搜索法要求数组必须是有序的。</p>
+
+<p>接下来再看一个示例，选择排序(selection sort)是一种简单的排序算法，用于使数组内的每个元素从小到大排列。该算法的基本原理为：先找出数组的最小元素并移动到数组的起始位置，然后每次都从剩余未排序元素中查找最小元素并放到已排序序列的末尾，直到没有待排序元素为止。</p>
+
+<p>选择排序的算法实现如下：</p>
+
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">selection_sort</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">arr</span><span token="keyword">[]</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">len</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">min</span>, <span token="variable">temp</span>;</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">len</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="variable">min</span> <span style="color: #c792ea;">=</span> <span token="variable">i</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">j</span> <span style="color: #c792ea;">=</span> <span token="variable">i</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span>; <span token="variable">j</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">len</span>; <span token="variable">j</span><span style="color: #c792ea;">++</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">arr</span>[<span token="variable">j</span>] <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">min</span>])</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">min</span> <span style="color: #c792ea;">=</span> <span token="variable">j</span>;</div><div>&#160; &#160; &#160; &#160; <span token="variable">temp</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">min</span>];</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">arr</span>[<span token="variable">min</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">arr</span>[<span token="variable">i</span>];</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">arr</span>[<span token="variable">i</span>] <span style="color: #c792ea;">=</span> <span token="variable">temp</span>;</div><div>&#160; &#160; }</div><div>}</div></div>
+
+<p>在这个算法中，<code>for</code> 循环内又嵌套了一层 <code>for</code> 循环。如果数据规模为 <span class="math">\\( n \\)</span> ，那么外层循环一共执行 <span class="math">\\( n-1 \\)</span> 次，内层循环的额执行次数也与 <span class="math">\\( n \\)</span> 有关，总的执行时间是两者的乘积，即时间复杂度为：</p>
+
+<div class="math">
+\\[
+    T(n) = O(n^2)
+\\]
+</div>
+
+<p>显然，当 <span class="math">\\( n \\)</span> 足够大的时候，它消耗的时间远比线性的时间复杂度多。因此选择排序效率较低，一般不用于排序很大的数据。选择排序的时间复杂度比普通的查找大，因此没有必要为了二分查找法的速度优势而特地为数组排序。</p>
+
+<p>排序是算法的一个重要话题，后续会专门花费一节介绍排序算法，许多精彩的思想都可以有效降低排序的时间复杂度。</p>
+
+<p>空间复杂度与时间复杂度类似，也可以使用类似的方法估计并对比算法花费的空间资源。不过只要不是太过夸张，一般对空间的需求并没有时间那么首要，并且大多数情况下空间复杂度都易于分析，因此较少研究算法的空间复杂度。</p>
+
+<h3>线性表的复杂度分析</h3>
+
+<p>使用顺序存储结构的线性表在其中某个位置插入或删除一个数据元素时，为了保证线性表的连续性，必须要移动表中的一系列元素。</p>
+
+<p>如果插入或删除开头位置的元素，则整个线性表的元素都要发生移动；如果删除末尾位置的元素，则可以不用移动元素。假设插入和删除的位置是随机的，那么每次操作平均会移动约一半元素，也就是说操作的时间复杂度为 <span class="math">\\( O(n) \\)</span> 。</p>
+
+<p>使用顺序存储结构的线性表时，其优势在于获取表的长度和取确定位置的元素时间复杂度都为 <span class="math">\\( O(1) \\)</span> ，也就是说不管线性表多长，要取哪一个位置的元素，都只需要常数级的时间。如果需要频繁地访问元素的话，使用线性表是不错的选择。</p>
+
+<p>由于顺序存储结构的线性表在应对大量数据的增加或修改时表现并不是很好，表的一部分需要经常移来移去。下一节介绍链表，链表是一种非连续的存储，在插入和删除时表的整体或部分无需全部移动。</p>
+
+
+
+
+
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python/library-time/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/03/Python3标准库time-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/03/Python3标准库time-520x293.jpg 520w, /wp-content/uploads/2022/03/Python3标准库time-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python/library-time/" rel="bookmark">Python标准库time：处理时间</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/data-science/via-python/numpy05-statistics/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/10/Python数据分析-numpy05数组统计与排序-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/10/Python数据分析-numpy05数组统计与排序-520x293.jpg 520w, /wp-content/uploads/2022/10/Python数据分析-numpy05数组统计与排序-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/data-science/via-python/numpy05-statistics/" rel="bookmark">numpy05:数组统计与排序</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-fp/08-library-itertools/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/Python函数式编程08-itertools模块：更多迭代器-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/Python函数式编程08-itertools模块：更多迭代器-520x293.jpg 520w, /wp-content/uploads/2022/06/Python函数式编程08-itertools模块：更多迭代器-300x169.jpg 300w, /wp-content/uploads/2022/06/Python函数式编程08-itertools模块：更多迭代器-1024x576.jpg 1024w, /wp-content/uploads/2022/06/Python函数式编程08-itertools模块：更多迭代器-768x432.jpg 768w, /wp-content/uploads/2022/06/Python函数式编程08-itertools模块：更多迭代器-1536x864.jpg 1536w, /wp-content/uploads/2022/06/Python函数式编程08-itertools模块：更多迭代器-950x534.jpg 950w, /wp-content/uploads/2022/06/Python函数式编程08-itertools模块：更多迭代器.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-fp/08-library-itertools/" rel="bookmark">Python函数式编程08 itertools模块：更多迭代器</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/computer-science/data-structure/02-linked-list/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>数据结构02-链表</span></a></li>
+		<li class="previous"><a href="/programming/python-oop/03-inheritances/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>Python面向对象编程03-类的继承</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

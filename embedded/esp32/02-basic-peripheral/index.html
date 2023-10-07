@@ -1,0 +1,766 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>ESP32与MicroPython入门-02 基本外设操作 - 冰封残烛的个人小站</title>
+	<link rel="canonical" href="/embedded/esp32/02-basic-peripheral/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="ESP32与MicroPython入门-02 基本外设操作 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="常用外设简介 开发板介绍 在介绍 GPIO 的基本操&#046;&#046;&#046;" />
+	<meta property="og:url" content="/embedded/esp32/02-basic-peripheral/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2022-09-01T02:38:05+00:00" />
+	<meta property="article:modified_time" content="2023-10-07T04:03:33+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作.jpg" />
+	<meta property="og:image:width" content="1920" />
+	<meta property="og:image:height" content="1080" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="4分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/embedded/esp32/02-basic-peripheral/#primaryimage",
+	            "url": "/wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作.jpg",
+	            "width": 1920,
+	            "height": 1080
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/embedded/esp32/02-basic-peripheral/#webpage",
+	            "url": "/embedded/esp32/02-basic-peripheral/",
+	            "name": "ESP32与MicroPython入门-02 基本外设操作 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/embedded/esp32/02-basic-peripheral/#primaryimage"
+	            },
+	            "datePublished": "2022-09-01T02:38:05+00:00",
+	            "dateModified": "2023-10-07T04:03:33+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "breadcrumb": {
+	                "@id": "/embedded/esp32/02-basic-peripheral/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/embedded/esp32/02-basic-peripheral/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/embedded/esp32/02-basic-peripheral/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "ESP32与MicroPython入门-02 基本外设操作"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/723" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=723' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fembedded%2Fesp32%2F02-basic-peripheral%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fembedded%2Fesp32%2F02-basic-peripheral%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><link rel="stylesheet" href="/wp-content/static/css/markdown@arduino.css">
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-723 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-723" class="post-723 post type-post status-publish format-standard has-post-thumbnail hentry category-esp32">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">ESP32与MicroPython入门-02 基本外设操作</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/embedded/esp32/" rel="category tag">ESP32</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年9月1日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+
+<h1>常用外设简介</h1>
+<h2>开发板介绍</h2>
+<p>在介绍 GPIO 的基本操作之前，有必要先介绍一下所使用的开发板，以便更好地了解其用途。</p>
+<p>DOIT ESP32 DEVKIT V1 使用的是 ESP-WROOM-32 模块，其主要参数为：</p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>参数值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主频</td>
+<td>240MHZ</td>
+</tr>
+<tr>
+<td>Flash容量</td>
+<td>4MB</td>
+</tr>
+<tr>
+<td>RAM容量</td>
+<td>512KB</td>
+</tr>
+</tbody>
+</table>
+<p>开发板上的一些主要元器件功能如下：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@esp32-micropython/02-esp32-devkits.jpg" alt="开发板"></figure>
+<ol>
+<li>ESP-WROOM-32 模块，是整个开发板的核心</li>
+<li>CP2102 芯片，用于串口转 USB</li>
+<li>3.3V 稳压器，使 ESP32 能正常工作</li>
+<li>EN(ENABLE) 按键，用于复位芯片</li>
+<li>BOOT 按键，用于引导芯片进入烧入状态</li>
+</ol>
+<p>上一节中，使用 MicroPython 实现了 LED 灯闪烁效果，完整的代码为：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">from</span> machine <span class="hljs-keyword">import</span> Pin
+<span class="hljs-keyword">import</span> time
+led = Pin(<span class="hljs-number">2</span>, Pin.OUT)
+<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    led.value(<span class="hljs-number">0</span>)
+    time.sleep(<span class="hljs-number">0.5</span>)
+    led.value(<span class="hljs-number">1</span>)
+    time.sleep(<span class="hljs-number">0.5</span>)
+</pre></div>
+<p>接下来通过详细分析该程序来介绍 MicroPython 操作 GPIO 的一般方法。</p>
+<h2>基本GPIO操作</h2>
+<h3>GPIO 输出代码分析</h3>
+<p>在第一行中，导入了 <code>machine</code> 模块的 <code>Pin</code> 类：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">from</span> machine <span class="hljs-keyword">import</span> Pin
+</pre></div>
+<p><code>machine</code> 是MicroPython提供的一个与芯片的外设交互的接口模块，包括 GPIO 、ADC 、计时器等。而 <code>Pin</code> 类就是对 GPIO 封装。</p>
+<p>第二行中，导入了标准库 <code>time</code> ：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">import</span> time
+</pre></div>
+<p>尽管 MicroPython 删除了很多标准库以及标准库里的函数，但还是有不少标准库可以正常使用。可以使用以下代码检查当前 MicroPython 支持的所有标准库：</p>
+<div class="hljs codeblock"><pre><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">help</span>(<span class="hljs-string">&#x27;modules&#x27;</span>)
+__main__          gc                ubinascii         urandom
+_boot             inisetup          ubluetooth        ure
+_onewire          machine           ucollections      urequests
+_thread           math              ucryptolib        uselect
+...
+Plus <span class="hljs-built_in">any</span> modules on the filesystem
+</pre></div>
+<p>接下来，以下代码用于初始化 GPIO 口：</p>
+<div class="hljs codeblock"><pre>led = Pin(<span class="hljs-number">2</span>, Pin.OUT)
+</pre></div>
+<p><code>Pin</code> 类的初始化方法中，有以下几个主要的参数：</p>
+<ul>
+<li><code>id</code> ：指定 GPIO 的引脚号，可以是一个标识符数字，也可以是字符串形式的引脚名称</li>
+<li><code>mode</code> ：引脚模式，可以为 <code>Pin.OUT</code> 常规输出、<code>Pin.IN</code> 输入，以及 <code>Pin.OPEN_RAIN</code> 开漏输出模式。</li>
+<li><code>pull</code> ：如果设置为 <code>Pin.PULL_UP</code> ，为上拉模式；<code>Pin.PULL_DOWN</code> 为下拉模式；设置为 <code>None</code> 则为悬空模式。</li>
+</ul>
+<p>当初始化完成后，随时都可以通过以下方法重新设置 GPIO 引脚功能：</p>
+<ul>
+<li><code>.mode(mode=None)</code> ：更改工作模式。如果忽略参数，则可以查询当前引脚的工作模式</li>
+<li><code>.pull(pull=None)</code> ：更改上下拉方式。如果忽略参数，则可以查询当前引脚的上下拉方式</li>
+<li><code>.init(mode=None, pull=None)</code> ：根据给定的参数重新初始化引脚</li>
+</ul>
+<p>GPIO 的输入输出，主要是通过类的 <code>.value(x=None)</code> 方法实现。该方法如果忽略参数，则可以读取当前引脚的数字逻辑电平（ 0 或 1 ）。如果是工作在输出模式，可以通过传入等价于 <code>True</code> 的值让引脚输出高电平，或传入等价于 <code>False</code> 的值让引脚输出低电平。</p>
+<p><code>Pin</code> 类还将其封装为方法 <code>.on(self)</code> 和 <code>.off(self)</code> ，能将一个引脚的电平快速置 1 或 0 。</p>
+<p>实际上，<code>Pin</code> 类还通过重载 <code>.__call__(self, x=None)</code> 特殊方法，只需要像函数一样调用 <code>Pin</code> 对象就可以读写 GPIO 。</p>
+<p>因此，借助 Python 的语法，循环还能写成如下更简洁的形式：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    led(<span class="hljs-keyword">not</span> led())
+    sleep(<span class="hljs-number">1</span>)
+</pre></div>
+<h3>GPIO 按键输入实例</h3>
+<p>有了以上对 GPIO 的介绍后，就可以很轻松编写出 GPIO 的按键输入程序了。</p>
+<p>例如，与 ESP32 相连的电路为：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@esp32-micropython/02-circuit-key-led.jpg" alt="电路图"></figure>
+<p>根据电路图，首先需要初始化 GPIO 引脚为：</p>
+<div class="hljs codeblock"><pre>led = Pin(<span class="hljs-number">4</span>, Pin.OUT)
+key = Pin(<span class="hljs-number">5</span>, Pin.IN, Pin.PULL_UP)
+</pre></div>
+<p>由于按钮按下时，GPIO5 的输入变为低电平 0 ，因此这里将 GPIO5 初始化设置为上拉模式，在按钮未按下时其值恒为 1 。</p>
+<p>以下程序，当按钮按下时，LED 灯也同步亮起；当按钮松开时，LED 灯同步熄灭：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    led.value(key.value())
+    time.sleep(<span class="hljs-number">0.1</span>)
+</pre></div>
+<p>对程序稍加改动，就可以实现通过按键每次按下控制 LED 亮起与熄灭翻转：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> key.value():
+        led.value(<span class="hljs-keyword">not</span> led.value())
+    time.sleep(<span class="hljs-number">0.1</span>)
+</pre></div>
+<h2>外设操作：PWM和ADC</h2>
+<p>ESP32 提供了许多外设，如 ADC 、UART 、I2C 、SPI 、CAN 等，这些外设不一定都会用到，因此这里先以比较常用且比较简单的 PWM 和 ADC 为例作为介绍，剩余的只有当需要时再作介绍。</p>
+<h3>PWM</h3>
+<p>PWM(Pulse-Width Modulation, 脉冲宽度调制)，是一种利用数字信号有无来控制某些模拟电路程度的方式。</p>
+<p>PWM 可以这样浅显地理解：某些元件（例如 LED ）的工作程度（例如 LED 灯的亮度）是根据功率来确定的，而功率又是根据电压的有效值来决定的。因此，如果让一个数字信号在很短的周期内快速变化，那么得到的电压有效值将介于两者之间，并且高电平持续的时间越长，有效值将越大。</p>
+<p>下图展示了 PWM 的概念。PWM 中有一个很重要的概念为<strong>占空比</strong>，指一个周期内高电平占用时间的比例：</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@esp32-micropython/02-pwm-concept.jpg" alt="PWM概念"></figure>
+<p>可以这样认为，占空比越高，电压利用率也就越高，有效值就越大。</p>
+<p>实现 PWM 效果非常容易，<code>machine</code> 模块包含了 <code>PWM</code> 类，可以快速生成 PWM 。首先引入该类：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">from</span> machine <span class="hljs-keyword">import</span> PWM
+</pre></div>
+<p>以下代码将一个 GPIO 引脚包装为 PWM 输出：</p>
+<div class="hljs codeblock"><pre>led = Pin(<span class="hljs-number">2</span>, Pin.OUT)
+led_pwm = PWM(led)
+</pre></div>
+<p><code>PWM</code> 类的 <code>.freq(freq=None)</code> 和 <code>.duty(duty=None)</code> 分别用于设置 PWM 的频率和占空比。如果忽略参数，则可以查询当前所用的频率和占空比。频率的设置范围为 0-78125 ，单位为 Hz ；而占空比的设置范围为 0-1023 ，它与 1023 的比值（或者说 0 到该值的范围占 0-1023 的范围比例）则是实际的占空比。这两个值都不能超过这个范围，否则实际结果会被约束到合法范围内。</p>
+<p>这里先设置好工作频率：</p>
+<div class="hljs codeblock"><pre>FREQUENCY = <span class="hljs-number">5000</span>
+led_pwm = PWM(Pin(<span class="hljs-number">2</span>), freq=FREQUENCY)
+</pre></div>
+<p>这里让占空比不断变化，以达到 LED 的亮度逐渐变化的效果，对应的代码为：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    <span class="hljs-keyword">for</span> duty <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-number">1024</span>, <span class="hljs-number">4</span>):
+        led_pwm.duty(duty)
+        time.sleep(<span class="hljs-number">0.01</span>)
+</pre></div>
+<p>运行该代码，可以看到开发板上的蓝色 LED 灯从熄灭开始逐渐变亮，达到最大亮度后再熄灭逐渐变亮，以此循环。</p>
+<p>如果要关闭 PWM 效果，可以调用其 <code>.deinit()</code> 方法。</p>
+<h3>ADC</h3>
+<p>ADC(Analog to Digital Converter, 模拟/数字信号转换)用于处理模拟信号。模拟信号指的是介于 0~Vcc 的电压值，此时该信号不能简单地使用 0 或 1 表示，而是要通过一定方式将其转换为其它可读的值。</p>
+<p>和大多数单片机一样，这种功能只有部分引脚具备。下图列出了 DOIT ESP32 DEVKIT V1 的所有 GPIO 口支持的复用功能。需要注意的是，该图所对应的开发板为 30 个引脚，而某些版本的开发板是 36 个引脚的，可能会多出一些功能。但不管怎么说，相同序号的引脚功能是基本相同的。</p>
+<figure><img decoding="async" src="/wp-content/uploads/image/category@esp32-micropython/02-esp32-devkit-pinout.jpg" alt="e"></figure>
+<p>注意 GPIO 口和引脚序号是不同步的。</p>
+<p>使用 ADC 和使用 PWM 的方式类似，首先都需要将一个引脚变为 ADC 功能：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">from</span> machine <span class="hljs-keyword">import</span> Pin, ADC
+adc = ADC(Pin(<span class="hljs-number">32</span>))
+</pre></div>
+<p>默认情况下，ADC 只能测量 1v 左右范围内的电压。如果要测量更大范围，可以使用 <code>.atten(attenuation)</code> 设置 ADC 输入的衰减量，以获取更大的电压测量范围。可以设置以下衰减值：</p>
+<ul>
+<li><code>ADC.ATTN_0DB</code> ：不衰减，最大输入电压为 1.1v（默认值）</li>
+<li><code>ADC.ATTN_2_5DB</code> ：2.5dB 衰减，最大输入电压约为 1.5v</li>
+<li><code>ADC.ATTN_6DB</code> ：6dB 衰减，最大输入电压约为 2.2v</li>
+<li><code>ADC.ATTN_11DB</code> ：11dB 衰减，最大输入电压约为 3.9v</li>
+</ul>
+<p>因此，如果要测量 0-3.3v 变化的电压，需要使用以下代码：</p>
+<div class="hljs codeblock"><pre>adc.atten(ADC.ATTN_11DB)
+</pre></div>
+<p>在适当的时候，调用 <code>ADC</code> 类的 <code>.read()</code> 方法就可以获取当前的电压。电压使用一个 12 位的值来描述，因此如果当读取的值为 4095 时，达到最大输入电压。其余值可以根据比例换算成相应的电压。</p>
+<blockquote>
+<p>注意，ESP32 的 ADC 引脚可以分为两组，GPIO 32-39 是第一组，GPIO 0, 2, 4, 12-15 和 25-27 是第二组。第二组引脚在有些时候（如使用 WiFi 功能时）不能作为 ADC 功能使用。</p>
+</blockquote>
+<h2>ESP32高级功能</h2>
+<h3>触摸检测</h3>
+<p>这算是 ESP32 提供的一个非常有意思的功能了。ESP32 的某些引脚具备一种能力，可以检测引脚是否被人体触摸。</p>
+<p>ESP32 有 10 个 GPIO 口可用作电容触摸输入，它们分别为：0、2、4、12、13、14、15、27、32、33。在 30 个引脚的开发板中，没有 0 号 GPIO ，这点需要注意。</p>
+<p>使用电容触摸检测功能非常简单，只需要将一个 GPIO 引脚转化成触摸口，然后读入电容值即可。在有无触摸情况下，读入的值差别甚大。对应的代码为：</p>
+<div class="hljs codeblock"><pre><span class="hljs-keyword">from</span> machine <span class="hljs-keyword">import</span> Pin, TouchPad
+<span class="hljs-keyword">import</span> time
+
+touch = TouchPad(Pin(<span class="hljs-number">4</span>))
+
+<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:
+    <span class="hljs-built_in">print</span>(touch.read())
+    time.sleep(<span class="hljs-number">0.5</span>)
+</pre></div>
+<p>运行代码，观察输出结果如下：</p>
+<div class="hljs codeblock"><pre><span class="hljs-number">809</span>
+<span class="hljs-number">684</span>
+<span class="hljs-number">671</span>
+<span class="hljs-number">809</span>
+<span class="hljs-number">109</span>
+<span class="hljs-number">62</span>
+<span class="hljs-number">56</span>
+<span class="hljs-number">43</span>
+<span class="hljs-number">57</span>
+<span class="hljs-number">808</span>
+<span class="hljs-number">825</span>
+</pre></div>
+<p>当被触摸时，读取的值变为几十，而未触摸时的值则为几百。当然，具体的值可能会随着环境的改变而不一定，但是只要捕捉到很大的差别就可以判断是否被触摸。</p>
+<h3>中断</h3>
+<p>MicroPython 可以直接操作中断功能，通过某个信号暂停当前程序的运转并执行特定的功能。下面以外部中断为例简单介绍外部中断的使用方法。</p>
+<p>除了 GPIO6 ~ GPIO11 之外的 GPIO 引脚都有这样一种功能，在电平发生跳变的瞬间，发出一个中断信号，并强制跳转执行某些代码。</p>
+<p>要使用外部中断，首先需要初始化一个 GPIO 引脚，将其作为输入模式：</p>
+<div class="hljs codeblock"><pre>key = Pin(<span class="hljs-number">23</span>, Pin.IN, Pin.PULL_DOWN)
+</pre></div>
+<p>为了在发送中断时执行某些功能，需要定义一个函数，这个函数要有这样一个参数，当发送外部中断时，传入产生中断的中断源：</p>
+<div class="hljs codeblock"><pre><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">interrupt_handler</span>(<span class="hljs-params">source</span>):</span>
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;interrupt caused by <span class="hljs-subst">{source}</span>&#x27;</span>)
+</pre></div>
+<p>然后，通过调用 GPIO 引脚的 <code>.irq(trigger, handler)</code> 方法，可以将其变成一个中断源。<em><code>trigger</code></em> 表示触发方式，可以为上升沿 <code>Pin.IRQ_RISING</code> 即低电平向高电平跳变的瞬间，或下降沿 <code>Pin.IRQ_FALLING</code> 即高电平向低电平跳变的瞬间。<code>handler</code> 应该传入一个中断处理函数。</p>
+<p>例如：</p>
+<div class="hljs codeblock"><pre>key.irq(trigger=Pin.IRQ_RISING, handler=interrupt_handler)
+</pre></div>
+<p>则与按键相连的 GPIO 口在从低电平向高电平跳变的瞬间，会调用 <code>interrupt_handler()</code> 函数，执行其中的代码，在终端中打印 <code>&quot;interrupt caused by Pin(23)&quot;</code> 。</p>
+
+<h2>参考资料/延伸阅读</h2>
+
+<p>
+	<a href="https://docs.micropython.org/en/latest/esp32/quickref.html#">https://docs.micropython.org/en/latest/esp32/quickref.html#</a><br>
+	MicroPython 官方文档
+</p>
+
+
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/data-science/via-python/pandas01-data-types/">
+											<img width="520" height="293" src="/wp-content/uploads/2023/02/Python数据分析-pandas01基本数据类型-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2023/02/Python数据分析-pandas01基本数据类型-520x293.jpg 520w, /wp-content/uploads/2023/02/Python数据分析-pandas01基本数据类型-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/data-science/via-python/pandas01-data-types/" rel="bookmark">pandas01:基本数据类型</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python/python3-with-statement-context-manager/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/Python-with语句和上下文管理器-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/07/Python-with语句和上下文管理器-520x293.jpg 520w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-300x169.jpg 300w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-1024x576.jpg 1024w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-768x432.jpg 768w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-1536x864.jpg 1536w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-950x534.jpg 950w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python/python3-with-statement-context-manager/" rel="bookmark">Python3 with语句和上下文管理器</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/computer-science/computer-networking/06-internet-protocol/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/计算机网络05-网络层概述与网际协议IP-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/07/计算机网络05-网络层概述与网际协议IP-520x293.jpg 520w, /wp-content/uploads/2022/07/计算机网络05-网络层概述与网际协议IP-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/computer-science/computer-networking/06-internet-protocol/" rel="bookmark">计算机网络06-网络层概述与网际协议IP</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/computer-science/data-structure/07-sort-algorithm/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>数据结构07-排序算法</span></a></li>
+		<li class="previous"><a href="/computer-science/data-structure/06-heap/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>数据结构06-优先队列(堆)</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

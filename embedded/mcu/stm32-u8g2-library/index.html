@@ -1,0 +1,879 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>U8g2图形库与STM32移植 - 冰封残烛的个人小站</title>
+	<meta name="description" content="U8g2 是一个用于嵌入式设备的简易图形库，可以在多种 OLED 和 LCD 屏幕上，支持包括 SSD1306 等多种类型的底层驱动，并可以很方便地移植到 STM32 等单片机上，并支持软件或硬件形式的 I2C 。本节介绍移植过程与 U8g2 的绘图方式" />
+	<link rel="canonical" href="/embedded/mcu-application/stm32-u8g2-library/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="U8g2图形库与STM32移植 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="U8g2 是一个用于嵌入式设备的简易图形库，可以在多种 OLED 和 LCD 屏幕上，支持包括 SSD1306 等多种类型的底层驱动，并可以很方便地移植到 STM32 等单片机上，并支持软件或硬件形式的 I2C 。本节介绍移植过程与 U8g2 的绘图方式" />
+	<meta property="og:url" content="/embedded/mcu-application/stm32-u8g2-library/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2022-06-09T02:43:19+00:00" />
+	<meta property="article:modified_time" content="2023-10-05T13:15:47+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2022/06/U8g2图形库与STM32移植.jpg" />
+	<meta property="og:image:width" content="1920" />
+	<meta property="og:image:height" content="1080" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="9分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/embedded/mcu-application/stm32-u8g2-library/#primaryimage",
+	            "url": "/wp-content/uploads/2022/06/U8g2图形库与STM32移植.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/06/U8g2图形库与STM32移植.jpg",
+	            "width": 1920,
+	            "height": 1080
+	        },
+	        {
+	            "@type": "WebPage",
+	            "@id": "/embedded/mcu-application/stm32-u8g2-library/#webpage",
+	            "url": "/embedded/mcu-application/stm32-u8g2-library/",
+	            "name": "U8g2图形库与STM32移植 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/embedded/mcu-application/stm32-u8g2-library/#primaryimage"
+	            },
+	            "datePublished": "2022-06-09T02:43:19+00:00",
+	            "dateModified": "2023-10-05T13:15:47+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "U8g2 是一个用于嵌入式设备的简易图形库，可以在多种 OLED 和 LCD 屏幕上，支持包括 SSD1306 等多种类型的底层驱动，并可以很方便地移植到 STM32 等单片机上，并支持软件或硬件形式的 I2C 。本节介绍移植过程与 U8g2 的绘图方式",
+	            "breadcrumb": {
+	                "@id": "/embedded/mcu-application/stm32-u8g2-library/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/embedded/mcu-application/stm32-u8g2-library/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/embedded/mcu-application/stm32-u8g2-library/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "U8g2图形库与STM32移植"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/301" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=301' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fembedded%2Fmcu-application%2Fstm32-u8g2-library%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fembedded%2Fmcu-application%2Fstm32-u8g2-library%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><link rel="stylesheet" href="/wp-content/static/css/markdown@arduino.css">
+<style>
+    .math { color:blue; font-size: 13px; }
+    div.vscode-block { color: #403F53; background-color: #FBFBFB; }
+</style>
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-301 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-301" class="post-301 post type-post status-publish format-standard has-post-thumbnail hentry category-mcu-application">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">U8g2图形库与STM32移植</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/embedded/mcu-application/" rel="category tag">单片机与应用</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2022年6月9日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+<p></p>
+
+
+
+
+<h2>简介</h2>
+
+<p>U8g2 是一个用于嵌入式设备的简易图形库，可以在多种 OLED 和 LCD 屏幕上，支持包括 SSD1306 等多种类型的底层驱动，并可以很方便地移植到 Arduino 、树莓派、NodeMCU 和 ARM 上。</p>
+
+<p>U8g2 库同时包含了 U8x8 绘图库，两者的区别为：</p>
+
+<ul>
+    <li>U8g2 包含各种简单及复杂图形的绘制，并支持各种形式的字体，但需要占用一定单片机的内存作为绘图缓存</li>
+    <li>U8x8 只包含简单的显示文本功能，且只支持简单、定宽的字体。它直接绘制图形，没有缓存功能</li>
+</ul>
+
+<p>U8g2 库的 GitHub 地址为：<a href="https://github.com/olikraus/u8g2">https://github.com/olikraus/u8g2</a> ，可以从中获取到源码与文档帮助。</p>
+
+<h2>移植</h2>
+
+<p>本次以将 U8g2 移植到 STM32 单片机与 SSD1306 通过 I2C 驱动的 128x64 OLED 为例，介绍移植的方法。不同单片机和驱动的移植可以参考这一过程，也可以参考 U8g2 的官方移植教程 <a href="https://github.com/olikraus/u8g2/wiki/Porting-to-new-MCU-platform">https://github.com/olikraus/u8g2/wiki/Porting-to-new-MCU-platform</a> 。</p>
+
+<p>首先下载或克隆 U8g2 的源码，这里主要是使用 C 语言编写，所以只需要用到 <code>csrc</code> 目录下的文件。</p>
+
+<p>下载完成后，将 <code>csrc</code> 目录拷贝或移动到工程目录里，并重命名为合适的目录名例如 <code>u8g2lib</code> 。</p>
+
+<p>接下来，需要删除一些无用的代码，并添加底层驱动的代码。</p>
+
+<h3>删除无用内容</h3>
+
+<p>U8g2 的源码为了支持多种设备驱动，包含了许多兼容性的代码。首先，类似 <code>u8x8_d_xxx.c</code> 命名的文件中包含 U8x8 的驱动兼容，文件名包括驱动的型号和屏幕分辨率，因此需要删除无用的驱动文件，只保留当前设备的驱动。例如，本次使用的是 128x64 的 SSD1306 屏幕，那么只需要保留 <code>u8x8_d_ssd1306_128x64_noname.c</code> 文件，删除其它类似的文件即可。U8g2 支持的所有屏幕驱动可以在 <a href="https://github.com/olikraus/u8g2/wiki/u8g2setupc">https://github.com/olikraus/u8g2/wiki/u8g2setupc</a> 找到。</p>
+
+<p>同时还需要精简 <code>u8g2_d_setup.c</code> 和 <code>u8g2_d_memory.c</code> 中 U8g2 提供的驱动兼容。</p>
+
+<p>在 <code>u8g2_d_setup.c</code> 中，只需要保留 <code>u8g2_Setup_ssd1306_i2c_128x64_noname_f()</code> 这一个函数即可。注意，该文件内有几个命名类似的函数：命名中无 <code>i2c</code> 的是 SPI 接口驱动的函数，需要根据接口选择；以 1 结尾的函数代表使用的缓存空间为 128 字节，以 2 结尾的函数代表使用的缓存为 256字节，类似以 f 结尾的函数代表使用的缓存为 1024 字节。</p>
+
+<p><code>u8g2_d_memory.c</code> 文件也是同理，它需要根据 <code>u8g2_d_setup.c</code> 中的调用情况决定用到哪些函数。由于 <code>u8g2_Setup_ssd1306_i2c_128x64_noname_f()</code> 函数只用到 <code>u8g2_m_16_8_f()</code> 这一个函数，因此只需要保留它，其余函数全部删除即可。</p>
+
+<p>还有一处必要的精简是字体文件 <code>u8x8_fonts.c</code> 和 <code>u8g2_fonts.c</code> ，尤其是 <code>u8g2_fonts.c</code> ，该文件提供了包括汉字在内的几万个文字的多种字体，仅源文件就有 30MB ，编译后占据的内存非常大。</p>
+
+<p>字体类型的变量非常多，建议先复制一个备份后将所有变量删除，之后视情况再添加字体。字体变量的命名大致遵循以下规则：</p>
+
+<div class="codeblock code-template">
+    &lt;prefix&gt; '_' &lt;name&gt; '_' &lt;purpose&gt; &lt;charset&gt;
+</div>
+
+<p>其中：</p>
+
+<ul>
+    <li><code>&lt;prefix&gt;</code> 前缀基本上以 u8g2 开头；</li>
+    <li><code>&lt;name&gt;</code> 字体名，其中可能包含字符大小</li>
+    <li>各种 <code>&lt;purpose&gt;</code> 含义如下表所示：</li>
+</ul>
+
+<table>
+    <thead>
+        <tr>
+            <th>名称</th>
+            <th>描述</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>t</td>
+            <td>透明字体形式</td>
+        </tr>
+        <tr>
+            <td>h</td>
+            <td>所有字符等高</td>
+        </tr>
+        <tr>
+            <td>m</td>
+            <td>monospace 字体（等宽字体）</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>每一个字符都是 8x8 大小的</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul>
+    <li><code>&lt;charset&gt;</code> 是字体支持的字符集，如下表所示：</li>
+</ul>
+
+<table>
+    <thead>
+        <tr>
+            <th>名称</th>
+            <th>描述</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>f</td>
+            <td>只包含单字节字符</td>
+        </tr>
+        <tr>
+            <td>r</td>
+            <td>只包含 ASCII 范围为 32~127 的字符</td>
+        </tr>
+        <tr>
+            <td>u</td>
+            <td>只包含 ASCII 范围为 32~95 的字符，即不包括小写英文</td>
+        </tr>
+        <tr>
+            <td>n</td>
+            <td>只包含数字及一些特殊用途字符</td>
+        </tr>
+        <tr>
+            <td>...</td>
+            <td>还包括许多自定义的字符集，例如有一些结尾带 gb2312 或 Chinese 的字体名就包括中文</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>一般建议只保留需要的字体即可。</p>
+
+<h3>添加回调函数</h3>
+
+<p>U8g2 已经包含了 SSD1306 的驱动，只需要添加一个函数 <code>u8x8_gpio_and_delay()</code> 用于模拟时序即可。官方文件给出了一个函数的编写模板为：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">uint8_t</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8x8_gpio_and_delay</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8x8_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8x8</span><span style="color: #403f53;">, </span><span style="color: #994cc3;font-weight: bold;">uint8_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">msg</span><span style="color: #403f53;">, </span><span style="color: #994cc3;font-weight: bold;">uint8_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">arg_int</span><span style="color: #403f53;">, </span><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">arg_ptr</span><span style="color: #403f53;">) {</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">switch</span><span style="color: #403f53;"> (</span><span style="color: #403f53;">msg</span><span style="color: #403f53;">) {</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_GPIO_AND_DELAY_INIT</span><span style="color: #403f53;">: &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> called once during init phase of u8g2/u8x8</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> can be used to setup pins</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_DELAY_NANO</span><span style="color: #403f53;">: &#160; &#160; &#160; &#160; &#160; </span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> delay arg_int * 1 nano second</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">; &#160;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_DELAY_100NANO</span><span style="color: #403f53;">: &#160; &#160; &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> delay arg_int * 100 nano seconds</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #a8a8a8;">/* and many other cases */</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_GPIO_MENU_HOME</span><span style="color: #403f53;">:</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">u8x8_SetGPIOResult</span><span style="color: #403f53;">(</span><span style="color: #403f53;">u8x8</span><span style="color: #403f53;">, </span><span style="color: #a8a8a8;">/* get menu home pin state */</span><span style="color: #403f53;"> </span><span style="color: #aa0982;">0</span><span style="color: #403f53;">);</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">default</span><span style="color: #403f53;">:</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">u8x8_SetGPIOResult</span><span style="color: #403f53;">(</span><span style="color: #403f53;">u8x8</span><span style="color: #403f53;">, </span><span style="color: #aa0982;">1</span><span style="color: #403f53;">); &#160; &#160; </span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> default return value</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; }</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">return</span><span style="color: #403f53;"> </span><span style="color: #aa0982;">1</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">}</span></div></div>
+
+<p>以下是一个写法示例：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">uint8_t</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8x8_gpio_and_delay</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8x8_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8x8</span><span style="color: #403f53;">, </span><span style="color: #994cc3;font-weight: bold;">uint8_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">msg</span><span style="color: #403f53;">, </span><span style="color: #994cc3;font-weight: bold;">uint8_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">arg_int</span><span style="color: #403f53;">, </span><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">arg_ptr</span><span style="color: #403f53;">) {</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">switch</span><span style="color: #403f53;"> (</span><span style="color: #403f53;">msg</span><span style="color: #403f53;">) {</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_DELAY_100NANO</span><span style="color: #403f53;">: </span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> delay arg_int * 100 nano seconds</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">__NOP</span><span style="color: #403f53;">();</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_DELAY_10MICRO</span><span style="color: #403f53;">: </span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> delay arg_int * 10 micro seconds</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">for</span><span style="color: #403f53;"> (</span><span style="color: #994cc3;font-weight: bold;">uint16_t</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">n</span><span style="color: #403f53;"> </span><span style="color: #994cc3;">=</span><span style="color: #403f53;"> </span><span style="color: #aa0982;">0</span><span style="color: #403f53;">; </span><span style="color: #4876d6;">n</span><span style="color: #403f53;"> </span><span style="color: #994cc3;">&lt;</span><span style="color: #403f53;"> </span><span style="color: #aa0982;">320</span><span style="color: #403f53;">; </span><span style="color: #4876d6;">n</span><span style="color: #994cc3;">++</span><span style="color: #403f53;">)</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">__NOP</span><span style="color: #403f53;">();</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_DELAY_MILLI</span><span style="color: #403f53;">: &#160; </span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> delay arg_int * 1 milli second</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">delay_ms</span><span style="color: #403f53;">(</span><span style="color: #aa0982;">1</span><span style="color: #403f53;">);</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_DELAY_I2C</span><span style="color: #403f53;">: &#160; &#160; </span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> arg_int is the I2C speed in 100KHz, e.g. 4 = 400 KHz</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">delay_us</span><span style="color: #403f53;">(</span><span style="color: #aa0982;">5</span><span style="color: #403f53;">);</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> arg_int=1: delay by 5us, arg_int = 4: delay by 1.25us</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_GPIO_I2C_CLOCK</span><span style="color: #403f53;">: </span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> arg_int=0: Output low at I2C clock pin</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #403f53;">arg_int</span><span style="color: #403f53;"> </span><span style="color: #994cc3;">?</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">GPIO_SetBits</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">GPIO_B</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">GPIO_Pin_6</span><span style="color: #403f53;">) </span><span style="color: #994cc3;">:</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">GPIO_ResetBits</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">GPIO_B</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">GPIO_Pin_6</span><span style="color: #403f53;">); &#160;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> arg_int=1: Input dir with pullup high for I2C clock pin</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_GPIO_I2C_DATA</span><span style="color: #403f53;">: &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> arg_int=0: Output low at I2C data pin</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #403f53;">arg_int</span><span style="color: #403f53;"> </span><span style="color: #994cc3;">?</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">GPIO_SetBits</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">GPIO_B</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">GPIO_Pin_7</span><span style="color: #403f53;">) </span><span style="color: #994cc3;">:</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">GPIO_ResetBits</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">GPIO_B</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">GPIO_Pin_7</span><span style="color: #403f53;">); &#160;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> arg_int=1: Input dir with pullup high for I2C data pin</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_GPIO_MENU_SELECT</span><span style="color: #403f53;">:</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">u8x8_SetGPIOResult</span><span style="color: #403f53;">(</span><span style="color: #403f53;">u8x8</span><span style="color: #403f53;">, </span><span style="color: #a8a8a8;">/* get menu select pin state */</span><span style="color: #403f53;"> </span><span style="color: #aa0982;">0</span><span style="color: #403f53;">);</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_GPIO_MENU_NEXT</span><span style="color: #403f53;">:</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">u8x8_SetGPIOResult</span><span style="color: #403f53;">(</span><span style="color: #403f53;">u8x8</span><span style="color: #403f53;">, </span><span style="color: #a8a8a8;">/* get menu next pin state */</span><span style="color: #403f53;"> </span><span style="color: #aa0982;">0</span><span style="color: #403f53;">);</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_GPIO_MENU_PREV</span><span style="color: #403f53;">:</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">u8x8_SetGPIOResult</span><span style="color: #403f53;">(</span><span style="color: #403f53;">u8x8</span><span style="color: #403f53;">, </span><span style="color: #a8a8a8;">/* get menu prev pin state */</span><span style="color: #403f53;"> </span><span style="color: #aa0982;">0</span><span style="color: #403f53;">);</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_GPIO_MENU_HOME</span><span style="color: #403f53;">:</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">u8x8_SetGPIOResult</span><span style="color: #403f53;">(</span><span style="color: #403f53;">u8x8</span><span style="color: #403f53;">, </span><span style="color: #a8a8a8;">/* get menu home pin state */</span><span style="color: #403f53;"> </span><span style="color: #aa0982;">0</span><span style="color: #403f53;">);</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">default</span><span style="color: #403f53;">:</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">u8x8_SetGPIOResult</span><span style="color: #403f53;">(</span><span style="color: #403f53;">u8x8</span><span style="color: #403f53;">, </span><span style="color: #aa0982;">1</span><span style="color: #403f53;">); </span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> default return value</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; }</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">return</span><span style="color: #403f53;"> </span><span style="color: #aa0982;">1</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">}</span></div></div>
+
+<p>如果使用的引脚不是 PB6 和 PB7 ，注意在对应的位置修改；如果是使用硬件 I2C 的方式，那么可以不需要模拟时序，但是需要编写硬件驱动函数。在结尾处，会给出一个基于标准库的硬件移植方法。</p>
+
+<p>最后，不要忘记了初始化 I2C 对应的 GPIO 引脚。</p>
+
+<h2>U8g2简单使用</h2>
+
+<p>U8g2 的初始化可以参考如下步骤：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_Init</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8g2</span><span style="color: #403f53;">) {</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">u8g2_Setup_ssd1306_i2c_128x64_noname_f(</span><span style="color: #403f53;">u8g2</span><span style="color: #4876d6;">, U8G2_R0, u8x8_byte_sw_i2c, u8x8_gpio_and_delay)</span><span style="color: #403f53;">; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> 初始化 u8g2 结构体</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">u8g2_InitDisplay(</span><span style="color: #403f53;">u8g2</span><span style="color: #4876d6;">)</span><span style="color: #403f53;">; &#160; &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> 根据所选的芯片进行初始化工作，初始化完成后，显示器处于关闭状态</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">u8g2_SetPowerSave(</span><span style="color: #403f53;">u8g2</span><span style="color: #4876d6;">, </span><span style="color: #aa0982;">0</span><span style="color: #4876d6;">)</span><span style="color: #403f53;">; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> 打开显示器</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">u8g2_ClearBuffer(</span><span style="color: #403f53;">u8g2</span><span style="color: #4876d6;">)</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">}</span></div></div>
+
+<p>这里需要调用之前保留的 <code>u8g2_Setup_ssd1306_128x64_noname_f()</code> 函数，该函数的4个参数，其含义为：</p>
+
+<ul>
+    <li><code>u8g2</code> ：需要配置的 U8g2 结构体</li>
+    <li><code>rotation</code> ：配置屏幕是否要旋转，默认使用 <code>U8G2_R0</code> 即可</li>
+    <li><code>byte_cb</code> ：传输字节的方式，这里使用软件 I2C 驱动，因此使用 U8g2 源码提供的 <code>u8x8_byte_sw_i2c()</code> 函数。如果是硬件 I2C 的话，可以参照编写自己的函数</li>
+    <li><code>gpio_and_delay_cb</code> ：提供给软件模拟 I2C 的 GPIO 输出和延时，使用之前编写的配置函数 <code>u8x8_gpio_and_delay()</code></li>
+</ul>
+
+<p>如果需要显示字符串，需要提前调用以下函数设置字体：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_SetFont</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8g2</span><span style="color: #403f53;">, </span><span style="color: #994cc3;font-weight: bold;">const</span><span style="color: #403f53;"> </span><span style="color: #994cc3;font-weight: bold;">uint8_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">font</span><span style="color: #403f53;">);</span></div></div>
+
+<hr>
+
+<p>U8g2 的绘制方式有 2 种，每种都有不同的特点。</p>
+
+<p>首先是全屏缓存模式(Full screen buffer mode)，它的特点是绘制速度快，并且所有的绘制方法都可以使用。但是这种模式需要大量的 RAM 空间，因此使用需要用到缓存为 1024 字节的初始化函数（函数名以 f 结尾）。</p>
+
+<p>这种绘图的方式首先需要清除缓冲区，调用绘图 API 后绘制的内容会保留在缓存内，需要手动发送缓存的内容到屏幕上：</p>
+
+<div class="vscode-block"><div><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2</span><span style="color: #403f53;">;</span></div><div><span style="color: #4876d6;">u8g2_ClearBuffer(</span><span style="color: #0c969b;">&amp;</span><span style="color: #4876d6;">u8g2</span><span style="color: #4876d6;">)</span><span style="color: #403f53;">;</span></div><div><span style="color: #a8a8a8;">/* Draw Something */</span></div><div><span style="color: #4876d6;">u8g2_SendBuffer(</span><span style="color: #0c969b;">&amp;</span><span style="color: #4876d6;">u8g2</span><span style="color: #4876d6;">)</span><span style="color: #403f53;">;</span></div></div>
+
+<p>第二种是分页模式(Page mode)，它同样可以使用所有的绘制方法，但绘制速度较慢，不过占用的 RAM 空间也少，可以使用 128 或 256 字节的缓存（函数名以 1 和 2 结尾）。</p>
+
+<p>这种绘图的方式首先创建第一页，然后在一个 <code>do...while</code> 循环内部绘制图形，不断判断是否到达下一页，如果到达了就自动刷新缓存：</p>
+
+<div class="vscode-block"><div><span style="color: #4876d6;">u8g2_FirstPage(</span><span style="color: #0c969b;">&amp;</span><span style="color: #4876d6;">u8g2)</span><span style="color: #403f53;">;</span></div><div><span style="color: #994cc3;font-weight: bold;">do</span><span style="color: #403f53;"> {</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #a8a8a8;">/* Draw Something */</span></div><div><span style="color: #403f53;">} </span><span style="color: #994cc3;font-weight: bold;">while</span><span style="color: #403f53;"> (</span><span style="color: #4876d6;">u8g2_NextPage(</span><span style="color: #0c969b;">&amp;</span><span style="color: #4876d6;">u8g2)</span><span style="color: #403f53;">);</span></div></div>
+
+<p>可以认为分页模式是一块一块绘制的，只绘制需要的区域。</p>
+
+<p>还可以使用 U8x8 的绘图模式，这种情况下需要使用 U8x8 提供的结构体以及一系列函数，这里不再说明。</p>
+
+<h2>绘图API</h2>
+
+<p>完整的 API 参考可以参见官方文档 <a href="https://github.com/olikraus/u8g2/wiki/u8g2reference/">https://github.com/olikraus/u8g2/wiki/u8g2reference/</a> ，里面不仅有 API 的介绍，还有绘制效果的图片演示。</p>
+
+<p>U8g2 的坐标系和绝大多数 GUI 库一样，原点在左上角，(x, y) 往右下递增，坐标的单位为像素。</p>
+
+<h3>简单图形绘制</h3>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_DrawPixel</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8g2</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">x</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">y</span><span style="color: #403f53;">);</span></div><div><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_DrawHLine</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8g2</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">x</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">y</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">len</span><span style="color: #403f53;">);</span></div><div><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_DrawVLine</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8g2</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">x</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">y</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">len</span><span style="color: #403f53;">);</span></div><div><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_DrawLine</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8g2</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">x1</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">y1</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">x2</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">y2</span><span style="color: #403f53;">);</span></div></div>
+
+<p>分别用于绘制像素点、根据左上角顶点 (<code>x</code>, <code>y</code>) 与长度 <code>len</code> 绘制水平线与垂直线，以及绘制两点之间的线段。</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_DrawFrame</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8g2</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">x</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">y</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">w</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">h</span><span style="color: #403f53;">);</span></div><div><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_DrawBox</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8g2</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">x</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">y</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">w</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">h</span><span style="color: #403f53;">);</span></div></div>
+
+<p>根据左上角的 (<code>x</code>, <code>y</code>) 坐标与宽 <code>w</code> 高 <code>h</code> 绘制空心与实心矩形。</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_DrawRBox</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8g2, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> x, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> y, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> w, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> h, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> r);</span></div><div><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_DrawRFrame</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8g2, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> x, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> y, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> w, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> h, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> r);</span></div></div>
+
+<p>绘制实行与空心圆角矩形，多了一个参数圆角半径 <code>r</code> 。</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_DrawCircle</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8g2</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">x0</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">y0</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">rad</span><span style="color: #403f53;">, </span><span style="color: #994cc3;font-weight: bold;">uint8_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">option</span><span style="color: #403f53;">);</span></div><div><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_DrawDisc</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8g2</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">x0</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">y0</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">rad</span><span style="color: #403f53;">, </span><span style="color: #994cc3;font-weight: bold;">uint8_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">option</span><span style="color: #403f53;">);</span></div></div>
+
+<p>根据圆心 (<code>x0</code>, <code>y0</code>) 绘制直径为 <code>rad</code> ×2+1 的空心圆和实心圆。</p>
+
+<p><code>option</code> 为圆的部分选项，此参数可控制绘制圆弧或扇形：</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>取值</th>
+            <th>结果</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>U8G_DRAW_ALL</code></td>
+            <td>整个圆弧</td>
+        </tr>
+        <tr>
+            <td><code>U8G2_DRAW_UPPER_RIGHT</code></td>
+            <td>右上部分的圆弧</td>
+        </tr>
+        <tr>
+            <td><code>U8G2_DRAW_UPPER_LEFT</code></td>
+            <td>左上部分的圆弧</td>
+        </tr>
+        <tr>
+            <td><code>U8G2_DRAW_LOWER_LEFT</code></td>
+            <td>左下部分的圆弧</td>
+        </tr>
+        <tr>
+            <td><code>U8G2_DRAW_LOWER_RIGHT</code></td>
+            <td>右下部分的圆弧</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>还可以使用按位或运算符 <code>|</code> 连接几个部分。</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_DrawEllipse</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8g2, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> x0, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> y0, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> rx, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> ry, </span><span style="color: #994cc3;font-weight: bold;">uint8_t</span><span style="color: #403f53;"> option);</span></div><div><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_DrawFilledEllipse</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8g2, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> x0, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> y0, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> rx, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> ry, </span><span style="color: #994cc3;font-weight: bold;">uint8_t</span><span style="color: #403f53;"> option);</span></div></div>
+
+<p>根据圆心 (<code>x0</code>, <code>y0</code>) 和水平半径 <code>rx</code> 、竖直半径 <code>ry</code> 绘制空心和实心椭圆。</p>
+
+void u8g2_DrawTriangle(u8g2_t *u8g2, int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2);
+
+<p>根据三个点绘制实心三角形（空心三角形可以使用直线达到类似效果）。</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_DrawXBM</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8g2, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> x, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> y, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> w, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> h, </span><span style="color: #994cc3;font-weight: bold;">const</span><span style="color: #403f53;"> </span><span style="color: #994cc3;font-weight: bold;">uint8_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">bitmap);</span></div></div>
+
+<p>在图形左上角 (<code>x</code>, <code>y</code>) 根据宽 <code>w</code> 高 <code>h</code> 绘制 XBM 格式的位图。可以使用 <a href="https://tools.clz.me/image-to-bitmap-array">https://tools.clz.me/image-to-bitmap-array</a> 工具将一般图片转换为位图代码。</p>
+
+<p>和 Bitmap 有关的函数还有一个：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_SetBitmapMode</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8g2, </span><span style="color: #994cc3;font-weight: bold;">uint8_t</span><span style="color: #403f53;"> is_transparent);</span></div></div>
+
+<p>该函数用于设置 Bitmap 是否透明。</p>
+
+<h3>字符显示</h3>
+
+<p>为了显示字符串，首先要设置字体。调用以下函数可以提前设置字体：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_SetFont</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8g2, </span><span style="color: #994cc3;font-weight: bold;">const</span><span style="color: #403f53;"> </span><span style="color: #994cc3;font-weight: bold;">uint8_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">font);</span></div><div><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_SetFontMode</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8g2, </span><span style="color: #994cc3;font-weight: bold;">uint8_t</span><span style="color: #403f53;"> is_transparent);</span></div></div>
+
+<p>字体是一种特殊的位图，因此也可以设置是否透明。所有的字体保存在 <code>u8g2_fonts.c</code> 源文件中，注意在移植 U8g2 库时曾经裁剪过该文件。</p>
+
+<div class="vscode-block"><div><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_DrawStr</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8g2</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">x</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">y</span><span style="color: #403f53;">, </span><span style="color: #994cc3;font-weight: bold;">const</span><span style="color: #403f53;"> </span><span style="color: #994cc3;font-weight: bold;">char</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">str</span><span style="color: #403f53;">);</span></div></div>
+
+<p>在左下角 (<code>x</code>, <code>y</code>) 处显示字符串。注意，这个方法只能绘制 ASCII 字符。如有需要显示 Unicode 字符，需要使用以下函数：</p>
+
+<div class="vscode-block"><div><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_DrawGlyph</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8g2</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">x</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">y</span><span style="color: #403f53;">, </span><span style="color: #994cc3;font-weight: bold;">uint16_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">encoding</span><span style="color: #403f53;">);</span></div><div><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_DrawUTF8</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8g2</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">x</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">y</span><span style="color: #403f53;">, </span><span style="color: #994cc3;font-weight: bold;">const</span><span style="color: #403f53;"> </span><span style="color: #994cc3;font-weight: bold;">char</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">str</span><span style="color: #403f53;">);</span></div></div>
+
+<p>绘制 Unicode 字符和字符串。U8g2 支持 16 位的 Unicode 字符集，因此 <code>encoding</code> 的范围被限制在 65535 。该函数绘制 Unicode 字符串时还需要对应的字体也支持 Unicode 字符。</p>
+
+<p>注意这几个函数都有返回值，它们返回绘制成功的字符个数。</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;">#</span><span style="color: #994cc3;font-weight: bold;">define</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_GetAscent</span><span style="color: #111111;">(</span><span style="color: #403f53;">u8g2</span><span style="color: #111111;">)</span></div><div><span style="color: #994cc3;">#</span><span style="color: #994cc3;font-weight: bold;">define</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_GetDescent</span><span style="color: #111111;">(</span><span style="color: #403f53;">u8g2</span><span style="color: #111111;">)</span></div></div>
+
+<p>这两个宏定义用于获取字体基线以上和基线以下的高度。上文提到的显示字符串的函数实际上参数 <code>y</code> 指的是基线高度。此外注意基线以下的高度返回的是负值。</p>
+
+<div class="vscode-block"><div><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_GetStrWidth</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8g2, </span><span style="color: #994cc3;font-weight: bold;">const</span><span style="color: #403f53;"> </span><span style="color: #994cc3;font-weight: bold;">char</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">s);</span></div><div><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_GetUTF8Width</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8g2, </span><span style="color: #994cc3;font-weight: bold;">const</span><span style="color: #403f53;"> </span><span style="color: #994cc3;font-weight: bold;">char</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">str);</span></div></div>
+
+<p>获取当前字体下，字符串和 UTF-8 字符串的宽度，单位为像素。</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_SetFontDirection</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8g2, </span><span style="color: #994cc3;font-weight: bold;">uint8_t</span><span style="color: #403f53;"> dir);</span></div></div>
+
+<p>设置文字朝向，根据参数不同分别设置为正常朝向的顺时针旋转 <code>dir</code> ×90° 。</p>
+
+<h3>其它绘图相关API</h3>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_SetClipWindow</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8g2</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">clip_x0</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">clip_y0</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">clip_x1</span><span style="color: #403f53;">, </span><span style="color: #4876d6;">u8g2_uint_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">clip_y1</span><span style="color: #403f53;">);</span></div></div>
+
+<p>设置采集窗口大小，设置后绘制的图形只在该窗口范围内显示。设置后可以使用 <code>u8g2_SetMaxClipWindow()</code> 函数去掉该限制。</p>
+
+<h2>示例代码</h2>
+
+<p>以下官方示例代码可以在 OLED 上显示该库的 logo ：</p>
+
+<div class="vscode-block"><div><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2</span><span style="color: #403f53;">;</span></div><div><span style="color: #4876d6;">u8g2_FirstPage</span><span style="color: #403f53;">(</span><span style="color: #0c969b;">&amp;</span><span style="color: #403f53;">u8g2);</span></div><div><span style="color: #994cc3;font-weight: bold;">do</span><span style="color: #403f53;"> {</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">u8g2_SetFontMode(</span><span style="color: #0c969b;">&amp;</span><span style="color: #4876d6;">u8g2, </span><span style="color: #aa0982;">1</span><span style="color: #4876d6;">)</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">u8g2_SetFontDirection(</span><span style="color: #0c969b;">&amp;</span><span style="color: #4876d6;">u8g2, </span><span style="color: #aa0982;">0</span><span style="color: #4876d6;">)</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">u8g2_SetFont(</span><span style="color: #0c969b;">&amp;</span><span style="color: #4876d6;">u8g2, u8g2_font_inb24_mf)</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">u8g2_DrawStr(</span><span style="color: #0c969b;">&amp;</span><span style="color: #4876d6;">u8g2, </span><span style="color: #aa0982;">0</span><span style="color: #4876d6;">, </span><span style="color: #aa0982;">20</span><span style="color: #4876d6;">, </span><span style="color: #111111;">"</span><span style="color: #c96765;">U</span><span style="color: #111111;">"</span><span style="color: #4876d6;">)</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">u8g2_SetFontDirection(</span><span style="color: #0c969b;">&amp;</span><span style="color: #4876d6;">u8g2, </span><span style="color: #aa0982;">1</span><span style="color: #4876d6;">)</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">u8g2_SetFont(</span><span style="color: #0c969b;">&amp;</span><span style="color: #4876d6;">u8g2, u8g2_font_inb30_mn)</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">u8g2_DrawStr(</span><span style="color: #0c969b;">&amp;</span><span style="color: #4876d6;">u8g2, </span><span style="color: #aa0982;">21</span><span style="color: #4876d6;">, </span><span style="color: #aa0982;">8</span><span style="color: #4876d6;">, </span><span style="color: #111111;">"</span><span style="color: #c96765;">8</span><span style="color: #111111;">"</span><span style="color: #4876d6;">)</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">u8g2_SetFontDirection(</span><span style="color: #0c969b;">&amp;</span><span style="color: #4876d6;">u8g2, </span><span style="color: #aa0982;">0</span><span style="color: #4876d6;">)</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">u8g2_SetFont(</span><span style="color: #0c969b;">&amp;</span><span style="color: #4876d6;">u8g2, u8g2_font_inb24_mf)</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">u8g2_DrawStr(</span><span style="color: #0c969b;">&amp;</span><span style="color: #4876d6;">u8g2, </span><span style="color: #aa0982;">51</span><span style="color: #4876d6;">, </span><span style="color: #aa0982;">30</span><span style="color: #4876d6;">, </span><span style="color: #111111;">"</span><span style="color: #c96765;">g</span><span style="color: #111111;">"</span><span style="color: #4876d6;">)</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">u8g2_DrawStr(</span><span style="color: #0c969b;">&amp;</span><span style="color: #4876d6;">u8g2, </span><span style="color: #aa0982;">67</span><span style="color: #4876d6;">, </span><span style="color: #aa0982;">30</span><span style="color: #4876d6;">, </span><span style="color: #111111;">"</span><span style="color: #aa0982;">\xb2</span><span style="color: #111111;">"</span><span style="color: #4876d6;">)</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">u8g2_DrawHLine(</span><span style="color: #0c969b;">&amp;</span><span style="color: #4876d6;">u8g2, </span><span style="color: #aa0982;">2</span><span style="color: #4876d6;">, </span><span style="color: #aa0982;">35</span><span style="color: #4876d6;">, </span><span style="color: #aa0982;">47</span><span style="color: #4876d6;">)</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">u8g2_DrawHLine(</span><span style="color: #0c969b;">&amp;</span><span style="color: #4876d6;">u8g2, </span><span style="color: #aa0982;">3</span><span style="color: #4876d6;">, </span><span style="color: #aa0982;">36</span><span style="color: #4876d6;">, </span><span style="color: #aa0982;">47</span><span style="color: #4876d6;">)</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">u8g2_DrawVLine(</span><span style="color: #0c969b;">&amp;</span><span style="color: #4876d6;">u8g2, </span><span style="color: #aa0982;">45</span><span style="color: #4876d6;">, </span><span style="color: #aa0982;">32</span><span style="color: #4876d6;">, </span><span style="color: #aa0982;">12</span><span style="color: #4876d6;">)</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">u8g2_DrawVLine(</span><span style="color: #0c969b;">&amp;</span><span style="color: #4876d6;">u8g2, </span><span style="color: #aa0982;">46</span><span style="color: #4876d6;">, </span><span style="color: #aa0982;">33</span><span style="color: #4876d6;">, </span><span style="color: #aa0982;">12</span><span style="color: #4876d6;">)</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">u8g2_SetFont(</span><span style="color: #0c969b;">&amp;</span><span style="color: #4876d6;">u8g2, u8g2_font_4x6_tr)</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #4876d6;">u8g2_DrawStr(</span><span style="color: #0c969b;">&amp;</span><span style="color: #4876d6;">u8g2, </span><span style="color: #aa0982;">1</span><span style="color: #4876d6;">, </span><span style="color: #aa0982;">54</span><span style="color: #4876d6;">, </span><span style="color: #111111;">"</span><span style="color: #c96765;">github.com/olikraus/u8g2</span><span style="color: #111111;">"</span><span style="color: #4876d6;">)</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">} </span><span style="color: #994cc3;font-weight: bold;">while</span><span style="color: #403f53;"> (</span><span style="color: #4876d6;">u8g2_NextPage</span><span style="color: #403f53;">(</span><span style="color: #0c969b;">&amp;</span><span style="color: #403f53;">u8g2));</span></div></div>
+
+<h2>附录：使用硬件I2C移植U8g2</h2>
+
+<p>硬件 I2C 效率上比软件 I2C 快了非常多，因此特别适合 U8g2 这种大型 UI 框架。下面基于标准库介绍硬件 I2C 的移植方式。</p>
+
+<p>如果使用硬件 I2C ，需要在调用该函数（或类似函数）时，使用自己的硬件读写函数：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_Setup_ssd1306_i2c_128x64_noname_f</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8g2_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8g2</span><span style="color: #403f53;">, </span><span style="color: #994cc3;font-weight: bold;">const</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8g2_cb_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">rotation</span><span style="color: #403f53;">, u8x8_msg_cb </span><span style="color: #403f53;">byte_cb</span><span style="color: #403f53;">, u8x8_msg_cb </span><span style="color: #403f53;">gpio_and_delay_cb</span><span style="color: #403f53;">);</span></div></div>
+
+<p>首先还是需要编写一个 <code>gpio_and_delay()</code> 回调函数。不过由于这里是使用硬件 I2C ，因此不再需要提供 GPIO 和时序操作的支持，只需要提供一个毫秒级的延时即可：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">uint8_t</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8x8_gpio_and_delay_hw</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8x8_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8x8</span><span style="color: #403f53;">, </span><span style="color: #994cc3;font-weight: bold;">uint8_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">msg</span><span style="color: #403f53;">, </span><span style="color: #994cc3;font-weight: bold;">uint8_t</span><span style="color: #403f53;"> </span><span style="color: #403f53;">arg_int</span><span style="color: #403f53;">, </span><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">arg_ptr</span><span style="color: #403f53;">) {</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">switch</span><span style="color: #403f53;"> (</span><span style="color: #403f53;">msg</span><span style="color: #403f53;">) {</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_DELAY_100NANO</span><span style="color: #403f53;">: </span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> delay arg_int * 100 nano seconds</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_DELAY_10MICRO</span><span style="color: #403f53;">: </span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> delay arg_int * 10 micro seconds</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_DELAY_MILLI</span><span style="color: #403f53;">: </span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> delay arg_int * 1 milli second</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">Delay_ms</span><span style="color: #403f53;">(</span><span style="color: #aa0982;">1</span><span style="color: #403f53;">);</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_DELAY_I2C</span><span style="color: #403f53;">: </span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> arg_int is the I2C speed in 100KHz, e.g. 4 = 400 KHz</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> arg_int=1: delay by 5us, arg_int = 4: delay by 1.25us</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_GPIO_I2C_CLOCK</span><span style="color: #403f53;">: </span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> arg_int=0: Output low at I2C clock pin</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> arg_int=1: Input dir with pullup high for I2C clock pin</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_GPIO_I2C_DATA</span><span style="color: #403f53;">: &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> arg_int=0: Output low at I2C data pin</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> arg_int=1: Input dir with pullup high for I2C data pin</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_GPIO_MENU_SELECT</span><span style="color: #403f53;">:</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">u8x8_SetGPIOResult</span><span style="color: #403f53;">(</span><span style="color: #403f53;">u8x8</span><span style="color: #403f53;">, </span><span style="color: #a8a8a8;">/* get menu select pin state */</span><span style="color: #403f53;"> </span><span style="color: #aa0982;">0</span><span style="color: #403f53;">);</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_GPIO_MENU_NEXT</span><span style="color: #403f53;">:</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">u8x8_SetGPIOResult</span><span style="color: #403f53;">(</span><span style="color: #403f53;">u8x8</span><span style="color: #403f53;">, </span><span style="color: #a8a8a8;">/* get menu next pin state */</span><span style="color: #403f53;"> </span><span style="color: #aa0982;">0</span><span style="color: #403f53;">);</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_GPIO_MENU_PREV</span><span style="color: #403f53;">:</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">u8x8_SetGPIOResult</span><span style="color: #403f53;">(</span><span style="color: #403f53;">u8x8</span><span style="color: #403f53;">, </span><span style="color: #a8a8a8;">/* get menu prev pin state */</span><span style="color: #403f53;"> </span><span style="color: #aa0982;">0</span><span style="color: #403f53;">);</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_GPIO_MENU_HOME</span><span style="color: #403f53;">:</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">u8x8_SetGPIOResult</span><span style="color: #403f53;">(</span><span style="color: #403f53;">u8x8</span><span style="color: #403f53;">, </span><span style="color: #a8a8a8;">/* get menu home pin state */</span><span style="color: #403f53;"> </span><span style="color: #aa0982;">0</span><span style="color: #403f53;">);</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">default</span><span style="color: #403f53;">:</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">u8x8_SetGPIOResult</span><span style="color: #403f53;">(</span><span style="color: #403f53;">u8x8</span><span style="color: #403f53;">, </span><span style="color: #aa0982;">1</span><span style="color: #403f53;">); </span><span style="color: #a8a8a8;">//</span><span style="color: #939dbb;"> default return value</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; }</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">return</span><span style="color: #403f53;"> </span><span style="color: #aa0982;">1</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">}</span></div></div>
+
+<p>如果是使用硬件 I2C ，那么需要自行编写硬件驱动函数，向 OLED 写入字节。这个函数的编写可以参考官方提供的软件驱动函数 <code>u8x8_byte_sw_i2c()</code> ，一个编写示例为：</p>
+
+<div class="vscode-block"><div><span style="color: #4876d6;">uint8_t</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">u8x8_byte_hw_i2c</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">u8x8_t</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">u8x8, </span><span style="color: #994cc3;font-weight: bold;">uint8_t</span><span style="color: #403f53;"> msg, </span><span style="color: #994cc3;font-weight: bold;">uint8_t</span><span style="color: #403f53;"> arg_int, </span><span style="color: #994cc3;font-weight: bold;">void</span><span style="color: #403f53;"> </span><span style="color: #0c969b;">*</span><span style="color: #403f53;">arg_ptr) {</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">uint8_t</span><span style="color: #0c969b;">*</span><span style="color: #403f53;"> data </span><span style="color: #994cc3;">=</span><span style="color: #403f53;"> (</span><span style="color: #994cc3;font-weight: bold;">uint8_t</span><span style="color: #0c969b;">*</span><span style="color: #403f53;">) arg_ptr;</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">switch</span><span style="color: #403f53;">(msg) {</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_BYTE_SEND</span><span style="color: #403f53;">:</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">while</span><span style="color: #403f53;">( arg_int</span><span style="color: #0c969b;">--</span><span style="color: #403f53;"> </span><span style="color: #994cc3;">&gt;</span><span style="color: #403f53;"> </span><span style="color: #aa0982;">0</span><span style="color: #403f53;"> ) {</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">I2C_SendData(I2C1, </span><span style="color: #0c969b;">*</span><span style="color: #4876d6;">data</span><span style="color: #994cc3;">++</span><span style="color: #4876d6;">)</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">while</span><span style="color: #403f53;"> (</span><span style="color: #994cc3;">!</span><span style="color: #4876d6;">I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTED)</span><span style="color: #403f53;">) </span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">continue</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; }</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_BYTE_INIT</span><span style="color: #403f53;">:</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #a8a8a8;">/* add your custom code to init i2c subsystem */</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">RCC_APB1PeriphClockCmd</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">RCC_APB1Periph_I2C1</span><span style="color: #403f53;">, ENABLE);</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; I2C_InitTypeDef I2C_InitStructure </span><span style="color: #994cc3;">=</span><span style="color: #403f53;"> {</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; .I2C_Mode </span><span style="color: #994cc3;">=</span><span style="color: #403f53;"> I2C_Mode_I2C,</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; .I2C_DutyCycle </span><span style="color: #994cc3;">=</span><span style="color: #403f53;"> I2C_DutyCycle_2,</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; .I2C_OwnAddress1 </span><span style="color: #994cc3;">=</span><span style="color: #403f53;"> </span><span style="color: #aa0982;">0x10</span><span style="color: #403f53;">,</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; .I2C_Ack </span><span style="color: #994cc3;">=</span><span style="color: #403f53;"> I2C_Ack_Enable,</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; .I2C_AcknowledgedAddress </span><span style="color: #994cc3;">=</span><span style="color: #403f53;"> I2C_AcknowledgedAddress_7bit,</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; .I2C_ClockSpeed </span><span style="color: #994cc3;">=</span><span style="color: #403f53;"> </span><span style="color: #aa0982;">400000</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; };</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">I2C_Init</span><span style="color: #403f53;">(I2C1, </span><span style="color: #0c969b;">&amp;</span><span style="color: #403f53;">I2C_InitStructure);</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">I2C_Cmd</span><span style="color: #403f53;">(</span><span style="color: #403f53;">I2C1</span><span style="color: #403f53;">, </span><span style="color: #403f53;">ENABLE</span><span style="color: #403f53;">); &#160;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_BYTE_SET_DC</span><span style="color: #403f53;">:</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #a8a8a8;">/* ignored for i2c */</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_BYTE_START_TRANSFER</span><span style="color: #403f53;">:</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">while</span><span style="color: #403f53;">(</span><span style="color: #4876d6;">I2C_GetFlagStatus</span><span style="color: #403f53;">(I2C1, I2C_FLAG_BUSY));</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">I2C_GenerateSTART</span><span style="color: #403f53;">(</span><span style="color: #403f53;">I2C1</span><span style="color: #403f53;">, </span><span style="color: #403f53;">ENABLE</span><span style="color: #403f53;">);</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">while</span><span style="color: #403f53;">(</span><span style="color: #994cc3;">!</span><span style="color: #4876d6;">I2C_CheckEvent</span><span style="color: #403f53;">(I2C1, I2C_EVENT_MASTER_MODE_SELECT))</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">continue</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">I2C_Send7bitAddress</span><span style="color: #403f53;">(</span><span style="color: #403f53;">I2C1</span><span style="color: #403f53;">, </span><span style="color: #aa0982;">0x78</span><span style="color: #403f53;">, </span><span style="color: #403f53;">I2C_Direction_Transmitter</span><span style="color: #403f53;">);</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">while</span><span style="color: #403f53;">(</span><span style="color: #994cc3;">!</span><span style="color: #4876d6;">I2C_CheckEvent</span><span style="color: #403f53;">(I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED))</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">continue</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">case</span><span style="color: #403f53;"> </span><span style="color: #4876d6;">U8X8_MSG_BYTE_END_TRANSFER</span><span style="color: #403f53;">:</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">I2C_GenerateSTOP</span><span style="color: #403f53;">(I2C1, ENABLE);</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">break</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; </span><span style="color: #4876d6;">default</span><span style="color: #403f53;">:</span></div><div><span style="color: #403f53;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">return</span><span style="color: #403f53;"> </span><span style="color: #aa0982;">0</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">&#160; &#160; }</span></div><div><span style="color: #403f53;">&#160; &#160; </span><span style="color: #994cc3;font-weight: bold;">return</span><span style="color: #403f53;"> </span><span style="color: #aa0982;">1</span><span style="color: #403f53;">;</span></div><div><span style="color: #403f53;">}</span></div></div>
+
+<p>从各个 <code>case</code> 标签可以很明白地看出一个 I2C 的读写过程：<code>U8X8_MSG_BYTE_INIT</code> 标签下需要初始化 I2C 外设，<code>U8X8_MSG_BYTE_START_TRANSFER</code> 标签产生起始信号并发出目标地址，<code>U8X8_MSG_BYTE_SEND</code> 标签开始发送字节，并且发送的字节存储在 <code>*arg_ptr</code> 参数中，<code>arg_int</code> 是字节的总长度（ U8g2 库似乎一次不会传输多余 32 字节的信息）。最后，<code>U8X8_MSG_BYTE_END_TRANSFER</code> 标签处产生停止信号。</p>
+
+<blockquote>
+    <p>注意在使用硬件 I2C 时，GPIO 需要设置为复用开漏输出模式 <code>GPIO_Mode_AF_OD</code> 。</p>
+</blockquote>
+
+<p>最后一步，用以上编写的硬件函数初始化 U8g2 驱动：</p>
+
+<div class="vscode-block"><div><span style="color: #4876d6;">u8g2_Setup_ssd1306_i2c_128x64_noname_f</span><span style="color: #403f53;">(</span><span style="color: #403f53;">u8g2</span><span style="color: #403f53;">, </span><span style="color: #403f53;">U8G2_R0</span><span style="color: #403f53;">, </span><span style="color: #403f53;">u8x8_byte_hw_i2c</span><span style="color: #403f53;">, </span><span style="color: #403f53;">u8x8_gpio_and_delay_hw</span><span style="color: #403f53;">);</span></div></div>
+
+<p>硬件移植过程完毕。</p>
+
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/web/django/codemirror-for-django/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/02/city-light-城市夜光-520x293.png" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/02/city-light-城市夜光-520x293.png 520w, /wp-content/uploads/2022/02/city-light-城市夜光-300x169.png 300w, /wp-content/uploads/2022/02/city-light-城市夜光-1024x576.png 1024w, /wp-content/uploads/2022/02/city-light-城市夜光-768x432.png 768w, /wp-content/uploads/2022/02/city-light-城市夜光-1536x864.png 1536w, /wp-content/uploads/2022/02/city-light-城市夜光-950x534.png 950w, /wp-content/uploads/2022/02/city-light-城市夜光.png 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/web/django/codemirror-for-django/" rel="bookmark">CodeMirror实现Django后台代码编辑器</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-fp/07-generators/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程07-生成器-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/05/Python函数式编程07-生成器-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程07-生成器-300x169.jpg 300w, /wp-content/uploads/2022/05/Python函数式编程07-生成器-1024x576.jpg 1024w, /wp-content/uploads/2022/05/Python函数式编程07-生成器-768x432.jpg 768w, /wp-content/uploads/2022/05/Python函数式编程07-生成器-1536x864.jpg 1536w, /wp-content/uploads/2022/05/Python函数式编程07-生成器-950x534.jpg 950w, /wp-content/uploads/2022/05/Python函数式编程07-生成器.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-fp/07-generators/" rel="bookmark">Python函数式编程07 生成器</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/data-science/machine-learning/03-naive-bayes/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/12/机器学习-朴素贝叶斯-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/12/机器学习-朴素贝叶斯-520x293.jpg 520w, /wp-content/uploads/2022/12/机器学习-朴素贝叶斯-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/data-science/machine-learning/03-naive-bayes/" rel="bookmark">机器学习-朴素贝叶斯</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/embedded/mcu-application/lvgl-01-migration/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>LVGL库入门教程01-移植到STM32</span></a></li>
+		<li class="previous"><a href="/programming/python-fp/10-library-functools/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>Python函数式编程10 functools模块：高阶函数工具</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
+											<span class="post-date">2023年2月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
+											<span class="post-date">2023年2月8日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
+											<span class="post-date">2023年1月20日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

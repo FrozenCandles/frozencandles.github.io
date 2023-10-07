@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <!-- [private] -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="icon" type="image/x-icon" href="static/favicon.ico">
+
+    <link rel="stylesheet" href="https://frozencandles.fun/wp-content/themes/instorm/style.css">
+    <link rel="stylesheet" href="https://frozencandles.fun/wp-content/themes/instorm-child-theme/style.css">
+    <!-- [/private] -->
+
+    <link rel="stylesheet" href="static/css/text.css">
+    <link rel="stylesheet" href="static/css/note.css">
+
+
+    <link rel="stylesheet" href="static/css/assist.css">
+    <link rel="stylesheet" href="static/css/math.css">
+
+    <script src="static/js/note.js"></script>
+    <script src="static/js/assist.js"></script>
+    <script src="static/js/math.js"></script>
+
+    {% autoescape off %}{{ header }}{% endautoescape %}
+</head>
+<body>
+
+<div id="assist">
+    <div id="toc"></div>
+</div>
+
+<div class="entry">{% autoescape off %}{{ content }}{% endautoescape %}</div>
+
+<script>
+    //addImageScalar();
+    addTableOfContents("toc");
+    //checkArticle();
+
+    addAssistButton('Check Article', onCheckArticle);
+    addAssistButton('Close Image Scalar', function() {
+        for (let elem of document.getElementsByClassName('imagescalar-content')) {
+            elem.style.display = 'none';
+
+        }
+    });
+
+    document.title = document.getElementsByTagName('H1')[0].innerHTML
+</script>
+</body>
+</html>
