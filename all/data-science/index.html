@@ -21,7 +21,7 @@
 	<meta property="og:description" content="Python 数据科学 搭建工作环境 Jupyter&#046;&#046;&#046;" />
 	<meta property="og:url" content="/all/data-science/" />
 	<meta property="og:site_name" content="冰封残烛的个人小站" />
-	<meta property="article:modified_time" content="2023-03-23T08:18:51+00:00" />
+	<meta property="article:modified_time" content="2023-10-12T13:55:20+00:00" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="预计阅读时间" />
 	<meta name="twitter:data1" content="4分" />
@@ -55,7 +55,7 @@
 	                "@id": "/#website"
 	            },
 	            "datePublished": "2022-11-27T14:22:26+00:00",
-	            "dateModified": "2023-03-23T08:18:51+00:00",
+	            "dateModified": "2023-10-12T13:55:20+00:00",
 	            "breadcrumb": {
 	                "@id": "/all/data-science/#breadcrumb"
 	            },
@@ -130,8 +130,6 @@ body { font-family: "Roboto", Arial, sans-serif; }
 <link rel='shortlink' href='/?p=874' />
 <link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fall%2Fdata-science%2F" />
 <link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fall%2Fdata-science%2F&#038;format=xml" />
-<link rel="stylesheet" href="/wp-content/static/css/text.css">
-<link rel="stylesheet" href="/wp-content/static/css/category.css">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
 <script>
@@ -140,7 +138,17 @@ body { font-family: "Roboto", Arial, sans-serif; }
   gtag('js', new Date());
 
   gtag('config', 'G-SZV4B5M0NK');
+</script><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?432b66336cb23bd6712cecabe6d808eb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
 </script>
+<link rel="stylesheet" href="/wp-content/static/css/category.css">
+
 
 <link rel="stylesheet" href="/wp-content/static/css/text.css">
 <link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
@@ -191,7 +199,7 @@ body { font-family: "Roboto", Arial, sans-serif; }
 	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-874 current_page_item menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/" aria-current="page"><span class="screen-reader-text">Current Page: </span>数据科学与机器学习</a></span></li>
 	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
 	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
-	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/embedded/">嵌入式应用</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/all/embedded/">嵌入式应用</a></span></li>
 </ul>
 </li>
 <li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
@@ -238,11 +246,11 @@ body { font-family: "Roboto", Arial, sans-serif; }
 <div class="post-item-wrap">
     <article class="post-item-card">
         <div class="post-item-card-image">
-            <a href="/wordpress/archives/823"><img
-                    src="/wordpress/wp-content/uploads/2022/10/Jupyter-Notebook-使用指南-520x293.jpg" alt=""></a>
+            <a href="/data-science/via-python/jupyter-notebook-tutorial"><img
+                    src="/wp-content/uploads/2022/10/Jupyter-Notebook-使用指南-520x293.jpg" alt=""></a>
         </div>
         <div class="post-item-card-detail">
-            <h4><a href="/wordpress/archives/823">Jupyter Notebook 使用指南</a></h4>
+            <h4><a href="/data-science/via-python/jupyter-notebook-tutorial">Jupyter Notebook 使用指南</a></h4>
             <p>一个轻量级、适合数据分析的编辑器</p>
         </div>
     </article>
@@ -253,191 +261,200 @@ body { font-family: "Roboto", Arial, sans-serif; }
 
 <p>介绍 Python 数据处理工具。主要由 NumPy 、Pandas 、Matplotlib 以及它们的扩展组成。</p>
 
-<ul>
-    <li>NumPy 系列：</li>
-</ul>
+<h4 id="section-numpy">NumPy 系列</h4>
+
 
 <div class="post-item-wrap">
     <article class="post-item-card">
         <div class="post-item-card-image">
-            <a href="/wordpress/archives/772"><img
-                    src="/wordpress/wp-content/uploads/2022/09/Python数据分析-numpy01数组操作-520x293.jpg" alt=""></a>
+            <a href="/data-science/via-python/numpy01-create-arrays"><img
+                    src="/wp-content/uploads/2022/09/Python数据分析-numpy01数组操作-520x293.jpg" alt=""></a>
         </div>
         <div class="post-item-card-detail">
-            <h4><a href="/wordpress/archives/772">01-整体介绍与创建数组</a></h4>
+            <h4><a href="/data-science/via-python/numpy01-create-arrays">01-整体介绍与创建数组</a></h4>
             <p>介绍 NumPy 的核心对象<strong>数组</strong>以及如何创建它</p>
         </div>
     </article>
 
     <article class="post-item-card">
         <div class="post-item-card-image">
-            <a href="/wordpress/archives/777"><img
-                    src="/wordpress/wp-content/uploads/2022/10/Python数据分析-numpy02数组变形与组合-520x293.jpg" alt=""></a>
+            <a href="/data-science/via-python/numpy02-reshape-arrays"><img
+                    src="/wp-content/uploads/2022/10/Python数据分析-numpy02数组变形与组合-520x293.jpg" alt=""></a>
         </div>
         <div class="post-item-card-detail">
-            <h4><a href="/wordpress/archives/777">02-数组变形与组合</a></h4>
+            <h4><a href="/data-science/via-python/numpy02-reshape-arrays">02-数组变形与组合</a></h4>
             <p>介绍高维数组变形与组合的各种方法</p>
         </div>
     </article>
 
     <article class="post-item-card">
         <div class="post-item-card-image">
-            <a href="/wordpress/archives/342"><img
-                    src="/wordpress/wp-content/uploads/2022/10/Python数据分析-numpy03数组索引与切片-520x293.jpg" alt=""></a>
+            <a href="/data-science/via-python/numpy03-slices"><img
+                    src="/wp-content/uploads/2022/10/Python数据分析-numpy03数组索引与切片-520x293.jpg" alt=""></a>
         </div>
         <div class="post-item-card-detail">
-            <h4><a href="/wordpress/archives/342">03-数组索引与切片</a></h4>
+            <h4><a href="/data-science/via-python/numpy03-slices">03-数组索引与切片</a></h4>
             <p>介绍高维数组提供的各种索引与切片的方法</p>
         </div>
     </article>
 
     <article class="post-item-card">
         <div class="post-item-card-image">
-            <a href="/wordpress/archives/800"><img
-                    src="/wordpress/wp-content/uploads/2022/10/Python数据分析-numpy04通用函数与广播规则-520x293.jpg" alt=""></a>
+            <a href="/data-science/via-python/numpy04-universal-functions"><img
+                    src="/wp-content/uploads/2022/10/Python数据分析-numpy04通用函数与广播规则-520x293.jpg" alt=""></a>
         </div>
         <div class="post-item-card-detail">
-            <h4><a href="/wordpress/archives/800">04-通用函数与广播规则</a></h4>
+            <h4><a href="/data-science/via-python/numpy04-universal-functions">04-通用函数与广播规则</a></h4>
             <p>通用函数与广播规则是 NumPy 数组运算的核心</p>
         </div>
     </article>
 
     <article class="post-item-card">
         <div class="post-item-card-image">
-            <a href="/wordpress/archives/807"><img
-                    src="/wordpress/wp-content/uploads/2022/10/Python数据分析-numpy05数组统计与排序-520x293.jpg" alt=""></a>
+            <a href="/data-science/via-python/numpy05-statistics"><img
+                    src="/wp-content/uploads/2022/10/Python数据分析-numpy05数组统计与排序-520x293.jpg" alt=""></a>
         </div>
         <div class="post-item-card-detail">
-            <h4><a href="/wordpress/archives/807">05-数组统计与排序</a></h4>
+            <h4><a href="/data-science/via-python/numpy05-statistics">05-数组统计与排序</a></h4>
             <p>介绍关于统计与排序相关的数组操作函数</p>
         </div>
     </article>
 
     <article class="post-item-card">
         <div class="post-item-card-image">
-            <a href="/wordpress/archives/816"><img
-                    src="/wordpress/wp-content/uploads/2022/10/Python数据分析-numpy06高级数据类型-520x293.jpg" alt=""></a>
+            <a href="/data-science/via-python/numpy06-advanced-data-types"><img
+                    src="/wp-content/uploads/2022/10/Python数据分析-numpy06高级数据类型-520x293.jpg" alt=""></a>
         </div>
         <div class="post-item-card-detail">
-            <h4><a href="/wordpress/archives/816">06-高级数据类型</a></h4>
+            <h4><a href="/data-science/via-python/numpy06-advanced-data-types">06-高级数据类型</a></h4>
             <p>介绍 NumPy 中的高级结构化数组等剩余内容</p>
         </div>
     </article>
 
 </div>
 
-<ul>
-    <li>Pandas 系列：</li>
-</ul>
+<h4 id="section-pandas">Pandas 系列</h4>
+
 
 <div class="post-item-wrap">
     <article class="post-item-card">
         <div class="post-item-card-image">
-            <a href="/wordpress/archives/1041"><img
-                    src="/wordpress/wp-content/uploads/2023/02/Python数据分析-pandas01基本数据类型-520x293.jpg" alt=""></a>
+            <a href="/data-science/via-python/pandas01-data-types"><img
+                    src="/wp-content/uploads/2023/02/Python数据分析-pandas01基本数据类型-520x293.jpg" alt=""></a>
         </div>
         <div class="post-item-card-detail">
-            <h4><a href="/wordpress/archives/1041">01-基本数据类型</a></h4>
+            <h4><a href="/data-science/via-python/pandas01-data-types">1-基本数据类型</a></h4>
             <p>介绍 Pandas 的用途以及其中最常用的数据类型</p>
         </div>
     </article>
 
     <article class="post-item-card">
         <div class="post-item-card-image">
-            <a href="/wordpress/archives/1048"><img
-                    src="/wordpress/wp-content/uploads/2023/03/Python数据分析-pandas03索引-520x293.jpg" alt=""></a>
+            <a href="/data-science/via-python/pandas03-the-index"><img
+                    src="/wp-content/uploads/2023/03/Python数据分析-pandas03索引-520x293.jpg" alt=""></a>
         </div>
         <div class="post-item-card-detail">
-            <h4><a href="/wordpress/archives/1048">03-深入认识索引</a></h4>
+            <h4><a href="/data-science/via-python/pandas03-the-index">3-深入认识索引</a></h4>
             <p>深入认识 Pandas 中的索引表示与层级索引</p>
         </div>
     </article>
 
     <article class="post-item-card">
         <div class="post-item-card-image">
-            <a href="/wordpress/archives/1054"><img
-                    src="/wordpress/wp-content/uploads/2023/03/Python数据分析-pandas04索引与缺失值-520x293.jpg" alt=""></a>
+            <a href="/data-science/via-python/pandas04-missing-values"><img
+                    src="/wp-content/uploads/2023/03/Python数据分析-pandas04索引与缺失值-520x293.jpg" alt=""></a>
         </div>
         <div class="post-item-card-detail">
-            <h4><a href="/wordpress/archives/1054">04-索引与缺失值</a></h4>
+            <h4><a href="/data-science/via-python/pandas04-missing-values">4-索引与缺失值</a></h4>
             <p>介绍索引对齐现象，以及 Pandas 中的缺失值及其处理方式</p>
         </div>
     </article>
 
 </div>
 
-<h3>机器学习</h3>
+<h3 id="section-machine-learning">机器学习</h3>
 
 <div class="post-item-wrap">
     <article class="post-item-card">
         <div class="post-item-card-image">
-            <a href="/wordpress/archives/880"><img
-                    src="/wordpress/wp-content/uploads/2022/12/机器学习-线性回归-520x293.png" alt=""></a>
+            <a href="/data-science/machine-learning/01-linear-regression"><img
+                    src="/wp-content/static/card/card-cover/machine-learning-01-Linear-Regression.png" alt=""></a>
         </div>
         <div class="post-item-card-detail">
-            <h4><a href="/wordpress/archives/880">线性回归</a></h4>
+            <h4><a href="/data-science/machine-learning/01-linear-regression">线性回归</a></h4>
             <p>线性回归是统计学的基本内容，也是最容易理解的机器学习模型</p>
         </div>
     </article>
 
     <article class="post-item-card">
         <div class="post-item-card-image">
-            <a href="/wordpress/archives/966"><img
-                    src="/wordpress/wp-content/uploads/2022/12/机器学习-逻辑回归-520x293.png" alt=""></a>
+            <a href="/data-science/machine-learning/02-logistic-regression"><img
+                    src="/wp-content/static/card/card-cover/machine-learning-02-Logistic-Regession.png" alt=""></a>
         </div>
         <div class="post-item-card-detail">
-            <h4><a href="/wordpress/archives/966">逻辑回归</a></h4>
+            <h4><a href="/data-science/machine-learning/02-logistic-regression">逻辑回归</a></h4>
             <p>逻辑回归是处理简单分类问题的经典算法</p>
         </div>
     </article>
 
     <article class="post-item-card">
         <div class="post-item-card-image">
-            <a href="/wordpress/archives/953"><img
-                    src="/wordpress/wp-content/uploads/2022/12/机器学习-朴素贝叶斯-520x293.jpg" alt=""></a>
+            <a href="/data-science/machine-learning/03-naive-bayes"><img
+                    src="/wp-content/static/card/card-cover/machine-learning-03-Naive-Bayes.png" alt=""></a>
         </div>
         <div class="post-item-card-detail">
-            <h4><a href="/wordpress/archives/953">朴素贝叶斯分类</a></h4>
+            <h4><a href="/data-science/machine-learning/03-naive-bayes">朴素贝叶斯分类</a></h4>
             <p>朴素贝叶斯是一种基于概率统计的分类器</p>
         </div>
     </article>
 
     <article class="post-item-card">
         <div class="post-item-card-image">
-            <a href="/wordpress/archives/993"><img
-                    src="/wordpress/wp-content/uploads/2023/01/机器学习-支持向量机-520x293.jpg" alt=""></a>
+            <a href="/data-science/machine-learning/04-support-vector-machine"><img
+                    src="/wp-content/static/card/card-cover/machine-learning-04-Support-Vector-Machine.png" alt=""></a>
         </div>
         <div class="post-item-card-detail">
-            <h4><a href="/wordpress/archives/993">支持向量机</a></h4>
+            <h4><a href="/data-science/machine-learning/04-support-vector-machine">支持向量机</a></h4>
             <p>支持向量机是一种基于间隔的强大分类算法</p>
         </div>
     </article>
 
     <article class="post-item-card">
         <div class="post-item-card-image">
-            <a href="/wordpress/archives/1020"><img
-                    src="/wordpress/wp-content/uploads/2023/02/机器学习-决策树-520x293.jpg" alt=""></a>
+            <a href="/data-science/machine-learning/05-decision-tree"><img
+                    src="/wp-content/static/card/card-cover/machine-learning-05-Decision-Tree.png" alt=""></a>
         </div>
         <div class="post-item-card-detail">
-            <h4><a href="/wordpress/archives/1020">决策树</a></h4>
+            <h4><a href="/data-science/machine-learning/05-decision-tree">决策树</a></h4>
             <p>决策树是一种简单但有效的分类算法</p>
         </div>
     </article>
 
     <article class="post-item-card">
         <div class="post-item-card-image">
-            <a href="/wordpress/archives/851"><img
-                    src="/wordpress/wp-content/uploads/2022/11/机器学习-聚类算法-520x293.jpg" alt=""></a>
+            <a href="/data-science/machine-learning/06-module-validation"><img
+                    src="/wp-content/static/card/card-cover/machine-learning-06-Confusion-Matrix.png" alt=""></a>
         </div>
         <div class="post-item-card-detail">
-            <h4><a href="/wordpress/archives/851">聚类算法</a></h4>
+            <h4><a href="/data-science/machine-learning/06-module-validation">参数选择与模型验证</a></h4>
+            <p>介绍常用的模型验证指标与数据选择方法</p>
+        </div>
+    </article>
+
+    <article class="post-item-card">
+        <div class="post-item-card-image">
+            <a href="/data-science/machine-learning/10-clustering"><img
+                    src="/wp-content/static/card/card-cover/machine-learning-10-K-Means.png" alt=""></a>
+        </div>
+        <div class="post-item-card-detail">
+            <h4><a href="/data-science/machine-learning/10-clustering">聚类算法</a></h4>
             <p>聚类可以主动将数据分类。KMeans 和 DBSCAN 是常见的聚类算法</p>
         </div>
     </article>
 
 </div>
 
-<p>系列包含的代码已作为 notebook 的形式发布到 <a href="https://github.com/FrozenCandles/machine-learning-note">Github</a> 中</p>
+<p>系列包含的代码已作为 notebook 的形式发布到 <a href="https://github.com/FrozenCandles/machine-learning-note">Github</a> 中。</p>
 
 					<div class="clear"></div>
 				</div><!--/.entry-->
@@ -463,6 +480,10 @@ body { font-family: "Roboto", Arial, sans-serif; }
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
 											<li>
+					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
+											<span class="post-date">2023年6月19日</span>
+									</li>
+											<li>
 					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
 											<span class="post-date">2023年4月15日</span>
 									</li>
@@ -486,10 +507,6 @@ body { font-family: "Roboto", Arial, sans-serif; }
 					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
 											<span class="post-date">2023年2月8日</span>
 									</li>
-											<li>
-					<a href="/data-science/machine-learning/04-support-vector-machine/">机器学习-支持向量机</a>
-											<span class="post-date">2023年1月20日</span>
-									</li>
 					</ul>
 
 		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
@@ -499,6 +516,12 @@ body { font-family: "Roboto", Arial, sans-serif; }
 	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
 </li>
 	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (1)
+<ul class='children'>
+	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
 </li>
 </ul>
 </li>
@@ -546,7 +569,8 @@ body { font-family: "Roboto", Arial, sans-serif; }
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+				<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
 	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
 	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
 	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
