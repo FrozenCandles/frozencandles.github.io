@@ -12,22 +12,23 @@
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 
-	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
 	<title>Python面向对象编程04-类与实例的方法 - 冰封残烛的个人小站</title>
-	<meta name="description" content="实例方法需要有一个实例才能调用，类方法可以在不需要实例的情况下使用类本身来调用，静态方法可以被任意的类或实例调用。Python 对变量的操作是通过调用一些特殊方法（或称魔法方法）实现的，它们的名称以双下划线开始结束，与 Python 运作息息相关。" />
+	<meta name="description" content="本节介绍 Python 的各种方法(method)，实例方法需要有一个实例才能调用，类方法可以在不需要实例的情况下使用类本身来调用，静态方法可以被任意的类或实例调用。Python 中还有一类特殊方法（或称魔法方法），它们的名称以双下划线开始结束，与 Python 运作息息相关。" />
 	<link rel="canonical" href="/programming/python-oop/04-methods/" />
 	<meta property="og:locale" content="zh_CN" />
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content="Python面向对象编程04-类与实例的方法 - 冰封残烛的个人小站" />
-	<meta property="og:description" content="实例方法需要有一个实例才能调用，类方法可以在不需要实例的情况下使用类本身来调用，静态方法可以被任意的类或实例调用。Python 对变量的操作是通过调用一些特殊方法（或称魔法方法）实现的，它们的名称以双下划线开始结束，与 Python 运作息息相关。" />
+	<meta property="og:description" content="本节介绍 Python 的各种方法(method)，实例方法需要有一个实例才能调用，类方法可以在不需要实例的情况下使用类本身来调用，静态方法可以被任意的类或实例调用。Python 中还有一类特殊方法（或称魔法方法），它们的名称以双下划线开始结束，与 Python 运作息息相关。" />
 	<meta property="og:url" content="/programming/python-oop/04-methods/" />
 	<meta property="og:site_name" content="冰封残烛的个人小站" />
 	<meta property="article:published_time" content="2023-03-27T01:08:07+00:00" />
-	<meta property="article:modified_time" content="2023-10-07T02:16:44+00:00" />
+	<meta property="article:modified_time" content="2023-10-14T03:38:00+00:00" />
 	<meta property="og:image" content="/wp-content/uploads/2023/03/Python面向对象编程04-类与实例的方法.jpg" />
 	<meta property="og:image:width" content="800" />
 	<meta property="og:image:height" content="500" />
 	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="作者" />
 	<meta name="twitter:data1" content="Hello" />
@@ -37,35 +38,8 @@
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
-	            "@type": "WebSite",
-	            "@id": "/#website",
-	            "url": "/",
-	            "name": "冰封残烛的个人小站",
-	            "description": "FrozenCandle&#039;s Personal Site",
-	            "potentialAction": [
-	                {
-	                    "@type": "SearchAction",
-	                    "target": {
-	                        "@type": "EntryPoint",
-	                        "urlTemplate": "/?s={search_term_string}"
-	                    },
-	                    "query-input": "required name=search_term_string"
-	                }
-	            ],
-	            "inLanguage": "zh-CN"
-	        },
-	        {
-	            "@type": "ImageObject",
-	            "inLanguage": "zh-CN",
-	            "@id": "/programming/python-oop/04-methods/#primaryimage",
-	            "url": "/wp-content/uploads/2023/03/Python面向对象编程04-类与实例的方法.jpg",
-	            "contentUrl": "/wp-content/uploads/2023/03/Python面向对象编程04-类与实例的方法.jpg",
-	            "width": 800,
-	            "height": 500
-	        },
-	        {
 	            "@type": "WebPage",
-	            "@id": "/programming/python-oop/04-methods/#webpage",
+	            "@id": "/programming/python-oop/04-methods/",
 	            "url": "/programming/python-oop/04-methods/",
 	            "name": "Python面向对象编程04-类与实例的方法 - 冰封残烛的个人小站",
 	            "isPartOf": {
@@ -74,12 +48,16 @@
 	            "primaryImageOfPage": {
 	                "@id": "/programming/python-oop/04-methods/#primaryimage"
 	            },
+	            "image": {
+	                "@id": "/programming/python-oop/04-methods/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2023/03/Python面向对象编程04-类与实例的方法.jpg",
 	            "datePublished": "2023-03-27T01:08:07+00:00",
-	            "dateModified": "2023-10-07T02:16:44+00:00",
+	            "dateModified": "2023-10-14T03:38:00+00:00",
 	            "author": {
 	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
 	            },
-	            "description": "实例方法需要有一个实例才能调用，类方法可以在不需要实例的情况下使用类本身来调用，静态方法可以被任意的类或实例调用。Python 对变量的操作是通过调用一些特殊方法（或称魔法方法）实现的，它们的名称以双下划线开始结束，与 Python 运作息息相关。",
+	            "description": "本节介绍 Python 的各种方法(method)，实例方法需要有一个实例才能调用，类方法可以在不需要实例的情况下使用类本身来调用，静态方法可以被任意的类或实例调用。Python 中还有一类特殊方法（或称魔法方法），它们的名称以双下划线开始结束，与 Python 运作息息相关。",
 	            "breadcrumb": {
 	                "@id": "/programming/python-oop/04-methods/#breadcrumb"
 	            },
@@ -92,6 +70,15 @@
 	                    ]
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/programming/python-oop/04-methods/#primaryimage",
+	            "url": "/wp-content/uploads/2023/03/Python面向对象编程04-类与实例的方法.jpg",
+	            "contentUrl": "/wp-content/uploads/2023/03/Python面向对象编程04-类与实例的方法.jpg",
+	            "width": 800,
+	            "height": 500
 	        },
 	        {
 	            "@type": "BreadcrumbList",
@@ -109,6 +96,24 @@
 	                    "name": "Python面向对象编程04-类与实例的方法"
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
 	        },
 	        {
 	            "@type": "Person",
@@ -158,7 +163,6 @@ body { font-family: "Roboto", Arial, sans-serif; }
 <link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
-<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
 <script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
 <link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/1059" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
 <meta name="generator" content="WordPress 6.3.1" />
@@ -292,9 +296,9 @@ var _hmt = _hmt || [];
 
 <h3>实例方法</h3>
 
-<p>在<a href="/archives/442" class="link-internal">第一节</a>中，便已经介绍过实例方法。实例方法需要有一个实例才能调用，而这个实例是通过第一个通常名为 <code>self</code> 的参数表示的，因此借助该参数可以在定义方法时就去操作一个抽象的实例对象。例如，假设有一个这样的类和实例的定义：</p>
+<p>在<a class="link-internal" href="/programming/python-oop/01-class-and-instance">第一节</a>中，便已经介绍过实例方法。实例方法需要有一个实例才能调用，而这个实例是通过第一个通常名为 <code>self</code> 的参数表示的，因此借助该参数可以在定义方法时就去操作一个抽象的实例对象。例如，假设有一个这样的类和实例的定义：</p>
 
-<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">C</span>:</div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">method</span>(self, arg):</div><div>&#160; &#160; &#160; &#160; <span style="color: #268bd2;">print</span>(<span style="color: #268bd2;">self</span>, arg)</div><br><div><span style="color: #268bd2;">c</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">C</span>()</div></div>
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">C</span>:</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">method</span>(self, arg):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">print</span>(<span style="color: #268bd2;">self</span>, arg)</div><br/><div><span style="color: #268bd2;">c</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">C</span>()</div></div>
 
 <p>那么可以使用这样的方式通过实例调用该方法，实例对象将会自动作为第一个位置参数传入：</p>
 
@@ -325,8 +329,8 @@ var _hmt = _hmt || [];
 <p>因此，一个完整的类方法的定义为：</p>
 
 <div class="codeblock code-template">
-    @classmethod<br>
-    <strong>def</strong> <em>method_name</em>(cls, ...):<br>
+    @classmethod<br/>
+    <strong>def</strong> <em>method_name</em>(cls, ...):<br/>
     &nbsp; &nbsp; ...
 </div>
 
@@ -334,26 +338,26 @@ var _hmt = _hmt || [];
 
 <p>类方法还可以用于以别的方式构建实例。例如，<code>datetime</code> 是一个用于处理日期与时间的标准库，其中 <code>date</code> 是一个用于表示日期的类。如果要通过该类生成一个具体的日期，在初始化时需要传入代表年、月、日的参数：</p>
 
-<div class="codeblock code-console">>>> from datetime import date
->>> date(2023, 3, 19)
+<div class="codeblock code-console">&gt;&gt;&gt; from datetime import date
+&gt;&gt;&gt; date(2023, 3, 19)
 datetime.date(2023, 3, 19)</div>
 
 <p>但有些时候，拿到的信息可能未必包含年月日，它可能是具有特定格式的表示时间的字符串，还有可能是浮点型的时间戳。此时，可以使用 <code>date</code> 类提供的类方法使用这几种信息构造一个日期实例：</p>
 
-<div class="codeblock code-console">>>> date.fromisoformat('2023-03-19')  # python3.7+
+<div class="codeblock code-console">&gt;&gt;&gt; date.fromisoformat('2023-03-19')  # python3.7+
 datetime.date(2023, 3, 19)
->>> date.fromtimestamp(time.time())
+&gt;&gt;&gt; date.fromtimestamp(time.time())
 datetime.date(2023, 3, 19)</div>
 
 <p>仿照这种思路，可以为之前自定义的 <code>Point</code> 类编写一个类方法来通过格式字符串构造实例：</p>
 
-<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Point</span>:</div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__init__</span>(self, x, y):</div><div>&#160; &#160; &#160; &#160; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">x</span>, <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">y</span> <span style="color: #859900;">=</span> x, y</div><div>&#160; &#160; <span style="color: #268bd2;">@</span><span style="color: #cb4b16;">classmethod</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">from_format</span>(cls, format):</div><div>&#160; &#160; &#160; &#160; <span style="color: #268bd2;">x</span>, <span style="color: #268bd2;">y</span> <span style="color: #859900;">=</span> <span style="color: #268bd2;">format</span>[<span style="color: #d33682;">1</span>:<span style="color: #859900;">-</span><span style="color: #d33682;">1</span>].split(<span style="color: #2aa198;">','</span>)</div><div>&#160; &#160; &#160; &#160; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">cls</span>(<span style="color: #cb4b16;">int</span>(<span style="color: #268bd2;">x</span>), <span style="color: #cb4b16;">int</span>(<span style="color: #268bd2;">y</span>)) &#160;<span style="color: #a8a8a8;"># same as Point(...)</span></div></div>
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Point</span>:</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__init__</span>(self, x, y):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">x</span>, <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">y</span> <span style="color: #859900;">=</span> x, y</div><div>&nbsp; &nbsp; <span style="color: #268bd2;">@</span><span style="color: #cb4b16;">classmethod</span></div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">from_format</span>(cls, format):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">x</span>, <span style="color: #268bd2;">y</span> <span style="color: #859900;">=</span> <span style="color: #268bd2;">format</span>[<span style="color: #d33682;">1</span>:<span style="color: #859900;">-</span><span style="color: #d33682;">1</span>].split(<span style="color: #2aa198;">','</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">cls</span>(<span style="color: #cb4b16;">int</span>(<span style="color: #268bd2;">x</span>), <span style="color: #cb4b16;">int</span>(<span style="color: #268bd2;">y</span>)) &nbsp;<span style="color: #a8a8a8;"># same as Point(...)</span></div></div>
 
 <p>注意，这里的参数 <code>cls</code> 在调用时会替换为 <code>Point</code> ，因此调用 <code>cls(...)</code> 等价于类的实例化 <code>Point(...)</code></p>
 
 <p>使用这个类方法可以返回一个实例，就像正常方式得到的实例一样可以调用各种方法：</p>
 
-<div class="vscode-block"><div><span style="color: #268bd2;">p</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">Point</span>.<span style="color: #268bd2;">from_format</span>(<span style="color: #2aa198;">'(10,40)'</span>)</div><div><span style="color: #268bd2;">p</span>.<span style="color: #268bd2;">distance_to_origin</span>() &#160;<span style="color: #a8a8a8;"># returns 41.23</span></div></div>
+<div class="vscode-block"><div><span style="color: #268bd2;">p</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">Point</span>.<span style="color: #268bd2;">from_format</span>(<span style="color: #2aa198;">'(10,40)'</span>)</div><div><span style="color: #268bd2;">p</span>.<span style="color: #268bd2;">distance_to_origin</span>() &nbsp;<span style="color: #a8a8a8;"># returns 41.23</span></div></div>
 
 <p>从技术上说，也可以用一个普通函数来构造实例。但使用类方法的好处在于，一是使用者容易明白构造出的实例是属于哪个类的，二是当类被重命名后类方法无需跟着修改，降低了因为疏忽导致错误的可能性。</p>
 
@@ -368,30 +372,30 @@ datetime.date(2023, 3, 19)</div>
 <p>一个静态方法的定义为：</p>
 
 <div class="codeblock code-template">
-    @staticmethod<br>
-    <strong>def</strong> <em>method_name</em>(...):<br>
+    @staticmethod<br/>
+    <strong>def</strong> <em>method_name</em>(...):<br/>
     &nbsp; &nbsp; ...
 </div>
 
 <p>不难看出，静态方法脱离了类和实例，表现得更像一个普通的函数。</p>
 
-<hr>
+<hr/>
 
 <p>实际上，Python 中的方法和函数除了是否位于类的定义中外，并没有本质的区别。Python 中的类可以看作一个独立的<em>命名空间</em>。在 <code>class</code> 关键字引导的代码块中，可以包含各种语句，例如常见的 <code>for</code> 循环和 <code>with</code> 语句：</p>
 
-<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Type</span>:</div><div>&#160; &#160; <span style="color: #268bd2;">s</span> <span style="color: #859900;">=</span> <span style="color: #d33682;">0</span></div><div>&#160; &#160; <span style="color: #859900;font-weight: bold;">for</span> <span style="color: #268bd2;">i</span> <span style="color: #859900;font-weight: bold;">in</span> <span style="color: #cb4b16;">range</span>(<span style="color: #d33682;">10</span>):</div><div>&#160; &#160; &#160; &#160; <span style="color: #268bd2;">s</span> <span style="color: #859900;">+=</span> <span style="color: #268bd2;">i</span> <span style="color: #859900;">**</span> <span style="color: #d33682;">2</span></div><div>&#160; &#160; <span style="color: #859900;font-weight: bold;">with</span> <span style="color: #268bd2;">open</span>(<span style="color: #2aa198;">'settings.txt'</span>, <span style="color: #2aa198;">'r'</span>) <span style="color: #859900;font-weight: bold;">as</span> <span style="color: #268bd2;">f</span>:</div><div>&#160; &#160; &#160; &#160; <span style="color: #268bd2;">settings</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">dict</span>([</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #268bd2;">kv</span>.<span style="color: #268bd2;">split</span>(<span style="color: #2aa198;">'='</span>) <span style="color: #859900;font-weight: bold;">for</span> <span style="color: #268bd2;">kv</span> <span style="color: #859900;font-weight: bold;">in</span> <span style="color: #268bd2;">f</span>.<span style="color: #268bd2;">read</span>().<span style="color: #268bd2;">split</span>(<span style="color: #2aa198;">'</span><span style="color: #cb4b16;">\n</span><span style="color: #2aa198;">'</span>)</div><div>&#160; &#160; &#160; &#160; ])</div><div>&#160; &#160; <span style="color: #859900;font-weight: bold;">if</span> <span style="color: #268bd2;">settings</span>.<span style="color: #268bd2;">get</span>(<span style="color: #2aa198;">'value'</span>):</div><div>&#160; &#160; &#160; &#160; <span style="color: #268bd2;">@</span><span style="color: #cb4b16;">property</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">value</span>(self):</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">settings</span>[<span style="color: #2aa198;">'value'</span>]</div></div>
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Type</span>:</div><div>&nbsp; &nbsp; <span style="color: #268bd2;">s</span> <span style="color: #859900;">=</span> <span style="color: #d33682;">0</span></div><div>&nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">for</span> <span style="color: #268bd2;">i</span> <span style="color: #859900;font-weight: bold;">in</span> <span style="color: #cb4b16;">range</span>(<span style="color: #d33682;">10</span>):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">s</span> <span style="color: #859900;">+=</span> <span style="color: #268bd2;">i</span> <span style="color: #859900;">**</span> <span style="color: #d33682;">2</span></div><div>&nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">with</span> <span style="color: #268bd2;">open</span>(<span style="color: #2aa198;">'settings.txt'</span>, <span style="color: #2aa198;">'r'</span>) <span style="color: #859900;font-weight: bold;">as</span> <span style="color: #268bd2;">f</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">settings</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">dict</span>([</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">kv</span>.<span style="color: #268bd2;">split</span>(<span style="color: #2aa198;">'='</span>) <span style="color: #859900;font-weight: bold;">for</span> <span style="color: #268bd2;">kv</span> <span style="color: #859900;font-weight: bold;">in</span> <span style="color: #268bd2;">f</span>.<span style="color: #268bd2;">read</span>().<span style="color: #268bd2;">split</span>(<span style="color: #2aa198;">'</span><span style="color: #cb4b16;">\n</span><span style="color: #2aa198;">'</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; ])</div><div>&nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">if</span> <span style="color: #268bd2;">settings</span>.<span style="color: #268bd2;">get</span>(<span style="color: #2aa198;">'value'</span>):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">@</span><span style="color: #cb4b16;">property</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">value</span>(self):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">settings</span>[<span style="color: #2aa198;">'value'</span>]</div></div>
 
 <p>注意，这里使用 <code>if</code> 语句动态地定义了一个方法，这是完全可以的。除此之外，在类内定义另一个类也是很常见的情况，这个嵌套类一般用于提供基本的元信息。</p>
 
 <p>在类之中这个独立的命名空间内，可以直接访问其中定义的变量（或者说属性）。而在类外部，访问这些变量需要通过类名来标识其所位于的命名空间：</p>
 
-<div class="vscode-block"><div><span style="color: #268bd2;">print</span>(<span style="color: #cb4b16;">Type</span>.<span style="color: #268bd2;">s</span>) &#160;<span style="color: #a8a8a8;"># 285</span></div><div><span style="color: #268bd2;">print</span>(<span style="color: #cb4b16;">Type</span>().<span style="color: #268bd2;">value</span>) &#160;<span style="color: #a8a8a8;"># 1</span></div></div>
+<div class="vscode-block"><div><span style="color: #268bd2;">print</span>(<span style="color: #cb4b16;">Type</span>.<span style="color: #268bd2;">s</span>) &nbsp;<span style="color: #a8a8a8;"># 285</span></div><div><span style="color: #268bd2;">print</span>(<span style="color: #cb4b16;">Type</span>().<span style="color: #268bd2;">value</span>) &nbsp;<span style="color: #a8a8a8;"># 1</span></div></div>
 
-<p>从这个角度上说，类和模块并没有太大的差别。实际上，当模块导入后，它就是一个普通的 Python 对象，只不过是 <code>&lt;class 'module'></code> 类型的对象。所以在 Python 中使用方法时，实际上就是使用一个函数，Python 解释器只是额外提供了一个语法糖，将调用方法的实例自动填写到函数的 <code>self</code> 参数上，仅此而已。</p>
+<p>从这个角度上说，类和模块并没有太大的差别。实际上，当模块导入后，它就是一个普通的 Python 对象，只不过是 <code>&lt;class 'module'&gt;</code> 类型的对象。所以在 Python 中使用方法时，实际上就是使用一个函数，Python 解释器只是额外提供了一个语法糖，将调用方法的实例自动填写到函数的 <code>self</code> 参数上，仅此而已。</p>
 
 <h2>特殊方法</h2>
 
-<p>在<a href="" class="link-internal">第一节</a>介绍过实例方法时，同时介绍了一个特殊的实例方法 <code>.__init()__</code> ，它会在类初始化时自动调用，以此完成一些初始化工作。之前介绍时同时提及了类还有很多类似的特殊方法，它们都以双下划线开头结尾，有时也被称为双下方法。</p>
+<p>在<a class="link-internal" href="/programming/python-oop/01-class-and-instance">第一节</a>介绍过实例方法时，同时介绍了一个特殊的实例方法 <code>.__init()__</code> ，它会在类初始化时自动调用，以此完成一些初始化工作。之前介绍时同时提及了类还有很多类似的特殊方法，它们都以双下划线开头结尾，有时也被称为双下方法。</p>
 
 <p>Python 的特点是一切皆对象，任何 Python 的变量都是一个对象。而 Python 对这些变量的操作，例如构造、初始化、删除、获取属性，甚至比较、索引、和迭代，都是通过调用一些特殊的方法实现的，这些方法称为 Python 的<strong>特殊方法</strong>(special method)或<strong>魔法方法</strong>(magic method)，它们的名称以双下划线开始，以双下划线结束，代表着对象的一种特殊的操作。一般情况下，使用类方法或实例方法就可以完成类的功能；但在必要时，可以使用或者重写这些特殊方法，来为自己的类提供更加规范的接口。</p>
 
@@ -413,7 +417,7 @@ datetime.date(2023, 3, 19)</div>
 
 <p>它的返回值是新的对象实例（通常是 <code>cls</code> 的实例）。例如以下类 <code>Card</code> ，它使用 <code>.__new__()</code> 方法，在每次生成一个实例时，便给予它唯一的一个 <code>.id_</code> 属性：</p>
 
-<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Card</span>:</div><div>&#160; &#160; <span style="color: #268bd2;">id_</span> <span style="color: #859900;">=</span> <span style="color: #d33682;">0</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__new__</span>(cls, <span style="color: #859900;">*</span>args, <span style="color: #859900;">**</span>kwargs):</div><div>&#160; &#160; &#160; &#160; <span style="color: #268bd2;">instance</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">super</span>().<span style="color: #268bd2;">__new__</span>(<span style="color: #268bd2;">cls</span>)</div><div>&#160; &#160; &#160; &#160; <span style="color: #268bd2;">cls</span>.<span style="color: #268bd2;">id_</span> <span style="color: #859900;">+=</span> <span style="color: #d33682;">1</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #268bd2;">instance</span>.<span style="color: #268bd2;">id_</span> <span style="color: #859900;">=</span> <span style="color: #268bd2;">cls</span>.<span style="color: #268bd2;">id_</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">instance</span></div><br><div><span style="color: #268bd2;">c01</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">Card</span>()</div><div><span style="color: #268bd2;">c02</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">Card</span>()</div><div><span style="color: #268bd2;">c03</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">Card</span>()</div><div><span style="color: #268bd2;">c03</span>.<span style="color: #268bd2;">id_</span> &#160;<span style="color: #a8a8a8;"># 3</span></div></div>
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Card</span>:</div><div>&nbsp; &nbsp; <span style="color: #268bd2;">id_</span> <span style="color: #859900;">=</span> <span style="color: #d33682;">0</span></div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__new__</span>(cls, <span style="color: #859900;">*</span>args, <span style="color: #859900;">**</span>kwargs):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">instance</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">super</span>().<span style="color: #268bd2;">__new__</span>(<span style="color: #268bd2;">cls</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">cls</span>.<span style="color: #268bd2;">id_</span> <span style="color: #859900;">+=</span> <span style="color: #d33682;">1</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">instance</span>.<span style="color: #268bd2;">id_</span> <span style="color: #859900;">=</span> <span style="color: #268bd2;">cls</span>.<span style="color: #268bd2;">id_</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">instance</span></div><br/><div><span style="color: #268bd2;">c01</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">Card</span>()</div><div><span style="color: #268bd2;">c02</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">Card</span>()</div><div><span style="color: #268bd2;">c03</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">Card</span>()</div><div><span style="color: #268bd2;">c03</span>.<span style="color: #268bd2;">id_</span> &nbsp;<span style="color: #a8a8a8;"># 3</span></div></div>
 
 <p>注意，虽然它表现得很像一个类方法，但不能像之前介绍的类方法一样通过 <code>cls(...)</code> 来创建实例，因为这样做实质上就是在调用该方法，会陷入无限递归。一般来说对象的创建是底层 C 语言的任务，而 Python 中只需要使用 CPython 提供的接口即可，例如使用 <code>super().__new__(cls, ...)</code> 调用 <code>object</code> 类提供的基本 <code>.__new__()</code> 方法，然后在返回之前根据需要修改新创建的实例即可。</p>
 
@@ -423,7 +427,7 @@ datetime.date(2023, 3, 19)</div>
 
 <p>利用这种特性，可以在 Python 中创建单例。单例模式涉及到一个单一的类，该类负责创建自己的对象，同时确保只有单个对象被创建。单例提供了创建与访问其唯一对象的方式。使用 <code>.__new__()</code> 方法可以自由控制创建的对象，从而比较方便地实现单例：</p>
 
-<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Singleton</span>:</div><div>&#160; &#160; <span style="color: #268bd2;">_has_instance</span> <span style="color: #859900;">=</span> <span style="color: #b58900;">False</span></div><div>&#160; &#160; <span style="color: #268bd2;">__single_instance</span> <span style="color: #859900;">=</span> <span style="color: #b58900;">None</span></div><div>&#160; &#160; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__new__</span>(cls, <span style="color: #859900;">*</span>args, <span style="color: #859900;">**</span>kwargs):</div><div>&#160; &#160; &#160; &#160; <span style="color: #859900;font-weight: bold;">if</span> <span style="color: #859900;">not</span> <span style="color: #268bd2;">cls</span>.<span style="color: #268bd2;">_has_instance</span>:</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #268bd2;">cls</span>.<span style="color: #268bd2;">_has_instance</span> <span style="color: #859900;">=</span> <span style="color: #b58900;">True</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #268bd2;">cls</span>.<span style="color: #268bd2;">__single_instance</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">super</span>().<span style="color: #268bd2;">__new__</span>(<span style="color: #268bd2;">cls</span>)</div><div>&#160; &#160; &#160; &#160; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">cls</span>.<span style="color: #268bd2;">__single_instance</span></div><div>&#160; &#160; </div><div><span style="color: #268bd2;">one_task</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">Singleton</span>()</div><div><span style="color: #268bd2;">another_task</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">Singleton</span>(<span style="color: #d33682;">123</span>, name<span style="color: #859900;">=</span><span style="color: #2aa198;">'another'</span>)</div><div><span style="color: #268bd2;">one_task</span> <span style="color: #859900;">is</span> <span style="color: #268bd2;">another_task</span> <span style="color: #859900;">is</span> <span style="color: #cb4b16;">Singleton</span>(<span style="color: #2aa198;">'abs'</span>) &#160;<span style="color: #a8a8a8;"># True</span></div></div>
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Singleton</span>:</div><div>&nbsp; &nbsp; <span style="color: #268bd2;">_has_instance</span> <span style="color: #859900;">=</span> <span style="color: #b58900;">False</span></div><div>&nbsp; &nbsp; <span style="color: #268bd2;">__single_instance</span> <span style="color: #859900;">=</span> <span style="color: #b58900;">None</span></div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__new__</span>(cls, <span style="color: #859900;">*</span>args, <span style="color: #859900;">**</span>kwargs):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">if</span> <span style="color: #859900;">not</span> <span style="color: #268bd2;">cls</span>.<span style="color: #268bd2;">_has_instance</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">cls</span>.<span style="color: #268bd2;">_has_instance</span> <span style="color: #859900;">=</span> <span style="color: #b58900;">True</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">cls</span>.<span style="color: #268bd2;">__single_instance</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">super</span>().<span style="color: #268bd2;">__new__</span>(<span style="color: #268bd2;">cls</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">cls</span>.<span style="color: #268bd2;">__single_instance</span></div><div>&nbsp; &nbsp; </div><div><span style="color: #268bd2;">one_task</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">Singleton</span>()</div><div><span style="color: #268bd2;">another_task</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">Singleton</span>(<span style="color: #d33682;">123</span>, name<span style="color: #859900;">=</span><span style="color: #2aa198;">'another'</span>)</div><div><span style="color: #268bd2;">one_task</span> <span style="color: #859900;">is</span> <span style="color: #268bd2;">another_task</span> <span style="color: #859900;">is</span> <span style="color: #cb4b16;">Singleton</span>(<span style="color: #2aa198;">'abs'</span>) &nbsp;<span style="color: #a8a8a8;"># True</span></div></div>
 
 <p>可以看到，不管该类被实例化多少次，如何实例化，得到的都是唯一的实例。单例提供了一种共享数据的方式，并且方便使用 <code><strong>is</strong></code> 判断。但考虑到 Python 能使用全局变量完成相同的工作，因此一般来说在 Python 中没必要使用单例。</p>
 
@@ -439,12 +443,12 @@ datetime.date(2023, 3, 19)</div>
 
 <p>通过 <code>.__del__()</code> 方法，可以研究 Python 的垃圾回收机制。例如，以下是在命令行中的一个小测试：</p>
 
-<div class="codeblock code-console">>>> GCTest()
-&lt;__main__.GCTest object at 0x00000282CE8907B8>
->>> t = GCTest()
->>> del t
+<div class="codeblock code-console">&gt;&gt;&gt; GCTest()
+&lt;__main__.GCTest object at 0x00000282CE8907B8&gt;
+&gt;&gt;&gt; t = GCTest()
+&gt;&gt;&gt; del t
 object deleted
->>> 'now delete "_"'
+&gt;&gt;&gt; 'now delete "_"'
 object deleted
 'now delete "_"'
 </div>
@@ -454,9 +458,14 @@ object deleted
 <h2>参考资料/延伸阅读</h2>
 
 <p>
-    <a href="https://docs.python.org/3/reference/datamodel.html#basic-customization">https://docs.python.org/3/reference/datamodel.html#basic-customization</a><br>
-    Python3 语言参考——数据模型部分，该部分介绍了绝大多数常用的特殊方法、特殊属性与 Python 的运行机制，是深入理解 Python 最好的文档。
+    <a class="link-reference" href="https://docs.python.org/3/reference/datamodel.html#basic-customization">https://docs.python.org/3/reference/datamodel.html#basic-customization</a><br/>
+    Python3 语言参考&mdash;&mdash;数据模型部分，该部分介绍了绝大多数常用的特殊方法、特殊属性与 Python 的运行机制，是深入理解 Python 最好的文档。
 </p>
+
+
+
+
+
 												<div class="clear"></div>				
 					</div><!--/.entry-->
 				</div>
@@ -478,14 +487,14 @@ object deleted
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/embedded/stm32/esp8266-controlling/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/07/STM32与物联网02-网络数据收发-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/07/STM32与物联网02-网络数据收发-520x293.jpg 520w, /wp-content/uploads/2022/07/STM32与物联网02-网络数据收发-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/computer-science/data-structure/01-linear-list/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/数据结构01-基本概念与线性表-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/07/数据结构01-基本概念与线性表-520x293.jpg 520w, /wp-content/uploads/2022/07/数据结构01-基本概念与线性表-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/embedded/stm32/esp8266-controlling/" rel="bookmark">STM32与物联网02-网络数据收发</a>
+					<a href="/computer-science/data-structure/01-linear-list/" rel="bookmark">数据结构01-基本概念与线性表</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -496,14 +505,14 @@ object deleted
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/programming/python-oop/02-attributes/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-520x293.jpg 520w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-300x169.jpg 300w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-1024x576.jpg 1024w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-768x432.jpg 768w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-1536x864.jpg 1536w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-950x534.jpg 950w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/programming/python-fp/09-decorators/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/Python函数式编程09-闭包与装饰器-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/Python函数式编程09-闭包与装饰器-520x293.jpg 520w, /wp-content/uploads/2022/06/Python函数式编程09-闭包与装饰器-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/programming/python-oop/02-attributes/" rel="bookmark">Python面向对象编程02-类与实例的属性</a>
+					<a href="/programming/python-fp/09-decorators/" rel="bookmark">Python函数式编程09 闭包和装饰器</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -514,14 +523,14 @@ object deleted
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/data-science/via-python/pandas01-data-types/">
-											<img width="520" height="293" src="/wp-content/uploads/2023/02/Python数据分析-pandas01基本数据类型-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2023/02/Python数据分析-pandas01基本数据类型-520x293.jpg 520w, /wp-content/uploads/2023/02/Python数据分析-pandas01基本数据类型-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/embedded/stm32/esp8266-introduction/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/STM32与物联网01-ESP8266基本操作-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/07/STM32与物联网01-ESP8266基本操作-520x293.jpg 520w, /wp-content/uploads/2022/07/STM32与物联网01-ESP8266基本操作-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/data-science/via-python/pandas01-data-types/" rel="bookmark">pandas01:基本数据类型</a>
+					<a href="/embedded/stm32/esp8266-introduction/" rel="bookmark">STM32与物联网01-ESP8266基本操作</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -558,6 +567,14 @@ object deleted
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
 											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
 					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
 											<span class="post-date">2023年6月19日</span>
 									</li>
@@ -577,14 +594,6 @@ object deleted
 					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
 											<span class="post-date">2023年3月6日</span>
 									</li>
-											<li>
-					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
-											<span class="post-date">2023年2月27日</span>
-									</li>
-											<li>
-					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
-											<span class="post-date">2023年2月8日</span>
-									</li>
 					</ul>
 
 		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
@@ -597,9 +606,11 @@ object deleted
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (1)
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
 <ul class='children'>
 	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
 </li>
 </ul>
 </li>
@@ -621,7 +632,7 @@ object deleted
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (20)
 <ul class='children'>
 	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
 </li>
@@ -647,7 +658,9 @@ object deleted
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(1)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
 	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
 	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
 	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
@@ -712,7 +725,7 @@ object deleted
 					
 										
 					<div id="copyright">
-													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
 											</div><!--/#copyright-->
 					
 										

@@ -12,7 +12,7 @@
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 
-	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
 	<title>Python数据分析-pandas04:索引与缺失值 - 冰封残烛的个人小站</title>
 	<meta name="description" content="当在两个 Series 或 DataFrame 对象上做计算时，pandas 会按照索引值配对计算元素，而不是按位置配对，这就是索引对齐现象。numpy 提供了缺失值 NaN，是一种按照 IEEE 754 标准设计的特殊浮点数，pandas 提供了处理该缺失值有关的完整工具。" />
 	<link rel="canonical" href="/data-science/via-python/pandas04-missing-values/" />
@@ -28,6 +28,7 @@
 	<meta property="og:image:width" content="1400" />
 	<meta property="og:image:height" content="1000" />
 	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="作者" />
 	<meta name="twitter:data1" content="Hello" />
@@ -37,35 +38,8 @@
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
-	            "@type": "WebSite",
-	            "@id": "/#website",
-	            "url": "/",
-	            "name": "冰封残烛的个人小站",
-	            "description": "FrozenCandle&#039;s Personal Site",
-	            "potentialAction": [
-	                {
-	                    "@type": "SearchAction",
-	                    "target": {
-	                        "@type": "EntryPoint",
-	                        "urlTemplate": "/?s={search_term_string}"
-	                    },
-	                    "query-input": "required name=search_term_string"
-	                }
-	            ],
-	            "inLanguage": "zh-CN"
-	        },
-	        {
-	            "@type": "ImageObject",
-	            "inLanguage": "zh-CN",
-	            "@id": "/data-science/via-python/pandas04-missing-values/#primaryimage",
-	            "url": "/wp-content/uploads/2023/03/Python数据分析-pandas04索引与缺失值.jpg",
-	            "contentUrl": "/wp-content/uploads/2023/03/Python数据分析-pandas04索引与缺失值.jpg",
-	            "width": 1400,
-	            "height": 1000
-	        },
-	        {
 	            "@type": "WebPage",
-	            "@id": "/data-science/via-python/pandas04-missing-values/#webpage",
+	            "@id": "/data-science/via-python/pandas04-missing-values/",
 	            "url": "/data-science/via-python/pandas04-missing-values/",
 	            "name": "Python数据分析-pandas04:索引与缺失值 - 冰封残烛的个人小站",
 	            "isPartOf": {
@@ -74,6 +48,10 @@
 	            "primaryImageOfPage": {
 	                "@id": "/data-science/via-python/pandas04-missing-values/#primaryimage"
 	            },
+	            "image": {
+	                "@id": "/data-science/via-python/pandas04-missing-values/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2023/03/Python数据分析-pandas04索引与缺失值.jpg",
 	            "datePublished": "2023-03-17T09:55:47+00:00",
 	            "dateModified": "2023-10-07T03:23:48+00:00",
 	            "author": {
@@ -94,6 +72,15 @@
 	            ]
 	        },
 	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/data-science/via-python/pandas04-missing-values/#primaryimage",
+	            "url": "/wp-content/uploads/2023/03/Python数据分析-pandas04索引与缺失值.jpg",
+	            "contentUrl": "/wp-content/uploads/2023/03/Python数据分析-pandas04索引与缺失值.jpg",
+	            "width": 1400,
+	            "height": 1000
+	        },
+	        {
 	            "@type": "BreadcrumbList",
 	            "@id": "/data-science/via-python/pandas04-missing-values/#breadcrumb",
 	            "itemListElement": [
@@ -109,6 +96,24 @@
 	                    "name": "Python数据分析-pandas04:索引与缺失值"
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
 	        },
 	        {
 	            "@type": "Person",
@@ -158,7 +163,6 @@ body { font-family: "Roboto", Arial, sans-serif; }
 <link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
-<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
 <script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
 <link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/1054" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
 <meta name="generator" content="WordPress 6.3.1" />
@@ -668,14 +672,14 @@ dtype: int32</div>
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/data-science/via-python/numpy06-advanced-data-types/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/10/Python数据分析-numpy06高级数据类型-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/10/Python数据分析-numpy06高级数据类型-520x293.jpg 520w, /wp-content/uploads/2022/10/Python数据分析-numpy06高级数据类型-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/programming/python-oop/01-class-and-instance/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/Python面向对象编程01-类的定义与使用-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/07/Python面向对象编程01-类的定义与使用-520x293.jpg 520w, /wp-content/uploads/2022/07/Python面向对象编程01-类的定义与使用-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/data-science/via-python/numpy06-advanced-data-types/" rel="bookmark">numpy06:高级数据类型</a>
+					<a href="/programming/python-oop/01-class-and-instance/" rel="bookmark">Python面向对象编程01-类的定义与使用</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -686,14 +690,14 @@ dtype: int32</div>
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/computer-science/data-structure/08-graph/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/09/数据结构08-图-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/09/数据结构08-图-520x293.jpg 520w, /wp-content/uploads/2022/09/数据结构08-图-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/computer-science/data-structure/07-sort-algorithm/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/09/数据结构07-排序算法-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/09/数据结构07-排序算法-520x293.jpg 520w, /wp-content/uploads/2022/09/数据结构07-排序算法-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/computer-science/data-structure/08-graph/" rel="bookmark">数据结构08-图</a>
+					<a href="/computer-science/data-structure/07-sort-algorithm/" rel="bookmark">数据结构07-排序算法</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -704,14 +708,14 @@ dtype: int32</div>
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/embedded/stm32/esp8266-controlling/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/07/STM32与物联网02-网络数据收发-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/07/STM32与物联网02-网络数据收发-520x293.jpg 520w, /wp-content/uploads/2022/07/STM32与物联网02-网络数据收发-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/computer-science/computer-networking/02-the-application-layer/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/计算机网络02-应用层概览-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/计算机网络02-应用层概览-520x293.jpg 520w, /wp-content/uploads/2022/06/计算机网络02-应用层概览-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/embedded/stm32/esp8266-controlling/" rel="bookmark">STM32与物联网02-网络数据收发</a>
+					<a href="/computer-science/computer-networking/02-the-application-layer/" rel="bookmark">计算机网络02-应用层概览与SMTP电子邮件发送</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -748,6 +752,14 @@ dtype: int32</div>
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
 											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
 					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
 											<span class="post-date">2023年6月19日</span>
 									</li>
@@ -767,14 +779,6 @@ dtype: int32</div>
 					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
 											<span class="post-date">2023年3月6日</span>
 									</li>
-											<li>
-					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
-											<span class="post-date">2023年2月27日</span>
-									</li>
-											<li>
-					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
-											<span class="post-date">2023年2月8日</span>
-									</li>
 					</ul>
 
 		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
@@ -787,9 +791,11 @@ dtype: int32</div>
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (1)
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
 <ul class='children'>
 	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
 </li>
 </ul>
 </li>
@@ -811,7 +817,7 @@ dtype: int32</div>
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (20)
 <ul class='children'>
 	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
 </li>
@@ -837,7 +843,9 @@ dtype: int32</div>
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(1)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
 	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
 	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
 	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
@@ -902,7 +910,7 @@ dtype: int32</div>
 					
 										
 					<div id="copyright">
-													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
 											</div><!--/#copyright-->
 					
 										

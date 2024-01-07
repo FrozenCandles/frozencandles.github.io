@@ -12,7 +12,7 @@
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 
-	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
 	<title>numpy04:通用函数与广播规则 - 冰封残烛的个人小站</title>
 	<link rel="canonical" href="/data-science/via-python/04-numpy-universal-functions/" />
 	<meta property="og:locale" content="zh_CN" />
@@ -27,6 +27,7 @@
 	<meta property="og:image:width" content="2048" />
 	<meta property="og:image:height" content="1536" />
 	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="作者" />
 	<meta name="twitter:data1" content="Hello" />
@@ -36,35 +37,8 @@
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
-	            "@type": "WebSite",
-	            "@id": "/#website",
-	            "url": "/",
-	            "name": "冰封残烛的个人小站",
-	            "description": "FrozenCandle&#039;s Personal Site",
-	            "potentialAction": [
-	                {
-	                    "@type": "SearchAction",
-	                    "target": {
-	                        "@type": "EntryPoint",
-	                        "urlTemplate": "/?s={search_term_string}"
-	                    },
-	                    "query-input": "required name=search_term_string"
-	                }
-	            ],
-	            "inLanguage": "zh-CN"
-	        },
-	        {
-	            "@type": "ImageObject",
-	            "inLanguage": "zh-CN",
-	            "@id": "/data-science/via-python/04-numpy-universal-functions/#primaryimage",
-	            "url": "/wp-content/uploads/2022/10/Python数据分析-numpy04通用函数与广播规则.jpg",
-	            "contentUrl": "/wp-content/uploads/2022/10/Python数据分析-numpy04通用函数与广播规则.jpg",
-	            "width": 2048,
-	            "height": 1536
-	        },
-	        {
 	            "@type": "WebPage",
-	            "@id": "/data-science/via-python/04-numpy-universal-functions/#webpage",
+	            "@id": "/data-science/via-python/04-numpy-universal-functions/",
 	            "url": "/data-science/via-python/04-numpy-universal-functions/",
 	            "name": "numpy04:通用函数与广播规则 - 冰封残烛的个人小站",
 	            "isPartOf": {
@@ -73,6 +47,10 @@
 	            "primaryImageOfPage": {
 	                "@id": "/data-science/via-python/04-numpy-universal-functions/#primaryimage"
 	            },
+	            "image": {
+	                "@id": "/data-science/via-python/04-numpy-universal-functions/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2022/10/Python数据分析-numpy04通用函数与广播规则.jpg",
 	            "datePublished": "2022-10-09T08:51:39+00:00",
 	            "dateModified": "2023-10-07T02:58:08+00:00",
 	            "author": {
@@ -92,6 +70,15 @@
 	            ]
 	        },
 	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/data-science/via-python/04-numpy-universal-functions/#primaryimage",
+	            "url": "/wp-content/uploads/2022/10/Python数据分析-numpy04通用函数与广播规则.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/10/Python数据分析-numpy04通用函数与广播规则.jpg",
+	            "width": 2048,
+	            "height": 1536
+	        },
+	        {
 	            "@type": "BreadcrumbList",
 	            "@id": "/data-science/via-python/04-numpy-universal-functions/#breadcrumb",
 	            "itemListElement": [
@@ -107,6 +94,24 @@
 	                    "name": "numpy04:通用函数与广播规则"
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
 	        },
 	        {
 	            "@type": "Person",
@@ -156,7 +161,6 @@ body { font-family: "Roboto", Arial, sans-serif; }
 <link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
-<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
 <script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
 <link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/800" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
 <meta name="generator" content="WordPress 6.3.1" />
@@ -805,14 +809,14 @@ tan(theta) : [ 0.00000000e+00  1.63312394e+16 -1.22464680e-16]</div>
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/programming/python-fp/09-decorators/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/06/Python函数式编程09-闭包与装饰器-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/06/Python函数式编程09-闭包与装饰器-520x293.jpg 520w, /wp-content/uploads/2022/06/Python函数式编程09-闭包与装饰器-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/programming/python-fp/06-tuple-handling/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-300x169.jpg 300w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-1024x576.jpg 1024w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-768x432.jpg 768w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-1536x864.jpg 1536w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-950x534.jpg 950w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/programming/python-fp/09-decorators/" rel="bookmark">Python函数式编程09 闭包和装饰器</a>
+					<a href="/programming/python-fp/06-tuple-handling/" rel="bookmark">Python函数式编程06 元组与命名元组</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -823,14 +827,14 @@ tan(theta) : [ 0.00000000e+00  1.63312394e+16 -1.22464680e-16]</div>
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/computer-science/data-structure/07-sort-algorithm/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/09/数据结构07-排序算法-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/09/数据结构07-排序算法-520x293.jpg 520w, /wp-content/uploads/2022/09/数据结构07-排序算法-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/computer-science/computer-networking/05-transmission-control-protocol/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/计算机网络05-面向连接的运输：TCP-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/07/计算机网络05-面向连接的运输：TCP-520x293.jpg 520w, /wp-content/uploads/2022/07/计算机网络05-面向连接的运输：TCP-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/computer-science/data-structure/07-sort-algorithm/" rel="bookmark">数据结构07-排序算法</a>
+					<a href="/computer-science/computer-networking/05-transmission-control-protocol/" rel="bookmark">计算机网络05-面向连接的运输：TCP</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -841,14 +845,14 @@ tan(theta) : [ 0.00000000e+00  1.63312394e+16 -1.22464680e-16]</div>
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/computer-science/data-structure/05-hash/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/08/数据结构05-散列-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/08/数据结构05-散列-520x293.jpg 520w, /wp-content/uploads/2022/08/数据结构05-散列-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/programming/python/python3-string-format/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/02/Night-Street-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/02/Night-Street-520x293.jpg 520w, /wp-content/uploads/2022/02/Night-Street-300x169.jpg 300w, /wp-content/uploads/2022/02/Night-Street-1024x576.jpg 1024w, /wp-content/uploads/2022/02/Night-Street-768x432.jpg 768w, /wp-content/uploads/2022/02/Night-Street-1536x864.jpg 1536w, /wp-content/uploads/2022/02/Night-Street-950x534.jpg 950w, /wp-content/uploads/2022/02/Night-Street.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/computer-science/data-structure/05-hash/" rel="bookmark">数据结构05-散列</a>
+					<a href="/programming/python/python3-string-format/" rel="bookmark">Python3 字符串格式化</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -885,6 +889,14 @@ tan(theta) : [ 0.00000000e+00  1.63312394e+16 -1.22464680e-16]</div>
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
 											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
 					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
 											<span class="post-date">2023年6月19日</span>
 									</li>
@@ -904,14 +916,6 @@ tan(theta) : [ 0.00000000e+00  1.63312394e+16 -1.22464680e-16]</div>
 					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
 											<span class="post-date">2023年3月6日</span>
 									</li>
-											<li>
-					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
-											<span class="post-date">2023年2月27日</span>
-									</li>
-											<li>
-					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
-											<span class="post-date">2023年2月8日</span>
-									</li>
 					</ul>
 
 		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
@@ -924,9 +928,11 @@ tan(theta) : [ 0.00000000e+00  1.63312394e+16 -1.22464680e-16]</div>
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (1)
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
 <ul class='children'>
 	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
 </li>
 </ul>
 </li>
@@ -948,7 +954,7 @@ tan(theta) : [ 0.00000000e+00  1.63312394e+16 -1.22464680e-16]</div>
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (20)
 <ul class='children'>
 	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
 </li>
@@ -974,7 +980,9 @@ tan(theta) : [ 0.00000000e+00  1.63312394e+16 -1.22464680e-16]</div>
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(1)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
 	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
 	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
 	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
@@ -1039,7 +1047,7 @@ tan(theta) : [ 0.00000000e+00  1.63312394e+16 -1.22464680e-16]</div>
 					
 										
 					<div id="copyright">
-													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
 											</div><!--/#copyright-->
 					
 										

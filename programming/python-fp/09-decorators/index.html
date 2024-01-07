@@ -12,22 +12,23 @@
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 
-	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
 	<title>Python函数式编程09 闭包和装饰器 - 冰封残烛的个人小站</title>
-	<meta name="description" content="函数在定义内部内可以嵌套定义函数，如果返回的函数包含外部函数绑定的变量，则称为闭包。装饰器 是Python的一大特性，在不修改函数本义的情况下，可以通过简单的代码增加函数的功能，有效增加了代码的复用性，并使写出的代码结构更清晰。" />
+	<meta name="description" content="函数在定义内部内可以嵌套定义函数，如果返回的函数包含外部函数绑定的变量，则称为闭包。装饰器(decorator)是Python的一大特性，在不修改函数本义的情况下，可以通过简单的代码增加函数的功能，有效增加了代码的复用性，并使写出的代码结构更清晰。" />
 	<link rel="canonical" href="/programming/python-fp/09-decorators/" />
 	<meta property="og:locale" content="zh_CN" />
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content="Python函数式编程09 闭包和装饰器 - 冰封残烛的个人小站" />
-	<meta property="og:description" content="函数在定义内部内可以嵌套定义函数，如果返回的函数包含外部函数绑定的变量，则称为闭包。装饰器 是Python的一大特性，在不修改函数本义的情况下，可以通过简单的代码增加函数的功能，有效增加了代码的复用性，并使写出的代码结构更清晰。" />
+	<meta property="og:description" content="函数在定义内部内可以嵌套定义函数，如果返回的函数包含外部函数绑定的变量，则称为闭包。装饰器(decorator)是Python的一大特性，在不修改函数本义的情况下，可以通过简单的代码增加函数的功能，有效增加了代码的复用性，并使写出的代码结构更清晰。" />
 	<meta property="og:url" content="/programming/python-fp/09-decorators/" />
 	<meta property="og:site_name" content="冰封残烛的个人小站" />
 	<meta property="article:published_time" content="2022-06-03T03:07:51+00:00" />
-	<meta property="article:modified_time" content="2023-10-05T03:11:57+00:00" />
+	<meta property="article:modified_time" content="2023-10-14T02:46:01+00:00" />
 	<meta property="og:image" content="/wp-content/uploads/2022/06/Python函数式编程09-闭包与装饰器.jpg" />
 	<meta property="og:image:width" content="2250" />
 	<meta property="og:image:height" content="1080" />
 	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="作者" />
 	<meta name="twitter:data1" content="Hello" />
@@ -37,35 +38,8 @@
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
-	            "@type": "WebSite",
-	            "@id": "/#website",
-	            "url": "/",
-	            "name": "冰封残烛的个人小站",
-	            "description": "FrozenCandle&#039;s Personal Site",
-	            "potentialAction": [
-	                {
-	                    "@type": "SearchAction",
-	                    "target": {
-	                        "@type": "EntryPoint",
-	                        "urlTemplate": "/?s={search_term_string}"
-	                    },
-	                    "query-input": "required name=search_term_string"
-	                }
-	            ],
-	            "inLanguage": "zh-CN"
-	        },
-	        {
-	            "@type": "ImageObject",
-	            "inLanguage": "zh-CN",
-	            "@id": "/programming/python-fp/09-decorators/#primaryimage",
-	            "url": "/wp-content/uploads/2022/06/Python函数式编程09-闭包与装饰器.jpg",
-	            "contentUrl": "/wp-content/uploads/2022/06/Python函数式编程09-闭包与装饰器.jpg",
-	            "width": 2250,
-	            "height": 1080
-	        },
-	        {
 	            "@type": "WebPage",
-	            "@id": "/programming/python-fp/09-decorators/#webpage",
+	            "@id": "/programming/python-fp/09-decorators/",
 	            "url": "/programming/python-fp/09-decorators/",
 	            "name": "Python函数式编程09 闭包和装饰器 - 冰封残烛的个人小站",
 	            "isPartOf": {
@@ -74,12 +48,16 @@
 	            "primaryImageOfPage": {
 	                "@id": "/programming/python-fp/09-decorators/#primaryimage"
 	            },
+	            "image": {
+	                "@id": "/programming/python-fp/09-decorators/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2022/06/Python函数式编程09-闭包与装饰器.jpg",
 	            "datePublished": "2022-06-03T03:07:51+00:00",
-	            "dateModified": "2023-10-05T03:11:57+00:00",
+	            "dateModified": "2023-10-14T02:46:01+00:00",
 	            "author": {
 	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
 	            },
-	            "description": "函数在定义内部内可以嵌套定义函数，如果返回的函数包含外部函数绑定的变量，则称为闭包。装饰器 是Python的一大特性，在不修改函数本义的情况下，可以通过简单的代码增加函数的功能，有效增加了代码的复用性，并使写出的代码结构更清晰。",
+	            "description": "函数在定义内部内可以嵌套定义函数，如果返回的函数包含外部函数绑定的变量，则称为闭包。装饰器(decorator)是Python的一大特性，在不修改函数本义的情况下，可以通过简单的代码增加函数的功能，有效增加了代码的复用性，并使写出的代码结构更清晰。",
 	            "breadcrumb": {
 	                "@id": "/programming/python-fp/09-decorators/#breadcrumb"
 	            },
@@ -92,6 +70,15 @@
 	                    ]
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/programming/python-fp/09-decorators/#primaryimage",
+	            "url": "/wp-content/uploads/2022/06/Python函数式编程09-闭包与装饰器.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/06/Python函数式编程09-闭包与装饰器.jpg",
+	            "width": 2250,
+	            "height": 1080
 	        },
 	        {
 	            "@type": "BreadcrumbList",
@@ -109,6 +96,24 @@
 	                    "name": "Python函数式编程09 闭包和装饰器"
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
 	        },
 	        {
 	            "@type": "Person",
@@ -158,7 +163,6 @@ body { font-family: "Roboto", Arial, sans-serif; }
 <link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
-<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
 <script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
 <link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/276" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
 <meta name="generator" content="WordPress 6.3.1" />
@@ -295,20 +299,17 @@ var _hmt = _hmt || [];
 				<div class="entry-content">
 					<div class="entry themeform">	
 						
-
-
-
 <h2>闭包</h2>
 
 <h3>闭包的概念</h3>
 
-<p>在<a class="link-internal" link="python-fp@03" href="/archives/246">第 3 节</a>中，介绍了高阶函数的概念，一个高阶函数可以返回另一个函数。但实际上，Python 的函数定义还有另一个有意思的地方：一个函数的定义可以嵌套在另一个函数之内，也就是说，如下所示的定义：</p>
+<p>在<a class="link-internal" href="/programming/python-fp/03-functional-programming">第 3 节</a>中，介绍了高阶函数的概念，一个高阶函数可以返回另一个函数。但实际上，Python 的函数定义还有另一个有意思的地方：一个函数的定义可以嵌套在另一个函数之内，也就是说，如下所示的定义：</p>
 
 <div class="codeblock code-template">
-    <strong>def</strong> func(...):<br>
-    &nbsp; &nbsp; ...<br>
-    &nbsp; &nbsp; <strong>def</strong> inner_func(...):<br>
-    &nbsp; &nbsp; &nbsp; &nbsp; ...<br>
+    <strong>def</strong> func(...):<br/>
+    &nbsp; &nbsp; ...<br/>
+    &nbsp; &nbsp; <strong>def</strong> inner_func(...):<br/>
+    &nbsp; &nbsp; &nbsp; &nbsp; ...<br/>
     &nbsp; &nbsp; ...
 </div>
 
@@ -318,7 +319,7 @@ var _hmt = _hmt || [];
 
 <p>以下展示了一个这样的情形，注意到在调用函数后，就将这个函数给删除了：</p>
 
-<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">func</span><span style="color: #405c79;">():</span></div><div><span style="color: #405c79;">&#160; &#160; n = </span><span style="color: #bf8b56;">10</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">inner_n</span><span style="color: #405c79;">():</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> n</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> inner_n</span></div><br><div><span style="color: #405c79;">inner_func = func()</span></div><div><span style="color: #bf568b;font-weight: bold;">del</span><span style="color: #405c79;"> func</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(inner_func())</span></div></div>
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">func</span><span style="color: #405c79;">():</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; n = </span><span style="color: #bf8b56;">10</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">inner_n</span><span style="color: #405c79;">():</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> n</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> inner_n</span></div><br/><div><span style="color: #405c79;">inner_func = func()</span></div><div><span style="color: #bf568b;font-weight: bold;">del</span><span style="color: #405c79;"> func</span></div><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(inner_func())</span></div></div>
 
 <p>结果为：</p>
 
@@ -331,7 +332,7 @@ var _hmt = _hmt || [];
 
 <p>闭包的一个用途就是通过函数批量生成所需的参数。例如，以下函数利用闭包的特性，可以批量生成多项式函数：</p>
 
-<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">from</span><span style="color: #405c79;"> itertools </span><span style="color: #bf568b;font-weight: bold;">import</span><span style="color: #405c79;"> starmap</span></div><br><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">polinomial</span><span style="color: #405c79;">(*</span><span style="color: #bf8b56;">coeffs</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">inner</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">x</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">sum</span><span style="color: #405c79;">(starmap(</span><span style="color: #bf568b;font-weight: bold;">lambda</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">i</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">coeff</span><span style="color: #405c79;">: coeff * x ** i,</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;</span><span style="color: #8b56bf;">enumerate</span><span style="color: #405c79;">(</span><span style="color: #8b56bf;">reversed</span><span style="color: #405c79;">(coeffs)))</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160;)</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> inner</span></div></div>
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">from</span><span style="color: #405c79;"> itertools </span><span style="color: #bf568b;font-weight: bold;">import</span><span style="color: #405c79;"> starmap</span></div><br/><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">polinomial</span><span style="color: #405c79;">(*</span><span style="color: #bf8b56;">coeffs</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">inner</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">x</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">sum</span><span style="color: #405c79;">(starmap(</span><span style="color: #bf568b;font-weight: bold;">lambda</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">i</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">coeff</span><span style="color: #405c79;">: coeff * x ** i,</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="color: #8b56bf;">enumerate</span><span style="color: #405c79;">(</span><span style="color: #8b56bf;">reversed</span><span style="color: #405c79;">(coeffs)))</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;)</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> inner</span></div></div>
 
 <p>这样可以通过控制几个参数得到不同的函数：</p>
 
@@ -363,7 +364,7 @@ var _hmt = _hmt || [];
 
 <p>装饰器的思路可以从高阶函数开始。假设有函数：</p>
 
-<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">demo01</span><span style="color: #405c79;">():</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">hello</span><span style="color: #405c79;">'</span><span style="color: #405c79;">)</span></div><br><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">demo02</span><span style="color: #405c79;">():</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">hello</span><span style="color: #405c79;">'</span></div></div>
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">demo01</span><span style="color: #405c79;">():</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">hello</span><span style="color: #405c79;">'</span><span style="color: #405c79;">)</span></div><br/><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">demo02</span><span style="color: #405c79;">():</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">hello</span><span style="color: #405c79;">'</span></div></div>
 
 <p>在某个比较大的项目内，可能不知道这两个函数是在哪里执行的。现在需要增加这两个函数的功能，能让函数在调用时，显示函数名、调用时间、保存的局部变量等信息，但又希望不要逐个修改函数结构，否则这样会让工程量大大增加，而且容易出现疏忽。</p>
 
@@ -377,7 +378,7 @@ var _hmt = _hmt || [];
 
 <p>那么关于该提供调试信息的高阶函数便可以是这样：</p>
 
-<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">log</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">func</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; result = func()</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">'[</span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">strftime(</span><span style="color: #405c79;">"</span><span style="color: #56bf8b;">%H:%M:%S</span><span style="color: #405c79;">"</span><span style="color: #405c79;">, localtime())</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">]'</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">' </span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">func.</span><span style="color: #8b56bf;">__name__</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;"> returns </span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">result</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">'</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> result</span></div></div>
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">log</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">func</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; result = func()</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">'[</span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">strftime(</span><span style="color: #405c79;">"</span><span style="color: #56bf8b;">%H:%M:%S</span><span style="color: #405c79;">"</span><span style="color: #405c79;">, localtime())</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">]'</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">' </span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">func.</span><span style="color: #8b56bf;">__name__</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;"> returns </span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">result</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">'</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> result</span></div></div>
 
 <p>测试运行的效果为：</p>
 
@@ -398,7 +399,7 @@ hello
 
 <p>这就可以使用之前介绍闭包时提到过的批量生产函数的用法：可以让函数在生产时不改变其用法，只输出基本信息，也就是说在高阶函数内部定义一个嵌套函数，让高阶函数传入的参数来供嵌套函数使用，再由返回的嵌套函数来执行需要的传参功能。因此，该高阶函数便可以是：</p>
 
-<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">log</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">func</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">inner_func</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">x</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; result = func()</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">'[</span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">strftime(</span><span style="color: #405c79;">"</span><span style="color: #56bf8b;">%H:%M:%S</span><span style="color: #405c79;">"</span><span style="color: #405c79;">, localtime())</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">]'</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">' </span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">func.</span><span style="color: #8b56bf;">__name__</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;"> returns </span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">result</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">'</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> result</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> inner_func</span></div></div>
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">log</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">func</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">inner_func</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">x</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; result = func()</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">'[</span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">strftime(</span><span style="color: #405c79;">"</span><span style="color: #56bf8b;">%H:%M:%S</span><span style="color: #405c79;">"</span><span style="color: #405c79;">, localtime())</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">]'</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">' </span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">func.</span><span style="color: #8b56bf;">__name__</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;"> returns </span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">result</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">'</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> result</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> inner_func</span></div></div>
 
 <p>注意到定义装饰器函数时，其传参是依靠内层函数来完成的，因此嵌套函数的参数应该与装饰器函数的内层函数的参数数量相一致。这里使用可变参数 <code>*args</code> 和 <code>**kwargs</code> 组合，就可以表示任意的传参情况。接下来的一个技巧就是使用覆盖原有的函数定义，使用添加功能后的同名函数：</p>
 
@@ -414,53 +415,53 @@ hello
 
 <p>这就是装饰器的基本思路，使用嵌套函数实现的生产函数效果来替换原有函数，实现更丰富的功能。不过这种使用高阶函数的方式略显复杂，而且还需要定义很多新函数来执行传入参数功能。实际上，Python 中可以使用装饰器来很好地实现以上操作。相对于赋值创建一个新函数的方法去改变原有函数的功能，可以在函数定义的前一行，通过 <code>@</code> 符号加上高阶函数名，来作为一个函数的装饰器。例如，以上修改后的高阶函数便可以作为一个装饰器来装饰函数：</p>
 
-<div class="vscode-block"><div><span style="color: #405c79;">@</span><span style="color: #8b56bf;">log</span></div><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">four_times</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">x</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> x * </span><span style="color: #bf8b56;">4</span></div></div>
+<div class="vscode-block"><div><span style="color: #405c79;">@</span><span style="color: #8b56bf;">log</span></div><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">four_times</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">x</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> x * </span><span style="color: #bf8b56;">4</span></div></div>
 
 <p>是 Python 提供的一种更简洁的写法。也就是说，函数的装饰器使用下列形式来装饰一个函数：</p>
 
 <div class="codeblock code-template">
-    @decorator<br>
-    <strong>def</strong> function():<br>
+    @decorator<br/>
+    <strong>def</strong> function():<br/>
     &nbsp; &nbsp; ... 
 </div>
 
 <p>等价于下面这种普通形式：</p>
 
 <div class="codeblock code-template">
-    <strong>def</strong> function():<br>
-    &nbsp; &nbsp; ...<br>
+    <strong>def</strong> function():<br/>
+    &nbsp; &nbsp; ...<br/>
     function = decorator(function) 
 </div>
 
 <p>装饰器实际上就是一个函数，它将一个函数装饰成一个它修改之后的新的函数。需要注意的是，装饰器的函数是一个高阶函数，且必须要有一个位置参数。</p>
 
-<p>可以看出，<mark>装饰器可以在不影响函数结果的同时，为函数增加一些新的功能</mark>，也就是“装饰”的字面意义。</p>
+<p>可以看出，<mark>装饰器可以在不影响函数结果的同时，为函数增加一些新的功能</mark>，也就是&ldquo;装饰&rdquo;的字面意义。</p>
 
 <p>下图表达了这种装饰的思路，可以看到装饰器就像一张图片的花边，让图片内容变得更丰富，但又不改变图片原有的含义：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@python-fp/09-decorator-concept.jpg" alt="" width="330">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@python-fp/09-decorator-concept.jpg" width="330"/>
     <figcaption>图片素材来源于网络</figcaption>
 </figure>
 
 <p>例如，以下实现了一个装饰器 <code>@timer</code> ，可以在调用函数时同时检查函数运行的时间，从而统计出是哪一个函数拖慢了程序的运行：</p>
 
-<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">timer</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">func</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">wrapper</span><span style="color: #405c79;">(*</span><span style="color: #bf8b56;">args</span><span style="color: #405c79;">, **</span><span style="color: #bf8b56;">kwargs</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; start = perf_counter()</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; result = func(*args, **kwargs)</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">'</span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">func.</span><span style="color: #8b56bf;">__name__</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;"> execs </span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">perf_counter() - start</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;"> second(s)'</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> result</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> wrapper</span></div></div>
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">timer</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">func</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">wrapper</span><span style="color: #405c79;">(*</span><span style="color: #bf8b56;">args</span><span style="color: #405c79;">, **</span><span style="color: #bf8b56;">kwargs</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; start = perf_counter()</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; result = func(*args, **kwargs)</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">'</span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">func.</span><span style="color: #8b56bf;">__name__</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;"> execs </span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">perf_counter() - start</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;"> second(s)'</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> result</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> wrapper</span></div></div>
 
 <p>一个函数的定义可以使用多个装饰器，结果与装饰器的位置顺序有关。例如：</p>
 
 <div class="codeblock code-template">
-    @outer_decor<br>
-    @inner_decor<br>
-    <strong>def</strong> func(..):<br>
+    @outer_decor<br/>
+    @inner_decor<br/>
+    <strong>def</strong> func(..):<br/>
     &nbsp; &nbsp; ... 
 </div>
 
 <p>它等价于：</p>
 
 <div class="codeblock code-template">
-    <strong>def</strong> func(...):<br>
-    &nbsp; &nbsp; ... <br>
+    <strong>def</strong> func(...):<br/>
+    &nbsp; &nbsp; ... <br/>
     func = outer_decor(inner_decor(func))
 </div>
 
@@ -473,16 +474,16 @@ hello
 <p>前文说过，装饰器</p>
 
 <div class="codeblock code-template">
-    @decorator<br>
-    <strong>def</strong> function():<br>
+    @decorator<br/>
+    <strong>def</strong> function():<br/>
     &nbsp; &nbsp; ... 
 </div>
 
 <p>等价于下面这种普通形式：</p>
 
 <div class="codeblock code-template">
-    <strong>def</strong> function():<br>
-    &nbsp; &nbsp; ...<br>
+    <strong>def</strong> function():<br/>
+    &nbsp; &nbsp; ...<br/>
     function = decorator(function) 
 </div>
 
@@ -490,7 +491,7 @@ hello
 
 <p>例如，以下修改之前定义的 <code>log</code> 函数，使它能够在装饰函数时可以通过参数自由控制显示的内容。这样，该函数便可以再嵌套一次，以完成二次传参作用：</p>
 
-<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">log</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">time</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">True</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">check_arg</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">False</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">outer_wrapper</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">func</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">inner_wrapper</span><span style="color: #405c79;">(*</span><span style="color: #bf8b56;">args</span><span style="color: #405c79;">, **</span><span style="color: #bf8b56;">kwargs</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; result = func(*args, **kwargs)</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> time:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">'[</span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">strftime(</span><span style="color: #405c79;">"</span><span style="color: #56bf8b;">%H:%M:%S</span><span style="color: #405c79;">"</span><span style="color: #405c79;">, localtime())</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">]'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">end</span><span style="color: #405c79;">=</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;"> </span><span style="color: #405c79;">'</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(func.</span><span style="color: #8b56bf;">__name__</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">end</span><span style="color: #405c79;">=</span><span style="color: #405c79;">''</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> check_arg:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">(</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, *args, *[</span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">'</span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">k</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">=</span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">v</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">'</span><span style="color: #405c79;"> </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> k, v in kwargs.items()], </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">)</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">end</span><span style="color: #405c79;">=</span><span style="color: #405c79;">''</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">' returns </span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">result</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">'</span><span style="color: #405c79;">)</span></div><br><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> result</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> inner_wrapper</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> outer_wrapper</span></div></div>
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">log</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">time</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">True</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">check_arg</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">False</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">outer_wrapper</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">func</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">inner_wrapper</span><span style="color: #405c79;">(*</span><span style="color: #bf8b56;">args</span><span style="color: #405c79;">, **</span><span style="color: #bf8b56;">kwargs</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; result = func(*args, **kwargs)</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> time:</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">'[</span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">strftime(</span><span style="color: #405c79;">"</span><span style="color: #56bf8b;">%H:%M:%S</span><span style="color: #405c79;">"</span><span style="color: #405c79;">, localtime())</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">]'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">end</span><span style="color: #405c79;">=</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;"> </span><span style="color: #405c79;">'</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(func.</span><span style="color: #8b56bf;">__name__</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">end</span><span style="color: #405c79;">=</span><span style="color: #405c79;">''</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> check_arg:</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">(</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, *args, *[</span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">'</span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">k</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">=</span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">v</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">'</span><span style="color: #405c79;"> </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> k, v in kwargs.items()], </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">)</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">end</span><span style="color: #405c79;">=</span><span style="color: #405c79;">''</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(</span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">' returns </span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">result</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">'</span><span style="color: #405c79;">)</span></div><br/><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> result</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> inner_wrapper</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> outer_wrapper</span></div></div>
 
 <p>先分析一下该函数，当该函数作为装饰器装饰 <code>function</code> 函数时，等价于这种形式：</p>
 
@@ -502,7 +503,7 @@ hello
 
 <p>以下编写了两个函数：<code>isprime()</code> 用于判断一个数是否为质数；<code>prime_factorization()</code> 则根据结果将一个大数分解为它的质因数。如果给第一个函数加上 <code>@log</code> 装饰器，那么在调用函数时就可以很清楚地看到程序执行的过程：</p>
 
-<div class="vscode-block"><div><span style="color: #405c79;">@</span><span style="color: #8b56bf;">log</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">check_arg</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">True</span><span style="color: #405c79;">)</span></div><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">isprime</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">number</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">int</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i in </span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">, number // </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> number % i == </span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">False</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">True</span></div><br><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">prime_factorization</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">number</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">int</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; factors = []</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">while</span><span style="color: #405c79;"> not isprime(number):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i in </span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">, number // </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> number % i == </span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; factors.append(i)</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; number //= i</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">break</span></div><div><span style="color: #405c79;">&#160; &#160; factors.append(number)</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> factors</span></div><br><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(prime_factorization(</span><span style="color: #bf8b56;">6108984</span><span style="color: #405c79;">))</span></div></div>
+<div class="vscode-block"><div><span style="color: #405c79;">@</span><span style="color: #8b56bf;">log</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">check_arg</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">True</span><span style="color: #405c79;">)</span></div><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">isprime</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">number</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">int</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i in </span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">, number // </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> number % i == </span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">False</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">True</span></div><br/><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">prime_factorization</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">number</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">int</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; factors = []</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">while</span><span style="color: #405c79;"> not isprime(number):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i in </span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">, number // </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> number % i == </span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; factors.append(i)</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; number //= i</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">break</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; factors.append(number)</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> factors</span></div><br/><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(prime_factorization(</span><span style="color: #bf8b56;">6108984</span><span style="color: #405c79;">))</span></div></div>
 
 <p>通过结果可以观察到质因数的分解过程：</p>
 
@@ -524,11 +525,11 @@ hello
 
 <p>装饰器的基本结构已经大致完成，但是仍然有一些小缺陷。例如，以下装饰器可以将任意函数的返回值包装成 HTML 标签：</p>
 
-<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">html_tag</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">tag</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">str</span><span style="color: #405c79;">, **</span><span style="color: #bf8b56;">attrs</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">outer_func</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">func</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">inner_func</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">contain</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">str</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; attr = </span><span style="color: #405c79;">''</span><span style="color: #405c79;">.join([</span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">' </span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">k</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">="</span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">v</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">"'</span><span style="color: #405c79;"> </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> k, v in attrs.items()])</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">&lt;</span><span style="color: #bf8b56;">{0}{1}</span><span style="color: #56bf8b;">&gt;</span><span style="color: #bf8b56;">{2}</span><span style="color: #56bf8b;">&lt;/</span><span style="color: #bf8b56;">{0}</span><span style="color: #56bf8b;">&gt;</span><span style="color: #405c79;">'</span><span style="color: #405c79;">.format(tag, attr, func(contain))</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> inner_func</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> outer_func</span></div></div>
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">html_tag</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">tag</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">str</span><span style="color: #405c79;">, **</span><span style="color: #bf8b56;">attrs</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">outer_func</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">func</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">inner_func</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">contain</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">str</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; attr = </span><span style="color: #405c79;">''</span><span style="color: #405c79;">.join([</span><span style="color: #bf568b;font-weight: bold;">f</span><span style="color: #56bf8b;">' </span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">k</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">="</span><span style="color: #bf8b56;">{</span><span style="color: #405c79;">v</span><span style="color: #bf8b56;">}</span><span style="color: #56bf8b;">"'</span><span style="color: #405c79;"> </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> k, v in attrs.items()])</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">&lt;</span><span style="color: #bf8b56;">{0}{1}</span><span style="color: #56bf8b;">&gt;</span><span style="color: #bf8b56;">{2}</span><span style="color: #56bf8b;">&lt;/</span><span style="color: #bf8b56;">{0}</span><span style="color: #56bf8b;">&gt;</span><span style="color: #405c79;">'</span><span style="color: #405c79;">.format(tag, attr, func(contain))</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> inner_func</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> outer_func</span></div></div>
 
 <p>这个装饰器本身没有任何问题，以下是一个装饰示例：</p>
 
-<div class="vscode-block"><div><span style="color: #405c79;">@</span><span style="color: #8b56bf;">html_tag</span><span style="color: #405c79;">(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">p</span><span style="color: #405c79;">'</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">@</span><span style="color: #8b56bf;">html_tag</span><span style="color: #405c79;">(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">a</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">href</span><span style="color: #405c79;">=</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">javascript: upload(this);</span><span style="color: #405c79;">'</span><span style="color: #405c79;">)</span></div><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">legalize</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">string</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #405c79;">"""</span><span style="color: #56bf8b;">Make the string a valid filename</span><span style="color: #405c79;">"""</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> sub(</span><span style="color: #bf568b;font-weight: bold;">r</span><span style="color: #405c79;">'</span><span style="color: #bf8b56;">[</span><span style="color: #568bbf;">\\\/</span><span style="color: #bf8b56;">:*?"&lt;&gt;|]</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;"> </span><span style="color: #405c79;">'</span><span style="color: #405c79;">, string)</span></div><br><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(legalize(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">&lt;User&gt;: name</span><span style="color: #405c79;">'</span><span style="color: #405c79;">))</span></div></div>
+<div class="vscode-block"><div><span style="color: #405c79;">@</span><span style="color: #8b56bf;">html_tag</span><span style="color: #405c79;">(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">p</span><span style="color: #405c79;">'</span><span style="color: #405c79;">)</span></div><div><span style="color: #405c79;">@</span><span style="color: #8b56bf;">html_tag</span><span style="color: #405c79;">(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">a</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">href</span><span style="color: #405c79;">=</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">javascript: upload(this);</span><span style="color: #405c79;">'</span><span style="color: #405c79;">)</span></div><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">legalize</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">string</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #405c79;">"""</span><span style="color: #56bf8b;">Make the string a valid filename</span><span style="color: #405c79;">"""</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> sub(</span><span style="color: #bf568b;font-weight: bold;">r</span><span style="color: #405c79;">'</span><span style="color: #bf8b56;">[</span><span style="color: #568bbf;">\\\/</span><span style="color: #bf8b56;">:*?"&lt;&gt;|]</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;"> </span><span style="color: #405c79;">'</span><span style="color: #405c79;">, string)</span></div><br/><div><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(legalize(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">&lt;User&gt;: name</span><span style="color: #405c79;">'</span><span style="color: #405c79;">))</span></div></div>
 
 <p>这里为函数提供了帮助文档。运行结果为：</p>
 
@@ -546,11 +547,11 @@ inner_func(contain: str)</div>
 
 <p>要想完善该问题，可以在装饰器函数内部返回 inner_func 前进行一些改动，手动将原有函数的属性拷贝给返回的函数：</p>
 
-<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">html_tag</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">tag</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">str</span><span style="color: #405c79;">, **</span><span style="color: #bf8b56;">attrs</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">outer_func</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">func</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">inner_func</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">contain</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">str</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf8b56;">...</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; inner_func.</span><span style="color: #8b56bf;">__name__</span><span style="color: #405c79;"> = func.</span><span style="color: #8b56bf;">__name__</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; inner_func.</span><span style="color: #8b56bf;">__doc__</span><span style="color: #405c79;"> = func.</span><span style="color: #8b56bf;">__doc__</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #a8a8a8;"># too many attributes need to update</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> inner_func</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> outer_func</span></div></div>
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">html_tag</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">tag</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">str</span><span style="color: #405c79;">, **</span><span style="color: #bf8b56;">attrs</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">outer_func</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">func</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">inner_func</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">contain</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">str</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf8b56;">...</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; inner_func.</span><span style="color: #8b56bf;">__name__</span><span style="color: #405c79;"> = func.</span><span style="color: #8b56bf;">__name__</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; inner_func.</span><span style="color: #8b56bf;">__doc__</span><span style="color: #405c79;"> = func.</span><span style="color: #8b56bf;">__doc__</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #a8a8a8;"># too many attributes need to update</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> inner_func</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> outer_func</span></div></div>
 
 <p>这样的做法稍显复杂，因为函数的属性实际上是非常多的（例如，<code>__dict__</code> 包含了各种额外属性，如果不更新会导致这些属性丢失）。实际上，Python 提供了一种方法，可以快速拷贝函数对象的所有属性给另一个函数，通过使用 <code>functools</code> 模块的 <code>@wraps()</code> 装饰器来完成该操作：</p>
 
-<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">from</span><span style="color: #405c79;"> functools </span><span style="color: #bf568b;font-weight: bold;">import</span><span style="color: #405c79;"> wraps</span></div><br><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">html_tag</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">tag</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">str</span><span style="color: #405c79;">, **</span><span style="color: #bf8b56;">attrs</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">outer_func</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">func</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; @</span><span style="color: #8b56bf;">wraps</span><span style="color: #405c79;">(func)</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">inner_func</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">contain</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">str</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #bf8b56;">...</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> inner_func</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> outer_func</span></div></div>
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">from</span><span style="color: #405c79;"> functools </span><span style="color: #bf568b;font-weight: bold;">import</span><span style="color: #405c79;"> wraps</span></div><br/><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">html_tag</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">tag</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">str</span><span style="color: #405c79;">, **</span><span style="color: #bf8b56;">attrs</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">outer_func</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">func</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; @</span><span style="color: #8b56bf;">wraps</span><span style="color: #405c79;">(func)</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">inner_func</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">contain</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">str</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf8b56;">...</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> inner_func</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> outer_func</span></div></div>
 
 <p>这样再次检查帮助文档的结果就正确了：</p>
 
@@ -564,7 +565,7 @@ legalize(string)
 
 <p>例如，以下是第三方框架 Flask 的一个非常简单的示例：</p>
 
-<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">from</span><span style="color: #405c79;"> flask </span><span style="color: #bf568b;font-weight: bold;">import</span><span style="color: #405c79;"> Flask, render_template</span></div><br><div><span style="color: #405c79;">app = Flask(</span><span style="color: #8b56bf;">__name__</span><span style="color: #405c79;">)</span></div><br><div><span style="color: #405c79;">@</span><span style="color: #8b56bf;">app</span><span style="color: #405c79;">.</span><span style="color: #8b56bf;">route</span><span style="color: #405c79;">(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">/</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">methods</span><span style="color: #405c79;">=[</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">GET</span><span style="color: #405c79;">'</span><span style="color: #405c79;">])</span></div><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">main</span><span style="color: #405c79;">():</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> render_template(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">index.html</span><span style="color: #405c79;">'</span><span style="color: #405c79;">)</span></div><br><div><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">__name__</span><span style="color: #405c79;"> == </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">__main__</span><span style="color: #405c79;">'</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&#160; &#160; app.run(</span><span style="color: #bf8b56;">debug</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">True</span><span style="color: #405c79;">)</span></div></div>
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">from</span><span style="color: #405c79;"> flask </span><span style="color: #bf568b;font-weight: bold;">import</span><span style="color: #405c79;"> Flask, render_template</span></div><br/><div><span style="color: #405c79;">app = Flask(</span><span style="color: #8b56bf;">__name__</span><span style="color: #405c79;">)</span></div><br/><div><span style="color: #405c79;">@</span><span style="color: #8b56bf;">app</span><span style="color: #405c79;">.</span><span style="color: #8b56bf;">route</span><span style="color: #405c79;">(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">/</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">methods</span><span style="color: #405c79;">=[</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">GET</span><span style="color: #405c79;">'</span><span style="color: #405c79;">])</span></div><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">main</span><span style="color: #405c79;">():</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> render_template(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">index.html</span><span style="color: #405c79;">'</span><span style="color: #405c79;">)</span></div><br/><div><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">__name__</span><span style="color: #405c79;"> == </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">__main__</span><span style="color: #405c79;">'</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; app.run(</span><span style="color: #bf8b56;">debug</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">True</span><span style="color: #405c79;">)</span></div></div>
 
 <p>只需要一个装饰器，便可以将一个只有两行的函数变成一个网络应用，当在浏览器中访问本地端口时就会将 <code>index.html</code> 中的内容显示在浏览器上，但在代码中几乎完全不用涉及这方面的内容，这就是装饰器的强大之处。</p>
 
@@ -593,14 +594,14 @@ legalize(string)
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/programming/python/python3-string-format/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/02/Night-Street-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/02/Night-Street-520x293.jpg 520w, /wp-content/uploads/2022/02/Night-Street-300x169.jpg 300w, /wp-content/uploads/2022/02/Night-Street-1024x576.jpg 1024w, /wp-content/uploads/2022/02/Night-Street-768x432.jpg 768w, /wp-content/uploads/2022/02/Night-Street-1536x864.jpg 1536w, /wp-content/uploads/2022/02/Night-Street-950x534.jpg 950w, /wp-content/uploads/2022/02/Night-Street.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/computer-science/computer-networking/mqtt-tutorial/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/08/MQTT协议简介-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/08/MQTT协议简介-520x293.jpg 520w, /wp-content/uploads/2022/08/MQTT协议简介-300x169.jpg 300w, /wp-content/uploads/2022/08/MQTT协议简介-1024x576.jpg 1024w, /wp-content/uploads/2022/08/MQTT协议简介-768x432.jpg 768w, /wp-content/uploads/2022/08/MQTT协议简介-1536x864.jpg 1536w, /wp-content/uploads/2022/08/MQTT协议简介-950x534.jpg 950w, /wp-content/uploads/2022/08/MQTT协议简介.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/programming/python/python3-string-format/" rel="bookmark">Python3 字符串格式化</a>
+					<a href="/computer-science/computer-networking/mqtt-tutorial/" rel="bookmark">MQTT协议简介</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -611,14 +612,14 @@ legalize(string)
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/programming/python-oop/02-attributes/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-520x293.jpg 520w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-300x169.jpg 300w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-1024x576.jpg 1024w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-768x432.jpg 768w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-1536x864.jpg 1536w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性-950x534.jpg 950w, /wp-content/uploads/2022/07/Python面向对象编程02-类与实例的属性.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/programming/python-fp/03-functional-programming/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/programming/python-oop/02-attributes/" rel="bookmark">Python面向对象编程02-类与实例的属性</a>
+					<a href="/programming/python-fp/03-functional-programming/" rel="bookmark">Python函数式编程03 高阶函数与匿名函数</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -629,14 +630,14 @@ legalize(string)
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/computer-science/character-encoding/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/06/字节、字符与字符编码-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/字节、字符与字符编码-520x293.jpg 520w, /wp-content/uploads/2022/06/字节、字符与字符编码-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/embedded/stm32/esp8266-controlling/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/STM32与物联网02-网络数据收发-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/07/STM32与物联网02-网络数据收发-520x293.jpg 520w, /wp-content/uploads/2022/07/STM32与物联网02-网络数据收发-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/computer-science/character-encoding/" rel="bookmark">字节、字符与字符编码</a>
+					<a href="/embedded/stm32/esp8266-controlling/" rel="bookmark">STM32与物联网02-网络数据收发</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -673,6 +674,14 @@ legalize(string)
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
 											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
 					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
 											<span class="post-date">2023年6月19日</span>
 									</li>
@@ -692,14 +701,6 @@ legalize(string)
 					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
 											<span class="post-date">2023年3月6日</span>
 									</li>
-											<li>
-					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
-											<span class="post-date">2023年2月27日</span>
-									</li>
-											<li>
-					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
-											<span class="post-date">2023年2月8日</span>
-									</li>
 					</ul>
 
 		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
@@ -712,9 +713,11 @@ legalize(string)
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (1)
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
 <ul class='children'>
 	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
 </li>
 </ul>
 </li>
@@ -736,7 +739,7 @@ legalize(string)
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (20)
 <ul class='children'>
 	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
 </li>
@@ -762,7 +765,9 @@ legalize(string)
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(1)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
 	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
 	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
 	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
@@ -827,7 +832,7 @@ legalize(string)
 					
 										
 					<div id="copyright">
-													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
 											</div><!--/#copyright-->
 					
 										

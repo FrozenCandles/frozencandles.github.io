@@ -1,0 +1,1026 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>向量及其运算 - 冰封残烛的个人小站</title>
+	<link rel="canonical" href="/math/linear-algebra/01-vectors/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="向量及其运算 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="平面与向量 平面与点 平面(plane)是一种二维空&#046;&#046;&#046;" />
+	<meta property="og:url" content="/math/linear-algebra/01-vectors/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2023-07-02T03:35:00+00:00" />
+	<meta property="article:modified_time" content="2023-10-13T03:36:27+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2023/10/01-vectors.jpg" />
+	<meta property="og:image:width" content="1920" />
+	<meta property="og:image:height" content="1080" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="4分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebPage",
+	            "@id": "/math/linear-algebra/01-vectors/",
+	            "url": "/math/linear-algebra/01-vectors/",
+	            "name": "向量及其运算 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/math/linear-algebra/01-vectors/#primaryimage"
+	            },
+	            "image": {
+	                "@id": "/math/linear-algebra/01-vectors/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2023/10/01-vectors.jpg",
+	            "datePublished": "2023-07-02T03:35:00+00:00",
+	            "dateModified": "2023-10-13T03:36:27+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "breadcrumb": {
+	                "@id": "/math/linear-algebra/01-vectors/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/math/linear-algebra/01-vectors/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/math/linear-algebra/01-vectors/#primaryimage",
+	            "url": "/wp-content/uploads/2023/10/01-vectors.jpg",
+	            "contentUrl": "/wp-content/uploads/2023/10/01-vectors.jpg",
+	            "width": 1920,
+	            "height": 1080
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/math/linear-algebra/01-vectors/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "向量及其运算"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/1292" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=1292' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fmath%2Flinear-algebra%2F01-vectors%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fmath%2Flinear-algebra%2F01-vectors%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?432b66336cb23bd6712cecabe6d808eb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<link rel="stylesheet" href="/wp-content/static/css/theme@neon-pie.wp.css">
+<style>
+    .entry img { height: revert-layer; }
+</style>
+<script>
+    MathJax = {
+        tex: {
+            inlineMath: [['\\\\(', '\\\\)']],
+            displayMath: [["\\\\[","\\\\]"]],
+            macros: {
+                Vec: "\\boldsymbol"
+            }
+        },
+        startup: {
+            ready: () => {
+                MathJax.startup.defaultReady();
+                MathJax.startup.promise.then(() => {
+                    console.log('MathJax initial typesetting complete');
+                });
+            }
+        },
+        options: {
+            enableMenu: false,
+        }
+    };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-1292 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/all/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-1292" class="post-1292 post type-post status-publish format-standard has-post-thumbnail hentry category-linear-algebra">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">向量及其运算</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/math/linear-algebra/" rel="category tag">线性代数</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2023年7月2日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+<h2>平面与向量</h2>
+
+<h3>平面与点</h3>
+
+<p><strong>平面</strong>(plane)是一种二维空间，可以将其比作一张纸。<strong>点</strong>(point)是位置的参照，可以使用一个二维的点表示平面中的一个位置。在这个二维空间中可能分布着许多点，为了描述一个点，需要两个信息，如水平位置和竖直位置。<strong>原点</strong>(origin)是一个参考点，用于描述其它点在平面中的相对位置。</p>
+
+<figure>
+    <img decoding="async" alt="" height="210" src="/wp-content/uploads/image/category@math-linear-algebra/01-plane-and-origin.png"/>
+</figure>
+
+<p>为了测量平面内一个点的位置，需要两把尺子，这两把尺子称为<strong>坐标轴</strong>(axes, the singular is axis)，它们相交于原点，且彼此垂直。水平的轴称为 <span class="math">\\( x \\)</span> 轴，竖直的轴称为 <span class="math">\\( y \\)</span> 轴。</p>
+
+<figure>
+    <img decoding="async" alt="" height="210" src="/wp-content/uploads/image/category@math-linear-algebra/01-axes-on-plane.png"/>
+</figure>
+
+<p>借助坐标轴，可以使用 <span class="math">\\( x \\)</span> 坐标和 <span class="math">\\( y \\)</span> 坐标定位具体的点。一般将二维坐标写成 <span class="math">\\( x \\)</span> 坐标和 <span class="math">\\( y \\)</span> 坐标的有序数对（数组）<span class="math">\\( (x,y) \\)</span> ，例如 <span class="math">\\( (5,3) \\)</span> 。</p>
+
+<h3>向量的基本概念</h3>
+
+<p><strong>向量</strong>(vector)是具有方向和大小的量，可以用一个箭头表示向量：箭头的长度表示向量的大小，箭头的指向表示向量的方向：</p>
+
+<figure>
+    <img decoding="async" alt="" height="140" src="/wp-content/uploads/image/category@math-linear-algebra/01-vector.png"/>
+</figure>
+
+<p>向量的特征只由它的大小与方向决定，而与它在什么位置无关。因此，经任意平移得到的依然是同一个向量：</p>
+
+<figure>
+    <img decoding="async" alt="" height="210" src="/wp-content/uploads/image/category@math-linear-algebra/01-vector-space.png"/>
+</figure>
+
+<p>在二维平面中，可以使用两个点表示一个向量，两点的方向确定向量的方向，两点的距离确定向量的大小。由于平移不改变向量，因此往往使用原点作为向量的起点（箭头的尾部）。因此，在平面中，向量可以理解成从原点指向一个具体的点的一个直线箭头，也可以理解为平面上（相对于原点的）任意一个点，可以使用点的方式表示向量，也可以使用点的坐标描述向量。</p>
+
+<figure>
+    <img decoding="async" alt="" height="210" src="/wp-content/uploads/image/category@math-linear-algebra/01-vector-in-plane.png"/>
+</figure>
+
+<p>为了区别于点，一般将向量记为加粗的符号，例如 <span class="math">\\( \Vec v \\)</span> 。</p>
+
+<p>向量是一种解决问题的实用工具。在现实世界中许多物理量都具有大小和方向，此时它们就可以通过向量表示；在解析几何中，向量是计算几何体间的相对位置的实用工具。除此之外，向量也可以用作描述若干数构成的有序数组。</p>
+
+<p>向量和普通的数一样，可以参与各种运算。接下来简单介绍平面向量的一些简单运算。</p>
+
+<h3>平面向量运算</h3>
+
+<h4>向量加法</h4>
+
+<p>将两个数相加就是将它们合并在一起。同样，<strong>向量加法</strong>等价于将两个向量首尾相连，指向的新的向量：</p>
+
+<figure>
+    <img decoding="async" alt="" height="210" src="/wp-content/uploads/image/category@math-linear-algebra/01-vector-add.png"/>
+    <figcaption>向量加法的三角形法则</figcaption>
+</figure>
+
+<p>向量的加法和实数加法一样满足交换律，这条定律有时也称为向量加法的<strong>平行四边形法则</strong>，因为两种相加的顺序构成了一个平行四边形，指向同一个位置：</p>
+
+<figure>
+    <img decoding="async" alt="" height="210" src="/wp-content/uploads/image/category@math-linear-algebra/01-vector-add-parallelogram.png"/>
+    <figcaption>向量加法的平行四边形法则</figcaption>
+</figure>
+
+<h4>向量的标量乘法</h4>
+
+<p>将一个数与一个整数相乘，实际上就是将这个数自身重复相加若干次数。类似地，将向量与一个数相乘可以看作向量的重复相加这么多次，只要把箭头复制若干份，不断地首尾相连即可得出结果：</p>
+
+<figure>
+    <img decoding="async" alt="" height="210" src="/wp-content/uploads/image/category@math-linear-algebra/01-vector-scale-int.png"/>
+    <figcaption>标量乘法可以看作同一向量的累加</figcaption>
+</figure>
+
+<p>将向量乘以数的运算称为<strong>标量乘法</strong>(scalar multiplication)，普通的数通常被称为<strong>标量</strong>(scalar)。它的英文很形象，因为运算的效果就是将目标向量按给定的系数<em>缩放</em>(scale)。因此与向量相乘的标量也可以是小数。下图展示了这种运算，并将结果的箭头也按比例放大了：</p>
+
+<figure>
+    <img decoding="async" alt="" height="140" src="/wp-content/uploads/image/category@math-linear-algebra/01-vector-scale-float.png"/>
+    <figcaption>对小数的标量乘法</figcaption>
+</figure>
+
+<p>标量乘法还可以使用负数，使用负数代表沿相反方向缩放。例如，向量 <span class="math">\\( \Vec v \\)</span> 与 <span class="math">\\( &minus;0.5 \\)</span> 的乘积，结果向量的长度是原向量的一半，而且指向相反的方向。</p>
+
+<figure>
+    <img decoding="async" alt="" height="140" src="/wp-content/uploads/image/category@math-linear-algebra/01-vector-scale-negative.png"/>
+    <figcaption>对负数的标量乘法</figcaption>
+</figure>
+
+<h4>向量的分量和长度</h4>
+
+<p>直角坐标系下，一般将平行于坐标轴、长度为 1 的向量称为<strong>单位向量</strong> ，分别记作 <span class="math">\\( \Vec e_x \\)</span> 和 <span class="math">\\( \Vec e_y \\)</span> 。根据向量的加法和数乘，任何一个向量都可以被分解为由单位向量经缩放和相加运算得到的结果：</p>
+
+<div class="math">
+\\[
+    \Vec v = v_x \Vec e_x + v_y \Vec e_y
+\\]
+</div>
+
+<figure>
+    <img decoding="async" alt="" height="210" src="/wp-content/uploads/image/category@math-linear-algebra/01-vector-components.png"/>
+</figure>
+
+<p>因此，向量的坐标更严谨的表示方法是看作是组成它的单位向量前系数的有序组合。反之，给定一对有序数 <span class="math">\\( (x,y) \\)</span> ，它既唯一确定了平面上的一个点，也唯一确定了由同一组单位向量组成的一个向量，这种情况下点和向量可以一一对应，因此可以使用点表示向量。</p>
+
+<p><span class="math">\\( v_x \Vec e_x \\)</span> 和 <span class="math">\\( v_y \Vec e_y \\)</span> 这两个沿坐标轴上的向量有时也被称为向量的分量，<span class="math">\\( (v_x,v_y) \\)</span> 有时也称为向量的<strong>坐标</strong> ，它和点的坐标一样都可以用于确定唯一的向量。向量的运算也可以看作是对各个坐标的运算：</p>
+
+<p>相加得到的向量，其分量为被加的两个向量的分量之和。例如，向量 <span class="math">\\( \Vec u_1 = (3,4) \\)</span> 和 <span class="math">\\( \Vec u_2 = (2,-1) \\)</span> 相加，实际就是 <span class="math">\\( (3 \Vec e_x + 4 \Vec e_y) + (2 \Vec e_x + (-1) \Vec e_y) = (5 \Vec e_x + 3 \Vec e_y) \\)</span> ，或者可以直接写成 <span class="math">\\( (3+2,4-1) = (5,3) \\)</span> 的坐标相加形式。</p>
+
+<p>向量 <span class="math">\\( \Vec v_1 = (4,3) \\)</span> 与数 <span class="math">\\( 2.5 \\)</span> 的乘积 <span class="math">\\( 2.5 \Vec v_1 \\)</span> 等价于两个坐标各乘以 <span class="math">\\( 2.5 \\)</span> ，结果为 <span class="math">\\( (10,7.5) \\)</span> ，而且指向相同的方向。</p>
+
+<p>因为两个坐标轴是垂直的，所以知道了向量的分量或坐标，就可以使用勾股定理计算向量的长度了。如果一个向量的坐标为 <span class="math">\\( (x,y) \\)</span> ，那么它的长度为：</p>
+
+<div class="math">
+\\[
+    \text{length} = \sqrt{x^2 + y^2}
+\\]
+</div>
+
+<h4>向量减法</h4>
+
+<p>有了向量加法，自然就有向量减法。对向量减法有两种理解方式：</p>
+
+<p>首先，一个数的负数等价于将这个数乘以 <span class="math">\\( &minus;1 \\)</span> ；同样，一个向量 <span class="math">\\( \Vec v \\)</span> 的<strong>负向量</strong> <span class="math">\\( &minus;v \\)</span> 也等价于将这个向量乘以 <span class="math">\\( &minus;1 \\)</span> ，即标量乘积 <span class="math">\\( -1\cdot \Vec v \\)</span> ，结果长度相等，方向相反。如果 <span class="math">\\( \Vec v \\)</span> 是 <span class="math">\\( (4,3) \\)</span> ，那么它的负值 <span class="math">\\( &minus;v \\)</span> 等价于将两个分量乘以 &minus;1（改变每个坐标值的符号），结果为 <span class="math">\\( (&minus;4,&minus;3) \\)</span> 。</p>
+
+<figure>
+    <img decoding="async" alt="" height="140" src="/wp-content/uploads/image/category@math-linear-algebra/01-negative-vector.png"/>
+    <figcaption>负向量：大小相等，方向相反</figcaption>
+</figure>
+
+<p>那么，向量减法 <span class="math">\\( \Vec v_1 - \Vec v_2 \\)</span> 就等价于 <span class="math">\\( \Vec v_1 \\)</span> 加上向量负值 <span class="math">\\( -\Vec v_2 \\)</span> ，结果仍然遵守向量的缩放和加法三角形运算法则：</p>
+
+<figure>
+    <img decoding="async" alt="" height="140" src="/wp-content/uploads/image/category@math-linear-algebra/01-vector-subtract.png"/>
+    <figcaption>向量相减可以看作加上负向量</figcaption>
+</figure>
+
+<p>两个数的减法得到的是它们大小的差值，可以看作它们在数轴上对应两点的距离：</p>
+
+<figure>
+    <img decoding="async" alt="" height="140" src="/wp-content/uploads/image/category@math-linear-algebra/01-number-subtract.png"/>
+</figure>
+
+<p>类似地，另一种理解向量相减的方式是，向量减法 <span class="math">\\( \Vec v_1 - \Vec v_2\\)</span> 可以看作向量 <span class="math">\\( \Vec v_1 \\)</span> 相对于向量 <span class="math">\\( \Vec v_2 \\)</span> 的位置，也可以理解为从 <span class="math">\\( \Vec v_2 \\)</span> 头部到 <span class="math">\\( \Vec v_1 \\)</span> 头部的箭头：</p>
+
+<figure>
+    <img decoding="async" alt="" height="140" src="/wp-content/uploads/image/category@math-linear-algebra/01-vector-difference.png"/>
+    <figcaption>向量相减可以看作向量的相对位置</figcaption>
+</figure>
+
+<p>不管采用哪种理解方式，相减得到的向量坐标，同样为两个向量的坐标相减结果。例如，向量 <span class="math">\\( (5,4) \\)</span> 和 <span class="math">\\( (3,1) \\)</span> 相减的结果就是对应坐标相减的结果，为 <span class="math">\\( (2,3) \\)</span> 。</p>
+
+<h2>从二维平面到三维空间</h2>
+
+<h3>三维空间中的向量</h3>
+
+<p>在二维平面上，需要使用两个坐标来描述一个点的信息。二维向量有三种等价的表达：具有确定长度和方向的箭头、相对于原点的点，或者点对于的坐标 <span class="math">\\( (x,y) \\)</span>。</p>
+
+<p>三维空间与二维平面类似，只是除了 <span class="math">\\( x \\)</span> 方向和 <span class="math">\\( y \\)</span> 方向外，还增加了 <span class="math">\\( z \\)</span> 方向表示高度信息。三维向量也可以用类似的方式解释，只不过这个点在三维空间中，并且坐标需要使用三个数 <span class="math">\\( (x,y,z) \\)</span> 描述：</p>
+
+<figure>
+    <img decoding="async" alt="" height="260" src="/wp-content/uploads/image/category@math-linear-algebra/01-vector-in-3d.png"/>
+</figure>
+
+<p>可以说，所有二维向量也都存在于三维空间中，只是位于高度 <span class="math">\\( z \\)</span> 为零的平面上。</p>
+
+<figure>
+    <img decoding="async" alt="" height="260" src="/wp-content/uploads/image/category@math-linear-algebra/01-2d-vector-in-3d.png"/>
+</figure>
+
+<h3>三维空间中的向量运算</h3>
+
+<p>在三维空间中向量的运算规律和二维向量非常类似。例如，向量加法也可以通过首尾相连向量，或将坐标分量相加来完成：</p>
+
+<figure>
+    <img decoding="async" alt="" height="260" src="/wp-content/uploads/image/category@math-linear-algebra/01-vector-add-3d.png"/>
+</figure>
+
+<p>任意数量的三维向量相加，规律也和二维向量一样，可以将它们的所有 <span class="math">\\( x \\)</span> 、<span class="math">\\( y \\)</span> 和 <span class="math">\\( z \\)</span> 坐标分别相加。</p>
+
+<p>将三维向量乘以标量同样可以视为缩放，将其所有分量乘以标量系数便可以得到结果：</p>
+
+<figure>
+    <img decoding="async" alt="" height="260" src="/wp-content/uploads/image/category@math-linear-algebra/01-vector-scale-3d.png"/>
+</figure>
+
+<p>一个三维向量减去另一个三维向量，可以理解为从另一个向量头部到它头部的相对位置：</p>
+
+<figure>
+    <img decoding="async" alt="" height="260" src="/wp-content/uploads/image/category@math-linear-algebra/01-vector-subtract-3d.png"/>
+</figure>
+
+<p>二维向量的距离可以使用勾股定理计算，而三维向量也可以使用勾股定理，只是需要构造一个辅助三角形：</p>
+
+<figure>
+    <img decoding="async" alt="" height="260" src="/wp-content/uploads/image/category@math-linear-algebra/01-vector-length-3d.png"/>
+</figure>
+
+<p>一个三维向量可以看成 <span class="math">\\( xy \\)</span> 平面内的分量和 <span class="math">\\( z \\)</span> 轴上的分量之和，<span class="math">\\( xy \\)</span> 平面的分量长度计算可以通过勾股定理，类似二维向量；而这部分分量和 <span class="math">\\( z \\)</span> 轴上的分量也构成了一个直角三角形，因此可以使用两次勾股定理计算三维向量的长度：</p>
+
+<div class="math">
+\\[
+    \text{length}=\sqrt{\left(\sqrt{x^2+y^2}\right)^2+z^2}=\sqrt{x^2+y^2+z^2}
+\\]
+</div>
+
+<h2>向量乘法</h2>
+
+<p>前面介绍了向量的加法、减法和标量乘法。但与实数不同的是，向量不满足四则运算，向量间的除法是没有意义的。不过向量之间可以相乘，具体来说，有两种相乘方式，它们的含义各不一样，分别代表了某种特定场景下的几何意义。</p>
+
+<h3>点积：测量向量对齐</h3>
+
+<p><strong>点积</strong>(dot product)也叫内积(inner product)，是两个向量之间的运算。两个向量 <span class="math">\\( \Vec u \\)</span> 和 <span class="math">\\( \Vec v \\)</span> 的点积记作 <span class="math">\\( \Vec u \cdot \Vec v \\)</span> 。点积适用于任意维度的向量，它返回一个标量（数），这个数可以被看作两个输入向量的对齐程度。</p>
+
+<p>点积同时受到两个向量夹角和各自的长度影响，这是由于夹角相同的一对向量，如果它们更长，那么看起来相对更不对齐一些：</p>
+
+<figure>
+    <img decoding="async" alt="" height="140" src="/wp-content/uploads/image/category@math-linear-algebra/01-vector-alignment.png"/>
+</figure>
+
+<p>当向量夹角从 <span class="math">\\( 0 \\)</span> 变到 <span class="math">\\( \dfrac \pi 2 \\)</span> 时，点积 <span class="math">\\( \Vec u \cdot \Vec v \\)</span> 从 <span class="math">\\( \Vec u \\)</span> 和 <span class="math">\\( \Vec v \\)</span> 长度乘积变到长度乘积的负值，这和余弦函数的变化规律相同，因此点积的计算公式为：</p>
+
+<div class="math">
+\\[
+    \Vec u \cdot \Vec v = |\Vec u|\cdot|\Vec v| \cdot \cos(\theta)
+\\]
+</div>
+
+<p>其中 <span class="math">\\( \theta \\)</span> 是向量 <span class="math">\\( \Vec u \\)</span> 和 <span class="math">\\( \Vec v \\)</span> 之间的角度。</p>
+
+<p>向量的点积也满足交换律，相乘的顺序不影响结果。并且和实数运算律一样，向量乘法的优先级高于向量加法，</p>
+
+<p>首先以二维向量为例了解它们的点积。假设向量 <span class="math">\\( \Vec v_1 \\)</span> 和 <span class="math">\\( \Vec v_2 \\)</span> 的长度分别为 4 和 5 。如果它们的方向几乎相同，那么它们的点积为正，且大小近似等于它们长度之积，这意味着它们是基本对齐的：</p>
+
+<figure>
+    <img decoding="async" alt="" height="160" src="/wp-content/uploads/image/category@math-linear-algebra/01-vector-dot-prod-1.png"/>
+</figure>
+
+<p>如果两个向量指向大致相反的方向，则其点积为负，且大致等于它们长度乘积的负数，这时可以说它们是反向对齐的：</p>
+
+<figure>
+    <img decoding="async" alt="" height="160" src="/wp-content/uploads/image/category@math-linear-algebra/01-vector-dot-prod-4.png"/>
+</figure>
+
+<p>如果两个向量既不相同，也不相反，指向很不对齐，则其点积是一个远小于它们长度之积的数，正负主要看它们的指向是偏向相同还是偏向相反：</p>
+
+<figure>
+    <img decoding="async" alt="" height="160" src="/wp-content/uploads/image/category@math-linear-algebra/01-vector-dot-prod-2.png"/>
+</figure>
+
+<p>特别地，如果两个向量的方向完全垂直，那么无论它们的长度如何，点积都是零：</p>
+
+<figure>
+    <img decoding="async" alt="" height="160" src="/wp-content/uploads/image/category@math-linear-algebra/01-vector-dot-prod-3.png"/>
+</figure>
+
+<p>这种对齐程度还可以用向量的投影来衡量。如下图所示，想象在一束垂直向量 <span class="math">\\( \Vec u \\)</span> 的灯光照射下，<span class="math">\\( \Vec v \\)</span> 落在 <span class="math">\\( \Vec u \\)</span> 方向上的可见部分就是 <span class="math">\\( \Vec v \\)</span> 在 <span class="math">\\( \Vec u \\)</span> 上的投影：</p>
+
+<figure>
+    <img decoding="async" alt="" height="160" src="/wp-content/uploads/image/category@math-linear-algebra/01-vector-projection.png"/>
+</figure>
+
+<p>向量的点积反应了经投影后，投影方向上两个向量长度之积。显然，如果两个向量&ldquo;靠的较近&rdquo;，那么投影就较大，因此点积也较大。如果向量之间&ldquo;离得较远&rdquo;，投影便很小，使得点积也较小。</p>
+
+<p>向量的点积还满足分配率，即：</p>
+
+<div class="math">
+\\[
+    \Vec u \cdot (\Vec v + \Vec w) = \Vec u \cdot \Vec v + \Vec u \cdot \Vec w
+\\]
+</div>
+
+<p>接下来考虑点积的坐标计算式。如果根据坐标的定义展开点积，可以得到：</p>
+
+<div class="math">
+\\[
+    \begin{align}
+        \Vec u \cdot \Vec v &amp;= (u_x \Vec e_x + u_y \Vec e_y) \cdot (v_x \Vec e_x + v_y \Vec e_y) \\
+            &amp;= (u_x \Vec e_x) \cdot (u_x \Vec e_x) + (u_x \Vec e_x) \cdot (v_y \Vec e_y)
+                + (u_y \Vec e_y) \cdot (v_x \Vec e_x) + (v_y \Vec e_y) \cdot (v_y \Vec e_y)
+    \end{align}
+\\]
+</div>
+
+<p>仔细观察拆分的这四项，<span class="math">\\( (u_x \Vec e_x) \cdot (u_x \Vec e_x) \\)</span> 和 <span class="math">\\( (v_y \Vec e_y) \cdot (v_y \Vec e_y) \\)</span> 都是向量与自身相乘，它们一定是对齐的，所以结果就等于它们的长度乘积；<span class="math">\\( (u_x \Vec e_x) \cdot (v_y \Vec e_y) \\)</span> 和 <span class="math">\\( (u_y \Vec e_y) \cdot (v_x \Vec e_x) \\)</span> 是两个垂直的向量相乘，它们完全不对齐，所以结果为 0 。因此可以得到计算点积的坐标运算公式：</p>
+
+<div class="math">
+\\[
+    \begin{align}
+        \Vec u \cdot \Vec v &amp;= |\Vec u|\cdot|\Vec v| \cdot \cos(\theta) \\
+            &amp;= u_x \cdot v_x + u_y \cdot v_y 
+    \end{align}
+\\]
+</div>
+
+<p>也就是说，给定两个向量的坐标，其点积就是将相应的坐标相乘，然后将乘积相加。</p>
+
+<p>可以通过坐标计算两个向量的长度和它们之间的角度得到点积的结果；反过来也可以通过坐标计算两个向量的长度和点积得到它们之间的角度。对上式变形，结果为：</p>
+
+<div class="math">
+\\[
+    \begin{align}
+        \cos(\theta) &amp;= \dfrac{\boldsymbol{u}\cdot\boldsymbol{v}}{|\boldsymbol{u}|\cdot|\boldsymbol{v}|} \\
+            &amp;= \frac {u_x \cdot v_x + u_y \cdot v_y } {\sqrt{\vphantom{u_y^2} u_x^2 + v_x^2} \cdot \sqrt{u_y^2 + v_y^2 }}
+    \end{align}
+\\]
+</div>
+
+<p>这就是点积最重要的应用之一：点积可以在不做任何三角运算的情况下，判断两个向量或直线的相对方向。如果两个向量的点积为正，则向量的夹角小于 <span class="math">\\( 90^\circ \\)</span> ；如果点积为负，则夹角大于 <span class="math">\\( 90^\circ \\)</span> ；如果点积为 0 ，则两个向量垂直。这在三维空间很有用，因为在三维空间中，只需要确定坐标就可以计算向量长度和点积，但两个直线可能不在同一平面上，无法直接测量它们的夹角。</p>
+
+<h3>叉积：测量有向面积</h3>
+
+<p>和点积类似，<strong>叉积</strong>(cross product)也是向量之间的乘法运算。叉积也称外积(outer product)，两个向量 <span class="math">\\( \Vec u \\)</span> 和 <span class="math">\\( \Vec v \\)</span> 的叉积记作 <span class="math">\\( \Vec u \times \Vec v \\)</span> 。</p>
+
+<p>和点积不同的是，叉积只适合三维空间中的向量运算。叉积得到的结果是一个向量，它的大小代表两个向量确定的平行四边形的面积，方向代表两个向量在三维空间的方向。因此，点积有时也称数量积，叉积有时也称向量积。</p>
+
+<p>叉积的长度也可视为两个向量的垂直程度，这和点积的定义非常相似，其计算公式为：</p>
+
+<div class="math">
+\\[
+    |\Vec u \times \Vec v| = |\Vec u| \cdot |\Vec v| \cdot \sin(\theta)
+\\]
+</div>
+
+<p>这个数值也可以视为由 <span class="math">\\( \Vec u \\)</span> 和 <span class="math">\\( \Vec v \\)</span> 围成的平行四边形的面积：</p>
+
+<figure>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@math-linear-algebra/01-cross-product-parallelogram.png"/>
+</figure>
+
+<p>在介绍叉积的方向前，需要了解空间中的旋向。下图展示了两个合理的三维坐标系，并且使用同一套坐标生成了一对茶杯：</p>
+
+<figure>
+    <img decoding="async" alt="" height="200" src="/wp-content/uploads/image/category@math-linear-algebra/01-space-orientation.png"/>
+</figure>
+
+<p>这两个茶杯看起来很像，但并不是完全一致的：它们呈镜像对称，如果将杯身的图案正对屏幕，那么杯柄将一个向左，一个向右。就像手套有左右手之分一样，不同的坐标系会引起三维空间方向上的歧义。</p>
+
+<p>为了解决这个问题，需要有一个唯一的规则来确定坐标系的定义或坐标的空间朝向。这种规则称为<strong>右手法则</strong>(right-hand rule)，具体来说，如果使用右手的四指从 <span class="math">\\( x \\)</span> 轴弯向 <span class="math">\\( y \\)</span> 轴，那么拇指所指的方向规定为 <span class="math">\\( z \\)</span> 轴的正向：</p>
+
+<figure>
+    <img decoding="async" alt="" height="260" src="/wp-content/uploads/image/category@math-linear-algebra/01-right-hand-rule.png"/>
+</figure>
+
+<p>叉积的方向就是由 <span class="math">\\( \Vec u \\)</span> 和 <span class="math">\\( \Vec v \\)</span> 根据右手法则确定的朝向，从而叉积可以用作指明空间中的方向。</p>
+
+<p>注意，叉积的运算是有顺序的，叉积运算并不满足交换律，具体来说：</p>
+
+<div class="math">
+\\[
+    \Vec u \times \Vec v = - (\Vec v \times \Vec u)
+\\]
+</div>
+
+<p>叉积结果同时垂直于参与运算的两个向量，如果这两个向量确定了一个平面，那么叉积最重要的用途就是<em>求解法向量</em>。</p>
+
+<p>因此，叉积运算实际上就是确定了这样一个向量：</p>
+
+<figure>
+    <img decoding="async" alt="" height="260" src="/wp-content/uploads/image/category@math-linear-algebra/01-cross-product.png"/>
+</figure>
+
+<p>叉积的另一个性质就是任意向量与自身的叉积都是零向量：</p>
+
+<div class="math">
+\\[
+    \Vec v \times \Vec v = \Vec 0
+\\]
+</div>
+
+<p>此外，叉积运算也满足分配律：</p>
+
+<div class="math">
+\\[
+    \Vec u \times (\Vec v + \Vec w) = \Vec u \times \Vec v + \Vec u \times \Vec w
+\\]
+</div>
+
+<p>根据以上性质，可以推导叉积的坐标运算法则：</p>
+
+<div class="math">
+\\[
+    \begin{align}
+        \Vec u \times \Vec v =&amp; (u_x \Vec e_x + u_y \Vec e_y + u_z \Vec e_z) \times (v_x \Vec e_x + v_y \Vec e_y + v_z \Vec e_z) \\
+            =&amp;  (u_x \Vec e_x \times v_x \Vec e_x) + (u_x \Vec e_x \times v_y \Vec e_y) + (u_x \Vec e_x \times v_z \Vec e_z) \\
+             &amp;+ (u_y \Vec e_y \times v_x \Vec e_x) + (u_y \Vec e_y \times v_y \Vec e_y) + (u_y \Vec e_y \times v_z \Vec e_z) \\
+             &amp;+ (u_z \Vec e_z \times v_x \Vec e_x) + (u_z \Vec e_z \times v_y \Vec e_y) + (u_z \Vec e_z \times v_z \Vec e_z) \\
+    \end{align}
+\\]
+</div>
+
+<p>注意三维空间中一般规定 <span class="math">\\( \Vec e_x \times \Vec e_y = \Vec e_z \\)</span> ，并且有 <span class="math">\\( \Vec e_y \times \Vec e_z = \Vec e_x, \\)</span> <span class="math">\\( \Vec e_x \times \Vec e_z = - \Vec e_y, \\)</span> <span class="math">\\( \Vec e_y \times \Vec e_y = \Vec 0 \\)</span> 等，那么就可以得到：</p>
+
+<div class="math">
+\\[
+    \begin{align}
+        \Vec u \times \Vec v 
+           =&amp;  \Vec 0 + (u_x \times v_y) \Vec e_z - (u_x \times v_z) \Vec e_y \\
+            &amp;- (u_y \times v_x) \Vec e_z + \Vec 0 + (u_y \times v_z) \Vec e_x \\
+            &amp;+ (u_z \times v_x) \Vec e_y - (u_z \times v_y) \Vec e_x + \Vec 0 \\
+           =&amp; (u_y v_z - u_z v_y) \Vec e_x + (u_z v_x - u_x v_z) \Vec e_y + (u_x v_y - u_y v_x) \Vec e_z \\
+    \end{align}
+\\]
+</div>
+
+<p>向量积的运算比较复杂。如果了解行列式，那么倒是可以用行列式表达出来：</p>
+
+<div class="math">
+\\[
+    \Vec u \times \Vec v = \begin{vmatrix}
+        \Vec e_x &amp; \Vec e_y &amp; \Vec e_z \\
+        u_x &amp; u_y &amp; u_z \\
+        v_x &amp; v_y &amp; v_z \\
+    \end{vmatrix}
+\\]
+</div>
+
+
+
+
+
+
+
+
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/embedded/mcu-application/lvgl-05-color-and-image/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/LVGL库入门教程05-颜色和图像-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/06/LVGL库入门教程05-颜色和图像-520x293.jpg 520w, /wp-content/uploads/2022/06/LVGL库入门教程05-颜色和图像-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/embedded/mcu-application/lvgl-05-color-and-image/" rel="bookmark">LVGL库入门教程05-颜色和图像</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-fp/03-functional-programming/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-fp/03-functional-programming/" rel="bookmark">Python函数式编程03 高阶函数与匿名函数</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/embedded/mcu-application/lvgl-04-styles/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/LVGL库入门教程04-样式-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/LVGL库入门教程04-样式-520x293.jpg 520w, /wp-content/uploads/2022/06/LVGL库入门教程04-样式-300x169.jpg 300w, /wp-content/uploads/2022/06/LVGL库入门教程04-样式-1024x576.jpg 1024w, /wp-content/uploads/2022/06/LVGL库入门教程04-样式-768x432.jpg 768w, /wp-content/uploads/2022/06/LVGL库入门教程04-样式-1536x864.jpg 1536w, /wp-content/uploads/2022/06/LVGL库入门教程04-样式-950x534.jpg 950w, /wp-content/uploads/2022/06/LVGL库入门教程04-样式.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/embedded/mcu-application/lvgl-04-styles/" rel="bookmark">LVGL库入门教程04-样式</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/programming/c-macro/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>C语言-宏定义完全指南</span></a></li>
+		<li class="previous"><a href="/math/numerical-analysis/03-interpolating/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>数值分析-插值</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/" aria-current="page">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
+					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
+											<span class="post-date">2023年6月19日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (20)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(1)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

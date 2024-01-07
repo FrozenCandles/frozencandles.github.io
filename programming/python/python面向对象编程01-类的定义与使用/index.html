@@ -12,7 +12,7 @@
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 
-	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
 	<title>Python面向对象编程01-类的定义与使用 - 冰封残烛的个人小站</title>
 	<meta name="description" content="面向对象编程 思路将一系列属性与方法作为一个整体封装成一个类。Python 是一种面向对象编程的语言，本节介绍类与对象的概念，以及如何在 Python 中定义类和实例，并介绍类和实例的属性与方法的基本操作，与特殊方法 __init__ 。" />
 	<link rel="canonical" href="/programming/python-oop/01-class-and-instance/" />
@@ -28,6 +28,7 @@
 	<meta property="og:image:width" content="2349" />
 	<meta property="og:image:height" content="1080" />
 	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="作者" />
 	<meta name="twitter:data1" content="Hello" />
@@ -37,35 +38,8 @@
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
-	            "@type": "WebSite",
-	            "@id": "/#website",
-	            "url": "/",
-	            "name": "冰封残烛的个人小站",
-	            "description": "FrozenCandle&#039;s Personal Site",
-	            "potentialAction": [
-	                {
-	                    "@type": "SearchAction",
-	                    "target": {
-	                        "@type": "EntryPoint",
-	                        "urlTemplate": "/?s={search_term_string}"
-	                    },
-	                    "query-input": "required name=search_term_string"
-	                }
-	            ],
-	            "inLanguage": "zh-CN"
-	        },
-	        {
-	            "@type": "ImageObject",
-	            "inLanguage": "zh-CN",
-	            "@id": "/programming/python-oop/01-class-and-instance/#primaryimage",
-	            "url": "/wp-content/uploads/2022/07/Python面向对象编程01-类的定义与使用.jpg",
-	            "contentUrl": "/wp-content/uploads/2022/07/Python面向对象编程01-类的定义与使用.jpg",
-	            "width": 2349,
-	            "height": 1080
-	        },
-	        {
 	            "@type": "WebPage",
-	            "@id": "/programming/python-oop/01-class-and-instance/#webpage",
+	            "@id": "/programming/python-oop/01-class-and-instance/",
 	            "url": "/programming/python-oop/01-class-and-instance/",
 	            "name": "Python面向对象编程01-类的定义与使用 - 冰封残烛的个人小站",
 	            "isPartOf": {
@@ -74,6 +48,10 @@
 	            "primaryImageOfPage": {
 	                "@id": "/programming/python-oop/01-class-and-instance/#primaryimage"
 	            },
+	            "image": {
+	                "@id": "/programming/python-oop/01-class-and-instance/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2022/07/Python面向对象编程01-类的定义与使用.jpg",
 	            "datePublished": "2022-07-03T12:45:12+00:00",
 	            "dateModified": "2023-10-07T02:04:44+00:00",
 	            "author": {
@@ -94,6 +72,15 @@
 	            ]
 	        },
 	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/programming/python-oop/01-class-and-instance/#primaryimage",
+	            "url": "/wp-content/uploads/2022/07/Python面向对象编程01-类的定义与使用.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/07/Python面向对象编程01-类的定义与使用.jpg",
+	            "width": 2349,
+	            "height": 1080
+	        },
+	        {
 	            "@type": "BreadcrumbList",
 	            "@id": "/programming/python-oop/01-class-and-instance/#breadcrumb",
 	            "itemListElement": [
@@ -109,6 +96,24 @@
 	                    "name": "Python面向对象编程01-类的定义与使用"
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
 	        },
 	        {
 	            "@type": "Person",
@@ -158,7 +163,6 @@ body { font-family: "Roboto", Arial, sans-serif; }
 <link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
-<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
 <script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
 <link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/442" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
 <meta name="generator" content="WordPress 6.3.1" />
@@ -495,14 +499,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/computer-science/computer-networking/03-domain-name-system/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/06/计算机网络03-域名系统：DNS-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/06/计算机网络03-域名系统：DNS-520x293.jpg 520w, /wp-content/uploads/2022/06/计算机网络03-域名系统：DNS-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/embedded/mcu-application/lvgl-05-color-and-image/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/LVGL库入门教程05-颜色和图像-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/06/LVGL库入门教程05-颜色和图像-520x293.jpg 520w, /wp-content/uploads/2022/06/LVGL库入门教程05-颜色和图像-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/computer-science/computer-networking/03-domain-name-system/" rel="bookmark">计算机网络03-域名系统：DNS</a>
+					<a href="/embedded/mcu-application/lvgl-05-color-and-image/" rel="bookmark">LVGL库入门教程05-颜色和图像</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -513,14 +517,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/programming/python-fp/07-generators/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程07-生成器-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/05/Python函数式编程07-生成器-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程07-生成器-300x169.jpg 300w, /wp-content/uploads/2022/05/Python函数式编程07-生成器-1024x576.jpg 1024w, /wp-content/uploads/2022/05/Python函数式编程07-生成器-768x432.jpg 768w, /wp-content/uploads/2022/05/Python函数式编程07-生成器-1536x864.jpg 1536w, /wp-content/uploads/2022/05/Python函数式编程07-生成器-950x534.jpg 950w, /wp-content/uploads/2022/05/Python函数式编程07-生成器.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/computer-science/data-structure/06-heap/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/08/数据结构06-优先队列堆-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/08/数据结构06-优先队列堆-520x293.jpg 520w, /wp-content/uploads/2022/08/数据结构06-优先队列堆-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/programming/python-fp/07-generators/" rel="bookmark">Python函数式编程07 生成器</a>
+					<a href="/computer-science/data-structure/06-heap/" rel="bookmark">数据结构06-优先队列(堆)</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -531,14 +535,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/data-science/machine-learning/03-naive-bayes/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/12/机器学习-朴素贝叶斯-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/12/机器学习-朴素贝叶斯-520x293.jpg 520w, /wp-content/uploads/2022/12/机器学习-朴素贝叶斯-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/data-science/via-python/pandas01-data-types/">
+											<img width="520" height="293" src="/wp-content/uploads/2023/02/Python数据分析-pandas01基本数据类型-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2023/02/Python数据分析-pandas01基本数据类型-520x293.jpg 520w, /wp-content/uploads/2023/02/Python数据分析-pandas01基本数据类型-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/data-science/machine-learning/03-naive-bayes/" rel="bookmark">机器学习-朴素贝叶斯</a>
+					<a href="/data-science/via-python/pandas01-data-types/" rel="bookmark">pandas01:基本数据类型</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -575,6 +579,14 @@ var _hmt = _hmt || [];
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
 											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
 					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
 											<span class="post-date">2023年6月19日</span>
 									</li>
@@ -594,14 +606,6 @@ var _hmt = _hmt || [];
 					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
 											<span class="post-date">2023年3月6日</span>
 									</li>
-											<li>
-					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
-											<span class="post-date">2023年2月27日</span>
-									</li>
-											<li>
-					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
-											<span class="post-date">2023年2月8日</span>
-									</li>
 					</ul>
 
 		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
@@ -614,9 +618,11 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (1)
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
 <ul class='children'>
 	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
 </li>
 </ul>
 </li>
@@ -638,7 +644,7 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (20)
 <ul class='children'>
 	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
 </li>
@@ -664,7 +670,9 @@ var _hmt = _hmt || [];
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(1)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
 	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
 	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
 	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
@@ -729,7 +737,7 @@ var _hmt = _hmt || [];
 					
 										
 					<div id="copyright">
-													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
 											</div><!--/#copyright-->
 					
 										

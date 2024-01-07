@@ -1,0 +1,3 @@
+wp-includes/blocks/
+wp-content/plugins
+!wp-content/plugins/wordpress-seo

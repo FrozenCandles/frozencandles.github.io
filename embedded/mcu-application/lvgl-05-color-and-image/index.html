@@ -12,7 +12,7 @@
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 
-	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
 	<title>LVGL库入门教程05-颜色和图像 - 冰封残烛的个人小站</title>
 	<meta name="description" content="本节介绍 LVGL 中颜色的类型、创建方式与各种颜色空间之间的转换，还介绍透明度与复杂的渐变色的创建与应用，以及颜色的其它用法。本节还介绍了图像的创建、使用，以及对图像做一些简单的修改，最后利用图像创建了一个花哨的按钮。" />
 	<link rel="canonical" href="/embedded/mcu-application/lvgl-05-color-and-image/" />
@@ -28,6 +28,7 @@
 	<meta property="og:image:width" content="1920" />
 	<meta property="og:image:height" content="1200" />
 	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="作者" />
 	<meta name="twitter:data1" content="Hello" />
@@ -37,35 +38,8 @@
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
-	            "@type": "WebSite",
-	            "@id": "/#website",
-	            "url": "/",
-	            "name": "冰封残烛的个人小站",
-	            "description": "FrozenCandle&#039;s Personal Site",
-	            "potentialAction": [
-	                {
-	                    "@type": "SearchAction",
-	                    "target": {
-	                        "@type": "EntryPoint",
-	                        "urlTemplate": "/?s={search_term_string}"
-	                    },
-	                    "query-input": "required name=search_term_string"
-	                }
-	            ],
-	            "inLanguage": "zh-CN"
-	        },
-	        {
-	            "@type": "ImageObject",
-	            "inLanguage": "zh-CN",
-	            "@id": "/embedded/mcu-application/lvgl-05-color-and-image/#primaryimage",
-	            "url": "/wp-content/uploads/2022/06/LVGL库入门教程05-颜色和图像.jpg",
-	            "contentUrl": "/wp-content/uploads/2022/06/LVGL库入门教程05-颜色和图像.jpg",
-	            "width": 1920,
-	            "height": 1200
-	        },
-	        {
 	            "@type": "WebPage",
-	            "@id": "/embedded/mcu-application/lvgl-05-color-and-image/#webpage",
+	            "@id": "/embedded/mcu-application/lvgl-05-color-and-image/",
 	            "url": "/embedded/mcu-application/lvgl-05-color-and-image/",
 	            "name": "LVGL库入门教程05-颜色和图像 - 冰封残烛的个人小站",
 	            "isPartOf": {
@@ -74,6 +48,10 @@
 	            "primaryImageOfPage": {
 	                "@id": "/embedded/mcu-application/lvgl-05-color-and-image/#primaryimage"
 	            },
+	            "image": {
+	                "@id": "/embedded/mcu-application/lvgl-05-color-and-image/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2022/06/LVGL库入门教程05-颜色和图像.jpg",
 	            "datePublished": "2022-06-24T01:49:34+00:00",
 	            "dateModified": "2023-10-05T13:23:00+00:00",
 	            "author": {
@@ -94,6 +72,15 @@
 	            ]
 	        },
 	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/embedded/mcu-application/lvgl-05-color-and-image/#primaryimage",
+	            "url": "/wp-content/uploads/2022/06/LVGL库入门教程05-颜色和图像.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/06/LVGL库入门教程05-颜色和图像.jpg",
+	            "width": 1920,
+	            "height": 1200
+	        },
+	        {
 	            "@type": "BreadcrumbList",
 	            "@id": "/embedded/mcu-application/lvgl-05-color-and-image/#breadcrumb",
 	            "itemListElement": [
@@ -109,6 +96,24 @@
 	                    "name": "LVGL库入门教程05-颜色和图像"
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
 	        },
 	        {
 	            "@type": "Person",
@@ -158,7 +163,6 @@ body { font-family: "Roboto", Arial, sans-serif; }
 <link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
-<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
 <script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
 <link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/383" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
 <meta name="generator" content="WordPress 6.3.1" />
@@ -628,14 +632,14 @@ typedef struct _lv_color_filter_dsc_t {
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/data-science/via-python/pandas03-the-index/">
-											<img width="520" height="293" src="/wp-content/uploads/2023/03/Python数据分析-pandas03索引-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2023/03/Python数据分析-pandas03索引-520x293.jpg 520w, /wp-content/uploads/2023/03/Python数据分析-pandas03索引-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/programming/python-fp/06-tuple-handling/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-300x169.jpg 300w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-1024x576.jpg 1024w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-768x432.jpg 768w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-1536x864.jpg 1536w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-950x534.jpg 950w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/data-science/via-python/pandas03-the-index/" rel="bookmark">pandas03:深入认识索引</a>
+					<a href="/programming/python-fp/06-tuple-handling/" rel="bookmark">Python函数式编程06 元组与命名元组</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -646,14 +650,14 @@ typedef struct _lv_color_filter_dsc_t {
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/embedded/esp32/01-setting-up-development/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-520x293.jpg 520w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-300x169.jpg 300w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-1024x576.jpg 1024w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-768x432.jpg 768w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-1536x864.jpg 1536w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-950x534.jpg 950w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/computer-science/data-structure/07-sort-algorithm/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/09/数据结构07-排序算法-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/09/数据结构07-排序算法-520x293.jpg 520w, /wp-content/uploads/2022/09/数据结构07-排序算法-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/embedded/esp32/01-setting-up-development/" rel="bookmark">ESP32与MicroPython入门-01 搭建开发环境</a>
+					<a href="/computer-science/data-structure/07-sort-algorithm/" rel="bookmark">数据结构07-排序算法</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -664,14 +668,14 @@ typedef struct _lv_color_filter_dsc_t {
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/programming/python-fp/05-recursions/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程05-函数的递归-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/05/Python函数式编程05-函数的递归-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-300x169.jpg 300w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-1024x576.jpg 1024w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-768x432.jpg 768w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-1536x864.jpg 1536w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-950x534.jpg 950w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/embedded/mcu-application/lvgl-02-quick-start/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/LVGL库入门教程02-基本控件与交互-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/LVGL库入门教程02-基本控件与交互-520x293.jpg 520w, /wp-content/uploads/2022/06/LVGL库入门教程02-基本控件与交互-300x169.jpg 300w, /wp-content/uploads/2022/06/LVGL库入门教程02-基本控件与交互-1024x576.jpg 1024w, /wp-content/uploads/2022/06/LVGL库入门教程02-基本控件与交互-768x432.jpg 768w, /wp-content/uploads/2022/06/LVGL库入门教程02-基本控件与交互-1536x864.jpg 1536w, /wp-content/uploads/2022/06/LVGL库入门教程02-基本控件与交互-950x534.jpg 950w, /wp-content/uploads/2022/06/LVGL库入门教程02-基本控件与交互.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/programming/python-fp/05-recursions/" rel="bookmark">Python函数式编程05 函数的递归</a>
+					<a href="/embedded/mcu-application/lvgl-02-quick-start/" rel="bookmark">LVGL库入门教程02-基本控件与交互</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -708,6 +712,14 @@ typedef struct _lv_color_filter_dsc_t {
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
 											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
 					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
 											<span class="post-date">2023年6月19日</span>
 									</li>
@@ -727,14 +739,6 @@ typedef struct _lv_color_filter_dsc_t {
 					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
 											<span class="post-date">2023年3月6日</span>
 									</li>
-											<li>
-					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
-											<span class="post-date">2023年2月27日</span>
-									</li>
-											<li>
-					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
-											<span class="post-date">2023年2月8日</span>
-									</li>
 					</ul>
 
 		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
@@ -747,9 +751,11 @@ typedef struct _lv_color_filter_dsc_t {
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (1)
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
 <ul class='children'>
 	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
 </li>
 </ul>
 </li>
@@ -771,7 +777,7 @@ typedef struct _lv_color_filter_dsc_t {
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (20)
 <ul class='children'>
 	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
 </li>
@@ -797,7 +803,9 @@ typedef struct _lv_color_filter_dsc_t {
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(1)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
 	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
 	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
 	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
@@ -862,7 +870,7 @@ typedef struct _lv_color_filter_dsc_t {
 					
 										
 					<div id="copyright">
-													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
 											</div><!--/#copyright-->
 					
 										

@@ -12,21 +12,23 @@
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 
-	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
 	<title>数据结构05-散列 - 冰封残烛的个人小站</title>
+	<meta name="description" content="散列表(hash table)也叫哈希表，是极度优化了查找速度的数据结构。它通过散列函数(hash function)为不同元素在散列表中分配特定地址来实现快速查找元素。散列冲突是散列表的一个解决话题，本节提出分离链接法和开放定址法来解决散列冲突。" />
 	<link rel="canonical" href="/computer-science/data-structure/05-hash/" />
 	<meta property="og:locale" content="zh_CN" />
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content="数据结构05-散列 - 冰封残烛的个人小站" />
-	<meta property="og:description" content="散列的概念 散列简介 前文介绍的树或链表都是一种链式&#046;&#046;&#046;" />
+	<meta property="og:description" content="散列表(hash table)也叫哈希表，是极度优化了查找速度的数据结构。它通过散列函数(hash function)为不同元素在散列表中分配特定地址来实现快速查找元素。散列冲突是散列表的一个解决话题，本节提出分离链接法和开放定址法来解决散列冲突。" />
 	<meta property="og:url" content="/computer-science/data-structure/05-hash/" />
 	<meta property="og:site_name" content="冰封残烛的个人小站" />
 	<meta property="article:published_time" content="2022-08-10T02:50:08+00:00" />
-	<meta property="article:modified_time" content="2023-10-06T04:17:47+00:00" />
+	<meta property="article:modified_time" content="2023-10-13T04:05:47+00:00" />
 	<meta property="og:image" content="/wp-content/uploads/2022/08/数据结构05-散列.jpg" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="826" />
 	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="作者" />
 	<meta name="twitter:data1" content="Hello" />
@@ -36,35 +38,8 @@
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
-	            "@type": "WebSite",
-	            "@id": "/#website",
-	            "url": "/",
-	            "name": "冰封残烛的个人小站",
-	            "description": "FrozenCandle&#039;s Personal Site",
-	            "potentialAction": [
-	                {
-	                    "@type": "SearchAction",
-	                    "target": {
-	                        "@type": "EntryPoint",
-	                        "urlTemplate": "/?s={search_term_string}"
-	                    },
-	                    "query-input": "required name=search_term_string"
-	                }
-	            ],
-	            "inLanguage": "zh-CN"
-	        },
-	        {
-	            "@type": "ImageObject",
-	            "inLanguage": "zh-CN",
-	            "@id": "/computer-science/data-structure/05-hash/#primaryimage",
-	            "url": "/wp-content/uploads/2022/08/数据结构05-散列.jpg",
-	            "contentUrl": "/wp-content/uploads/2022/08/数据结构05-散列.jpg",
-	            "width": 1200,
-	            "height": 826
-	        },
-	        {
 	            "@type": "WebPage",
-	            "@id": "/computer-science/data-structure/05-hash/#webpage",
+	            "@id": "/computer-science/data-structure/05-hash/",
 	            "url": "/computer-science/data-structure/05-hash/",
 	            "name": "数据结构05-散列 - 冰封残烛的个人小站",
 	            "isPartOf": {
@@ -73,11 +48,16 @@
 	            "primaryImageOfPage": {
 	                "@id": "/computer-science/data-structure/05-hash/#primaryimage"
 	            },
+	            "image": {
+	                "@id": "/computer-science/data-structure/05-hash/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2022/08/数据结构05-散列.jpg",
 	            "datePublished": "2022-08-10T02:50:08+00:00",
-	            "dateModified": "2023-10-06T04:17:47+00:00",
+	            "dateModified": "2023-10-13T04:05:47+00:00",
 	            "author": {
 	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
 	            },
+	            "description": "散列表(hash table)也叫哈希表，是极度优化了查找速度的数据结构。它通过散列函数(hash function)为不同元素在散列表中分配特定地址来实现快速查找元素。散列冲突是散列表的一个解决话题，本节提出分离链接法和开放定址法来解决散列冲突。",
 	            "breadcrumb": {
 	                "@id": "/computer-science/data-structure/05-hash/#breadcrumb"
 	            },
@@ -90,6 +70,15 @@
 	                    ]
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/computer-science/data-structure/05-hash/#primaryimage",
+	            "url": "/wp-content/uploads/2022/08/数据结构05-散列.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/08/数据结构05-散列.jpg",
+	            "width": 1200,
+	            "height": 826
 	        },
 	        {
 	            "@type": "BreadcrumbList",
@@ -107,6 +96,24 @@
 	                    "name": "数据结构05-散列"
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
 	        },
 	        {
 	            "@type": "Person",
@@ -156,7 +163,6 @@ body { font-family: "Roboto", Arial, sans-serif; }
 <link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
-<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
 <script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
 <link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/653" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
 <meta name="generator" content="WordPress 6.3.1" />
@@ -303,10 +309,6 @@ var _hmt = _hmt || [];
 				<div class="entry-content">
 					<div class="entry themeform">	
 						
-
-
-
-
 <h2>散列的概念</h2>
 
 <h3>散列简介</h3>
@@ -318,7 +320,7 @@ var _hmt = _hmt || [];
 <p><strong>散列表</strong>(hash table)就是根据该原理实现的。散列表也叫哈希表，可以为不同值（这个值可以是任意类型的，包括浮点数、字符串等）在散列表中分配一个地址，但这个值不能直接得到，而是要经由一定计算从而转换为整数。该映射关系由<strong>散列函数</strong>计算。</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/08-hashtable-module.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/08-hashtable-module.png"/>
 </figure>
 
 <p>理想的情况下每个元素的映射关系易于计算，且每个元素都能被分配到唯一的地址。例如假设机器中拥有一个很长的结构数组，索引值位置存放身份证号对应的个人信息，那么可以根据一定规律计算得到身份证号，再根据身份证号就可以直接找到存放个人信息的单元。然而这是不可能的，因为单元的数目总是有限的，但是要存储的元素可能是无法穷举的。</p>
@@ -341,7 +343,7 @@ var _hmt = _hmt || [];
 
 <p>这样可以就可以增加字符间联系的作用。相应的代码实现如下：</p>
 
-<div class="vscode-block"><div><span style="color: #c792ea;">typedef</span> <span token="keyword">unsigned</span> <span token="keyword">int</span> <span token="type">index</span>;</div><br><div><span token="type">index</span> <span style="color: #82aaff;">HashWord</span>(<span token="keyword">const</span> <span token="keyword">char</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">key</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">table_size</span>) {</div><div>&#160; &#160; <span token="keyword">unsigned</span> <span token="keyword">long</span> <span token="variable">val</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&#160; &#160; <span token="keyword">while</span> (<span style="color: #7fdbca;">*</span><span style="color: #d7dbe0;">key</span> <span style="color: #c792ea;">!=</span> <span style="color: #d9f5dd;">'</span><span token="number">\0</span><span style="color: #d9f5dd;">'</span>)</div><div>&#160; &#160; &#160; &#160; <span token="variable">val</span> <span style="color: #c792ea;">=</span> (<span token="variable">val</span> <span style="color: #c792ea;">&lt;&lt;</span> <span token="number">5</span>) <span style="color: #7fdbca;">+</span> <span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">key</span><span style="color: #c792ea;">++</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">val</span> <span style="color: #7fdbca;">%</span> <span style="color: #d7dbe0;">table_size</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span style="color: #c792ea;">typedef</span> <span token="keyword">unsigned</span> <span token="keyword">int</span> <span token="type">index</span>;</div><br/><div><span token="type">index</span> <span style="color: #82aaff;">HashWord</span>(<span token="keyword">const</span> <span token="keyword">char</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">key</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">table_size</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">unsigned</span> <span token="keyword">long</span> <span token="variable">val</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&nbsp; &nbsp; <span token="keyword">while</span> (<span style="color: #7fdbca;">*</span><span style="color: #d7dbe0;">key</span> <span style="color: #c792ea;">!=</span> <span style="color: #d9f5dd;">'</span><span token="number">\0</span><span style="color: #d9f5dd;">'</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">val</span> <span style="color: #c792ea;">=</span> (<span token="variable">val</span> <span style="color: #c792ea;">&lt;&lt;</span> <span token="number">5</span>) <span style="color: #7fdbca;">+</span> <span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">key</span><span style="color: #c792ea;">++</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="variable">val</span> <span style="color: #7fdbca;">%</span> <span style="color: #d7dbe0;">table_size</span>;</div><div>}</div></div>
 
 <p>程序使用如下变式计算多项式的和：</p>
 
@@ -354,9 +356,9 @@ var _hmt = _hmt || [];
 <p>使用 32 代替 27 的原因是可以通过移位加速运算。使用取模可以减少表长度，同时提升表的利用率。使用该算法时，部分计算出的对应关系如下：</p>
 
 <div class="codeblock code-template">
-    "hello"->28423<br>
-    "world"->34135<br>
-    "algorithm"->36119
+    "hello"-&gt;28423<br/>
+    "world"-&gt;34135<br/>
+    "algorithm"-&gt;36119
 </div>
 
 <p>当然，该算法还是存在许多问题，不过今天的重点不是散列算法，而是需要提出一种合适的数据结构，使得发生冲突时能有相应的解决方案。接下来就介绍两种常用的方法。</p>
@@ -365,10 +367,10 @@ var _hmt = _hmt || [];
 
 <h3>分离链接法</h3>
 
-<p><strong>分离链接法</strong>(separator chaining)将散列到同一个值的所有元素保留到一个表中。下图展示了使用<a href="http://frozencandles.fun/archives/592">链表模型</a>下的分离链接法：</p>
+<p><strong>分离链接法</strong>(separator chaining)将散列到同一个值的所有元素保留到一个表中。下图展示了使用<a class="link-internal" href="/computer-science/data-structure/02-linked-list">链表模型</a>下的分离链接法：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/08-separator-chain.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/08-separator-chain.png"/>
 </figure>
 
 <p>除了使用链表，还可以使用其余任意的表、二叉树，甚至是另一个散列表来保存冲突的元素。</p>
@@ -379,29 +381,29 @@ var _hmt = _hmt || [];
 
 <p>分离链接散列表的类型声明如下：</p>
 
-<div class="vscode-block"><div><span style="color: #c792ea;">typedef</span> <span token="type">linkedlist</span> <span token="type">hashsep_node</span>;</div><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">hashsep_table</span> {</div><div>&#160; &#160; <span token="keyword">int</span> <span style="color: #7fdbca;">size</span>;</div><div>&#160; &#160; <span token="type">hashsep_node</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">list</span>;</div><div>} <span style="color: #7fdbca;">*</span> <span token="type">hashsep_table</span>;</div></div>
+<div class="vscode-block"><div><span style="color: #c792ea;">typedef</span> <span token="type">linkedlist</span> <span token="type">hashsep_node</span>;</div><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">hashsep_table</span> {</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span style="color: #7fdbca;">size</span>;</div><div>&nbsp; &nbsp; <span token="type">hashsep_node</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">list</span>;</div><div>} <span style="color: #7fdbca;">*</span> <span token="type">hashsep_table</span>;</div></div>
 
 <p>以上定义有些混乱，可以结合上面图示理解：<code>hashsep_table</code> 指针指向一个分离链接散列表；<code>list</code> 域指向表的主体部分，注意，它是一个指向指针的二重指针；<code>hashsep_node</code> 是一个链表，指向具体节点。下图有助于理解它们的关系：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/08-separator-chain-structure.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/08-separator-chain-structure.png"/>
 </figure>
 
 <p>因此，分离链接散列表的创建过程为：</p>
 
-<div class="vscode-block"><div><span token="type">hashsep_table</span> <span style="color: #82aaff;">HashSepTable_New</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">size</span>) {</div><div>&#160; &#160; <span token="type">hashsep_table</span> <span token="variable">table</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span token="keyword">struct</span><span style="color: #82aaff;"> </span><span style="color: #82aaff;text-decoration: underline;">hashsep_table</span><span style="color: #82aaff;">))</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span token="variable">table</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #82aaff;">NULL</span>;<span style="color: #637777;"> &#160; &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of memory</span></div><div>&#160; &#160; <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">size</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">size</span>;</div><div>&#160; &#160; <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">list</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">hashsep_node</span><span style="color: #82aaff;">) </span><span style="color: #7fdbca;">*</span><span style="color: #82aaff;"> </span><span token="variable">table</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">size</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span token="variable">table</span>-&gt;<span style="color: #7fdbca;">list</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #82aaff;">NULL</span>;<span style="color: #637777;"> &#160; &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of memory</span></div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span token="variable">i</span>] <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">linkedlist_node</span><span style="color: #82aaff;">))</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span token="variable">i</span>] <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #82aaff;">NULL</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of memory</span></div><div>&#160; &#160; &#160; &#160; <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span token="variable">i</span>]-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">NULL</span>;</div><div>&#160; &#160; } &#160; &#160;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">table</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">hashsep_table</span> <span style="color: #82aaff;">HashSepTable_New</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">size</span>) {</div><div>&nbsp; &nbsp; <span token="type">hashsep_table</span> <span token="variable">table</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span token="keyword">struct</span><span style="color: #82aaff;"> </span><span style="color: #82aaff;text-decoration: underline;">hashsep_table</span><span style="color: #82aaff;">))</span>;</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">table</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #82aaff;">NULL</span>;<span style="color: #637777;"> &nbsp; &nbsp; &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of memory</span></div><div>&nbsp; &nbsp; <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">size</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">size</span>;</div><div>&nbsp; &nbsp; <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">list</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">hashsep_node</span><span style="color: #82aaff;">) </span><span style="color: #7fdbca;">*</span><span style="color: #82aaff;"> </span><span token="variable">table</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">size</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">table</span>-&gt;<span style="color: #7fdbca;">list</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #82aaff;">NULL</span>;<span style="color: #637777;"> &nbsp; &nbsp; &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of memory</span></div><div>&nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span token="variable">i</span>] <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">linkedlist_node</span><span style="color: #82aaff;">))</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span token="variable">i</span>] <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #82aaff;">NULL</span>;<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of memory</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span token="variable">i</span>]-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">NULL</span>;</div><div>&nbsp; &nbsp; } &nbsp; &nbsp;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="variable">table</span>;</div><div>}</div></div>
 
 <p>程序中需要为散列表、散列表链表组、散列表链表组每个链表的首个节点都分配内存。定义时链表使用了表头，因此对每个链表都需要单独调整表头。</p>
 
 <p>查找操作将返回一个包含元素的链表单元。在通过散列函数取得合适的链表后，接下来的查找等同于链表的查找：</p>
 
-<div class="vscode-block"><div><span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #82aaff;">HashSepTable_Find</span>(<span token="type">hashsep_table</span> <span style="color: #d7dbe0;">table</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">key</span>) {</div><div>&#160; &#160; <span token="type">linkedlist</span> <span token="variable">list</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span style="color: #82aaff;">Hash</span>(<span style="color: #d7dbe0;">key</span>, table_size)];</div><div>&#160; &#160; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">node</span> <span style="color: #c792ea;">=</span> <span token="variable">list</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&#160; &#160; <span token="keyword">while</span> (<span token="variable">node</span> <span style="color: #c792ea;">!=</span> <span style="color: #82aaff;">NULL</span> <span style="color: #c792ea;">&amp;&amp;</span> <span style="color: #c792ea;">!</span><span style="color: #82aaff;">Equals</span><span style="color: #82aaff;">(</span><span token="variable">node</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">elem</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">key</span><span style="color: #82aaff;">)</span>)</div><div>&#160; &#160; &#160; &#160; <span token="variable">node</span> <span style="color: #c792ea;">=</span> <span token="variable">node</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">node</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #82aaff;">HashSepTable_Find</span>(<span token="type">hashsep_table</span> <span style="color: #d7dbe0;">table</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">key</span>) {</div><div>&nbsp; &nbsp; <span token="type">linkedlist</span> <span token="variable">list</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span style="color: #82aaff;">Hash</span>(<span style="color: #d7dbe0;">key</span>, table_size)];</div><div>&nbsp; &nbsp; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">node</span> <span style="color: #c792ea;">=</span> <span token="variable">list</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&nbsp; &nbsp; <span token="keyword">while</span> (<span token="variable">node</span> <span style="color: #c792ea;">!=</span> <span style="color: #82aaff;">NULL</span> <span style="color: #c792ea;">&amp;&amp;</span> <span style="color: #c792ea;">!</span><span style="color: #82aaff;">Equals</span><span style="color: #82aaff;">(</span><span token="variable">node</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">elem</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">key</span><span style="color: #82aaff;">)</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">node</span> <span style="color: #c792ea;">=</span> <span token="variable">node</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="variable">node</span>;</div><div>}</div></div>
 
 <p>注意，由于使用散列时元素的值未必可以直接比较，因此这里抽象为 <code>Equals()</code> 函数，字符串的具体实现可以使用 <code>strcmp()</code> 。</p>
 
 <p>接下来是插入，如果插入的项已经存在，则什么都不用做；否则，将其插入链表的前端：</p>
 
-<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">HashSepTable_Insert</span>(<span token="type">hashsep_table</span> <span style="color: #d7dbe0;">table</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">key</span>) {</div><div>&#160; &#160; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">node</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">HashSepTable_Find</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">table</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">key</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span token="variable">node</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>) {<span style="color: #637777;"> &#160; </span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> key not found</span></div><div>&#160; &#160; &#160; &#160; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">new_node</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">linkedlist_node</span><span style="color: #82aaff;">))</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">new_node</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="number">2</span>;<span style="color: #637777;"> &#160; &#160; </span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of memory</span></div><div>&#160; &#160; &#160; &#160; <span token="type">linkedlist</span> <span token="variable">list</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span style="color: #82aaff;">Hash</span>(<span style="color: #d7dbe0;">key</span>, table_size)];</div><div>&#160; &#160; &#160; &#160; <span token="variable">new_node</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span token="variable">list</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">Assign</span><span style="color: #82aaff;">(</span><span token="variable">new_node</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">elem</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">key</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span token="variable">list</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span token="variable">new_node</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="number">0</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">return</span> <span token="number">1</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">HashSepTable_Insert</span>(<span token="type">hashsep_table</span> <span style="color: #d7dbe0;">table</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">key</span>) {</div><div>&nbsp; &nbsp; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">node</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">HashSepTable_Find</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">table</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">key</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">node</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>) {<span style="color: #637777;"> &nbsp; </span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> key not found</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">new_node</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">linkedlist_node</span><span style="color: #82aaff;">))</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">new_node</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="number">2</span>;<span style="color: #637777;"> &nbsp; &nbsp; </span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of memory</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="type">linkedlist</span> <span token="variable">list</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span style="color: #82aaff;">Hash</span>(<span style="color: #d7dbe0;">key</span>, table_size)];</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">new_node</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span token="variable">list</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">Assign</span><span style="color: #82aaff;">(</span><span token="variable">new_node</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">elem</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">key</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">list</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span token="variable">new_node</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="number">0</span>;</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="number">1</span>;</div><div>}</div></div>
 
 <p>插入链表前端的实现是最方便且高效的，并且有时候最新插入的元素可能最先被访问。不过该函数在查找和插入时两次调用了散列函数，如果将其合并可能会更快一些。</p>
 
@@ -411,7 +413,7 @@ var _hmt = _hmt || [];
 
 <p>装填因子直接影响查找的效率。在以上链表实现的分离链接散列表中，要求 <span class="math">\\( \lambda \sim 1 \\)</span> ，如果比 1 大，说明元素较多，不可避免地会加长链表；如果比 1 小的多，那么表的大小不能充分利用。</p>
 
-<p>除此之外，使用素数作为表的长度也能使元素更分散一些，比如不会使相同比例的数值分到同一个模。<a href="https://stackoverflow.com/questions/1145217/why-should-hash-functions-use-a-prime-number-modulus">stackoverflow 有一个问题</a>就是关于它的，有兴趣可以看一看里面的回答。</p>
+<p>除此之外，使用素数作为表的长度也能使元素更分散一些，比如不会使相同比例的数值分到同一个模。<a class="link-external" href="https://stackoverflow.com/questions/1145217/why-should-hash-functions-use-a-prime-number-modulus">stackoverflow 有一个问题</a>就是关于它的，有兴趣可以看一看里面的回答。</p>
 
 <h3>开放定址法</h3>
 
@@ -436,12 +438,12 @@ var _hmt = _hmt || [];
 <p>线性探测法中，函数 <span class="math">\\( F \\)</span> 是线性函数。下图展示了这一原理：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/08-open-addressing-linear.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/08-open-addressing-linear.png"/>
 </figure>
 
 <p>这样做的缺点是碰撞时单元会形成一些区块，导致一次<strong>聚集</strong>(primary clustering)。下一次散列到该聚集区块的值往往又需要多次线性探测，且会加重聚集区块。</p>
 
-<p>计算结果表明线性探测的预期探测次数对插入和不成功的查找而言大约为 <span class="math">\\( 0.5(1 + 1 / (1- \lambda)^2) \\)</span> ，对成功的查找为 <span class="math">\\( 0.5(1 + 1 / (1 - \lambda)) \\)</span> 。因此线性探测法要求 <span class="math">\\( \lambda < 0.5 \\)</span> ，否则当表快满时线性探测要往下找很多个节点才能找到一个空余的，浪费较多时间。</p>
+<p>计算结果表明线性探测的预期探测次数对插入和不成功的查找而言大约为 <span class="math">\\( 0.5(1 + 1 / (1- \lambda)^2) \\)</span> ，对成功的查找为 <span class="math">\\( 0.5(1 + 1 / (1 - \lambda)) \\)</span> 。因此线性探测法要求 <span class="math">\\( \lambda &lt; 0.5 \\)</span> ，否则当表快满时线性探测要往下找很多个节点才能找到一个空余的，浪费较多时间。</p>
 
 <ul>
     <li><strong>平方探测法</strong></li>
@@ -450,7 +452,7 @@ var _hmt = _hmt || [];
 <p>平方探测可以解决线性探测的聚集问题。平方探测就是将冲突函数改为二次函数，下图说明了为何此过程不会聚集：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/08-open-addressing-quadratic.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/08-open-addressing-quadratic.png"/>
 </figure>
 
 <p>可以证明，如果使用平方探测，且表的大小是<em>素数</em>，那么当表至少有一半是空的时候，总是能插入一个元素。</p>
@@ -463,23 +465,23 @@ var _hmt = _hmt || [];
 
 <p>以平方探测法为例，开放定址法的散列表结构声明为：</p>
 
-<div class="vscode-block"><div><span token="keyword">enum</span> <span token="type">hashquad_status</span> { </div><div>&#160; &#160; <span token="variable">HASHQUAD_USED</span>, <span token="variable">HASHQUAD_EMPTY</span>, <span token="variable">HASHQUAD_DELETED</span> };</div><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">hashquad_node</span> {</div><div>&#160; &#160; <span token="type">elemtype</span> <span style="color: #7fdbca;">elem</span>;</div><div>&#160; &#160; <span token="keyword">enum</span> <span token="type">hashquad_status</span> <span style="color: #7fdbca;">status</span>;</div><div>} <span token="type">hashquad_node</span>;</div><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">hashquad_table</span> {</div><div>&#160; &#160; <span token="keyword">int</span> <span style="color: #7fdbca;">size</span>;</div><div>&#160; &#160; <span token="type">hashquad_node</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">list</span>;</div><div>} <span style="color: #7fdbca;">*</span> <span token="type">hashquad_table</span>;</div></div>
+<div class="vscode-block"><div><span token="keyword">enum</span> <span token="type">hashquad_status</span> { </div><div>&nbsp; &nbsp; <span token="variable">HASHQUAD_USED</span>, <span token="variable">HASHQUAD_EMPTY</span>, <span token="variable">HASHQUAD_DELETED</span> };</div><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">hashquad_node</span> {</div><div>&nbsp; &nbsp; <span token="type">elemtype</span> <span style="color: #7fdbca;">elem</span>;</div><div>&nbsp; &nbsp; <span token="keyword">enum</span> <span token="type">hashquad_status</span> <span style="color: #7fdbca;">status</span>;</div><div>} <span token="type">hashquad_node</span>;</div><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">hashquad_table</span> {</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span style="color: #7fdbca;">size</span>;</div><div>&nbsp; &nbsp; <span token="type">hashquad_node</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">list</span>;</div><div>} <span style="color: #7fdbca;">*</span> <span token="type">hashquad_table</span>;</div></div>
 
 <p>在开放定址散列表中，不能直接删除元素，否则会使定址关系断裂；如果要删除，需要使用懒惰删除策略，在定义中也增加了对懒惰删除的支持。</p>
 
 <p>初始化开放定址散列表和初始化分离链接散列表的过程类似。由于不使用链表，因此这部分内容会简化一些：</p>
 
-<div class="vscode-block"><div><span token="type">hashquad_table</span> <span style="color: #82aaff;">HashQuadTable_New</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">size</span>) {</div><div>&#160; &#160; <span token="type">hashquad_table</span> <span token="variable">table</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span token="keyword">struct</span><span style="color: #82aaff;"> </span><span style="color: #82aaff;text-decoration: underline;">hashquad_table</span><span style="color: #82aaff;">))</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span token="variable">table</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #82aaff;">NULL</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of memory</span></div><div>&#160; &#160; <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">size</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">size</span>;</div><div>&#160; &#160; <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">list</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">hashquad_node</span><span style="color: #82aaff;">) </span><span style="color: #7fdbca;">*</span><span style="color: #82aaff;"> </span><span token="variable">table</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">size</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span token="variable">table</span>-&gt;<span style="color: #7fdbca;">list</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #82aaff;">NULL</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of memory</span></div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>)</div><div>&#160; &#160; &#160; &#160; <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span token="variable">i</span>].<span style="color: #7fdbca;">status</span> <span style="color: #c792ea;">=</span> <span token="variable">HASHQUAD_EMPTY</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">table</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">hashquad_table</span> <span style="color: #82aaff;">HashQuadTable_New</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">size</span>) {</div><div>&nbsp; &nbsp; <span token="type">hashquad_table</span> <span token="variable">table</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span token="keyword">struct</span><span style="color: #82aaff;"> </span><span style="color: #82aaff;text-decoration: underline;">hashquad_table</span><span style="color: #82aaff;">))</span>;</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">table</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #82aaff;">NULL</span>;<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of memory</span></div><div>&nbsp; &nbsp; <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">size</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">size</span>;</div><div>&nbsp; &nbsp; <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">list</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">hashquad_node</span><span style="color: #82aaff;">) </span><span style="color: #7fdbca;">*</span><span style="color: #82aaff;"> </span><span token="variable">table</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">size</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">table</span>-&gt;<span style="color: #7fdbca;">list</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #82aaff;">NULL</span>;<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of memory</span></div><div>&nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span token="variable">i</span>].<span style="color: #7fdbca;">status</span> <span style="color: #c792ea;">=</span> <span token="variable">HASHQUAD_EMPTY</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="variable">table</span>;</div><div>}</div></div>
 
 <p>为了执行查找操作，在查找到对应对应的表单元时，会沿着平方路径继续查找，直到找到对应的单元或发现已经到路径的结尾。结尾的标志为遇到一个 <code>EMPTY</code> 的项：</p>
 
-<div class="vscode-block"><div><span token="type">index</span> <span style="color: #82aaff;">HashQuadTable_Find</span>(<span token="type">hashquad_table</span> <span style="color: #d7dbe0;">table</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">key</span>) {</div><div>&#160; &#160; <span token="type">index</span> <span token="variable">pos</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Hash</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">key</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">table</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">size</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">collision</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&#160; &#160; <span token="keyword">while</span> (<span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span token="variable">pos</span>].<span style="color: #7fdbca;">status</span> <span style="color: #c792ea;">!=</span> <span token="variable">HASHQUAD_EMPTY</span> <span style="color: #c792ea;">&amp;&amp;</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160;<span style="color: #c792ea;">!</span><span style="color: #82aaff;">Equals</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">table</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">list</span><span style="color: #82aaff;">[</span><span token="variable">pos</span><span style="color: #82aaff;">].</span><span style="color: #7fdbca;">elem</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">key</span><span style="color: #82aaff;">)</span>) {</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">pos</span> <span style="color: #c792ea;">+=</span> <span token="number">2</span> <span style="color: #7fdbca;">*</span> <span style="color: #c792ea;">++</span><span token="variable">collision</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">pos</span> <span style="color: #c792ea;">&gt;=</span> <span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">size</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">pos</span> <span style="color: #c792ea;">-=</span> <span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">size</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">pos</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">index</span> <span style="color: #82aaff;">HashQuadTable_Find</span>(<span token="type">hashquad_table</span> <span style="color: #d7dbe0;">table</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">key</span>) {</div><div>&nbsp; &nbsp; <span token="type">index</span> <span token="variable">pos</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Hash</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">key</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">table</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">size</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">collision</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&nbsp; &nbsp; <span token="keyword">while</span> (<span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span token="variable">pos</span>].<span style="color: #7fdbca;">status</span> <span style="color: #c792ea;">!=</span> <span token="variable">HASHQUAD_EMPTY</span> <span style="color: #c792ea;">&amp;&amp;</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #c792ea;">!</span><span style="color: #82aaff;">Equals</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">table</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">list</span><span style="color: #82aaff;">[</span><span token="variable">pos</span><span style="color: #82aaff;">].</span><span style="color: #7fdbca;">elem</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">key</span><span style="color: #82aaff;">)</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">pos</span> <span style="color: #c792ea;">+=</span> <span token="number">2</span> <span style="color: #7fdbca;">*</span> <span style="color: #c792ea;">++</span><span token="variable">collision</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">pos</span> <span style="color: #c792ea;">&gt;=</span> <span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">size</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">pos</span> <span style="color: #c792ea;">-=</span> <span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">size</span>;</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="variable">pos</span>;</div><div>}</div></div>
 
 <p>两个判断条件不能写反，否则当发现元素匹配时，判断短路会忽视了该位置应该不可用的事实。程序中使用平方间的关系 <span class="math">\\( (i+1)^2 = (i)^2 + 2i - 1 \\)</span> 来加速运算，并在必要的时候执行绕回。</p>
 
 <p>查找发现不存在时，函数会返回路径上的最后一个位置，插入例程可在返回值的基础上做插入：</p>
 
-<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">HashQuadTable_Insert</span>(<span token="type">hashquad_table</span> <span style="color: #d7dbe0;">table</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">key</span>) {</div><div>&#160; &#160; <span token="type">index</span> <span token="variable">pos</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">HashQuadTable_Find</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">table</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">key</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span token="variable">pos</span>].<span style="color: #7fdbca;">status</span> <span style="color: #c792ea;">!=</span> <span token="variable">HASHQUAD_USED</span>) {</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span token="variable">pos</span>].<span style="color: #7fdbca;">status</span> <span style="color: #c792ea;">=</span> <span token="variable">HASHQUAD_USED</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">Assign</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">&amp;</span><span style="color: #d7dbe0;">table</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">list</span><span style="color: #82aaff;">[</span><span token="variable">pos</span><span style="color: #82aaff;">].</span><span style="color: #7fdbca;">elem</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">key</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="number">0</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">return</span> <span token="number">1</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">HashQuadTable_Insert</span>(<span token="type">hashquad_table</span> <span style="color: #d7dbe0;">table</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">key</span>) {</div><div>&nbsp; &nbsp; <span token="type">index</span> <span token="variable">pos</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">HashQuadTable_Find</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">table</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">key</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span token="variable">pos</span>].<span style="color: #7fdbca;">status</span> <span style="color: #c792ea;">!=</span> <span token="variable">HASHQUAD_USED</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">list</span>[<span token="variable">pos</span>].<span style="color: #7fdbca;">status</span> <span style="color: #c792ea;">=</span> <span token="variable">HASHQUAD_USED</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">Assign</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">&amp;</span><span style="color: #d7dbe0;">table</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">list</span><span style="color: #82aaff;">[</span><span token="variable">pos</span><span style="color: #82aaff;">].</span><span style="color: #7fdbca;">elem</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">key</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="number">0</span>;</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="number">1</span>;</div><div>}</div></div>
 
 <p>如果元素已经存在，那么就什么都不做。</p>
 
@@ -501,7 +503,7 @@ var _hmt = _hmt || [];
 
 <p>再散列的实现比较简单，只需要创建一个更大（例如两倍大）的表，然后将原表内的所有元素重新插入新表内即可：</p>
 
-<div class="vscode-block"><div><span token="type">hashquad_table</span> <span style="color: #82aaff;">HashQuadTable_Rehash</span>(<span token="type">hashquad_table</span> <span style="color: #d7dbe0;">table</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">old_size</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">size</span>;</div><div>&#160; &#160; <span token="type">hashquad_node</span><span style="color: #7fdbca;">*</span> <span token="variable">old_list</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">list</span>;</div><div>&#160; &#160; <span style="color: #d7dbe0;">table</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">HashQuadTable_New</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;">NextPrime</span><span style="color: #82aaff;">(</span><span token="variable">old_size</span><span style="color: #82aaff;"> </span><span style="color: #7fdbca;">*</span><span style="color: #82aaff;"> </span><span token="number">2</span><span style="color: #82aaff;">))</span>;</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span token="variable">old_size</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">old_list</span>[<span token="variable">i</span>].<span style="color: #7fdbca;">status</span> <span style="color: #c792ea;">!=</span> <span token="variable">HASHQUAD_USED</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #82aaff;">HashQuadTable_Insert</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">table</span><span style="color: #82aaff;">, </span><span token="variable">old_list</span><span style="color: #82aaff;">[</span><span token="variable">i</span><span style="color: #82aaff;">].</span><span style="color: #7fdbca;">elem</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span style="color: #82aaff;">free</span><span style="color: #82aaff;">(</span><span token="variable">old_list</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">table</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">hashquad_table</span> <span style="color: #82aaff;">HashQuadTable_Rehash</span>(<span token="type">hashquad_table</span> <span style="color: #d7dbe0;">table</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">old_size</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">size</span>;</div><div>&nbsp; &nbsp; <span token="type">hashquad_node</span><span style="color: #7fdbca;">*</span> <span token="variable">old_list</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">table</span>-&gt;<span style="color: #7fdbca;">list</span>;</div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">table</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">HashQuadTable_New</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;">NextPrime</span><span style="color: #82aaff;">(</span><span token="variable">old_size</span><span style="color: #82aaff;"> </span><span style="color: #7fdbca;">*</span><span style="color: #82aaff;"> </span><span token="number">2</span><span style="color: #82aaff;">))</span>;</div><div>&nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span token="variable">old_size</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">old_list</span>[<span token="variable">i</span>].<span style="color: #7fdbca;">status</span> <span style="color: #c792ea;">!=</span> <span token="variable">HASHQUAD_USED</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">HashQuadTable_Insert</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">table</span><span style="color: #82aaff;">, </span><span token="variable">old_list</span><span style="color: #82aaff;">[</span><span token="variable">i</span><span style="color: #82aaff;">].</span><span style="color: #7fdbca;">elem</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; <span style="color: #82aaff;">free</span><span style="color: #82aaff;">(</span><span token="variable">old_list</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #d7dbe0;">table</span>;</div><div>}</div></div>
 
 <!-- ignored:可扩散列 -->
 
@@ -529,14 +531,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/data-science/machine-learning/04-support-vector-machine/">
-											<img width="520" height="293" src="/wp-content/uploads/2023/01/机器学习-支持向量机-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2023/01/机器学习-支持向量机-520x293.jpg 520w, /wp-content/uploads/2023/01/机器学习-支持向量机-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/embedded/mcu-application/lvgl-03-layouts/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-520x293.jpg 520w, /wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-300x169.jpg 300w, /wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-1024x576.jpg 1024w, /wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-768x432.jpg 768w, /wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-1536x864.jpg 1536w, /wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-950x534.jpg 950w, /wp-content/uploads/2022/06/LVGL库入门教程03-布局方式.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/data-science/machine-learning/04-support-vector-machine/" rel="bookmark">机器学习-支持向量机</a>
+					<a href="/embedded/mcu-application/lvgl-03-layouts/" rel="bookmark">LVGL库入门教程03-布局方式</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -547,14 +549,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/embedded/mcu-application/lvgl-04-styles/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/06/LVGL库入门教程04-样式-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/LVGL库入门教程04-样式-520x293.jpg 520w, /wp-content/uploads/2022/06/LVGL库入门教程04-样式-300x169.jpg 300w, /wp-content/uploads/2022/06/LVGL库入门教程04-样式-1024x576.jpg 1024w, /wp-content/uploads/2022/06/LVGL库入门教程04-样式-768x432.jpg 768w, /wp-content/uploads/2022/06/LVGL库入门教程04-样式-1536x864.jpg 1536w, /wp-content/uploads/2022/06/LVGL库入门教程04-样式-950x534.jpg 950w, /wp-content/uploads/2022/06/LVGL库入门教程04-样式.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/data-science/via-python/numpy01-create-arrays/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/09/Python数据分析-numpy01数组操作-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/09/Python数据分析-numpy01数组操作-520x293.jpg 520w, /wp-content/uploads/2022/09/Python数据分析-numpy01数组操作-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/embedded/mcu-application/lvgl-04-styles/" rel="bookmark">LVGL库入门教程04-样式</a>
+					<a href="/data-science/via-python/numpy01-create-arrays/" rel="bookmark">numpy01:数组操作</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -565,14 +567,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/computer-science/computer-networking/04-the-transport-layer/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/07/计算机网络04-运输层概率与UDP协议-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/07/计算机网络04-运输层概率与UDP协议-520x293.jpg 520w, /wp-content/uploads/2022/07/计算机网络04-运输层概率与UDP协议-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/embedded/stm32/esp8266-introduction/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/STM32与物联网01-ESP8266基本操作-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/07/STM32与物联网01-ESP8266基本操作-520x293.jpg 520w, /wp-content/uploads/2022/07/STM32与物联网01-ESP8266基本操作-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/computer-science/computer-networking/04-the-transport-layer/" rel="bookmark">计算机网络04-运输层概览与UDP协议</a>
+					<a href="/embedded/stm32/esp8266-introduction/" rel="bookmark">STM32与物联网01-ESP8266基本操作</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -609,6 +611,14 @@ var _hmt = _hmt || [];
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
 											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
 					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
 											<span class="post-date">2023年6月19日</span>
 									</li>
@@ -628,14 +638,6 @@ var _hmt = _hmt || [];
 					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
 											<span class="post-date">2023年3月6日</span>
 									</li>
-											<li>
-					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
-											<span class="post-date">2023年2月27日</span>
-									</li>
-											<li>
-					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
-											<span class="post-date">2023年2月8日</span>
-									</li>
 					</ul>
 
 		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
@@ -648,9 +650,11 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (1)
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
 <ul class='children'>
 	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
 </li>
 </ul>
 </li>
@@ -672,7 +676,7 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (20)
 <ul class='children'>
 	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
 </li>
@@ -698,7 +702,9 @@ var _hmt = _hmt || [];
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(1)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
 	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
 	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
 	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
@@ -763,7 +769,7 @@ var _hmt = _hmt || [];
 					
 										
 					<div id="copyright">
-													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
 											</div><!--/#copyright-->
 					
 										

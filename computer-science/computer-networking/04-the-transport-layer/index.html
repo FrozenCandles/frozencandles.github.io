@@ -12,22 +12,23 @@
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 
-	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
 	<title>计算机网络04-运输层概览与UDP协议 - 冰封残烛的个人小站</title>
-	<meta name="description" content="运输层" />
+	<meta name="description" content="运输层(transport layer)协议为运行在不同主机上的应用进程之间提供了逻辑通信功能，即主机之间表现得像直接相连。运输层协议是在主机上而不是路由器内实现的。在发送端，运输层将发送应用程序进程接收到的报文转换成运输层报文段，然后传递给网络层。" />
 	<link rel="canonical" href="/computer-science/computer-networking/04-the-transport-layer/" />
 	<meta property="og:locale" content="zh_CN" />
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content="计算机网络04-运输层概览与UDP协议 - 冰封残烛的个人小站" />
-	<meta property="og:description" content="运输层" />
+	<meta property="og:description" content="运输层(transport layer)协议为运行在不同主机上的应用进程之间提供了逻辑通信功能，即主机之间表现得像直接相连。运输层协议是在主机上而不是路由器内实现的。在发送端，运输层将发送应用程序进程接收到的报文转换成运输层报文段，然后传递给网络层。" />
 	<meta property="og:url" content="/computer-science/computer-networking/04-the-transport-layer/" />
 	<meta property="og:site_name" content="冰封残烛的个人小站" />
 	<meta property="article:published_time" content="2022-07-08T14:49:32+00:00" />
-	<meta property="article:modified_time" content="2023-10-06T10:57:51+00:00" />
+	<meta property="article:modified_time" content="2023-10-14T02:17:08+00:00" />
 	<meta property="og:image" content="/wp-content/uploads/2022/07/计算机网络04-运输层概率与UDP协议.jpg" />
 	<meta property="og:image:width" content="1980" />
 	<meta property="og:image:height" content="1320" />
 	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="作者" />
 	<meta name="twitter:data1" content="Hello" />
@@ -37,35 +38,8 @@
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
-	            "@type": "WebSite",
-	            "@id": "/#website",
-	            "url": "/",
-	            "name": "冰封残烛的个人小站",
-	            "description": "FrozenCandle&#039;s Personal Site",
-	            "potentialAction": [
-	                {
-	                    "@type": "SearchAction",
-	                    "target": {
-	                        "@type": "EntryPoint",
-	                        "urlTemplate": "/?s={search_term_string}"
-	                    },
-	                    "query-input": "required name=search_term_string"
-	                }
-	            ],
-	            "inLanguage": "zh-CN"
-	        },
-	        {
-	            "@type": "ImageObject",
-	            "inLanguage": "zh-CN",
-	            "@id": "/computer-science/computer-networking/04-the-transport-layer/#primaryimage",
-	            "url": "/wp-content/uploads/2022/07/计算机网络04-运输层概率与UDP协议.jpg",
-	            "contentUrl": "/wp-content/uploads/2022/07/计算机网络04-运输层概率与UDP协议.jpg",
-	            "width": 1980,
-	            "height": 1320
-	        },
-	        {
 	            "@type": "WebPage",
-	            "@id": "/computer-science/computer-networking/04-the-transport-layer/#webpage",
+	            "@id": "/computer-science/computer-networking/04-the-transport-layer/",
 	            "url": "/computer-science/computer-networking/04-the-transport-layer/",
 	            "name": "计算机网络04-运输层概览与UDP协议 - 冰封残烛的个人小站",
 	            "isPartOf": {
@@ -74,12 +48,16 @@
 	            "primaryImageOfPage": {
 	                "@id": "/computer-science/computer-networking/04-the-transport-layer/#primaryimage"
 	            },
+	            "image": {
+	                "@id": "/computer-science/computer-networking/04-the-transport-layer/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2022/07/计算机网络04-运输层概率与UDP协议.jpg",
 	            "datePublished": "2022-07-08T14:49:32+00:00",
-	            "dateModified": "2023-10-06T10:57:51+00:00",
+	            "dateModified": "2023-10-14T02:17:08+00:00",
 	            "author": {
 	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
 	            },
-	            "description": "运输层",
+	            "description": "运输层(transport layer)协议为运行在不同主机上的应用进程之间提供了逻辑通信功能，即主机之间表现得像直接相连。运输层协议是在主机上而不是路由器内实现的。在发送端，运输层将发送应用程序进程接收到的报文转换成运输层报文段，然后传递给网络层。",
 	            "breadcrumb": {
 	                "@id": "/computer-science/computer-networking/04-the-transport-layer/#breadcrumb"
 	            },
@@ -92,6 +70,15 @@
 	                    ]
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/computer-science/computer-networking/04-the-transport-layer/#primaryimage",
+	            "url": "/wp-content/uploads/2022/07/计算机网络04-运输层概率与UDP协议.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/07/计算机网络04-运输层概率与UDP协议.jpg",
+	            "width": 1980,
+	            "height": 1320
 	        },
 	        {
 	            "@type": "BreadcrumbList",
@@ -109,6 +96,24 @@
 	                    "name": "计算机网络04-运输层概览与UDP协议"
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
 	        },
 	        {
 	            "@type": "Person",
@@ -158,7 +163,6 @@ body { font-family: "Roboto", Arial, sans-serif; }
 <link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
-<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
 <script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
 <link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/453" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
 <meta name="generator" content="WordPress 6.3.1" />
@@ -295,13 +299,12 @@ var _hmt = _hmt || [];
 				<div class="entry-content">
 					<div class="entry themeform">	
 						
-
 <h2>运输层概述</h2>
 
-<p>运输层协议为运行在不同主机上的应用进程之间提供了逻辑通信(logic communication)功能，即主机之间表现得像直接相连。下图展示了这种封装思路：</p>
+<p>运输层(transport layer)协议为运行在不同主机上的应用进程之间提供了逻辑通信(logic communication)功能，即主机之间表现得像直接相连。下图展示了这种封装思路：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-transport-layer.jpg" alt="" width="400">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@computer-network/03-transport-layer.jpg" width="400"/>
     <figcaption>运输层协议的工作原理</figcaption>
 </figure>
 
@@ -316,7 +319,7 @@ var _hmt = _hmt || [];
 <p>下图展示了多路分解与多路复用的思路：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-multiplexing.jpg" alt="" width="490">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@computer-network/03-multiplexing.jpg" width="490"/>
     <figcaption>多路复用与多路分解</figcaption>
 </figure>
 
@@ -381,7 +384,7 @@ var _hmt = _hmt || [];
 <p>UDP 报文段相对 TCP 更加简单。下图展示了 UDP 报文段的结构：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-udp-message.jpg" alt="" width="250">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@computer-network/03-udp-message.jpg" width="250"/>
     <figcaption>UDP 报文段结构</figcaption>
 </figure>
 
@@ -398,7 +401,7 @@ var _hmt = _hmt || [];
 <p>首先使用 WireShark 分析 UDP 数据包的结构。打开 WireShark 捕获并过滤出 UDP 分组如下：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-wireshark-udp.jpg" alt="" width="580">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@computer-network/03-wireshark-udp.jpg" width="580"/>
 </figure>
 
 <p>有时过滤的分组还包括基于 UDP 实现的应用层协议的分组。这里手动使用代码在本地之间发送一个 UDP 分组，得到的数据如上图所示：</p>
@@ -414,7 +417,7 @@ var _hmt = _hmt || [];
 <p>其中伪首部由源 IP 地址、目的 IP 地址、协议类型（UDP 协议类型使用 <code>0x11</code> 表示）和 UDP 分组长度，这部分内容会参与检验和字段的计算。它们的位置和长度如下图所示：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-udp-check-head.jpg" alt="" width="400">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@computer-network/03-udp-check-head.jpg" width="400"/>
 </figure>
 
 <p>然后就可以计算检验和字段了。检验和计算的步骤如下：首先结合伪首部、首部以及应用数据，将所有字节划分为每 16 位，即 2 字节的块（若应用数据中的字节数不为偶数，则需要额外在末尾填充一个全零字节）。然后，把所有 16 位的块逐块相加，考虑到结果可能不止 16 位，此时使用 32 位的值描述结果，但将这 32 位的高 16 位和低 16 位相加，抹除这个进位值（再次相加之后肯定不会再发生溢出），得到一个 16 位的回卷结果。</p>
@@ -423,20 +426,20 @@ var _hmt = _hmt || [];
 
 <p>考虑到 C 语言操作底层字节比较方便，这里使用 C 语言验证以上结果。按照以上说明，给定一个字节数组，计算检验和的方法为：</p>
 
-<div class="vscode-block"><div><span style="color: #6f42c1;font-weight: bold;">uint16_t</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">checksum</span><span style="color: #24292e;">(</span><span style="color: #6f42c1;font-weight: bold;">uint8_t</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">*</span><span style="color: #e36209;">packet</span><span style="color: #24292e;">, </span><span style="color: #d73a49;font-weight: bold;">int</span><span style="color: #24292e;"> </span><span style="color: #e36209;">length</span><span style="color: #24292e;">) {</span></div><div><span style="color: #24292e;">&#160; &#160; </span><span style="color: #6f42c1;font-weight: bold;">uint32_t</span><span style="color: #24292e;"> </span><span style="color: #24292e;">sum</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">0</span><span style="color: #24292e;">;</span></div><div><span style="color: #24292e;">&#160; &#160; </span><span style="color: #d73a49;font-weight: bold;">for</span><span style="color: #24292e;"> (</span><span style="color: #6f42c1;font-weight: bold;">uint16_t</span><span style="color: #24292e;"> </span><span style="color: #24292e;">i</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">0</span><span style="color: #24292e;">; </span><span style="color: #24292e;">i</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">&lt;</span><span style="color: #24292e;"> </span><span style="color: #e36209;">length</span><span style="color: #24292e;">; </span><span style="color: #24292e;">i</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">+=</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">2</span><span style="color: #24292e;">) {</span></div><div><span style="color: #24292e;">&#160; &#160; &#160; &#160; </span><span style="color: #24292e;">sum</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">+=</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">*</span><span style="color: #24292e;">((</span><span style="color: #6f42c1;font-weight: bold;">uint16_t</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">*</span><span style="color: #24292e;">)(</span><span style="color: #e36209;">packet</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">+</span><span style="color: #24292e;"> </span><span style="color: #24292e;">i</span><span style="color: #24292e;">));</span></div><div><span style="color: #24292e;">&#160; &#160; &#160; &#160; </span><span style="color: #24292e;">sum</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> (</span><span style="color: #24292e;">sum</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">&gt;&gt;</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">16</span><span style="color: #24292e;">) </span><span style="color: #d73a49;">+</span><span style="color: #24292e;"> (</span><span style="color: #24292e;">sum</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">&amp;</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">0x</span><span style="color: #005cc5;">ffff</span><span style="color: #24292e;">);</span></div><div><span style="color: #24292e;">&#160; &#160; }</span></div><div><span style="color: #24292e;">&#160; &#160; </span><span style="color: #d73a49;font-weight: bold;">return</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">~</span><span style="color: #24292e;">sum</span><span style="color: #24292e;">;</span></div><div><span style="color: #24292e;">}</span></div></div>
+<div class="vscode-block"><div><span style="color: #6f42c1;font-weight: bold;">uint16_t</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">checksum</span><span style="color: #24292e;">(</span><span style="color: #6f42c1;font-weight: bold;">uint8_t</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">*</span><span style="color: #e36209;">packet</span><span style="color: #24292e;">, </span><span style="color: #d73a49;font-weight: bold;">int</span><span style="color: #24292e;"> </span><span style="color: #e36209;">length</span><span style="color: #24292e;">) {</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #6f42c1;font-weight: bold;">uint32_t</span><span style="color: #24292e;"> </span><span style="color: #24292e;">sum</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">0</span><span style="color: #24292e;">;</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #d73a49;font-weight: bold;">for</span><span style="color: #24292e;"> (</span><span style="color: #6f42c1;font-weight: bold;">uint16_t</span><span style="color: #24292e;"> </span><span style="color: #24292e;">i</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">0</span><span style="color: #24292e;">; </span><span style="color: #24292e;">i</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">&lt;</span><span style="color: #24292e;"> </span><span style="color: #e36209;">length</span><span style="color: #24292e;">; </span><span style="color: #24292e;">i</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">+=</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">2</span><span style="color: #24292e;">) {</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #24292e;">sum</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">+=</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">*</span><span style="color: #24292e;">((</span><span style="color: #6f42c1;font-weight: bold;">uint16_t</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">*</span><span style="color: #24292e;">)(</span><span style="color: #e36209;">packet</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">+</span><span style="color: #24292e;"> </span><span style="color: #24292e;">i</span><span style="color: #24292e;">));</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #24292e;">sum</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> (</span><span style="color: #24292e;">sum</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">&gt;&gt;</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">16</span><span style="color: #24292e;">) </span><span style="color: #d73a49;">+</span><span style="color: #24292e;"> (</span><span style="color: #24292e;">sum</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">&amp;</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">0x</span><span style="color: #005cc5;">ffff</span><span style="color: #24292e;">);</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; }</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #d73a49;font-weight: bold;">return</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">~</span><span style="color: #24292e;">sum</span><span style="color: #24292e;">;</span></div><div><span style="color: #24292e;">}</span></div></div>
 
 <p>程序中将两个字节当做一个块处理，每次计算后将 32 位结果的高 16 位和低 16 位相加。</p>
 
-<p>首部和数据部分可以在 WireShark 中右键下方的条目窗口，通过“导出分组字节流”以二进制的形式保存在磁盘上，保存的二进制内容为最下方十六进制查看器中蓝色高亮的部分：</p>
+<p>首部和数据部分可以在 WireShark 中右键下方的条目窗口，通过&ldquo;导出分组字节流&rdquo;以二进制的形式保存在磁盘上，保存的二进制内容为最下方十六进制查看器中蓝色高亮的部分：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-wireshark-udp-export.jpg" alt="" width="570">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@computer-network/03-wireshark-udp-export.jpg" width="570"/>
 </figure>
 
 <p>这里将 UDP 首部和数据分开保存，并使用开源十六进制编辑器 ImHex 为首部添加上伪首部部分。在 ImHex 中，于 0x0 位置插入 0xC 个字节，这部分字节的内容按顺序为：源 IP 地址 <code>0x7F 00 00 01</code> ；目的 IP 地址 <code>0x7F 00 00 01</code> ；协议类型 <code>0x00 11</code> ；UDP 长度 <code>0x00 14</code> 。最后，由于此时还没有计算检验和字段，不要忘记将首部的检验和字段置为 <code>0x00 00</code> ，如下所示：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-udp-hex-head.jpg" alt="" width="570">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@computer-network/03-udp-hex-head.jpg" width="570"/>
 </figure>
 
 <p>然后，使用程序读入保存的 UDP 首部和应用数据，并拼接在同一个数组中，计算检验和并打印：</p>
@@ -481,10 +484,10 @@ var _hmt = _hmt || [];
 <p>此时接收方的处理比较简单，它只需要根据收到的分组是否受损回答 ACK 或 NACK 即可。下图展示了这种最简单的可靠数据传输协议的通信过程：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-rdt-2.0.jpg" alt="" width="380">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@computer-network/03-rdt-2.0.jpg" width="380"/>
 </figure>
 
-<hr>
+<hr/>
 
 <p>以上设计的具有差错检测与恢复的运输层协议看起来已经可以正常工作了，但是它存在一个致命的缺陷：该协议并没有考虑到响应分组损坏的可能性，而发送方却没有能力知道这个响应是否受损，进而无法知道接收方是否正确接收了上一块发送的数据。</p>
 
@@ -497,12 +500,12 @@ var _hmt = _hmt || [];
 <p>由于发送方可能发送新的分组，也可能重传上一个分组，因此发送方和接收方的状态数都是以前的两倍。不过这两类状态下处理的动作是相似的，只是内容不同：当接收到正确的分组时，接收方对所接收的分组发送肯定确认；如果收到受损的分组，则接收方将发送否定确认。下图展示了改进后的可靠数据传输协议的通信过程：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-rdt-2.1.jpg" alt="" width="360">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@computer-network/03-rdt-2.1.jpg" width="360"/>
 </figure>
 
 <p>如果不发送 NACK ，可以对上次正确接收的分组发送一个冗余ACK(duplicate ACK)，表示正确接收到被确认两次的分组后面的分组。</p>
 
-<hr>
+<hr/>
 
 <p>除了比特受损外，实际的底层信道还会丢包，这就需要运输层提供检测丢包以及对丢包的弥补功能。</p>
 
@@ -517,13 +520,13 @@ var _hmt = _hmt || [];
 <p>引入定时器后，通信原理并没有复杂多少，但过程中可能的情况变多了。首先考虑最简单的情况，底层并没有发生丢包或分组损坏，那么只需要不断根据 ACK 发送分组即可：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-rdt-3-case1.jpg" alt="" width="340">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@computer-network/03-rdt-3-case1.jpg" width="340"/>
 </figure>
 
 <p>再考虑稍微复杂一些的情况，在传输过程中发送了丢包。不论是分组丢失还是响应丢失，接收方都无法收到发送方的 ACK 响应，在倒计时结束后都会发生重传：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-rdt-3-case2-3.jpg" alt="" width="600">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@computer-network/03-rdt-3-case2-3.jpg" width="600"/>
 </figure>
 
 <p>接收方可能得到重复的分组，不过它可以通过判断分组序号，确定这是一个冗余分组而丢弃。</p>
@@ -531,7 +534,7 @@ var _hmt = _hmt || [];
 <p>最后是最复杂的一种情况，在传输过程中没有发生丢包，但发送方超时时间设置过短，发生过早超时而认为此时发生了丢包。此时，发送方尝试再发送一个相同分组，不过该分组会被接收方确认为冗余分组而舍弃，发送方接到重复响应后也会将其丢弃：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-rdt-3-case4.jpg" alt="" width="320">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@computer-network/03-rdt-3-case4.jpg" width="320"/>
 </figure>
 
 <p>这样便成功地构建了一种可靠数据传输协议。检验和可以验证一个分组是否受损，接收方反馈使发送方知道分组受损，重传机制可以恢复受损的内容，分组序号可以防止冗余分组的影响，超时机制用于防止通信过程中发生分组丢失。</p>
@@ -545,7 +548,7 @@ var _hmt = _hmt || [];
 <p>为了解决该问题，可以不采用停等，而是以<strong>流水线</strong>(pipelining)的方式发送多个分组而无须等待确认，如下图所示：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-pipelining-transmission.jpg" alt="" width="520">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@computer-network/03-pipelining-transmission.jpg" width="520"/>
 </figure>
 
 <p>然而，流水线操作下，为了让接收方判断是否有冗余分组，分组的序号不再是简单的 0（一个新的分组）或 1（重复上一个分组），每个非重传的分组都必须有一个唯一的序号；并且发送方接到的响应都是之前发送的分组的，为了能够应对接收方的重传请求，发送方必须要能够缓存那些已经发送但还没有确认的分组。</p>
@@ -557,7 +560,7 @@ var _hmt = _hmt || [];
 <p>若将基序号(base)定义为最早未确认分组的序号，后续序号(nextseqnum)定义为下个待发分组的序号，则这 N 个分组可分为 4 段：基序号之前的分组都已经发送并被确认；基序号到后续序号是已经发送但未被确认的分组；后续序号到基序号后的最大允许长度 N 内的序号能用于那些要被立即发送的分组；大于等于基序号后的最大允许长度 N 的序号暂时无法使用，直到当前流水线中出现被确认的分组为止（一般是基序号对应的分组）。下图描述了发送方的序号：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-pipelining-gobackN.jpg" alt="" width="440">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@computer-network/03-pipelining-gobackN.jpg" width="440"/>
 </figure>
 
 <p>协议运行时，由有效序号标识的分组可以被看作一个长度为 N 的窗口，在序号空间向前滑动。如果分组中序号字段的长度为 k ，那么序号空间可以用重复的 0~2<sup>k</sup> 表示。</p>
@@ -565,7 +568,7 @@ var _hmt = _hmt || [];
 <p>GBN 发送方必须响应 3 种不同的事件，下图描述了 GBN 发送方的工作状态：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-pipelining-gobackN-sender.jpg" alt="" width="460">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@computer-network/03-pipelining-gobackN-sender.jpg" width="460"/>
 </figure>
 
 <p>当一个应用层准备发送数据时，发送方首先检查发送窗口是否已满（即已经发送但未被确认的分组是否达到了 N ）：如果窗口未满，则产生一个分组并发送，并相应地更新变量；如果窗口已满，发送方则返还数据并提醒应用层等候一段时间再尝试发送。或者发送方也可以先缓存这些数据，在合适的时间再发送。发送方的运输层也可以和应用层根据信号同步，让应用层仅当窗口未满时才执行发送数据。</p>
@@ -579,12 +582,12 @@ var _hmt = _hmt || [];
 <p>下图表示一个窗口长度为 4 个分组的 GBN 协议的运行情况，此时发送方只能发送分组 0~3 ，直到一个或多个分组被确认才能继续发送。当接收到顺序的 ACK 时，该窗口便向前滑动，发送方便可以发送新的分组：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-pipelining-gobackN-demo.jpg" alt="" width="350">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@computer-network/03-pipelining-gobackN-demo.jpg" width="350"/>
 </figure>
 
 <p>由于窗口长度的限制，发送方只能一次性发送分组 0~3 ，在继续发送之前必须等待直到一个或多个分组被确认。当接收到每个连续的 ACK 时，该窗口便向前滑动，发送方便可以发送新的分组。分组 2 第一次传输时发生了丢失，接收方发现分组 3~5 是失序分组并丢弃，而发送方因为迟迟接不到分组 2 的响应而发生超时，在超时事件中重发当前窗口的分组 2~5 。</p>
 
-<hr>
+<hr/>
 
 <p>改进后的 GBN 协议使发送方可以在没有接收响应时便同时发送多个分组，避免了停等协议中存在的时间利用率问题。然而 GBN 也存在一些性能问题，主要是当窗口长度和传输时延都很大时，单个分组的差错就能够引起 GBN 重传大量分组，但许多分组根本没有必要重传。随着底层通道差错率的增加，许多正确送达的分组可能会被多次不必要地重传。</p>
 
@@ -593,7 +596,7 @@ var _hmt = _hmt || [];
 <p>当发送方从应用层接收到数据后，将检查下个可用于该分组的序号是否位于窗口内：如果位于窗口内，则将数据打包并发送；否则要么将数据缓存，要么返还给应用层。此时接收方也需要一个长度为 N 的窗口，序号在窗口内的分组被正确接收并回送一个 ACK 。下图展示了 SR 的窗口状态：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-pipelining-selectiveRepeat-window.jpg" alt="" width="570">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@computer-network/03-pipelining-selectiveRepeat-window.jpg" width="570"/>
 </figure>
 
 <p>当发送方收到某个分组的 ACK 时，如果该分组序号在窗口内，则发送方将该分组标记为已接收。如果该分组的序号等于发送方窗口基序号 <code>send_base</code> ，则基序号变为未确认分组的最小序号处并带动整个窗口移动，并发送落在窗口内的未发送序号。</p>
@@ -603,13 +606,13 @@ var _hmt = _hmt || [];
 <p>在 SR 中，每个分组都可能发生超时，在超时事件中只能发送一个分组，因此每个分组必须拥有独立的逻辑定时器，否则不知道哪一个分组发生了超时。下图演示了 SR 是如何处理之前的情况下 GBN 遇到的问题的：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/03-pipelining-selectiveRepeat-demo.jpg" alt="" width="600">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@computer-network/03-pipelining-selectiveRepeat-demo.jpg" width="600"/>
 </figure>
 
 <p>至此终于得出了一个高效、可靠的数据传输协议。下表总结了该协议的一些机制，以及这些机制是如何保证协议正常运行的：</p>
 
 <table>
-    <tr>
+    <tbody><tr>
         <th>机制</th>
         <th>用途</th>
     </tr>
@@ -637,13 +640,13 @@ var _hmt = _hmt || [];
         <td>窗口</td>
         <td>限制分组序号范围，减轻缓存压力</td>
     </tr>
-</table>
+</tbody></table>
 
 <p>下一节将介绍 TCP 协议，更详细地介绍差错检测、超时机制、流量控制等原理，并研究 TCP 是如何实现它们的。</p>
 
 <h2>延伸阅读</h2>
 
-<p>本文使用的 UDP 检验和算法参考自 OpenBSD ：<a href="https://github.com/openbsd/src/blob/master/sbin/dhclient/packet.c">https://github.com/openbsd/src/blob/master/sbin/dhclient/packet.c</a></p>
+<p>本文使用的 UDP 检验和算法参考自 OpenBSD ：<a class="link-reference" href="https://github.com/openbsd/src/blob/master/sbin/dhclient/packet.c">https://github.com/openbsd/src/blob/master/sbin/dhclient/packet.c</a></p>
 
 
 												<div class="clear"></div>				
@@ -667,14 +670,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/computer-science/computer-networking/03-domain-name-system/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/06/计算机网络03-域名系统：DNS-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/06/计算机网络03-域名系统：DNS-520x293.jpg 520w, /wp-content/uploads/2022/06/计算机网络03-域名系统：DNS-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/embedded/mcu-application/lvgl-03-layouts/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-520x293.jpg 520w, /wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-300x169.jpg 300w, /wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-1024x576.jpg 1024w, /wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-768x432.jpg 768w, /wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-1536x864.jpg 1536w, /wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-950x534.jpg 950w, /wp-content/uploads/2022/06/LVGL库入门教程03-布局方式.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/computer-science/computer-networking/03-domain-name-system/" rel="bookmark">计算机网络03-域名系统：DNS</a>
+					<a href="/embedded/mcu-application/lvgl-03-layouts/" rel="bookmark">LVGL库入门教程03-布局方式</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -685,14 +688,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/computer-science/data-structure/02-linked-list/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/08/数据结构02-链表-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/08/数据结构02-链表-520x293.jpg 520w, /wp-content/uploads/2022/08/数据结构02-链表-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/data-science/machine-learning/02-logistic-regression/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/12/机器学习-逻辑回归-520x293.png" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/12/机器学习-逻辑回归-520x293.png 520w, /wp-content/uploads/2022/12/机器学习-逻辑回归-950x534.png 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/computer-science/data-structure/02-linked-list/" rel="bookmark">数据结构02-链表</a>
+					<a href="/data-science/machine-learning/02-logistic-regression/" rel="bookmark">机器学习-逻辑回归</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -703,14 +706,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/programming/python-fp/09-decorators/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/06/Python函数式编程09-闭包与装饰器-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/Python函数式编程09-闭包与装饰器-520x293.jpg 520w, /wp-content/uploads/2022/06/Python函数式编程09-闭包与装饰器-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/embedded/mcu-application/lvgl-06-animations/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/LVGL库入门教程06-动画-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/LVGL库入门教程06-动画-520x293.jpg 520w, /wp-content/uploads/2022/06/LVGL库入门教程06-动画-300x169.jpg 300w, /wp-content/uploads/2022/06/LVGL库入门教程06-动画-1024x576.jpg 1024w, /wp-content/uploads/2022/06/LVGL库入门教程06-动画-768x432.jpg 768w, /wp-content/uploads/2022/06/LVGL库入门教程06-动画-1536x864.jpg 1536w, /wp-content/uploads/2022/06/LVGL库入门教程06-动画-950x534.jpg 950w, /wp-content/uploads/2022/06/LVGL库入门教程06-动画.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/programming/python-fp/09-decorators/" rel="bookmark">Python函数式编程09 闭包和装饰器</a>
+					<a href="/embedded/mcu-application/lvgl-06-animations/" rel="bookmark">LVGL库入门教程06-动画</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -747,6 +750,14 @@ var _hmt = _hmt || [];
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
 											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
 					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
 											<span class="post-date">2023年6月19日</span>
 									</li>
@@ -766,14 +777,6 @@ var _hmt = _hmt || [];
 					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
 											<span class="post-date">2023年3月6日</span>
 									</li>
-											<li>
-					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
-											<span class="post-date">2023年2月27日</span>
-									</li>
-											<li>
-					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
-											<span class="post-date">2023年2月8日</span>
-									</li>
 					</ul>
 
 		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
@@ -786,9 +789,11 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (1)
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
 <ul class='children'>
 	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
 </li>
 </ul>
 </li>
@@ -810,7 +815,7 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (20)
 <ul class='children'>
 	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
 </li>
@@ -836,7 +841,9 @@ var _hmt = _hmt || [];
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(1)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
 	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
 	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
 	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
@@ -901,7 +908,7 @@ var _hmt = _hmt || [];
 					
 										
 					<div id="copyright">
-													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
 											</div><!--/#copyright-->
 					
 										

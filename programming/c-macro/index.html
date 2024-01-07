@@ -1,0 +1,1391 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>C语言-宏定义完全指南 - 冰封残烛的个人小站</title>
+	<meta name="description" content="宏(macro)作为 C 语言提供的一种功能强大的预处理工具，在不损失代码运行效率的同时可以实现非常强大的效果，一定程度上也方便维护代码。但是过度使用宏也会造成一些缺点，例如导致代码的可读性降低，且难以调试。如何平衡宏的便利性与潜在问题，是在使用宏时必须考虑的问题。" />
+	<link rel="canonical" href="/programming/c-macro/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="C语言-宏定义完全指南 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="宏(macro)作为 C 语言提供的一种功能强大的预处理工具，在不损失代码运行效率的同时可以实现非常强大的效果，一定程度上也方便维护代码。但是过度使用宏也会造成一些缺点，例如导致代码的可读性降低，且难以调试。如何平衡宏的便利性与潜在问题，是在使用宏时必须考虑的问题。" />
+	<meta property="og:url" content="/programming/c-macro/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2024-01-07T07:00:19+00:00" />
+	<meta property="article:modified_time" content="2024-01-07T07:19:36+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2024/01/c-macro.jpg" />
+	<meta property="og:image:width" content="1500" />
+	<meta property="og:image:height" content="844" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="7分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebPage",
+	            "@id": "/programming/c-macro/",
+	            "url": "/programming/c-macro/",
+	            "name": "C语言-宏定义完全指南 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/programming/c-macro/#primaryimage"
+	            },
+	            "image": {
+	                "@id": "/programming/c-macro/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2024/01/c-macro.jpg",
+	            "datePublished": "2024-01-07T07:00:19+00:00",
+	            "dateModified": "2024-01-07T07:19:36+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "宏(macro)作为 C 语言提供的一种功能强大的预处理工具，在不损失代码运行效率的同时可以实现非常强大的效果，一定程度上也方便维护代码。但是过度使用宏也会造成一些缺点，例如导致代码的可读性降低，且难以调试。如何平衡宏的便利性与潜在问题，是在使用宏时必须考虑的问题。",
+	            "breadcrumb": {
+	                "@id": "/programming/c-macro/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/programming/c-macro/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/programming/c-macro/#primaryimage",
+	            "url": "/wp-content/uploads/2024/01/c-macro.jpg",
+	            "contentUrl": "/wp-content/uploads/2024/01/c-macro.jpg",
+	            "width": 1500,
+	            "height": 844
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/programming/c-macro/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "C语言-宏定义完全指南"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/1338" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=1338' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fc-macro%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fc-macro%2F&#038;format=xml" />
+<link rel="stylesheet" href="/wp-content/static/css/theme@haru-regular.wp.css">
+
+<link rel="stylesheet" href="/wp-content/static/highlight/styles/night-owl-light.css">
+<script src="/wp-content/static/highlight/highlight.min.js"></script>
+<script src="/wp-content/static/highlight/languages/c.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        document.querySelectorAll('.code-highlight').forEach((el) => {
+            hljs.highlightElement(el);
+        });
+    });
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?432b66336cb23bd6712cecabe6d808eb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-1338 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/all/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-1338" class="post-1338 post type-post status-publish format-standard has-post-thumbnail hentry category-programming">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">C语言-宏定义完全指南</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/programming/" rel="category tag">编程语言</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2024年1月7日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+<h2>宏定义简介</h2>
+
+<p>在计算机编程领域，<strong>宏指令</strong>(macro)或称宏，表示一类将输入转换为输出的处理规则。和子程序（函数）不同的是，宏一般发生在源文件还未编写完成的阶段（即预处理阶段），并且宏一般只是通过简单地替换指令来工作，而不管这些执行是如何执行的甚至是否能执行。</p>
+
+<p>宏处理器会先将宏扩展为实际的指令再执行它们，这一过程称为宏展开(macro expansion)。宏可以将一系列处理指令用作单条指令使用，在消除重复性工作的同时降低这一过程中出错的可能。（因为一个“小”的宏指令可能包含很“大”的指令序列，所以这也是它被称为“宏”的原因。）</p>
+
+<p>许多软件和编程语言都支持使用宏的概念。例如在文本处理工具中，宏可以帮助用户自动化处理重复的编辑任务；在电子表格应用中，宏可以自动执行一系列复杂计算。在 C 语言中，宏可以向源码中插入更多的代码，而不必手动重复编写它们。</p>
+
+
+<h3>预处理器指令#define</h3>
+
+<p><code>#define</code> 是一个预处理器指令，用于定义一个宏。<code>#define</code> 预处理器指令和其它预处理器指令一样，要求 <code>#</code> 符号是一行的第一个非空白字符。</p>
+
+<p>一个基本的宏通过如下形式定义：</p>
+
+<div class="codeblock code-template">
+    <strong>#define</strong> <em>identifier</em> <em>replacement-list</em>
+</div>
+
+<p><code><em>identifier</em></code> 表示宏的名称，需要遵循 C 语言标识符的命名规则（只能使用字符、数字和下划线 <code>_</code> 字符，而且首字符不能是数字）。<code><em>replacement-list</em></code> 称为替换列表或替换体。一旦预处理器在程序中发现了一个宏对应的标识符，它就会使用替换体的内容代替该宏。</p>
+
+<p>以下演示了宏的基本用法：</p>
+
+<div class="code-highlight language-c">/* definition */
+#define PI 3.141592653589793
+#define FORMAT_X "X is %.4f.\n"
+#define PRINT_X printf(FORMAT_X, x)
+
+/* usage */
+double x = sin(PI / 6);
+PRINT_X;</div>
+
+<p>当预处理器遇到标识符 <code>PI</code> 时，它会被展开为浮点数字面量 <code>3.141592653589793</code> ；当预处理器遇到标识符 <code>PRINT_X</code> 时，它会被展开为函数调用 <code>printf(FORMAT_X, x)</code> ，这个替换体中嵌套了其它宏，预处理器会将其进一步扩展为完整的形式 <code>printf("X is %.4f.\n", x)</code> 。</p>
+
+<blockquote>
+    <p>使用 gcc 编译器的话可以使用 <code>-E</code> 参数获得预处理后代码的完整形式。不过注意，这一步不仅会展开所有的宏，还会引入头文件的所有内容。</p>
+
+    <div class="codeblock code-console">$ gcc -E macro.c
+...
+double x = sin(3.141592653589793 / 6);
+printf("X is %.4f.\n", x);
+...
+    </div>
+</blockquote>
+
+<p>从这个示例中可以看出宏的特点：在代码编译之前，预处理器会将宏的定义替换到程序中，因此宏其实是一种源代码中的文本替代机制。一般而言，预处理器发现程序中的宏后，会用宏定义中的替换文本替换它。如果替换的表达式或语句中还包含宏，则继续替换这些宏。记住，预处理器不做计算，不对表达式求值，它只替换文本。</p>
+
+<p>一个 <code>#define</code> 的替换体是从宏标识符的空格后面到换行符的所有文本。如果要使宏的定义跨越多行，需要使用续行符 <code>\</code> ，例如：</p>
+
+<div class="code-highlight language-c">#define NUMS_LIST 1, \
+                  2, \
+                  3,
+int arr[] = {NUMS_LIST};</div>
+
+<p>宏展开后等价于：</p>
+
+<div class="code-highlight language-c">int arr[] = {1, 2, 3,};</div>
+
+<p>不过在 <code>#define</code> 的行中存在的注释不算替换体，注释的去除比预处理更早发生，因此不会参与替换。例如宏：</p>
+
+<div class="code-highlight language-c">#define LENGTH 16  // length of array
+int arr[LENGTH];</div>
+
+<p>最终 <code>LENGTH</code> 被展开后为 <code>16</code> ，后面的注释会被忽略。</p>
+
+<blockquote>
+    <p>注意宏定义末尾不需要分号；如果提供分号，那么这个分号会作为替换体的一部分被插入目标位置。如果定义的宏用起来像一个值，那么这个多余的分号用在表达式中往往会造成问题。</p>
+
+    <p>如果宏用起来类似一条语句，那么通常的做法是定义时省略最后的分号，使用时再加上，就像以上用法一样。</p>
+</blockquote>
+
+<p>宏有许多用法，以上只是演示了其中一种用法，即将一个复杂表达式或若干语句封装成一个简单的符号，这样在源代码中通过简单地写出这个符号，来引用这个复杂的表达式或语句。这些用起来像一个变量或一条语句之类的宏被称为类对象宏(object-like macro)。</p>
+
+<blockquote>
+    <p>该指令可以出现在源文件的任何地方，其定义从指令出现的地方到该文件末尾有效。但是这种用途的宏一般习惯性写在源代码文件的顶部，<code>#include</code> 内容的后面。</p>
+</blockquote>
+
+<p>在以上示例中，通过使用 <code>#define</code> 指令为数值字面量起了一个别名，这种形式定义的常量称为<strong>明示常量</strong>(manifest constant)。宏定义、<code>const</code> 变量与 <code>enum</code> 枚举类型都是一种给数值起别名的方式，它们可以提高代码的可读性和可维护性，防止代码中出现“魔法数字”（即在代码中直出现的、没有解释的数字）。这三种使用方式有些相似，但使用场景又有一些区别：</p>
+
+<p>宏定义相比 <code>const</code> 变量，它发生在预处理阶段，只是执行简单的文本替换，没有实际分配存储空间，预处理后这个符号就消失了。<code>const</code> 关键字定义的是变量，它会在编译期分配空间，并具有类型信息、作用域以及链接形式相关的概念。不过宏定义可以配合其它的预处理器指令实现更复杂的功能。</p>
+
+<p>另外，<code>const</code> 变量不能像宏一样参与各种预处理操作。例如，宏可以这样用：</p>
+
+<div class="code-highlight language-c">#define PRT_SIZE "%zu"
+
+printf("sizeof int is "PRT_SIZE, sizeof(int));</div>
+
+<p>如果用的是 <code>const</code> 变量，可能需要通过 <code>strcat()</code> 的方式拼接字符串。</p>
+
+<blockquote>
+    <p>宏的这种特点使其可以对 C 语法做一些扩展，例如将语句块的花括号改成一些编程语言惯用的 <code>BEGIN</code> 和 <code>END</code> 的关键字形式：</p>
+
+    <div class="code-highlight language-c">#define THEN {
+#define END  }
+
+if (condition) THEN
+    /* ... */
+END</div>
+</blockquote>
+
+<p>最后，宏定义可以直接写到 <code>.h</code> 头文件中，但 <code>const</code> 常量如果写在头文件中，被多个源文件包含时会产生重复定义。</p>
+
+<p><code>enum</code> 枚举类型可以为一组整型常量提供了更好的组织结构。<code>enum</code> 类型的含义通常是某些常量的集合。枚举自身是一种类型，它可以提示使用者定义了哪些可用的枚举值，并由编译器确保只用了这些合理的枚举值；但宏在预处理阶段后就消失了，编译器无法确定使用的值是否合理。</p>
+
+<p>不过，但实际应用中一些常量是单独存在的，例如 <code>BUF_SIZE</code> ，它们既难以分类，也不存在“枚举”的字面意思，不应该强行用作枚举值。此外，枚举常量是有类型的，默认为 <code>int</code> 。有些时候如果需要定义一个无符号整型或长整型，如果使用 <code>enum</code> 就会有潜在的问题。C 语言不支持字符串作为枚举值，这时也只能使用宏代替。</p>
+
+<h3>带参数的宏</h3>
+
+<p><code>#define</code> 中的标识符名也可以像函数一样，使用圆括号创建带参数形式的宏：</p>
+
+<div class="codeblock code-template">
+    <strong>#define</strong> <em>identifier</em>(<em>identifier-list</em>) <em>replacement-list</em>
+</div>
+
+<p>圆括号中的参数列表 <code><em>identifier-list</em></code> 可以有一个或多个参数，这些参数可以被用在替换体中。带有参数的宏也和函数一样，采用圆括号的形式调用。以下演示了一个简单的（但实际上有一些问题的）带参数宏的用法：</p>
+
+<div class="code-highlight language-c">printf("the square of 4 is %d\n", SQUARE(4));</div>
+
+<p>以上使用宏时，<code>SQUARE</code> 被替换为 <code>X*X</code> ，宏参数 <code>X</code> 进一步被替换为 <code>4</code> ，因此展开的结果是 <code>4*4</code> 。也就是说，带参数的宏经过两次文本替换。</p>
+
+<p>使用带参数的宏时，参数的替换规则和宏的替换规则一样：预处理器只会替换完整的记号，而不会替换作为预处理器指令、另一个标识符的一部分、字符或字符串字面量之中和宏名相同的文本。例如，假设有以下宏的定义和调用：</p>
+
+<div class="code-highlight language-c">#define PRINT_X(X) FLAG_X && printf("X is %d.\n", X)
+
+PRINT_X(100);</div>
+
+<p>那么参数替换的结果为 <code>FLAG_X && printf("X is %d.\n", 100)</code> 。这个替换规则也适用于宏本身。因此可以认为带参数的宏实际上发生了两次展开。</p>
+
+<p>一个带参数的宏可以可以具有空的参数列表，例如：</p>
+
+<div class="code-highlight language-c">#define getchar() getc(stdin)</div>
+
+<p>使用空的参数而不是不带参数的宏，可以使宏更像一个函数而不是一个值。</p>
+
+<p>这种定义和用法都和函数类似的宏称为类函数宏(function-like macro)</p>
+
+<blockquote>
+    <p>注意，类函数宏在定义时，宏的标识符和左括号之间不能有空格，否则预处理器会将其视为一个简单的宏，并将 <code>(<em>identifier-list</em>) <em>replacement-list</em></code> 作为完整的替换体。</p>
+</blockquote>
+
+<p>之所以说以上定义的宏带有一些问题，是因为带参数的宏在替换时，多个参数展开后可能存在运算符优先级的问题，例如：</p>
+
+<div class="code-highlight language-c">printf("the square of 4 + 2 is %d\n", SQUARE(4 + 2));
+// the square of 4 + 2 is 14</div>
+
+<p>本意是计算 <code>4 + 2</code> 的平方，但是宏先展开为 <code>X*X</code> ，参数再展开后变成 <code>4 + 2*4 + 2</code> ，运算符的优先级使得中间的乘法先执行，因此得到了偏离预期的结果。</p>
+
+<p>为了避免这种情况，一般都会在宏定义中使用足够多的圆括号保证实际计算顺序和理论一致：</p>
+
+<div class="code-highlight language-c">#define SQUARE(X) ((X) * (X))</div>
+
+<p>如果不带参数的宏的替换体是一个表达式，那么也应该给这个表达式加上圆括号，防止运算受影响。</p>
+
+<p>类函数宏用起来很像函数，但毕竟不是真正的函数。类函数宏的参数是没有类型的，这既是一个缺点，也是一个优点：编译器无法检查宏的参数是否传入了合适的值，也不会自动将参数转换为合理的类型。不过这使得宏的参数可以支持不同类型的值，例如前面实现的 <code>MAX</code> 宏既可以比较整型值的大小，也可以比较浮点类型的大小，从而一定程度上实现泛型。但如果参数是一个表达式，函数对其只会求值一次，而宏可能会不止一次求值。如果参数有副作用，多次求值可能会产生不可预知的结果。</p>
+
+<p>非内联的函数在调用时有一定开销，但它只保存一份代码副本，可以减小代码体积。函数还可以被指针指向，这种情况下宏不能实现回调函数这种效果。</p>
+
+<p>因此，宏一般只用于定义一些简短的代码片段，或者用在不实现一个完整的逻辑的场景。以下提供了一些类函数宏的定义示例：</p>
+
+<div class="code-highlight language-c">#define MAX(a, b) ((a) > (b) ? (a) : (b))
+#define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
+#define CHECK_FLAG(flag, bit) (((flag) & (bit)) == (bit))</div>
+
+<h3>变参宏</h3>
+
+<p>C99 允许在宏中定义可变长度的参数列表，就像可变参数的函数一样。</p>
+
+<p>在带参数宏的定义中，可以在参数列表的最后使用 <code>...</code> 符号，表示可变个数的参数。在含有 <code>...</code> 参数的宏的替换列表中，可以使用一个标识符 <code>__VA_ARGS__</code> 代表所有与 <code>...</code> 符号相对应的参数。<code>...</code> 符号可以对应 0 个或任意个参数，在 0 个参数的情况下，<code>__VA_ARGS__</code> 为空。</p>
+
+<p>变参宏可以更好地和可变参数的函数交互，例如以下定义：</p>
+
+<div class="code-highlight language-c">#define assert(expr, ...) \
+    ((expr) ? : fprintf(stderr, __VA_ARGS__))</div>
+
+<p>宏 <code>assert</code> 至少要有 2 个参数：第一个参数匹配普通的形式参数，第二个参数用作 <code>fprintf</code> 的格式字符串，然后可以有任意个参数用于格式化打印。以下是两个调用该宏的示例：</p>
+
+<div class="code-highlight language-c">assert(arg1 > 0, "error: invalid argument.");
+assert(arg2 > 0, "error: invalid argument. expected: > 0 , got %d.\n", arg2);</div>
+
+<p>变参宏之前在语言层面有一个小的缺陷，以上的示例不太能体现。如果宏 <code>assert</code> 是这样定义的：</p>
+
+<div class="code-highlight language-c">#define assert(expr, format, ...) \
+    ((expr) ? : fprintf(stderr, format, __VA_ARGS__))</div>
+
+<p>这时，新定义的 <code>assert</code> 宏变成了至少要有 3 个参数：如果只传递两个参数，它会展开成：</p>
+
+<div class="codeblock code-template">
+assert(arg1 > 0, "error: invalid argument") <br>
+→ ((arg1 > 0) ? : fprintf(stderr, "error: invalid argument", ))
+</div>
+
+<p>如果只传递两个参数，可变参数 <code>...</code> 将接收 0 个参数，<code>__VA_ARGS__</code> 展开结果为空，但是参数前有一个逗号 <code>,</code> ，正是这个小小的逗号导致函数调用时发生了语法错误。</p>
+
+<p>C++20 引入了一个类函数宏 <code>__VA_OPT__()</code> ，该宏只能用于变参宏的定义中：只有当可变参数 <code>...</code> 至少接收了一个参数时，<code>__VA_OPT__()</code> 展开为其参数的内容；否则该宏展开为空。借助 <code>__VA_OPT__()</code> ，可以将 <code>assert</code> 宏改写如下：</p>
+
+<div class="code-highlight language-c">#define assert(expr, format, ...) \
+    ((expr) ? : fprintf(stderr, format __VA_OPT__(,) __VA_ARGS__))</div>
+
+<p><code>__VA_OPT__()</code> 已经正式被 C23 标准接收，并且一些编译器早就将其作为扩展实现。</p>
+
+<blockquote>
+    <p>GCC 之前提供了另一种方式处理这个问题：通过在逗号 <code>,</code> 和 <code>__VA_ARGS__</code> 中使用 <code>##</code> 预处理运算符：</p>
+
+    <div class="code-highlight language-c">#define assert(expr, format, ...) \
+    ((expr) ? : fprintf(stderr, format, ## __VA_ARGS__))</div>
+
+    <p>如果 <code>__VA_ARGS__</code> 为空，那么逗号将被忽略。不过这只是 GCC 提供的一种语言扩展，只有 GCC 等少部分编译器实现了这个特性。</p>
+</blockquote>
+
+
+<h2>宏与预处理器</h2>
+
+<h3>定义与重定义</h3>
+
+<p>如果先定义了一个宏，但在该文件中又定义了相同名字的宏，这个过程称为重定义。标准规定只有新定义和旧定义完全相同才允许重定义，大多数编译器在宏发生重定义时也会给出警告。</p>
+
+<p>当源文件中包含了很多头文件时，难以确定到底定义了哪些宏，也就很可能发生宏的重定义。<code>#undef</code> 指令用于取消已定义的 #define 指令。假设有以下定义：</p>
+
+<div class="code-highlight language-c">#define MAX(a, b) ((a) > (b) ? (a) : (b))</div>
+
+<p>使用指令</p>
+
+<div class="code-highlight language-c">#undef MAX
+#define MAX 2147483647</div>
+
+<p>在移除上面的定义后，重新定义 <code>MAX</code> 宏为一个新值。</p>
+
+<p>即使原来没有定义 <code>MAX</code> ，使用 <code>#undef MAX</code> 取消该宏的定义也不会出错。因此，可以在不确定时使用 <code>#undef</code> 指令，以防止重复定义宏。</p>
+
+<hr>
+
+<p>C 语言还提供了预处理器指令 <code>#ifdef</code> ，可以将宏是否定义作为一个条件。</p>
+
+<p><code>#ifdef</code> 指令需要配合 <code>#endif</code> 指令使用。<code>#endif</code> 指令说明当宏被定义后，哪些代码将被处理并编译。<code>#ifdef</code> 指令配合宏，可以得到<strong>条件编译</strong>(conditinal compilation)手段，告诉编译器根据编译时的条件执行或忽略特定的代码块。</p>
+
+<p>考虑以下宏：</p>
+
+<div class="code-highlight language-c">#define DEBUG_MODE</div>
+
+<p>这个宏的替换体是空的，这样的宏定义也是合法的。这种空宏一般用于配合 <code>#ifdef</code> 指令实现条件编译。例如以下用法：</p>
+
+<div class="code-highlight language-c">#ifdef DEBUG_MODE
+    printf("arg1 = %d, arg2 = %d\n", arg1, arg2);
+#endif</div>
+
+<p>表示如果定义了宏 <code>DEBUG_MODE</code> ，则输出一条调试信息，否则这条语句将被忽略。</p>
+
+<p>再如以下用法：</p>
+
+<div class="code-highlight language-c">struct GPIO {
+    volatile uint32_t REG_IN;
+    volatile uint32_t REG_OUT;
+    volatile uint32_t REG_CLK;
+#ifdef LARGE_DEVICE
+    volatile uint32_t REG_DMA;
+#endif
+};</div>
+
+<p>表示当定义了宏 <code>LARGE_DEVICE</code> 后，在结构体内额外定义一个成员 <code>REG_DMA</code> ，否则忽略这个定义。</p>
+
+<p>所以有时会看到将一个宏定义在一个第三方头文件的上面：</p>
+
+<div class="code-highlight language-c">#define _CRT_SECURE_NO_WARNINGS
+#include &lt;stdio.h></div>
+
+<p>这时，头文件将会根据该宏是否被定义来生成不同的代码。但一般情况下不要将宏的定义放在头文件上，以免不小心和头文件中的其它标识符冲突。</p>
+
+<p>还有两个和 <code>#ifdef</code> 用途相同的指令：</p>
+
+<ol>
+    <li><code>#ifndef</code> 指令判断后面的标识符是否是未定义的</li>
+    <li><code>#else</code> 指令说明当 <code>#ifdef</code> 或 <code>#ifndef</code> 逻辑相反时，应当处理的代码</li>
+</ol>
+
+<blockquote>
+    <p>C23 还提供了 <code>#elifdef</code> 和 <code>#elifndef</code> 指令，用于实现并列的逻辑关系。</p>
+</blockquote>
+
+<p><code>#ifndef</code> 指令和 <code>#ifdef</code> 指令虽然逻辑相反，但应用场景有一些区别。例如，<code>#ifndef</code> 指令可以用于条件性地定义一些宏：</p>
+
+<div class="code-highlight language-c">#ifndef BUFSIZE
+    #define BUFSIZE 1024
+#endif</div>
+
+<p>这段代码说明如果没有定义宏 <code>BUFSIZE</code> ，那么程序自行提供一个默认的定义；否则，使用别处定义的该宏。</p>
+
+<p>这种性质使得 <code>#ifndef</code> 通常用于防止多次包含一个文件。这种情况下头文件中应该包含类似这样的代码：</p>
+
+<div class="code-highlight language-c">#ifndef __MY_HEADER_H__
+    #define __MY_HEADER_H__
+/* ... */
+#endif</div>
+
+<p>当该文件首次被包含时，<code>__MY_HEADER_H__</code> 是未定义的，在定义 <code>__MY_HEADER_H__</code> 后正常引入头文件的所有内容。该文件被被重复包含时，<code>__MY_HEADER_H__</code> 已经被定义了，预处理器便跳过了该文件的其它部分。</p>
+
+<p>使用宏防止头文件重复包含的方式比 <code>#pragma once</code> 更通用，任何标准的 C 编译器都能正确执行它。但为了确保相关的宏没有在别处定义，需要按一种约定名称来定义在这种场景下使用的宏（通常用与文件名相关的名称来定义此处的宏）。</p>
+
+<hr>
+
+<p>另一类条件编译的方式是使用 <code>#if</code> 指令。<code>#if</code> 指令与 C 语言中的 <code>if</code> 语句类型，它后面需要跟随一个整型常量表达式（或可以展开为整型常量表达式的宏）：如果表达式为非零，则表达式为真，解析它对应的所有代码。</p>
+
+<p><code>#if</code> 指令同样需要使用 <code>#endif</code> 指令标记处理的结束位置。<code>#if</code> 指令可以配合使用 <code>#elif</code> 指令实现并列的逻辑关系，例如：</p>
+
+<div class="code-highlight language-c">#if DEBUG_LEVEL == 1
+    printf("[DEBUG] arg1 = %d, arg2 = %d\n", arg1, arg2);
+#elif DEBUG_LEVEL == 2
+    printf("[DEBUG:%s] arg1 = %d, arg2 = %d\n", 
+           ctime(&now), arg1, arg2);
+#endif</div>
+
+<blockquote>
+    <p>当条件指令包含的内容很多时，一个比较好的习惯是为每一个 <code>#endif</code> 都添加注释，指明对应的 <code>#ifdef</code> 判断哪个宏或 <code>#if</code> 测试哪个条件。</p>
+</blockquote>
+
+<blockquote>
+    <p>一些编码风格使用 <code>#if 0</code> 来编写注释，这样做的好处是编辑器可以高亮其中的代码。这种手段也经常用于临时屏蔽某些代码（但稍后可能会用上）。</p>
+</blockquote>
+
+<p><code>#if</code> 指令虽然没有对应的“否定”版本，但它可以在指令中使用关系运算符和逻辑运算符：</p>
+
+<div class="code-highlight language-c">#if DEBUG_LEVEL == 2 && (SYS_VERSION >= 30708)
+    /* ... */
+#endif</div>
+
+<p>较新的编译器提供了运算符 <code>defined(<em>MACRO</em>)</code> ，用于在 <code>#if</code> 指令中判断宏是否已定义：如果宏 <code><em>MACRO</em></code> 已经用 <code>#defined</code> 定义过，则返回 <code>1</code> ；否则返回 <code>0</code> 。</p>
+
+<p>使用 <code>#if defined(<em>MACRO</em>)</code> 代替 <code>#ifdef <em>MACRO</em></code> 的好处是，可以在同一个指令中同时判断宏是否已定义和判断定义的值：</p>
+
+<div class="code-highlight language-c">#if defined (DEBUG_LEVEL) && (DEBUG_LEVEL == 2)
+    /* ... */
+#endif</div>
+
+<p>如果宏 <code>DEBUG_LEVEL</code> 没有定义，逻辑运算符的短路性质会使得相等运算符不会执行，而避免出错。</p>
+
+<p><code>#if ... #else</code> 很像 <code>if ... else</code> ，两者的主要区别是：</p>
+
+<ul>
+    <li><code>#if ... #else</code> 发生在预处理阶段，而 <code>if ... else</code> 发生在编译阶段</li>
+    <li><code>if ... else</code> 根据花括号 <code>{ }</code> 标记语句块，而预处理器不识别 <code>#if ... #else</code> 中的花括号，因此需要提供 <code>#endif</code> 来标记结束位置</li>
+</ul>
+
+<p>这些指令结构也可以通过嵌套实现更复杂的判断效果。</p>
+
+<p>通过以上介绍，可以了解为什么这些指令被称为“条件编译”指令：它们可以根据某些特征，控制特定代码部分是否被编译器编译。不同的编译器、操作系统甚至处理器都会提供不同的特征，通过使用条件编译，可以创建易于维护和适应不同环境需求的代码，而无需改变源代码基础，增强了代码的可移植性和灵活性。例如，以下是一个高性能运算库的部分代码，其中包含判断不同处理器后再编译的相关代码，真正做到了极致的性能优化：</p>
+
+<div class="code-highlight language-c">#if defined(_M_X64) && defined(_MSC_VER) && _MSC_VER >= 1920 && !defined(__clang__)
+    npy_uint64 remainder;
+    quotient = _udiv128(high, 0, divisor, &remainder);
+    (void)remainder;
+#elif defined(__x86_64__) && (defined(__GNUC__) || defined(__clang__) || defined(__INTEL_COMPILER))
+    __asm__("divq %[d]" : "=a"(quotient) : [d] "r"(divisor), "a"(0), "d"(high));
+#elif defined(__SIZEOF_INT128__)
+    quotient = (npy_uint64)((((__uint128_t)high) << 64) / divisor);
+#else
+    /* ... */
+#endif</div>
+
+<h3>预处理运算符#</h3>
+
+<p>在类函数宏的替换体中，<code>#</code> 号是一个预处理运算符，可以把参数转换成字符串字面量。如果 <code>x</code> 是一个宏的形式参数，并且使用时向其传入了参数 <code>var</code> ，那么 <code>#x</code> 会在将 <code>x</code> 替换为 <code>var</code> 后，将其转换为字符串字面量形式的 <code>"var"</code> 。这个过程称为字符串化(stringizing)。</p>
+
+<p>这个预处理运算符一般配合 C 语言字符串的串联特性，在预处理时批量生成字符串字面量。以下程序演示了它的用法：</p>
+
+<div class="code-highlight language-c">#define PRINT_INT(x) printf("the value of " #x " is %d.\n", x)
+
+PRINT_INT(number);
+PRINT_INT(5 * 6);</div>
+
+<p>这两个包含宏的语句展开结果等价于：</p>
+
+<div class="code-highlight language-c">printf("the value of " "number" " is %d.\n", number);
+printf("the value of " "5 * 6" " is %d.\n", 5 * 6);</div>
+
+<h3>预处理运算符##</h3>
+
+<p><code>##</code> 运算符把两个记号“粘合”成一个记号。例如，假设有这样的宏：</p>
+
+<div class="code-highlight language-c">#define NAMED_X(n) x ## n</div>
+
+<p>那么调用 <code>NAMED_X(3)</code> 会展开为一个完整的记号 <code>x3</code> ，可以像使用一个标识符一样使用它，例如：</p>
+
+<div class="code-highlight language-c">int NAMED_X(3) = 3;
+printf(XSTR(NAMED_X(3)) " is %d.\n", NAMED_X(3));</div>
+
+<p>程序运行结果会输出信息 <code>x3 is 3</code> 。</p>
+
+<p>与 <code>#</code> 运算符类似，<code>##</code> 运算符一般用在类函数宏的替换部分处理参数。如果其中一个操作数是宏参数，“粘合”会在形式参数被相应的实际参数替换后发生，并且这个过程最多只发生一次替换，如果要将两个宏展开后的内容粘合在一起，需要像上一节的示例一样定义两层的宏。</p>
+
+<p><code>##</code> 运算符用的不多，一种可能的使用场景是批量生成一类变量或函数。例如，假设有这样的定义：</p>
+
+<div class="code-highlight language-c">#define GENERIC_MUL(type)   \
+static inline type type##_mul(type x, type y) { \
+    return x * y;           \
+}
+#define MUL(type, a, b) type##_mul(a, b)</div>
+
+<p>然后就可以这样批量生成并使用函数：</p>
+
+<div class="code-highlight language-c">GENERIC_MUL(double)
+GENERIC_MUL(int)
+GENERIC_MUL(int64_t)
+/* usage */
+double dec = MUL(double, 1.2, 2.4);</div>
+
+<p>如果后续定义了复数或矩阵等类型，并提供相应命名规则的函数，那么 <code>MUL(Complex, c1, c2);</code> 之类的调用也可以正常工作。</p>
+
+<h3>预定义宏</h3>
+
+<p>标准规定了一些预定义宏，这些宏一定是已定义的，而且不能取消定义。这些预定义宏如下：</p>
+
+<table>
+    <tr>
+        <th>宏</th>
+        <th>替换体</th>
+    </tr>
+    <tr>
+        <td class="code-font">__STDC__</td>
+        <td>设置为 1 时，表明实现遵循 C 标准</td>
+    </tr>
+    <tr>
+        <td class="code-font">__STDC_VERSION__</td>
+        <td>表示当前标准的整型常量（例如支持 C99 标准，则设置为 <code>199901L</code> ；支持 C11 标准，则设置为 <code>201112L</code> ）</td>
+    </tr>
+    <tr>
+        <td class="code-font">__DATE__</td>
+        <td>预处理发生的日期，是一个 <code>"Mmm dd yyyy"</code> 形式的字符串字面量</td>
+    </tr>
+    <tr>
+        <td class="code-font">__TIME__</td>
+        <td>翻译代码的时间，是一个 <code>"hh:mm:ss"</code> 形式的字符串字面量</td>
+    </tr>
+    <tr>
+        <td class="code-font">__FILE__</td>
+        <td>宏展开后，位于文件名的字符串字面量</td>
+    </tr>
+    <tr>
+        <td class="code-font">__LINE__</td>
+        <td>宏展开后，位于行号的整型常量</td>
+    </tr>
+</table>
+
+<p>C99 标准还提供了标识符 <code>__func__</code> ，它是一个代表位于函数名的字符串字面量（和其它几个不同，<code>__func__</code> 并不是宏，而是一个标识符，相当于在函数体的开始位置声明的变量）。除此之外 C99 还提供了一些其它用途的宏，不过用的较少，这里就不介绍了。</p>
+
+<p><code>__DATE__</code> 和 <code>__TIME__</code> 可以用于确定程序编译的时间，从而帮助区分同一个程序的不同版本。</p>
+
+<p><code>__FILE__</code> 、<code>__LINE__</code> 和 <code>__func__</code> 经常作为一个调试的手段，帮助快速定位问题发生的源文件具体行号和函数位置。例如，以下代码使用这些预定义宏，定义了一个用于提示错误信息的宏，当这个宏被调用时会输出一条详细的错误信息：</p>
+
+<div class="code-highlight language-c">#if __STDC_VERSION__ >= 199900L
+    #define ERROR(message)                            \
+        fprintf(stderr, "%s:%d:(in %s) error: %s \n", \
+                __FILE__, __LINE__, __func__, message)
+#else
+    #define ERROR(message)                     \
+        fprintf(stderr, "%s:%d: error: %s \n", \
+                __FILE__, __LINE__, message)
+#endif</div>
+
+<p>这个宏可以这样使用：</p> 
+
+<div class="code-highlight language-c">if (node == NULL)
+    ERROR("find NULL expression");
+    // .\macro.c:53:(in main) error: find NULL expression</div>
+
+
+
+<h2>宏的定义细节</h2>
+
+<h3>关于记号</h3>
+
+<p>之前曾将宏的替换体称为替换<em>列表</em>，这是有原因的：宏的替换体应该被看作是一系列<strong>记号</strong>(token)，而不仅仅是一系列字符。记号是 C 编译器解析代码的最小单位。一般来说，C 编译器会根据空白符将源代码分割为一系列记号后，分析这些记号的语法。</p>
+
+<p>因此，两个宏只有记号相同、且顺序也相同时才不会发生重定义。例如，以下几个定义相同：</p>
+
+<div class="code-highlight language-c">#define SIX (2 * 3)
+#define SIX    (2  *   3)
+#define SIX (2 /* mul */ * 3)</div>
+
+<p>它们都包含记号 <code>(2</code> 、<code>*</code> 和 <code>3)</code> 。而这些宏的定义是不同的，尽管它们看起来和用起来都很像：</p>
+
+<div class="code-highlight language-c">#define SIX (2*3)
+#define SIX() (2 * 3)</div>
+
+此外，<code>##</code> 运算符执行的是记号拼接而不是文本拼接，它会将两侧的记号拼接成一个记号。但如果两个记号不知道如何拼接为一个记号，或无法拼接成一个有效的记号，那么结果是未定义的，有些预处理器在这种场景下会给结果两侧增加空白符。例如，对于以下宏：
+
+<div class="code-highlight language-c">#define CAT2(x, y) x ## y</div>
+
+<p>以下用法：</p>
+
+<div class="code-highlight language-c">int CAT2(x_, 2) = 1;</div>
+
+<p>这个拼接是合理的，因为 <code>x_</code> 会被视为标识符的一部分作为一个记号，数字也会被视为标识符的一部分作为另一个记号，这两个记号的拼接结果是一个完整的标识符。但是以下用法：</p>
+
+<div class="code-highlight language-c">double f1 = CAT2(1.23, e-1);</div>
+
+<p>是有问题的，因为 <code>1.23</code> 是一个有效的数字形式的记号，但 <code>e-1</code> 不知道如何与数字形式的记号拼接，这时会产生不可知的结果（例如 gcc 8.1.0 会将其展开为 <code>1.23e -1</code> ，但这不是一个合法的字符串字面量）。</p>
+
+<p>不过这种形式的用法是可以的：</p>
+
+<div class="code-highlight language-c">double f2 = CAT2(1.2, 3e-1);</div>
+
+<p>这时 <code>1.2</code> 和 <code>3e-1</code> 都是数字形式的记号，所以它们会被拼接为一个合法的浮点数字面量 <code>1.23e-1</code> 。</p>
+
+<h3>关于展开</h3>
+
+<p>前文介绍了宏展开的条件，所有（在宏定义之后的代码中）出现宏名的地方都会被替换为对应的替换体。宏的替换是递归进行的，即替换内容中如果还包含宏名，这些宏同样会被展开。并且前文说明了出现在字符串或字符常量中、作为另一个标识符一部分的宏不会被展开。对于带参数的宏，在宏展开时会先将实际参数替换到宏定义中的参数位置，然后对整个宏内容进行展开。</p>
+
+<blockquote>
+    <p>早期的预处理器在遇到嵌套或递归的宏时，可能会陷入无限循环。但现代 C 语言标准规定，在扩展宏的过程中出现的相同宏名不会再次被替换。</p>
+</blockquote>
+
+<p><code>#</code> 运算符和 <code>##</code> 运算符会在代入参数后立刻将其变为字符串。如果参数还是一个宏，那么这个宏并不会展开，而是直接将宏的名称变成字符串。</p>
+
+<p>因此，如果想要将某个宏展开的内容字符串化，需要定义一个两层的宏，就像这样：</p>
+
+<div class="code-highlight language-c">#define STR(x) #x
+#define XSTR(x) STR(x)
+
+#define MAGIC_NUMBER 42
+STR(MAGIC_NUMBER)
+// => "MAGIC_NUMBER"
+XSTR(MAGIC_NUMBER)
+// => STR(42) => "42"</div>
+
+<p>这个技巧对 <code>##</code> 运算符也适用。再如，假设要定义一个宏 <code>foreach</code> ，实现大致这样的效果：</p>
+
+<div class="code-highlight language-c">#define in ,
+int i;
+foreach(i in a) { /* ... */ }</div>
+
+<p>那么直接定义具有两个参数的宏是不对的，因为编译器会将 <code>i in a</code> 看作一个完整的参数传入宏 <code>foreach</code> 中，因此在展开类函数宏 <code>foreach</code> 时，<code>in</code> 宏并没有展开，<code>foreach</code> 只传入了一个参数而发生错误。</p>
+
+<p>解决方法是定义两层的宏，第一层具有一个参数，第二层具有两个参数，<code>in</code> 宏在第一宏的替换体中被展开，将一个参数分成两个参数：</p>
+
+<div class="code-highlight language-c">#define foreach(exp) _foreach(exp)
+#define _foreach(e, a) for(size_t e = 0; e < ARRAY_SIZE(a); e++)
+
+foreach (i in arr) {
+    arr[i] = rand() % 100;
+}</div>
+
+<h3>关于宏参数</h3>
+
+<p>带参数的宏在调用时，由逗号确定各个参数的对应。不过这个规则实际上会更复杂一些：如果调用的参数内还有一对匹配的圆括号，那么这对圆括号之间的逗号不会分隔参数。</p>
+
+<p>也就是说，如果有一个这样的宏：</p>
+
+<div class="code-highlight language-c">#define ADD(a, b) a + b</div>
+
+<p>那么调用</p>
+
+<div class="code-highlight language-c">ADD(f(2, 3), 4)</div>
+
+<p>实际上会展开为 <code>f(2, 3) + 4</code> ，而不是 <code>f(2 + 3), 4</code> ，更不会被视为三个参数 <code>f(2</code> 、<code>3),</code> 和 <code>4</code> 。</p>
+
+<hr>
+
+<p>C99 标准允许宏调用中的任意或所有参数为空，但应有的逗号不能省略。空的调用参数替换内容为空。</p>
+
+<p>例如，对以上宏省略参数的调用：</p>
+
+<div class="code-highlight language-c">ADD(,4)</div>
+
+<p>展开结果为 <code>+ 4</code> 。</p>
+
+<p>当空的实际参数被 <code>#</code> 或 <code>##</code> 运算符操作时，结果有特殊规定：空的实际参数经由 <code>#</code> 运算符结果为空字符串 <code>""</code> ；如果 <code>##</code> 运算符操作的一个实际参数为空，它会被一个称为“位置标记(placemarker)”的记号代替：两个位置标记会被拼接为一个单独的位置标记，而位置标记和其它标记拼接结果将会去除这个位置标记。例如以下宏：</p>
+
+<div class="code-highlight language-c">#define CAT3(x, y, z) x ## y ## z</div>
+
+<p>那么这些省略参数的调用：</p>
+
+<div class="code-highlight language-c">int CAT3(a,b,c), CAT3(a,b,), CAT3(a,,c), CAT3(,,c);</div>
+
+<p>展开结果如下：</p>
+
+<div class="code-highlight language-c">int abc, ab, ac, c;</div>
+
+<p>省略的参数由位置标记代替，并在与其它参数拼接或最终展开的过程消失。</p>
+
+<h2>宏的高级用法</h2>
+
+<h3>复杂语句作为宏</h3>
+
+<p>前面说过多条复杂的语句可以通过宏简化为一条语句，但定义宏时要小心，因为多条语句也会像多个表达式一样可能受上下文影响。</p>
+
+<p>以下给出了一个宏的示例，该宏用于生成一个打印数组各元素的完整语句：</p>
+
+<div class="code-highlight language-c">#define PRINT_ARRAY(arr, fmt)     \
+    printf("Array " #arr " { ");  \
+    for (size_t i = 0; i < ARRAY_SIZE(arr); i++) \
+        printf(fmt " ", arr[i]);  \
+    printf("}\n");</div>
+
+<p>这个宏相比使用函数的优点是，不但能在结果中输出数组名，而且可以通过简单的形式自行提供转换说明符来打印各种类型的元素，或使用各种打印格式：</p>
+
+<div class="code-highlight language-c">PRINT_ARRAY(arr, "%2d");</div>
+
+<p>但是这个宏有一些问题：虽然这个宏用起来像一条语句，但它替换后会产生不止一条一条语句。如果这个宏的上下文只接收一条语句，那么可能会出现一些问题。例如，假设这个宏被用在一个 <code>if</code> 语句中：</p>
+
+<div class="code-highlight language-c">if (condition)
+    PRINT_ARRAY(arr, "%2d");</div>
+
+<p>那么当宏展开后，<code>if</code> 真正起作用的只有宏中的第一条语句：</p>
+
+<div class="code-highlight language-c">if (condition)
+    printf("Array " "arr" " { ");
+for (size_t i = 0; i < (sizeof(arr) / sizeof(arr[0])); i++)
+    printf("%2d" " ", arr[i]); printf("}\n");</div>
+
+<p>一种更合理的定义方式是给替换体中的语句加上花括号：</p>
+
+<div class="code-highlight language-c">#define PRINT_ARRAY(arr, fmt)   {     \
+        printf("Array " #arr " { ");  \
+        for (size_t i = 0; i < ARRAY_SIZE(arr); i++) \
+            printf(fmt " ", arr[i]);  \
+        printf("}\n");                \
+    }</div>
+
+<p>但是这种情况下，如果 <code>if</code> 语句有对应的 <code>else</code> 语句，又会出现新的问题：</p>
+
+<div class="code-highlight language-c">if (condition)
+    PRINT_ARRAY(arr, "%2d");
+else
+    puts("ok");</div>
+
+<p>当宏展开后，问题就比较明显了：</p>
+
+<div class="code-highlight language-c">if (condition) {
+    printf("Array " "arr" " { ");
+    for (size_t i = 0; i < (sizeof(arr) / sizeof(arr[0])); i++)
+    printf("%2d" " ", arr[i]); printf("}\n");
+}
+;
+else
+    puts("ok");</div>
+
+<p>编译器会将 <code>if</code> 大括号后的分号视为一条空语句，使得后面的 <code>else</code> 无法配对这条 <code>if</code> 语句而产生错误。不过所幸这个问题在编译时就会显露，因此比上面的方案更好一些。</p>
+
+<p>可以通过不在宏后面加上分号，或强制所有 <code>if</code> 等语句必须加上花括号解决这个问题，但这样会使得涉及该宏的代码必须得小心处理，总的来说这种方案明显不能让人满意。</p>
+
+<p>对这个问题的一种标准的处理技巧是将语句放在 <code>do while</code> 循环中，并将条件设置为假：</p>
+
+<div class="code-highlight language-c">#define PRINT_ARRAY(arr, fmt) do {    \
+    printf("Array " #arr " { ");  \
+    for (size_t i = 0; i < ARRAY_SIZE(arr); i++) \
+        printf(fmt " ", arr[i]);  \
+    printf("}\n");                \
+} while (0)</div>
+
+<p>这样做的好处是，<code>do { ... } while (0)</code> 语句会执行但只会执行一次，并且在宏定义时故意省略了 <code>while (0)</code> 后面的分号，在使用时需要补全分号让这个宏用起来更像一个语句，也不会和上下文其它结构发生冲突。大多数编译器在编译时也会将循环相关的代码去除，可以说完美地解决了这个问题。</p>
+
+<p>除此之外，还有一种容纳多条语句的定义方式是使用逗号运算符，将多个表达式放在一条语句中：</p>
+
+<div class="code-highlight language-c">#define ECHO(buf) (fgets(buf, sizeof(buf), stdin), fputs(buf, stdout))
+
+char in_buf[1024];
+ECHO(in_buf);</div>
+
+<p>但对于较复杂的情况（如上面示例中多条语句还包含 <code>for</code> 循环），逗号表达式就无法处理了。</p>
+
+<h3>宏与Generic</h3>
+
+<p>C11 新增了泛型选择表达式(generic selection expression) <code>_Generic</code> ，可根据表达式的类型（即表达式的类型是 int 、double 还是其它类型）选择一个值。泛型选择表达式不是预处理器指令，但是在一些泛型编程中它常用作宏定义的一部分。</p>
+
+<p><code>_Generic</code> 是一个关键字，它后面的圆括号中包含多个用逗号分隔的项：第 1 个项是一个表达式，后面的每个项都由类似 <code>float: 1</code>  的一个类型、一个冒号和一个值组成。下面是一个泛型选择表达式的示例：</p>
+
+<div class="code-highlight language-c">_Generic(x, int: 0, float: 1, double: 2, default: 3)</div>
+
+<p>第1个项的类型匹配哪个标签，整个表达式的值是该标签后面的值。例如，假设上面表达式中 <code>x</code> 是 <code>float</code> 类型的变量，<code>x</code> 的类型匹配 <code>float:</code> 标签，那么整个表达式的值就是 <code>1</code> 。如果没有与类型匹配的标签，表达式的值就是 <code>default:</code> 标签后面的值。泛型选择语句与 <code>switch</code> 语句类似，只是前者用表达式的类型匹配标签，而后者用表达式的值匹配标签。</p>
+
+<p>下面是一个把泛型选择语句和宏定义组合的示例，泛型选择表达式使得宏可以在打印变量时，自动根据变量的不同类型选择不同的转换说明：</p>
+
+<div class="code-highlight language-c">#define BUFSIZE 256
+#define PTR_TYPE(X) _Generic((X),\
+    int: "%d", float : "%f", double: "%f", char: "%c", char*: "%s", default: "%p")
+#define printv(var) do {                                                     \
+    char __print_buf[BUFSIZE], __format_buf[BUFSIZE] = "val of " #var ": ";  \
+    sprintf(__print_buf, strcat(__format_buf, PTR_TYPE(var)), var);          \
+    puts(__print_buf);                                                       \
+} while(0)</div>
+
+<p>这个宏对于不同类型的变量适应情况很好：</p>
+
+<div class="code-highlight language-c">int num = 10;
+double sin10 = sin(PI / 9);
+char ch = '6';
+char* greeting = "Hello";
+void* data = malloc(num);
+
+printv(num);        // val of num: 10
+printv(sin10);      // val of sin10: 0.342020
+printv(ch);         // val of ch: 6
+printv(greeting);   // val of greeting: Hello
+printv(data);       // val of data: 00000000009B2430</div>
+
+<p>最后要注意的是，泛型选择表达式用起来更像一个函数，因为它不会在预处理阶段展开它的结果。</p>
+
+<h3>更高级的变参宏</h3>
+
+<p>变参宏有个使用技巧：通过背后定义一系列辅助作用的宏，变参宏不仅能接收任意个参数，还能在接收不同参数时生成完全不同的代码。</p>
+
+<p>首先需要定义一个这样的宏：</p>
+
+<div class="code-highlight language-c">#define _VA_ARGS_N(_9, _8, _7, _6, _5, _4, _3, _2, _1, _0, N, ...) N</div>
+
+<p>这个宏的功能为：不管传入了多少个参数，它固定只展开第 11 个参数，然后抛弃所有前面或后面的参数。根据这个特性，可以定义如下的变参宏，使得当参数个数改变时，它的第 11 个参数始终对应传入的参数个数：</p>
+
+<div class="code-highlight language-c">#define VA_ARGS_N(...) _VA_ARGS_N(0 __VA_OPT__(,) __VA_ARGS__, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)</div>
+
+<p>以下是一些使用示例：</p>
+
+<div class="code-highlight language-c">VA_ARGS_N()
+→ _VA_ARGS_N(0, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+VA_ARGS_N(a, b)
+→ _VA_ARGS_N(0, a, b, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+VA_ARGS_N(a, b, c, d)
+→ _VA_ARGS_N(0, a, b, c, d, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+                                           ↑
+                                        N is here</div>
+
+<p>有了 <code>VA_ARGS_N</code> 宏后，就可以利用它完成一些操作了：例如当传入参数个数改变时，利用 <code>##</code> 操作符拼接为不同的宏名，从而实现不同的展开。这一过程的思路为：</p>
+
+<div class="codeblock code-template">
+    range(n) → __range_1(n) <br>
+    range(low, high) → __range_2(low, high) <br>
+    range(start, stop, step) → __range_3(start, stop, step)
+</div>
+
+<p>一个实现示例如下，注意为了确保正确的展开，需要定义多层的宏：</p>
+
+<div class="code-highlight language-c">#define __range_1(var, n) (size_t var = 0; var < n; var++)
+#define __range_2(var, a, b) (size_t var = a; var < b; var++)
+#define __range_3(var, start, stop, step) (size_t var = start; var < stop; var += step)
+#define __range_n_cat(a, b) a ## b
+#define __range_n(n) __range_n_cat(__range_, n)
+#define __range(...) __range_n(VA_ARGS_N(__VA_ARGS__))
+#define range(var, ...)  __range(__VA_ARGS__)(var, __VA_ARGS__)</div>
+
+<p>这个宏对于一些简单场景还是比较好用的，而且这一过程发生在预处理阶段，实际运行时不会产生任何额外的开销。</p>
+
+<div class="code-highlight language-c">range(i, 10) → (size_t i = 0; i < 10; i++)
+range(c, 'g', 's') → (size_t c = 'g'; c < 's'; c++)
+range(n, 10, 32, 3) → (size_t n = 10; n < 32; n += 3)</div>
+
+<h3>X-macro</h3>
+
+<p>X-macro 是宏一个强大的使用技巧。X-macro 通过使用宏定义技术来生成重复代码，从而自动维护一张列表的所有变量。</p>
+
+<p>X-macro 的基本概念是定义一个列表宏，该宏包含对另一个宏的多次调用，例如：</p>
+
+<div class="code-highlight language-c">#define MAKE_COLORS            \
+    COLOR(red,   0xff0000)     \
+    COLOR(green, 0x00ff00)     \
+    COLOR(blue,  0x0000ff)     \
+    COLOR(black, 0x000000)     \
+    COLOR(white, 0xffffff)</div>
+
+<p>X-macro 的精髓在于，通过在每次展开 <code>MAKE_COLORS</code> 时提供不同的 <code>COLOR</code> 定义，可以使这张列表中的变量用于不同的场景中。例如，当需要提供一系列变量定义时：</p>
+
+<div class="code-highlight language-c">struct color {
+    uint32_t value;
+    char* name;
+};
+
+#define COLOR(name, value) \
+    static const struct color color_##name = {value, #name};
+
+MAKE_COLORS</div>
+
+<p><code>MAKE_COLORS</code> 展开后可以生成一系列结构变量。再如，如果要初始化一个数组，那么将 <code>COLOR</code> 宏重定义为：</p>
+
+<div class="code-highlight language-c">#define COLOR(name, value) {value, #name},
+
+static struct color color_list[] = {
+    MAKE_COLORS 
+};</div>
+
+<p>再如，如果要打印这些颜色变量的参数，那么只需要提供定义：</p>
+
+<div class="code-highlight language-c">#define COLOR(n, v) \
+    printf("%-10s: %06x \n", color_##n.name, color_##n.value);
+
+MAKE_COLORS</div>
+
+<p>这样的好处是，当需要增加一个新的颜色时，只需要在 <code>MAKE_COLORS</code> 宏中增加一行 <code>COLOR(purple, 0x994cc3)\</code> ，而不需要在每个使用到这组颜色的地方手动添加。当需要用到这组颜色时，只需要提供一个 <code>COLOR</code> 宏，<code>MAKE_COLORS</code> 就可以用于不同的场景。这种技术虽然会使得代码更难理解，但对于复杂的生成逻辑或是大量重复代码使用时可以大幅减少维护成本。</p>
+
+<hr>
+
+<p>总的来说，宏作为 C 语言提供的一种功能强大的预处理工具，在不损失代码运行效率的同时可以实现非常强大的效果，一定程度上也方便维护代码。但是过度使用宏也会造成一些缺点，例如导致代码的可读性降低，且难以调试。如何平衡宏的便利性与潜在问题，是在使用宏时必须考虑的问题。</p>
+
+<h2>参考资料/延伸阅读</h2>
+
+<p><a href="https://gcc.gnu.org/onlinedocs/cpp/Macros.html">Macros (The C Preprocessor) - GNU</a></p>
+
+<p><a href="https://en.cppreference.com/w/c/preprocessor">Preprocessor - cppreference.com</a></p>
+
+<p><a href="https://en.wikipedia.org/wiki/X_macro">X macro - Wikipedia</a></p>
+
+<p>其它大部分内容都是阅读《C Primer Plus》和《C语言程序设计：现代方法》的读书笔记。</p>
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/computer-science/data-structure/07-sort-algorithm/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/09/数据结构07-排序算法-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/09/数据结构07-排序算法-520x293.jpg 520w, /wp-content/uploads/2022/09/数据结构07-排序算法-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/computer-science/data-structure/07-sort-algorithm/" rel="bookmark">数据结构07-排序算法</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-fp/06-tuple-handling/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-300x169.jpg 300w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-1024x576.jpg 1024w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-768x432.jpg 768w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-1536x864.jpg 1536w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-950x534.jpg 950w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-fp/06-tuple-handling/" rel="bookmark">Python函数式编程06 元组与命名元组</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-fp/05-recursions/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程05-函数的递归-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/05/Python函数式编程05-函数的递归-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-300x169.jpg 300w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-1024x576.jpg 1024w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-768x432.jpg 768w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-1536x864.jpg 1536w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-950x534.jpg 950w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-fp/05-recursions/" rel="bookmark">Python函数式编程05 函数的递归</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"></li>
+		<li class="previous"><a href="/math/linear-algebra/01-vectors/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>向量及其运算</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/programming/c-macro/" aria-current="page">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
+					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
+											<span class="post-date">2023年6月19日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
+											<span class="post-date">2023年3月6日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (20)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(1)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

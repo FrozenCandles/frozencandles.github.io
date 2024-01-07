@@ -12,7 +12,7 @@
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 
-	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
 	<title>数据结构03-栈和队列 - 冰封残烛的个人小站</title>
 	<link rel="canonical" href="/computer-science/data-structure/03-stack-and-queue/" />
 	<meta property="og:locale" content="zh_CN" />
@@ -22,11 +22,12 @@
 	<meta property="og:url" content="/computer-science/data-structure/03-stack-and-queue/" />
 	<meta property="og:site_name" content="冰封残烛的个人小站" />
 	<meta property="article:published_time" content="2022-08-04T02:00:38+00:00" />
-	<meta property="article:modified_time" content="2023-10-06T04:15:06+00:00" />
+	<meta property="article:modified_time" content="2023-10-13T04:00:02+00:00" />
 	<meta property="og:image" content="/wp-content/uploads/2022/08/数据结构03-栈和队列.jpg" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="887" />
 	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="作者" />
 	<meta name="twitter:data1" content="Hello" />
@@ -36,35 +37,8 @@
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
-	            "@type": "WebSite",
-	            "@id": "/#website",
-	            "url": "/",
-	            "name": "冰封残烛的个人小站",
-	            "description": "FrozenCandle&#039;s Personal Site",
-	            "potentialAction": [
-	                {
-	                    "@type": "SearchAction",
-	                    "target": {
-	                        "@type": "EntryPoint",
-	                        "urlTemplate": "/?s={search_term_string}"
-	                    },
-	                    "query-input": "required name=search_term_string"
-	                }
-	            ],
-	            "inLanguage": "zh-CN"
-	        },
-	        {
-	            "@type": "ImageObject",
-	            "inLanguage": "zh-CN",
-	            "@id": "/computer-science/data-structure/03-stack-and-queue/#primaryimage",
-	            "url": "/wp-content/uploads/2022/08/数据结构03-栈和队列.jpg",
-	            "contentUrl": "/wp-content/uploads/2022/08/数据结构03-栈和队列.jpg",
-	            "width": 1200,
-	            "height": 887
-	        },
-	        {
 	            "@type": "WebPage",
-	            "@id": "/computer-science/data-structure/03-stack-and-queue/#webpage",
+	            "@id": "/computer-science/data-structure/03-stack-and-queue/",
 	            "url": "/computer-science/data-structure/03-stack-and-queue/",
 	            "name": "数据结构03-栈和队列 - 冰封残烛的个人小站",
 	            "isPartOf": {
@@ -73,8 +47,12 @@
 	            "primaryImageOfPage": {
 	                "@id": "/computer-science/data-structure/03-stack-and-queue/#primaryimage"
 	            },
+	            "image": {
+	                "@id": "/computer-science/data-structure/03-stack-and-queue/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2022/08/数据结构03-栈和队列.jpg",
 	            "datePublished": "2022-08-04T02:00:38+00:00",
-	            "dateModified": "2023-10-06T04:15:06+00:00",
+	            "dateModified": "2023-10-13T04:00:02+00:00",
 	            "author": {
 	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
 	            },
@@ -92,6 +70,15 @@
 	            ]
 	        },
 	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/computer-science/data-structure/03-stack-and-queue/#primaryimage",
+	            "url": "/wp-content/uploads/2022/08/数据结构03-栈和队列.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/08/数据结构03-栈和队列.jpg",
+	            "width": 1200,
+	            "height": 887
+	        },
+	        {
 	            "@type": "BreadcrumbList",
 	            "@id": "/computer-science/data-structure/03-stack-and-queue/#breadcrumb",
 	            "itemListElement": [
@@ -107,6 +94,24 @@
 	                    "name": "数据结构03-栈和队列"
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
 	        },
 	        {
 	            "@type": "Person",
@@ -156,7 +161,6 @@ body { font-family: "Roboto", Arial, sans-serif; }
 <link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
-<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
 <script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
 <link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/609" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
 <meta name="generator" content="WordPress 6.3.1" />
@@ -303,8 +307,6 @@ var _hmt = _hmt || [];
 				<div class="entry-content">
 					<div class="entry themeform">	
 						
-
-
 <p>很多时候都需要将表作为某个暂时存储的容器，此时就需要频繁地添加或删除表中的元素。</p>
 
 <p>然而，线性表的插入或删除需要线性时间，显然不适合频繁修改。链表的修改虽然需要只需要常数级时间，但是涉及内存的动态分配、指针的调整等，操作还是有些复杂。</p>
@@ -318,7 +320,7 @@ var _hmt = _hmt || [];
 <p><strong>栈</strong>(stack)是限制插入和删除都只能在一个位置上进行的表，该位置是表的末端，又称为栈顶(top)。下图列出了栈的概念：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/05-stack-concept.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/05-stack-concept.png"/>
 </figure>
 
 <p>对栈的基本操作有<strong>入栈</strong>(push)和<strong>出栈</strong>(pop)，前者向栈内添加一个元素，后者向栈内移除一个元素。从图中可以看出，栈的特点是后添加的元素必须先被移除后，才能处理前面添加的元素，因此栈有时又被称为<strong>后进先出</strong>(last in first out, LIFO)表。</p>
@@ -334,24 +336,24 @@ var _hmt = _hmt || [];
 <p>用数组实现下，每一个栈结构需要有一个成员 <code>topptr</code> ，用于指示栈顶在数组中的哪一个位置。对于空栈而言，它的值一般是是 -1 或 0 。下图展示了栈的数组实现模型：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/05-stack-model.png" alt="" width="108">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/05-stack-model.png" width="108"/>
 </figure>
 
 <p>根据以上介绍，栈的数组实现的结构定义为：</p>
 
-<div class="vscode-block"><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> {</div><div>&#160; &#160; <span token="keyword">int</span> <span style="color: #7fdbca;">size</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span style="color: #7fdbca;">topptr</span>;</div><div>&#160; &#160; <span token="type">elemtype</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">body</span>;</div><div>} <span token="type">stack</span>;</div><br><div><span style="color: #c792ea;">#</span><span token="keyword">define</span> <span style="color: #82aaff;">STACK_NULLTOP</span> (<span token="number">0</span>)</div></div>
+<div class="vscode-block"><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> {</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span style="color: #7fdbca;">size</span>;</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span style="color: #7fdbca;">topptr</span>;</div><div>&nbsp; &nbsp; <span token="type">elemtype</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">body</span>;</div><div>} <span token="type">stack</span>;</div><br/><div><span style="color: #c792ea;">#</span><span token="keyword">define</span> <span style="color: #82aaff;">STACK_NULLTOP</span> (<span token="number">0</span>)</div></div>
 
 <p>数组实现下，栈的入栈和出栈操作分别如下：</p>
 
 <p>为了将某个元素压入栈中，需要将栈顶位置上移一层，然后置栈的栈顶位置为入栈元素。相应的实现为：</p>
 
-<div class="vscode-block"><div><span style="color: #82aaff;">bool</span> <span style="color: #82aaff;">Stack_IsFull</span>(<span token="type">stack</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">s</span>) {</div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">topptr</span> <span style="color: #c792ea;">&gt;=</span> <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">size</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>;</div><div>}</div><div><span token="type">status</span> <span style="color: #82aaff;">Stack_Push</span>(<span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>, <span token="type">stack</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">s</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #82aaff;">Stack_IsFull</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">s</span><span style="color: #82aaff;">)</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="number">1</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> stack full</span></div><div>&#160; &#160; <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">body</span>[<span style="color: #c792ea;">++</span><span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">topptr</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">value</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="number">0</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span style="color: #82aaff;">bool</span> <span style="color: #82aaff;">Stack_IsFull</span>(<span token="type">stack</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">s</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">topptr</span> <span style="color: #c792ea;">&gt;=</span> <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">size</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>;</div><div>}</div><div><span token="type">status</span> <span style="color: #82aaff;">Stack_Push</span>(<span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>, <span token="type">stack</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">s</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #82aaff;">Stack_IsFull</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">s</span><span style="color: #82aaff;">)</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="number">1</span>;<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> stack full</span></div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">body</span>[<span style="color: #c792ea;">++</span><span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">topptr</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">value</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="number">0</span>;</div><div>}</div></div>
 
 <p>由于数组的容量总是有限的，因此需要先判断栈是否已满。如果在栈已满的情况下继续入栈，将不可避免地发生<strong>栈顶越界</strong>，可能会与其余部分的数据发生冲突。因此对栈应该小心操作。</p>
 
 <p>为了弹出栈元素，直接让栈顶位置下移一层即可：</p>
 
-<div class="vscode-block"><div><span style="color: #82aaff;">bool</span> <span style="color: #82aaff;">Stack_IsEmpty</span>(<span token="type">stack</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">s</span>) {</div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">topptr</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">STACK_NULLTOP</span>;</div><div>}</div><div><span token="type">status</span> <span style="color: #82aaff;">Stack_Pop</span>(<span token="type">stack</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">s</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #82aaff;">Stack_IsEmpty</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">s</span><span style="color: #82aaff;">)</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="number">1</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> stack empty</span></div><div>&#160; &#160; <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">topptr</span><span style="color: #7fdbca;">--</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="number">0</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span style="color: #82aaff;">bool</span> <span style="color: #82aaff;">Stack_IsEmpty</span>(<span token="type">stack</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">s</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">topptr</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">STACK_NULLTOP</span>;</div><div>}</div><div><span token="type">status</span> <span style="color: #82aaff;">Stack_Pop</span>(<span token="type">stack</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">s</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #82aaff;">Stack_IsEmpty</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">s</span><span style="color: #82aaff;">)</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="number">1</span>;<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> stack empty</span></div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">topptr</span><span style="color: #7fdbca;">--</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="number">0</span>;</div><div>}</div></div>
 
 <p>同样，为了防止栈顶越界，需要提前判断栈是否为空。</p>
 
@@ -363,13 +365,13 @@ var _hmt = _hmt || [];
 
 <p>出栈是一种很有意思的操作，因为它不涉及数据的改变，只需要调整栈顶指针即可。下一次入栈操作时，该元素就会被覆盖，达到删除效果。因此，清空栈只需要将栈顶指针重新置于栈底即可：</p>
 
-<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">Stack_Clear</span>(<span token="type">stack</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">s</span>) {</div><div>&#160; &#160; <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">topptr</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">STACK_NULLTOP</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">Stack_Clear</span>(<span token="type">stack</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">s</span>) {</div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">topptr</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">STACK_NULLTOP</span>;</div><div>}</div></div>
 
 <p>该操作不需要改动任何元素，可以以常数级，并且是非常快的常数级时间完成。</p>
 
 <p>返回栈顶元素可以通过读取栈在栈顶指针位置的元素实现。出栈操作有时也需要读取弹出的元素，其实现就是读取栈顶和出栈的叠加：</p>
 
-<div class="vscode-block"><div><span token="type">elemtype</span> <span style="color: #82aaff;">Stack_PopTop</span>(<span token="type">stack</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">s</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span style="color: #82aaff;">Stack_IsEmpty</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">s</span><span style="color: #82aaff;">)</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">body</span>[<span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">topptr</span><span style="color: #7fdbca;">--</span>];</div><div><span style="color: #a8a8a8;">&#160; &#160; /* stack empty */</span></div><div>&#160; &#160; <span token="keyword">return</span> <span token="number">0</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> return value to avoid warning</span></div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">elemtype</span> <span style="color: #82aaff;">Stack_PopTop</span>(<span token="type">stack</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">s</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span style="color: #82aaff;">Stack_IsEmpty</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">s</span><span style="color: #82aaff;">)</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">body</span>[<span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">topptr</span><span style="color: #7fdbca;">--</span>];</div><div><span style="color: #a8a8a8;">&nbsp; &nbsp; /* stack empty */</span></div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="number">0</span>;<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> return value to avoid warning</span></div><div>}</div></div>
 
 <p>此过程中可能出现栈空的情况，但无法通过返回值提示栈已空，只能通过控制台提示或强制中断代码的执行。</p>
 
@@ -379,33 +381,33 @@ var _hmt = _hmt || [];
 
 <p>这种栈的实现下，测试栈是否是空栈的方式与测试链表是否为空的实现相同，并且栈几乎没有长度限制，无需判断栈是否已满：</p>
 
-<div class="vscode-block"><div><span token="keyword">bool</span> <span style="color: #82aaff;">Stack_IsEmpty</span>(<span token="type">stack</span> <span style="color: #d7dbe0;">s</span>) {</div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="keyword">bool</span> <span style="color: #82aaff;">Stack_IsEmpty</span>(<span token="type">stack</span> <span style="color: #d7dbe0;">s</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>;</div><div>}</div></div>
 
 <p>入栈和出栈在栈的链表实现下的具体操作分别为：</p>
 
 <p>入栈通过向链表开始端添加新的节点实现：</p>
 
-<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">Stack_Push</span>(<span token="type">stack</span> <span style="color: #d7dbe0;">s</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&#160; &#160; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">cell</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">linkedlist_node</span><span style="color: #82aaff;">))</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span token="variable">cell</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="number">1</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> stack (memory) full</span></div><div>&#160; &#160; <span token="variable">cell</span>-&gt;<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">value</span>;</div><div>&#160; &#160; <span token="variable">cell</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&#160; &#160; <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span token="variable">cell</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="number">0</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">Stack_Push</span>(<span token="type">stack</span> <span style="color: #d7dbe0;">s</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&nbsp; &nbsp; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">cell</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">linkedlist_node</span><span style="color: #82aaff;">))</span>;</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">cell</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="number">1</span>;<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> stack (memory) full</span></div><div>&nbsp; &nbsp; <span token="variable">cell</span>-&gt;<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">value</span>;</div><div>&nbsp; &nbsp; <span token="variable">cell</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span token="variable">cell</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="number">0</span>;</div><div>}</div></div>
 
 <p>出栈通过移除链表开始端的首个节点实现：</p>
 
-<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">Stack_Pop</span>(<span token="type">stack</span> <span style="color: #d7dbe0;">s</span>) {</div><div>&#160; &#160; <span token="type">stack</span> <span token="variable">first</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #82aaff;">Stack_IsEmpty</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">s</span><span style="color: #82aaff;">)</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="number">1</span>;</div><div>&#160; &#160; <span token="variable">first</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&#160; &#160; <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">next</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&#160; &#160; <span style="color: #82aaff;">free</span><span style="color: #82aaff;">(</span><span token="variable">first</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="number">0</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">Stack_Pop</span>(<span token="type">stack</span> <span style="color: #d7dbe0;">s</span>) {</div><div>&nbsp; &nbsp; <span token="type">stack</span> <span token="variable">first</span>;</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #82aaff;">Stack_IsEmpty</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">s</span><span style="color: #82aaff;">)</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="number">1</span>;</div><div>&nbsp; &nbsp; <span token="variable">first</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">next</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&nbsp; &nbsp; <span style="color: #82aaff;">free</span><span style="color: #82aaff;">(</span><span token="variable">first</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="number">0</span>;</div><div>}</div></div>
 
 <p>链表实现下，入栈和出栈的操作依赖于内存的重新分配，不仅速度较慢，在许多机器上需要依赖操作系统的行为，因此链表实现的栈并不能作为计算机的基本数据结构。</p>
 
 <p>链表实现栈的特点是首节点本身不动，且代表栈顶。下图展示了这一思想：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/05-stack-linked.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/05-stack-linked.png"/>
 </figure>
 
 <p>因此，返回栈顶元素通过检查链表的首节点的值实现：</p>
 
-<div class="vscode-block"><div><span token="type">elemtype</span> <span style="color: #82aaff;">Stack_Top</span>(<span token="type">stack</span> <span style="color: #d7dbe0;">s</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span style="color: #82aaff;">Stack_IsEmpty</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">s</span><span style="color: #82aaff;">)</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">next</span>-&gt;<span style="color: #7fdbca;">elem</span>;</div><div><span style="color: #a8a8a8;">&#160; &#160; /* empty stack */</span></div><div>&#160; &#160; <span token="keyword">return</span> <span token="number">0</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> return to avoid warning</span></div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">elemtype</span> <span style="color: #82aaff;">Stack_Top</span>(<span token="type">stack</span> <span style="color: #d7dbe0;">s</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span style="color: #82aaff;">Stack_IsEmpty</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">s</span><span style="color: #82aaff;">)</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #d7dbe0;">s</span>-&gt;<span style="color: #7fdbca;">next</span>-&gt;<span style="color: #7fdbca;">elem</span>;</div><div><span style="color: #a8a8a8;">&nbsp; &nbsp; /* empty stack */</span></div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="number">0</span>;<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> return to avoid warning</span></div><div>}</div></div>
 
 <p>链表实现下，出栈后栈的位置无法被重新利用，因此需要显式回收。清空链表的操作需要通过不断执行出栈操作实现，而不能直接修改栈顶指针：</p>
 
-<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">Stack_Clear</span>(<span token="type">stack</span> <span style="color: #d7dbe0;">s</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">s</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="number">1</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> not created</span></div><div>&#160; &#160; <span token="keyword">else</span></div><div>&#160; &#160; &#160; &#160; <span token="keyword">while</span> (<span style="color: #c792ea;">!</span><span style="color: #82aaff;">Stack_IsEmpty</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">s</span><span style="color: #82aaff;">)</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #82aaff;">Stack_Pop</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">s</span><span style="color: #82aaff;">)</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">Stack_Clear</span>(<span token="type">stack</span> <span style="color: #d7dbe0;">s</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">s</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="number">1</span>;<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> not created</span></div><div>&nbsp; &nbsp; <span token="keyword">else</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">while</span> (<span style="color: #c792ea;">!</span><span style="color: #82aaff;">Stack_IsEmpty</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">s</span><span style="color: #82aaff;">)</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">Stack_Pop</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">s</span><span style="color: #82aaff;">)</span>;</div><div>}</div></div>
 
 <p>该操作需要消耗线性时间。考虑到链表的操作更加复杂，因此使用链表实现栈并不是一种很实用的做法。</p>
 
@@ -422,7 +424,7 @@ var _hmt = _hmt || [];
 <p>下图展示了一个队列的模型：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/06-queue-concept.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/06-queue-concept.png"/>
 </figure>
 
 <p>同样地，队列可以由数组或链表实现。不过数组的实现较为常用，因此这里只介绍队列的数组模型。</p>
@@ -432,20 +434,20 @@ var _hmt = _hmt || [];
 <p>下图展示了数组模型下，处于中间状态的一个队列：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/06-queue-model.png" alt="" width="217">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/06-queue-model.png" width="217"/>
 </figure>
 
 <p>队列两端的元素有着不确定的值。特别地，队列前面的元素曾经属于该队列。</p>
 
 <p>采用以下结构定义实现队列：</p>
 
-<div class="vscode-block"><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> {</div><div>&#160; &#160; <span token="keyword">int</span> <span style="color: #7fdbca;">size</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span style="color: #7fdbca;">front</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span style="color: #7fdbca;">rear</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span style="color: #7fdbca;">length</span>;</div><div>&#160; &#160; <span token="type">elemtype</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">body</span>;</div><div>} <span token="type">queue</span>;</div></div>
+<div class="vscode-block"><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> {</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span style="color: #7fdbca;">size</span>;</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span style="color: #7fdbca;">front</span>;</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span style="color: #7fdbca;">rear</span>;</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span style="color: #7fdbca;">length</span>;</div><div>&nbsp; &nbsp; <span token="type">elemtype</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">body</span>;</div><div>} <span token="type">queue</span>;</div></div>
 
 <p>这里需要一个成员 <code>length</code> 来记录实际存在队列中的元素个数。</p>
 
 <p>通过队列的类型声明，测试一个队列为空或已满的方法是很容易的：</p>
 
-<div class="vscode-block"><div><span style="color: #82aaff;">bool</span> <span style="color: #82aaff;">Queue_IsEmpty</span>(<span token="type">queue</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">q</span>) {</div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">length</span> <span style="color: #c792ea;">==</span> <span token="number">0</span>;</div><div>}</div><div><span style="color: #82aaff;">bool</span> <span style="color: #82aaff;">Queue_IsFull</span>(<span token="type">queue</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">q</span>) {</div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">length</span> <span style="color: #c792ea;">==</span> <span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">size</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span style="color: #82aaff;">bool</span> <span style="color: #82aaff;">Queue_IsEmpty</span>(<span token="type">queue</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">q</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">length</span> <span style="color: #c792ea;">==</span> <span token="number">0</span>;</div><div>}</div><div><span style="color: #82aaff;">bool</span> <span style="color: #82aaff;">Queue_IsFull</span>(<span token="type">queue</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">q</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">length</span> <span style="color: #c792ea;">==</span> <span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">size</span>;</div><div>}</div></div>
 
 <p>队列的操作细节和栈比较相似。为了使一个元素入队，让队尾后移，并将元素放入队尾后更新队列长度。</p>
 
@@ -455,7 +457,7 @@ var _hmt = _hmt || [];
 
 <p>一种简单的解决方法可以参考循环链表的思想，即只要队首或队尾到达数组尾端，它就绕回数组开头，形成循环结构。其实现为：</p>
 
-<div class="vscode-block"><div><span token="keyword">static</span> <span token="keyword">int</span> <span style="color: #82aaff;">Queue_Succ</span>(<span token="type">queue</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">q</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">pos</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #c792ea;">++</span>pos <span style="color: #c792ea;">==</span> <span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">size</span>)</div><div>&#160; &#160; &#160; &#160; pos <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&#160; &#160; <span token="keyword">return</span> pos;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="keyword">static</span> <span token="keyword">int</span> <span style="color: #82aaff;">Queue_Succ</span>(<span token="type">queue</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">q</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">pos</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #c792ea;">++</span>pos <span style="color: #c792ea;">==</span> <span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">size</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; pos <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> pos;</div><div>}</div></div>
 
 <p>如果 <code>front</code> 或 <code>rear</code> 增 1 使得超越了数组，那么其值重置为数组的第一个位置，否则可以放心增 1 。实现绕回并不需要多少附加代码，不过它会使开销变大。如果能保证入队的次数不会大于队列长度，那么没必要使用回绕。</p>
 
@@ -468,7 +470,7 @@ var _hmt = _hmt || [];
 
 <p>这里采用后一种实现，即队首和队尾在相邻单元。和栈一样，为了清空队列，只需要将位置 <code>front</code> 和 <code>rear</code> 修改到合适的位置，并将队列大小置 0 即可，并不需要对队列中的元素作任何改动：</p>
 
-<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">Queue_Clear</span>(<span token="type">queue</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">q</span>) {</div><div>&#160; &#160; <span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">length</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&#160; &#160; <span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">front</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&#160; &#160; <span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">rear</span> <span style="color: #c792ea;">=</span> <span token="number">1</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">Queue_Clear</span>(<span token="type">queue</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">q</span>) {</div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">length</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">front</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">rear</span> <span style="color: #c792ea;">=</span> <span token="number">1</span>;</div><div>}</div></div>
 
 <p>该操作也可用于初始化队列。</p>
 
@@ -476,13 +478,13 @@ var _hmt = _hmt || [];
 
 <p>入队：让队尾在逻辑上后移，并将元素放入队尾后更新队列长度，代码实现为：</p>
 
-<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">Queue_Enqueue</span>(<span token="type">queue</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">q</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #82aaff;">Queue_IsFull</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">q</span><span style="color: #82aaff;">)</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="number">1</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> queue full</span></div><div>&#160; &#160; <span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">length</span><span style="color: #c792ea;">++</span>;</div><div>&#160; &#160; <span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">rear</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Queue_Succ</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">q</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">q</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">rear</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">body</span>[<span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">rear</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">value</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">Queue_Enqueue</span>(<span token="type">queue</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">q</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #82aaff;">Queue_IsFull</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">q</span><span style="color: #82aaff;">)</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="number">1</span>;<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> queue full</span></div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">length</span><span style="color: #c792ea;">++</span>;</div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">rear</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Queue_Succ</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">q</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">q</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">rear</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">body</span>[<span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">rear</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">value</span>;</div><div>}</div></div>
 
 <p>这里的后移是一种逻辑上的后移，因为队列底层是由循环数组支持的，其位置的改变由相应的函数决定。</p>
 
 <p>出队的操作为，置队首元素为返回值，然后让队首后移并更新长度。一般情况下都需要对出队元素做一定处理，否则栈就够用了：</p>
 
-<div class="vscode-block"><div><span token="type">elemtype</span> <span style="color: #82aaff;">Queue_Dequeue</span>(<span token="type">queue</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">q</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">elem</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #82aaff;">Queue_IsEmpty</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">q</span><span style="color: #82aaff;">)</span>) {</div><div><span style="color: #a8a8a8;">&#160; &#160; &#160; &#160; /* queue empty */</span></div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="number">0</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> return to avoid warning</span></div><div>&#160; &#160; }</div><div>&#160; &#160; <span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">length</span><span style="color: #7fdbca;">--</span>;</div><div>&#160; &#160; <span token="variable">elem</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">body</span>[<span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">front</span>];</div><div>&#160; &#160; <span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">front</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Queue_Succ</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">q</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">front</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">q</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">elem</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">elemtype</span> <span style="color: #82aaff;">Queue_Dequeue</span>(<span token="type">queue</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">q</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">elem</span>;</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #82aaff;">Queue_IsEmpty</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">q</span><span style="color: #82aaff;">)</span>) {</div><div><span style="color: #a8a8a8;">&nbsp; &nbsp; &nbsp; &nbsp; /* queue empty */</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="number">0</span>;<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> return to avoid warning</span></div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">length</span><span style="color: #7fdbca;">--</span>;</div><div>&nbsp; &nbsp; <span token="variable">elem</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">body</span>[<span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">front</span>];</div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">q</span>-&gt;<span style="color: #7fdbca;">front</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Queue_Succ</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">q</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">front</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">q</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="variable">elem</span>;</div><div>}</div></div>
 
 <p>循环实现下，队列可以在无需移动元素的基础上，不断操作队列两端的元素，使得插入和删除都有着常数级且很快的效率。但也正因如此，队列的维护不像栈那么简单，无法得到计算机底层的直接支持。</p>
 
@@ -511,14 +513,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/programming/python/python3-with-statement-context-manager/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/07/Python-with语句和上下文管理器-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/07/Python-with语句和上下文管理器-520x293.jpg 520w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-300x169.jpg 300w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-1024x576.jpg 1024w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-768x432.jpg 768w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-1536x864.jpg 1536w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-950x534.jpg 950w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/computer-science/computer-networking/05-transmission-control-protocol/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/计算机网络05-面向连接的运输：TCP-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/07/计算机网络05-面向连接的运输：TCP-520x293.jpg 520w, /wp-content/uploads/2022/07/计算机网络05-面向连接的运输：TCP-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/programming/python/python3-with-statement-context-manager/" rel="bookmark">Python3 with语句和上下文管理器</a>
+					<a href="/computer-science/computer-networking/05-transmission-control-protocol/" rel="bookmark">计算机网络05-面向连接的运输：TCP</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -529,14 +531,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/programming/other/regular-expression-tutorial/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/02/Skyrim-River-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/02/Skyrim-River-520x293.jpg 520w, /wp-content/uploads/2022/02/Skyrim-River-300x169.jpg 300w, /wp-content/uploads/2022/02/Skyrim-River-1024x576.jpg 1024w, /wp-content/uploads/2022/02/Skyrim-River-768x432.jpg 768w, /wp-content/uploads/2022/02/Skyrim-River-1536x864.jpg 1536w, /wp-content/uploads/2022/02/Skyrim-River-2048x1152.jpg 2048w, /wp-content/uploads/2022/02/Skyrim-River-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/computer-science/character-encoding/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/字节、字符与字符编码-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/字节、字符与字符编码-520x293.jpg 520w, /wp-content/uploads/2022/06/字节、字符与字符编码-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/programming/other/regular-expression-tutorial/" rel="bookmark">正则表达式简单入门</a>
+					<a href="/computer-science/character-encoding/" rel="bookmark">字节、字符与字符编码</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -547,14 +549,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/embedded/esp32/02-basic-peripheral/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-520x293.jpg 520w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-300x169.jpg 300w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-1024x576.jpg 1024w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-768x432.jpg 768w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-1536x864.jpg 1536w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-950x534.jpg 950w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/computer-science/computer-networking/03-domain-name-system/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/计算机网络03-域名系统：DNS-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/计算机网络03-域名系统：DNS-520x293.jpg 520w, /wp-content/uploads/2022/06/计算机网络03-域名系统：DNS-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/embedded/esp32/02-basic-peripheral/" rel="bookmark">ESP32与MicroPython入门-02 基本外设操作</a>
+					<a href="/computer-science/computer-networking/03-domain-name-system/" rel="bookmark">计算机网络03-域名系统：DNS</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -591,6 +593,14 @@ var _hmt = _hmt || [];
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
 											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
 					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
 											<span class="post-date">2023年6月19日</span>
 									</li>
@@ -610,14 +620,6 @@ var _hmt = _hmt || [];
 					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
 											<span class="post-date">2023年3月6日</span>
 									</li>
-											<li>
-					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
-											<span class="post-date">2023年2月27日</span>
-									</li>
-											<li>
-					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
-											<span class="post-date">2023年2月8日</span>
-									</li>
 					</ul>
 
 		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
@@ -630,9 +632,11 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (1)
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
 <ul class='children'>
 	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
 </li>
 </ul>
 </li>
@@ -654,7 +658,7 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (20)
 <ul class='children'>
 	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
 </li>
@@ -680,7 +684,9 @@ var _hmt = _hmt || [];
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(1)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
 	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
 	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
 	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
@@ -745,7 +751,7 @@ var _hmt = _hmt || [];
 					
 										
 					<div id="copyright">
-													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
 											</div><!--/#copyright-->
 					
 										

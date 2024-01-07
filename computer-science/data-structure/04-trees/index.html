@@ -12,7 +12,7 @@
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 
-	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
 	<title>数据结构04-树与二叉树 - 冰封残烛的个人小站</title>
 	<meta name="description" content="树(tree)是一种典型的一对多关系，本节介绍树的递归定义，并提出二叉查找树(binary search tree)的概念：二叉查找树提出了一种对数级的、较为高效的查找解决方案。本节介绍二叉查找树的代码实现并对比其优缺点，以此提出了二叉查找树的一种改进实现：AVL 树" />
 	<link rel="canonical" href="/computer-science/data-structure/04-trees/" />
@@ -23,11 +23,12 @@
 	<meta property="og:url" content="/computer-science/data-structure/04-trees/" />
 	<meta property="og:site_name" content="冰封残烛的个人小站" />
 	<meta property="article:published_time" content="2022-08-06T18:33:00+00:00" />
-	<meta property="article:modified_time" content="2023-10-06T04:16:45+00:00" />
+	<meta property="article:modified_time" content="2023-10-13T04:00:48+00:00" />
 	<meta property="og:image" content="/wp-content/uploads/2022/08/数据结构04-树与二叉树.jpg" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="874" />
 	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="作者" />
 	<meta name="twitter:data1" content="Hello" />
@@ -37,35 +38,8 @@
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
-	            "@type": "WebSite",
-	            "@id": "/#website",
-	            "url": "/",
-	            "name": "冰封残烛的个人小站",
-	            "description": "FrozenCandle&#039;s Personal Site",
-	            "potentialAction": [
-	                {
-	                    "@type": "SearchAction",
-	                    "target": {
-	                        "@type": "EntryPoint",
-	                        "urlTemplate": "/?s={search_term_string}"
-	                    },
-	                    "query-input": "required name=search_term_string"
-	                }
-	            ],
-	            "inLanguage": "zh-CN"
-	        },
-	        {
-	            "@type": "ImageObject",
-	            "inLanguage": "zh-CN",
-	            "@id": "/computer-science/data-structure/04-trees/#primaryimage",
-	            "url": "/wp-content/uploads/2022/08/数据结构04-树与二叉树.jpg",
-	            "contentUrl": "/wp-content/uploads/2022/08/数据结构04-树与二叉树.jpg",
-	            "width": 1200,
-	            "height": 874
-	        },
-	        {
 	            "@type": "WebPage",
-	            "@id": "/computer-science/data-structure/04-trees/#webpage",
+	            "@id": "/computer-science/data-structure/04-trees/",
 	            "url": "/computer-science/data-structure/04-trees/",
 	            "name": "数据结构04-树与二叉树 - 冰封残烛的个人小站",
 	            "isPartOf": {
@@ -74,8 +48,12 @@
 	            "primaryImageOfPage": {
 	                "@id": "/computer-science/data-structure/04-trees/#primaryimage"
 	            },
+	            "image": {
+	                "@id": "/computer-science/data-structure/04-trees/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2022/08/数据结构04-树与二叉树.jpg",
 	            "datePublished": "2022-08-06T18:33:00+00:00",
-	            "dateModified": "2023-10-06T04:16:45+00:00",
+	            "dateModified": "2023-10-13T04:00:48+00:00",
 	            "author": {
 	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
 	            },
@@ -94,6 +72,15 @@
 	            ]
 	        },
 	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/computer-science/data-structure/04-trees/#primaryimage",
+	            "url": "/wp-content/uploads/2022/08/数据结构04-树与二叉树.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/08/数据结构04-树与二叉树.jpg",
+	            "width": 1200,
+	            "height": 874
+	        },
+	        {
 	            "@type": "BreadcrumbList",
 	            "@id": "/computer-science/data-structure/04-trees/#breadcrumb",
 	            "itemListElement": [
@@ -109,6 +96,24 @@
 	                    "name": "数据结构04-树与二叉树"
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
 	        },
 	        {
 	            "@type": "Person",
@@ -158,7 +163,6 @@ body { font-family: "Roboto", Arial, sans-serif; }
 <link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
-<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
 <script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
 <link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/622" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
 <meta name="generator" content="WordPress 6.3.1" />
@@ -305,9 +309,6 @@ var _hmt = _hmt || [];
 				<div class="entry-content">
 					<div class="entry themeform">	
 						
-
-
-
 <h2>树的概念</h2>
 
 <h3>树的结构</h3>
@@ -315,7 +316,7 @@ var _hmt = _hmt || [];
 <p><strong>树</strong>(tree)是一种典型的一对多关系，下图展示了一棵具体的树：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-tree-concrete.png" width="272">
+    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-tree-concrete.png" width="272"/>
 </figure>
 
 <p>将上图倒过来看就是生活中常见的树。树从一个主干开始，随着一对多指数级分裂，向上逐渐变茂盛。</p>
@@ -325,7 +326,7 @@ var _hmt = _hmt || [];
 <p>下图表示这种树的思想：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-tree-model.png" alt="" width="255">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/07-tree-model.png" width="255"/>
 </figure>
 
 <p>每一棵子树的根称为根 <span class="math">\\( r \\)</span> 的<strong>子</strong>(child)节点，而 <span class="math">\\( r \\)</span> 是每一棵子树根的<strong>父</strong>(parent)节点。</p>
@@ -334,7 +335,7 @@ var _hmt = _hmt || [];
 
 <p>以上展示的具体的树中，根为节点 A ，每一个节点可以有任意多个子节点，包括 0 个。没有子节点的节点称为<strong>叶</strong>(leaf)，具有相同父节点的节点称为<strong>兄弟</strong>(sibling)。类似地可以定义<strong>祖父</strong>(grandparent)节点和<strong>子孙</strong>(grandchild)节点关系。</p>
 
-<p>从节点 <span class="math">\\( n_1 \\)</span> 到节点 <span class="math">\\( n_k \\)</span> 的<strong>路径</strong>(path)定义为节点 <span class="math">\\( n_1,n_2,\dots,n_k \\)</span> 的一个序列，使得对于 <span class="math">\\( 1 \leq i < k \\)</span> ，节点 <span class="math">\\( n_i \\)</span> 是 <span class="math">\\( n_{i+1} \\)</span> 的父节点。这个路径的<strong>长</strong>(length)为该路径上边的条数，即 <span class="math">\\( n-1 \\)</span> 。从每一个节点到它自己有一条长为 0 的路径，从根到每一个节点存在且仅存在一条路径。</p>
+<p>从节点 <span class="math">\\( n_1 \\)</span> 到节点 <span class="math">\\( n_k \\)</span> 的<strong>路径</strong>(path)定义为节点 <span class="math">\\( n_1,n_2,\dots,n_k \\)</span> 的一个序列，使得对于 <span class="math">\\( 1 \leq i &lt; k \\)</span> ，节点 <span class="math">\\( n_i \\)</span> 是 <span class="math">\\( n_{i+1} \\)</span> 的父节点。这个路径的<strong>长</strong>(length)为该路径上边的条数，即 <span class="math">\\( n-1 \\)</span> 。从每一个节点到它自己有一条长为 0 的路径，从根到每一个节点存在且仅存在一条路径。</p>
 
 <p>任意节点 <span class="math">\\( n_i \\)</span> 的<strong>深度</strong>(depth)为从根到该节点的唯一路径的长，根的深度为 0 ；<strong>高</strong>(height)是从 <span class="math">\\( n_i \\)</span> 到一片树叶的最长路径的长，因此所有树叶的高度都是 0 。</p>
 
@@ -348,19 +349,19 @@ var _hmt = _hmt || [];
 
 <p>树的应用非常广泛，其中之一就是操作系统的文件结构。在操作系统中，一个目录可能包含几个子目录或文件，子目录中又可能包含子目录或文件，这种一对多且递归的关系就可以使用树来表示。在 Windows 系统中，在命令行中显示当前目录的体系结构使用的命令就为 <code>tree</code> ：</p>
 
-<div class="codeblock code-console"><span class="codetoken prompt">D:\sources\data-science></span> <span class="codetoken command">tree</span>
+<div class="codeblock code-console"><span class="codetoken prompt">D:\sources\data-science&gt;</span> <span class="codetoken command">tree</span>
 Folder PATH listing for volume Enormous
 Volume serial number is C61A-4BF3
 D:.
-└───data-science
-    ├───articles
-    │   ├───chapter01
-    │   ├───chapter02
-    │   ├───chapter03
-    │   ├───chapter04
-    │   └───chapter05
-    ├───assets
-    └───images
+&boxur;&boxh;&boxh;&boxh;data-science
+    &boxvr;&boxh;&boxh;&boxh;articles
+    &boxv;   &boxvr;&boxh;&boxh;&boxh;chapter01
+    &boxv;   &boxvr;&boxh;&boxh;&boxh;chapter02
+    &boxv;   &boxvr;&boxh;&boxh;&boxh;chapter03
+    &boxv;   &boxvr;&boxh;&boxh;&boxh;chapter04
+    &boxv;   &boxur;&boxh;&boxh;&boxh;chapter05
+    &boxvr;&boxh;&boxh;&boxh;assets
+    &boxur;&boxh;&boxh;&boxh;images
 </div>
 
 <p>以上就是一个典型的树状结构。</p>
@@ -370,7 +371,7 @@ D:.
 <p>然而实际情况下，子节点的数量不定且可能变化，因此不能直接建立对应到每个子节点的指针。既然使用链表的思想，那么可以再重新安排一下树的结构，变成如下模型：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-tree-concrete-linkedlist.png" alt="" width="267">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/07-tree-concrete-linkedlist.png" width="267"/>
 </figure>
 
 <p>该模型下，每个结点都需要两个固定的指针：一个指针指向子树，一个指针指向兄弟节点。这样就可以以确定的方式串联起整棵树的节点了，且可以很方便地管理所有的子节点。</p>
@@ -386,7 +387,7 @@ D:.
 <p>下图展示了一个二叉树的模型，其中 <span class="math">\\( T_L \\)</span> 和 <span class="math">\\( T_R \\)</span> 均可能为空：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-tree-binary-model.png" alt="" width="226">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/07-tree-binary-model.png" width="226"/>
 </figure>
 
 <p>二叉树的重要性质是二叉树的平均深度为 <span class="math">\\( O(\sqrt{N}) \\)</span> （二叉树节点不总是左右都有节点，因此二叉树的节点一般会随着深度线性增长），不过最坏情况（都只有一边有子节点）下深度可以达到 <span class="math">\\( N-1 \\)</span> 。</p>
@@ -397,13 +398,13 @@ D:.
 
 <p><strong>二叉查找树</strong>(binary search tree)又是一种特殊的二叉树，它满足二叉树的所有要求，但同时规定：对于树中的每个节点 <span class="math">\\( X \\)</span> ，它的左子树中的所有值小于 <span class="math">\\( X \\)</span> 中的值，而它的右子树中的所有值大于 <span class="math">\\( X \\)</span> 的值。</p>
 
-<p>这意味着该树可以用某种统一的方式排序。在<a href="http://frozencandles.fun/archives/586">第一节</a>就介绍了二分查找法，并指出二分查找法有远低于线性查找的时间开销。然而二分查找必须要求结构是有序的，而对线性表的排序会涉及表项的移动，移动表项总是要消耗线性的时间，因此线性表不适合直接使用二分查找。</p>
+<p>这意味着该树可以用某种统一的方式排序。在<a class="link-internal" href="/computer-science/data-structure/01-linear-list">第一节</a>就介绍了二分查找法，并指出二分查找法有远低于线性查找的时间开销。然而二分查找必须要求结构是有序的，而对线性表的排序会涉及表项的移动，移动表项总是要消耗线性的时间，因此线性表不适合直接使用二分查找。</p>
 
 <p>然而二叉查找树天然是有序的，它具有链表一样的常数级插入删除开销。理想的二叉查找树左右子节点都能尽可能利用，使得节点可以随着深度指数级增长，从而使平均深度达到 <span class="math">\\( O(\log N) \\)</span> 。</p>
 
 <p>有了以上对二叉树模型的描述，二叉树的节点定义为：</p>
 
-<div class="vscode-block"><div><span token="operator">typedef</span> <span token="keyword">struct</span> <span token="type">bsearchtree_node</span> {</div><div>&#160; &#160; <span token="type">elemtype</span> <span token="property">elem</span>;</div><div>&#160; &#160; <span token="keyword">struct</span> <span token="type">bsearchtree_node</span><span token="property">*</span> <span token="property">left</span>;</div><div>&#160; &#160; <span token="keyword">struct</span> <span token="type">bsearchtree_node</span><span token="property">*</span> <span token="property">right</span>;</div><div>} <span token="type">bsearchtree_node</span>, <span token="property">*</span> <span token="type">bsearchtree</span>;</div></div>
+<div class="vscode-block"><div><span token="operator">typedef</span> <span token="keyword">struct</span> <span token="type">bsearchtree_node</span> {</div><div>&nbsp; &nbsp; <span token="type">elemtype</span> <span token="property">elem</span>;</div><div>&nbsp; &nbsp; <span token="keyword">struct</span> <span token="type">bsearchtree_node</span><span token="property">*</span> <span token="property">left</span>;</div><div>&nbsp; &nbsp; <span token="keyword">struct</span> <span token="type">bsearchtree_node</span><span token="property">*</span> <span token="property">right</span>;</div><div>} <span token="type">bsearchtree_node</span>, <span token="property">*</span> <span token="type">bsearchtree</span>;</div></div>
 
 <p>由于二叉树最多只有两个子节点，因此不需要使用链表的方式管理子节点，可以在指针域中直接定位子节点。</p>
 
@@ -413,7 +414,7 @@ D:.
 
 <p>例如清空一棵树的操作，为了清空一棵树需要清空它的所有节点，但为了使树不发生断裂，需要逐层清空叶节点。如果采用循环的方式不能很好地执行回退操作，此时可以考虑使用递归。递归的实现非常简单：</p>
 
-<div class="vscode-block"><div><span token="type">bsearchtree</span> <span token="func">BinSearchTree_Clear</span>(<span token="type">bsearchtree</span> <span style="color: #d7dbe0;">tree</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">!=</span> <span token="func">NULL</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="func">BinSearchTree_Clear</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">)</span>;</div><div>&#160; &#160; &#160; &#160; <span token="func">BinSearchTree_Clear</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">)</span>;</div><div>&#160; &#160; &#160; &#160; <span token="func">free</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">)</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">return</span> <span token="func">NULL</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">bsearchtree</span> <span token="func">BinSearchTree_Clear</span>(<span token="type">bsearchtree</span> <span style="color: #d7dbe0;">tree</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">!=</span> <span token="func">NULL</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="func">BinSearchTree_Clear</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="func">BinSearchTree_Clear</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="func">free</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">)</span>;</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="func">NULL</span>;</div><div>}</div></div>
 
 <p>在删除一棵树时，需要先删除它的左右子节点：如果存在左右子节点，就说明有子树，那么就进入左右子树递归删除；否则就说明该节点已经是树叶了，被删除也没有影响。在确保子树都被删除了以后，再删除节点自身。考虑到这里使用了双递归，还不是尾递归，因此无法很轻松地改写为循环。</p>
 
@@ -423,7 +424,7 @@ D:.
 
 <p>根据二叉查找树的定义，如果查找的值比当前节点的值小，那么可能的值存在于它的左子树中，就去它左子树中查找；如果值比当前节点的值大，那么就去它右子树中查找，这也很适合用递归的方式实现：</p>
 
-<div class="vscode-block"><div><span token="type">bsearchtree_node</span><span token="property">*</span> <span token="func">BinSearchTree_Find</span>(<span token="type">bsearchtree</span> <span style="color: #d7dbe0;">tree</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">==</span> <span token="func">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="func">NULL</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">value</span> <span token="operator">&lt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="func">BinSearchTree_Find</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">, </span><span style="color: #d7dbe0;">value</span><span token="func">)</span>;</div><div>&#160; &#160; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">value</span> <span token="operator">&gt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="func">BinSearchTree_Find</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">, </span><span style="color: #d7dbe0;">value</span><span token="func">)</span>;</div><div>&#160; &#160; <span token="keyword">else</span></div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">tree</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">bsearchtree_node</span><span token="property">*</span> <span token="func">BinSearchTree_Find</span>(<span token="type">bsearchtree</span> <span style="color: #d7dbe0;">tree</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">==</span> <span token="func">NULL</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="func">NULL</span>;</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">value</span> <span token="operator">&lt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="func">BinSearchTree_Find</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">, </span><span style="color: #d7dbe0;">value</span><span token="func">)</span>;</div><div>&nbsp; &nbsp; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">value</span> <span token="operator">&gt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="func">BinSearchTree_Find</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">, </span><span style="color: #d7dbe0;">value</span><span token="func">)</span>;</div><div>&nbsp; &nbsp; <span token="keyword">else</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #d7dbe0;">tree</span>;</div><div>}</div></div>
 
 <p>注意测试的顺序，关键问题是需要首先测试当前位置是否为空树，否则后续的查找会出现问题。同时还需要将最不可能的情况，也就是正好找到的情况放在最后一步执行。</p>
 
@@ -433,7 +434,7 @@ D:.
 
 <p>下面给出了分别用递归和循环实现的查找最值：</p>
 
-<div class="vscode-block"><div><span token="type">bsearchtree_node</span><span token="property">*</span> <span token="func">BinSearchTree_FindMin</span>(<span token="type">bsearchtree</span> <span style="color: #d7dbe0;">tree</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">==</span> <span token="func">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="func">NULL</span>;</div><div>&#160; &#160; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span> <span token="operator">==</span> <span token="func">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">tree</span>;</div><div>&#160; &#160; <span token="keyword">else</span></div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="func">BinSearchTree_FindMin</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">)</span>;</div><div>}</div><div><span token="type">bsearchtree_node</span><span token="property">*</span> <span token="func">BinSearchTree_FindMax</span>(<span token="type">bsearchtree</span> <span style="color: #d7dbe0;">tree</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">!=</span> <span token="func">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">while</span> (<span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span> <span token="operator">!=</span> <span token="func">NULL</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">tree</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">bsearchtree_node</span><span token="property">*</span> <span token="func">BinSearchTree_FindMin</span>(<span token="type">bsearchtree</span> <span style="color: #d7dbe0;">tree</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">==</span> <span token="func">NULL</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="func">NULL</span>;</div><div>&nbsp; &nbsp; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span> <span token="operator">==</span> <span token="func">NULL</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #d7dbe0;">tree</span>;</div><div>&nbsp; &nbsp; <span token="keyword">else</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="func">BinSearchTree_FindMin</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">)</span>;</div><div>}</div><div><span token="type">bsearchtree_node</span><span token="property">*</span> <span token="func">BinSearchTree_FindMax</span>(<span token="type">bsearchtree</span> <span style="color: #d7dbe0;">tree</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">!=</span> <span token="func">NULL</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">while</span> (<span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span> <span token="operator">!=</span> <span token="func">NULL</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #d7dbe0;">tree</span>;</div><div>}</div></div>
 
 <p>查找最值的要点与普通查找类似，都要注意终止条件是树已经到达最深的位置了。除此之外，最好判断一下一开始传入的树是否为空树。</p>
 
@@ -448,10 +449,10 @@ D:.
 <p>下图展示了这种插入思路：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-tree-insert.png" alt="" height="200">
+    <img decoding="async" alt="" height="200" src="/wp-content/uploads/image/category@data-structure/07-tree-insert.png"/>
 </figure>
 
-<p>为了插入元素 5 ，尝试沿着路径搜索 5 ：6(向左找)→2(向右找)→4(向右找)→找到底了，那么这个位置满足二叉查找树的要求，就将其插入这个位置上。</p>
+<p>为了插入元素 5 ，尝试沿着路径搜索 5 ：6(向左找)&rarr;2(向右找)&rarr;4(向右找)&rarr;找到底了，那么这个位置满足二叉查找树的要求，就将其插入这个位置上。</p>
 
 <p>可见插入都是在叶节点上完成，既然使用查找的方式寻找合适的插入位置，那么下一次查找、插入时也可以顺利找到该节点，且不会使树存在重复的元素。</p>
 
@@ -459,7 +460,7 @@ D:.
 
 <p>根据该原理，以下是插入的例程，注意还是用递归的方式实现的：</p>
 
-<div class="vscode-block"><div><span token="type">bsearchtree</span> <span token="func">BinSearchTree_Insert</span>(<span token="type">bsearchtree</span> <span style="color: #d7dbe0;">tree</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">==</span> <span token="func">NULL</span>) {<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> empty tree, should create first</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span token="func">malloc</span><span token="func">(</span><span token="property">sizeof</span><span token="func">(</span><span style="color: #82aaff;text-decoration: underline;">bsearchtree_node</span><span token="func">))</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">==</span> <span token="func">NULL</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="func">NULL</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> fail to allocate memory</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span> <span token="operator">=</span> <span style="color: #d7dbe0;">value</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span> <span token="operator">=</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span> <span token="operator">=</span> <span token="func">NULL</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">value</span> <span token="operator">&lt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span>)</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span> <span token="operator">=</span> <span token="func">BinSearchTree_Insert</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">, </span><span style="color: #d7dbe0;">value</span><span token="func">)</span>;</div><div>&#160; &#160; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">value</span> <span token="operator">&gt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span>)</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span> <span token="operator">=</span> <span token="func">BinSearchTree_Insert</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">, </span><span style="color: #d7dbe0;">value</span><span token="func">)</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">tree</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> value is in the tree already</span></div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">bsearchtree</span> <span token="func">BinSearchTree_Insert</span>(<span token="type">bsearchtree</span> <span style="color: #d7dbe0;">tree</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">==</span> <span token="func">NULL</span>) {<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> empty tree, should create first</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span token="func">malloc</span><span token="func">(</span><span token="property">sizeof</span><span token="func">(</span><span style="color: #82aaff;text-decoration: underline;">bsearchtree_node</span><span token="func">))</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">==</span> <span token="func">NULL</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="func">NULL</span>;<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> fail to allocate memory</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span> <span token="operator">=</span> <span style="color: #d7dbe0;">value</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span> <span token="operator">=</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span> <span token="operator">=</span> <span token="func">NULL</span>;</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">value</span> <span token="operator">&lt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span> <span token="operator">=</span> <span token="func">BinSearchTree_Insert</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">, </span><span style="color: #d7dbe0;">value</span><span token="func">)</span>;</div><div>&nbsp; &nbsp; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">value</span> <span token="operator">&gt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span> <span token="operator">=</span> <span token="func">BinSearchTree_Insert</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">, </span><span style="color: #d7dbe0;">value</span><span token="func">)</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #d7dbe0;">tree</span>;<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> value is in the tree already</span></div><div>}</div></div>
 
 <p>每一次递归时，都尝试到子树中执行插入；真正的插入发送在子树为空的情况（到达边缘位置了），那么就在原地创建一个新的节点并容纳插入值。为了让新的节点成为树的一部分，将该函数写成返回一个指向新根节点的指针，并在递归回退时重新建立路径上的所有指针。</p>
 
@@ -473,7 +474,7 @@ D:.
 <p>下图展示了删除的节点只有一个子节点的情况：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-single-delete.png" height="200" alt="">
+    <img decoding="async" alt="" height="200" src="/wp-content/uploads/image/category@data-structure/07-single-delete.png"/>
 </figure>
 
 <p>删除前后，整个树的结构仍然符合二叉查找树的定义。</p>
@@ -487,7 +488,7 @@ D:.
 <p>下图展示了从一棵较为复杂的树中删除值 4 的情况：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-tree-delete-complex.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/07-tree-delete-complex.png"/>
 </figure>
 
 <p>该删除分几步：首先找到节点 4 ，并用右子树中最小数据 6 代替；然后还需要删除右子树中重复数据 6 ，那么继续沿着该路径查找 6 ，找到后以相同的方式删除 6 。这里右子树中的 6 只有一个子节点，因此只需要像链表一样删除即可。</p>
@@ -498,7 +499,7 @@ D:.
 
 <p>二叉查找树删除的例程如下：</p>
 
-<div class="vscode-block"><div><span token="type">bsearchtree_node</span><span token="property">*</span> <span token="func">BinSearchTree_Remove</span>(<span token="type">bsearchtree</span> <span style="color: #d7dbe0;">tree</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">==</span> <span token="func">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="func">NULL</span>;<span style="color: #637777;"> &#160; &#160; &#160; &#160; &#160; &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> element not found</span></div><div>&#160; &#160; <span token="type">bsearchtree_node</span><span token="property">*</span> <span token="variable">temp</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">value</span> <span token="operator">&lt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span>)<span style="color: #637777;"> &#160; &#160; &#160; </span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> go left</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span> <span token="operator">=</span> <span token="func">BinSearchTree_Remove</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">, </span><span style="color: #d7dbe0;">value</span><span token="func">)</span>;</div><div>&#160; &#160; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">value</span> <span token="operator">&gt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span>)<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> go right</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span> <span token="operator">=</span> <span token="func">BinSearchTree_Remove</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">, </span><span style="color: #d7dbe0;">value</span><span token="func">)</span>;</div><div>&#160; &#160; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span> <span token="operator">&amp;&amp;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span>) {<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> element found with 2 children</span></div><div><span style="color: #a8a8a8;">&#160; &#160; &#160; &#160; /* replace by min value in right subtree */</span></div><div>&#160; &#160; &#160; &#160; <span token="variable">temp</span> <span token="operator">=</span> <span token="func">BinSearchTree_FindMin</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">)</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span> <span token="operator">=</span> <span token="variable">temp</span>-&gt;<span token="property">elem</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span> <span token="operator">=</span> <span token="func">BinSearchTree_Remove</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">, </span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">elem</span><span token="func">)</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">else</span> {<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> element found with 0 or 1 children</span></div><div>&#160; &#160; &#160; &#160; <span token="variable">temp</span> <span token="operator">=</span> <span style="color: #d7dbe0;">tree</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span> <span token="operator">==</span> <span token="func">NULL</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span> <span token="operator">==</span> <span token="func">NULL</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span>;</div><div>&#160; &#160; &#160; &#160; <span token="func">free</span><span token="func">(</span><span token="variable">temp</span><span token="func">)</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">tree</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">bsearchtree_node</span><span token="property">*</span> <span token="func">BinSearchTree_Remove</span>(<span token="type">bsearchtree</span> <span style="color: #d7dbe0;">tree</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">==</span> <span token="func">NULL</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="func">NULL</span>;<span style="color: #637777;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> element not found</span></div><div>&nbsp; &nbsp; <span token="type">bsearchtree_node</span><span token="property">*</span> <span token="variable">temp</span>;</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">value</span> <span token="operator">&lt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span>)<span style="color: #637777;"> &nbsp; &nbsp; &nbsp; </span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> go left</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span> <span token="operator">=</span> <span token="func">BinSearchTree_Remove</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">, </span><span style="color: #d7dbe0;">value</span><span token="func">)</span>;</div><div>&nbsp; &nbsp; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">value</span> <span token="operator">&gt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span>)<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> go right</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span> <span token="operator">=</span> <span token="func">BinSearchTree_Remove</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">, </span><span style="color: #d7dbe0;">value</span><span token="func">)</span>;</div><div>&nbsp; &nbsp; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span> <span token="operator">&amp;&amp;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span>) {<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> element found with 2 children</span></div><div><span style="color: #a8a8a8;">&nbsp; &nbsp; &nbsp; &nbsp; /* replace by min value in right subtree */</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">temp</span> <span token="operator">=</span> <span token="func">BinSearchTree_FindMin</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span> <span token="operator">=</span> <span token="variable">temp</span>-&gt;<span token="property">elem</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span> <span token="operator">=</span> <span token="func">BinSearchTree_Remove</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">, </span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">elem</span><span token="func">)</span>;</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span token="keyword">else</span> {<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> element found with 0 or 1 children</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">temp</span> <span token="operator">=</span> <span style="color: #d7dbe0;">tree</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span> <span token="operator">==</span> <span token="func">NULL</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span> <span token="operator">==</span> <span token="func">NULL</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="func">free</span><span token="func">(</span><span token="variable">temp</span><span token="func">)</span>;</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #d7dbe0;">tree</span>;</div><div>}</div></div>
 
 <p>以上函数可以分为几个部分：最前面用于递归查找待删除元素，如果找到了判断子节点个数：如果有两个子节点，查找右侧最小值替换该位置，并再次递归地查找、删除该最小值；如果有 0 个或 1 个子节点，那么就按正常的方式删除。</p>
 
@@ -520,7 +521,7 @@ D:.
 <p>因此，该删除操作有助于使左子树变深，右子树变浅。在足够多的随机插入和删除操作下，一棵树会不可避免地左沉：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-tree-left-lean.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/07-tree-left-lean.png"/>
 </figure>
 
 <p>左沉使右侧节点的利用率变低，不能很好地利用两个子节点位置。一种极端的情况是每个节点的右节点都没有值，那么二叉树将会退化为有序的链表，使得深度变为 <span class="math">\\( N-1 \\)</span> 。可以证明，如果随机交替插入和删除 <span class="math">\\( N^2 \\)</span> 次，那么树的期望深度为 <span class="math">\\( \sqrt{N} \\)</span> 。</p>
@@ -528,7 +529,7 @@ D:.
 <p>如果能对左沉的树重新编排节点的位置，那么有助于缓解这一情况。例如，对以上删除示例中使用到的左沉的树重新排列节点后，树的深度从 6 减少为了 4 ：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-tree-left-lean-example.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/07-tree-left-lean-example.png"/>
 </figure>
 
 <p>如果在删除时随机选择右子树的最小元素或左子树的最大元素来代替它，确实有助于缓解倾斜问题。不过在条件不好的情况下，还是可能发现倾斜。这就要求树必须要能够有简单的方式做调整，使得后面操作效率更高。</p>
@@ -547,17 +548,17 @@ D:.
 
 <p>调整树会消耗一定时间，这就要求不能太过频繁地调整，或一次只调整树的一部分。插入操作一定会破坏 AVL 树的完整性，因此可以在插入后对周围的节点做一定的调整，使其恢复 AVL 树的性质。对 AVL 树的修正可以使用<strong>旋转</strong>(rotation)来完成。</p>
 
-<p>下图是一棵平衡的 AVL（子）树，因为左右子树的高度只差 1 。然而，对左侧子树的插入会破坏该平衡。插入有两种情况：一种是发生在“外侧”的插入，另一种是发生在“内侧”的插入。对右子树的插入实质上的对称的，虽然需要使用不同的代码处理。</p>
+<p>下图是一棵平衡的 AVL（子）树，因为左右子树的高度只差 1 。然而，对左侧子树的插入会破坏该平衡。插入有两种情况：一种是发生在&ldquo;外侧&rdquo;的插入，另一种是发生在&ldquo;内侧&rdquo;的插入。对右子树的插入实质上的对称的，虽然需要使用不同的代码处理。</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-avltree-unbalance.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/07-avltree-unbalance.png"/>
 </figure>
 
-<p>发生在“外侧”的插入可以通过对树的一次<strong>单旋转</strong>(single rotation)调整，发生在“内侧”的插入可以通过对树的一次<strong>双旋转</strong>(single rotation)调整。本节介绍旋转的基本原理，并给出简单的代码实现。</p>
+<p>发生在&ldquo;外侧&rdquo;的插入可以通过对树的一次<strong>单旋转</strong>(single rotation)调整，发生在&ldquo;内侧&rdquo;的插入可以通过对树的一次<strong>双旋转</strong>(single rotation)调整。本节介绍旋转的基本原理，并给出简单的代码实现。</p>
 
 <p>首先，采用以下代码实现 AVL 树并计算节点的高度：</p>
 
-<div class="vscode-block"><div><span token="operator">typedef</span> <span token="keyword">struct</span> <span token="type">avltree_node</span> {</div><div>&#160; &#160; <span token="type">elemtype</span> <span token="property">elem</span>;</div><div>&#160; &#160; <span token="keyword">struct</span> <span token="type">avltree_node</span><span token="property">*</span> <span token="property">left</span>;</div><div>&#160; &#160; <span token="keyword">struct</span> <span token="type">avltree_node</span><span token="property">*</span> <span token="property">right</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span token="property">height</span>;</div><div>} <span token="type">avltree_node</span>, <span token="property">*</span> <span token="type">avltree</span>;</div><br><div><span token="keyword">static</span> <span token="keyword">int</span> <span token="func">AvlTree_Height</span>(<span token="keyword">const</span> <span token="type">avltree_node</span><span token="property">*</span> <span style="color: #d7dbe0;">node</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">node</span> <span token="operator">==</span> <span token="func">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="property">-</span><span token="number">1</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> empty tree</span></div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">node</span>-&gt;<span token="property">height</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="operator">typedef</span> <span token="keyword">struct</span> <span token="type">avltree_node</span> {</div><div>&nbsp; &nbsp; <span token="type">elemtype</span> <span token="property">elem</span>;</div><div>&nbsp; &nbsp; <span token="keyword">struct</span> <span token="type">avltree_node</span><span token="property">*</span> <span token="property">left</span>;</div><div>&nbsp; &nbsp; <span token="keyword">struct</span> <span token="type">avltree_node</span><span token="property">*</span> <span token="property">right</span>;</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span token="property">height</span>;</div><div>} <span token="type">avltree_node</span>, <span token="property">*</span> <span token="type">avltree</span>;</div><br/><div><span token="keyword">static</span> <span token="keyword">int</span> <span token="func">AvlTree_Height</span>(<span token="keyword">const</span> <span token="type">avltree_node</span><span token="property">*</span> <span style="color: #d7dbe0;">node</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">node</span> <span token="operator">==</span> <span token="func">NULL</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="property">-</span><span token="number">1</span>;<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> empty tree</span></div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #d7dbe0;">node</span>-&gt;<span token="property">height</span>;</div><div>}</div></div>
 
 <p>接下来介绍旋转操作。</p>
 
@@ -572,7 +573,7 @@ D:.
 <p>下图展示了一个不平衡树的抽象模型，对 <span class="math">\\( X \\)</span> 节点的插入使 <span class="math">\\( Z \\)</span> 明显不平衡：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-avltree-single-rotate.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/07-avltree-single-rotate.png"/>
 </figure>
 
 <p>为了恢复树的平衡，需要调整两者的位置。但是为了满足二叉查找树的定义，不能直接交换它们，而是需要调整节点间的指向关系，使水平位置满足 <span class="math">\\( [X, k_1, k_2, Z] \\)</span> 的顺序。</p>
@@ -581,7 +582,7 @@ D:.
 
 <p>以下给出了单旋转的代码实现：</p>
 
-<div class="vscode-block"><div><span token="keyword">static</span> <span token="type">avltree_node</span><span token="property">*</span> <span token="func">AvlTree_LeftSingleRotate</span>(<span token="type">avltree_node</span><span token="property">*</span> <span style="color: #d7dbe0;">k2</span>) {</div><div>&#160; &#160; <span token="type">avltree_node</span><span token="property">*</span> <span style="color: #c5e478;">k1</span> <span token="operator">=</span> <span style="color: #d7dbe0;">k2</span>-&gt;<span token="property">left</span>;</div><div>&#160; &#160; <span style="color: #d7dbe0;">k2</span>-&gt;<span token="property">left</span> <span token="operator">=</span> <span style="color: #c5e478;">k1</span>-&gt;<span token="property">right</span>;</div><div>&#160; &#160; <span style="color: #c5e478;">k1</span>-&gt;<span token="property">right</span> <span token="operator">=</span> <span style="color: #d7dbe0;">k2</span>;</div><div>&#160; &#160; <span style="color: #d7dbe0;">k2</span>-&gt;<span token="property">height</span> <span token="operator">=</span> <span token="func">max</span><span token="func">(</span><span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #d7dbe0;">k2</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">), </span><span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #d7dbe0;">k2</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">))</span> <span token="property">+</span> <span token="number">1</span>;</div><div>&#160; &#160; <span style="color: #c5e478;">k1</span>-&gt;<span token="property">height</span> <span token="operator">=</span> <span token="func">max</span><span token="func">(</span><span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #c5e478;">k1</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">), </span><span style="color: #d7dbe0;">k2</span><span token="func">-&gt;</span><span token="property">height</span><span token="func">)</span> <span token="property">+</span> <span token="number">1</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #c5e478;">k1</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> new root</span></div><div>}</div></div>
+<div class="vscode-block"><div><span token="keyword">static</span> <span token="type">avltree_node</span><span token="property">*</span> <span token="func">AvlTree_LeftSingleRotate</span>(<span token="type">avltree_node</span><span token="property">*</span> <span style="color: #d7dbe0;">k2</span>) {</div><div>&nbsp; &nbsp; <span token="type">avltree_node</span><span token="property">*</span> <span style="color: #c5e478;">k1</span> <span token="operator">=</span> <span style="color: #d7dbe0;">k2</span>-&gt;<span token="property">left</span>;</div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">k2</span>-&gt;<span token="property">left</span> <span token="operator">=</span> <span style="color: #c5e478;">k1</span>-&gt;<span token="property">right</span>;</div><div>&nbsp; &nbsp; <span style="color: #c5e478;">k1</span>-&gt;<span token="property">right</span> <span token="operator">=</span> <span style="color: #d7dbe0;">k2</span>;</div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">k2</span>-&gt;<span token="property">height</span> <span token="operator">=</span> <span token="func">max</span><span token="func">(</span><span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #d7dbe0;">k2</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">), </span><span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #d7dbe0;">k2</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">))</span> <span token="property">+</span> <span token="number">1</span>;</div><div>&nbsp; &nbsp; <span style="color: #c5e478;">k1</span>-&gt;<span token="property">height</span> <span token="operator">=</span> <span token="func">max</span><span token="func">(</span><span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #c5e478;">k1</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">), </span><span style="color: #d7dbe0;">k2</span><span token="func">-&gt;</span><span token="property">height</span><span token="func">)</span> <span token="property">+</span> <span token="number">1</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #c5e478;">k1</span>;<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> new root</span></div><div>}</div></div>
 
 <p>对指针指向的修改可以参照旋转模型实现。在修改后还要调整节点高度，为子节点最大高度多一层。</p>
 
@@ -591,39 +592,39 @@ D:.
     <li><strong>双旋转</strong></li>
 </ul>
 
-<p>单旋转对“内侧”的插入无效，下面通过实际情况展示了这样失败的原因：</p>
+<p>单旋转对&ldquo;内侧&rdquo;的插入无效，下面通过实际情况展示了这样失败的原因：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-avltree-single-rotate-failure.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/07-avltree-single-rotate-failure.png"/>
 </figure>
 
-<p>“内侧”插入模型可以看作一个天平，不平衡之处发生在中心，因此不能通过调整两端节点达到平衡。</p>
+<p>&ldquo;内侧&rdquo;插入模型可以看作一个天平，不平衡之处发生在中心，因此不能通过调整两端节点达到平衡。</p>
 
 <p>以下模型展示了使用双旋转修复 AVL 树的方法：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-avltree-double-rotate.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/07-avltree-double-rotate.png"/>
 </figure>
 
-<p>插入可能发生在 <span class="math">\\( B \\)</span> 或 <span class="math">\\( C \\)</span> 位置。为了重新平衡，必须让靠“中间”的节点，即 <span class="math">\\( k_2 \\)</span> 作为新的根。</p>
+<p>插入可能发生在 <span class="math">\\( B \\)</span> 或 <span class="math">\\( C \\)</span> 位置。为了重新平衡，必须让靠&ldquo;中间&rdquo;的节点，即 <span class="math">\\( k_2 \\)</span> 作为新的根。</p>
 
 <p>双旋转操作下，不管插入的位置发生在 <span class="math">\\( B \\)</span> 还是 <span class="math">\\( C \\)</span> ，旋转之后树总是平衡的。</p>
 
 <p>双旋转操作可以以一种简洁的形式完成。下图展示的树由于插入了节点 3 ，而使 10 的两个子节点高度差 2 变得不平衡。但如果对 10 的左节点做一次右单旋转：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-avltree-double-rotate-example-1.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/07-avltree-double-rotate-example-1.png"/>
 </figure>
 
-<p>尽管还是没有平衡，但是这次的不平衡好像插入变到了“外侧”去了，那么只需要再对 10 做一次单旋转即可维持平衡：</p>
+<p>尽管还是没有平衡，但是这次的不平衡好像插入变到了&ldquo;外侧&rdquo;去了，那么只需要再对 10 做一次单旋转即可维持平衡：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-avltree-double-rotate-example-2.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/07-avltree-double-rotate-example-2.png"/>
 </figure>
 
 <p>因此，代码可以以一种很简单的形式实现：</p>
 
-<div class="vscode-block"><div><span token="keyword">static</span> <span token="type">avltree_node</span><span token="property">*</span> <span token="func">AvlTree_LeftDoubleRotate</span>(<span token="type">avltree_node</span><span token="property">*</span> <span style="color: #d7dbe0;">k3</span>) {</div><div>&#160; &#160; <span style="color: #d7dbe0;">k3</span>-&gt;<span token="property">left</span> <span token="operator">=</span> <span token="func">AvlTree_RightSingleRotate(</span><span style="color: #d7dbe0;">k3</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">)</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="func">AvlTree_LeftSingleRotate</span><span token="func">(</span><span style="color: #d7dbe0;">k3</span><span token="func">)</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="keyword">static</span> <span token="type">avltree_node</span><span token="property">*</span> <span token="func">AvlTree_LeftDoubleRotate</span>(<span token="type">avltree_node</span><span token="property">*</span> <span style="color: #d7dbe0;">k3</span>) {</div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">k3</span>-&gt;<span token="property">left</span> <span token="operator">=</span> <span token="func">AvlTree_RightSingleRotate(</span><span style="color: #d7dbe0;">k3</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">)</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="func">AvlTree_LeftSingleRotate</span><span token="func">(</span><span style="color: #d7dbe0;">k3</span><span token="func">)</span>;</div><div>}</div></div>
 
 <p>所有的旋转都只需要调整几个指针和高度，都是常数级的。</p>
 
@@ -631,7 +632,7 @@ D:.
 
 <p>下面展示了插入的代码实现：</p>
 
-<div class="vscode-block"><div><span token="type">avltree</span> <span token="func">AvlTree_Insert</span>(<span token="type">avltree</span> <span style="color: #d7dbe0;">tree</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">elem</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">==</span> <span token="func">NULL</span>) {<span style="color: #637777;"> &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> create and return a one-node tree</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span token="func">malloc(</span><span token="property">sizeof</span><span token="func">(</span><span style="color: #82aaff;text-decoration: underline;">avltree_node</span><span token="func">))</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">==</span> <span token="func">NULL</span>)<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of memory</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="func">NULL</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span> <span token="operator">=</span> <span style="color: #d7dbe0;">elem</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">height</span> <span token="operator">=</span> <span token="number">0</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span> <span token="operator">=</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span> <span token="operator">=</span> <span token="func">NULL</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">elem</span> <span token="operator">&lt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span>) {</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span> <span token="operator">=</span> <span token="func">AvlTree_Insert</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">, </span><span style="color: #d7dbe0;">elem</span><span token="func">)</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">)</span> <span token="property">-</span> <span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">)</span> <span token="operator">==</span> <span token="number">2</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">elem</span> <span token="operator">&lt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span>-&gt;<span token="property">elem</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span token="func">AvlTree_LeftSingleRotate</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">)</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">else</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span token="func">AvlTree_LeftDoubleRotate</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">)</span>;</div><div>&#160; &#160; } &#160; &#160;</div><div>&#160; &#160; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">elem</span> <span token="operator">&gt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span>) {</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span> <span token="operator">=</span> <span token="func">AvlTree_Insert</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">, </span><span style="color: #d7dbe0;">elem</span><span token="func">)</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">)</span> <span token="property">-</span> <span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">)</span> <span token="operator">==</span> <span token="number">2</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">elem</span> <span token="operator">&gt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span>-&gt;<span token="property">elem</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span token="func">AvlTree_RightSingleRotate(</span><span style="color: #d7dbe0;">tree</span><span token="func">)</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">else</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span token="func">AvlTree_RightDoubleRotate</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">)</span>;</div><div>&#160; &#160; }</div><div><span style="color: #a8a8a8;">&#160; &#160; /* elem is in the tree already */</span></div><div>&#160; &#160; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">height</span> <span token="operator">=</span> <span token="func">max</span><span token="func">(</span><span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">), </span><span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">))</span> <span token="property">+</span> <span token="number">1</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">tree</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">avltree</span> <span token="func">AvlTree_Insert</span>(<span token="type">avltree</span> <span style="color: #d7dbe0;">tree</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">elem</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">==</span> <span token="func">NULL</span>) {<span style="color: #637777;"> &nbsp; &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> create and return a one-node tree</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span token="func">malloc(</span><span token="property">sizeof</span><span token="func">(</span><span style="color: #82aaff;text-decoration: underline;">avltree_node</span><span token="func">))</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span token="operator">==</span> <span token="func">NULL</span>)<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of memory</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="func">NULL</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span> <span token="operator">=</span> <span style="color: #d7dbe0;">elem</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">height</span> <span token="operator">=</span> <span token="number">0</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span> <span token="operator">=</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span> <span token="operator">=</span> <span token="func">NULL</span>;</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">elem</span> <span token="operator">&lt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span> <span token="operator">=</span> <span token="func">AvlTree_Insert</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">, </span><span style="color: #d7dbe0;">elem</span><span token="func">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">)</span> <span token="property">-</span> <span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">)</span> <span token="operator">==</span> <span token="number">2</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">elem</span> <span token="operator">&lt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">left</span>-&gt;<span token="property">elem</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span token="func">AvlTree_LeftSingleRotate</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">else</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span token="func">AvlTree_LeftDoubleRotate</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">)</span>;</div><div>&nbsp; &nbsp; } &nbsp; &nbsp;</div><div>&nbsp; &nbsp; <span token="keyword">else</span> <span token="keyword">if</span> (<span style="color: #d7dbe0;">elem</span> <span token="operator">&gt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">elem</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span> <span token="operator">=</span> <span token="func">AvlTree_Insert</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">, </span><span style="color: #d7dbe0;">elem</span><span token="func">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">)</span> <span token="property">-</span> <span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">)</span> <span token="operator">==</span> <span token="number">2</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">elem</span> <span token="operator">&gt;</span> <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">right</span>-&gt;<span token="property">elem</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span token="func">AvlTree_RightSingleRotate(</span><span style="color: #d7dbe0;">tree</span><span token="func">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">else</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">tree</span> <span token="operator">=</span> <span token="func">AvlTree_RightDoubleRotate</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">)</span>;</div><div>&nbsp; &nbsp; }</div><div><span style="color: #a8a8a8;">&nbsp; &nbsp; /* elem is in the tree already */</span></div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">tree</span>-&gt;<span token="property">height</span> <span token="operator">=</span> <span token="func">max</span><span token="func">(</span><span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">left</span><span token="func">), </span><span token="func">AvlTree_Height</span><span token="func">(</span><span style="color: #d7dbe0;">tree</span><span token="func">-&gt;</span><span token="property">right</span><span token="func">))</span> <span token="property">+</span> <span token="number">1</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #d7dbe0;">tree</span>;</div><div>}</div></div>
 
 <p>以上使用递归实现，代码是在二叉查找树的基础上扩充实现的，主要增加了高度的计算和旋转的操作，旋转发生的条件可以参考模型。</p>
 
@@ -643,12 +644,12 @@ D:.
 
 <p>下面给出了一种至少能看的打印操作：</p>
 
-<div class="vscode-block"><div><span token="keyword">static</span> <span token="keyword">void</span> <span style="color: #82aaff;">AvlTree_PrintNode</span>(<span token="type">avltree_node</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">node</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">depth</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">node</span> <span style="color: #c792ea;">&amp;&amp;</span> <span style="color: #d7dbe0;">node</span>-&gt;<span style="color: #7fdbca;">height</span> <span style="color: #c792ea;">&gt;</span> <span token="number">0</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span style="color: #c5e478;">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span style="color: #c5e478;">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">depth</span>; <span style="color: #c5e478;">i</span><span style="color: #c792ea;">++</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #82aaff;">printf(</span><span style="color: #d9f5dd;">"</span><span style="color: #ecc48d;">—</span><span style="color: #d9f5dd;">"</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">printf(</span><span style="color: #d9f5dd;">"</span> <span style="color: #82aaff;">%d</span><span token="number">\n</span><span style="color: #d9f5dd;">"</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">node</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">elem</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; }</div><div>}</div><div><span token="keyword">void</span> <span style="color: #82aaff;">AvlTree_Print</span>(<span token="type">avltree</span> <span style="color: #d7dbe0;">tree</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">depth</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span>) {</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">AvlTree_Print</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">tree</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">left</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">depth</span><span style="color: #82aaff;"> </span><span style="color: #7fdbca;">+</span><span style="color: #82aaff;"> </span><span token="number">1</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">AvlTree_PrintNode</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">tree</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">depth</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">AvlTree_Print</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">tree</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">right</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">depth</span><span style="color: #82aaff;"> </span><span style="color: #7fdbca;">+</span><span style="color: #82aaff;"> </span><span token="number">1</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; }</div><div>}</div><div><span style="color: #c792ea;">#</span><span token="keyword">define</span> <span style="color: #82aaff;">avltree_print</span><span style="color: #d9f5dd;">(</span><span style="color: #d7dbe0;">avl</span><span style="color: #d9f5dd;">)</span> <span style="color: #82aaff;">AvlTree_Print</span>(avl, <span token="number">0</span>)</div></div>
+<div class="vscode-block"><div><span token="keyword">static</span> <span token="keyword">void</span> <span style="color: #82aaff;">AvlTree_PrintNode</span>(<span token="type">avltree_node</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">node</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">depth</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">node</span> <span style="color: #c792ea;">&amp;&amp;</span> <span style="color: #d7dbe0;">node</span>-&gt;<span style="color: #7fdbca;">height</span> <span style="color: #c792ea;">&gt;</span> <span token="number">0</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span style="color: #c5e478;">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span style="color: #c5e478;">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">depth</span>; <span style="color: #c5e478;">i</span><span style="color: #c792ea;">++</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">printf(</span><span style="color: #d9f5dd;">"</span><span style="color: #ecc48d;">&mdash;</span><span style="color: #d9f5dd;">"</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">printf(</span><span style="color: #d9f5dd;">"</span> <span style="color: #82aaff;">%d</span><span token="number">\n</span><span style="color: #d9f5dd;">"</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">node</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">elem</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; }</div><div>}</div><div><span token="keyword">void</span> <span style="color: #82aaff;">AvlTree_Print</span>(<span token="type">avltree</span> <span style="color: #d7dbe0;">tree</span>, <span token="keyword">int</span> <span style="color: #d7dbe0;">depth</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">AvlTree_Print</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">tree</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">left</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">depth</span><span style="color: #82aaff;"> </span><span style="color: #7fdbca;">+</span><span style="color: #82aaff;"> </span><span token="number">1</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">AvlTree_PrintNode</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">tree</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">depth</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">AvlTree_Print</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">tree</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">right</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">depth</span><span style="color: #82aaff;"> </span><span style="color: #7fdbca;">+</span><span style="color: #82aaff;"> </span><span token="number">1</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; }</div><div>}</div><div><span style="color: #c792ea;">#</span><span token="keyword">define</span> <span style="color: #82aaff;">avltree_print</span><span style="color: #d9f5dd;">(</span><span style="color: #d7dbe0;">avl</span><span style="color: #d9f5dd;">)</span> <span style="color: #82aaff;">AvlTree_Print</span>(avl, <span token="number">0</span>)</div></div>
 
 <p>将相邻层顶点之间用线连接，即可看到一棵抽象的二叉查找树：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/07-avltree-print.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/07-avltree-print.png"/>
 </figure>
 
 <p>打印结果从上到下是有序的，说明二叉查找树也是有序的，因此可以换来大量数据时很快的查找效率。并且不管节点间深度有什么关系，值小的节点一定排在值大的节点的左边（图中表示为上面），因此对二叉查找树的修改一定也要维持这种规律。</p>
@@ -657,7 +658,7 @@ D:.
 
 <p>第三种常用的遍历方式是<strong>先序遍历</strong>(preorder traversal)，当前节点在子节点前优先处理，可以用来利用节点深度标志标志每一个节点：</p>
 
-<div class="vscode-block"><div><span token="keyword">int</span> <span style="color: #82aaff;">AvlTree_Height</span>(<span token="type">avltree</span> <span style="color: #d7dbe0;">tree</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #7fdbca;">-</span><span token="number">1</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="number">1</span> <span style="color: #7fdbca;">+</span> <span style="color: #82aaff;">max</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;">AvlTree_Height</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">tree</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">left</span><span style="color: #82aaff;">), </span><span style="color: #82aaff;">AvlTree_Height</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">tree</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">right</span><span style="color: #82aaff;">))</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="keyword">int</span> <span style="color: #82aaff;">AvlTree_Height</span>(<span token="type">avltree</span> <span style="color: #d7dbe0;">tree</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">tree</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #7fdbca;">-</span><span token="number">1</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="number">1</span> <span style="color: #7fdbca;">+</span> <span style="color: #82aaff;">max</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;">AvlTree_Height</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">tree</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">left</span><span style="color: #82aaff;">), </span><span style="color: #82aaff;">AvlTree_Height</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">tree</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">right</span><span style="color: #82aaff;">))</span>;</div><div>}</div></div>
 
 <p>总的来说，二叉查找树是一种比较经典的数据结构，它提出了一种较为高效的查找解决方案。二叉查找树并不是唯一的查找树，还有许多类似的、甚至更高效的查找树实现。不过对树的介绍暂时告一段落，接下来研究散列表，它实现了一种更快速的、常数级的查找，不过其限制也更大。</p>
 
@@ -686,14 +687,14 @@ D:.
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/programming/python/library-time/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/03/Python3标准库time-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/03/Python3标准库time-520x293.jpg 520w, /wp-content/uploads/2022/03/Python3标准库time-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/programming/python-oop/03-inheritances/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/Python面向对象编程03-类的继承-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/07/Python面向对象编程03-类的继承-520x293.jpg 520w, /wp-content/uploads/2022/07/Python面向对象编程03-类的继承-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/programming/python/library-time/" rel="bookmark">Python标准库time：处理时间</a>
+					<a href="/programming/python-oop/03-inheritances/" rel="bookmark">Python面向对象编程03-类的继承</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -704,14 +705,14 @@ D:.
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/embedded/mcu-application/lvgl-03-layouts/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-520x293.jpg 520w, /wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-300x169.jpg 300w, /wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-1024x576.jpg 1024w, /wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-768x432.jpg 768w, /wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-1536x864.jpg 1536w, /wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-950x534.jpg 950w, /wp-content/uploads/2022/06/LVGL库入门教程03-布局方式.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/web/web-scraping/xpath-tutorial/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/11/XPath简单入门-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/11/XPath简单入门-520x293.jpg 520w, /wp-content/uploads/2022/11/XPath简单入门-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/embedded/mcu-application/lvgl-03-layouts/" rel="bookmark">LVGL库入门教程03-布局方式</a>
+					<a href="/web/web-scraping/xpath-tutorial/" rel="bookmark">XPath简单入门</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -722,14 +723,14 @@ D:.
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/programming/python-fp/03-functional-programming/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/data-science/via-python/pandas03-the-index/">
+											<img width="520" height="293" src="/wp-content/uploads/2023/03/Python数据分析-pandas03索引-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2023/03/Python数据分析-pandas03索引-520x293.jpg 520w, /wp-content/uploads/2023/03/Python数据分析-pandas03索引-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/programming/python-fp/03-functional-programming/" rel="bookmark">Python函数式编程03 高阶函数与匿名函数</a>
+					<a href="/data-science/via-python/pandas03-the-index/" rel="bookmark">pandas03:深入认识索引</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -766,6 +767,14 @@ D:.
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
 											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
 					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
 											<span class="post-date">2023年6月19日</span>
 									</li>
@@ -785,14 +794,6 @@ D:.
 					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
 											<span class="post-date">2023年3月6日</span>
 									</li>
-											<li>
-					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
-											<span class="post-date">2023年2月27日</span>
-									</li>
-											<li>
-					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
-											<span class="post-date">2023年2月8日</span>
-									</li>
 					</ul>
 
 		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
@@ -805,9 +806,11 @@ D:.
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (1)
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
 <ul class='children'>
 	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
 </li>
 </ul>
 </li>
@@ -829,7 +832,7 @@ D:.
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (20)
 <ul class='children'>
 	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
 </li>
@@ -855,7 +858,9 @@ D:.
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(1)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
 	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
 	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
 	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
@@ -920,7 +925,7 @@ D:.
 					
 										
 					<div id="copyright">
-													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
 											</div><!--/#copyright-->
 					
 										

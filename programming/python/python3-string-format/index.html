@@ -12,21 +12,23 @@
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 
-	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
 	<title>Python3 字符串格式化 - 冰封残烛的个人小站</title>
+	<meta name="description" content="所谓格式化(formatting)，是指将现有的数据组成得到一个完整的字符串。Python2通常使用百分号的方式来对字符串进行格式化操作，而 Python3 新增了字符串的 .format() 方法和 f-string ，可以更高效、简洁地完成字符串格式化。" />
 	<link rel="canonical" href="/programming/python/python3-string-format/" />
 	<meta property="og:locale" content="zh_CN" />
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content="Python3 字符串格式化 - 冰封残烛的个人小站" />
-	<meta property="og:description" content="所谓格式化，指将现有的数据组成得到一个完整的字符串用&#046;&#046;&#046;" />
+	<meta property="og:description" content="所谓格式化(formatting)，是指将现有的数据组成得到一个完整的字符串。Python2通常使用百分号的方式来对字符串进行格式化操作，而 Python3 新增了字符串的 .format() 方法和 f-string ，可以更高效、简洁地完成字符串格式化。" />
 	<meta property="og:url" content="/programming/python/python3-string-format/" />
 	<meta property="og:site_name" content="冰封残烛的个人小站" />
 	<meta property="article:published_time" content="2022-02-22T16:13:21+00:00" />
-	<meta property="article:modified_time" content="2023-10-05T11:51:17+00:00" />
+	<meta property="article:modified_time" content="2023-10-13T05:50:22+00:00" />
 	<meta property="og:image" content="/wp-content/uploads/2022/02/Night-Street.jpg" />
 	<meta property="og:image:width" content="1920" />
 	<meta property="og:image:height" content="1080" />
 	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="作者" />
 	<meta name="twitter:data1" content="Hello" />
@@ -36,35 +38,8 @@
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
-	            "@type": "WebSite",
-	            "@id": "/#website",
-	            "url": "/",
-	            "name": "冰封残烛的个人小站",
-	            "description": "FrozenCandle&#039;s Personal Site",
-	            "potentialAction": [
-	                {
-	                    "@type": "SearchAction",
-	                    "target": {
-	                        "@type": "EntryPoint",
-	                        "urlTemplate": "/?s={search_term_string}"
-	                    },
-	                    "query-input": "required name=search_term_string"
-	                }
-	            ],
-	            "inLanguage": "zh-CN"
-	        },
-	        {
-	            "@type": "ImageObject",
-	            "inLanguage": "zh-CN",
-	            "@id": "/programming/python/python3-string-format/#primaryimage",
-	            "url": "/wp-content/uploads/2022/02/Night-Street.jpg",
-	            "contentUrl": "/wp-content/uploads/2022/02/Night-Street.jpg",
-	            "width": 1920,
-	            "height": 1080
-	        },
-	        {
 	            "@type": "WebPage",
-	            "@id": "/programming/python/python3-string-format/#webpage",
+	            "@id": "/programming/python/python3-string-format/",
 	            "url": "/programming/python/python3-string-format/",
 	            "name": "Python3 字符串格式化 - 冰封残烛的个人小站",
 	            "isPartOf": {
@@ -73,11 +48,16 @@
 	            "primaryImageOfPage": {
 	                "@id": "/programming/python/python3-string-format/#primaryimage"
 	            },
+	            "image": {
+	                "@id": "/programming/python/python3-string-format/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2022/02/Night-Street.jpg",
 	            "datePublished": "2022-02-22T16:13:21+00:00",
-	            "dateModified": "2023-10-05T11:51:17+00:00",
+	            "dateModified": "2023-10-13T05:50:22+00:00",
 	            "author": {
 	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
 	            },
+	            "description": "所谓格式化(formatting)，是指将现有的数据组成得到一个完整的字符串。Python2通常使用百分号的方式来对字符串进行格式化操作，而 Python3 新增了字符串的 .format() 方法和 f-string ，可以更高效、简洁地完成字符串格式化。",
 	            "breadcrumb": {
 	                "@id": "/programming/python/python3-string-format/#breadcrumb"
 	            },
@@ -90,6 +70,15 @@
 	                    ]
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/programming/python/python3-string-format/#primaryimage",
+	            "url": "/wp-content/uploads/2022/02/Night-Street.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/02/Night-Street.jpg",
+	            "width": 1920,
+	            "height": 1080
 	        },
 	        {
 	            "@type": "BreadcrumbList",
@@ -107,6 +96,24 @@
 	                    "name": "Python3 字符串格式化"
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
 	        },
 	        {
 	            "@type": "Person",
@@ -156,7 +163,6 @@ body { font-family: "Roboto", Arial, sans-serif; }
 <link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
-<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
 <script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
 <link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/119" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
 <meta name="generator" content="WordPress 6.3.1" />
@@ -285,8 +291,6 @@ var _hmt = _hmt || [];
 				<div class="entry-content">
 					<div class="entry themeform">	
 						
-
-
 <p>所谓<strong>格式化</strong>，指将现有的数据组成得到一个完整的字符串用于输出、传参等的方式。Python2中，通常使用百分号的方式来对字符串进行格式化操作。例如：</p>
 
 <div class="vscode-block"><div>&gt;&gt;&gt; '<span style="color: #56bf8b;">I am </span><span style="color: #bf8b56;">%s</span><span style="color: #56bf8b;">, </span><span style="color: #bf8b56;">%d</span><span style="color: #56bf8b;"> years old.</span>' % ('<span style="color: #56bf8b;">Jack</span>', <span style="color: #bf8b56;">17</span>)</div><div>'<span style="color: #56bf8b;">I am Jack, 17 years old.</span>'</div></div>
@@ -507,7 +511,6 @@ The end of the line is at (10, 20, 6.15)
 <p><a href="https://www.python.org/dev/peps/pep-3101/">https://www.python.org/dev/peps/pep-3101/</a></p>
 
 <p>一篇非常优质的关于Python3字符串格式化的讨论</p>
-
 												<div class="clear"></div>				
 					</div><!--/.entry-->
 				</div>
@@ -529,14 +532,14 @@ The end of the line is at (10, 20, 6.15)
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/programming/python/library-re/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/03/Python3标准库re-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/03/Python3标准库re-520x293.jpg 520w, /wp-content/uploads/2022/03/Python3标准库re-300x169.jpg 300w, /wp-content/uploads/2022/03/Python3标准库re-1024x576.jpg 1024w, /wp-content/uploads/2022/03/Python3标准库re-768x432.jpg 768w, /wp-content/uploads/2022/03/Python3标准库re-1536x864.jpg 1536w, /wp-content/uploads/2022/03/Python3标准库re-950x534.jpg 950w, /wp-content/uploads/2022/03/Python3标准库re.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/computer-science/data-structure/03-stack-and-queue/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/08/数据结构03-栈和队列-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/08/数据结构03-栈和队列-520x293.jpg 520w, /wp-content/uploads/2022/08/数据结构03-栈和队列-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/programming/python/library-re/" rel="bookmark">Python标准库re：使用正则表达式</a>
+					<a href="/computer-science/data-structure/03-stack-and-queue/" rel="bookmark">数据结构03-栈和队列</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -547,14 +550,14 @@ The end of the line is at (10, 20, 6.15)
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/computer-science/data-structure/05-hash/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/08/数据结构05-散列-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/08/数据结构05-散列-520x293.jpg 520w, /wp-content/uploads/2022/08/数据结构05-散列-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/data-science/via-python/pandas03-the-index/">
+											<img width="520" height="293" src="/wp-content/uploads/2023/03/Python数据分析-pandas03索引-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2023/03/Python数据分析-pandas03索引-520x293.jpg 520w, /wp-content/uploads/2023/03/Python数据分析-pandas03索引-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/computer-science/data-structure/05-hash/" rel="bookmark">数据结构05-散列</a>
+					<a href="/data-science/via-python/pandas03-the-index/" rel="bookmark">pandas03:深入认识索引</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -565,14 +568,14 @@ The end of the line is at (10, 20, 6.15)
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/embedded/mcu-application/stm32-u8g2-library/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/06/U8g2图形库与STM32移植-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/U8g2图形库与STM32移植-520x293.jpg 520w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植-300x169.jpg 300w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植-1024x576.jpg 1024w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植-768x432.jpg 768w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植-1536x864.jpg 1536w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植-950x534.jpg 950w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/embedded/esp32/01-setting-up-development/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-520x293.jpg 520w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-300x169.jpg 300w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-1024x576.jpg 1024w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-768x432.jpg 768w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-1536x864.jpg 1536w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-950x534.jpg 950w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/embedded/mcu-application/stm32-u8g2-library/" rel="bookmark">U8g2图形库与STM32移植</a>
+					<a href="/embedded/esp32/01-setting-up-development/" rel="bookmark">ESP32与MicroPython入门-01 搭建开发环境</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -609,6 +612,14 @@ The end of the line is at (10, 20, 6.15)
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
 											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
 					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
 											<span class="post-date">2023年6月19日</span>
 									</li>
@@ -628,14 +639,6 @@ The end of the line is at (10, 20, 6.15)
 					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
 											<span class="post-date">2023年3月6日</span>
 									</li>
-											<li>
-					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
-											<span class="post-date">2023年2月27日</span>
-									</li>
-											<li>
-					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
-											<span class="post-date">2023年2月8日</span>
-									</li>
 					</ul>
 
 		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
@@ -648,9 +651,11 @@ The end of the line is at (10, 20, 6.15)
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (1)
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
 <ul class='children'>
 	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
 </li>
 </ul>
 </li>
@@ -672,7 +677,7 @@ The end of the line is at (10, 20, 6.15)
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (20)
 <ul class='children'>
 	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
 </li>
@@ -698,7 +703,9 @@ The end of the line is at (10, 20, 6.15)
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(1)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
 	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
 	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
 	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
@@ -763,7 +770,7 @@ The end of the line is at (10, 20, 6.15)
 					
 										
 					<div id="copyright">
-													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
 											</div><!--/#copyright-->
 					
 										

@@ -12,7 +12,7 @@
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 
-	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
 	<title>机器学习-逻辑回归 - 冰封残烛的个人小站</title>
 	<meta name="description" content="逻辑回归(logistic regression)是处理二分类问题的基本算法，它使用 sigmoid 函数描述样本的分类概率。代价函数用于衡量模型的误差程度，一般使用梯度下降法计算逻辑回归代价函数的最小值，以此选择最好的拟合参数。" />
 	<link rel="canonical" href="/data-science/machine-learning/02-logistic-regression/" />
@@ -23,11 +23,12 @@
 	<meta property="og:url" content="/data-science/machine-learning/02-logistic-regression/" />
 	<meta property="og:site_name" content="冰封残烛的个人小站" />
 	<meta property="article:published_time" content="2022-12-23T02:51:10+00:00" />
-	<meta property="article:modified_time" content="2023-10-06T11:47:19+00:00" />
+	<meta property="article:modified_time" content="2023-10-13T03:47:02+00:00" />
 	<meta property="og:image" content="/wp-content/uploads/2022/12/机器学习-逻辑回归.png" />
 	<meta property="og:image:width" content="1528" />
 	<meta property="og:image:height" content="1080" />
 	<meta property="og:image:type" content="image/png" />
+	<meta name="author" content="Hello" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="作者" />
 	<meta name="twitter:data1" content="Hello" />
@@ -37,35 +38,8 @@
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
-	            "@type": "WebSite",
-	            "@id": "/#website",
-	            "url": "/",
-	            "name": "冰封残烛的个人小站",
-	            "description": "FrozenCandle&#039;s Personal Site",
-	            "potentialAction": [
-	                {
-	                    "@type": "SearchAction",
-	                    "target": {
-	                        "@type": "EntryPoint",
-	                        "urlTemplate": "/?s={search_term_string}"
-	                    },
-	                    "query-input": "required name=search_term_string"
-	                }
-	            ],
-	            "inLanguage": "zh-CN"
-	        },
-	        {
-	            "@type": "ImageObject",
-	            "inLanguage": "zh-CN",
-	            "@id": "/data-science/machine-learning/02-logistic-regression/#primaryimage",
-	            "url": "/wp-content/uploads/2022/12/机器学习-逻辑回归.png",
-	            "contentUrl": "/wp-content/uploads/2022/12/机器学习-逻辑回归.png",
-	            "width": 1528,
-	            "height": 1080
-	        },
-	        {
 	            "@type": "WebPage",
-	            "@id": "/data-science/machine-learning/02-logistic-regression/#webpage",
+	            "@id": "/data-science/machine-learning/02-logistic-regression/",
 	            "url": "/data-science/machine-learning/02-logistic-regression/",
 	            "name": "机器学习-逻辑回归 - 冰封残烛的个人小站",
 	            "isPartOf": {
@@ -74,8 +48,12 @@
 	            "primaryImageOfPage": {
 	                "@id": "/data-science/machine-learning/02-logistic-regression/#primaryimage"
 	            },
+	            "image": {
+	                "@id": "/data-science/machine-learning/02-logistic-regression/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2022/12/机器学习-逻辑回归.png",
 	            "datePublished": "2022-12-23T02:51:10+00:00",
-	            "dateModified": "2023-10-06T11:47:19+00:00",
+	            "dateModified": "2023-10-13T03:47:02+00:00",
 	            "author": {
 	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
 	            },
@@ -94,6 +72,15 @@
 	            ]
 	        },
 	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/data-science/machine-learning/02-logistic-regression/#primaryimage",
+	            "url": "/wp-content/uploads/2022/12/机器学习-逻辑回归.png",
+	            "contentUrl": "/wp-content/uploads/2022/12/机器学习-逻辑回归.png",
+	            "width": 1528,
+	            "height": 1080
+	        },
+	        {
 	            "@type": "BreadcrumbList",
 	            "@id": "/data-science/machine-learning/02-logistic-regression/#breadcrumb",
 	            "itemListElement": [
@@ -109,6 +96,24 @@
 	                    "name": "机器学习-逻辑回归"
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
 	        },
 	        {
 	            "@type": "Person",
@@ -158,7 +163,6 @@ body { font-family: "Roboto", Arial, sans-serif; }
 <link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
-<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
 <script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
 <link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/966" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
 <meta name="generator" content="WordPress 6.3.1" />
@@ -326,7 +330,7 @@ var _hmt = _hmt || [];
 						
 <h2>分类算法</h2>
 
-<p><a class="link-internal" link="data-science/machine-learning@02-logistic-regression" href="/archives/880">上一节</a>介绍了线性回归，线性回归是一种经典的<em>回归</em>算法，它可以根据一系列自变量来预测因变量的值。</p>
+<p><a class="link-internal" href="/data-science/machine-learning/01-linear-regression">上一节</a>介绍了线性回归，线性回归是一种经典的<em>回归</em>算法，它可以根据一系列自变量来预测因变量的值。</p>
 
 <p><strong>分类</strong>(classification)也是一种常见的需求。分类问题并不要求预测具体的值，而是需要判断样本属于的类别。例如分析一株植物属于哪个物种，或者判断一封邮件是否是垃圾邮件等。分类问题的因变量是离散的，因此无法通过简单的计算阐述结果。</p>
 
@@ -341,27 +345,27 @@ var _hmt = _hmt || [];
 <p>首先先看一个典型的分类场景。假设有如下的一系列数据，横坐标代表样本某个特征的值，纵坐标代表样本的分类，并且是离散的：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-logistic-intro-1.png" alt="" width="260">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/02-logistic-intro-1.png" width="260"/>
 </figure>
 
-<p>在以上示例中，可以很明显看到分类为“ 0 ”的样本特征变量的值都小于 300 ，而分类为“ 1 ”的样本特征变量的都大于 300 。那么就可以用特征变量的值是否大于 300 作为样本分类的依据。</p>
+<p>在以上示例中，可以很明显看到分类为&ldquo; 0 &rdquo;的样本特征变量的值都小于 300 ，而分类为&ldquo; 1 &rdquo;的样本特征变量的都大于 300 。那么就可以用特征变量的值是否大于 300 作为样本分类的依据。</p>
 
 <p>但在稍微复杂一点的场景中，这种简单的逻辑就会失效。例如，考虑以下数据：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-logistic-intro-2.png" alt="" width="260">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/02-logistic-intro-2.png" width="260"/>
 </figure>
 
-<p>在 300 附近，样本可能属于分类“ 0 ”也可能属于分类“ 1 ”。但是数据仍然具有这样的规律：当特征变量的值小于 300 较多时，该样本属于分类“ 0 ”；当特征变量的值大于 300 较多时，它属于分类“ 1 ”；但特征变量的值在 300 附近时，它同时可能属于其中的任何一个分类。</p>
+<p>在 300 附近，样本可能属于分类&ldquo; 0 &rdquo;也可能属于分类&ldquo; 1 &rdquo;。但是数据仍然具有这样的规律：当特征变量的值小于 300 较多时，该样本属于分类&ldquo; 0 &rdquo;；当特征变量的值大于 300 较多时，它属于分类&ldquo; 1 &rdquo;；但特征变量的值在 300 附近时，它同时可能属于其中的任何一个分类。</p>
 
-<p>那么此时就无法直接确定某些范围样本的分类了。相比起死板地直接分为两类（硬分类），可以使用另一种思路解决这个问题：确定样本属于分类的概率（软分类）。显然，远大于 300 的样本属于分类“ 1 ”的概率更大，远小于 300 的样本属于分类“ 0 ”的概率更大，而接近 300 的样本属于两个样本的概率相差不大。</p>
+<p>那么此时就无法直接确定某些范围样本的分类了。相比起死板地直接分为两类（硬分类），可以使用另一种思路解决这个问题：确定样本属于分类的概率（软分类）。显然，远大于 300 的样本属于分类&ldquo; 1 &rdquo;的概率更大，远小于 300 的样本属于分类&ldquo; 0 &rdquo;的概率更大，而接近 300 的样本属于两个样本的概率相差不大。</p>
 
-<p>这就是<strong>逻辑回归</strong>(logistic regression)的基本思路。逻辑回归通过建立一条 <span class="math">\\( y \\)</span> 值分布在 0~1 之间的函数来计算样本的分类概率：<span class="math">\\( y \\)</span> 值表示样本属于分类“ 1 ”的概率，那么 <span class="math">\\( 1-y \\)</span> 就表示样本属于分类“ 0 ”的概率，从而将分类问题转换为回归问题。最终样本的分类也容易确定：如果 <span class="math">\\( y > 0.5 \\)</span> ，那么说明样本更可能属于分类“ 1 ”，反之说明样本更可能属于分类“ 0 ”。</p>
+<p>这就是<strong>逻辑回归</strong>(logistic regression)的基本思路。逻辑回归通过建立一条 <span class="math">\\( y \\)</span> 值分布在 0~1 之间的函数来计算样本的分类概率：<span class="math">\\( y \\)</span> 值表示样本属于分类&ldquo; 1 &rdquo;的概率，那么 <span class="math">\\( 1-y \\)</span> 就表示样本属于分类&ldquo; 0 &rdquo;的概率，从而将分类问题转换为回归问题。最终样本的分类也容易确定：如果 <span class="math">\\( y &gt; 0.5 \\)</span> ，那么说明样本更可能属于分类&ldquo; 1 &rdquo;，反之说明样本更可能属于分类&ldquo; 0 &rdquo;。</p>
 
 <p>可以使用线性回归拟合一条范围在 0~1 内的直线作为概率函数，类似这样：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-logistic-intro-3.png" alt="" width="260">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/02-logistic-intro-3.png" width="260"/>
 </figure>
 
 <p>但是直线比较僵硬，不但不能表示在分界区域概率密度的变化过程，还要在两端将其约束到 0~1 的范围内。一般来说，逻辑回归最常用的概率函数为 sigmoid 函数，这个函数的表达式为：</p>
@@ -373,13 +377,13 @@ var _hmt = _hmt || [];
 </div>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-sigmoid-function.png" alt="" width="380">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/02-sigmoid-function.png" width="380"/>
 </figure>
 
 <p>该函数的特点是当 <span class="math">\\( y \\)</span> 离 0 较远时，<span class="math">\\( f(y) \\)</span> 值十分趋近 0 或 1 ；而当 <span class="math">\\( y \\)</span> 接近 0 时，函数由 0 到 1 有一个较为平缓的过渡。并且该函数是中心对称的，因此比较贴近真实情况下的概率分布。</p>
 
 <blockquote>
-    <p>逻辑回归使用 sigmoid 函数是经过严格推导后得到的结果，这个 <a href="https://www.quora.com/Logistic-Regression-Why-sigmoid-function/answer/Roi-Yehoshua?target_type=answer">Quora 上的回答</a>从概率分布的角度解释了为什么。</p>
+    <p>逻辑回归使用 sigmoid 函数是经过严格推导后得到的结果，这个 <a class="link-external" href="https://www.quora.com/Logistic-Regression-Why-sigmoid-function/answer/Roi-Yehoshua?target_type=answer">Quora 上的回答</a>从概率分布的角度解释了为什么。</p>
 </blockquote>
 
 <h3>决策边界</h3>
@@ -399,36 +403,36 @@ var _hmt = _hmt || [];
 <div class="math">
 \\[
 \begin{align}
-    h_\theta(y) &= \frac{1}{1 + {\large e}^{\displaystyle{-(\theta_n x^n + \theta_{n-1} x^{n-1} + \cdots + \theta_1 x + \theta_0)}}}\\
-                &= \frac{1}{1 + {\large e}^{\displaystyle{-\boldsymbol{\theta}^T \boldsymbol{x}}}}
+    h_\theta(y) &amp;= \frac{1}{1 + {\large e}^{\displaystyle{-(\theta_n x^n + \theta_{n-1} x^{n-1} + \cdots + \theta_1 x + \theta_0)}}}\\
+                &amp;= \frac{1}{1 + {\large e}^{\displaystyle{-\boldsymbol{\theta}^T \boldsymbol{x}}}}
 \end{align}
 \\]
 </div>
 
-<p>此时 <span class="math">\\( \boldsymbol{\theta}^T \boldsymbol{x} = 0 \\)</span> 就是实际情况的一个决策边界：当 <span class="math">\\( \boldsymbol{\theta}^T \boldsymbol{x} > 0 \\)</span> 时，可以预测样本属于类别“ 1 ”；当 <span class="math">\\( \boldsymbol{\theta}^T \boldsymbol{x} < 0 \\)</span> 时，则可以预测样本属于类别“ 0 ”。</p>
+<p>此时 <span class="math">\\( \boldsymbol{\theta}^T \boldsymbol{x} = 0 \\)</span> 就是实际情况的一个决策边界：当 <span class="math">\\( \boldsymbol{\theta}^T \boldsymbol{x} &gt; 0 \\)</span> 时，可以预测样本属于类别&ldquo; 1 &rdquo;；当 <span class="math">\\( \boldsymbol{\theta}^T \boldsymbol{x} &lt; 0 \\)</span> 时，则可以预测样本属于类别&ldquo; 0 &rdquo;。</p>
 
 <p>通过取用合适的参数 <span class="math">\\( \boldsymbol{\theta} \\)</span> ，可以得到不同的决策边界，从而适应不同的实际情况。例如，对于以下具有两个特征的数据集：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-decision-boundary-intro-1.png" alt="" width="260">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/02-decision-boundary-intro-1.png" width="260"/>
 </figure>
 
 <p>可以看出，在这个二维平面上可以作出这样一条直线 <span class="math">\\( \theta_2x_2+\theta_1x_1+\theta_0=0 \\)</span> ，将两种类别的样本分隔在直线两侧，就像这样：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-decision-boundary-intro-2.png" alt="" width="260">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/02-decision-boundary-intro-2.png" width="260"/>
 </figure>
 
 <p>但有时候边界可能比较复杂，并不能用直线描述，例如：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-decision-boundary-intro-3.png" alt="" width="260">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/02-decision-boundary-intro-3.png" width="260"/>
 </figure>
 
 <p>那么这个时候，可以像在线性回归中处理非线性数据一样，通过引入非线性特征项，在平面上使用曲线例如二次多项式曲线 <span class="math">\\( \theta_2x_2+\theta_{12}x_1^2+\theta_{11}x_1+\theta_0=0 \\)</span> 作为决策边界，将两种类别的样本分隔在曲线两侧，就像这样：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-decision-boundary-intro-4.png" alt="" width="260">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/02-decision-boundary-intro-4.png" width="260"/>
 </figure>
 
 <p>这也就说明了线性回归和逻辑回归之间的联系：线性回归主要是拟合实际的数据，而逻辑回归主要是拟合实际的决策边界。逻辑回归模型可以通过设计复杂的曲线，来表达复杂的决策边界，从而适应各种复杂的模型。</p>
@@ -450,16 +454,16 @@ var _hmt = _hmt || [];
 <div class="math">
 \\[
     \mathrm{cost}(h_\theta (\boldsymbol{x}), y) = \begin{cases}
-        -\log(h_\theta (\boldsymbol{x})) & \text{if} \quad y = 1 \\
-        -\log(1 - h_\theta (\boldsymbol{x})) & \text{if} \quad y = 0
+        -\log(h_\theta (\boldsymbol{x})) &amp; \text{if} \quad y = 1 \\
+        -\log(1 - h_\theta (\boldsymbol{x})) &amp; \text{if} \quad y = 0
     \end{cases}
 \\]
 </div>
 
-<p>逻辑回归计算的概率是相对类型“ 1 ”而言的，因此对于类型“ 0 ”的概率要用 1 减去该值。取对数的原因是为了让概率接近 1（与实际分类结果接近）时，误差将变得很小；而概率接近 0（完全分错类了）时，误差将变得非常大，从而防止为了让边界上的一些样本取得更大的概率错误地挪动边界，而将某个样本置于明显错误的位置的情况。最后考虑到误差越小，代价函数也应该越小，再给对数结果取相反值。</p>
+<p>逻辑回归计算的概率是相对类型&ldquo; 1 &rdquo;而言的，因此对于类型&ldquo; 0 &rdquo;的概率要用 1 减去该值。取对数的原因是为了让概率接近 1（与实际分类结果接近）时，误差将变得很小；而概率接近 0（完全分错类了）时，误差将变得非常大，从而防止为了让边界上的一些样本取得更大的概率错误地挪动边界，而将某个样本置于明显错误的位置的情况。最后考虑到误差越小，代价函数也应该越小，再给对数结果取相反值。</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-cost-function-why-log.png" alt="" width="440">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/02-cost-function-why-log.png" width="440"/>
     <figcaption>为什么要取对数：严格的计算表明不取对数时会使用不好的决策边界</figcaption>
 </figure>
 
@@ -478,14 +482,14 @@ var _hmt = _hmt || [];
 <p>假设一个人被困在遍布密林的深山中，无法判断当前所处的位置，那么快速下山的一种策略就是沿着最陡的方向下坡。这就是<strong>梯度下降</strong>(gradient descent)法的基本原理：通过计算当前参数 <span class="math">\\( \boldsymbol{\theta} \\)</span> 下代价函数的局部梯度，并不断沿着降低梯度的方向调整参数 <span class="math">\\( \boldsymbol{\theta} \\)</span> ，直到梯度降为 0 ，说明代价函数取得极小值：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-gradient-descent.png" alt="" width="440">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/02-gradient-descent.png" width="440"/>
     <figcaption>图片来源于网络</figcaption>
 </figure>
 
 <p>第一个 <span class="math">\\( \boldsymbol{\theta} \\)</span> 值可以随机选择，每次执行梯度下降都会使代价函数降低一些。最终收敛得到一个极小值：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-gradient-descent-steps.png" alt="" width="300">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/02-gradient-descent-steps.png" width="300"/>
 </figure>
 
 <p>不同的梯度下，参数沿着能让代价函数下降方向改变的步长也不一样：如果梯度较平缓，那么步长应该小一些，以免错过了极小值。步长的改变量取决于<strong>学习率</strong>(learning rate)，学习率越高则参数的改变程度也越大，具体由以下公式确定：</p>
@@ -499,13 +503,13 @@ var _hmt = _hmt || [];
 <p>可以看出，学习率对梯度下降结果很重要：低下的学习率将会使算法需要太多次迭代才能达到极值点，而过高的学习率则可能使算法直接越过极值点到达对坡面，甚至在这一过程中发散而永远无法到达极值点：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-gradient-descent-steps-bad-1.png" alt="" width="540">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/02-gradient-descent-steps-bad-1.png" width="540"/>
 </figure>
 
 <p>并且梯度下降得到的是极值点，但未必是最值点，下图展示了这种情况：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-gradient-descent-steps-bad-2.png" alt="" width="320">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/02-gradient-descent-steps-bad-2.png" width="320"/>
 </figure>
 
 <p>这就要求代价函数尽量是一个凸(convex)函数，它的极值就是最值。凸函数也便于自动计算合适的学习率。可以证明逻辑回归的代价函数是一个凸函数，它求偏导的结果如下：（省略过程）</p>
@@ -519,7 +523,7 @@ var _hmt = _hmt || [];
 <p>因此逻辑回归可以很好地使用梯度下降算法得到具有最小误差的最好模型。下图展示了一个逻辑回归模型是如何从最开始的随机参数，经由梯度下降收敛到最优参数的：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-output-gradient-descent-steps.jpg" alt="" width="380">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/02-output-gradient-descent-steps.jpg" width="380"/>
 </figure>
 
 <p>总的来说，梯度下降是一种非常通用的优化算法，适用于很多找最优解的问题中。梯度下降也有许多改进版本，进一步拓宽了它的适用范围。</p>
@@ -529,7 +533,7 @@ var _hmt = _hmt || [];
 <p>在线性回归模型中介绍过在拟合现有数据时可能因为设置太高次项而导致的过拟合问题，在逻辑回归中也可能存在这种情况。例如，以下是某个逻辑回归模型中因为异常数据而带来的过拟合：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-logistic-overfitting.jpg" alt="" width="390">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/02-logistic-overfitting.jpg" width="390"/>
 </figure>
 
 <p>这个决策边界显然是不合理的。可以像线性回归一样给代价函数加上正则化约束项，从而防止决策边界取得过大的参数而过于复杂。</p>
@@ -544,7 +548,7 @@ var _hmt = _hmt || [];
 <p>这实际上就是线性回归中介绍的岭回归和 LASSO 回归使用的正则化项。以下是使用正则化项后的模型，可以看到过拟合的情况明显改善了很多：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/02-logistic-overfitting-prevent.jpg" alt="" width="390">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/02-logistic-overfitting-prevent.jpg" width="390"/>
 </figure>
 
 <h3>Scikit-Learn中的逻辑回归模型</h3>
@@ -553,7 +557,7 @@ var _hmt = _hmt || [];
 
 <div class="jupyter codeblock">
     <div class="jupyter-mark-in"></div>
-    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span><span style="color: #90a4ae;"> sklearn</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">linear_model </span><span style="color: #39adb5;font-weight: bold;">import</span><span style="color: #90a4ae;"> LogisticRegression</span></div><br><div><span style="color: #90a4ae;">model </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> LogisticRegression</span><span style="color: #39adb5;">()</span></div><div><span style="color: #90a4ae;">model</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">fit</span><span style="color: #39adb5;">(</span><span style="color: #90a4ae;">X</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> y</span><span style="color: #39adb5;">)</span></div></div>
+    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span><span style="color: #90a4ae;"> sklearn</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">linear_model </span><span style="color: #39adb5;font-weight: bold;">import</span><span style="color: #90a4ae;"> LogisticRegression</span></div><br/><div><span style="color: #90a4ae;">model </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> LogisticRegression</span><span style="color: #39adb5;">()</span></div><div><span style="color: #90a4ae;">model</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">fit</span><span style="color: #39adb5;">(</span><span style="color: #90a4ae;">X</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> y</span><span style="color: #39adb5;">)</span></div></div>
     <div class="jupyter-mark-out"></div>
     <div class="jupyter-output"><div class="sklearn-model"><p>LogisticRegression()</p></div></div>
 </div>
@@ -582,18 +586,18 @@ var _hmt = _hmt || [];
 <p>相比线性回归，逻辑回归模型多了很多超参数，其中许多参数都涉及本文介绍的内容，接下来介绍其中的一部分：</p>
 
 <div class="codeblock code-template">
-LogisticRegression(<br>
-&nbsp; &nbsp; <em>penalty</em>="l2",<br>
-&nbsp; &nbsp; <em>l1_ratio</em>=None,<br>
-&nbsp; &nbsp; <em>C</em>=1.0,<br>
-&nbsp; &nbsp; <em>tol</em>=1e-4,<br>
-&nbsp; &nbsp; <em>max_iter</em>=100,<br>
-&nbsp; &nbsp; <em>verbose</em>=0,<br>
-&nbsp; &nbsp; <em>multi_class</em>="auto"<br>
+LogisticRegression(<br/>
+&nbsp; &nbsp; <em>penalty</em>="l2",<br/>
+&nbsp; &nbsp; <em>l1_ratio</em>=None,<br/>
+&nbsp; &nbsp; <em>C</em>=1.0,<br/>
+&nbsp; &nbsp; <em>tol</em>=1e-4,<br/>
+&nbsp; &nbsp; <em>max_iter</em>=100,<br/>
+&nbsp; &nbsp; <em>verbose</em>=0,<br/>
+&nbsp; &nbsp; <em>multi_class</em>="auto"<br/>
 )
 </div>
 
-<p>参数 <code><em>penalty</em></code> 指定使用的正则化项，如果设置为 <code>"none"</code> 代表不使用正则化。除了前面介绍的 <code>"l1"</code> 和 <code>"l2"</code> 两种正则化之外，还可以使用一种称为“弹性网络” <code>"elasticnet"</code> 的正则化项，它是 L1 和 L2 的混合形式，参数 <code><em>l1_ratio</em></code> 就控制着这种混合比例。参数 <code><em>C</em></code> 是大于 0 的正则化强度，但注意它不是系数，在这里值越小代表正则化效果越强。</p>
+<p>参数 <code><em>penalty</em></code> 指定使用的正则化项，如果设置为 <code>"none"</code> 代表不使用正则化。除了前面介绍的 <code>"l1"</code> 和 <code>"l2"</code> 两种正则化之外，还可以使用一种称为&ldquo;弹性网络&rdquo; <code>"elasticnet"</code> 的正则化项，它是 L1 和 L2 的混合形式，参数 <code><em>l1_ratio</em></code> 就控制着这种混合比例。参数 <code><em>C</em></code> 是大于 0 的正则化强度，但注意它不是系数，在这里值越小代表正则化效果越强。</p>
 
 <p>前文介绍了逻辑回归使用梯度下降的方式优化系数。但浮点运算并不是完全精确的，往往不会出现导数正好为 0 的情况。参数 <code><em>tol</em></code> 决定了它的收敛条件：如果相邻两次计算的步长小于这个值，说明结果已经足够精确，可以不继续算下去。如果达到了 <code><em>max_iter</em></code> 代表的最大迭代次数还是无法找到这样一个收敛条件，那么说明模型可能存在问题，则停止继续计算。</p>
 
@@ -622,7 +626,7 @@ LogisticRegression(<br>
     <li>属于(1)和不属于(0)分类 C</li>
 </ol>
 
-<p>可以单独建立这几个二分类模型，对于每个模型都将另外两类看成一个整体，然后组合它们得到的结果：如果在模型 1 中“属于(1)”的分数比模型 2 和 3 的“属于(1)”都高，那么说明更可能属于分类 A 。</p>
+<p>可以单独建立这几个二分类模型，对于每个模型都将另外两类看成一个整体，然后组合它们得到的结果：如果在模型 1 中&ldquo;属于(1)&rdquo;的分数比模型 2 和 3 的&ldquo;属于(1)&rdquo;都高，那么说明更可能属于分类 A 。</p>
 
 <p>这等价于参数 <code><em>multi_class</em>="ovr"</code> 。</p>
 
@@ -644,7 +648,7 @@ LogisticRegression(<br>
 \\]
 </div>
 
-<p>这等价于参数 <code><em>multi_class</em>="multinomial"</code> 。但很明显，这种新的概率函数不能再用之前的代价函数去描述它的误差了，并且新的代价函数也不能像之前的函数那么定义：概率最多就为 1 ，根据无法表达与类别“ 2 ”的误差。一般来说，softmax 回归使用交叉熵作为它的代价函数，其公式如下：</p>
+<p>这等价于参数 <code><em>multi_class</em>="multinomial"</code> 。但很明显，这种新的概率函数不能再用之前的代价函数去描述它的误差了，并且新的代价函数也不能像之前的函数那么定义：概率最多就为 1 ，根据无法表达与类别&ldquo; 2 &rdquo;的误差。一般来说，softmax 回归使用交叉熵作为它的代价函数，其公式如下：</p>
 
 <div class="math">
 \\[
@@ -655,6 +659,7 @@ LogisticRegression(<br>
 <p>注意这里使用参数矩阵 <span class="math">\\( \boldsymbol{\Theta} \\)</span> 来存储每个类别的参数向量 <span class="math">\\( \boldsymbol{\theta} \\)</span> 。如果想知道为什么 softmax 回归这样定义以及为什么使用交叉熵作为代价函数，请参阅相关资料。</p>
 
 <p>总的来说，逻辑回归作为一种简单的分类算法，模型简单且数学上易于分析，具有运算速度快，对预处理要求少，可以得出概率便于进一步分析等优点。不过逻辑回归的实际分类准确率并不高，特别是可能无法处理一个分类形成多个群落的情况，因此一般只用于处理简单的分类问题。</p>
+
 												<div class="clear"></div>				
 					</div><!--/.entry-->
 				</div>
@@ -676,14 +681,14 @@ LogisticRegression(<br>
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/computer-science/data-structure/08-graph/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/09/数据结构08-图-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/09/数据结构08-图-520x293.jpg 520w, /wp-content/uploads/2022/09/数据结构08-图-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/embedded/mcu-application/lvgl-06-animations/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/LVGL库入门教程06-动画-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/06/LVGL库入门教程06-动画-520x293.jpg 520w, /wp-content/uploads/2022/06/LVGL库入门教程06-动画-300x169.jpg 300w, /wp-content/uploads/2022/06/LVGL库入门教程06-动画-1024x576.jpg 1024w, /wp-content/uploads/2022/06/LVGL库入门教程06-动画-768x432.jpg 768w, /wp-content/uploads/2022/06/LVGL库入门教程06-动画-1536x864.jpg 1536w, /wp-content/uploads/2022/06/LVGL库入门教程06-动画-950x534.jpg 950w, /wp-content/uploads/2022/06/LVGL库入门教程06-动画.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/computer-science/data-structure/08-graph/" rel="bookmark">数据结构08-图</a>
+					<a href="/embedded/mcu-application/lvgl-06-animations/" rel="bookmark">LVGL库入门教程06-动画</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -694,14 +699,14 @@ LogisticRegression(<br>
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/programming/python-fp/01-function-fundamentals/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程01-函数的基本概念-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/05/Python函数式编程01-函数的基本概念-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程01-函数的基本概念-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/embedded/stm32/esp8266-controlling/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/STM32与物联网02-网络数据收发-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/07/STM32与物联网02-网络数据收发-520x293.jpg 520w, /wp-content/uploads/2022/07/STM32与物联网02-网络数据收发-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/programming/python-fp/01-function-fundamentals/" rel="bookmark">Python函数式编程01 函数的基本概念</a>
+					<a href="/embedded/stm32/esp8266-controlling/" rel="bookmark">STM32与物联网02-网络数据收发</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -712,14 +717,14 @@ LogisticRegression(<br>
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/data-science/via-python/numpy02-reshape-arrays/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/10/Python数据分析-numpy02数组变形与组合-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/10/Python数据分析-numpy02数组变形与组合-520x293.jpg 520w, /wp-content/uploads/2022/10/Python数据分析-numpy02数组变形与组合-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/computer-science/data-structure/06-heap/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/08/数据结构06-优先队列堆-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/08/数据结构06-优先队列堆-520x293.jpg 520w, /wp-content/uploads/2022/08/数据结构06-优先队列堆-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/data-science/via-python/numpy02-reshape-arrays/" rel="bookmark">numpy02:数组变形与组合</a>
+					<a href="/computer-science/data-structure/06-heap/" rel="bookmark">数据结构06-优先队列(堆)</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -756,6 +761,14 @@ LogisticRegression(<br>
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
 											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
 					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
 											<span class="post-date">2023年6月19日</span>
 									</li>
@@ -775,14 +788,6 @@ LogisticRegression(<br>
 					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
 											<span class="post-date">2023年3月6日</span>
 									</li>
-											<li>
-					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
-											<span class="post-date">2023年2月27日</span>
-									</li>
-											<li>
-					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
-											<span class="post-date">2023年2月8日</span>
-									</li>
 					</ul>
 
 		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
@@ -795,9 +800,11 @@ LogisticRegression(<br>
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (1)
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
 <ul class='children'>
 	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
 </li>
 </ul>
 </li>
@@ -819,7 +826,7 @@ LogisticRegression(<br>
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (20)
 <ul class='children'>
 	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
 </li>
@@ -845,7 +852,9 @@ LogisticRegression(<br>
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(1)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
 	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
 	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
 	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
@@ -910,7 +919,7 @@ LogisticRegression(<br>
 					
 										
 					<div id="copyright">
-													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
 											</div><!--/#copyright-->
 					
 										

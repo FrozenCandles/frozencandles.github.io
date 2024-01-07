@@ -12,21 +12,23 @@
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 
-	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
 	<title>Python函数式编程06 元组与命名元组 - 冰封残烛的个人小站</title>
+	<meta name="description" content="在 Python 中，使用圆括号括起逗号分隔的不同的数据项会被视为一个元组(tuple)。元组是一种不可变类型，任何尝试对元组元素的修改都会发生错误。命名元组是一种特殊的元组，命名元组的元素既可以使用名称访问，也可以使用索引值访问，大大增加了元组的可读性。" />
 	<link rel="canonical" href="/programming/python-fp/06-tuple-handling/" />
 	<meta property="og:locale" content="zh_CN" />
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content="Python函数式编程06 元组与命名元组 - 冰封残烛的个人小站" />
-	<meta property="og:description" content="元组的基本概念 元组的基本操作 在 Python 中&#046;&#046;&#046;" />
+	<meta property="og:description" content="在 Python 中，使用圆括号括起逗号分隔的不同的数据项会被视为一个元组(tuple)。元组是一种不可变类型，任何尝试对元组元素的修改都会发生错误。命名元组是一种特殊的元组，命名元组的元素既可以使用名称访问，也可以使用索引值访问，大大增加了元组的可读性。" />
 	<meta property="og:url" content="/programming/python-fp/06-tuple-handling/" />
 	<meta property="og:site_name" content="冰封残烛的个人小站" />
 	<meta property="article:published_time" content="2022-05-25T15:15:06+00:00" />
-	<meta property="article:modified_time" content="2023-10-05T02:55:00+00:00" />
+	<meta property="article:modified_time" content="2023-10-13T04:25:45+00:00" />
 	<meta property="og:image" content="/wp-content/uploads/2022/05/Python函数式编程06-元组处理技术.jpg" />
 	<meta property="og:image:width" content="1920" />
 	<meta property="og:image:height" content="1080" />
 	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="作者" />
 	<meta name="twitter:data1" content="Hello" />
@@ -36,35 +38,8 @@
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
-	            "@type": "WebSite",
-	            "@id": "/#website",
-	            "url": "/",
-	            "name": "冰封残烛的个人小站",
-	            "description": "FrozenCandle&#039;s Personal Site",
-	            "potentialAction": [
-	                {
-	                    "@type": "SearchAction",
-	                    "target": {
-	                        "@type": "EntryPoint",
-	                        "urlTemplate": "/?s={search_term_string}"
-	                    },
-	                    "query-input": "required name=search_term_string"
-	                }
-	            ],
-	            "inLanguage": "zh-CN"
-	        },
-	        {
-	            "@type": "ImageObject",
-	            "inLanguage": "zh-CN",
-	            "@id": "/programming/python-fp/06-tuple-handling/#primaryimage",
-	            "url": "/wp-content/uploads/2022/05/Python函数式编程06-元组处理技术.jpg",
-	            "contentUrl": "/wp-content/uploads/2022/05/Python函数式编程06-元组处理技术.jpg",
-	            "width": 1920,
-	            "height": 1080
-	        },
-	        {
 	            "@type": "WebPage",
-	            "@id": "/programming/python-fp/06-tuple-handling/#webpage",
+	            "@id": "/programming/python-fp/06-tuple-handling/",
 	            "url": "/programming/python-fp/06-tuple-handling/",
 	            "name": "Python函数式编程06 元组与命名元组 - 冰封残烛的个人小站",
 	            "isPartOf": {
@@ -73,11 +48,16 @@
 	            "primaryImageOfPage": {
 	                "@id": "/programming/python-fp/06-tuple-handling/#primaryimage"
 	            },
+	            "image": {
+	                "@id": "/programming/python-fp/06-tuple-handling/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2022/05/Python函数式编程06-元组处理技术.jpg",
 	            "datePublished": "2022-05-25T15:15:06+00:00",
-	            "dateModified": "2023-10-05T02:55:00+00:00",
+	            "dateModified": "2023-10-13T04:25:45+00:00",
 	            "author": {
 	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
 	            },
+	            "description": "在 Python 中，使用圆括号括起逗号分隔的不同的数据项会被视为一个元组(tuple)。元组是一种不可变类型，任何尝试对元组元素的修改都会发生错误。命名元组是一种特殊的元组，命名元组的元素既可以使用名称访问，也可以使用索引值访问，大大增加了元组的可读性。",
 	            "breadcrumb": {
 	                "@id": "/programming/python-fp/06-tuple-handling/#breadcrumb"
 	            },
@@ -90,6 +70,15 @@
 	                    ]
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/programming/python-fp/06-tuple-handling/#primaryimage",
+	            "url": "/wp-content/uploads/2022/05/Python函数式编程06-元组处理技术.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/05/Python函数式编程06-元组处理技术.jpg",
+	            "width": 1920,
+	            "height": 1080
 	        },
 	        {
 	            "@type": "BreadcrumbList",
@@ -107,6 +96,24 @@
 	                    "name": "Python函数式编程06 元组与命名元组"
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
 	        },
 	        {
 	            "@type": "Person",
@@ -156,7 +163,6 @@ body { font-family: "Roboto", Arial, sans-serif; }
 <link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
-<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
 <script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
 <link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/253" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
 <meta name="generator" content="WordPress 6.3.1" />
@@ -293,19 +299,17 @@ var _hmt = _hmt || [];
 				<div class="entry-content">
 					<div class="entry themeform">	
 						
-<!-- 为了跟书中的内容同步，特地加的这一章。 -->
-
 <h2>元组的基本概念</h2>
 
 <h3>元组的基本操作</h3>
 
-<P>在 Python 中，使用圆括号括起逗号分隔的不同的数据项</P>
+<p>在 Python 中，使用圆括号括起逗号分隔的不同的数据项</p>
 
 <div class="codeblock code-template">
     (elem1, elem2, ..., elemn) 
 </div>
 
-<p>会被视为一个元组。在不引起歧义的情况下，最外层的括号可以省略，例如：</p>
+<p>会被视为一个元组(tuple)。在不引起歧义的情况下，最外层的括号可以省略，例如：</p>
 
 <div class="codeblock code-console">&gt;&gt;&gt; t1 = (1, 3, 4, 6)
 &gt;&gt;&gt; type(t1)
@@ -426,7 +430,7 @@ Point(x=10, y=4, z=12)</div>
 
 <p>这种类型的命名元组通过继承创建，并且使用类属性表示各个字段，代码为：</p>
 
-<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">from</span><span style="color: #405c79;"> typing </span><span style="color: #bf568b;font-weight: bold;">import</span><span style="color: #405c79;"> NamedTuple</span></div><br><div><span style="color: #bf568b;font-weight: bold;">class</span><span style="color: #405c79;"> </span><span style="color: #568bbf;">Student</span><span style="color: #405c79;">(</span><span style="color: #56bf8b;">NamedTuple</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; name: </span><span style="color: #bf568b;">str</span></div><div><span style="color: #405c79;">&#160; &#160; age: </span><span style="color: #bf568b;">int</span></div><div><span style="color: #405c79;">&#160; &#160; score: </span><span style="color: #bf568b;">float</span></div></div>
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">from</span><span style="color: #405c79;"> typing </span><span style="color: #bf568b;font-weight: bold;">import</span><span style="color: #405c79;"> NamedTuple</span></div><br/><div><span style="color: #bf568b;font-weight: bold;">class</span><span style="color: #405c79;"> </span><span style="color: #568bbf;">Student</span><span style="color: #405c79;">(</span><span style="color: #56bf8b;">NamedTuple</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; name: </span><span style="color: #bf568b;">str</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; age: </span><span style="color: #bf568b;">int</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; score: </span><span style="color: #bf568b;">float</span></div></div>
 
 <p>类型注解是必须的，否则无法通过语法检查。Python 中的类型注解都不会实际检查类型是否匹配，不过它会为编写和阅读代码提供一定方便。</p>
 
@@ -437,6 +441,8 @@ Point(x=10, y=4, z=12)</div>
 Student(name='Peter', age=21, score=62.0)</div>
 
 <p>这种命名元组也具有以上所使用的一些特别的属性和方法。在实际使用时可以任意选取一种命名元组。个人比较推荐这一种，因为它的定义比较简洁易懂。</p>
+
+
 												<div class="clear"></div>				
 					</div><!--/.entry-->
 				</div>
@@ -458,14 +464,14 @@ Student(name='Peter', age=21, score=62.0)</div>
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/embedded/mcu-application/lvgl-01-migration/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/06/LVGL库入门教程01-移植到STM32-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/06/LVGL库入门教程01-移植到STM32-520x293.jpg 520w, /wp-content/uploads/2022/06/LVGL库入门教程01-移植到STM32-300x169.jpg 300w, /wp-content/uploads/2022/06/LVGL库入门教程01-移植到STM32-1024x576.jpg 1024w, /wp-content/uploads/2022/06/LVGL库入门教程01-移植到STM32-768x432.jpg 768w, /wp-content/uploads/2022/06/LVGL库入门教程01-移植到STM32-1536x864.jpg 1536w, /wp-content/uploads/2022/06/LVGL库入门教程01-移植到STM32-950x534.jpg 950w, /wp-content/uploads/2022/06/LVGL库入门教程01-移植到STM32.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/data-science/via-python/numpy03-slices/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/10/Python数据分析-numpy03数组索引与切片-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/10/Python数据分析-numpy03数组索引与切片-520x293.jpg 520w, /wp-content/uploads/2022/10/Python数据分析-numpy03数组索引与切片-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/embedded/mcu-application/lvgl-01-migration/" rel="bookmark">LVGL库入门教程01-移植到STM32</a>
+					<a href="/data-science/via-python/numpy03-slices/" rel="bookmark">numpy03:数组索引与切片</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -476,14 +482,14 @@ Student(name='Peter', age=21, score=62.0)</div>
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/programming/python/library-re/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/03/Python3标准库re-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/03/Python3标准库re-520x293.jpg 520w, /wp-content/uploads/2022/03/Python3标准库re-300x169.jpg 300w, /wp-content/uploads/2022/03/Python3标准库re-1024x576.jpg 1024w, /wp-content/uploads/2022/03/Python3标准库re-768x432.jpg 768w, /wp-content/uploads/2022/03/Python3标准库re-1536x864.jpg 1536w, /wp-content/uploads/2022/03/Python3标准库re-950x534.jpg 950w, /wp-content/uploads/2022/03/Python3标准库re.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/programming/python-oop/01-class-and-instance/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/Python面向对象编程01-类的定义与使用-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/07/Python面向对象编程01-类的定义与使用-520x293.jpg 520w, /wp-content/uploads/2022/07/Python面向对象编程01-类的定义与使用-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/programming/python/library-re/" rel="bookmark">Python标准库re：使用正则表达式</a>
+					<a href="/programming/python-oop/01-class-and-instance/" rel="bookmark">Python面向对象编程01-类的定义与使用</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -494,14 +500,14 @@ Student(name='Peter', age=21, score=62.0)</div>
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/embedded/esp32/02-basic-peripheral/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-520x293.jpg 520w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-300x169.jpg 300w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-1024x576.jpg 1024w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-768x432.jpg 768w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-1536x864.jpg 1536w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-950x534.jpg 950w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/data-science/via-python/numpy06-advanced-data-types/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/10/Python数据分析-numpy06高级数据类型-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/10/Python数据分析-numpy06高级数据类型-520x293.jpg 520w, /wp-content/uploads/2022/10/Python数据分析-numpy06高级数据类型-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/embedded/esp32/02-basic-peripheral/" rel="bookmark">ESP32与MicroPython入门-02 基本外设操作</a>
+					<a href="/data-science/via-python/numpy06-advanced-data-types/" rel="bookmark">numpy06:高级数据类型</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -538,6 +544,14 @@ Student(name='Peter', age=21, score=62.0)</div>
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
 											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
 					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
 											<span class="post-date">2023年6月19日</span>
 									</li>
@@ -557,14 +571,6 @@ Student(name='Peter', age=21, score=62.0)</div>
 					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
 											<span class="post-date">2023年3月6日</span>
 									</li>
-											<li>
-					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
-											<span class="post-date">2023年2月27日</span>
-									</li>
-											<li>
-					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
-											<span class="post-date">2023年2月8日</span>
-									</li>
 					</ul>
 
 		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
@@ -577,9 +583,11 @@ Student(name='Peter', age=21, score=62.0)</div>
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (1)
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
 <ul class='children'>
 	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
 </li>
 </ul>
 </li>
@@ -601,7 +609,7 @@ Student(name='Peter', age=21, score=62.0)</div>
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (20)
 <ul class='children'>
 	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
 </li>
@@ -627,7 +635,9 @@ Student(name='Peter', age=21, score=62.0)</div>
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(1)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
 	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
 	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
 	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
@@ -692,7 +702,7 @@ Student(name='Peter', age=21, score=62.0)</div>
 					
 										
 					<div id="copyright">
-													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
 											</div><!--/#copyright-->
 					
 										

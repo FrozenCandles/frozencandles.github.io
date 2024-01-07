@@ -12,7 +12,7 @@
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 
-	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
 	<title>机器学习-决策树 - 冰封残烛的个人小站</title>
 	<meta name="description" content="决策树(decision tree)是一种简单且直观的算法，其原理是将数据的分布规律表达为一系列形成一个树形的结构的条件判断，从而在引入新样本时通过一系列条件判断将其分到合理的类别中。决策树的缺点是非常容易过拟合，且形成的决策边界也不够理想。" />
 	<link rel="canonical" href="/data-science/machine-learning/05-decision-tree/" />
@@ -23,11 +23,12 @@
 	<meta property="og:url" content="/data-science/machine-learning/05-decision-tree/" />
 	<meta property="og:site_name" content="冰封残烛的个人小站" />
 	<meta property="article:published_time" content="2023-02-08T15:46:24+00:00" />
-	<meta property="article:modified_time" content="2023-10-06T11:53:33+00:00" />
+	<meta property="article:modified_time" content="2023-10-13T03:53:10+00:00" />
 	<meta property="og:image" content="/wp-content/uploads/2023/02/机器学习-决策树.jpg" />
 	<meta property="og:image:width" content="1920" />
 	<meta property="og:image:height" content="1080" />
 	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="作者" />
 	<meta name="twitter:data1" content="Hello" />
@@ -37,35 +38,8 @@
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
-	            "@type": "WebSite",
-	            "@id": "/#website",
-	            "url": "/",
-	            "name": "冰封残烛的个人小站",
-	            "description": "FrozenCandle&#039;s Personal Site",
-	            "potentialAction": [
-	                {
-	                    "@type": "SearchAction",
-	                    "target": {
-	                        "@type": "EntryPoint",
-	                        "urlTemplate": "/?s={search_term_string}"
-	                    },
-	                    "query-input": "required name=search_term_string"
-	                }
-	            ],
-	            "inLanguage": "zh-CN"
-	        },
-	        {
-	            "@type": "ImageObject",
-	            "inLanguage": "zh-CN",
-	            "@id": "/data-science/machine-learning/05-decision-tree/#primaryimage",
-	            "url": "/wp-content/uploads/2023/02/机器学习-决策树.jpg",
-	            "contentUrl": "/wp-content/uploads/2023/02/机器学习-决策树.jpg",
-	            "width": 1920,
-	            "height": 1080
-	        },
-	        {
 	            "@type": "WebPage",
-	            "@id": "/data-science/machine-learning/05-decision-tree/#webpage",
+	            "@id": "/data-science/machine-learning/05-decision-tree/",
 	            "url": "/data-science/machine-learning/05-decision-tree/",
 	            "name": "机器学习-决策树 - 冰封残烛的个人小站",
 	            "isPartOf": {
@@ -74,8 +48,12 @@
 	            "primaryImageOfPage": {
 	                "@id": "/data-science/machine-learning/05-decision-tree/#primaryimage"
 	            },
+	            "image": {
+	                "@id": "/data-science/machine-learning/05-decision-tree/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2023/02/机器学习-决策树.jpg",
 	            "datePublished": "2023-02-08T15:46:24+00:00",
-	            "dateModified": "2023-10-06T11:53:33+00:00",
+	            "dateModified": "2023-10-13T03:53:10+00:00",
 	            "author": {
 	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
 	            },
@@ -94,6 +72,15 @@
 	            ]
 	        },
 	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/data-science/machine-learning/05-decision-tree/#primaryimage",
+	            "url": "/wp-content/uploads/2023/02/机器学习-决策树.jpg",
+	            "contentUrl": "/wp-content/uploads/2023/02/机器学习-决策树.jpg",
+	            "width": 1920,
+	            "height": 1080
+	        },
+	        {
 	            "@type": "BreadcrumbList",
 	            "@id": "/data-science/machine-learning/05-decision-tree/#breadcrumb",
 	            "itemListElement": [
@@ -109,6 +96,24 @@
 	                    "name": "机器学习-决策树"
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
 	        },
 	        {
 	            "@type": "Person",
@@ -158,7 +163,6 @@ body { font-family: "Roboto", Arial, sans-serif; }
 <link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
-<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
 <script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
 <link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/1020" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
 <meta name="generator" content="WordPress 6.3.1" />
@@ -324,49 +328,45 @@ var _hmt = _hmt || [];
 				<div class="entry-content">
 					<div class="entry themeform">	
 						
-
-
-
-
 <h2>决策树</h2>
 
 <h3>决策树简介</h3>
 
-<p>和<a class="link-internal" link="data-science/machine-learning@naive-bayes" href="/archives/953">朴素贝叶斯</a>一样，决策树(decision tree)也是一种简单但有效的分类算法。决策树的原理是将数据的分布规律表达为一系列的条件判断，从而在引入新样本时通过一系列条件判断将其分到合理的类别中。这一系列条件判断会形成一个树形的结构，每个节点都是一次判断过程：</p>
+<p>和<a class="link-internal" href="/data-science/machine-learning/03-naive-bayes">朴素贝叶斯</a>一样，决策树(decision tree)也是一种简单但有效的分类算法。决策树的原理是将数据的分布规律表达为一系列的条件判断，从而在引入新样本时通过一系列条件判断将其分到合理的类别中。这一系列条件判断会形成一个树形的结构，每个节点都是一次判断过程：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/05-decision-tree-concept.png" alt="" width="400">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/05-decision-tree-concept.png" width="400"/>
     <figcaption>根据网图改的</figcaption>
 </figure>
 
 <p>接下来看一个实际的示例。对于以下数据：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/05-output-decision-step-0.png" alt="" width="340">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/05-output-decision-step-0.png" width="340"/>
 </figure>
 
 <p>显然靠左侧位置分布的都是红色的样本，因此第一次可以将这些样本划分出来：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/05-output-decision-step-1.png" alt="" width="340">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/05-output-decision-step-1.png" width="340"/>
 </figure>
 
 <p>而靠右侧位置分布的都是蓝色的样本，接下来将这些样本划分出来：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/05-output-decision-step-2.png" alt="" width="340">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/05-output-decision-step-2.png" width="340"/>
 </figure>
 
 <p>对于中间位置的样本，靠上方的是蓝色位置的样本：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/05-output-decision-step-3.png" alt="" width="340">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/05-output-decision-step-3.png" width="340"/>
 </figure>
 
 <p>靠下方的是红色位置的样本：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/05-output-decision-step-4.png" alt="" width="340">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/05-output-decision-step-4.png" width="340"/>
 </figure>
 
 <p>这几个决策过程就构成了完整的分类依据。</p>
@@ -375,13 +375,13 @@ var _hmt = _hmt || [];
 
 <div class="jupyter codeblock">
     <div class="jupyter-mark-in"></div>
-    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span><span style="color: #90a4ae;"> sklearn</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">tree </span><span style="color: #39adb5;font-weight: bold;">import</span><span style="color: #90a4ae;"> DecisionTreeClassifier</span></div><br><div><span style="color: #90a4ae;">model </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> DecisionTreeClassifier</span><span style="color: #39adb5;">().</span><span style="color: #90a4ae;">fit</span><span style="color: #39adb5;">(</span><span style="color: #90a4ae;">X</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> y</span><span style="color: #39adb5;">)</span></div></div>
+    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span><span style="color: #90a4ae;"> sklearn</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">tree </span><span style="color: #39adb5;font-weight: bold;">import</span><span style="color: #90a4ae;"> DecisionTreeClassifier</span></div><br/><div><span style="color: #90a4ae;">model </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> DecisionTreeClassifier</span><span style="color: #39adb5;">().</span><span style="color: #90a4ae;">fit</span><span style="color: #39adb5;">(</span><span style="color: #90a4ae;">X</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> y</span><span style="color: #39adb5;">)</span></div></div>
 </div>
 
 <p>下图展示了 Scikit-Learn 中决策树的分类边界：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/05-output-decision-step-std.png" alt="" width="420">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/05-output-decision-step-std.png" width="420"/>
 </figure>
 
 <p>可以看到 Scikit-Learn 中的决策树似乎找到了一个更好的规律，使得只需要两次判断就能完成分类。不过相应的决策边界更靠近样本，过拟合的可能性增大。</p>
@@ -406,8 +406,8 @@ var _hmt = _hmt || [];
     <div class="math">
     \\[
         \begin{align}
-            \text{Gini}(D) &= 1 - (\frac 1 3)^2 - (\frac 1 3)^2 - (\frac 1 3)^2 \\
-            &= \frac 2 3 \approx 0.67
+            \text{Gini}(D) &amp;= 1 - (\frac 1 3)^2 - (\frac 1 3)^2 - (\frac 1 3)^2 \\
+            &amp;= \frac 2 3 \approx 0.67
         \end{align}
     \\]
     </div>
@@ -417,8 +417,8 @@ var _hmt = _hmt || [];
     <div class="math">
         \\[
             \begin{align}
-                \text{Gini}(D_1) &= 1 - (\frac 1 {10})^2 - (\frac 2 {10})^2 - (\frac 7 {10})^2 \\
-                &= 0.46
+                \text{Gini}(D_1) &amp;= 1 - (\frac 1 {10})^2 - (\frac 2 {10})^2 - (\frac 7 {10})^2 \\
+                &amp;= 0.46
             \end{align}
         \\]
     </div>
@@ -428,8 +428,8 @@ var _hmt = _hmt || [];
     <div class="math">
         \\[
             \begin{align}
-                \text{Gini}(D_2) &= 1 - (\frac 9 {20})^2 - (\frac 8 {20})^2 - (\frac 3 {20})^2 \\
-                &= 0.615
+                \text{Gini}(D_2) &amp;= 1 - (\frac 9 {20})^2 - (\frac 8 {20})^2 - (\frac 3 {20})^2 \\
+                &amp;= 0.615
             \end{align}
         \\]
     </div>
@@ -439,8 +439,8 @@ var _hmt = _hmt || [];
     <div class="math">
     \\[
         \begin{align}
-            \text{Gini}(D) &= \frac{S_1}{S_1 + S_2}\text{Gini}(D_1) + \frac{S_2}{S_1 + S_2}\text{Gini}(D_2) \\
-            &\approx 0.563
+            \text{Gini}(D) &amp;= \frac{S_1}{S_1 + S_2}\text{Gini}(D_1) + \frac{S_2}{S_1 + S_2}\text{Gini}(D_2) \\
+            &amp;\approx 0.563
         \end{align}
     \\]
     </div>
@@ -455,7 +455,7 @@ var _hmt = _hmt || [];
 <p>决策树的一个特点是它天然支持多分类，而不需要使用一对多方法实现。下图展示了一棵多分类决策树的决策边界：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/05-tree-multi-classification.png" alt="" width="450">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/05-tree-multi-classification.png" width="450"/>
 </figure>
 
 <p>对于连续数据，Scikit-Learn 使用<strong>分类和回归树</strong>(Classification and Regression Tree, CART)算法来建立一棵决策树，该算法找到某个特征变量合适的切分点，使得切分后左右两侧数据总体的基尼系数发生下降，那么说明这是一次合理的切分，可以作为一次决策过程。而左右两侧数据可以使用相同的逻辑递归切分，直到总的基尼系数降为 0 或达到停止条件为止。可以看出该算法仅生成二叉树，即它是一种 <code>if ... else</code> 形式的决策。而其它算法（例如 ID3 算法和它的改进版 C4.5 算法）可能找到多个切分点，形成类似 <code>elif</code> 的决策。</p>
@@ -465,13 +465,13 @@ var _hmt = _hmt || [];
 <p>CART 算法的这种性质还会带来另一个问题：由于每次被切分的维度是任意的，因此同一个模型多次调用决策树得到的决策边界往往不会完全相同。下图展示了相同的数据集使用不同随机种子生成的决策树，由于每次选择不同的维度划分数据而导致不同的结果：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/05-tree-param-randseed.png" alt="" width="500">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/05-tree-param-randseed.png" width="500"/>
 </figure>
 
 <p>除此之外，由于 CART 算法每次都只从一个维度上切分，因此得到的决策边界由垂直于坐标轴的直线构成。如果数据集的边界是倾斜的，那么决策树只能通过锯齿状的边界来模拟它，这既会导致不必要的多次判断，也容易使决策树发生过拟合：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/05-output-tree-rotate.png" alt="" width="500">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/05-output-tree-rotate.png" width="500"/>
     <figcaption>一个简单的数据集旋转后划分效果变得更糟</figcaption>
 </figure>
 
@@ -494,7 +494,7 @@ var _hmt = _hmt || [];
 <p>除了最大深度外，Scikit-Learn 还提供了一些其它前剪枝参数，如下：</p>
 
 <table>
-    <tr>
+    <tbody><tr>
         <th>参数</th>
         <th>说明</th>
     </tr>
@@ -514,12 +514,12 @@ var _hmt = _hmt || [];
         <td class="code-font">min_impurity_decrease</td>
         <td>如果继续划分能使基尼不纯度的下降大于该值，那么便继续划分。默认值 0.0 代表只要能使不纯度下降就继续划分</td>
     </tr>
-</table>
+</tbody></table>
 
 <p>可以看出决策树的默认参数并没有限制决策树的增长，适当增加最小值与约束最大值可以防止异常值的影响，并增强决策树的泛化能力。下图展示了一棵没有约束的决策树和加上不同约束条件后的决策边界：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/05-tree-param-pre-pruning.png" alt="" width="540">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/05-tree-param-pre-pruning.png" width="540"/>
 </figure>
 
 <ul>
@@ -543,7 +543,7 @@ var _hmt = _hmt || [];
 <!-- 
 <blockquote>
     <figure>
-        <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/05-CCP-example.png" alt="" width="390">
+        <img decoding="async" src="./imgs/05-CCP-example.png" alt="" width="390">
     </figure>
 
     <div class="math">
@@ -588,7 +588,7 @@ var _hmt = _hmt || [];
 
 <div class="jupyter codeblock">
     <div class="jupyter-mark-in"></div>
-    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span><span style="color: #90a4ae;"> sklearn</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">tree </span><span style="color: #39adb5;font-weight: bold;">import</span><span style="color: #90a4ae;"> export_graphviz</span></div><br><div><span style="color: #90a4ae;">export_graphviz</span><span style="color: #39adb5;">(</span></div><div><span style="color: #90a4ae;">&#160; &#160; model</span><span style="color: #39adb5;">,</span></div><div><span style="color: #90a4ae;">&#160; &#160; </span><span style="color: #e53935;">out_file</span><span style="color: #7c4dff;">=</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">tree.dot</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">,</span></div><div><span style="color: #90a4ae;">&#160; &#160; </span><span style="color: #e53935;">rounded</span><span style="color: #7c4dff;">=</span><span style="color: #f76d47;">True</span></div><div><span style="color: #39adb5;">)</span></div></div>
+    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span><span style="color: #90a4ae;"> sklearn</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">tree </span><span style="color: #39adb5;font-weight: bold;">import</span><span style="color: #90a4ae;"> export_graphviz</span></div><br/><div><span style="color: #90a4ae;">export_graphviz</span><span style="color: #39adb5;">(</span></div><div><span style="color: #90a4ae;">&nbsp; &nbsp; model</span><span style="color: #39adb5;">,</span></div><div><span style="color: #90a4ae;">&nbsp; &nbsp; </span><span style="color: #e53935;">out_file</span><span style="color: #7c4dff;">=</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">tree.dot</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">,</span></div><div><span style="color: #90a4ae;">&nbsp; &nbsp; </span><span style="color: #e53935;">rounded</span><span style="color: #7c4dff;">=</span><span style="color: #f76d47;">True</span></div><div><span style="color: #39adb5;">)</span></div></div>
 </div>
 
 <p>然后在命令行中使用 dot 工具完成图片的输出。可以输出的图片格式有许多种，包括常见的 PNG 、PDF 和 SVG 等：</p>
@@ -599,13 +599,13 @@ var _hmt = _hmt || [];
 <p>输出的决策过程如下：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/05-graphviz-export-tree.png" alt="" width="610">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/05-graphviz-export-tree.png" width="610"/>
 </figure>
 
 <p>其中 <code>X[0]</code> 表示样本的第一个特征变量（本例中为横坐标的值）；<code>gini</code> 表示该节点的基尼系数；<code>samples</code> 表示该节点包含的样本数；<code>value</code> 表示该节点中各类别样本的数量。根据这些提供的信息，就能清楚地了解到决策树运作的过程。下图是该决策树最终形成的决策边界：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/05-graphviz-source-tree.png" alt="" width="420">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/05-graphviz-source-tree.png" width="420"/>
 </figure>
 
 <h3>决策树回归</h3>
@@ -613,7 +613,7 @@ var _hmt = _hmt || [];
 <p>决策树也可以用作回归。这种情况下，每个树叶节点不再预测离散的类别，而是一个连续的值，就像这样：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/05-tree-regression.png" alt="" width="440">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/05-tree-regression.png" width="440"/>
 </figure>
 
 <p>决策树回归与分类的原理是类似的，只不过不再采用基尼系数或熵作为划分的依据，而是均方误差 <span class="math">\\( \text{MSE} \\)</span> 。具体来说，就是在每一次分裂时试图使以下结果最小：</p>
@@ -629,12 +629,14 @@ var _hmt = _hmt || [];
 <p>决策树回归的优点是不用添加额外特征也能拟合曲线数据，但是拟合结果也不是曲线，而是阶跃的直线，并且和分类一样也有着严重的过拟合问题：如果不加约束地生长，决策的最终结果会落到每个值上：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/05-tree-regression-overfit.png" alt="" width="660">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/05-tree-regression-overfit.png" width="660"/>
 </figure>
 
 <p>可以用相同的方式对回归决策树剪枝，或者使用 Graphviz 导出为可视化图片。</p>
 
 <p>总的来说，决策树是一种简单且直观的算法，它只求能够将两类样本分开，而不考虑分类的质量如何。除了容易导致过拟合外，决策树的分类边界也不够理想，不仅均垂直于坐标轴，而且完全没有考虑远离样本的问题，因此对异常值较为敏感。</p>
+
+
 
 
 
@@ -659,14 +661,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/computer-science/data-structure/08-graph/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/09/数据结构08-图-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/09/数据结构08-图-520x293.jpg 520w, /wp-content/uploads/2022/09/数据结构08-图-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/embedded/mcu-application/lvgl-03-layouts/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-520x293.jpg 520w, /wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-300x169.jpg 300w, /wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-1024x576.jpg 1024w, /wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-768x432.jpg 768w, /wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-1536x864.jpg 1536w, /wp-content/uploads/2022/06/LVGL库入门教程03-布局方式-950x534.jpg 950w, /wp-content/uploads/2022/06/LVGL库入门教程03-布局方式.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/computer-science/data-structure/08-graph/" rel="bookmark">数据结构08-图</a>
+					<a href="/embedded/mcu-application/lvgl-03-layouts/" rel="bookmark">LVGL库入门教程03-布局方式</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -677,14 +679,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/programming/python-fp/07-generators/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程07-生成器-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/05/Python函数式编程07-生成器-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程07-生成器-300x169.jpg 300w, /wp-content/uploads/2022/05/Python函数式编程07-生成器-1024x576.jpg 1024w, /wp-content/uploads/2022/05/Python函数式编程07-生成器-768x432.jpg 768w, /wp-content/uploads/2022/05/Python函数式编程07-生成器-1536x864.jpg 1536w, /wp-content/uploads/2022/05/Python函数式编程07-生成器-950x534.jpg 950w, /wp-content/uploads/2022/05/Python函数式编程07-生成器.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/data-science/via-python/04-numpy-universal-functions/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/10/Python数据分析-numpy04通用函数与广播规则-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/10/Python数据分析-numpy04通用函数与广播规则-520x293.jpg 520w, /wp-content/uploads/2022/10/Python数据分析-numpy04通用函数与广播规则-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/programming/python-fp/07-generators/" rel="bookmark">Python函数式编程07 生成器</a>
+					<a href="/data-science/via-python/04-numpy-universal-functions/" rel="bookmark">numpy04:通用函数与广播规则</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -695,14 +697,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/computer-science/data-structure/02-linked-list/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/08/数据结构02-链表-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/08/数据结构02-链表-520x293.jpg 520w, /wp-content/uploads/2022/08/数据结构02-链表-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/data-science/via-python/numpy02-reshape-arrays/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/10/Python数据分析-numpy02数组变形与组合-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/10/Python数据分析-numpy02数组变形与组合-520x293.jpg 520w, /wp-content/uploads/2022/10/Python数据分析-numpy02数组变形与组合-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/computer-science/data-structure/02-linked-list/" rel="bookmark">数据结构02-链表</a>
+					<a href="/data-science/via-python/numpy02-reshape-arrays/" rel="bookmark">numpy02:数组变形与组合</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -739,6 +741,14 @@ var _hmt = _hmt || [];
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
 											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
 					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
 											<span class="post-date">2023年6月19日</span>
 									</li>
@@ -758,14 +768,6 @@ var _hmt = _hmt || [];
 					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
 											<span class="post-date">2023年3月6日</span>
 									</li>
-											<li>
-					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
-											<span class="post-date">2023年2月27日</span>
-									</li>
-											<li>
-					<a href="/data-science/machine-learning/05-decision-tree/" aria-current="page">机器学习-决策树</a>
-											<span class="post-date">2023年2月8日</span>
-									</li>
 					</ul>
 
 		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
@@ -778,9 +780,11 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (1)
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
 <ul class='children'>
 	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
 </li>
 </ul>
 </li>
@@ -802,7 +806,7 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (20)
 <ul class='children'>
 	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
 </li>
@@ -828,7 +832,9 @@ var _hmt = _hmt || [];
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(1)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
 	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
 	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
 	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
@@ -893,7 +899,7 @@ var _hmt = _hmt || [];
 					
 										
 					<div id="copyright">
-													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
 											</div><!--/#copyright-->
 					
 										

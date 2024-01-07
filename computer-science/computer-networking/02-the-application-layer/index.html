@@ -12,22 +12,23 @@
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 
-	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
 	<title>计算机网络02-应用层概览与SMTP电子邮件发送 - 冰封残烛的个人小站</title>
-	<meta name="description" content="应用层(application-layer)是计算机网络结构体系的最顶层，主要通过应用程序的交互来实现网络应用，其核心是编写能够运行在不同的端系统和通过网络彼此通信的程序。本节介绍应用层的内容以及应用层协议，其中详细介绍邮件发送协议，并使用 Python 编写应用层的应用程序" />
+	<meta name="description" content="应用层(application layer)是计算机网络结构体系的最顶层，主要通过应用程序的交互来实现网络应用，其核心是编写能够运行在不同的端系统和通过网络彼此通信的程序。本节介绍应用层的内容以及应用层协议，其中详细介绍邮件发送协议，并使用 Python 编写应用层的应用程序" />
 	<link rel="canonical" href="/computer-science/computer-networking/02-the-application-layer/" />
 	<meta property="og:locale" content="zh_CN" />
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content="计算机网络02-应用层概览与SMTP电子邮件发送 - 冰封残烛的个人小站" />
-	<meta property="og:description" content="应用层(application-layer)是计算机网络结构体系的最顶层，主要通过应用程序的交互来实现网络应用，其核心是编写能够运行在不同的端系统和通过网络彼此通信的程序。本节介绍应用层的内容以及应用层协议，其中详细介绍邮件发送协议，并使用 Python 编写应用层的应用程序" />
+	<meta property="og:description" content="应用层(application layer)是计算机网络结构体系的最顶层，主要通过应用程序的交互来实现网络应用，其核心是编写能够运行在不同的端系统和通过网络彼此通信的程序。本节介绍应用层的内容以及应用层协议，其中详细介绍邮件发送协议，并使用 Python 编写应用层的应用程序" />
 	<meta property="og:url" content="/computer-science/computer-networking/02-the-application-layer/" />
 	<meta property="og:site_name" content="冰封残烛的个人小站" />
 	<meta property="article:published_time" content="2022-06-25T15:35:56+00:00" />
-	<meta property="article:modified_time" content="2023-10-06T05:00:27+00:00" />
+	<meta property="article:modified_time" content="2023-10-14T02:27:54+00:00" />
 	<meta property="og:image" content="/wp-content/uploads/2022/06/计算机网络02-应用层概览.jpg" />
 	<meta property="og:image:width" content="1920" />
 	<meta property="og:image:height" content="1280" />
 	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="作者" />
 	<meta name="twitter:data1" content="Hello" />
@@ -37,35 +38,8 @@
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
-	            "@type": "WebSite",
-	            "@id": "/#website",
-	            "url": "/",
-	            "name": "冰封残烛的个人小站",
-	            "description": "FrozenCandle&#039;s Personal Site",
-	            "potentialAction": [
-	                {
-	                    "@type": "SearchAction",
-	                    "target": {
-	                        "@type": "EntryPoint",
-	                        "urlTemplate": "/?s={search_term_string}"
-	                    },
-	                    "query-input": "required name=search_term_string"
-	                }
-	            ],
-	            "inLanguage": "zh-CN"
-	        },
-	        {
-	            "@type": "ImageObject",
-	            "inLanguage": "zh-CN",
-	            "@id": "/computer-science/computer-networking/02-the-application-layer/#primaryimage",
-	            "url": "/wp-content/uploads/2022/06/计算机网络02-应用层概览.jpg",
-	            "contentUrl": "/wp-content/uploads/2022/06/计算机网络02-应用层概览.jpg",
-	            "width": 1920,
-	            "height": 1280
-	        },
-	        {
 	            "@type": "WebPage",
-	            "@id": "/computer-science/computer-networking/02-the-application-layer/#webpage",
+	            "@id": "/computer-science/computer-networking/02-the-application-layer/",
 	            "url": "/computer-science/computer-networking/02-the-application-layer/",
 	            "name": "计算机网络02-应用层概览与SMTP电子邮件发送 - 冰封残烛的个人小站",
 	            "isPartOf": {
@@ -74,12 +48,16 @@
 	            "primaryImageOfPage": {
 	                "@id": "/computer-science/computer-networking/02-the-application-layer/#primaryimage"
 	            },
+	            "image": {
+	                "@id": "/computer-science/computer-networking/02-the-application-layer/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2022/06/计算机网络02-应用层概览.jpg",
 	            "datePublished": "2022-06-25T15:35:56+00:00",
-	            "dateModified": "2023-10-06T05:00:27+00:00",
+	            "dateModified": "2023-10-14T02:27:54+00:00",
 	            "author": {
 	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
 	            },
-	            "description": "应用层(application-layer)是计算机网络结构体系的最顶层，主要通过应用程序的交互来实现网络应用，其核心是编写能够运行在不同的端系统和通过网络彼此通信的程序。本节介绍应用层的内容以及应用层协议，其中详细介绍邮件发送协议，并使用 Python 编写应用层的应用程序",
+	            "description": "应用层(application layer)是计算机网络结构体系的最顶层，主要通过应用程序的交互来实现网络应用，其核心是编写能够运行在不同的端系统和通过网络彼此通信的程序。本节介绍应用层的内容以及应用层协议，其中详细介绍邮件发送协议，并使用 Python 编写应用层的应用程序",
 	            "breadcrumb": {
 	                "@id": "/computer-science/computer-networking/02-the-application-layer/#breadcrumb"
 	            },
@@ -92,6 +70,15 @@
 	                    ]
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/computer-science/computer-networking/02-the-application-layer/#primaryimage",
+	            "url": "/wp-content/uploads/2022/06/计算机网络02-应用层概览.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/06/计算机网络02-应用层概览.jpg",
+	            "width": 1920,
+	            "height": 1280
 	        },
 	        {
 	            "@type": "BreadcrumbList",
@@ -109,6 +96,24 @@
 	                    "name": "计算机网络02-应用层概览与SMTP电子邮件发送"
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
 	        },
 	        {
 	            "@type": "Person",
@@ -158,7 +163,6 @@ body { font-family: "Roboto", Arial, sans-serif; }
 <link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
-<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
 <script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
 <link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/403" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
 <meta name="generator" content="WordPress 6.3.1" />
@@ -295,15 +299,11 @@ var _hmt = _hmt || [];
 				<div class="entry-content">
 					<div class="entry themeform">	
 						
-
-
-
-
 <h2>应用层协议原理</h2>
 
 <h3>应用程序体系结构</h3>
 
-<p>应用层是计算机网络结构体系的最顶层，也是计算机网络最终的发展目的。计算机网络的其余体系结构主要都是为应用层提供正常运作所需的服务而建立的。</p>
+<p>应用层(application layer)是计算机网络结构体系的最顶层，也是计算机网络最终的发展目的。计算机网络的其余体系结构主要都是为应用层提供正常运作所需的服务而建立的。</p>
 
 <p>应用层主要通过应用程序的交互来实现网络应用，其核心是编写能够运行在不同的端系统和通过网络彼此通信的程序。因此这一章内容基本只涉及软件方面的应用。</p>
 
@@ -316,7 +316,7 @@ var _hmt = _hmt || [];
 <p>下图展示了这两种应用程序体系结构的区别：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/02-program-architecture.jpg" alt="" width="840">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@computer-network/02-program-architecture.jpg" width="840"/>
     <figcaption>客户-服务器体系结构与P2P体系结构</figcaption>
 </figure>
 
@@ -339,7 +339,7 @@ var _hmt = _hmt || [];
 <p>进程通过<strong>套接字</strong>(socket)软件接口向网络发送和接收报文。套接字是同一台主机内应用层与运输层之间的接口，也称为<strong>应用程序编程接口</strong>(Application Programming Interface, API)。应用程序可以控制套接字在应用层端的功能。下图展示了套接字与进程在计算机网络中所处的位置（这里只关心应用层与运输层之间的部分）：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/02-socket-process.png" alt="" width="380">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@computer-network/02-socket-process.png" width="380"/>
     <figcaption>进程、套接字与计算机网络其余部分的图示</figcaption>
 </figure>
 
@@ -359,7 +359,7 @@ var _hmt = _hmt || [];
 
 <p>最后，运输协议也可能需要为应用程序提供若干安全性服务，以防止传输的数据被窃取或篡改。</p>
 
-<hr>
+<hr/>
 
 <p>互联网为应用程序提供了两个运输层协议：TCP 协议和 UDP 协议。这里仅对此做简要介绍，在运输层中才会真正涉及这两个协议的细节。</p>
 
@@ -396,7 +396,7 @@ var _hmt = _hmt || [];
 <p>下图描述了这一通信的过程：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/02-usp-socket.jpg" alt="" width="330">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@computer-network/02-usp-socket.jpg" width="330"/>
     <figcaption>UDP 套接字的通信过程</figcaption>
 </figure>
 
@@ -430,7 +430,7 @@ var _hmt = _hmt || [];
 
 <p>服务端的套接字进程需要持续运行，以在任何时候接收到客户端发送的信息，因此需要使用 <code>while True</code> 无限循环：</p>
 
-<div class="vscode-block"><div><span style="color: #d73a49;font-weight: bold;">while</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">True</span><span style="color: #24292e;">:</span></div><div><span style="color: #24292e;">&#160; &#160; </span><span style="color: #24292e;">received_message</span><span style="color: #24292e;">, </span><span style="color: #24292e;">client_address</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">server</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">recvfrom</span><span style="color: #24292e;">(</span><span style="color: #005cc5;">2048</span><span style="color: #24292e;">)</span></div><div><span style="color: #24292e;">&#160; &#160; </span><span style="color: #24292e;">message</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">received_message</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">decode</span><span style="color: #24292e;">()</span></div><div><span style="color: #24292e;">&#160; &#160; </span><span style="color: #24292e;">server</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">sendto</span><span style="color: #24292e;">(</span><span style="color: #d73a49;font-weight: bold;">f</span><span style="color: #032f62;">'</span><span style="color: #005cc5;">{</span><span style="color: #24292e;">message</span><span style="color: #005cc5;">}</span><span style="color: #032f62;"> (</span><span style="color: #005cc5;">{</span><span style="color: #6f42c1;">len</span><span style="color: #24292e;">(</span><span style="color: #24292e;">message</span><span style="color: #24292e;">)</span><span style="color: #005cc5;">}</span><span style="color: #032f62;">)'</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">(), </span><span style="color: #24292e;">client_address</span><span style="color: #24292e;">)</span></div></div>
+<div class="vscode-block"><div><span style="color: #d73a49;font-weight: bold;">while</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">True</span><span style="color: #24292e;">:</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #24292e;">received_message</span><span style="color: #24292e;">, </span><span style="color: #24292e;">client_address</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">server</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">recvfrom</span><span style="color: #24292e;">(</span><span style="color: #005cc5;">2048</span><span style="color: #24292e;">)</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #24292e;">message</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">received_message</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">decode</span><span style="color: #24292e;">()</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #24292e;">server</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">sendto</span><span style="color: #24292e;">(</span><span style="color: #d73a49;font-weight: bold;">f</span><span style="color: #032f62;">'</span><span style="color: #005cc5;">{</span><span style="color: #24292e;">message</span><span style="color: #005cc5;">}</span><span style="color: #032f62;"> (</span><span style="color: #005cc5;">{</span><span style="color: #6f42c1;">len</span><span style="color: #24292e;">(</span><span style="color: #24292e;">message</span><span style="color: #24292e;">)</span><span style="color: #005cc5;">}</span><span style="color: #032f62;">)'</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">(), </span><span style="color: #24292e;">client_address</span><span style="color: #24292e;">)</span></div></div>
 
 <p>套接字对象的 <code>.recvform(<em>bufsize</em>)</code> 方法将会返回一个有两个元素的元组，第一个元素是返回的数据字符串，第二个元素是数据的来源地址。<code>.sendto(<em>data</em>, <em>address</em>)</code> 方法则向特定远程地址发送数据。</p>
 
@@ -442,7 +442,7 @@ var _hmt = _hmt || [];
 
 <p>为了找到服务端对应的套接字，客户端的 UDP 套接字程序还需要提供服务端的 IP 地址或主机名：</p>
 
-<div class="vscode-block"><div><span style="color: #a8a8a8;"># client.py</span></div><div><span style="color: #d73a49;font-weight: bold;">import</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">socket</span></div><br><div><span style="color: #24292e;">server_name</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #032f62;">'localhost'</span></div><div><span style="color: #24292e;">server_port</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">12000</span></div></div>
+<div class="vscode-block"><div><span style="color: #a8a8a8;"># client.py</span></div><div><span style="color: #d73a49;font-weight: bold;">import</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">socket</span></div><br/><div><span style="color: #24292e;">server_name</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #032f62;">'localhost'</span></div><div><span style="color: #24292e;">server_port</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">12000</span></div></div>
 
 <p>然后，创建一个用户端的 UDP 套接字对象：</p>
 
@@ -450,7 +450,7 @@ var _hmt = _hmt || [];
 
 <p>用户端的 UDP 套接字将报文发送到服务端的套接字里：</p>
 
-<div class="vscode-block"><div><span style="color: #24292e;">message</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">input</span><span style="color: #24292e;">(</span><span style="color: #032f62;">'Enter something to send: '</span><span style="color: #24292e;">).</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">()</span></div><div><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">sendto</span><span style="color: #24292e;">(</span><span style="color: #24292e;">message</span><span style="color: #24292e;">, (</span><span style="color: #24292e;">server_name</span><span style="color: #24292e;">, </span><span style="color: #24292e;">server_port</span><span style="color: #24292e;">))</span></div><br><div><span style="color: #24292e;">received_message</span><span style="color: #24292e;">, </span><span style="color: #24292e;">address</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">recvfrom</span><span style="color: #24292e;">(</span><span style="color: #005cc5;">2048</span><span style="color: #24292e;">)</span></div><div><span style="color: #6f42c1;">print</span><span style="color: #24292e;">(</span><span style="color: #24292e;">received_message</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">decode</span><span style="color: #24292e;">())</span></div></div>
+<div class="vscode-block"><div><span style="color: #24292e;">message</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">input</span><span style="color: #24292e;">(</span><span style="color: #032f62;">'Enter something to send: '</span><span style="color: #24292e;">).</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">()</span></div><div><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">sendto</span><span style="color: #24292e;">(</span><span style="color: #24292e;">message</span><span style="color: #24292e;">, (</span><span style="color: #24292e;">server_name</span><span style="color: #24292e;">, </span><span style="color: #24292e;">server_port</span><span style="color: #24292e;">))</span></div><br/><div><span style="color: #24292e;">received_message</span><span style="color: #24292e;">, </span><span style="color: #24292e;">address</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">recvfrom</span><span style="color: #24292e;">(</span><span style="color: #005cc5;">2048</span><span style="color: #24292e;">)</span></div><div><span style="color: #6f42c1;">print</span><span style="color: #24292e;">(</span><span style="color: #24292e;">received_message</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">decode</span><span style="color: #24292e;">())</span></div></div>
 
 <p>发送时，操作系统会自动将源主机地址附加在分组上，无需显式通过代码完成。发送之后，客户端可能还需要再次接收来自服务端的响应报文。在这里，客户端已经不需要使用了，可以主动关闭：</p>
 
@@ -475,7 +475,7 @@ Hello, world! (13)</div>
 <p>当创建该连接套接字后，一侧要向另一侧发送数据时，它只需经过连接套接字将数据送入 TCP 连接；而 UDP 连接每次在发送数据时，都需要附加上目的地地址。</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/02-tcp-socket.jpg" alt="" width="350">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@computer-network/02-tcp-socket.jpg" width="350"/>
     <figcaption>TCP 套接字的通信过程</figcaption>
 </figure>
 
@@ -485,7 +485,7 @@ Hello, world! (13)</div>
 
 <p>首先处理客户端的套接字程序。客户端套接字为了连接到服务器套接字，同样需要标识出服务器的地址和套接字端口：</p>
 
-<div class="vscode-block"><div><span style="color: #a8a8a8;"># client.py</span></div><div><span style="color: #d73a49;font-weight: bold;">import</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">socket</span></div><br><div><span style="color: #24292e;">server_name</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #032f62;">'localhost'</span></div><div><span style="color: #24292e;">server_port</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">12000</span></div></div>
+<div class="vscode-block"><div><span style="color: #a8a8a8;"># client.py</span></div><div><span style="color: #d73a49;font-weight: bold;">import</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">socket</span></div><br/><div><span style="color: #24292e;">server_name</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #032f62;">'localhost'</span></div><div><span style="color: #24292e;">server_port</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">12000</span></div></div>
 
 <p>TCP 套接字和 UDP 套接字程序的区别首先是套接字的创建：</p>
 
@@ -517,7 +517,7 @@ Hello, world! (13)</div>
 
 <p>服务端的 TCP 套接字也需要先创建一个套接字对象，然后将其与服务器的端口号关联起来：</p>
 
-<div class="vscode-block"><div><span style="color: #a8a8a8;"># server.py</span></div><div><span style="color: #d73a49;font-weight: bold;">import</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">socket</span></div><br><div><span style="color: #24292e;">server_port</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">12000</span></div><br><div><span style="color: #24292e;">server</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">(</span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #24292e;">AF_INET</span><span style="color: #24292e;">, </span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #24292e;">SOCK_STREAM</span><span style="color: #24292e;">)</span></div><div><span style="color: #24292e;">server</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">bind</span><span style="color: #24292e;">((</span><span style="color: #032f62;">''</span><span style="color: #24292e;">, </span><span style="color: #24292e;">server_port</span><span style="color: #24292e;">))</span></div></div>
+<div class="vscode-block"><div><span style="color: #a8a8a8;"># server.py</span></div><div><span style="color: #d73a49;font-weight: bold;">import</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">socket</span></div><br/><div><span style="color: #24292e;">server_port</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">12000</span></div><br/><div><span style="color: #24292e;">server</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">(</span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #24292e;">AF_INET</span><span style="color: #24292e;">, </span><span style="color: #6f42c1;">socket</span><span style="color: #24292e;">.</span><span style="color: #24292e;">SOCK_STREAM</span><span style="color: #24292e;">)</span></div><div><span style="color: #24292e;">server</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">bind</span><span style="color: #24292e;">((</span><span style="color: #032f62;">''</span><span style="color: #24292e;">, </span><span style="color: #24292e;">server_port</span><span style="color: #24292e;">))</span></div></div>
 
 <p>对于 TCP 连接，还需要调用 <code>.listen(<em>num</em>)</code> 让套接字监听该端口号，获取用户的连接请求。该方法的参数决定了同时请求连接的最大数量：</p>
 
@@ -525,13 +525,13 @@ Hello, world! (13)</div>
 
 <p>TCP 套接字的循环部分为：</p>
 
-<div class="vscode-block"><div><span style="color: #d73a49;font-weight: bold;">while</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">True</span><span style="color: #24292e;">:</span></div><div><span style="color: #24292e;">&#160; &#160; </span><span style="color: #24292e;">connection</span><span style="color: #24292e;">, </span><span style="color: #24292e;">address</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">server</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">accept</span><span style="color: #24292e;">()</span></div><div><span style="color: #24292e;">&#160; &#160; </span><span style="color: #24292e;">received_message</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">connection</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">recv</span><span style="color: #24292e;">(</span><span style="color: #005cc5;">1024</span><span style="color: #24292e;">)</span></div><div><span style="color: #24292e;">&#160; &#160; </span><span style="color: #24292e;">message</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">received_message</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">decode</span><span style="color: #24292e;">()</span></div><div><span style="color: #24292e;">&#160; &#160; </span><span style="color: #24292e;">connection</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">send</span><span style="color: #24292e;">(</span><span style="color: #d73a49;font-weight: bold;">f</span><span style="color: #032f62;">'</span><span style="color: #005cc5;">{</span><span style="color: #24292e;">message</span><span style="color: #005cc5;">}</span><span style="color: #032f62;"> (</span><span style="color: #005cc5;">{</span><span style="color: #6f42c1;">len</span><span style="color: #24292e;">(</span><span style="color: #24292e;">message</span><span style="color: #24292e;">)</span><span style="color: #005cc5;">}</span><span style="color: #032f62;">)'</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">())</span></div><div><span style="color: #24292e;">&#160; &#160; </span><span style="color: #24292e;">connection</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">close</span><span style="color: #24292e;">()</span></div></div>
+<div class="vscode-block"><div><span style="color: #d73a49;font-weight: bold;">while</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">True</span><span style="color: #24292e;">:</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #24292e;">connection</span><span style="color: #24292e;">, </span><span style="color: #24292e;">address</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">server</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">accept</span><span style="color: #24292e;">()</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #24292e;">received_message</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">connection</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">recv</span><span style="color: #24292e;">(</span><span style="color: #005cc5;">1024</span><span style="color: #24292e;">)</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #24292e;">message</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">received_message</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">decode</span><span style="color: #24292e;">()</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #24292e;">connection</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">send</span><span style="color: #24292e;">(</span><span style="color: #d73a49;font-weight: bold;">f</span><span style="color: #032f62;">'</span><span style="color: #005cc5;">{</span><span style="color: #24292e;">message</span><span style="color: #005cc5;">}</span><span style="color: #032f62;"> (</span><span style="color: #005cc5;">{</span><span style="color: #6f42c1;">len</span><span style="color: #24292e;">(</span><span style="color: #24292e;">message</span><span style="color: #24292e;">)</span><span style="color: #005cc5;">}</span><span style="color: #032f62;">)'</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">())</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #24292e;">connection</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">close</span><span style="color: #24292e;">()</span></div></div>
 
 <p>当客户开始连接后，程序通过调用 <code>.accept()</code> 方法来接收连接请求，每次调用该方法都会等待一个新的客户连接该服务器，然后返回一个新的套接字，用于管理该连接的数据收发。借助于创建的 TCP ，客户可以直接与服务器收发信息，并且发送的所有内容可以按正确的顺序到达。</p>
 
 <p>由于 TCP 通信下，每个连接都使用唯一的套接字，因此连接结束后，服务端对应的套接字也需要关闭。</p>
 
-同样可以在一台主机中运行这两个套接字程序，所得的现象与 UDP 套接字实验相同，这里不再展示。在下一章运输层中，还会结合运输层服务的内容对这几个程序中的细节作进一步分析。
+<p>同样可以在一台主机中运行这两个套接字程序，所得的现象与 UDP 套接字实验相同，这里不再展示。在下一章运输层中，还会结合运输层服务的内容对这几个程序中的细节作进一步分析。</p>
 
 <h2>电子邮件与SMTP协议</h2>
 
@@ -549,7 +549,7 @@ Hello, world! (13)</div>
 <p>例如，当在浏览器中输入一个网址时，浏览器从网站服务器中从发送请求到完整显示网页的过程中，就会利用应用层的超文本传输协议(HyperText Transfer Protocol, HTTP)。HTTP 对请求和响应的报文都做了非常严格的规定，以下是 HTTP 响应部分的内容格式：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/02-http-response.jpg" alt="" width="540">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@computer-network/02-http-response.jpg" width="540"/>
     <figcaption>HTTP 响应包体</figcaption>
 </figure>
 
@@ -570,7 +570,7 @@ Hello, world! (13)</div>
 <p>接收方要访问邮件则需要使用<strong>拉协议</strong>(pull protocol)来获取报文，目前常见的邮件访问协议包括第三版邮局协议(Post Office Protocol-Version 3, POP3)、互联网邮件访问协议(Internet Mail Access Protocol, IMAP)以及 HTTP 。</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@computer-network/02-mail-transfer.jpg" alt="" width="540">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@computer-network/02-mail-transfer.jpg" width="540"/>
     <figcaption>邮件发送的过程</figcaption>
 </figure>
 
@@ -610,7 +610,7 @@ Hello, world! (13)</div>
 
 <p>准备几个实验用的关键变量如下：</p>
 
-<div class="vscode-block"><div><span style="color: #a8a8a8;"># mail-client.py</span></div><div><span style="color: #d73a49;font-weight: bold;">import</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">socket</span></div><br><div><span style="color: #24292e;">mail_server</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #032f62;">'smtp.qiye.aliyun.com'</span></div><div><span style="color: #24292e;">mail_from</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #032f62;">'web@frozencandles.fun'</span></div><div><span style="color: #24292e;">mail_to</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #032f62;">'alterdellusion@gmail.com'</span></div><br><div><span style="color: #24292e;">mail</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #d73a49;font-weight: bold;">f</span><span style="color: #032f62;">'From: </span><span style="color: #005cc5;">{</span><span style="color: #24292e;">mail_from</span><span style="color: #005cc5;">}\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">\</span></div><div><span style="color: #24292e;">&#160; &#160; &#160; &#160;</span><span style="color: #d73a49;font-weight: bold;">f</span><span style="color: #032f62;">'To: </span><span style="color: #005cc5;">{</span><span style="color: #24292e;">mail_to</span><span style="color: #005cc5;">}\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">\</span></div><div><span style="color: #24292e;">&#160; &#160; &#160; &#160; </span><span style="color: #032f62;">'Subject: Hello World</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">\</span></div><div><span style="color: #24292e;">&#160; &#160; &#160; &#160; </span><span style="color: #032f62;">'</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">\</span></div><div><span style="color: #24292e;">&#160; &#160; &#160; &#160; </span><span style="color: #032f62;">'Hello, world!</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">'</span></div></div>
+<div class="vscode-block"><div><span style="color: #a8a8a8;"># mail-client.py</span></div><div><span style="color: #d73a49;font-weight: bold;">import</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">socket</span></div><br/><div><span style="color: #24292e;">mail_server</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #032f62;">'smtp.qiye.aliyun.com'</span></div><div><span style="color: #24292e;">mail_from</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #032f62;">'web@frozencandles.fun'</span></div><div><span style="color: #24292e;">mail_to</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #032f62;">'alterdellusion@gmail.com'</span></div><br/><div><span style="color: #24292e;">mail</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #d73a49;font-weight: bold;">f</span><span style="color: #032f62;">'From: </span><span style="color: #005cc5;">{</span><span style="color: #24292e;">mail_from</span><span style="color: #005cc5;">}\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">\</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; &nbsp; &nbsp;</span><span style="color: #d73a49;font-weight: bold;">f</span><span style="color: #032f62;">'To: </span><span style="color: #005cc5;">{</span><span style="color: #24292e;">mail_to</span><span style="color: #005cc5;">}\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">\</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #032f62;">'Subject: Hello World</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">\</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #032f62;">'</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">\</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #032f62;">'Hello, world!</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">'</span></div></div>
 
 <p>SMTP 使用 TCP 连接，端口号为 25 ，因此首先生成客户端套接字并连接：</p>
 
@@ -618,17 +618,17 @@ Hello, world! (13)</div>
 
 <p>当连接到邮件服务器后，邮件服务器会主动发送就绪应答码 220 给用户，应答码后面可能会跟随一些描述信息。这里使用如下代码接收并检查邮件服务器返回的信息：</p>
 
-<div class="vscode-block"><div><span style="color: #24292e;">received_message</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">recv</span><span style="color: #24292e;">(</span><span style="color: #005cc5;">1024</span><span style="color: #24292e;">).</span><span style="color: #6f42c1;">decode</span><span style="color: #24292e;">()</span></div><div><span style="color: #6f42c1;">print</span><span style="color: #24292e;">(</span><span style="color: #24292e;">received_message</span><span style="color: #24292e;">, </span><span style="color: #e36209;">end</span><span style="color: #d73a49;">=</span><span style="color: #032f62;">''</span><span style="color: #24292e;">)</span></div><div><span style="color: #d73a49;font-weight: bold;">if</span><span style="color: #24292e;"> </span><span style="color: #24292e;">received_message</span><span style="color: #24292e;">[:</span><span style="color: #005cc5;">3</span><span style="color: #24292e;">] </span><span style="color: #d73a49;">!=</span><span style="color: #24292e;"> </span><span style="color: #032f62;">'220'</span><span style="color: #24292e;">:</span></div><div><span style="color: #24292e;">&#160; &#160; </span><span style="color: #d73a49;font-weight: bold;">raise</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">RuntimeError</span><span style="color: #24292e;">(</span><span style="color: #032f62;">'220 reply not received from server'</span><span style="color: #24292e;">)</span></div></div>
+<div class="vscode-block"><div><span style="color: #24292e;">received_message</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">recv</span><span style="color: #24292e;">(</span><span style="color: #005cc5;">1024</span><span style="color: #24292e;">).</span><span style="color: #6f42c1;">decode</span><span style="color: #24292e;">()</span></div><div><span style="color: #6f42c1;">print</span><span style="color: #24292e;">(</span><span style="color: #24292e;">received_message</span><span style="color: #24292e;">, </span><span style="color: #e36209;">end</span><span style="color: #d73a49;">=</span><span style="color: #032f62;">''</span><span style="color: #24292e;">)</span></div><div><span style="color: #d73a49;font-weight: bold;">if</span><span style="color: #24292e;"> </span><span style="color: #24292e;">received_message</span><span style="color: #24292e;">[:</span><span style="color: #005cc5;">3</span><span style="color: #24292e;">] </span><span style="color: #d73a49;">!=</span><span style="color: #24292e;"> </span><span style="color: #032f62;">'220'</span><span style="color: #24292e;">:</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #d73a49;font-weight: bold;">raise</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">RuntimeError</span><span style="color: #24292e;">(</span><span style="color: #032f62;">'220 reply not received from server'</span><span style="color: #24292e;">)</span></div></div>
 
 <p>接下来，用户可以向服务器发送 <code>HELO <em>identity</em></code> 指令，<code><em>identity</em></code> 表示用户身份。若服务器认为身份有效，则返回应答码 250 。公共的邮件服务器在发送邮件之前，用户需要通过 <code>auth login</code> 指令登录邮箱，服务器接收后返回应答码 334 并提示用户输入用户名。以上行为翻译为代码就是：</p>
 
-<div class="vscode-block"><div><span style="color: #d73a49;font-weight: bold;">def</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">send_message</span><span style="color: #24292e;">(</span><span style="color: #e36209;">msg</span><span style="color: #24292e;">, </span><span style="color: #e36209;">status</span><span style="color: #24292e;">):</span></div><div><span style="color: #24292e;">&#160; &#160; </span><span style="color: #d73a49;font-weight: bold;">while</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">True</span><span style="color: #24292e;">:</span></div><div><span style="color: #24292e;">&#160; &#160; &#160; &#160; </span><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">send</span><span style="color: #24292e;">(</span><span style="color: #e36209;">msg</span><span style="color: #24292e;">)</span></div><div><span style="color: #24292e;">&#160; &#160; &#160; &#160; </span><span style="color: #24292e;">received_message</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">recv</span><span style="color: #24292e;">(</span><span style="color: #005cc5;">1024</span><span style="color: #24292e;">).</span><span style="color: #6f42c1;">decode</span><span style="color: #24292e;">()</span></div><div><span style="color: #24292e;">&#160; &#160; &#160; &#160; </span><span style="color: #6f42c1;">print</span><span style="color: #24292e;">(</span><span style="color: #24292e;">received_message</span><span style="color: #24292e;">, </span><span style="color: #e36209;">end</span><span style="color: #d73a49;">=</span><span style="color: #032f62;">''</span><span style="color: #24292e;">)</span></div><div><span style="color: #24292e;">&#160; &#160; &#160; &#160; </span><span style="color: #d73a49;font-weight: bold;">if</span><span style="color: #24292e;"> </span><span style="color: #24292e;">received_message</span><span style="color: #24292e;">[:</span><span style="color: #005cc5;">3</span><span style="color: #24292e;">] </span><span style="color: #d73a49;">==</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">str</span><span style="color: #24292e;">(</span><span style="color: #e36209;">status</span><span style="color: #24292e;">):</span></div><div><span style="color: #24292e;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #d73a49;font-weight: bold;">break</span></div><div><span style="color: #24292e;">&#160; &#160; &#160; &#160; </span><span style="color: #d73a49;font-weight: bold;">else</span><span style="color: #24292e;">:</span></div><div><span style="color: #24292e;">&#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #d73a49;font-weight: bold;">raise</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">RuntimeError</span><span style="color: #24292e;">(</span><span style="color: #032f62;">'Bad response from server'</span><span style="color: #24292e;">)</span></div><br><div><span style="color: #6f42c1;">send_message</span><span style="color: #24292e;">(</span><span style="color: #032f62;">'HELO mailserver</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">(), </span><span style="color: #005cc5;">250</span><span style="color: #24292e;">)</span></div><div><span style="color: #6f42c1;">send_message</span><span style="color: #24292e;">(</span><span style="color: #032f62;">'auth login</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">(), </span><span style="color: #005cc5;">334</span><span style="color: #24292e;">)</span></div></div>
+<div class="vscode-block"><div><span style="color: #d73a49;font-weight: bold;">def</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">send_message</span><span style="color: #24292e;">(</span><span style="color: #e36209;">msg</span><span style="color: #24292e;">, </span><span style="color: #e36209;">status</span><span style="color: #24292e;">):</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; </span><span style="color: #d73a49;font-weight: bold;">while</span><span style="color: #24292e;"> </span><span style="color: #005cc5;">True</span><span style="color: #24292e;">:</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">send</span><span style="color: #24292e;">(</span><span style="color: #e36209;">msg</span><span style="color: #24292e;">)</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #24292e;">received_message</span><span style="color: #24292e;"> </span><span style="color: #d73a49;">=</span><span style="color: #24292e;"> </span><span style="color: #24292e;">client</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">recv</span><span style="color: #24292e;">(</span><span style="color: #005cc5;">1024</span><span style="color: #24292e;">).</span><span style="color: #6f42c1;">decode</span><span style="color: #24292e;">()</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #6f42c1;">print</span><span style="color: #24292e;">(</span><span style="color: #24292e;">received_message</span><span style="color: #24292e;">, </span><span style="color: #e36209;">end</span><span style="color: #d73a49;">=</span><span style="color: #032f62;">''</span><span style="color: #24292e;">)</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #d73a49;font-weight: bold;">if</span><span style="color: #24292e;"> </span><span style="color: #24292e;">received_message</span><span style="color: #24292e;">[:</span><span style="color: #005cc5;">3</span><span style="color: #24292e;">] </span><span style="color: #d73a49;">==</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">str</span><span style="color: #24292e;">(</span><span style="color: #e36209;">status</span><span style="color: #24292e;">):</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #d73a49;font-weight: bold;">break</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #d73a49;font-weight: bold;">else</span><span style="color: #24292e;">:</span></div><div><span style="color: #24292e;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #d73a49;font-weight: bold;">raise</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">RuntimeError</span><span style="color: #24292e;">(</span><span style="color: #032f62;">'Bad response from server'</span><span style="color: #24292e;">)</span></div><br/><div><span style="color: #6f42c1;">send_message</span><span style="color: #24292e;">(</span><span style="color: #032f62;">'HELO mailserver</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">(), </span><span style="color: #005cc5;">250</span><span style="color: #24292e;">)</span></div><div><span style="color: #6f42c1;">send_message</span><span style="color: #24292e;">(</span><span style="color: #032f62;">'auth login</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">(), </span><span style="color: #005cc5;">334</span><span style="color: #24292e;">)</span></div></div>
 
 <p>注意每条指令都需要使用一个 CRLF 回车换行表示结束。</p>
 
 <p>部分邮件服务器为了能够接收非 ASCII 字符，使用 base64 编码后传输。本例中将待发送的用户名使用 base64 编码后发送，若服务器认为用户名存在，便会再次返回 334 应答码并提示用户继续发送口令。使用 base64 编码发送口令后，若验证通过，服务器则会返回 235 应答码。以上行为翻译为代码就是：</p>
 
-<div class="vscode-block"><div><span style="color: #d73a49;font-weight: bold;">from</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">base64</span><span style="color: #24292e;"> </span><span style="color: #d73a49;font-weight: bold;">import</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">b64encode</span></div><br><div><span style="color: #6f42c1;">send_message</span><span style="color: #24292e;">(</span><span style="color: #6f42c1;">b64encode</span><span style="color: #24292e;">(</span><span style="color: #24292e;">mail_from</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">()) </span><span style="color: #d73a49;">+</span><span style="color: #24292e;"> </span><span style="color: #d73a49;font-weight: bold;">b</span><span style="color: #032f62;">'</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">, </span><span style="color: #005cc5;">334</span><span style="color: #24292e;">)</span></div><div><span style="color: #6f42c1;">send_message</span><span style="color: #24292e;">(</span><span style="color: #6f42c1;">b64encode</span><span style="color: #24292e;">(</span><span style="color: #032f62;">'password123'</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">()) </span><span style="color: #d73a49;">+</span><span style="color: #24292e;"> </span><span style="color: #d73a49;font-weight: bold;">b</span><span style="color: #032f62;">'</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">, </span><span style="color: #005cc5;">235</span><span style="color: #24292e;">)</span></div></div>
+<div class="vscode-block"><div><span style="color: #d73a49;font-weight: bold;">from</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">base64</span><span style="color: #24292e;"> </span><span style="color: #d73a49;font-weight: bold;">import</span><span style="color: #24292e;"> </span><span style="color: #6f42c1;">b64encode</span></div><br/><div><span style="color: #6f42c1;">send_message</span><span style="color: #24292e;">(</span><span style="color: #6f42c1;">b64encode</span><span style="color: #24292e;">(</span><span style="color: #24292e;">mail_from</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">()) </span><span style="color: #d73a49;">+</span><span style="color: #24292e;"> </span><span style="color: #d73a49;font-weight: bold;">b</span><span style="color: #032f62;">'</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">, </span><span style="color: #005cc5;">334</span><span style="color: #24292e;">)</span></div><div><span style="color: #6f42c1;">send_message</span><span style="color: #24292e;">(</span><span style="color: #6f42c1;">b64encode</span><span style="color: #24292e;">(</span><span style="color: #032f62;">'password123'</span><span style="color: #24292e;">.</span><span style="color: #6f42c1;">encode</span><span style="color: #24292e;">()) </span><span style="color: #d73a49;">+</span><span style="color: #24292e;"> </span><span style="color: #d73a49;font-weight: bold;">b</span><span style="color: #032f62;">'</span><span style="color: #005cc5;">\r\n</span><span style="color: #032f62;">'</span><span style="color: #24292e;">, </span><span style="color: #005cc5;">235</span><span style="color: #24292e;">)</span></div></div>
 
 <p>为了发送一封邮件，用户需要用 <code>MAIL FROM &lt;<em>from_address</em>&gt;</code> 指定邮件的发件邮箱，用 <code>RCPT TO &lt;<em>to_address</em>&gt;</code> 指定收件邮箱。若服务器认为邮箱有效，则返回应答码 250 ，用户便可以使用指令 <code>DATA</code> 告知服务器准备发送邮件内容，邮件服务器使用应答码 354 表明准备接收这部分内容。</p>
 
@@ -656,7 +656,7 @@ Hello, world! (13)</div>
 
 <p>在本节中，简单介绍了应用层体系结构。应用层本身主要通过应用程序来实现特定的互联网功能。应用层本身不参与数据的传输，因此需要操作系统提供的运输服务。应用层协议是计算机网络建立的最终目的，也是近几年计算机网络发展的最快的部分，各种各样的应用层协议层出不穷，让互联网在多媒体浏览、文件传输、远程主机登录，乃至工业物联网通信间的各种场景中可以自由发挥。</p>
 
-<p>在下一节中，将介绍 DNS 应用层协议，它是一种用于实现网络设备名字到主机地址映射的网络服务。</p>
+<p>在<a class="link-internal" href="/computer-science/computer-networking/02-the-application-layer">下一节</a>中，将介绍 DNS 应用层协议，它是一种用于实现网络设备名字到主机地址映射的网络服务。</p>
 
 
 
@@ -683,14 +683,14 @@ Hello, world! (13)</div>
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/programming/python-fp/06-tuple-handling/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-300x169.jpg 300w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-1024x576.jpg 1024w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-768x432.jpg 768w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-1536x864.jpg 1536w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-950x534.jpg 950w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/programming/python-fp/03-functional-programming/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/programming/python-fp/06-tuple-handling/" rel="bookmark">Python函数式编程06 元组与命名元组</a>
+					<a href="/programming/python-fp/03-functional-programming/" rel="bookmark">Python函数式编程03 高阶函数与匿名函数</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -701,14 +701,14 @@ Hello, world! (13)</div>
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/embedded/stm32/esp8266-controlling/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/07/STM32与物联网02-网络数据收发-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/07/STM32与物联网02-网络数据收发-520x293.jpg 520w, /wp-content/uploads/2022/07/STM32与物联网02-网络数据收发-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/data-science/via-python/pandas03-the-index/">
+											<img width="520" height="293" src="/wp-content/uploads/2023/03/Python数据分析-pandas03索引-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2023/03/Python数据分析-pandas03索引-520x293.jpg 520w, /wp-content/uploads/2023/03/Python数据分析-pandas03索引-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/embedded/stm32/esp8266-controlling/" rel="bookmark">STM32与物联网02-网络数据收发</a>
+					<a href="/data-science/via-python/pandas03-the-index/" rel="bookmark">pandas03:深入认识索引</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -719,14 +719,14 @@ Hello, world! (13)</div>
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/data-science/machine-learning/10-clustering/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/11/机器学习-聚类算法-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/11/机器学习-聚类算法-520x293.jpg 520w, /wp-content/uploads/2022/11/机器学习-聚类算法-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/computer-science/computer-networking/04-the-transport-layer/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/计算机网络04-运输层概率与UDP协议-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/07/计算机网络04-运输层概率与UDP协议-520x293.jpg 520w, /wp-content/uploads/2022/07/计算机网络04-运输层概率与UDP协议-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/data-science/machine-learning/10-clustering/" rel="bookmark">机器学习-数据聚类与分群</a>
+					<a href="/computer-science/computer-networking/04-the-transport-layer/" rel="bookmark">计算机网络04-运输层概览与UDP协议</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -763,6 +763,14 @@ Hello, world! (13)</div>
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
 											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
 					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
 											<span class="post-date">2023年6月19日</span>
 									</li>
@@ -782,14 +790,6 @@ Hello, world! (13)</div>
 					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
 											<span class="post-date">2023年3月6日</span>
 									</li>
-											<li>
-					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
-											<span class="post-date">2023年2月27日</span>
-									</li>
-											<li>
-					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
-											<span class="post-date">2023年2月8日</span>
-									</li>
 					</ul>
 
 		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
@@ -802,9 +802,11 @@ Hello, world! (13)</div>
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (1)
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
 <ul class='children'>
 	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
 </li>
 </ul>
 </li>
@@ -826,7 +828,7 @@ Hello, world! (13)</div>
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (20)
 <ul class='children'>
 	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
 </li>
@@ -852,7 +854,9 @@ Hello, world! (13)</div>
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(1)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
 	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
 	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
 	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
@@ -917,7 +921,7 @@ Hello, world! (13)</div>
 					
 										
 					<div id="copyright">
-													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
 											</div><!--/#copyright-->
 					
 										

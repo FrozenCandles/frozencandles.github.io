@@ -12,7 +12,7 @@
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 
-	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
 	<title>机器学习-参数选择与模型验证 - 冰封残烛的个人小站</title>
 	<meta name="description" content="本节介绍机器学习中常用的模型验证方法：交叉验证(cross validation)、混淆矩阵(confusion matrix)，以及常用的模型指标：准确率、精确率、召回率、F1 分数、ROC、AUC、KS 曲线，以及网格搜索和随机搜索两种参数搜索方法。" />
 	<link rel="canonical" href="/data-science/machine-learning/06-module-validation/" />
@@ -23,11 +23,12 @@
 	<meta property="og:url" content="/data-science/machine-learning/06-module-validation/" />
 	<meta property="og:site_name" content="冰封残烛的个人小站" />
 	<meta property="article:published_time" content="2023-04-15T09:29:37+00:00" />
-	<meta property="article:modified_time" content="2023-10-06T11:56:25+00:00" />
+	<meta property="article:modified_time" content="2023-10-13T07:06:25+00:00" />
 	<meta property="og:image" content="/wp-content/uploads/2023/04/机器学习-参数选择与模型验证.jpg" />
 	<meta property="og:image:width" content="1754" />
 	<meta property="og:image:height" content="1240" />
 	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="作者" />
 	<meta name="twitter:data1" content="Hello" />
@@ -37,35 +38,8 @@
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
-	            "@type": "WebSite",
-	            "@id": "/#website",
-	            "url": "/",
-	            "name": "冰封残烛的个人小站",
-	            "description": "FrozenCandle&#039;s Personal Site",
-	            "potentialAction": [
-	                {
-	                    "@type": "SearchAction",
-	                    "target": {
-	                        "@type": "EntryPoint",
-	                        "urlTemplate": "/?s={search_term_string}"
-	                    },
-	                    "query-input": "required name=search_term_string"
-	                }
-	            ],
-	            "inLanguage": "zh-CN"
-	        },
-	        {
-	            "@type": "ImageObject",
-	            "inLanguage": "zh-CN",
-	            "@id": "/data-science/machine-learning/06-module-validation/#primaryimage",
-	            "url": "/wp-content/uploads/2023/04/机器学习-参数选择与模型验证.jpg",
-	            "contentUrl": "/wp-content/uploads/2023/04/机器学习-参数选择与模型验证.jpg",
-	            "width": 1754,
-	            "height": 1240
-	        },
-	        {
 	            "@type": "WebPage",
-	            "@id": "/data-science/machine-learning/06-module-validation/#webpage",
+	            "@id": "/data-science/machine-learning/06-module-validation/",
 	            "url": "/data-science/machine-learning/06-module-validation/",
 	            "name": "机器学习-参数选择与模型验证 - 冰封残烛的个人小站",
 	            "isPartOf": {
@@ -74,8 +48,12 @@
 	            "primaryImageOfPage": {
 	                "@id": "/data-science/machine-learning/06-module-validation/#primaryimage"
 	            },
+	            "image": {
+	                "@id": "/data-science/machine-learning/06-module-validation/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2023/04/机器学习-参数选择与模型验证.jpg",
 	            "datePublished": "2023-04-15T09:29:37+00:00",
-	            "dateModified": "2023-10-06T11:56:25+00:00",
+	            "dateModified": "2023-10-13T07:06:25+00:00",
 	            "author": {
 	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
 	            },
@@ -94,6 +72,15 @@
 	            ]
 	        },
 	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/data-science/machine-learning/06-module-validation/#primaryimage",
+	            "url": "/wp-content/uploads/2023/04/机器学习-参数选择与模型验证.jpg",
+	            "contentUrl": "/wp-content/uploads/2023/04/机器学习-参数选择与模型验证.jpg",
+	            "width": 1754,
+	            "height": 1240
+	        },
+	        {
 	            "@type": "BreadcrumbList",
 	            "@id": "/data-science/machine-learning/06-module-validation/#breadcrumb",
 	            "itemListElement": [
@@ -109,6 +96,24 @@
 	                    "name": "机器学习-参数选择与模型验证"
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
 	        },
 	        {
 	            "@type": "Person",
@@ -158,7 +163,6 @@ body { font-family: "Roboto", Arial, sans-serif; }
 <link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
-<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
 <script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
 <link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/1081" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
 <meta name="generator" content="WordPress 6.3.1" />
@@ -324,10 +328,6 @@ var _hmt = _hmt || [];
 				<div class="entry-content">
 					<div class="entry themeform">	
 						
-
-
-
-
 <p>在很多时候并不能直接将数据以可视化的形式表达出来，这就意味着无法以直观的方式检验模型的分类效果。本节介绍机器学习中常用的模型验证方法以及如何选择恰当的超参数。</p>
 
 <h2>模型检验方法</h2>
@@ -672,17 +672,6 @@ var _hmt = _hmt || [];
 <p>网格搜索的缺点是如果参数列表很多，那么搜索范围会变得很大，再加上交叉验证会严重拖慢搜索进度。此时可以使用随机搜索 <code>RandomizedSearchCV</code> ，它只会挑选部分而不是全部的参数组合，再从这部分随机组合中挑选最优结果。这个类的用法与 <code>GridSearchCV</code> 大致相同。</p>
 
 <p>随机搜索不仅速度更快，而且对是连续值的参数效果更好，因为随机搜索可以很方便地抽取大量参数用于检验，每个参数可能差别很小，完整训练的代价太大。</p>
-
-
-
-
-
-
-
-
-
-
-
 												<div class="clear"></div>				
 					</div><!--/.entry-->
 				</div>
@@ -704,14 +693,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/computer-science/computer-networking/06-internet-protocol/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/07/计算机网络05-网络层概述与网际协议IP-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/07/计算机网络05-网络层概述与网际协议IP-520x293.jpg 520w, /wp-content/uploads/2022/07/计算机网络05-网络层概述与网际协议IP-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/programming/python-fp/01-function-fundamentals/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程01-函数的基本概念-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/05/Python函数式编程01-函数的基本概念-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程01-函数的基本概念-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/computer-science/computer-networking/06-internet-protocol/" rel="bookmark">计算机网络06-网络层概述与网际协议IP</a>
+					<a href="/programming/python-fp/01-function-fundamentals/" rel="bookmark">Python函数式编程01 函数的基本概念</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -722,14 +711,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/data-science/via-python/pandas04-missing-values/">
-											<img width="520" height="293" src="/wp-content/uploads/2023/03/Python数据分析-pandas04索引与缺失值-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2023/03/Python数据分析-pandas04索引与缺失值-520x293.jpg 520w, /wp-content/uploads/2023/03/Python数据分析-pandas04索引与缺失值-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/data-science/machine-learning/02-logistic-regression/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/12/机器学习-逻辑回归-520x293.png" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/12/机器学习-逻辑回归-520x293.png 520w, /wp-content/uploads/2022/12/机器学习-逻辑回归-950x534.png 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/data-science/via-python/pandas04-missing-values/" rel="bookmark">Python数据分析-pandas04:索引与缺失值</a>
+					<a href="/data-science/machine-learning/02-logistic-regression/" rel="bookmark">机器学习-逻辑回归</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -740,14 +729,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/computer-science/data-structure/07-sort-algorithm/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/09/数据结构07-排序算法-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/09/数据结构07-排序算法-520x293.jpg 520w, /wp-content/uploads/2022/09/数据结构07-排序算法-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/programming/python-fp/10-library-functools/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/Python函数式编程10-functools模块：更多高阶函数-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/Python函数式编程10-functools模块：更多高阶函数-520x293.jpg 520w, /wp-content/uploads/2022/06/Python函数式编程10-functools模块：更多高阶函数-300x169.jpg 300w, /wp-content/uploads/2022/06/Python函数式编程10-functools模块：更多高阶函数-1024x576.jpg 1024w, /wp-content/uploads/2022/06/Python函数式编程10-functools模块：更多高阶函数-768x432.jpg 768w, /wp-content/uploads/2022/06/Python函数式编程10-functools模块：更多高阶函数-1536x864.jpg 1536w, /wp-content/uploads/2022/06/Python函数式编程10-functools模块：更多高阶函数-950x534.jpg 950w, /wp-content/uploads/2022/06/Python函数式编程10-functools模块：更多高阶函数.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/computer-science/data-structure/07-sort-algorithm/" rel="bookmark">数据结构07-排序算法</a>
+					<a href="/programming/python-fp/10-library-functools/" rel="bookmark">Python函数式编程10 functools模块：高阶函数工具</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -784,6 +773,14 @@ var _hmt = _hmt || [];
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
 											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
 					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
 											<span class="post-date">2023年6月19日</span>
 									</li>
@@ -803,14 +800,6 @@ var _hmt = _hmt || [];
 					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
 											<span class="post-date">2023年3月6日</span>
 									</li>
-											<li>
-					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
-											<span class="post-date">2023年2月27日</span>
-									</li>
-											<li>
-					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
-											<span class="post-date">2023年2月8日</span>
-									</li>
 					</ul>
 
 		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
@@ -823,9 +812,11 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (1)
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
 <ul class='children'>
 	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
 </li>
 </ul>
 </li>
@@ -847,7 +838,7 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (20)
 <ul class='children'>
 	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
 </li>
@@ -873,7 +864,9 @@ var _hmt = _hmt || [];
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(1)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
 	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
 	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
 	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
@@ -938,7 +931,7 @@ var _hmt = _hmt || [];
 					
 										
 					<div id="copyright">
-													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
 											</div><!--/#copyright-->
 					
 										

@@ -12,21 +12,23 @@
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 
-	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
 	<title>机器学习-朴素贝叶斯 - 冰封残烛的个人小站</title>
+	<meta name="description" content="朴素贝叶斯(naive bayes)模型是一种简单的分类算法，并且有坚实的数学原理支撑。朴素贝叶斯模型的一个显著的优点是只需要统计概率，因此计算速度很快，通常适用于维度非常高的数据集，并适合作为处理分类问题的基本方案，在得到数据后便可以使用朴素贝叶斯模型得到粗糙的结果。" />
 	<link rel="canonical" href="/data-science/machine-learning/03-naive-bayes/" />
 	<meta property="og:locale" content="zh_CN" />
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content="机器学习-朴素贝叶斯 - 冰封残烛的个人小站" />
-	<meta property="og:description" content="贝叶斯分类器 算法原理 贝叶斯分类源自概率论上著名的&#046;&#046;&#046;" />
+	<meta property="og:description" content="朴素贝叶斯(naive bayes)模型是一种简单的分类算法，并且有坚实的数学原理支撑。朴素贝叶斯模型的一个显著的优点是只需要统计概率，因此计算速度很快，通常适用于维度非常高的数据集，并适合作为处理分类问题的基本方案，在得到数据后便可以使用朴素贝叶斯模型得到粗糙的结果。" />
 	<meta property="og:url" content="/data-science/machine-learning/03-naive-bayes/" />
 	<meta property="og:site_name" content="冰封残烛的个人小站" />
 	<meta property="article:published_time" content="2022-12-16T15:00:20+00:00" />
-	<meta property="article:modified_time" content="2023-10-06T11:43:34+00:00" />
+	<meta property="article:modified_time" content="2023-10-13T03:46:25+00:00" />
 	<meta property="og:image" content="/wp-content/uploads/2022/12/机器学习-朴素贝叶斯.jpg" />
 	<meta property="og:image:width" content="1920" />
 	<meta property="og:image:height" content="1357" />
 	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="作者" />
 	<meta name="twitter:data1" content="Hello" />
@@ -36,35 +38,8 @@
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
-	            "@type": "WebSite",
-	            "@id": "/#website",
-	            "url": "/",
-	            "name": "冰封残烛的个人小站",
-	            "description": "FrozenCandle&#039;s Personal Site",
-	            "potentialAction": [
-	                {
-	                    "@type": "SearchAction",
-	                    "target": {
-	                        "@type": "EntryPoint",
-	                        "urlTemplate": "/?s={search_term_string}"
-	                    },
-	                    "query-input": "required name=search_term_string"
-	                }
-	            ],
-	            "inLanguage": "zh-CN"
-	        },
-	        {
-	            "@type": "ImageObject",
-	            "inLanguage": "zh-CN",
-	            "@id": "/data-science/machine-learning/03-naive-bayes/#primaryimage",
-	            "url": "/wp-content/uploads/2022/12/机器学习-朴素贝叶斯.jpg",
-	            "contentUrl": "/wp-content/uploads/2022/12/机器学习-朴素贝叶斯.jpg",
-	            "width": 1920,
-	            "height": 1357
-	        },
-	        {
 	            "@type": "WebPage",
-	            "@id": "/data-science/machine-learning/03-naive-bayes/#webpage",
+	            "@id": "/data-science/machine-learning/03-naive-bayes/",
 	            "url": "/data-science/machine-learning/03-naive-bayes/",
 	            "name": "机器学习-朴素贝叶斯 - 冰封残烛的个人小站",
 	            "isPartOf": {
@@ -73,11 +48,16 @@
 	            "primaryImageOfPage": {
 	                "@id": "/data-science/machine-learning/03-naive-bayes/#primaryimage"
 	            },
+	            "image": {
+	                "@id": "/data-science/machine-learning/03-naive-bayes/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2022/12/机器学习-朴素贝叶斯.jpg",
 	            "datePublished": "2022-12-16T15:00:20+00:00",
-	            "dateModified": "2023-10-06T11:43:34+00:00",
+	            "dateModified": "2023-10-13T03:46:25+00:00",
 	            "author": {
 	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
 	            },
+	            "description": "朴素贝叶斯(naive bayes)模型是一种简单的分类算法，并且有坚实的数学原理支撑。朴素贝叶斯模型的一个显著的优点是只需要统计概率，因此计算速度很快，通常适用于维度非常高的数据集，并适合作为处理分类问题的基本方案，在得到数据后便可以使用朴素贝叶斯模型得到粗糙的结果。",
 	            "breadcrumb": {
 	                "@id": "/data-science/machine-learning/03-naive-bayes/#breadcrumb"
 	            },
@@ -90,6 +70,15 @@
 	                    ]
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/data-science/machine-learning/03-naive-bayes/#primaryimage",
+	            "url": "/wp-content/uploads/2022/12/机器学习-朴素贝叶斯.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/12/机器学习-朴素贝叶斯.jpg",
+	            "width": 1920,
+	            "height": 1357
 	        },
 	        {
 	            "@type": "BreadcrumbList",
@@ -107,6 +96,24 @@
 	                    "name": "机器学习-朴素贝叶斯"
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
 	        },
 	        {
 	            "@type": "Person",
@@ -156,7 +163,6 @@ body { font-family: "Roboto", Arial, sans-serif; }
 <link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
-<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
 <script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
 <link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/953" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
 <meta name="generator" content="WordPress 6.3.1" />
@@ -322,10 +328,6 @@ var _hmt = _hmt || [];
 				<div class="entry-content">
 					<div class="entry themeform">	
 						
-
-
-
-
 <h2>贝叶斯分类器</h2>
 
 <h3>算法原理</h3>
@@ -341,12 +343,12 @@ var _hmt = _hmt || [];
 <p>该公式可以结合以下 Venn 图理解，注意 <span class="math">\\( P(B|A) = \displaystyle{\frac{P(A \cap B)}{P(A)}} \\)</span> ：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/03-prob-Venn.png" alt="" width="280">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/03-prob-Venn.png" width="280"/>
 </figure>
 
 <p>贝叶斯公式的用途为：很多时候并不能直接得出在事件 <span class="math">\\( B \\)</span> 发生的情况下事件 <span class="math">\\( A \\)</span> 发生的概率，但是根据贝叶斯公式，可以采用一种迂回的方式计算出它的概率。</p>
 
-<p>接下来看一个示例。假设研究人员统计了 10000 份邮件，其中包含 1500 份垃圾邮件，发现垃圾邮件中有 30% 的邮件都包含单词“ sale ”，而非垃圾邮件中只有 1% 包含该单词。如果现在新收到了一份邮件，它包含该单词，问它是垃圾邮件的概率。</p>
+<p>接下来看一个示例。假设研究人员统计了 10000 份邮件，其中包含 1500 份垃圾邮件，发现垃圾邮件中有 30% 的邮件都包含单词&ldquo; sale &rdquo;，而非垃圾邮件中只有 1% 包含该单词。如果现在新收到了一份邮件，它包含该单词，问它是垃圾邮件的概率。</p>
 
 <!-- 
 <div class="math">
@@ -374,7 +376,7 @@ P(X_1) = 0.15, P(X_2) = 0.85, P(Y|X_1) = 0.3, P(Y|X_2) = 0.01
 
 <p>结果显示这封邮件有很高的概率是垃圾邮件，那么它更应该被归入垃圾邮件的分类中。</p>
 
-<p>从计算过程中可以看到，虽然直接分析包含“ sale ”单词的邮件是垃圾邮件的概率较难，但是邮件中垃圾邮件和非垃圾邮件的概率是很方便统计的，而两种邮件的词频也是很好统计的，这些根据以往样本就可以计算得到的概率称为<strong>先验概率</strong>(prior probability)；而与之相对的<strong>后验概率</strong>(posterior probability)表示某个已经发生的事件应该发生的概率。容易看出，贝叶斯公式是一种用先验概率计算后验概率的公式。</p>
+<p>从计算过程中可以看到，虽然直接分析包含&ldquo; sale &rdquo;单词的邮件是垃圾邮件的概率较难，但是邮件中垃圾邮件和非垃圾邮件的概率是很方便统计的，而两种邮件的词频也是很好统计的，这些根据以往样本就可以计算得到的概率称为<strong>先验概率</strong>(prior probability)；而与之相对的<strong>后验概率</strong>(posterior probability)表示某个已经发生的事件应该发生的概率。容易看出，贝叶斯公式是一种用先验概率计算后验概率的公式。</p>
 
 <!-- <p>如果计算出在满足 <span class="math">\\( X=1 \\)</span> 中因变量 <span class="math">\\( Y=1 \\)</span> 的情况明显集中，则可以说明该条件是分类为 1 的一个特征。</p> -->
 
@@ -413,7 +415,7 @@ P(X_1) = 0.15, P(X_2) = 0.85, P(Y|X_1) = 0.3, P(Y|X_2) = 0.01
 <p>贝叶斯公式只能计算离散数据的概率，但对连续数据的分类比较困难。例如，对于以下在平面中分布的二维数据：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/03-output-gaussian-situation.png" alt="" width="420">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/03-output-gaussian-situation.png" width="420"/>
     <figcaption>不同的颜色描述样本的不同分类</figcaption>
 </figure>
 
@@ -429,11 +431,11 @@ P(X_1) = 0.15, P(X_2) = 0.85, P(Y|X_1) = 0.3, P(Y|X_2) = 0.01
 
 <figure class="parallel">
     <div>
-        <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/03-gaussian-probability.png" alt="" width="340">
+        <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/03-gaussian-probability.png" width="340"/>
         <figcaption>高斯朴素贝叶斯的概率密度，椭圆表示 3-sigma 边界</figcaption>
     </div>
     <div>
-        <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/03-output-gaussian-border.png" alt="" width="400">
+        <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/03-output-gaussian-border.png" width="400"/>
         <figcaption>由贝叶斯公式得到的决策边界</figcaption>
     </div>
 </figure>
@@ -451,12 +453,12 @@ P(X_1) = 0.15, P(X_2) = 0.85, P(Y|X_1) = 0.3, P(Y|X_2) = 0.01
 
 <div class="jupyter codeblock">
     <div class="jupyter-mark-in"></div>
-    <div class="vscode-block"><div><span style="color: #90a4ae;">model</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">theta_</span><span style="color: #39adb5;">[</span><span style="color: #f76d47;">0</span><span style="color: #39adb5;">]</span><span style="color: #90a4ae;"> &#160;</span><span style="color: #a8a8a8;"># mu (mean)</span></div></div>
+    <div class="vscode-block"><div><span style="color: #90a4ae;">model</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">theta_</span><span style="color: #39adb5;">[</span><span style="color: #f76d47;">0</span><span style="color: #39adb5;">]</span><span style="color: #90a4ae;"> &nbsp;</span><span style="color: #a8a8a8;"># mu (mean)</span></div></div>
     <div class="jupyter-mark-out"></div>
     <div class="jupyter-output">array([0.82083046, 3.94121607])</div>
 
     <div class="jupyter-mark-in"></div>
-    <div class="vscode-block"><div><span style="color: #90a4ae;">model</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">var_</span><span style="color: #39adb5;">[</span><span style="color: #f76d47;">0</span><span style="color: #39adb5;">]</span><span style="color: #90a4ae;"> &#160; </span><span style="color: #a8a8a8;"># sigma ** 2 (variance)</span></div></div>
+    <div class="vscode-block"><div><span style="color: #90a4ae;">model</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">var_</span><span style="color: #39adb5;">[</span><span style="color: #f76d47;">0</span><span style="color: #39adb5;">]</span><span style="color: #90a4ae;"> &nbsp; </span><span style="color: #a8a8a8;"># sigma ** 2 (variance)</span></div></div>
     <div class="jupyter-mark-out"></div>
     <div class="jupyter-output">array([2.05995969, 2.92921668])</div>
 </div>
@@ -475,7 +477,7 @@ P(X_1) = 0.15, P(X_2) = 0.85, P(Y|X_1) = 0.3, P(Y|X_2) = 0.01
 
 <h2>示例：垃圾邮件检测</h2>
 
-<p>本节将使用朴素贝叶斯算法将邮件分为普通邮件和垃圾邮件，所使用的数据集可以在 <a href="http://archive.ics.uci.edu/ml/machine-learning-databases/00228/">http://archive.ics.uci.edu/ml/machine-learning-databases/00228/</a> 处下载。由于这里只有英文的数据，因此只能用作英文邮件分类。（中文邮件的分类思路也是一致的，只不过需要更复杂的预处理而已）</p>
+<p>本节将使用朴素贝叶斯算法将邮件分为普通邮件和垃圾邮件，所使用的数据集可以在 <a class="link-external" href="http://archive.ics.uci.edu/ml/machine-learning-databases/00228/">http://archive.ics.uci.edu/ml/machine-learning-databases/00228/</a> 处下载。由于这里只有英文的数据，因此只能用作英文邮件分类。（中文邮件的分类思路也是一致的，只不过需要更复杂的预处理而已）</p>
 
 <p>这些数据的结构如下：</p>
 
@@ -484,7 +486,7 @@ P(X_1) = 0.15, P(X_2) = 0.85, P(Y|X_1) = 0.3, P(Y|X_2) = 0.01
     <div class="vscode-block"><div><span style="color: #90a4ae;">mail </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> pd</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">read_table</span><span style="color: #39adb5;">(</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">dataset/SMSSpamCollection</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> </span><span style="color: #e53935;">names</span><span style="color: #7c4dff;">=</span><span style="color: #39adb5;">[</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">label</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> </span><span style="color: #39adb5;">'</span><span style="color: #91b859;">text</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">])</span></div><div><span style="color: #90a4ae;">mail</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">head</span><span style="color: #39adb5;">(</span><span style="color: #f76d47;">3</span><span style="color: #39adb5;">)</span></div></div>
     <div class="jupyter-mark-out"></div>
     <div class="jupyter-output"><table class="pandas-dataframe">
-        <tr>
+        <tbody><tr>
             <th></th><th>label</th><th>text</th>
         </tr>
         <tr>
@@ -496,7 +498,7 @@ P(X_1) = 0.15, P(X_2) = 0.85, P(Y|X_1) = 0.3, P(Y|X_2) = 0.01
         <tr>
             <td>2</td><td>spam</td><td>Free entry in 2 a wkly comp to win FA Cup fina...</td>
         </tr>
-    </table></div>
+    </tbody></table></div>
 </div>
 
 在介绍数据具体的应用之前，先介绍数据
@@ -507,9 +509,9 @@ P(X_1) = 0.15, P(X_2) = 0.85, P(Y|X_1) = 0.3, P(Y|X_2) = 0.01
 
 <p>本次提取的文本特征为单词出现的频率，并使用词频计算贝叶斯模型中的概率。可以使用<strong>词袋模型</strong>(bag-of-words)来处理文本。词袋模型是一种基于词频的文本表示方法，它忽略了词的顺序，只考虑词在文本中出现的次数。词袋模型将所有样本中出现过的特征词汇表汇总成一个向量，每个词汇对应一个维度。</p>
 
-<p>例如，对于以下的文本数据：（示例来自<a href="https://en.wikipedia.org/wiki/Bag-of-words_model">维基百科</a>）</p>
+<p>例如，对于以下的文本数据：（示例来自<a class="link-external" href="https://en.wikipedia.org/wiki/Bag-of-words_model">维基百科</a>）</p>
 
-<div class="vscode-block"><div><span style="color: #90a4ae;">texts </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> </span><span style="color: #39adb5;">[</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">John likes to watch movies. Mary likes movies too.</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">,</span></div><div><span style="color: #90a4ae;">&#160; &#160; &#160; &#160; &#160;</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">Mary also likes to watch football games.</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">]</span></div></div>
+<div class="vscode-block"><div><span style="color: #90a4ae;">texts </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> </span><span style="color: #39adb5;">[</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">John likes to watch movies. Mary likes movies too.</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">,</span></div><div><span style="color: #90a4ae;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">Mary also likes to watch football games.</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">]</span></div></div>
 
 <p>那么所有的单词可以构成如下形式的词袋：</p>
 
@@ -520,13 +522,13 @@ P(X_1) = 0.15, P(X_2) = 0.85, P(Y|X_1) = 0.3, P(Y|X_2) = 0.01
 <p>每个文本数据都可以使用这样一个<em>向量</em>的形式来表示，向量上每个维度的值为该文本中对应单词的出现频率。例如，以上第一条文本就可以表示为如下向量：</p>
 
 <table>
-    <tr>
+    <tbody><tr>
         <th>also</th><th>football</th><th>games</th><th>john</th><th>likes</th><th>mary</th><th>movies</th><th>to</th><th>too</th><th>watch</th>
     </tr>
     <tr>
         <td>0</td><td>0</td><td>0</td><td>1</td><td>2</td><td>1</td><td>2</td><td>1</td><td>1</td><td>1</td>
     </tr>
-</table>
+</tbody></table>
 
 <p>词袋模型是自然语言处理(NLP)中最基础的一种特征提取方法，它仅考虑词频，而忽略了词语的出现位置、先后关系、词性等其它特征。尽管如此，作为一种易于使用且确实能反映文本部分特征的模型，词袋模型在文本分类、情感分析等领域仍有着广泛的应用。</p>
 
@@ -550,16 +552,16 @@ P(X_1) = 0.15, P(X_2) = 0.85, P(Y|X_1) = 0.3, P(Y|X_2) = 0.01
 
 <div class="jupyter codeblock">
     <div class="jupyter-mark-in"></div>
-    <div class="vscode-block"><div><span style="color: #90a4ae;">vec </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> count_vect</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">transform</span><span style="color: #39adb5;">([</span></div><div><span style="color: #90a4ae;">&#160; &#160; </span><span style="color: #39adb5;">'</span><span style="color: #91b859;">Tim likes to play games and watch baseball games.</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">])</span></div><div><span style="color: #90a4ae;">pd</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">DataFrame</span><span style="color: #39adb5;">(</span><span style="color: #90a4ae;">vec</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">toarray</span><span style="color: #39adb5;">(),</span><span style="color: #90a4ae;"> </span><span style="color: #e53935;">columns</span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;">count_vect</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">get_feature_names_out</span><span style="color: #39adb5;">())</span></div></div>
+    <div class="vscode-block"><div><span style="color: #90a4ae;">vec </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> count_vect</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">transform</span><span style="color: #39adb5;">([</span></div><div><span style="color: #90a4ae;">&nbsp; &nbsp; </span><span style="color: #39adb5;">'</span><span style="color: #91b859;">Tim likes to play games and watch baseball games.</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">])</span></div><div><span style="color: #90a4ae;">pd</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">DataFrame</span><span style="color: #39adb5;">(</span><span style="color: #90a4ae;">vec</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">toarray</span><span style="color: #39adb5;">(),</span><span style="color: #90a4ae;"> </span><span style="color: #e53935;">columns</span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;">count_vect</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">get_feature_names_out</span><span style="color: #39adb5;">())</span></div></div>
     <div class="jupyter-mark-out"></div>
     <div class="jupyter-output"><table class="pandas-dataframe">
-        <tr>
+        <tbody><tr>
             <th></th><th>also</th><th>football</th><th>games</th><th>john</th><th>likes</th><th>mary</th><th>movies</th><th>to</th><th>too</th><th>watch</th>
         </tr>
         <tr>
             <td>0</td><td>0</td><td>0</td><td>2</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td>
         </tr>
-    </table></div>
+    </tbody></table></div>
 </div>
 
 <h3>多项式朴素贝叶斯</h3>
@@ -570,14 +572,14 @@ P(X_1) = 0.15, P(X_2) = 0.85, P(Y|X_1) = 0.3, P(Y|X_2) = 0.01
 
 <div class="jupyter codeblock">
     <div class="jupyter-mark-in"></div>
-    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span><span style="color: #90a4ae;"> sklearn</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">feature_extraction</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">text </span><span style="color: #39adb5;font-weight: bold;">import</span><span style="color: #90a4ae;"> CountVectorizer</span></div><br><div><span style="color: #90a4ae;">count_vect </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> CountVectorizer</span><span style="color: #39adb5;">(</span><span style="color: #e53935;">stop_words</span><span style="color: #7c4dff;">=</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">english</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">)</span></div><div><span style="color: #90a4ae;">X </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> count_vect</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">fit_transform</span><span style="color: #39adb5;">(</span><span style="color: #90a4ae;">mail</span><span style="color: #39adb5;">[</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">text</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">])</span></div></div>
+    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span><span style="color: #90a4ae;"> sklearn</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">feature_extraction</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">text </span><span style="color: #39adb5;font-weight: bold;">import</span><span style="color: #90a4ae;"> CountVectorizer</span></div><br/><div><span style="color: #90a4ae;">count_vect </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> CountVectorizer</span><span style="color: #39adb5;">(</span><span style="color: #e53935;">stop_words</span><span style="color: #7c4dff;">=</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">english</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">)</span></div><div><span style="color: #90a4ae;">X </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> count_vect</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">fit_transform</span><span style="color: #39adb5;">(</span><span style="color: #90a4ae;">mail</span><span style="color: #39adb5;">[</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">text</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">])</span></div></div>
 </div>
 
 <p>然后将其应用于多项式朴素贝叶斯模型中：</p>
 
 <div class="jupyter codeblock">
     <div class="jupyter-mark-in"></div>
-    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span><span style="color: #90a4ae;"> sklearn</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">naive_bayes </span><span style="color: #39adb5;font-weight: bold;">import</span><span style="color: #90a4ae;"> MultinomialNB</span></div><br><div><span style="color: #90a4ae;">model </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> MultinomialNB</span><span style="color: #39adb5;">()</span></div><div><span style="color: #90a4ae;">model</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">fit</span><span style="color: #39adb5;">(</span><span style="color: #90a4ae;">X</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> mail</span><span style="color: #39adb5;">[</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">label</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">])</span></div></div>
+    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span><span style="color: #90a4ae;"> sklearn</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">naive_bayes </span><span style="color: #39adb5;font-weight: bold;">import</span><span style="color: #90a4ae;"> MultinomialNB</span></div><br/><div><span style="color: #90a4ae;">model </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> MultinomialNB</span><span style="color: #39adb5;">()</span></div><div><span style="color: #90a4ae;">model</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">fit</span><span style="color: #39adb5;">(</span><span style="color: #90a4ae;">X</span><span style="color: #39adb5;">,</span><span style="color: #90a4ae;"> mail</span><span style="color: #39adb5;">[</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">label</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">])</span></div></div>
     <div class="jupyter-mark-out"></div>
     <div class="jupyter-output"><div class="sklearn-model"><p>MultinomialNB()</p></div></div>
 </div>
@@ -586,12 +588,13 @@ P(X_1) = 0.15, P(X_2) = 0.85, P(Y|X_1) = 0.3, P(Y|X_2) = 0.01
 
 <div class="jupyter codeblock">
     <div class="jupyter-mark-in"></div>
-    <div class="vscode-block"><div><span style="color: #90a4ae;">model</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">predict</span><span style="color: #39adb5;">(</span></div><div><span style="color: #90a4ae;">&#160; &#160; count_vect</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">transform</span><span style="color: #39adb5;">(</span></div><div><span style="color: #90a4ae;">&#160; &#160; &#160; &#160; </span><span style="color: #39adb5;">[</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">Interested in trying out our product? </span><span style="color: #39adb5;">'</span></div><div><span style="color: #90a4ae;">&#160; &#160; &#160; &#160; &#160;</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">Here’s a special deal for newsletter subscribers: </span><span style="color: #39adb5;">'</span></div><div><span style="color: #90a4ae;">&#160; &#160; &#160; &#160; &#160;</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">get 1 years of it with 3 months of extra subscription time added on top.</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">])</span></div><div><span style="color: #39adb5;">)</span></div></div>
+    <div class="vscode-block"><div><span style="color: #90a4ae;">model</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">predict</span><span style="color: #39adb5;">(</span></div><div><span style="color: #90a4ae;">&nbsp; &nbsp; count_vect</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">transform</span><span style="color: #39adb5;">(</span></div><div><span style="color: #90a4ae;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #39adb5;">[</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">Interested in trying out our product? </span><span style="color: #39adb5;">'</span></div><div><span style="color: #90a4ae;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">Here&rsquo;s a special deal for newsletter subscribers: </span><span style="color: #39adb5;">'</span></div><div><span style="color: #90a4ae;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="color: #39adb5;">'</span><span style="color: #91b859;">get 1 years of it with 3 months of extra subscription time added on top.</span><span style="color: #39adb5;">'</span><span style="color: #39adb5;">])</span></div><div><span style="color: #39adb5;">)</span></div></div>
     <div class="jupyter-mark-out"></div>
     <div class="jupyter-output">array([1], dtype=int64)</div>
 </div>
 
 <p>总的来说，朴素贝叶斯模型是一种简单的分类算法，并且有坚实的数学原理支撑。朴素贝叶斯模型的一个显著的优点是只需要统计概率，因此计算速度很快，通常适用于维度非常高的数据集。并且由于可调参数很少，可以快速得到最终的结果，因此非常适合作为处理分类问题的基本方案，在得到数据后便可以使用朴素贝叶斯模型得到粗糙的结果。</p>
+
 
 
 												<div class="clear"></div>				
@@ -615,14 +618,14 @@ P(X_1) = 0.15, P(X_2) = 0.85, P(Y|X_1) = 0.3, P(Y|X_2) = 0.01
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/embedded/esp32/02-basic-peripheral/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-520x293.jpg 520w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-300x169.jpg 300w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-1024x576.jpg 1024w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-768x432.jpg 768w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-1536x864.jpg 1536w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-950x534.jpg 950w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/embedded/esp32/01-setting-up-development/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-520x293.jpg 520w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-300x169.jpg 300w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-1024x576.jpg 1024w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-768x432.jpg 768w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-1536x864.jpg 1536w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-950x534.jpg 950w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/embedded/esp32/02-basic-peripheral/" rel="bookmark">ESP32与MicroPython入门-02 基本外设操作</a>
+					<a href="/embedded/esp32/01-setting-up-development/" rel="bookmark">ESP32与MicroPython入门-01 搭建开发环境</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -633,14 +636,14 @@ P(X_1) = 0.15, P(X_2) = 0.85, P(Y|X_1) = 0.3, P(Y|X_2) = 0.01
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/computer-science/data-structure/04-trees/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/08/数据结构04-树与二叉树-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/08/数据结构04-树与二叉树-520x293.jpg 520w, /wp-content/uploads/2022/08/数据结构04-树与二叉树-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/programming/python-fp/07-generators/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程07-生成器-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/05/Python函数式编程07-生成器-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程07-生成器-300x169.jpg 300w, /wp-content/uploads/2022/05/Python函数式编程07-生成器-1024x576.jpg 1024w, /wp-content/uploads/2022/05/Python函数式编程07-生成器-768x432.jpg 768w, /wp-content/uploads/2022/05/Python函数式编程07-生成器-1536x864.jpg 1536w, /wp-content/uploads/2022/05/Python函数式编程07-生成器-950x534.jpg 950w, /wp-content/uploads/2022/05/Python函数式编程07-生成器.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/computer-science/data-structure/04-trees/" rel="bookmark">数据结构04-树与二叉树</a>
+					<a href="/programming/python-fp/07-generators/" rel="bookmark">Python函数式编程07 生成器</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -651,14 +654,14 @@ P(X_1) = 0.15, P(X_2) = 0.85, P(Y|X_1) = 0.3, P(Y|X_2) = 0.01
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/data-science/machine-learning/06-module-validation/">
-											<img width="520" height="293" src="/wp-content/uploads/2023/04/机器学习-参数选择与模型验证-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2023/04/机器学习-参数选择与模型验证-520x293.jpg 520w, /wp-content/uploads/2023/04/机器学习-参数选择与模型验证-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/programming/python-fp/06-tuple-handling/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-300x169.jpg 300w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-1024x576.jpg 1024w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-768x432.jpg 768w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-1536x864.jpg 1536w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术-950x534.jpg 950w, /wp-content/uploads/2022/05/Python函数式编程06-元组处理技术.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/data-science/machine-learning/06-module-validation/" rel="bookmark">机器学习-参数选择与模型验证</a>
+					<a href="/programming/python-fp/06-tuple-handling/" rel="bookmark">Python函数式编程06 元组与命名元组</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -695,6 +698,14 @@ P(X_1) = 0.15, P(X_2) = 0.85, P(Y|X_1) = 0.3, P(Y|X_2) = 0.01
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
 											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
 					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
 											<span class="post-date">2023年6月19日</span>
 									</li>
@@ -714,14 +725,6 @@ P(X_1) = 0.15, P(X_2) = 0.85, P(Y|X_1) = 0.3, P(Y|X_2) = 0.01
 					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
 											<span class="post-date">2023年3月6日</span>
 									</li>
-											<li>
-					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
-											<span class="post-date">2023年2月27日</span>
-									</li>
-											<li>
-					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
-											<span class="post-date">2023年2月8日</span>
-									</li>
 					</ul>
 
 		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
@@ -734,9 +737,11 @@ P(X_1) = 0.15, P(X_2) = 0.85, P(Y|X_1) = 0.3, P(Y|X_2) = 0.01
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (1)
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
 <ul class='children'>
 	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
 </li>
 </ul>
 </li>
@@ -758,7 +763,7 @@ P(X_1) = 0.15, P(X_2) = 0.85, P(Y|X_1) = 0.3, P(Y|X_2) = 0.01
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (20)
 <ul class='children'>
 	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
 </li>
@@ -784,7 +789,9 @@ P(X_1) = 0.15, P(X_2) = 0.85, P(Y|X_1) = 0.3, P(Y|X_2) = 0.01
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(1)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
 	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
 	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
 	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
@@ -849,7 +856,7 @@ P(X_1) = 0.15, P(X_2) = 0.85, P(Y|X_1) = 0.3, P(Y|X_2) = 0.01
 					
 										
 					<div id="copyright">
-													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
 											</div><!--/#copyright-->
 					
 										

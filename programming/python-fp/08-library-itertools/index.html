@@ -12,22 +12,23 @@
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 
-	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
 	<title>Python函数式编程08 itertools模块：更多迭代器 - 冰封残烛的个人小站</title>
-	<meta name="description" content="itertools模块中包含大量 迭代器 函数，是处理数据的非常好用的工具。本节介绍其中包含的所有迭代器，它们可以分为无限迭代器、有限迭代器和组合迭代器。使用这些迭代器可以代替许多算法中出现的简单循环，并使执行过程更高效。" />
+	<meta name="description" content="itertools 模块中包含大量 迭代器 函数，是处理数据的非常好用的工具。本节介绍其中包含的所有迭代器，它们可以分为无限迭代器、有限迭代器和组合迭代器。使用这些迭代器可以代替许多算法中出现的简单循环，并使执行过程更高效。" />
 	<link rel="canonical" href="/programming/python-fp/08-library-itertools/" />
 	<meta property="og:locale" content="zh_CN" />
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content="Python函数式编程08 itertools模块：更多迭代器 - 冰封残烛的个人小站" />
-	<meta property="og:description" content="itertools模块中包含大量 迭代器 函数，是处理数据的非常好用的工具。本节介绍其中包含的所有迭代器，它们可以分为无限迭代器、有限迭代器和组合迭代器。使用这些迭代器可以代替许多算法中出现的简单循环，并使执行过程更高效。" />
+	<meta property="og:description" content="itertools 模块中包含大量 迭代器 函数，是处理数据的非常好用的工具。本节介绍其中包含的所有迭代器，它们可以分为无限迭代器、有限迭代器和组合迭代器。使用这些迭代器可以代替许多算法中出现的简单循环，并使执行过程更高效。" />
 	<meta property="og:url" content="/programming/python-fp/08-library-itertools/" />
 	<meta property="og:site_name" content="冰封残烛的个人小站" />
 	<meta property="article:published_time" content="2022-06-01T04:46:00+00:00" />
-	<meta property="article:modified_time" content="2023-10-05T03:13:32+00:00" />
+	<meta property="article:modified_time" content="2023-10-14T02:48:45+00:00" />
 	<meta property="og:image" content="/wp-content/uploads/2022/06/Python函数式编程08-itertools模块：更多迭代器.jpg" />
 	<meta property="og:image:width" content="1920" />
 	<meta property="og:image:height" content="1080" />
 	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="作者" />
 	<meta name="twitter:data1" content="Hello" />
@@ -37,35 +38,8 @@
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
-	            "@type": "WebSite",
-	            "@id": "/#website",
-	            "url": "/",
-	            "name": "冰封残烛的个人小站",
-	            "description": "FrozenCandle&#039;s Personal Site",
-	            "potentialAction": [
-	                {
-	                    "@type": "SearchAction",
-	                    "target": {
-	                        "@type": "EntryPoint",
-	                        "urlTemplate": "/?s={search_term_string}"
-	                    },
-	                    "query-input": "required name=search_term_string"
-	                }
-	            ],
-	            "inLanguage": "zh-CN"
-	        },
-	        {
-	            "@type": "ImageObject",
-	            "inLanguage": "zh-CN",
-	            "@id": "/programming/python-fp/08-library-itertools/#primaryimage",
-	            "url": "/wp-content/uploads/2022/06/Python函数式编程08-itertools模块：更多迭代器.jpg",
-	            "contentUrl": "/wp-content/uploads/2022/06/Python函数式编程08-itertools模块：更多迭代器.jpg",
-	            "width": 1920,
-	            "height": 1080
-	        },
-	        {
 	            "@type": "WebPage",
-	            "@id": "/programming/python-fp/08-library-itertools/#webpage",
+	            "@id": "/programming/python-fp/08-library-itertools/",
 	            "url": "/programming/python-fp/08-library-itertools/",
 	            "name": "Python函数式编程08 itertools模块：更多迭代器 - 冰封残烛的个人小站",
 	            "isPartOf": {
@@ -74,12 +48,16 @@
 	            "primaryImageOfPage": {
 	                "@id": "/programming/python-fp/08-library-itertools/#primaryimage"
 	            },
+	            "image": {
+	                "@id": "/programming/python-fp/08-library-itertools/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2022/06/Python函数式编程08-itertools模块：更多迭代器.jpg",
 	            "datePublished": "2022-06-01T04:46:00+00:00",
-	            "dateModified": "2023-10-05T03:13:32+00:00",
+	            "dateModified": "2023-10-14T02:48:45+00:00",
 	            "author": {
 	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
 	            },
-	            "description": "itertools模块中包含大量 迭代器 函数，是处理数据的非常好用的工具。本节介绍其中包含的所有迭代器，它们可以分为无限迭代器、有限迭代器和组合迭代器。使用这些迭代器可以代替许多算法中出现的简单循环，并使执行过程更高效。",
+	            "description": "itertools 模块中包含大量 迭代器 函数，是处理数据的非常好用的工具。本节介绍其中包含的所有迭代器，它们可以分为无限迭代器、有限迭代器和组合迭代器。使用这些迭代器可以代替许多算法中出现的简单循环，并使执行过程更高效。",
 	            "breadcrumb": {
 	                "@id": "/programming/python-fp/08-library-itertools/#breadcrumb"
 	            },
@@ -92,6 +70,15 @@
 	                    ]
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/programming/python-fp/08-library-itertools/#primaryimage",
+	            "url": "/wp-content/uploads/2022/06/Python函数式编程08-itertools模块：更多迭代器.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/06/Python函数式编程08-itertools模块：更多迭代器.jpg",
+	            "width": 1920,
+	            "height": 1080
 	        },
 	        {
 	            "@type": "BreadcrumbList",
@@ -109,6 +96,24 @@
 	                    "name": "Python函数式编程08 itertools模块：更多迭代器"
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
 	        },
 	        {
 	            "@type": "Person",
@@ -158,7 +163,6 @@ body { font-family: "Roboto", Arial, sans-serif; }
 <link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
-<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
 <script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
 <link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/270" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
 <meta name="generator" content="WordPress 6.3.1" />
@@ -295,9 +299,6 @@ var _hmt = _hmt || [];
 				<div class="entry-content">
 					<div class="entry themeform">	
 						
-
-
-
 <p><code>itertools</code> 模块中包含大量迭代器函数，是处理数据的非常好用的工具。</p>
 
 <blockquote>
@@ -314,19 +315,19 @@ var _hmt = _hmt || [];
 
 <p><code>count()</code> 函数的参数可以是浮点数，但是由于进制带来的舍入误差会随着程序的运行逐渐累积，因此尽量在较大的计数过程中慎用浮点数计数，或者使用整型计数再转换为浮点数的方式。</p>
 
-<div class="vscode-block"><div><span style="color: #405c79;">count(</span><span style="color: #bf8b56;">10</span><span style="color: #405c79;">) &#160; &#160; &#160; &#160;</span><span style="color: #a8a8a8;"># =&gt; 10 11 12 13 14 ...</span></div><div><span style="color: #405c79;">count(</span><span style="color: #bf8b56;">2.5</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">0.5</span><span style="color: #405c79;">) &#160;</span><span style="color: #a8a8a8;"># =&gt; 2.5 3.0 3.5 ...</span></div></div>
+<div class="vscode-block"><div><span style="color: #405c79;">count(</span><span style="color: #bf8b56;">10</span><span style="color: #405c79;">) &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="color: #a8a8a8;"># =&gt; 10 11 12 13 14 ...</span></div><div><span style="color: #405c79;">count(</span><span style="color: #bf8b56;">2.5</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">0.5</span><span style="color: #405c79;">) &nbsp;</span><span style="color: #a8a8a8;"># =&gt; 2.5 3.0 3.5 ...</span></div></div>
 
 <h3>cycle：循环迭代器</h3>
 
 <p><code>cycle()</code> 函数重复循环一组值，可用它循环数据集标识符对数据集进行分组。</p>
 
-<div class="vscode-block"><div><span style="color: #405c79;">cycle(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">ABC</span><span style="color: #405c79;">'</span><span style="color: #405c79;">) &#160;</span><span style="color: #a8a8a8;"># =&gt; A B C A B C A B C ...</span></div></div>
+<div class="vscode-block"><div><span style="color: #405c79;">cycle(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">ABC</span><span style="color: #405c79;">'</span><span style="color: #405c79;">) &nbsp;</span><span style="color: #a8a8a8;"># =&gt; A B C A B C A B C ...</span></div></div>
 
 <h3>repeat：重复迭代器</h3>
 
 <p><code>repeat(<em>elem</em>, <em>n</em>=None)</code> 用于重复单个值，不过也可以通过第二个参数将其限制为有限的迭代器。</p>
 
-<div class="vscode-block"><div><span style="color: #405c79;">repeat(</span><span style="color: #bf8b56;">10</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">3</span><span style="color: #405c79;">) &#160;</span><span style="color: #a8a8a8;"># =&gt; 10 10 10</span></div></div>
+<div class="vscode-block"><div><span style="color: #405c79;">repeat(</span><span style="color: #bf8b56;">10</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">3</span><span style="color: #405c79;">) &nbsp;</span><span style="color: #a8a8a8;"># =&gt; 10 10 10</span></div></div>
 
 <h2>有限迭代器</h2>
 
@@ -336,7 +337,7 @@ var _hmt = _hmt || [];
 
 <p><code>accumulate()</code> 函数基于给定的函数返回一个可迭代对象，将一系列归约值汇总在一起，遍历迭代器得出当前汇总值。以下给出了一个这样的示例：</p>
 
-<div class="vscode-block"><div><span style="color: #405c79;">accumulate([</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">3</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">4</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">5</span><span style="color: #405c79;">]) &#160;</span><span style="color: #a8a8a8;"># =&gt; 1 3 6 10 15</span></div></div>
+<div class="vscode-block"><div><span style="color: #405c79;">accumulate([</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">3</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">4</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">5</span><span style="color: #405c79;">]) &nbsp;</span><span style="color: #a8a8a8;"># =&gt; 1 3 6 10 15</span></div></div>
 
 <p><code>accumulate()</code> 函数的第二个参数 <code>func</code> 的默认行为是加法，也可以改成其它的归约函数。</p>
 
@@ -344,11 +345,11 @@ var _hmt = _hmt || [];
 
 <p><code>chain()</code> 函数将多个迭代器组合为单个迭代器，可以用于一次处理多个集合。</p>
 
-<div class="vscode-block"><div><span style="color: #405c79;">chain(</span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">5</span><span style="color: #405c79;">), </span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">10</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">20</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">)) &#160;</span><span style="color: #a8a8a8;"># =&gt; 0 1 2 3 4 10 12 14 16 18</span></div></div>
+<div class="vscode-block"><div><span style="color: #405c79;">chain(</span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">5</span><span style="color: #405c79;">), </span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">10</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">20</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">)) &nbsp;</span><span style="color: #a8a8a8;"># =&gt; 0 1 2 3 4 10 12 14 16 18</span></div></div>
 
 <p>如果多个迭代器被放在一个可迭代对象内，那么还可以使用 chain.from_iterable() 类方法取代以上这种可变参数的形式。</p>
 
-<div class="vscode-block"><div><span style="color: #405c79;">chain.from_iterable([</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">ABC</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">DEF</span><span style="color: #405c79;">'</span><span style="color: #405c79;">]) &#160;</span><span style="color: #a8a8a8;"># =&gt; A B C D E F</span></div></div>
+<div class="vscode-block"><div><span style="color: #405c79;">chain.from_iterable([</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">ABC</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">DEF</span><span style="color: #405c79;">'</span><span style="color: #405c79;">]) &nbsp;</span><span style="color: #a8a8a8;"># =&gt; A B C D E F</span></div></div>
 
 <h3>groupby：分组迭代器</h3>
 
@@ -358,7 +359,7 @@ var _hmt = _hmt || [];
 
 <p>以下是一个简单的示例，将一个排序好的列表按十位分组：</p>
 
-<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">from</span><span style="color: #405c79;"> random </span><span style="color: #bf568b;font-weight: bold;">import</span><span style="color: #405c79;"> randint</span></div><div><span style="color: #405c79;">target = </span><span style="color: #8b56bf;">filter</span><span style="color: #405c79;">(</span><span style="color: #bf568b;font-weight: bold;">lambda</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">_</span><span style="color: #405c79;">: randint(</span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">), </span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">50</span><span style="color: #405c79;">))</span></div><div><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i in groupby(target, </span><span style="color: #bf8b56;">key</span><span style="color: #405c79;">=</span><span style="color: #bf568b;font-weight: bold;">lambda</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">x</span><span style="color: #405c79;">: x // </span><span style="color: #bf8b56;">10</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(i[</span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">], </span><span style="color: #bf568b;">list</span><span style="color: #405c79;">(i[</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">]))</span></div></div>
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">from</span><span style="color: #405c79;"> random </span><span style="color: #bf568b;font-weight: bold;">import</span><span style="color: #405c79;"> randint</span></div><div><span style="color: #405c79;">target = </span><span style="color: #8b56bf;">filter</span><span style="color: #405c79;">(</span><span style="color: #bf568b;font-weight: bold;">lambda</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">_</span><span style="color: #405c79;">: randint(</span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">), </span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">50</span><span style="color: #405c79;">))</span></div><div><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i in groupby(target, </span><span style="color: #bf8b56;">key</span><span style="color: #405c79;">=</span><span style="color: #bf568b;font-weight: bold;">lambda</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">x</span><span style="color: #405c79;">: x // </span><span style="color: #bf8b56;">10</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(i[</span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">], </span><span style="color: #bf568b;">list</span><span style="color: #405c79;">(i[</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">]))</span></div></div>
 
 <p>结果为：</p>
 
@@ -375,19 +376,19 @@ var _hmt = _hmt || [];
 
 <p>内置的 <code>filter()</code> 根据函数求值结果为真或假决定是否保留元素，而 <code>compress(<em>data</em>, <em>selectors</em>)</code> 则根据 <code><em>selectors</em></code> 可迭代对象给出的布尔值决定是否保留同一位置处的元素。</p>
 
-<div class="vscode-block"><div><span style="color: #405c79;">compress(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">ABCDEF</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, [</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">]) &#160;</span><span style="color: #a8a8a8;"># =&gt; A C E</span></div></div>
+<div class="vscode-block"><div><span style="color: #405c79;">compress(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">ABCDEF</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, [</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">]) &nbsp;</span><span style="color: #a8a8a8;"># =&gt; A C E</span></div></div>
 
 <h3>islice：切片迭代器</h3>
 
 <p><code>islice(<em>iterable</em>, <em>start</em>=0, <em>stop</em>, <em>step</em>=1)</code> 函数可以对迭代器实现切片操作，就像 <code>slice</code> 类对序列实现切片操作一样。</p>
 
-<div class="vscode-block"><div><span style="color: #405c79;">islice(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">ABCDEFG</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">) &#160; &#160; &#160; &#160; &#160; </span><span style="color: #a8a8a8;"># =&gt; C D E F G</span></div><div><span style="color: #405c79;">islice(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">ABCDEFG</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">None</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">) &#160;</span><span style="color: #a8a8a8;"># =&gt; B D F</span></div></div>
+<div class="vscode-block"><div><span style="color: #405c79;">islice(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">ABCDEFG</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #a8a8a8;"># =&gt; C D E F G</span></div><div><span style="color: #405c79;">islice(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">ABCDEFG</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">None</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">) &nbsp;</span><span style="color: #a8a8a8;"># =&gt; B D F</span></div></div>
 
 <h3>dropwhile和takewhile：过滤状态迭代器</h3>
 
 <p><code>dropwhile(<em>predicate</em>, <em>iterable</em>)</code> 和 <code>takewhile(<em>predicate</em>, <em>iterable</em>)</code> 都是过滤函数，其用法是：从 <code><em>predicate</em></code> 函数给定的一种布尔模式开始，当布尔状态变换后，则函数的过滤规则也发生变化。<code>dropwhile()</code> 函数开始采用拒绝模式，当谓词函数变为 <code>False</code> 时切换并一直保持为通过模式。<code>takewhile()</code> 则从通过模式开始，当谓词函数变为 <code>False</code> 时切换并一直保持为拒绝模式。</p>
 
-<div class="vscode-block"><div><span style="color: #405c79;">dropwhile(</span><span style="color: #bf568b;font-weight: bold;">lambda</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">x</span><span style="color: #405c79;">: x &lt; </span><span style="color: #bf8b56;">5</span><span style="color: #405c79;">, [</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">4</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">6</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">4</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">]) &#160;</span><span style="color: #a8a8a8;"># =&gt; 6 4 1</span></div><div><span style="color: #405c79;">takewhile(</span><span style="color: #bf568b;font-weight: bold;">lambda</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">x</span><span style="color: #405c79;">: x &lt; </span><span style="color: #bf8b56;">5</span><span style="color: #405c79;">, [</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">4</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">6</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">4</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">]) &#160;</span><span style="color: #a8a8a8;"># =&gt; 1 4</span></div></div>
+<div class="vscode-block"><div><span style="color: #405c79;">dropwhile(</span><span style="color: #bf568b;font-weight: bold;">lambda</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">x</span><span style="color: #405c79;">: x &lt; </span><span style="color: #bf8b56;">5</span><span style="color: #405c79;">, [</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">4</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">6</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">4</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">]) &nbsp;</span><span style="color: #a8a8a8;"># =&gt; 6 4 1</span></div><div><span style="color: #405c79;">takewhile(</span><span style="color: #bf568b;font-weight: bold;">lambda</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">x</span><span style="color: #405c79;">: x &lt; </span><span style="color: #bf8b56;">5</span><span style="color: #405c79;">, [</span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">4</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">6</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">4</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">]) &nbsp;</span><span style="color: #a8a8a8;"># =&gt; 1 4</span></div></div>
 
 <p>这两个函数的一种常见用法是过滤掉文件的头部和尾部的一些无用信息。例如，假设有如下附加了额外头部信息的 CSV 文件：</p>
 
@@ -395,7 +396,7 @@ var _hmt = _hmt || [];
 
 <p>那么可以使用如下方式处理它：</p>
 
-<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">with</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">open</span><span style="color: #405c79;">(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">header.csv</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">r</span><span style="color: #405c79;">'</span><span style="color: #405c79;">) </span><span style="color: #bf568b;font-weight: bold;">as</span><span style="color: #405c79;"> f:</span></div><div><span style="color: #405c79;">&#160; &#160; data = dropwhile(</span><span style="color: #bf568b;font-weight: bold;">lambda</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">row</span><span style="color: #405c79;">: </span><span style="color: #bf568b;font-weight: bold;">not</span><span style="color: #405c79;"> row[</span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">].isdigit(), f)</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i in </span><span style="color: #8b56bf;">map</span><span style="color: #405c79;">(</span><span style="color: #bf568b;font-weight: bold;">lambda</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">row</span><span style="color: #405c79;">: row.replace(</span><span style="color: #405c79;">'</span><span style="color: #568bbf;">\n</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #405c79;">''</span><span style="color: #405c79;">).split(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">,</span><span style="color: #405c79;">'</span><span style="color: #405c79;">), data):</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(i)</span></div></div>
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">with</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">open</span><span style="color: #405c79;">(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">header.csv</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">r</span><span style="color: #405c79;">'</span><span style="color: #405c79;">) </span><span style="color: #bf568b;font-weight: bold;">as</span><span style="color: #405c79;"> f:</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; data = dropwhile(</span><span style="color: #bf568b;font-weight: bold;">lambda</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">row</span><span style="color: #405c79;">: </span><span style="color: #bf568b;font-weight: bold;">not</span><span style="color: #405c79;"> row[</span><span style="color: #bf8b56;">0</span><span style="color: #405c79;">].isdigit(), f)</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">for</span><span style="color: #405c79;"> i in </span><span style="color: #8b56bf;">map</span><span style="color: #405c79;">(</span><span style="color: #bf568b;font-weight: bold;">lambda</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">row</span><span style="color: #405c79;">: row.replace(</span><span style="color: #405c79;">'</span><span style="color: #568bbf;">\n</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #405c79;">''</span><span style="color: #405c79;">).split(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">,</span><span style="color: #405c79;">'</span><span style="color: #405c79;">), data):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #8b56bf;">print</span><span style="color: #405c79;">(i)</span></div></div>
 
 <p>该程序检查 CSV 文件的每一行（注意文件对象也是可迭代对象，每次迭代结果为文件中的一行），判断每一行的首字符是不是数字，并将头部非数字开头的行丢弃。其结果为：</p>
 
@@ -411,27 +412,27 @@ var _hmt = _hmt || [];
 
 <h3>zip_longest：不截短的zip</h3>
 
-<p>在<a href="/archives/239">第 4 节</a>介绍了 <code>zip()</code> 迭代器，它接收多个序列，返回结果的长度是其中最短序列的长度。而 <code>zip_longest(*<em>iterables</em>, <em>fillvalue</em>=None)</code> 则为较短的序列填充 <code><em>fillvalue</em></code> 参数提供的默认值，直到遍历完最长的序列。</p>
+<p>在<a class="link-internal" href="/programming/python-fp/04-builtin-functions">第 4 节</a>介绍了 <code>zip()</code> 迭代器，它接收多个序列，返回结果的长度是其中最短序列的长度。而 <code>zip_longest(*<em>iterables</em>, <em>fillvalue</em>=None)</code> 则为较短的序列填充 <code><em>fillvalue</em></code> 参数提供的默认值，直到遍历完最长的序列。</p>
 
-<div class="vscode-block"><div><span style="color: #405c79;">zip_longest(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">ABCD</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">xy</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">fillvalue</span><span style="color: #405c79;">=</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">*</span><span style="color: #405c79;">'</span><span style="color: #405c79;">) &#160;</span><span style="color: #a8a8a8;"># =&gt; Ax By C* D*</span></div></div>
+<div class="vscode-block"><div><span style="color: #405c79;">zip_longest(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">ABCD</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">xy</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">fillvalue</span><span style="color: #405c79;">=</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">*</span><span style="color: #405c79;">'</span><span style="color: #405c79;">) &nbsp;</span><span style="color: #a8a8a8;"># =&gt; Ax By C* D*</span></div></div>
 
 <h3>filterfalse：filter的反相过滤</h3>
 
 <p>内置的 <code>filter()</code> 迭代器会保留所有求值结果为 <code>True</code> 的数据；而 <code>filterfalse()</code> 则与之相反，它会保留所有求值结果为 <code>False</code> 的数据。</p>
 
-<div class="vscode-block"><div><span style="color: #8b56bf;">filter</span><span style="color: #405c79;">(</span><span style="color: #bf568b;font-weight: bold;">lambda</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">x</span><span style="color: #405c79;">: x % </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">, </span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">10</span><span style="color: #405c79;">)) &#160; &#160; &#160; </span><span style="color: #a8a8a8;"># =&gt; 1 3 5 7 9</span></div><div><span style="color: #405c79;">filterfalse(</span><span style="color: #bf568b;font-weight: bold;">lambda</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">x</span><span style="color: #405c79;">: x % </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">, </span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">10</span><span style="color: #405c79;">)) &#160;</span><span style="color: #a8a8a8;"># =&gt; 0 2 4 6 8</span></div></div>
+<div class="vscode-block"><div><span style="color: #8b56bf;">filter</span><span style="color: #405c79;">(</span><span style="color: #bf568b;font-weight: bold;">lambda</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">x</span><span style="color: #405c79;">: x % </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">, </span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">10</span><span style="color: #405c79;">)) &nbsp; &nbsp; &nbsp; </span><span style="color: #a8a8a8;"># =&gt; 1 3 5 7 9</span></div><div><span style="color: #405c79;">filterfalse(</span><span style="color: #bf568b;font-weight: bold;">lambda</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">x</span><span style="color: #405c79;">: x % </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">, </span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">10</span><span style="color: #405c79;">)) &nbsp;</span><span style="color: #a8a8a8;"># =&gt; 0 2 4 6 8</span></div></div>
 
-<p>通过组合这两个迭代器，可以方便地将输入数据分为“保留”和“舍弃”两组。</p>
+<p>通过组合这两个迭代器，可以方便地将输入数据分为&ldquo;保留&rdquo;和&ldquo;舍弃&rdquo;两组。</p>
 
 <h3>starmap：平铺的map</h3>
 
 <p>内置的 <code>map()</code> 迭代器可以接收多个可迭代对象，它将每一个可迭代对象中的元素组合为所需的参数；而 <code>starmap()</code> 迭代器只接收一个可迭代对象，它将其中元素展开后变成所需的参数。以下给出了一个这样的示例：</p>
 
-<div class="vscode-block"><div><span style="color: #405c79;">starmap(</span><span style="color: #8b56bf;">pow</span><span style="color: #405c79;">, [(</span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">,</span><span style="color: #bf8b56;">5</span><span style="color: #405c79;">), (</span><span style="color: #bf8b56;">3</span><span style="color: #405c79;">,</span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">), (</span><span style="color: #bf8b56;">10</span><span style="color: #405c79;">,</span><span style="color: #bf8b56;">3</span><span style="color: #405c79;">)]) &#160;</span><span style="color: #a8a8a8;"># =&gt; 32 9 1000</span></div></div>
+<div class="vscode-block"><div><span style="color: #405c79;">starmap(</span><span style="color: #8b56bf;">pow</span><span style="color: #405c79;">, [(</span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">,</span><span style="color: #bf8b56;">5</span><span style="color: #405c79;">), (</span><span style="color: #bf8b56;">3</span><span style="color: #405c79;">,</span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">), (</span><span style="color: #bf8b56;">10</span><span style="color: #405c79;">,</span><span style="color: #bf8b56;">3</span><span style="color: #405c79;">)]) &nbsp;</span><span style="color: #a8a8a8;"># =&gt; 32 9 1000</span></div></div>
 
 <p>因此，使用 <code>zip()</code> 迭代器可以非常简单地将 <code>map()</code> 变成 <code>starmap()</code> ：</p>
 
-<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">starmap</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">function</span><span style="color: #405c79;">, *</span><span style="color: #bf8b56;">iterables</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">map</span><span style="color: #405c79;">(function, </span><span style="color: #8b56bf;">zip</span><span style="color: #405c79;">(iterables))</span></div></div>
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">starmap</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">function</span><span style="color: #405c79;">, *</span><span style="color: #bf8b56;">iterables</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">map</span><span style="color: #405c79;">(function, </span><span style="color: #8b56bf;">zip</span><span style="color: #405c79;">(iterables))</span></div></div>
 
 <h3>tee：克隆迭代器</h3>
 
@@ -447,40 +448,40 @@ var _hmt = _hmt || [];
 
 <p><code>product(*<em>iterables</em>, <em>repeat</em>=1)</code> 用于得到笛卡儿积，即基于一组集合生成所有可能的元素组合。<code><em>repeat</em></code> 参数可以将提供的集合重复若干次参与组合。例如：</p>
 
-<div class="vscode-block"><div><span style="color: #405c79;">product(</span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">3</span><span style="color: #405c79;">), </span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">3</span><span style="color: #405c79;">)) &#160;</span><span style="color: #a8a8a8;"># =&gt; 00 01 02 10 11 12 20 21 22</span></div><div><span style="color: #405c79;">product(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">AB</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">repeat</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">) &#160; &#160; &#160;</span><span style="color: #a8a8a8;"># =&gt; AA AB BA BB</span></div></div>
+<div class="vscode-block"><div><span style="color: #405c79;">product(</span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">3</span><span style="color: #405c79;">), </span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">3</span><span style="color: #405c79;">)) &nbsp;</span><span style="color: #a8a8a8;"># =&gt; 00 01 02 10 11 12 20 21 22</span></div><div><span style="color: #405c79;">product(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">AB</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">repeat</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">) &nbsp; &nbsp; &nbsp;</span><span style="color: #a8a8a8;"># =&gt; AA AB BA BB</span></div></div>
 
 <p>该函数的作用结果类似嵌套的 <code>for</code> 循环。以下再次给出了一个示例：</p>
 
 <div class="codeblock code-console">&gt;&gt;&gt; from random import choice
-&gt;&gt;&gt; cards = list(product(range(1, 14), '♣♦♥♠'))
+&gt;&gt;&gt; cards = list(product(range(1, 14), '&clubs;&diams;&hearts;&spades;'))
 &gt;&gt;&gt; choice(cards)
-(2, '♦')
+(2, '&diams;')
 &gt;&gt;&gt; choice(cards)
-(9, '♥')</div>
+(9, '&hearts;')</div>
 
-<h3>排列组合相关迭代器</h2>
+<h3>排列组合相关迭代器</h3>
 
 <p><code>permutations(<em>iterable</em>, <em>r</em>=None)</code> 函数会排列集合中所有元素；如果给出参数 <code><em>r</em></code> ，则它会限制参与排列元素的个数，例如：</p>
 
-<div class="vscode-block"><div><span style="color: #405c79;">permutations(</span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">3</span><span style="color: #405c79;">)) &#160; </span><span style="color: #a8a8a8;"># =&gt; 012 021 102 120 201 210</span></div><div><span style="color: #405c79;">permutations(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">ABCD</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">) &#160;</span><span style="color: #a8a8a8;"># =&gt; AB AC AD BA BC BD CA CB CD DA DB DC</span></div></div>
+<div class="vscode-block"><div><span style="color: #405c79;">permutations(</span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">3</span><span style="color: #405c79;">)) &nbsp; </span><span style="color: #a8a8a8;"># =&gt; 012 021 102 120 201 210</span></div><div><span style="color: #405c79;">permutations(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">ABCD</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">) &nbsp;</span><span style="color: #a8a8a8;"># =&gt; AB AC AD BA BC BD CA CB CD DA DB DC</span></div></div>
 
 <p>由于 <span class="math">\\( n \\)</span> 个元素的排列结果有 <span class="math">\\( P_n^r = \frac{n!}{(n-r)!} \\)</span> 个，因此随着元素个数的上升，排列结果的长度急剧上升。</p>
 
 <p>与之类似的函数是 <code>combinations(<em>iterable</em>, <em>r</em>)</code> ，它会以忽略顺序的形式组合集合中所有元素。</p>
 
-<div class="vscode-block"><div><span style="color: #405c79;">combinations(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">ABCD</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">) &#160; &#160;</span><span style="color: #a8a8a8;"># =&gt; AB AC AD BC BD CD</span></div><div><span style="color: #405c79;">combinations(</span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">4</span><span style="color: #405c79;">), </span><span style="color: #bf8b56;">3</span><span style="color: #405c79;">) &#160;</span><span style="color: #a8a8a8;"># =&gt; 012 013 023 123</span></div></div>
+<div class="vscode-block"><div><span style="color: #405c79;">combinations(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">ABCD</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">) &nbsp; &nbsp;</span><span style="color: #a8a8a8;"># =&gt; AB AC AD BC BD CD</span></div><div><span style="color: #405c79;">combinations(</span><span style="color: #8b56bf;">range</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">4</span><span style="color: #405c79;">), </span><span style="color: #bf8b56;">3</span><span style="color: #405c79;">) &nbsp;</span><span style="color: #a8a8a8;"># =&gt; 012 013 023 123</span></div></div>
 
 <p>还有一个类似的迭代器 <code>combinations_with_replacement(<em>iterable</em>, <em>r</em>)</code> ，其区别是该迭代器在组合时允许元素重复：</p>
 
-<div class="vscode-block"><div><span style="color: #405c79;">combinations(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">ABC</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">) &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; </span><span style="color: #a8a8a8;"># =&gt; AB AC BC</span></div><div><span style="color: #405c79;">combinations_with_replacement(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">ABC</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">) &#160;</span><span style="color: #a8a8a8;"># =&gt; AA AB AC BB BC CC</span></div></div>
+<div class="vscode-block"><div><span style="color: #405c79;">combinations(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">ABC</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #a8a8a8;"># =&gt; AB AC BC</span></div><div><span style="color: #405c79;">combinations_with_replacement(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">ABC</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">) &nbsp;</span><span style="color: #a8a8a8;"># =&gt; AA AB AC BB BC CC</span></div></div>
 
 <p>这些迭代器通常用于处理排列组合相关的数学问题中。</p>
 
-<p>使用这些迭代器可以代替许多算法中出现的简单循环，并使执行过程更高效。<code>itertools</code> 模块中还给出了更多范例，将基本的迭代器组合成更高级、有用的迭代器，可以高效地处理复杂的数据，参见 <a href="https://docs.python.org/3/library/itertools.html#itertools-recipes">https://docs.python.org/3/library/itertools.html#itertools-recipes</a> 。</p>
+<p>使用这些迭代器可以代替许多算法中出现的简单循环，并使执行过程更高效。<code>itertools</code> 模块中还给出了更多范例，将基本的迭代器组合成更高级、有用的迭代器，可以高效地处理复杂的数据，参见 <a class="link-external" href="https://docs.python.org/3/library/itertools.html#itertools-recipes">https://docs.python.org/3/library/itertools.html#itertools-recipes</a> 。</p>
 
 <h2>参考资料</h2>
 
-<p><a href="https://docs.python.org/3/library/itertools.html">https://docs.python.org/3/library/itertools.html</a></p>
+<p><a class="link-reference" href="https://docs.python.org/3/library/itertools.html">https://docs.python.org/3/library/itertools.html</a></p>
 
 <p><code>itertools</code> 模块的官方文档。本文中的许多示例代码都来自该文档中。</p>
 
@@ -509,14 +510,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/programming/python/python3-string-format/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/02/Night-Street-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/02/Night-Street-520x293.jpg 520w, /wp-content/uploads/2022/02/Night-Street-300x169.jpg 300w, /wp-content/uploads/2022/02/Night-Street-1024x576.jpg 1024w, /wp-content/uploads/2022/02/Night-Street-768x432.jpg 768w, /wp-content/uploads/2022/02/Night-Street-1536x864.jpg 1536w, /wp-content/uploads/2022/02/Night-Street-950x534.jpg 950w, /wp-content/uploads/2022/02/Night-Street.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/embedded/mcu-application/lvgl-06-animations/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/LVGL库入门教程06-动画-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/06/LVGL库入门教程06-动画-520x293.jpg 520w, /wp-content/uploads/2022/06/LVGL库入门教程06-动画-300x169.jpg 300w, /wp-content/uploads/2022/06/LVGL库入门教程06-动画-1024x576.jpg 1024w, /wp-content/uploads/2022/06/LVGL库入门教程06-动画-768x432.jpg 768w, /wp-content/uploads/2022/06/LVGL库入门教程06-动画-1536x864.jpg 1536w, /wp-content/uploads/2022/06/LVGL库入门教程06-动画-950x534.jpg 950w, /wp-content/uploads/2022/06/LVGL库入门教程06-动画.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/programming/python/python3-string-format/" rel="bookmark">Python3 字符串格式化</a>
+					<a href="/embedded/mcu-application/lvgl-06-animations/" rel="bookmark">LVGL库入门教程06-动画</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -527,14 +528,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/programming/python-fp/01-function-fundamentals/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程01-函数的基本概念-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/05/Python函数式编程01-函数的基本概念-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程01-函数的基本概念-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/embedded/mcu-application/lvgl-04-styles/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/LVGL库入门教程04-样式-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/LVGL库入门教程04-样式-520x293.jpg 520w, /wp-content/uploads/2022/06/LVGL库入门教程04-样式-300x169.jpg 300w, /wp-content/uploads/2022/06/LVGL库入门教程04-样式-1024x576.jpg 1024w, /wp-content/uploads/2022/06/LVGL库入门教程04-样式-768x432.jpg 768w, /wp-content/uploads/2022/06/LVGL库入门教程04-样式-1536x864.jpg 1536w, /wp-content/uploads/2022/06/LVGL库入门教程04-样式-950x534.jpg 950w, /wp-content/uploads/2022/06/LVGL库入门教程04-样式.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/programming/python-fp/01-function-fundamentals/" rel="bookmark">Python函数式编程01 函数的基本概念</a>
+					<a href="/embedded/mcu-application/lvgl-04-styles/" rel="bookmark">LVGL库入门教程04-样式</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -545,14 +546,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/data-science/machine-learning/06-module-validation/">
-											<img width="520" height="293" src="/wp-content/uploads/2023/04/机器学习-参数选择与模型验证-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2023/04/机器学习-参数选择与模型验证-520x293.jpg 520w, /wp-content/uploads/2023/04/机器学习-参数选择与模型验证-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/web/django/codemirror-for-django/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/02/city-light-城市夜光-520x293.png" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/02/city-light-城市夜光-520x293.png 520w, /wp-content/uploads/2022/02/city-light-城市夜光-300x169.png 300w, /wp-content/uploads/2022/02/city-light-城市夜光-1024x576.png 1024w, /wp-content/uploads/2022/02/city-light-城市夜光-768x432.png 768w, /wp-content/uploads/2022/02/city-light-城市夜光-1536x864.png 1536w, /wp-content/uploads/2022/02/city-light-城市夜光-950x534.png 950w, /wp-content/uploads/2022/02/city-light-城市夜光.png 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/data-science/machine-learning/06-module-validation/" rel="bookmark">机器学习-参数选择与模型验证</a>
+					<a href="/web/django/codemirror-for-django/" rel="bookmark">CodeMirror实现Django后台代码编辑器</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -589,6 +590,14 @@ var _hmt = _hmt || [];
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
 											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
 					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
 											<span class="post-date">2023年6月19日</span>
 									</li>
@@ -608,14 +617,6 @@ var _hmt = _hmt || [];
 					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
 											<span class="post-date">2023年3月6日</span>
 									</li>
-											<li>
-					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
-											<span class="post-date">2023年2月27日</span>
-									</li>
-											<li>
-					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
-											<span class="post-date">2023年2月8日</span>
-									</li>
 					</ul>
 
 		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
@@ -628,9 +629,11 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (1)
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
 <ul class='children'>
 	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
 </li>
 </ul>
 </li>
@@ -652,7 +655,7 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (20)
 <ul class='children'>
 	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
 </li>
@@ -678,7 +681,9 @@ var _hmt = _hmt || [];
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(1)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
 	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
 	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
 	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
@@ -743,7 +748,7 @@ var _hmt = _hmt || [];
 					
 										
 					<div id="copyright">
-													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
 											</div><!--/#copyright-->
 					
 										

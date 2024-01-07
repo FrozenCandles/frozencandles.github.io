@@ -12,7 +12,7 @@
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 
-	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
 	<title>数据结构02-链表 - 冰封残烛的个人小站</title>
 	<meta name="description" content="本节介绍链表(linked list)的概念，链表的实现是一种非连续的存储，在每项元素中都指出下一项元素的位置。链表在插入和删除时表的整体或部分无需全部移动，避免了线性开销。并具有很好地扩展能力，广泛应用在各种数据结构中。" />
 	<link rel="canonical" href="/computer-science/data-structure/02-linked-list/" />
@@ -23,11 +23,12 @@
 	<meta property="og:url" content="/computer-science/data-structure/02-linked-list/" />
 	<meta property="og:site_name" content="冰封残烛的个人小站" />
 	<meta property="article:published_time" content="2022-08-01T09:27:05+00:00" />
-	<meta property="article:modified_time" content="2023-10-06T04:13:11+00:00" />
+	<meta property="article:modified_time" content="2023-10-13T03:59:35+00:00" />
 	<meta property="og:image" content="/wp-content/uploads/2022/08/数据结构02-链表.jpg" />
 	<meta property="og:image:width" content="1053" />
 	<meta property="og:image:height" content="707" />
 	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="作者" />
 	<meta name="twitter:data1" content="Hello" />
@@ -37,35 +38,8 @@
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
-	            "@type": "WebSite",
-	            "@id": "/#website",
-	            "url": "/",
-	            "name": "冰封残烛的个人小站",
-	            "description": "FrozenCandle&#039;s Personal Site",
-	            "potentialAction": [
-	                {
-	                    "@type": "SearchAction",
-	                    "target": {
-	                        "@type": "EntryPoint",
-	                        "urlTemplate": "/?s={search_term_string}"
-	                    },
-	                    "query-input": "required name=search_term_string"
-	                }
-	            ],
-	            "inLanguage": "zh-CN"
-	        },
-	        {
-	            "@type": "ImageObject",
-	            "inLanguage": "zh-CN",
-	            "@id": "/computer-science/data-structure/02-linked-list/#primaryimage",
-	            "url": "/wp-content/uploads/2022/08/数据结构02-链表.jpg",
-	            "contentUrl": "/wp-content/uploads/2022/08/数据结构02-链表.jpg",
-	            "width": 1053,
-	            "height": 707
-	        },
-	        {
 	            "@type": "WebPage",
-	            "@id": "/computer-science/data-structure/02-linked-list/#webpage",
+	            "@id": "/computer-science/data-structure/02-linked-list/",
 	            "url": "/computer-science/data-structure/02-linked-list/",
 	            "name": "数据结构02-链表 - 冰封残烛的个人小站",
 	            "isPartOf": {
@@ -74,8 +48,12 @@
 	            "primaryImageOfPage": {
 	                "@id": "/computer-science/data-structure/02-linked-list/#primaryimage"
 	            },
+	            "image": {
+	                "@id": "/computer-science/data-structure/02-linked-list/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2022/08/数据结构02-链表.jpg",
 	            "datePublished": "2022-08-01T09:27:05+00:00",
-	            "dateModified": "2023-10-06T04:13:11+00:00",
+	            "dateModified": "2023-10-13T03:59:35+00:00",
 	            "author": {
 	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
 	            },
@@ -94,6 +72,15 @@
 	            ]
 	        },
 	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/computer-science/data-structure/02-linked-list/#primaryimage",
+	            "url": "/wp-content/uploads/2022/08/数据结构02-链表.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/08/数据结构02-链表.jpg",
+	            "width": 1053,
+	            "height": 707
+	        },
+	        {
 	            "@type": "BreadcrumbList",
 	            "@id": "/computer-science/data-structure/02-linked-list/#breadcrumb",
 	            "itemListElement": [
@@ -109,6 +96,24 @@
 	                    "name": "数据结构02-链表"
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
 	        },
 	        {
 	            "@type": "Person",
@@ -158,7 +163,6 @@ body { font-family: "Roboto", Arial, sans-serif; }
 <link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
-<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
 <script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
 <link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/592" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
 <meta name="generator" content="WordPress 6.3.1" />
@@ -305,15 +309,11 @@ var _hmt = _hmt || [];
 				<div class="entry-content">
 					<div class="entry themeform">	
 						
-
-
-
-
 <h2>单链表</h2>
 
 <h3>链表的概念</h3>
 
-<p>上一节介绍了线性表的概念，同时使用数组实现顺序存储方式的线性表。使用顺序存储方式的线性表的特点是逻辑关系上相邻的两个元素在物理位置上也相邻，因此元素的存储与访问都比较简单，各种操作也很直观。</p>
+<p><a class="link-internal" href="/computer-science/data-structure/01-linear-list">上一节</a>介绍了线性表的概念，同时使用数组实现顺序存储方式的线性表。使用顺序存储方式的线性表的特点是逻辑关系上相邻的两个元素在物理位置上也相邻，因此元素的存储与访问都比较简单，各种操作也很直观。</p>
 
 <p>然而，顺序存储结构也存在一定缺点，例如：</p>
 
@@ -329,7 +329,7 @@ var _hmt = _hmt || [];
 <p>下图表达了链表的思想：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/02-linklist-structure.png" alt="" width="430">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/02-linklist-structure.png" width="430"/>
 </figure>
 
 <p>从上图可以看到，链表的每一个结构都由两部分组成：</p>
@@ -343,14 +343,14 @@ var _hmt = _hmt || [];
 
 <p>因此，链表节点结构的定义如下：</p>
 
-<div class="vscode-block"><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">linkedlist_node</span> {</div><div>&#160; &#160; <span token="type">elemtype</span> <span style="color: #7fdbca;">elem</span>;</div><div>&#160; &#160; <span token="keyword">struct</span> <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">next</span>;</div><div>} <span token="type">linkedlist_node</span>, <span style="color: #7fdbca;">*</span> <span token="type">linkedlist</span>;</div></div>
+<div class="vscode-block"><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">linkedlist_node</span> {</div><div>&nbsp; &nbsp; <span token="type">elemtype</span> <span style="color: #7fdbca;">elem</span>;</div><div>&nbsp; &nbsp; <span token="keyword">struct</span> <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">next</span>;</div><div>} <span token="type">linkedlist_node</span>, <span style="color: #7fdbca;">*</span> <span token="type">linkedlist</span>;</div></div>
 
 <p>为了执行打印表或查找等遍历操作，只需要用一个指针记录该表的第一个元素，然后不断用 <code>next</code> 指针获取后继元素即可访问链表的每一项。</p>
 
 <p>链表在插入和删除时表的整体或部分无需全部移动，避免了线性开销。删除命令只需要通过修改一个指针实现：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/02-linklist-delete.png" alt="" width="430">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/02-linklist-delete.png" width="430"/>
 </figure>
 
 <p>在遍历表时，<span class="math">\\( A_3 \\)</span> 元素由于没有指针指向它，不会被访问到，便会直接忽略，达到删除的效果。</p>
@@ -358,7 +358,7 @@ var _hmt = _hmt || [];
 <p>插入命令只需要通过一次 <code>malloc()</code> 调用从系统中获得一个新节点结构，并调整周围的指针：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/02-linklist-insert.png" alt="" width="460">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/02-linklist-insert.png" width="460"/>
 </figure>
 
 <p>仔细研究上图可以发现，以上实现仍然存在一些问题，主要涉及首节点元素：它的插入和删除方式都比较特殊，因为不涉及修改调整前指针。</p>
@@ -366,7 +366,7 @@ var _hmt = _hmt || [];
 <p>为了方便起见，需要留出一个标志节点元素，称为表头节点。通过表头可以很容易地管理表元素：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/02-linklist-header.png" alt="" width="520">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/02-linklist-header.png" width="520"/>
 </figure>
 
 <p>接下来演示链表的具体操作。</p>
@@ -375,31 +375,31 @@ var _hmt = _hmt || [];
 
 <p>根据链表的定义，测试一个链表是否是空链表是很容易的：</p>
 
-<div class="vscode-block"><div><span style="color: #82aaff;">bool</span> <span style="color: #82aaff;">LinkedList_IsEmpty</span>(<span token="type">linkedlist</span> <span style="color: #d7dbe0;">list</span>) {</div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span style="color: #82aaff;">bool</span> <span style="color: #82aaff;">LinkedList_IsEmpty</span>(<span token="type">linkedlist</span> <span style="color: #d7dbe0;">list</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>;</div><div>}</div></div>
 
 <p>该函数也可以用于测试一个节点位置是否已经位于链表的末尾。线性表作为一个整体拥有表示长度的成员信息，但链表没有。在遍历时为了防止越界，必须不断判断是否遍历到链表的末尾。</p>
 
 <p>线性表在查找元素时必须一个个元素挨个判断过去，链表也不例外。只需要从表头或任意链表位置开始，不断向后查询节点，直到找到所需要的元素即可。链表的查找操作如下：</p>
 
-<div class="vscode-block"><div><span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #82aaff;">LinkedList_GetNode</span>(<span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">node</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&#160; &#160; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">nxt</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">node</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&#160; &#160; <span token="keyword">while</span> (<span token="variable">nxt</span> <span style="color: #c792ea;">!=</span> <span style="color: #82aaff;">NULL</span> <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">nxt</span>-&gt;<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">!=</span> <span style="color: #d7dbe0;">value</span>)</div><div>&#160; &#160; &#160; &#160; <span token="variable">nxt</span> <span style="color: #c792ea;">=</span> <span token="variable">nxt</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">nxt</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #82aaff;">LinkedList_GetNode</span>(<span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">node</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&nbsp; &nbsp; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">nxt</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">node</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&nbsp; &nbsp; <span token="keyword">while</span> (<span token="variable">nxt</span> <span style="color: #c792ea;">!=</span> <span style="color: #82aaff;">NULL</span> <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">nxt</span>-&gt;<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">!=</span> <span style="color: #d7dbe0;">value</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">nxt</span> <span style="color: #c792ea;">=</span> <span token="variable">nxt</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="variable">nxt</span>;</div><div>}</div></div>
 
-<p><code>while</code> 判断条件利用了 <code>&&</code> 运算符的短路原理，一旦发现到达结尾，就不再判断值的存在性。</p>
+<p><code>while</code> 判断条件利用了 <code>&amp;&amp;</code> 运算符的短路原理，一旦发现到达结尾，就不再判断值的存在性。</p>
 
 <p>上面介绍过链表的删除和插入原理，接下来尝试使用代码实现。删除节点的操作相对容易实现，只需要找到节点的前驱节点 <code>previous</code> ，再通过调整一个指针指向：</p>
 
 <div class="codeblock code-template">
-    previous->next=previous->next->next;
+    previous-&gt;next=previous-&gt;next-&gt;next;
 </div>
 
 <p>即可完成删除。不过该操作的难点在于节点只保存下一个节点的位置，因此无法通过一个现有节点简单获取前一个节点的位置。为了找到前驱元素，需要额外编写一个函数来寻找它：</p>
 
-<div class="vscode-block"><div><span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #82aaff;">LinkedList_GetPrevNode</span>(<span token="type">linkedlist</span> <span style="color: #d7dbe0;">list</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&#160; &#160; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">prev</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">list</span>;</div><div>&#160; &#160; <span token="keyword">while</span> (<span token="variable">prev</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">!=</span> <span style="color: #82aaff;">NULL</span> <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">prev</span>-&gt;<span style="color: #7fdbca;">next</span>-&gt;<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">!=</span> <span style="color: #d7dbe0;">value</span>)</div><div>&#160; &#160; &#160; &#160; <span token="variable">prev</span> <span style="color: #c792ea;">=</span> <span token="variable">prev</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">prev</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #82aaff;">LinkedList_GetPrevNode</span>(<span token="type">linkedlist</span> <span style="color: #d7dbe0;">list</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&nbsp; &nbsp; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">prev</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">list</span>;</div><div>&nbsp; &nbsp; <span token="keyword">while</span> (<span token="variable">prev</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">!=</span> <span style="color: #82aaff;">NULL</span> <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">prev</span>-&gt;<span style="color: #7fdbca;">next</span>-&gt;<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">!=</span> <span style="color: #d7dbe0;">value</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">prev</span> <span style="color: #c792ea;">=</span> <span token="variable">prev</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="variable">prev</span>;</div><div>}</div></div>
 
 <p>两种查找整体实现类似，只不过它直接跨节点查找，以确保不丢失上一个节点的信息。</p>
 
 <p>配合该例程以及上文的介绍，可以很容易编写出删除链表元素的函数：</p>
 
-<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">LinkedList_Remove</span>(<span token="type">linkedlist</span> <span style="color: #d7dbe0;">list</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&#160; &#160; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">prev</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">LinkedList_GetPrevNode</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">list</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">value</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span style="color: #82aaff;">LinkedList_IsLast</span><span style="color: #82aaff;">(</span><span token="variable">prev</span><span style="color: #82aaff;">)</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">temp</span> <span style="color: #c792ea;">=</span> <span token="variable">prev</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&#160; &#160; &#160; &#160; <span token="variable">prev</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span token="variable">temp</span>-&gt;<span style="color: #7fdbca;">next</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> bypass deleted cell</span></div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">free</span><span style="color: #82aaff;">(</span><span token="variable">temp</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="number">0</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">return</span> <span token="number">1</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">LinkedList_Remove</span>(<span token="type">linkedlist</span> <span style="color: #d7dbe0;">list</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&nbsp; &nbsp; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">prev</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">LinkedList_GetPrevNode</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">list</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">value</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span style="color: #82aaff;">LinkedList_IsLast</span><span style="color: #82aaff;">(</span><span token="variable">prev</span><span style="color: #82aaff;">)</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">temp</span> <span style="color: #c792ea;">=</span> <span token="variable">prev</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">prev</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span token="variable">temp</span>-&gt;<span style="color: #7fdbca;">next</span>;<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> bypass deleted cell</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">free</span><span style="color: #82aaff;">(</span><span token="variable">temp</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="number">0</span>;</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="number">1</span>;</div><div>}</div></div>
 
 <p>在查找前驱节点时，可能发生找不到的情况，此时返回的是最后一个节点，要对这种情况加以判断。</p>
 
@@ -412,7 +412,7 @@ var _hmt = _hmt || [];
 
 <p>这两个步骤不能反过来，否则后续节点的位置信息就丢失了。相应的C语言实现如下：</p>
 
-<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">LinkedList_InsertAfter</span>(<span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">prev</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&#160; &#160; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">temp</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">linkedlist_node</span><span style="color: #82aaff;">))</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span token="variable">temp</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>) {</div><div><span style="color: #a8a8a8;">&#160; &#160; &#160; &#160; /* fail to allocate memory for node */</span></div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="variable">temp</span>-&gt;<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">value</span>;</div><div>&#160; &#160; <span token="variable">temp</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">prev</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&#160; &#160; <span style="color: #d7dbe0;">prev</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span token="variable">temp</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">LinkedList_InsertAfter</span>(<span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">prev</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&nbsp; &nbsp; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">temp</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">linkedlist_node</span><span style="color: #82aaff;">))</span>;</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">temp</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>) {</div><div><span style="color: #a8a8a8;">&nbsp; &nbsp; &nbsp; &nbsp; /* fail to allocate memory for node */</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span>;</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span token="variable">temp</span>-&gt;<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">value</span>;</div><div>&nbsp; &nbsp; <span token="variable">temp</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">prev</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">prev</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span token="variable">temp</span>;</div><div>}</div></div>
 
 <p>从以上代码可以看出，链表在增删时需要不断调用 <code>malloc()</code> 和 <code>free()</code> 来管理内存，因此链表是动态的，它无需一次性分配一大段内存，可以在需要的时候再申请一小部分。</p>
 
@@ -420,7 +420,7 @@ var _hmt = _hmt || [];
 
 <p>尽管链表之间是单向连接的，不过可以使用一种很简单的算法反转单向链表：顺序遍历该链表，并将每个元素依次插入反转表的开头。这样的反转算法只需要消耗线性时间，并且无需额外的存储空间：</p>
 
-<div class="vscode-block"><div><span token="type">linkedlist</span> <span style="color: #82aaff;">LinkedList_Reverse</span>(<span token="type">linkedlist</span> <span style="color: #d7dbe0;">list</span>) {</div><div>&#160; &#160; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">header</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">linkedlist_node</span><span style="color: #82aaff;">))</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span token="variable">header</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #82aaff;">NULL</span>;</div><div>&#160; &#160; <span token="variable">header</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">NULL</span>;</div><div>&#160; &#160; <span token="keyword">while</span> (<span style="color: #d7dbe0;">list</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">next</span>) {</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">LinkedList_InsertAfter</span><span style="color: #82aaff;">(</span><span token="variable">header</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">list</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">elem</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">header</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">linkedlist</span> <span style="color: #82aaff;">LinkedList_Reverse</span>(<span token="type">linkedlist</span> <span style="color: #d7dbe0;">list</span>) {</div><div>&nbsp; &nbsp; <span token="type">linkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">header</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">linkedlist_node</span><span style="color: #82aaff;">))</span>;</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span token="variable">header</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #82aaff;">NULL</span>;</div><div>&nbsp; &nbsp; <span token="variable">header</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">NULL</span>;</div><div>&nbsp; &nbsp; <span token="keyword">while</span> (<span style="color: #d7dbe0;">list</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">list</span>-&gt;<span style="color: #7fdbca;">next</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">LinkedList_InsertAfter</span><span style="color: #82aaff;">(</span><span token="variable">header</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">list</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">elem</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="variable">header</span>;</div><div>}</div></div>
 
 <h2>静态链表(游标实现)</h2>
 
@@ -440,14 +440,14 @@ var _hmt = _hmt || [];
 <p>下图展示了游标方法实现静态链表的原理：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/03-cursorlist-structure.png" alt="" width="128">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/03-cursorlist-structure.png" width="128"/>
 </figure>
 
 <p>满足条件 1 的逻辑方式是要有一个全局的结构体数组，对于该数组中的单元，其数组下标可以用来代表一个地址，从而模拟指针。</p>
 
 <p>下面给出了静态链表的游标实现的声明：</p>
 
-<div class="vscode-block"><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">slinkedlist_node</span> {</div><div>&#160; &#160; <span token="type">elemtype</span> <span style="color: #7fdbca;">elem</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span style="color: #7fdbca;">cursor</span>;</div><div>} <span token="type">slinkedlist_node</span>;</div><br><div><span style="color: #c792ea;">#</span><span token="keyword">define</span> &#160;<span style="color: #82aaff;">SLINKEDLIST_SIZE</span> <span token="number">1024</span></div><div><span token="type">slinkedlist_node</span> <span token="variable">linkedspace</span>[<span style="color: #82aaff;">SLINKEDLIST_SIZE</span>];</div></div>
+<div class="vscode-block"><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">slinkedlist_node</span> {</div><div>&nbsp; &nbsp; <span token="type">elemtype</span> <span style="color: #7fdbca;">elem</span>;</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span style="color: #7fdbca;">cursor</span>;</div><div>} <span token="type">slinkedlist_node</span>;</div><br/><div><span style="color: #c792ea;">#</span><span token="keyword">define</span> &nbsp;<span style="color: #82aaff;">SLINKEDLIST_SIZE</span> <span token="number">1024</span></div><div><span token="type">slinkedlist_node</span> <span token="variable">linkedspace</span>[<span style="color: #82aaff;">SLINKEDLIST_SIZE</span>];</div></div>
 
 <p>模拟条件 2 的方法是，除了数据本身通过游标组成的链表外，在静态链表空间中还需要有一条连接各个空闲位置的链表，称为<strong>备用链表</strong>。</p>
 
@@ -460,23 +460,23 @@ var _hmt = _hmt || [];
 
 <p>通常将 <code>linkedspace[0]</code> 作为备用链表的表头使用，<code>linkspace[1]</code> 作为数据链表的表头使用。这样，对应的C语言代码为：</p>
 
-<div class="vscode-block"><div><span token="keyword">int</span> <span style="color: #82aaff;">SLinkedList_Alloc</span>(<span token="keyword">void</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">pos</span> <span style="color: #c792ea;">=</span> <span token="variable">linkspace</span>[<span token="number">0</span>].<span token="variable">cursor</span>;</div><div>&#160; &#160; <span token="variable">linkedspace</span>[<span token="number">0</span>].<span style="color: #7fdbca;">cursor</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span token="variable">pos</span>].<span style="color: #7fdbca;">cursor</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">pos</span>;</div><div>}</div><div><span token="keyword">void</span> <span style="color: #82aaff;">SLinkedList_Free</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">pos</span>) {</div><div>&#160; &#160; <span token="variable">linkedspace</span>[pos].<span token="variable">cursor</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span token="number">0</span>].<span token="variable">cursor</span>;</div><div>&#160; &#160; <span token="variable">linkedspace</span>[<span token="number">0</span>].<span token="variable">cursor</span> <span style="color: #c792ea;">=</span> pos;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="keyword">int</span> <span style="color: #82aaff;">SLinkedList_Alloc</span>(<span token="keyword">void</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">pos</span> <span style="color: #c792ea;">=</span> <span token="variable">linkspace</span>[<span token="number">0</span>].<span token="variable">cursor</span>;</div><div>&nbsp; &nbsp; <span token="variable">linkedspace</span>[<span token="number">0</span>].<span style="color: #7fdbca;">cursor</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span token="variable">pos</span>].<span style="color: #7fdbca;">cursor</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="variable">pos</span>;</div><div>}</div><div><span token="keyword">void</span> <span style="color: #82aaff;">SLinkedList_Free</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">pos</span>) {</div><div>&nbsp; &nbsp; <span token="variable">linkedspace</span>[pos].<span token="variable">cursor</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span token="number">0</span>].<span token="variable">cursor</span>;</div><div>&nbsp; &nbsp; <span token="variable">linkedspace</span>[<span token="number">0</span>].<span token="variable">cursor</span> <span style="color: #c792ea;">=</span> pos;</div><div>}</div></div>
 
 <p>注意，如果没有可分配的空间，它会正确返回位置 0 以供判断。下图展示了某一时刻的静态链表：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/03-cursorlist-concept.png" alt="" width="340">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/03-cursorlist-concept.png" width="340"/>
 </figure>
 
 <p>由于静态链表的游标充当后向指针，判断一个静态链表是否为空，或一个节点是否位于静态链表末尾和普通链表相似：</p>
 
-<div class="vscode-block"><div><span style="color: #82aaff;">bool</span> <span style="color: #82aaff;">SLinkedList_IsEmpty</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">list</span>) {</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">linkedspace</span>[<span style="color: #d7dbe0;">list</span>].<span style="color: #7fdbca;">cursor</span> <span style="color: #c792ea;">==</span> <span token="number">0</span>;</div><div>}</div><div><span style="color: #82aaff;">bool</span> <span style="color: #82aaff;">SLinkedList_IsLast</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">pos</span>) {</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">linkedspace</span>[<span style="color: #d7dbe0;">pos</span>].<span style="color: #7fdbca;">cursor</span> <span style="color: #c792ea;">==</span> <span token="number">0</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span style="color: #82aaff;">bool</span> <span style="color: #82aaff;">SLinkedList_IsEmpty</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">list</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="variable">linkedspace</span>[<span style="color: #d7dbe0;">list</span>].<span style="color: #7fdbca;">cursor</span> <span style="color: #c792ea;">==</span> <span token="number">0</span>;</div><div>}</div><div><span style="color: #82aaff;">bool</span> <span style="color: #82aaff;">SLinkedList_IsLast</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">pos</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="variable">linkedspace</span>[<span style="color: #d7dbe0;">pos</span>].<span style="color: #7fdbca;">cursor</span> <span style="color: #c792ea;">==</span> <span token="number">0</span>;</div><div>}</div></div>
 
 <h3>静态链表的操作</h3>
 
 <p>静态链表的操作和普通链表具有相似性。例如查找例程，它通过从数据链表的表头逐个遍历 <code>cursor</code> 指向的静态链表空间位置来访问下一个元素：</p>
 
-<div class="vscode-block"><div><span token="keyword">int</span> <span style="color: #82aaff;">SLinkedList_Find</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">list</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">elem</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">pos</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span style="color: #d7dbe0;">list</span>].<span style="color: #7fdbca;">cursor</span>;</div><div>&#160; &#160; <span token="keyword">while</span> (<span token="variable">pos</span> <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">linkedspace</span>[<span token="variable">pos</span>].<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">!=</span> <span style="color: #d7dbe0;">elem</span>)</div><div>&#160; &#160; &#160; &#160; <span token="variable">pos</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span token="variable">pos</span>].<span style="color: #7fdbca;">cursor</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">pos</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="keyword">int</span> <span style="color: #82aaff;">SLinkedList_Find</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">list</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">elem</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">pos</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span style="color: #d7dbe0;">list</span>].<span style="color: #7fdbca;">cursor</span>;</div><div>&nbsp; &nbsp; <span token="keyword">while</span> (<span token="variable">pos</span> <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">linkedspace</span>[<span token="variable">pos</span>].<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">!=</span> <span style="color: #d7dbe0;">elem</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">pos</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span token="variable">pos</span>].<span style="color: #7fdbca;">cursor</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="variable">pos</span>;</div><div>}</div></div>
 
 <p>删除的原理和指针链表一致，即找出前驱元素的位置 <code>prev</code> ，通过跨越节点：</p>
 
@@ -488,19 +488,19 @@ var _hmt = _hmt || [];
 
 <p>查询前驱元素节点的函数实现为：</p>
 
-<div class="vscode-block"><div><span token="keyword">int</span> <span style="color: #82aaff;">SLinkedList_FindPrevPos</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">list</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">elem</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">prev</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span style="color: #d7dbe0;">list</span>].<span style="color: #7fdbca;">cursor</span>;</div><div>&#160; &#160; <span token="keyword">while</span> (<span token="variable">prev</span> <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">linkedspace</span>[<span token="variable">linkedspace</span>[<span token="variable">prev</span>].<span style="color: #7fdbca;">cursor</span>].<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">!=</span> <span style="color: #d7dbe0;">elem</span>)</div><div>&#160; &#160; &#160; &#160; <span token="variable">prev</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span token="variable">prev</span>].<span style="color: #7fdbca;">cursor</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">prev</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="keyword">int</span> <span style="color: #82aaff;">SLinkedList_FindPrevPos</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">list</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">elem</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">prev</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span style="color: #d7dbe0;">list</span>].<span style="color: #7fdbca;">cursor</span>;</div><div>&nbsp; &nbsp; <span token="keyword">while</span> (<span token="variable">prev</span> <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">linkedspace</span>[<span token="variable">linkedspace</span>[<span token="variable">prev</span>].<span style="color: #7fdbca;">cursor</span>].<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">!=</span> <span style="color: #d7dbe0;">elem</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">prev</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span token="variable">prev</span>].<span style="color: #7fdbca;">cursor</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="variable">prev</span>;</div><div>}</div></div>
 
 <p>那么删除的程序实现为：</p>
 
-<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">SLinkedList_Remove</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">list</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">elem</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">temp</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">pos</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">SLinkedList_FindPrevPos</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">list</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">elem</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span style="color: #82aaff;">SLinkedList_IsLast</span><span style="color: #82aaff;">(</span><span token="variable">pos</span><span style="color: #82aaff;">)</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="variable">temp</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span token="variable">pos</span>].<span style="color: #7fdbca;">cursor</span>;</div><div>&#160; &#160; &#160; &#160; <span token="variable">linkedspace</span>[<span token="variable">pos</span>].<span style="color: #7fdbca;">cursor</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span token="variable">temp</span>].<span style="color: #7fdbca;">cursor</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">SLinkedList_Free</span><span style="color: #82aaff;">(</span><span token="variable">temp</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="number">0</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">return</span> <span token="number">1</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">SLinkedList_Remove</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">list</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">elem</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">temp</span>;</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">pos</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">SLinkedList_FindPrevPos</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">list</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">elem</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span style="color: #82aaff;">SLinkedList_IsLast</span><span style="color: #82aaff;">(</span><span token="variable">pos</span><span style="color: #82aaff;">)</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">temp</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span token="variable">pos</span>].<span style="color: #7fdbca;">cursor</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">linkedspace</span>[<span token="variable">pos</span>].<span style="color: #7fdbca;">cursor</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span token="variable">temp</span>].<span style="color: #7fdbca;">cursor</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">SLinkedList_Free</span><span style="color: #82aaff;">(</span><span token="variable">temp</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="number">0</span>;</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="number">1</span>;</div><div>}</div></div>
 
-<p>注意比较与指针链表的异同点。指针链表的 <code>this->next</code> 等价于静态链表的 <code>linkedspace[this].cursor</code> 。</p>
+<p>注意比较与指针链表的异同点。指针链表的 <code>this-&gt;next</code> 等价于静态链表的 <code>linkedspace[this].cursor</code> 。</p>
 
 <p>因此，类比一下指针链表的插入，静态链表的插入实现为：</p>
 
-<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">SLinkedList_InsertAfter</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">prev</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">elem</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">temp</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">SLinkedList_Alloc</span><span style="color: #82aaff;">()</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span token="variable">temp</span> <span style="color: #c792ea;">==</span> <span token="number">0</span>) {</div><div><span style="color: #a8a8a8;">&#160; &#160; &#160; &#160; /* fail to allocate memory */</span></div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="number">1</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="variable">linkedspace</span>[<span token="variable">temp</span>].<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">=</span> value;</div><div>&#160; &#160; <span token="variable">linkedspace</span>[<span token="variable">temp</span>].<span style="color: #7fdbca;">cursor</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span style="color: #d7dbe0;">prev</span>].<span style="color: #7fdbca;">cursor</span>;</div><div>&#160; &#160; <span token="variable">linkedspace</span>[<span style="color: #d7dbe0;">prev</span>].<span style="color: #7fdbca;">cursor</span> <span style="color: #c792ea;">=</span> <span token="variable">temp</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">SLinkedList_InsertAfter</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">prev</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">elem</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">temp</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">SLinkedList_Alloc</span><span style="color: #82aaff;">()</span>;</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">temp</span> <span style="color: #c792ea;">==</span> <span token="number">0</span>) {</div><div><span style="color: #a8a8a8;">&nbsp; &nbsp; &nbsp; &nbsp; /* fail to allocate memory */</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="number">1</span>;</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span token="variable">linkedspace</span>[<span token="variable">temp</span>].<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">=</span> value;</div><div>&nbsp; &nbsp; <span token="variable">linkedspace</span>[<span token="variable">temp</span>].<span style="color: #7fdbca;">cursor</span> <span style="color: #c792ea;">=</span> <span token="variable">linkedspace</span>[<span style="color: #d7dbe0;">prev</span>].<span style="color: #7fdbca;">cursor</span>;</div><div>&nbsp; &nbsp; <span token="variable">linkedspace</span>[<span style="color: #d7dbe0;">prev</span>].<span style="color: #7fdbca;">cursor</span> <span style="color: #c792ea;">=</span> <span token="variable">temp</span>;</div><div>}</div></div>
 
-<p>指针链表的核心是 <code>node*</code> 指针，用来在内存中找出下一个节点所在的位置。静态链表的核心是 <code>int</code> 值，用来在 <code>linkedspace</code> 中找出下一个节点所在的位置。因此可以认为静态链表在程序中维护了自己的一段“内存”，进而自行制造了指针这一概念。理解了这一点，便不难理解指针链表与静态链表的关系了。</p>
+<p>指针链表的核心是 <code>node*</code> 指针，用来在内存中找出下一个节点所在的位置。静态链表的核心是 <code>int</code> 值，用来在 <code>linkedspace</code> 中找出下一个节点所在的位置。因此可以认为静态链表在程序中维护了自己的一段&ldquo;内存&rdquo;，进而自行制造了指针这一概念。理解了这一点，便不难理解指针链表与静态链表的关系了。</p>
 
 <h2>更多链表模型</h2>
 
@@ -517,7 +517,7 @@ var _hmt = _hmt || [];
 <p>下图展示了双链表的原理：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/04-doubly-linklist-structure.png" alt="" width="550">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/04-doubly-linklist-structure.png" width="550"/>
 </figure>
 
 <p>双链表可以使向前检索变得更便利，但代价是一个附加的链，增加了空间的需求，同时也增加了插入和删除的开销，因为有更多指针需要调整。</p>
@@ -533,19 +533,19 @@ var _hmt = _hmt || [];
 
 <p>双链表的插入只需要给出前面或后面的节点作为定位即可。这里以给出前面的节点为例编写代码：</p>
 
-<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">DuLinkedList_InsertAfter</span>(<span token="type">dulinkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">previous</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&#160; &#160; <span token="type">dulinkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">next</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">previous</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&#160; &#160; <span token="type">dulinkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">temp</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">dulinkedlist_node</span><span style="color: #82aaff;">))</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span token="variable">temp</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="number">1</span>;</div><div>&#160; &#160; <span token="variable">temp</span>-&gt;<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">value</span>;</div><div>&#160; &#160; <span token="variable">temp</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span token="variable">next</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> adjusting between this and next</span></div><div>&#160; &#160; <span token="variable">next</span>-&gt;<span style="color: #7fdbca;">prev</span> <span style="color: #c792ea;">=</span> <span token="variable">temp</span>;</div><div>&#160; &#160; <span token="variable">temp</span>-&gt;<span style="color: #7fdbca;">prev</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">previous</span>;<span style="color: #637777;"> &#160; </span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> adjusting between this and prev</span></div><div>&#160; &#160; <span style="color: #d7dbe0;">previous</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span token="variable">temp</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="number">0</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">DuLinkedList_InsertAfter</span>(<span token="type">dulinkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">previous</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&nbsp; &nbsp; <span token="type">dulinkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">next</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">previous</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&nbsp; &nbsp; <span token="type">dulinkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">temp</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">dulinkedlist_node</span><span style="color: #82aaff;">))</span>;</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">temp</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="number">1</span>;</div><div>&nbsp; &nbsp; <span token="variable">temp</span>-&gt;<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">value</span>;</div><div>&nbsp; &nbsp; <span token="variable">temp</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span token="variable">next</span>;<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> adjusting between this and next</span></div><div>&nbsp; &nbsp; <span token="variable">next</span>-&gt;<span style="color: #7fdbca;">prev</span> <span style="color: #c792ea;">=</span> <span token="variable">temp</span>;</div><div>&nbsp; &nbsp; <span token="variable">temp</span>-&gt;<span style="color: #7fdbca;">prev</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">previous</span>;<span style="color: #637777;"> &nbsp; </span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> adjusting between this and prev</span></div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">previous</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span token="variable">temp</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="number">0</span>;</div><div>}</div></div>
 
 <p>双链表在删除时，需要调整的指针个数比单链表更多。但是双链表的删除操作比单链表简单，因为前驱元素的信息是现成的。</p>
 
 下图展示了双链表的删除操作：
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/04-doubly-linklist-delete.png" alt="" width="510">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/04-doubly-linklist-delete.png" width="510"/>
 </figure>
 
 <p>可以正序扫描双链表以找出所需元素，也可以倒序扫描。以下示例使用倒序扫描删除链表的最后一个找出的节点。为了判断倒序扫描结束，需要不断判断当前位置是否为表头：</p>
 
-<div class="vscode-block"><div><span style="color: #82aaff;">bool</span> <span style="color: #82aaff;">DuLinkedList_IsHeader</span>(<span token="type">dulinkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">node</span>) {</div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">node</span>-&gt;<span style="color: #7fdbca;">prev</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>;</div><div>}</div><div><span token="keyword">void</span> <span style="color: #82aaff;">DuLinkedList_DeleteLast</span>(<span token="type">dulinkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">last</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&#160; &#160; <span token="type">dulinkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">tmp</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">last</span>;</div><div>&#160; &#160; <span token="keyword">while</span> (<span token="variable">tmp</span> <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">tmp</span>-&gt;<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">!=</span> <span style="color: #d7dbe0;">value</span>)</div><div>&#160; &#160; &#160; &#160; <span token="variable">tmp</span> <span style="color: #c792ea;">=</span> <span token="variable">tmp</span>-&gt;<span style="color: #7fdbca;">prev</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span token="variable">tmp</span> <span style="color: #c792ea;">&amp;&amp;</span> <span style="color: #c792ea;">!</span><span style="color: #82aaff;">DuLinkedList_IsHeader</span><span style="color: #82aaff;">(</span><span token="variable">tmp</span><span style="color: #82aaff;">)</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="variable">tmp</span>-&gt;<span style="color: #7fdbca;">prev</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span token="variable">tmp</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&#160; &#160; &#160; &#160; <span token="variable">tmp</span>-&gt;<span style="color: #7fdbca;">next</span>-&gt;<span style="color: #7fdbca;">prev</span> <span style="color: #c792ea;">=</span> <span token="variable">tmp</span>-&gt;<span style="color: #7fdbca;">prev</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">free</span><span style="color: #82aaff;">(</span><span token="variable">tmp</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; }</div><div>}</div></div>
+<div class="vscode-block"><div><span style="color: #82aaff;">bool</span> <span style="color: #82aaff;">DuLinkedList_IsHeader</span>(<span token="type">dulinkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">node</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #d7dbe0;">node</span>-&gt;<span style="color: #7fdbca;">prev</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>;</div><div>}</div><div><span token="keyword">void</span> <span style="color: #82aaff;">DuLinkedList_DeleteLast</span>(<span token="type">dulinkedlist_node</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">last</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">value</span>) {</div><div>&nbsp; &nbsp; <span token="type">dulinkedlist_node</span><span style="color: #7fdbca;">*</span> <span token="variable">tmp</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">last</span>;</div><div>&nbsp; &nbsp; <span token="keyword">while</span> (<span token="variable">tmp</span> <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">tmp</span>-&gt;<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">!=</span> <span style="color: #d7dbe0;">value</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">tmp</span> <span style="color: #c792ea;">=</span> <span token="variable">tmp</span>-&gt;<span style="color: #7fdbca;">prev</span>;</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">tmp</span> <span style="color: #c792ea;">&amp;&amp;</span> <span style="color: #c792ea;">!</span><span style="color: #82aaff;">DuLinkedList_IsHeader</span><span style="color: #82aaff;">(</span><span token="variable">tmp</span><span style="color: #82aaff;">)</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">tmp</span>-&gt;<span style="color: #7fdbca;">prev</span>-&gt;<span style="color: #7fdbca;">next</span> <span style="color: #c792ea;">=</span> <span token="variable">tmp</span>-&gt;<span style="color: #7fdbca;">next</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">tmp</span>-&gt;<span style="color: #7fdbca;">next</span>-&gt;<span style="color: #7fdbca;">prev</span> <span style="color: #c792ea;">=</span> <span token="variable">tmp</span>-&gt;<span style="color: #7fdbca;">prev</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">free</span><span style="color: #82aaff;">(</span><span token="variable">tmp</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; }</div><div>}</div></div>
 
 <p>双链表是一种特殊的链表，除了原生支持倒序查找外，其余的操作例如查找或遍历，都与普通的单链表并没有太大区别。</p>
 
@@ -555,13 +555,13 @@ var _hmt = _hmt || [];
 
 <p>例如，可以让链表的最后一个元素指向第一个元素或表头，由此整个链表会发生闭合，形成<strong>循环链表</strong>(circular linked list)。下图展示了一个有表头的单链循环链表：</p>
 
-<figure><img decoding="async" src="/wp-content/uploads/image/category@data-structure/04-circle-linklist-structure.png" alt="" width="435"></figure>
+<figure><img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/04-circle-linklist-structure.png" width="435"/></figure>
 
 <p>循环链表的操作和普通链表一致，差别仅在于判断遍历终止的条件为是否回到表头或首元素而不是遇到 <code>NULL</code> 。</p>
 
 <p>循环链表也可以和双链表组合在一起，形成双向循环链表。下图展示了一个没有表头的双链循环链表：</p>
 
-<figure><img decoding="async" src="/wp-content/uploads/image/category@data-structure/04-circle-doubly-linklist-structure.png" alt="" width="430"></figure>
+<figure><img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/04-circle-doubly-linklist-structure.png" width="430"/></figure>
 
 <p>由此可见，链表只需要对节点做一些调整，就能适应多种多样的场景。有些时候需要经常获取链表的长度，但遍历链表显然是个低效的做法，此时可以为表头提供一个特殊的节点定义，它包含链表的长度信息，并在增加或删除结点时实时更新长度。</p>
 
@@ -570,7 +570,7 @@ var _hmt = _hmt || [];
 <p>下图展示了修改后的链表模型：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/04-linkedlist-final.png" alt="" width="520">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/04-linkedlist-final.png" width="520"/>
 </figure>
 
 <p>这样并没有为单次操作增加多少工作量，却可以很好地避免某些操作产生的线性开销。后续介绍的许多数据结构，例如树和图，都与链表的思想密不可分。</p>
@@ -597,14 +597,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/embedded/esp32/02-basic-peripheral/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-520x293.jpg 520w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-300x169.jpg 300w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-1024x576.jpg 1024w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-768x432.jpg 768w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-1536x864.jpg 1536w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-950x534.jpg 950w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/programming/python/python3-string-format/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/02/Night-Street-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/02/Night-Street-520x293.jpg 520w, /wp-content/uploads/2022/02/Night-Street-300x169.jpg 300w, /wp-content/uploads/2022/02/Night-Street-1024x576.jpg 1024w, /wp-content/uploads/2022/02/Night-Street-768x432.jpg 768w, /wp-content/uploads/2022/02/Night-Street-1536x864.jpg 1536w, /wp-content/uploads/2022/02/Night-Street-950x534.jpg 950w, /wp-content/uploads/2022/02/Night-Street.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/embedded/esp32/02-basic-peripheral/" rel="bookmark">ESP32与MicroPython入门-02 基本外设操作</a>
+					<a href="/programming/python/python3-string-format/" rel="bookmark">Python3 字符串格式化</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -615,14 +615,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/computer-science/data-structure/03-stack-and-queue/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/08/数据结构03-栈和队列-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/08/数据结构03-栈和队列-520x293.jpg 520w, /wp-content/uploads/2022/08/数据结构03-栈和队列-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/computer-science/computer-networking/06-internet-protocol/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/计算机网络05-网络层概述与网际协议IP-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/07/计算机网络05-网络层概述与网际协议IP-520x293.jpg 520w, /wp-content/uploads/2022/07/计算机网络05-网络层概述与网际协议IP-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/computer-science/data-structure/03-stack-and-queue/" rel="bookmark">数据结构03-栈和队列</a>
+					<a href="/computer-science/computer-networking/06-internet-protocol/" rel="bookmark">计算机网络06-网络层概述与网际协议IP</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -633,14 +633,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/data-science/via-python/jupyter-notebook-tutorial/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/10/Jupyter-Notebook-使用指南-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/10/Jupyter-Notebook-使用指南-520x293.jpg 520w, /wp-content/uploads/2022/10/Jupyter-Notebook-使用指南-300x169.jpg 300w, /wp-content/uploads/2022/10/Jupyter-Notebook-使用指南-1024x576.jpg 1024w, /wp-content/uploads/2022/10/Jupyter-Notebook-使用指南-768x432.jpg 768w, /wp-content/uploads/2022/10/Jupyter-Notebook-使用指南-1536x864.jpg 1536w, /wp-content/uploads/2022/10/Jupyter-Notebook-使用指南-950x534.jpg 950w, /wp-content/uploads/2022/10/Jupyter-Notebook-使用指南.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/embedded/mcu-application/lvgl-04-styles/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/LVGL库入门教程04-样式-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/LVGL库入门教程04-样式-520x293.jpg 520w, /wp-content/uploads/2022/06/LVGL库入门教程04-样式-300x169.jpg 300w, /wp-content/uploads/2022/06/LVGL库入门教程04-样式-1024x576.jpg 1024w, /wp-content/uploads/2022/06/LVGL库入门教程04-样式-768x432.jpg 768w, /wp-content/uploads/2022/06/LVGL库入门教程04-样式-1536x864.jpg 1536w, /wp-content/uploads/2022/06/LVGL库入门教程04-样式-950x534.jpg 950w, /wp-content/uploads/2022/06/LVGL库入门教程04-样式.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/data-science/via-python/jupyter-notebook-tutorial/" rel="bookmark">Jupyter Notebook 入门指南</a>
+					<a href="/embedded/mcu-application/lvgl-04-styles/" rel="bookmark">LVGL库入门教程04-样式</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -677,6 +677,14 @@ var _hmt = _hmt || [];
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
 											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
 					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
 											<span class="post-date">2023年6月19日</span>
 									</li>
@@ -696,14 +704,6 @@ var _hmt = _hmt || [];
 					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
 											<span class="post-date">2023年3月6日</span>
 									</li>
-											<li>
-					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
-											<span class="post-date">2023年2月27日</span>
-									</li>
-											<li>
-					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
-											<span class="post-date">2023年2月8日</span>
-									</li>
 					</ul>
 
 		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
@@ -716,9 +716,11 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (1)
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
 <ul class='children'>
 	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
 </li>
 </ul>
 </li>
@@ -740,7 +742,7 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (20)
 <ul class='children'>
 	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
 </li>
@@ -766,7 +768,9 @@ var _hmt = _hmt || [];
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(1)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
 	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
 	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
 	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
@@ -831,7 +835,7 @@ var _hmt = _hmt || [];
 					
 										
 					<div id="copyright">
-													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
 											</div><!--/#copyright-->
 					
 										

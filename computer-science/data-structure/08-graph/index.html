@@ -12,22 +12,23 @@
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 
-	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
 	<title>数据结构08-图 - 冰封残烛的个人小站</title>
-	<meta name="description" content="本节介绍图这种典型的多对多数据结构，与图的邻接矩阵和邻接表表示方法，以及一些经典的图论算法：拓扑排序、图的遍历（深度优先搜索和广度优先搜索）、最短路径算法（包括无权图和有权图）以及最小生成树（包括 Prim 算法和 Kruskal 算法）" />
+	<meta name="description" content="本节介绍图(graph)这种典型的多对多数据结构，与图的邻接矩阵和邻接表表示方法，以及一些经典的图论算法：拓扑排序、图的遍历（深度优先搜索和广度优先搜索）、最短路径算法（包括无权图和有权图）以及最小生成树（包括 Prim 算法和 Kruskal 算法）" />
 	<link rel="canonical" href="/computer-science/data-structure/08-graph/" />
 	<meta property="og:locale" content="zh_CN" />
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content="数据结构08-图 - 冰封残烛的个人小站" />
-	<meta property="og:description" content="本节介绍图这种典型的多对多数据结构，与图的邻接矩阵和邻接表表示方法，以及一些经典的图论算法：拓扑排序、图的遍历（深度优先搜索和广度优先搜索）、最短路径算法（包括无权图和有权图）以及最小生成树（包括 Prim 算法和 Kruskal 算法）" />
+	<meta property="og:description" content="本节介绍图(graph)这种典型的多对多数据结构，与图的邻接矩阵和邻接表表示方法，以及一些经典的图论算法：拓扑排序、图的遍历（深度优先搜索和广度优先搜索）、最短路径算法（包括无权图和有权图）以及最小生成树（包括 Prim 算法和 Kruskal 算法）" />
 	<meta property="og:url" content="/computer-science/data-structure/08-graph/" />
 	<meta property="og:site_name" content="冰封残烛的个人小站" />
 	<meta property="article:published_time" content="2022-09-15T03:41:15+00:00" />
-	<meta property="article:modified_time" content="2023-10-06T04:22:05+00:00" />
+	<meta property="article:modified_time" content="2023-10-13T04:08:37+00:00" />
 	<meta property="og:image" content="/wp-content/uploads/2022/09/数据结构08-图.jpg" />
 	<meta property="og:image:width" content="1066" />
 	<meta property="og:image:height" content="802" />
 	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="作者" />
 	<meta name="twitter:data1" content="Hello" />
@@ -37,35 +38,8 @@
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
-	            "@type": "WebSite",
-	            "@id": "/#website",
-	            "url": "/",
-	            "name": "冰封残烛的个人小站",
-	            "description": "FrozenCandle&#039;s Personal Site",
-	            "potentialAction": [
-	                {
-	                    "@type": "SearchAction",
-	                    "target": {
-	                        "@type": "EntryPoint",
-	                        "urlTemplate": "/?s={search_term_string}"
-	                    },
-	                    "query-input": "required name=search_term_string"
-	                }
-	            ],
-	            "inLanguage": "zh-CN"
-	        },
-	        {
-	            "@type": "ImageObject",
-	            "inLanguage": "zh-CN",
-	            "@id": "/computer-science/data-structure/08-graph/#primaryimage",
-	            "url": "/wp-content/uploads/2022/09/数据结构08-图.jpg",
-	            "contentUrl": "/wp-content/uploads/2022/09/数据结构08-图.jpg",
-	            "width": 1066,
-	            "height": 802
-	        },
-	        {
 	            "@type": "WebPage",
-	            "@id": "/computer-science/data-structure/08-graph/#webpage",
+	            "@id": "/computer-science/data-structure/08-graph/",
 	            "url": "/computer-science/data-structure/08-graph/",
 	            "name": "数据结构08-图 - 冰封残烛的个人小站",
 	            "isPartOf": {
@@ -74,12 +48,16 @@
 	            "primaryImageOfPage": {
 	                "@id": "/computer-science/data-structure/08-graph/#primaryimage"
 	            },
+	            "image": {
+	                "@id": "/computer-science/data-structure/08-graph/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2022/09/数据结构08-图.jpg",
 	            "datePublished": "2022-09-15T03:41:15+00:00",
-	            "dateModified": "2023-10-06T04:22:05+00:00",
+	            "dateModified": "2023-10-13T04:08:37+00:00",
 	            "author": {
 	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
 	            },
-	            "description": "本节介绍图这种典型的多对多数据结构，与图的邻接矩阵和邻接表表示方法，以及一些经典的图论算法：拓扑排序、图的遍历（深度优先搜索和广度优先搜索）、最短路径算法（包括无权图和有权图）以及最小生成树（包括 Prim 算法和 Kruskal 算法）",
+	            "description": "本节介绍图(graph)这种典型的多对多数据结构，与图的邻接矩阵和邻接表表示方法，以及一些经典的图论算法：拓扑排序、图的遍历（深度优先搜索和广度优先搜索）、最短路径算法（包括无权图和有权图）以及最小生成树（包括 Prim 算法和 Kruskal 算法）",
 	            "breadcrumb": {
 	                "@id": "/computer-science/data-structure/08-graph/#breadcrumb"
 	            },
@@ -92,6 +70,15 @@
 	                    ]
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/computer-science/data-structure/08-graph/#primaryimage",
+	            "url": "/wp-content/uploads/2022/09/数据结构08-图.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/09/数据结构08-图.jpg",
+	            "width": 1066,
+	            "height": 802
 	        },
 	        {
 	            "@type": "BreadcrumbList",
@@ -109,6 +96,24 @@
 	                    "name": "数据结构08-图"
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
 	        },
 	        {
 	            "@type": "Person",
@@ -158,7 +163,6 @@ body { font-family: "Roboto", Arial, sans-serif; }
 <link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
-<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
 <script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
 <link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/743" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
 <meta name="generator" content="WordPress 6.3.1" />
@@ -305,20 +309,16 @@ var _hmt = _hmt || [];
 				<div class="entry-content">
 					<div class="entry themeform">	
 						
-
-
-
-
 <h2>图存储结构</h2>
 
 <h3>图结构简介</h3>
 
-<p>在之前的章节中已经见过了一对一和一对多的数据结构，它们分别可以使用<a href="http://frozencandles.fun/archives/586">线性表</a>和<a href="http://frozencandles.fun/archives/622">树</a>来描述。本节介绍一种典型的多对多数据结构：<strong>图</strong>(graph)。</p>
+<p>在之前的章节中已经见过了一对一和一对多的数据结构，它们分别可以使用<a class="link-internal" href="/computer-science/data-structure/01-linear-list">线性表</a>和<a class="link-internal" href="/computer-science/data-structure/04-trees">树</a>来描述。本节介绍一种典型的多对多数据结构：<strong>图</strong>(graph)。</p>
 
 <p>下面展示了一个简单的图结构，可以看出每两个数据之间都可能有对应关系：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-graph-concept.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/11-graph-concept.png"/>
 </figure>
 
 <p>这种对应关系使得图不能简单地使用节点和指针表示，否则一个节点需要大量空间来表示这种对多的关系。在介绍图的表示方法之前，可以了解一下图的定义。</p>
@@ -330,7 +330,7 @@ var _hmt = _hmt || [];
 <p>有时候顶点之间并不是双向联系，而是像树一样的单方面指向，这种图称为<strong>有向图</strong>(digraph)。有向图的顶点对是有序的。下面展示了一个有向图，每两个数据之间的对应关系可能是指向也可能是被指向：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-digraph-concept.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/11-digraph-concept.png"/>
 </figure>
 
 <p>有向图中顶点的<strong>入度</strong>(indegree)指的是箭头指向它的数量，而<strong>出度</strong>(outdegree)指的是它指出的箭头数量。</p>
@@ -362,12 +362,12 @@ var _hmt = _hmt || [];
 <p>以下展示了图的邻接表表示方法，左侧是图的直观结构：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-adjacency-list.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/11-adjacency-list.png"/>
 </figure>
 
 <p>可以看到这种结构类似于分离链接散列表。邻接表是表示图的基本方法，接下来的操作都以邻接表为例。邻接表的定义可以参考如下：</p>
 
-<div class="vscode-block"><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">graph_arc</span> <span token="type">graph_arc</span>;</div><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">graph_vertex</span> {</div><div>&#160; &#160; <span token="type">elemtype</span> <span style="color: #7fdbca;">data</span>;</div><div>&#160; &#160; <span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">firstarc</span>;</div><div>} <span token="type">graph_vertex</span>;</div><div><span token="keyword">struct</span> <span token="type">graph_arc</span> {</div><div>&#160; &#160; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">vertex</span>;</div><div>&#160; &#160; <span token="keyword">struct</span> <span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">nextarc</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span style="color: #7fdbca;">weight</span>;</div><div>};</div><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">graph</span> {</div><div>&#160; &#160; <span token="type">graph_vertex</span><span style="color: #7fdbca;">**</span> <span style="color: #7fdbca;">vertices</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span style="color: #7fdbca;">vertex_num</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span style="color: #7fdbca;">arc_num</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span style="color: #7fdbca;">size</span>;</div><div>} <span style="color: #7fdbca;">*</span> <span token="type">graph</span>;</div></div>
+<div class="vscode-block"><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">graph_arc</span> <span token="type">graph_arc</span>;</div><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">graph_vertex</span> {</div><div>&nbsp; &nbsp; <span token="type">elemtype</span> <span style="color: #7fdbca;">data</span>;</div><div>&nbsp; &nbsp; <span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">firstarc</span>;</div><div>} <span token="type">graph_vertex</span>;</div><div><span token="keyword">struct</span> <span token="type">graph_arc</span> {</div><div>&nbsp; &nbsp; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">vertex</span>;</div><div>&nbsp; &nbsp; <span token="keyword">struct</span> <span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">nextarc</span>;</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span style="color: #7fdbca;">weight</span>;</div><div>};</div><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">graph</span> {</div><div>&nbsp; &nbsp; <span token="type">graph_vertex</span><span style="color: #7fdbca;">**</span> <span style="color: #7fdbca;">vertices</span>;</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span style="color: #7fdbca;">vertex_num</span>;</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span style="color: #7fdbca;">arc_num</span>;</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span style="color: #7fdbca;">size</span>;</div><div>} <span style="color: #7fdbca;">*</span> <span token="type">graph</span>;</div></div>
 
 <p>接下来介绍几个关于图的典型问题。</p>
 
@@ -382,31 +382,31 @@ var _hmt = _hmt || [];
 <p>例如，以下图：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-top-sort.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/11-top-sort.png"/>
 </figure>
 
 <p>顶点的指向顺序从左向右。特别地，顶点 C 和 D 之间是并列的，没有严格的先后关系，两者任意一个排在前面都可以。因此，以上图的拓扑排序可以有两种结果：</p>
 
 <div class="codeblock code-template">
-    A→B→C→D→E<br>
-    A→B→D→C→E
+    A&rarr;B&rarr;C&rarr;D&rarr;E<br/>
+    A&rarr;B&rarr;D&rarr;C&rarr;E
 </div>
 
 <p>拓扑排序的思路也很简单：如果一个顶点可以排在最前面，那么应该没有顶点指向它，即它的入度为 0 ；那么只需要找出入度为 0 的顶点，然后将它和它指出的边暂时排除，继续寻找下一个符合条件（入度为 0 ）的顶点即可。以下展示了这一步骤：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-top-sort-steps.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/11-top-sort-steps.png"/>
 </figure>
 
 <p>以上算法可以做一个小的优化：每一次查找入度为 0 的顶点都花费 <span class="math">\\( O(|V|) \\)</span> 的时间，但只取出一个顶点做处理，如果下一次还是遍历图去寻找入度为 0 的顶点，会使得算法的运行时间达到了平方级 <span class="math">\\( O(|V|^2) \\)</span> 。在第一次扫描时，可以将入度为 0 的顶点放入一个表中，然后逐个取出表中的顶点，检查它指向的顶点入度减 1 后是否为 0 ：只要一个顶点的入度降为 0 ，说明去除那些指向它的顶点后它就可以作为下一位置的顶点，可以同样地将它放入表中继续处理。</p>
 
-<p>这样就只需一次扫描顶点和边并建立表，使执行时间可以变为 <span class="math">\\( O(|V|+|E|) \\)</span> 。这种表可以使用栈或队列。这里使用<a href="http://frozencandles.fun/archives/609#queue">队列</a>以实现顺序处理。</p>
+<p>这样就只需一次扫描顶点和边并建立表，使执行时间可以变为 <span class="math">\\( O(|V|+|E|) \\)</span> 。这种表可以使用栈或队列。这里使用<a class="link-external" link="category@data-structure03-stack-and-queue#queue">队列</a>以实现顺序处理。</p>
 
 <p>拓扑排序的代码实现为：</p>
 
-<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">TopSort</span>(<span token="type">graph</span> <span style="color: #d7dbe0;">g</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">indegree</span>[<span style="color: #82aaff;">VERTEX_MAXNUM</span>];</div><div>&#160; &#160; <span style="color: #82aaff;">memset</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">&amp;</span><span token="variable">indegree</span><span style="color: #82aaff;">, </span><span token="number">0</span><span style="color: #82aaff;">, </span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;"> </span><span token="variable">indegree</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span style="color: #82aaff;">Graph_GatherInDegree</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">, </span><span token="variable">indegree</span><span style="color: #82aaff;">)</span>;</div><br><div>&#160; &#160; <span token="type">queue</span> <span token="variable">q</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Queue_New</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;">VERTEX_MAXNUM</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">indegree</span>[<span token="variable">i</span>] <span style="color: #c792ea;">==</span> <span token="number">0</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #82aaff;">Queue_Enqueue</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">vertices</span><span style="color: #82aaff;">[</span><span token="variable">i</span><span style="color: #82aaff;">]-&gt;</span><span style="color: #7fdbca;">data</span><span style="color: #82aaff;">)</span>;</div><br><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">counter</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&#160; &#160; <span token="keyword">while</span> (<span style="color: #c792ea;">!</span><span style="color: #82aaff;">Queue_IsEmpty</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">)</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span token="variable">v</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Graph_GetVertexByData</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">, </span><span style="color: #82aaff;">Queue_Dequeue</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">))</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">printf</span><span style="color: #82aaff;">(</span><span style="color: #d9f5dd;">"</span><span style="color: #82aaff;">%d</span><span style="color: #ecc48d;"> &gt;</span><span style="color: #d9f5dd;">"</span><span style="color: #82aaff;">, </span><span token="variable">v</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">data</span><span style="color: #82aaff;">)</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> print in topological order</span></div><div>&#160; &#160; &#160; &#160; <span token="variable">counter</span><span style="color: #c792ea;">++</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">v</span>-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>) {</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span token="variable">w</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #7fdbca;">--</span><span token="variable">indegree</span>[<span style="color: #82aaff;">Graph_GetVertexIndex</span>(<span style="color: #d7dbe0;">g</span>, <span token="variable">w</span>)] <span style="color: #c792ea;">==</span> <span token="number">0</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #82aaff;">Queue_Enqueue</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">, </span><span token="variable">w</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">data</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; }</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">if</span> (<span token="variable">counter</span> <span style="color: #c792ea;">!=</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertex_num</span>)</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">warning</span><span style="color: #82aaff;">(</span><span style="color: #d9f5dd;">"</span><span style="color: #ecc48d;">Graph has a cycle</span><span style="color: #d9f5dd;">"</span><span style="color: #82aaff;">)</span>;</div><br><div>&#160; &#160; <span style="color: #82aaff;">Queue_Delete</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">)</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">TopSort</span>(<span token="type">graph</span> <span style="color: #d7dbe0;">g</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">indegree</span>[<span style="color: #82aaff;">VERTEX_MAXNUM</span>];</div><div>&nbsp; &nbsp; <span style="color: #82aaff;">memset</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">&amp;</span><span token="variable">indegree</span><span style="color: #82aaff;">, </span><span token="number">0</span><span style="color: #82aaff;">, </span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;"> </span><span token="variable">indegree</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; <span style="color: #82aaff;">Graph_GatherInDegree</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">, </span><span token="variable">indegree</span><span style="color: #82aaff;">)</span>;</div><br/><div>&nbsp; &nbsp; <span token="type">queue</span> <span token="variable">q</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Queue_New</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;">VERTEX_MAXNUM</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">indegree</span>[<span token="variable">i</span>] <span style="color: #c792ea;">==</span> <span token="number">0</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">Queue_Enqueue</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">vertices</span><span style="color: #82aaff;">[</span><span token="variable">i</span><span style="color: #82aaff;">]-&gt;</span><span style="color: #7fdbca;">data</span><span style="color: #82aaff;">)</span>;</div><br/><div>&nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">counter</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&nbsp; &nbsp; <span token="keyword">while</span> (<span style="color: #c792ea;">!</span><span style="color: #82aaff;">Queue_IsEmpty</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">)</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span token="variable">v</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Graph_GetVertexByData</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">, </span><span style="color: #82aaff;">Queue_Dequeue</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">))</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">printf</span><span style="color: #82aaff;">(</span><span style="color: #d9f5dd;">"</span><span style="color: #82aaff;">%d</span><span style="color: #ecc48d;"> &gt;</span><span style="color: #d9f5dd;">"</span><span style="color: #82aaff;">, </span><span token="variable">v</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">data</span><span style="color: #82aaff;">)</span>;<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> print in topological order</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">counter</span><span style="color: #c792ea;">++</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">v</span>-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span token="variable">w</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #7fdbca;">--</span><span token="variable">indegree</span>[<span style="color: #82aaff;">Graph_GetVertexIndex</span>(<span style="color: #d7dbe0;">g</span>, <span token="variable">w</span>)] <span style="color: #c792ea;">==</span> <span token="number">0</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">Queue_Enqueue</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">, </span><span token="variable">w</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">data</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; }</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">counter</span> <span style="color: #c792ea;">!=</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertex_num</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">warning</span><span style="color: #82aaff;">(</span><span style="color: #d9f5dd;">"</span><span style="color: #ecc48d;">Graph has a cycle</span><span style="color: #d9f5dd;">"</span><span style="color: #82aaff;">)</span>;</div><br/><div>&nbsp; &nbsp; <span style="color: #82aaff;">Queue_Delete</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">)</span>;</div><div>}</div></div>
 
-<p>由于图的实现比较复杂，本节涉及到的代码一般会将一些细节抽象为函数，使用类似伪代码的形式展现。如果要获取包括拓扑排序在内的完整图论算法实现，以及图的创建等其它操作实现，可以访问 <a href="https://github.com/FrozenCandles/example-code/blob/master/DataStructure/Src/graph.c">GitHub 仓库</a>。</p>
+<p>由于图的实现比较复杂，本节涉及到的代码一般会将一些细节抽象为函数，使用类似伪代码的形式展现。如果要获取包括拓扑排序在内的完整图论算法实现，以及图的创建等其它操作实现，可以访问 <a class="link-external" href="https://github.com/FrozenCandles/example-code/blob/master/DataStructure/Src/graph.c">GitHub 仓库</a>。</p>
 
 <p>这个程序比较复杂，它可以分为几个部分理解。在计算入度时，由于邻接表只记录一个顶点指出的边，因此要计算入度时需要遍历所有的顶点才能完整得出指向一个顶点的所有边。这里使用一个数组 <code>indegree[]</code> 在一次遍历时便统计出所有顶点的边，加快运行的同时方便处理。</p>
 
@@ -423,14 +423,14 @@ var _hmt = _hmt || [];
 <p>下图展示了深度优先搜索某一时刻顶点的搜索情况，可以看出远处的顶点可能会被先搜索到：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-DFS.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/11-DFS.png"/>
 </figure>
 
 <p>深度优先搜索可以使用递归的形式来求解。另外为了让每个顶点只遍历一次，还需要有一个额外的顶点字段或数组记录顶点是否被访问过。</p>
 
 <p>以下代码是深度优先搜索的一个通用形式：</p>
 
-<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">Graph_DepthFirstSearch</span>(<span token="type">graph</span> <span style="color: #d7dbe0;">g</span>, <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">v</span>) {</div><div>&#160; &#160; <span token="variable">visited</span>[<span style="color: #d7dbe0;">v</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">true</span>;</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">v</span>-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span token="variable">w</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span token="variable">visited</span>[<span token="variable">w</span>-&gt;<span style="color: #7fdbca;">data</span>])</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #82aaff;">Graph_DepthFirstSearch</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">, </span><span token="variable">w</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; }</div><div>}</div></div>
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">Graph_DepthFirstSearch</span>(<span token="type">graph</span> <span style="color: #d7dbe0;">g</span>, <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">v</span>) {</div><div>&nbsp; &nbsp; <span token="variable">visited</span>[<span style="color: #d7dbe0;">v</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">true</span>;</div><div>&nbsp; &nbsp; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">v</span>-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span token="variable">w</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span token="variable">visited</span>[<span token="variable">w</span>-&gt;<span style="color: #7fdbca;">data</span>])</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">Graph_DepthFirstSearch</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">, </span><span token="variable">w</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; }</div><div>}</div></div>
 
 <p>值的注意的是，如果图是无向不连通或有向弱连通的，未必所有顶点都会在此过程中访问到。</p>
 
@@ -443,14 +443,14 @@ var _hmt = _hmt || [];
 <p>下图展示了广度优先搜索某一时刻顶点的搜索情况，搜索的顶点从起点开始向外辐射展开：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-BFS.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/11-BFS.png"/>
 </figure>
 
 <p>广度优先搜索需要在访问一批顶点时保存这些顶点的信息，这样下一次才能向外拓展一层。保存已访问但还没向外拓展的顶点可以使用队列来实现，并且使用队列可以让先向外拓展的顶点下一次也先向外拓展。</p>
 
 <p>以下代码是广度优先搜索的一个通用形式：</p>
 
-<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">Graph_BreadthFirstSearch</span>(<span token="type">graph</span> <span style="color: #d7dbe0;">g</span>, <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">v</span>) {</div><div>&#160; &#160; <span style="color: #82aaff;">bool</span> <span token="variable">visited</span>[<span style="color: #d7dbe0;">g</span>-&gt;<span token="variable">size</span>];</div><div>&#160; &#160; <span style="color: #82aaff;">memset</span><span style="color: #82aaff;">(</span><span token="variable">visited</span><span style="color: #82aaff;">, </span><span token="number">0</span><span style="color: #82aaff;">, </span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;"> </span><span token="variable">visited</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="type">queue</span> <span token="variable">q</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Queue_New</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;">VERTEX_MAXNUM</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span token="variable">visited</span>[<span style="color: #d7dbe0;">v</span>-&gt;<span style="color: #7fdbca;">data</span>]) {</div><div>&#160; &#160; &#160; &#160; <span token="variable">visited</span>[<span style="color: #d7dbe0;">v</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">true</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #82aaff;">Queue_Enqueue</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">v</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">data</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">while</span> (<span style="color: #c792ea;">!</span><span style="color: #82aaff;">Queue_IsEmpty</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">)</span>) {</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span token="variable">w</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Graph_GetVertexByData</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">, </span><span style="color: #82aaff;">Queue_Dequeue</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">))</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">w</span>-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span token="variable">visited</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>]) {</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">visited</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">true</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #82aaff;">Queue_Enqueue</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">, </span><span token="variable">arc</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">vertex</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">data</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; }</div><div>&#160; &#160; &#160; &#160; }</div><div>&#160; &#160; }</div><div>&#160; &#160; <span style="color: #82aaff;">Queue_Delete</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">)</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">Graph_BreadthFirstSearch</span>(<span token="type">graph</span> <span style="color: #d7dbe0;">g</span>, <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">v</span>) {</div><div>&nbsp; &nbsp; <span style="color: #82aaff;">bool</span> <span token="variable">visited</span>[<span style="color: #d7dbe0;">g</span>-&gt;<span token="variable">size</span>];</div><div>&nbsp; &nbsp; <span style="color: #82aaff;">memset</span><span style="color: #82aaff;">(</span><span token="variable">visited</span><span style="color: #82aaff;">, </span><span token="number">0</span><span style="color: #82aaff;">, </span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;"> </span><span token="variable">visited</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; <span token="type">queue</span> <span token="variable">q</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Queue_New</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;">VERTEX_MAXNUM</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span token="variable">visited</span>[<span style="color: #d7dbe0;">v</span>-&gt;<span style="color: #7fdbca;">data</span>]) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">visited</span>[<span style="color: #d7dbe0;">v</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">true</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">Queue_Enqueue</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">v</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">data</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">while</span> (<span style="color: #c792ea;">!</span><span style="color: #82aaff;">Queue_IsEmpty</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">)</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span token="variable">w</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Graph_GetVertexByData</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">, </span><span style="color: #82aaff;">Queue_Dequeue</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">))</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">w</span>-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span token="variable">visited</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>]) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">visited</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">true</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">Queue_Enqueue</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">, </span><span token="variable">arc</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">vertex</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">data</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; }</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span style="color: #82aaff;">Queue_Delete</span><span style="color: #82aaff;">(</span><span token="variable">q</span><span style="color: #82aaff;">)</span>;</div><div>}</div></div>
 
 <p>图的两种遍历方式各有侧重点，它们都有比较典型的应用。</p>
 
@@ -477,19 +477,19 @@ var _hmt = _hmt || [];
 <p>例如，假设要在以下有向有权图中寻找从 <span class="math">\\( v_1 \\)</span> 到 <span class="math">\\( v_8 \\)</span> 的最短路径：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-Dijkstra-step-1.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/11-Dijkstra-step-1.png"/>
 </figure>
 
 <p>那么首先从 <span class="math">\\( v_1 \\)</span> 开始，标记出从它到邻接顶点的路径，并暂时视为最短路径：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-Dijkstra-step-2.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/11-Dijkstra-step-2.png"/>
 </figure>
 
 <p>然后找到未访问且具有最短路径的顶点，即顶点 <span class="math">\\( v_2 \\)</span> ，再标记出经由它到邻接顶点的路径：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-Dijkstra-step-3.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/11-Dijkstra-step-3.png"/>
 </figure>
 
 <p>每次更新完邻接顶点的路径后，都继续从未访问的顶点中找出具有最短路径的顶点。</p>
@@ -497,7 +497,7 @@ var _hmt = _hmt || [];
 <p>本次找到的顶点为 <span class="math">\\( v_6 \\)</span> ，计算它邻接顶点的路径长时，发现从它到 <span class="math">\\( v_3 \\)</span> 比从已到达的顶点到 <span class="math">\\( v_3 \\)</span> 路径更短，那么就更新到 <span class="math">\\( v_3 \\)</span> 的最短路径：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-Dijkstra-step-4.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/11-Dijkstra-step-4.png"/>
 </figure>
 
 <p>重复以上步骤，直到确定了 <span class="math">\\( v_1 \\)</span> 与图中所有顶点的最短路径后才结束算法。</p>
@@ -505,14 +505,14 @@ var _hmt = _hmt || [];
 <p>例如，接下来两步是处理 <span class="math">\\( v_3 \\)</span> 和 <span class="math">\\( v_4 \\)</span> 顶点并更新它们邻接顶点的路径长：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-Dijkstra-step-5.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/11-Dijkstra-step-5.png"/>
 </figure>
 
 <p>Dijkstra 算法也可用于处理无向图的最短路径，甚至可以用于处理无权图的最短路径（无权图可以将每条边的权看作 1 ）。</p>
 
 <p>Dijkstra 算法的代码大致实现如下：</p>
 
-<div class="vscode-block"><div><span token="keyword">int</span> <span style="color: #82aaff;">Graph_WeightedPath_Dijkstra</span>(<span token="type">graph</span> <span style="color: #d7dbe0;">g</span>, <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">v</span>, <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">w</span>) {</div><div>&#160; &#160; <span style="color: #82aaff;">bool</span> <span token="variable">visited</span>[<span style="color: #82aaff;">VERTEX_MAXNUM</span>];</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">minpathlen</span>[<span style="color: #82aaff;">VERTEX_MAXNUM</span>];</div><div>&#160; &#160; <span style="color: #82aaff;">memset</span><span style="color: #82aaff;">(</span><span token="variable">visited</span><span style="color: #82aaff;">, </span><span token="number">0</span><span style="color: #82aaff;">, </span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;"> </span><span token="variable">visited</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #82aaff;">VERTEX_MAXNUM</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) <span token="variable">minpathlen</span>[<span token="variable">i</span>] <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">INT_MAX</span>;</div><div>&#160; &#160; </div><div>&#160; &#160; <span token="variable">minpathlen</span>[<span style="color: #d7dbe0;">v</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="variable">i</span>]) <span token="keyword">continue</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">int</span> <span token="variable">minv</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">int</span> <span token="variable">minlen</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">INT_MAX</span>;</div><br><div>&#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">j</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">j</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">j</span><span style="color: #c792ea;">++</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span token="variable">visited</span>[<span token="variable">j</span>] <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">minpathlen</span>[<span token="variable">j</span>] <span style="color: #c792ea;">&lt;</span> <span token="variable">minlen</span>) {</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">minv</span> <span style="color: #c792ea;">=</span> <span token="variable">j</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">minlen</span> <span style="color: #c792ea;">=</span> <span token="variable">minpathlen</span>[<span token="variable">minv</span>];</div><div>&#160; &#160; &#160; &#160; &#160; &#160; }</div><div>&#160; &#160; &#160; &#160; <span token="variable">visited</span>[<span token="variable">minv</span>] <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">true</span>;</div><div>&#160; &#160; &#160; &#160; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span token="variable">v_k</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Graph_GetVertexByData</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">, </span><span token="variable">minv</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">v_k</span>-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>) {</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span token="variable">u</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span token="variable">visited</span>[<span token="variable">u</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">&amp;&amp;</span> (<span token="variable">minlen</span> <span style="color: #7fdbca;">+</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">weight</span> <span style="color: #c792ea;">&lt;</span> <span token="variable">minpathlen</span>[<span token="variable">u</span>-&gt;<span style="color: #7fdbca;">data</span>]))</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">minpathlen</span>[<span token="variable">u</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span token="variable">minlen</span> <span style="color: #7fdbca;">+</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">weight</span>;</div><div>&#160; &#160; &#160; &#160; }</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">minpathlen</span>[<span style="color: #d7dbe0;">w</span>-&gt;<span style="color: #7fdbca;">data</span>];</div><div>}</div></div>
+<div class="vscode-block"><div><span token="keyword">int</span> <span style="color: #82aaff;">Graph_WeightedPath_Dijkstra</span>(<span token="type">graph</span> <span style="color: #d7dbe0;">g</span>, <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">v</span>, <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">w</span>) {</div><div>&nbsp; &nbsp; <span style="color: #82aaff;">bool</span> <span token="variable">visited</span>[<span style="color: #82aaff;">VERTEX_MAXNUM</span>];</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">minpathlen</span>[<span style="color: #82aaff;">VERTEX_MAXNUM</span>];</div><div>&nbsp; &nbsp; <span style="color: #82aaff;">memset</span><span style="color: #82aaff;">(</span><span token="variable">visited</span><span style="color: #82aaff;">, </span><span token="number">0</span><span style="color: #82aaff;">, </span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;"> </span><span token="variable">visited</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #82aaff;">VERTEX_MAXNUM</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) <span token="variable">minpathlen</span>[<span token="variable">i</span>] <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">INT_MAX</span>;</div><div>&nbsp; &nbsp; </div><div>&nbsp; &nbsp; <span token="variable">minpathlen</span>[<span style="color: #d7dbe0;">v</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="variable">i</span>]) <span token="keyword">continue</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">minv</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">minlen</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">INT_MAX</span>;</div><br/><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">j</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">j</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">j</span><span style="color: #c792ea;">++</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span token="variable">visited</span>[<span token="variable">j</span>] <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">minpathlen</span>[<span token="variable">j</span>] <span style="color: #c792ea;">&lt;</span> <span token="variable">minlen</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">minv</span> <span style="color: #c792ea;">=</span> <span token="variable">j</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">minlen</span> <span style="color: #c792ea;">=</span> <span token="variable">minpathlen</span>[<span token="variable">minv</span>];</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">visited</span>[<span token="variable">minv</span>] <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">true</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span token="variable">v_k</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Graph_GetVertexByData</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">, </span><span token="variable">minv</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">v_k</span>-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="type">graph_vertex</span><span style="color: #7fdbca;">*</span> <span token="variable">u</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span token="variable">visited</span>[<span token="variable">u</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">&amp;&amp;</span> (<span token="variable">minlen</span> <span style="color: #7fdbca;">+</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">weight</span> <span style="color: #c792ea;">&lt;</span> <span token="variable">minpathlen</span>[<span token="variable">u</span>-&gt;<span style="color: #7fdbca;">data</span>]))</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">minpathlen</span>[<span token="variable">u</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span token="variable">minlen</span> <span style="color: #7fdbca;">+</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">weight</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; }</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="variable">minpathlen</span>[<span style="color: #d7dbe0;">w</span>-&gt;<span style="color: #7fdbca;">data</span>];</div><div>}</div></div>
 
 <p>注意一个已计算路径最小值的顶点未必被访问过。</p>
 
@@ -535,12 +535,12 @@ var _hmt = _hmt || [];
 <p>例如，以上是上一节示例退化的无向图及其最小生成树：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-minimum-spanning-tree.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/11-minimum-spanning-tree.png"/>
 </figure>
 
 <p>最小生成树也有典型的实际应用。例如，假设要在若干地点间建立通信路线，那么需要通过最小生成树来规划建立需要的最短线路长度或最少花费。</p>
 
-<p>最小生成树之所以称为“树”，是因为这样得到的无向图是没有圈的，因此它将退化为树形结构。如果无向图有圈，那么圈上的两个顶点之间就会有两条不一样的路径，但这是不必要的，会增加总的路径长度，只需要保留更短的路径即可。</p>
+<p>最小生成树之所以称为&ldquo;树&rdquo;，是因为这样得到的无向图是没有圈的，因此它将退化为树形结构。如果无向图有圈，那么圈上的两个顶点之间就会有两条不一样的路径，但这是不必要的，会增加总的路径长度，只需要保留更短的路径即可。</p>
 
 <p>并且由于无向图是没有圈的，无向图边的条数为 <span class="math">\\( |V| - 1 \\)</span> ，因为除了根之外，每个顶点都需要一条边来接到图中；如果多了一条边，那么某个顶点就会接到图中两次，形成一个不必要的圈。</p>
 
@@ -553,7 +553,7 @@ var _hmt = _hmt || [];
 <p>一开始可以随机选择一个顶点作为生成树的根。下图展示了该算法计算以上图最小生成树的前几步：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-Prim-steps.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/11-Prim-steps.png"/>
 </figure>
 
 <p>Prim 算法原理比较直观，但有一些细节需要谨慎处理。Prim 算法的实现可以参照以下思路完成：</p>
@@ -563,7 +563,7 @@ var _hmt = _hmt || [];
 <p>首先，任取一个顶点放入生成树中，并将其邻接的顶点视为离生成树最近的顶点，更新这些顶点的最近路径长与最近顶点：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-Prim-step-1.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/11-Prim-step-1.png"/>
 </figure>
 
 <p>每个顶点的最近路径长一开始被置为 <span class="math">\\( \infty \\)</span> 或 <code>INT_MAX</code> 。如果一个顶点的最近路径长为 0 ，那么说明该顶点已经位于生成树中。</p>
@@ -571,18 +571,18 @@ var _hmt = _hmt || [];
 <p>接下来每次都选取离生成树最近的顶点，将其插入到生成树中，并更新该顶点邻接的顶点信息。例如，下一次离生成树最近的顶点是 <span class="math">\\( v_2 \\)</span> ，则将其插入生成树中。更新 <span class="math">\\( v_2 \\)</span> 邻接顶点时发现 <span class="math">\\( v_3 \\)</span> 离它比离 <span class="math">\\( v_1 \\)</span> 更近，因此将该顶点的相关字段更新：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-Prim-step-2.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/11-Prim-step-2.png"/>
 </figure>
 
 <p>下一步继续选择离生成树最近的顶点，依照上述方式插入到生成树中并更新邻接顶点的信息：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-Prim-step-3.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/11-Prim-step-3.png"/>
 </figure>
 
 <p>Prim 算法的简单代码实现可以参考如下，它与 Dijkstra 算法的实现上非常相似：</p>
 
-<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">Graph_MinSpanTree_Prim</span>(<span token="type">graph</span> <span style="color: #d7dbe0;">g</span>) {</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">min_vtx</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="number">0</span>]-&gt;<span style="color: #7fdbca;">data</span>;</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="number">0</span>]-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="variable">minpathfrom</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span token="variable">min_vtx</span>;</div><div>&#160; &#160; &#160; &#160; <span token="variable">minpathlen</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">weight</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="variable">minpathlen</span>[<span token="variable">min_vtx</span>] <span style="color: #c792ea;">=</span> <span token="number">0</span>;<span style="color: #637777;"> &#160; &#160; &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> put it in the tree</span></div><div><span style="color: #a8a8a8;">&#160; &#160; /* Add new edge ( minpathfrom[min_vtx] --- min_len --&gt; min_vtx ) */</span></div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">1</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="variable">i</span>])</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">continue</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">int</span> <span token="variable">min_len</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">INT_MAX</span>;<span style="color: #637777;"> &#160; &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> find the closest vertex</span></div><div>&#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">j</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">j</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">j</span><span style="color: #c792ea;">++</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">minpathlen</span>[<span token="variable">j</span>] <span style="color: #c792ea;">!=</span> <span token="number">0</span> <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">minpathlen</span>[<span token="variable">j</span>] <span style="color: #c792ea;">&lt;</span> <span token="variable">min_len</span>) {</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">min_len</span> <span style="color: #c792ea;">=</span> <span token="variable">minpathlen</span>[<span token="variable">j</span>];</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">min_vtx</span> <span style="color: #c792ea;">=</span> <span token="variable">j</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; }</div><div>&#160; &#160; &#160; &#160; <span token="variable">minpathlen</span>[<span token="variable">min_vtx</span>] <span style="color: #c792ea;">=</span> <span token="number">0</span>;<span style="color: #637777;"> &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> put it in the tree</span></div><div><span style="color: #a8a8a8;">&#160; &#160; &#160; &#160; /* update adjacent vertex */</span></div><div>&#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Graph_GetVertexByData</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">, </span><span token="variable">min_vtx</span><span style="color: #82aaff;">)</span>-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">minpathlen</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">!=</span> <span token="number">0</span> <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">weight</span> <span style="color: #c792ea;">&lt;</span> <span token="variable">minpathlen</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>]) {</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">minpathfrom</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span token="variable">min_vtx</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">minpathlen</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">weight</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; }</div><div>&#160; &#160; }</div><div>}</div></div>
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">Graph_MinSpanTree_Prim</span>(<span token="type">graph</span> <span style="color: #d7dbe0;">g</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">min_vtx</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="number">0</span>]-&gt;<span style="color: #7fdbca;">data</span>;</div><div>&nbsp; &nbsp; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="number">0</span>]-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">minpathfrom</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span token="variable">min_vtx</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">minpathlen</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">weight</span>;</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span token="variable">minpathlen</span>[<span token="variable">min_vtx</span>] <span style="color: #c792ea;">=</span> <span token="number">0</span>;<span style="color: #637777;"> &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> put it in the tree</span></div><div><span style="color: #a8a8a8;">&nbsp; &nbsp; /* Add new edge ( minpathfrom[min_vtx] --- min_len --&gt; min_vtx ) */</span></div><div>&nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">1</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #c792ea;">!</span><span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="variable">i</span>])</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">continue</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">min_len</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">INT_MAX</span>;<span style="color: #637777;"> &nbsp; &nbsp; &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> find the closest vertex</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">j</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">j</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">j</span><span style="color: #c792ea;">++</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">minpathlen</span>[<span token="variable">j</span>] <span style="color: #c792ea;">!=</span> <span token="number">0</span> <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">minpathlen</span>[<span token="variable">j</span>] <span style="color: #c792ea;">&lt;</span> <span token="variable">min_len</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">min_len</span> <span style="color: #c792ea;">=</span> <span token="variable">minpathlen</span>[<span token="variable">j</span>];</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">min_vtx</span> <span style="color: #c792ea;">=</span> <span token="variable">j</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">minpathlen</span>[<span token="variable">min_vtx</span>] <span style="color: #c792ea;">=</span> <span token="number">0</span>;<span style="color: #637777;"> &nbsp; &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> put it in the tree</span></div><div><span style="color: #a8a8a8;">&nbsp; &nbsp; &nbsp; &nbsp; /* update adjacent vertex */</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">Graph_GetVertexByData</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">, </span><span token="variable">min_vtx</span><span style="color: #82aaff;">)</span>-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">minpathlen</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">!=</span> <span token="number">0</span> <span style="color: #c792ea;">&amp;&amp;</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">weight</span> <span style="color: #c792ea;">&lt;</span> <span token="variable">minpathlen</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>]) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">minpathfrom</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span token="variable">min_vtx</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">minpathlen</span>[<span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>] <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">weight</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</div><div>&nbsp; &nbsp; }</div><div>}</div></div>
 
 <p>该算法的复杂度分析也和 Dijkstra 算法一致：不使用优先队列时复杂度为 <span class="math">\\( O(|V|^2) \\)</span> ，使用优先队列的复杂度为 <span class="math">\\( O(|E|\log |V|) \\)</span> 。</p>
 
@@ -593,19 +593,19 @@ var _hmt = _hmt || [];
 <p>还是以上面那个图为例，首先选择权重最小的边加入图中：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-Kruskal-step-1.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/11-Kruskal-step-1.png"/>
 </figure>
 
 <p>然后继续选择未添加的权重最小的边尝试放入图中：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-Kruskal-step-2.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/11-Kruskal-step-2.png"/>
 </figure>
 
 <p>继续添加边，但添加边 <span class="math">\\( (v_1, v_4) \\)</span> 时发现会形成圈，因此需要抛弃该边：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-Kruskal-step-3.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/11-Kruskal-step-3.png"/>
 </figure>
 
 <p>重复以上步骤即可建立最小生成树。</p>
@@ -615,16 +615,16 @@ var _hmt = _hmt || [];
 <p>例如，以上是某个图调用 Kruskal 算法的中间结果，它形成了三个互相独立的连通图：（这里使用不同颜色作为连通图的标记）</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/11-Kruskal-has-cycle.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/11-Kruskal-has-cycle.png"/>
 </figure>
 
 <p>如果要向顶点 <span class="math">\\( v_4 \\)</span> 和 <span class="math">\\( v_6 \\)</span> 之间插入一条边，那么就需要先判断这两个顶点的标记是否相同：如果相同，说明它们属于同一个连通图，两者已经存在了一条路径，再向它们之间插入一条边，则又增加了一条路径，使得无向图产生了一个圈。</p>
 
 <p>Kruskal 算法大致可以由以下方式实现：</p>
 
-<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">Graph_MinSpanTree_Kruskal</span>(<span token="type">graph</span> <span style="color: #d7dbe0;">g</span>) {</div><br><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>)<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> collect arcs</span></div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="variable">i</span>])</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="variable">i</span>]-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">arcs</span>[<span token="variable">arcs_ptr</span><span style="color: #c792ea;">++</span>] <span style="color: #c792ea;">=</span> (<span token="keyword">struct</span> <span token="type">_graph_arc</span>) {</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; .from<span style="color: #c792ea;">=</span><span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="variable">i</span>]-&gt;<span style="color: #7fdbca;">data</span>, .to<span style="color: #c792ea;">=</span><span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>, .weight<span style="color: #c792ea;">=</span><span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">weight</span> };</div><div>&#160; &#160; <span style="color: #82aaff;">qsort</span><span style="color: #82aaff;">(</span><span token="variable">arcs</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">arc_num</span><span style="color: #82aaff;">, </span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span token="keyword">struct</span><span style="color: #82aaff;"> </span><span style="color: #82aaff;text-decoration: underline;">_graph_arc</span><span style="color: #82aaff;">), </span><span style="color: #82aaff;">CompareByWeight</span><span style="color: #82aaff;">)</span>;</div><br><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">arcs_inserted</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">arc_num</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">conn_mark</span>[<span token="variable">arcs</span>[<span token="variable">i</span>].<span token="variable">from</span>] <span style="color: #c792ea;">!=</span> <span token="variable">conn_mark</span>[<span token="variable">arcs</span>[<span token="variable">i</span>].<span token="variable">to</span>]) {</div><div><span style="color: #a8a8a8;">&#160; &#160; &#160; &#160; &#160; &#160; /* insert edge (arcs[i].from &lt;-- arcs[i].weight --&gt; arcs[i].to) to tree */</span></div><div><span style="color: #a8a8a8;">&#160; &#160; &#160; &#160; &#160; &#160; /* union sets between edge */</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">k</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">k</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertex_num</span>; <span token="variable">k</span><span style="color: #c792ea;">++</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">conn_mark</span>[<span token="variable">k</span>] <span style="color: #c792ea;">==</span> <span token="variable">conn_mark</span>[<span token="variable">arcs</span>[<span token="variable">i</span>].<span token="variable">to</span>])</div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">conn_mark</span>[<span token="variable">k</span>] <span style="color: #c792ea;">=</span> <span token="variable">conn_mark</span>[<span token="variable">arcs</span>[<span token="variable">i</span>].<span token="variable">from</span>];</div><br><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">arcs_inserted</span><span style="color: #c792ea;">++</span>;</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">arcs_inserted</span> <span style="color: #c792ea;">==</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertex_num</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>)<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> minimum spanning tree has created</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">break</span>;</div><div>&#160; &#160; &#160; &#160; }</div><div>&#160; &#160; }</div><div>}</div></div>
+<div class="vscode-block"><div><span token="keyword">void</span> <span style="color: #82aaff;">Graph_MinSpanTree_Kruskal</span>(<span token="type">graph</span> <span style="color: #d7dbe0;">g</span>) {</div><br/><div>&nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">size</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>)<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> collect arcs</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="variable">i</span>])</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">for</span> (<span token="type">graph_arc</span><span style="color: #7fdbca;">*</span> <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="variable">i</span>]-&gt;<span style="color: #7fdbca;">firstarc</span>; <span token="variable">arc</span>; <span token="variable">arc</span> <span style="color: #c792ea;">=</span> <span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">nextarc</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">arcs</span>[<span token="variable">arcs_ptr</span><span style="color: #c792ea;">++</span>] <span style="color: #c792ea;">=</span> (<span token="keyword">struct</span> <span token="type">_graph_arc</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .from<span style="color: #c792ea;">=</span><span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertices</span>[<span token="variable">i</span>]-&gt;<span style="color: #7fdbca;">data</span>, .to<span style="color: #c792ea;">=</span><span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">vertex</span>-&gt;<span style="color: #7fdbca;">data</span>, .weight<span style="color: #c792ea;">=</span><span token="variable">arc</span>-&gt;<span style="color: #7fdbca;">weight</span> };</div><div>&nbsp; &nbsp; <span style="color: #82aaff;">qsort</span><span style="color: #82aaff;">(</span><span token="variable">arcs</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">g</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">arc_num</span><span style="color: #82aaff;">, </span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span token="keyword">struct</span><span style="color: #82aaff;"> </span><span style="color: #82aaff;text-decoration: underline;">_graph_arc</span><span style="color: #82aaff;">), </span><span style="color: #82aaff;">CompareByWeight</span><span style="color: #82aaff;">)</span>;</div><br/><div>&nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">arcs_inserted</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">i</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">arc_num</span>; <span token="variable">i</span><span style="color: #c792ea;">++</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">conn_mark</span>[<span token="variable">arcs</span>[<span token="variable">i</span>].<span token="variable">from</span>] <span style="color: #c792ea;">!=</span> <span token="variable">conn_mark</span>[<span token="variable">arcs</span>[<span token="variable">i</span>].<span token="variable">to</span>]) {</div><div><span style="color: #a8a8a8;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /* insert edge (arcs[i].from &lt;-- arcs[i].weight --&gt; arcs[i].to) to tree */</span></div><div><span style="color: #a8a8a8;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; /* union sets between edge */</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">k</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>; <span token="variable">k</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertex_num</span>; <span token="variable">k</span><span style="color: #c792ea;">++</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">conn_mark</span>[<span token="variable">k</span>] <span style="color: #c792ea;">==</span> <span token="variable">conn_mark</span>[<span token="variable">arcs</span>[<span token="variable">i</span>].<span token="variable">to</span>])</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">conn_mark</span>[<span token="variable">k</span>] <span style="color: #c792ea;">=</span> <span token="variable">conn_mark</span>[<span token="variable">arcs</span>[<span token="variable">i</span>].<span token="variable">from</span>];</div><br/><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">arcs_inserted</span><span style="color: #c792ea;">++</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">arcs_inserted</span> <span style="color: #c792ea;">==</span> <span style="color: #d7dbe0;">g</span>-&gt;<span style="color: #7fdbca;">vertex_num</span> <span style="color: #7fdbca;">-</span> <span token="number">1</span>)<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> minimum spanning tree has created</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">break</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; }</div><div>&nbsp; &nbsp; }</div><div>}</div></div>
 
-<p>以上代码首先收集所有的边（注意如果用邻接表表示无向图的话每条边只应该收集一次），然后对所有边做<a href="http://frozencandles.fun/archives/735">排序</a>，以实现从小到大插入合适的边。</p>
+<p>以上代码首先收集所有的边（注意如果用邻接表表示无向图的话每条边只应该收集一次），然后对所有边做<a class="link-internal" href="/computer-science/data-structure/07-sort-algorithm">排序</a>，以实现从小到大插入合适的边。</p>
 
 <p>在插入前需要判断边两侧顶点的标记是否相同，如果不相同便可插入，插入完成后还需更新两侧连通图的标记为同一连通图。修改标记的方式为：遍历所有顶点标记，将和边一侧顶点相同的标记修改为另一侧的标记。</p>
 
@@ -651,14 +651,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/embedded/esp32/02-basic-peripheral/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-520x293.jpg 520w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-300x169.jpg 300w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-1024x576.jpg 1024w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-768x432.jpg 768w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-1536x864.jpg 1536w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作-950x534.jpg 950w, /wp-content/uploads/2022/09/ESP32与MicroPython入门-02-基本外设操作.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/data-science/via-python/04-numpy-universal-functions/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/10/Python数据分析-numpy04通用函数与广播规则-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/10/Python数据分析-numpy04通用函数与广播规则-520x293.jpg 520w, /wp-content/uploads/2022/10/Python数据分析-numpy04通用函数与广播规则-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/embedded/esp32/02-basic-peripheral/" rel="bookmark">ESP32与MicroPython入门-02 基本外设操作</a>
+					<a href="/data-science/via-python/04-numpy-universal-functions/" rel="bookmark">numpy04:通用函数与广播规则</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -669,14 +669,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/computer-science/data-structure/03-stack-and-queue/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/08/数据结构03-栈和队列-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/08/数据结构03-栈和队列-520x293.jpg 520w, /wp-content/uploads/2022/08/数据结构03-栈和队列-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/computer-science/computer-networking/mqtt-tutorial/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/08/MQTT协议简介-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/08/MQTT协议简介-520x293.jpg 520w, /wp-content/uploads/2022/08/MQTT协议简介-300x169.jpg 300w, /wp-content/uploads/2022/08/MQTT协议简介-1024x576.jpg 1024w, /wp-content/uploads/2022/08/MQTT协议简介-768x432.jpg 768w, /wp-content/uploads/2022/08/MQTT协议简介-1536x864.jpg 1536w, /wp-content/uploads/2022/08/MQTT协议简介-950x534.jpg 950w, /wp-content/uploads/2022/08/MQTT协议简介.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/computer-science/data-structure/03-stack-and-queue/" rel="bookmark">数据结构03-栈和队列</a>
+					<a href="/computer-science/computer-networking/mqtt-tutorial/" rel="bookmark">MQTT协议简介</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -687,14 +687,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/programming/python/python3-with-statement-context-manager/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/07/Python-with语句和上下文管理器-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/07/Python-with语句和上下文管理器-520x293.jpg 520w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-300x169.jpg 300w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-1024x576.jpg 1024w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-768x432.jpg 768w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-1536x864.jpg 1536w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-950x534.jpg 950w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/data-science/machine-learning/10-clustering/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/11/机器学习-聚类算法-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/11/机器学习-聚类算法-520x293.jpg 520w, /wp-content/uploads/2022/11/机器学习-聚类算法-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/programming/python/python3-with-statement-context-manager/" rel="bookmark">Python3 with语句和上下文管理器</a>
+					<a href="/data-science/machine-learning/10-clustering/" rel="bookmark">机器学习-数据聚类与分群</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -731,6 +731,14 @@ var _hmt = _hmt || [];
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
 											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
 					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
 											<span class="post-date">2023年6月19日</span>
 									</li>
@@ -750,14 +758,6 @@ var _hmt = _hmt || [];
 					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
 											<span class="post-date">2023年3月6日</span>
 									</li>
-											<li>
-					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
-											<span class="post-date">2023年2月27日</span>
-									</li>
-											<li>
-					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
-											<span class="post-date">2023年2月8日</span>
-									</li>
 					</ul>
 
 		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
@@ -770,9 +770,11 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (1)
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
 <ul class='children'>
 	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
 </li>
 </ul>
 </li>
@@ -794,7 +796,7 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (20)
 <ul class='children'>
 	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
 </li>
@@ -820,7 +822,9 @@ var _hmt = _hmt || [];
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(1)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
 	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
 	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
 	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
@@ -885,7 +889,7 @@ var _hmt = _hmt || [];
 					
 										
 					<div id="copyright">
-													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
 											</div><!--/#copyright-->
 					
 										

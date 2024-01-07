@@ -12,7 +12,7 @@
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 
-	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
 	<title>数据结构06-优先队列(堆) - 冰封残烛的个人小站</title>
 	<meta name="description" content="优先队列(priority queue)是一种特殊的队列，它可以像队列一样插入与删除元素，不过它的特点是只能删除队列中的最小值。本节介绍的二叉堆与左式堆，是两种经典的优先队列的实现，主要是为下一节介绍排序算法做基础。" />
 	<link rel="canonical" href="/computer-science/data-structure/06-heap/" />
@@ -23,11 +23,12 @@
 	<meta property="og:url" content="/computer-science/data-structure/06-heap/" />
 	<meta property="og:site_name" content="冰封残烛的个人小站" />
 	<meta property="article:published_time" content="2022-08-21T09:36:41+00:00" />
-	<meta property="article:modified_time" content="2023-10-06T04:19:24+00:00" />
+	<meta property="article:modified_time" content="2023-10-13T04:06:44+00:00" />
 	<meta property="og:image" content="/wp-content/uploads/2022/08/数据结构06-优先队列堆.jpg" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="704" />
 	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="作者" />
 	<meta name="twitter:data1" content="Hello" />
@@ -37,35 +38,8 @@
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
-	            "@type": "WebSite",
-	            "@id": "/#website",
-	            "url": "/",
-	            "name": "冰封残烛的个人小站",
-	            "description": "FrozenCandle&#039;s Personal Site",
-	            "potentialAction": [
-	                {
-	                    "@type": "SearchAction",
-	                    "target": {
-	                        "@type": "EntryPoint",
-	                        "urlTemplate": "/?s={search_term_string}"
-	                    },
-	                    "query-input": "required name=search_term_string"
-	                }
-	            ],
-	            "inLanguage": "zh-CN"
-	        },
-	        {
-	            "@type": "ImageObject",
-	            "inLanguage": "zh-CN",
-	            "@id": "/computer-science/data-structure/06-heap/#primaryimage",
-	            "url": "/wp-content/uploads/2022/08/数据结构06-优先队列堆.jpg",
-	            "contentUrl": "/wp-content/uploads/2022/08/数据结构06-优先队列堆.jpg",
-	            "width": 1200,
-	            "height": 704
-	        },
-	        {
 	            "@type": "WebPage",
-	            "@id": "/computer-science/data-structure/06-heap/#webpage",
+	            "@id": "/computer-science/data-structure/06-heap/",
 	            "url": "/computer-science/data-structure/06-heap/",
 	            "name": "数据结构06-优先队列(堆) - 冰封残烛的个人小站",
 	            "isPartOf": {
@@ -74,8 +48,12 @@
 	            "primaryImageOfPage": {
 	                "@id": "/computer-science/data-structure/06-heap/#primaryimage"
 	            },
+	            "image": {
+	                "@id": "/computer-science/data-structure/06-heap/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2022/08/数据结构06-优先队列堆.jpg",
 	            "datePublished": "2022-08-21T09:36:41+00:00",
-	            "dateModified": "2023-10-06T04:19:24+00:00",
+	            "dateModified": "2023-10-13T04:06:44+00:00",
 	            "author": {
 	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
 	            },
@@ -94,6 +72,15 @@
 	            ]
 	        },
 	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/computer-science/data-structure/06-heap/#primaryimage",
+	            "url": "/wp-content/uploads/2022/08/数据结构06-优先队列堆.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/08/数据结构06-优先队列堆.jpg",
+	            "width": 1200,
+	            "height": 704
+	        },
+	        {
 	            "@type": "BreadcrumbList",
 	            "@id": "/computer-science/data-structure/06-heap/#breadcrumb",
 	            "itemListElement": [
@@ -109,6 +96,24 @@
 	                    "name": "数据结构06-优先队列(堆)"
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
 	        },
 	        {
 	            "@type": "Person",
@@ -158,7 +163,6 @@ body { font-family: "Roboto", Arial, sans-serif; }
 <link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
-<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
 <script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
 <link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/717" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
 <meta name="generator" content="WordPress 6.3.1" />
@@ -305,13 +309,9 @@ var _hmt = _hmt || [];
 				<div class="entry-content">
 					<div class="entry themeform">	
 						
-
-
-
-
 <h2>优先队列的概念</h2>
 
-<p>优先队列的概念可以由<a href="/archives/609#queue">队列</a>引出。队列可以让先到达的元素先处理，适用于很多需要边处理边容纳新元素的场合。</p>
+<p>优先队列的概念可以由<a class="link-internal" href="/computer-science/data-structure/03-stack-and-queue">队列</a>引出。队列可以让先到达的元素先处理，适用于很多需要边处理边容纳新元素的场合。</p>
 
 <p>然而，队列的处理过程也有一些不足：队列只能按顺序逐个处理，此时如果新入队了一个需要紧急处理的元素，队列不允许它插队，只能排队等待处理。</p>
 
@@ -328,18 +328,18 @@ var _hmt = _hmt || [];
 <p><strong>二叉堆</strong>(binary heap)是一棵被完全填满的二叉树，这种二叉树除了最底层外，所有位置都有元素；最底层元素从左到右填入，如下所示：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/09-complete-binary-tree.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/09-complete-binary-tree.png"/>
 </figure>
 
-<p>这种二叉树称为<strong>完全二叉树</strong>(complete binary tree)，非常适合用于实现优先队列，甚至“堆”在数据结构中多用于指代优先队列。因为完全二叉树很紧凑，因此可以使用数组表示：对于数组中位置 <span class="math">\\( i \\)</span> 上的元素，它的左侧子节点在位置 <span class="math">\\( 2i \\)</span> 处，右侧子节点在随后的位置 <span class="math">\\( 2i+1 \\)</span> 处。下图说明了数组表示完全二叉树的基本原理：</p>
+<p>这种二叉树称为<strong>完全二叉树</strong>(complete binary tree)，非常适合用于实现优先队列，甚至&ldquo;堆&rdquo;在数据结构中多用于指代优先队列。因为完全二叉树很紧凑，因此可以使用数组表示：对于数组中位置 <span class="math">\\( i \\)</span> 上的元素，它的左侧子节点在位置 <span class="math">\\( 2i \\)</span> 处，右侧子节点在随后的位置 <span class="math">\\( 2i+1 \\)</span> 处。下图说明了数组表示完全二叉树的基本原理：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/09-binary-tree-array.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/09-binary-tree-array.png"/>
 </figure>
 
 <p>因此，二叉堆的类型声明如下：</p>
 
-<div class="vscode-block"><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> {</div><div>&#160; &#160; <span token="keyword">int</span> <span style="color: #7fdbca;">size</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span style="color: #7fdbca;">length</span>;</div><div>&#160; &#160; <span token="type">elemtype</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">body</span>;</div><div>} <span token="type">binheap</span>;</div></div>
+<div class="vscode-block"><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> {</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span style="color: #7fdbca;">size</span>;</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span style="color: #7fdbca;">length</span>;</div><div>&nbsp; &nbsp; <span token="type">elemtype</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">body</span>;</div><div>} <span token="type">binheap</span>;</div></div>
 
 <p>使用数组表示完全二叉树不需要指针，并且可以很容易地遍历树；不过这种情况下树的大小需要提前估计。当然普通的二叉树也可以这么表示，但是普通的二叉树比较散，许多节点（尤其是中间位置的节点）都是空的，使用数组存储还需要给空的节点也预留所有后代的位置，存储效率不高。</p>
 
@@ -350,12 +350,12 @@ var _hmt = _hmt || [];
 <p>下图展示了一个二叉堆的树状结构：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/09-binary-heap-example.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/09-binary-heap-example.png"/>
 </figure>
 
 <p>因此，二叉堆的创建过程如下：</p>
 
-<div class="vscode-block"><div><span token="type">binheap</span><span style="color: #7fdbca;">*</span> <span style="color: #82aaff;">BinHeap_New</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">size</span>) {</div><div>&#160; &#160; <span token="type">binheap</span><span style="color: #7fdbca;">*</span> <span token="variable">heap</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">binheap</span><span style="color: #82aaff;">))</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span token="variable">heap</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #82aaff;">NULL</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of memory</span></div><div>&#160; &#160; <span token="variable">heap</span>-&gt;<span style="color: #7fdbca;">body</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">elemtype</span><span style="color: #82aaff;">) </span><span style="color: #7fdbca;">*</span><span style="color: #82aaff;"> (</span><span style="color: #d7dbe0;">size</span><span style="color: #82aaff;"> </span><span style="color: #7fdbca;">+</span><span style="color: #82aaff;"> </span><span token="number">1</span><span style="color: #82aaff;">))</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span token="variable">heap</span>-&gt;<span style="color: #7fdbca;">body</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #82aaff;">NULL</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of memory</span></div><div>&#160; &#160; <span token="variable">heap</span>-&gt;<span style="color: #7fdbca;">size</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">size</span>;</div><div>&#160; &#160; <span token="variable">heap</span>-&gt;<span style="color: #7fdbca;">length</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&#160; &#160; <span token="variable">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="number">0</span>] <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">HEAP_MIN_ELEM</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">binheap</span><span style="color: #7fdbca;">*</span> <span style="color: #82aaff;">BinHeap_New</span>(<span token="keyword">int</span> <span style="color: #d7dbe0;">size</span>) {</div><div>&nbsp; &nbsp; <span token="type">binheap</span><span style="color: #7fdbca;">*</span> <span token="variable">heap</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">binheap</span><span style="color: #82aaff;">))</span>;</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">heap</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #82aaff;">NULL</span>;<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of memory</span></div><div>&nbsp; &nbsp; <span token="variable">heap</span>-&gt;<span style="color: #7fdbca;">body</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">elemtype</span><span style="color: #82aaff;">) </span><span style="color: #7fdbca;">*</span><span style="color: #82aaff;"> (</span><span style="color: #d7dbe0;">size</span><span style="color: #82aaff;"> </span><span style="color: #7fdbca;">+</span><span style="color: #82aaff;"> </span><span token="number">1</span><span style="color: #82aaff;">))</span>;</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">heap</span>-&gt;<span style="color: #7fdbca;">body</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #82aaff;">NULL</span>;<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of memory</span></div><div>&nbsp; &nbsp; <span token="variable">heap</span>-&gt;<span style="color: #7fdbca;">size</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">size</span>;</div><div>&nbsp; &nbsp; <span token="variable">heap</span>-&gt;<span style="color: #7fdbca;">length</span> <span style="color: #c792ea;">=</span> <span token="number">0</span>;</div><div>&nbsp; &nbsp; <span token="variable">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="number">0</span>] <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">HEAP_MIN_ELEM</span>;</div><div>}</div></div>
 
 <p>注意，使用数组创建二叉堆时，其首位置将空缺出来，使剩下的元素可以直接使用下标值找到对应的父/子节点。</p>
 
@@ -364,7 +364,7 @@ var _hmt = _hmt || [];
 <p>例如，如果要向以下二叉堆插入元素 3 ，那么首先需要分配一个额外的位置：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/09-binary-heap-insert-1.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/09-binary-heap-insert-1.png"/>
 </figure>
 
 <blockquote>
@@ -374,18 +374,18 @@ var _hmt = _hmt || [];
 <p>如果向该位置直接插入 3 ，不符合二叉堆的定义，需要将该位置向上提一层，并与上层的位置对调：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/09-binary-heap-insert-2.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/09-binary-heap-insert-2.png"/>
 </figure>
 
 <p>该位置还是不符合二叉堆的定义，还需要再向上提一层：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/09-binary-heap-insert-3.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/09-binary-heap-insert-3.png"/>
 </figure>
 
 <p>此时，向该位置插入 3 便满足二叉堆的定义了。这种插入策略称为上浮或<strong>向上渗透</strong>(percolate up)。其代码实现如下：</p>
 
-<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">BinHeap_Insert</span>(<span token="type">binheap</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">heap</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">elem</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #82aaff;">BinHeap_IsFull</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">heap</span><span style="color: #82aaff;">)</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span token="number">1</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of space</span></div><div>&#160; &#160; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span style="color: #c792ea;">++</span><span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">length</span>; <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">i</span> <span style="color: #7fdbca;">/</span> <span token="number">2</span>] <span style="color: #c792ea;">&gt;</span> <span style="color: #d7dbe0;">elem</span>; <span token="variable">i</span> <span style="color: #c792ea;">/=</span> <span token="number">2</span>)</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">i</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">i</span> <span style="color: #7fdbca;">/</span> <span token="number">2</span>];</div><div>&#160; &#160; <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[i] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">elem</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">status</span> <span style="color: #82aaff;">BinHeap_Insert</span>(<span token="type">binheap</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">heap</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">elem</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #82aaff;">BinHeap_IsFull</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">heap</span><span style="color: #82aaff;">)</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span token="number">1</span>;<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of space</span></div><div>&nbsp; &nbsp; <span token="keyword">for</span> (<span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span style="color: #c792ea;">++</span><span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">length</span>; <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">i</span> <span style="color: #7fdbca;">/</span> <span token="number">2</span>] <span style="color: #c792ea;">&gt;</span> <span style="color: #d7dbe0;">elem</span>; <span token="variable">i</span> <span style="color: #c792ea;">/=</span> <span token="number">2</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">i</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">i</span> <span style="color: #7fdbca;">/</span> <span token="number">2</span>];</div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[i] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">elem</span>;</div><div>}</div></div>
 
 <p>注意，在插入时可能会一直浮到顶端，此时应该退出循环，否则它还会向索引值为 0 的位置继续移动，甚至造成无限循环。在创建二叉堆时可以通过在 0 号位置放入一个很小的元素，例如 <code>INT_MIN</code> 来避免这一点，同时简化代码的实现。</p>
 
@@ -394,7 +394,7 @@ var _hmt = _hmt || [];
 <p>例如，假设需要从以上二叉堆中删除最小值：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/09-binary-heap-remove-1.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/09-binary-heap-remove-1.png"/>
 </figure>
 
 <p>那么肯定要移除树根位置的元素。为了维持堆序性质，需要有其余位置的元素来填补该空缺，不管什么位置的元素来填补该空缺，数组少了一个元素因此最后一个位置必须被释放，该位置的元素必须被移动。</p>
@@ -402,24 +402,24 @@ var _hmt = _hmt || [];
 <p>不过该位置的元素不能直接移动到树根处，否则便违背了二叉堆的大小关系。只有树根的两个子节点的元素才能直接移动到树根处。由于左侧节点的值较小，因此移动到树根处不破坏二叉堆的性质：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/09-binary-heap-remove-2.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/09-binary-heap-remove-2.png"/>
 </figure>
 
 <p>此时又产生了一个空缺位置，并且最后一个位置的元素还是不能直接移到该空缺处。因此再重复几次以上的步骤：将较小的子节点的值移到空缺处，然后观察最后位置的元素是否适合移动到空缺处：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/09-binary-heap-remove-3.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/09-binary-heap-remove-3.png"/>
 </figure>
 
 <p>这样空缺处逐渐移动到了树叶位置，此时可以将最后位置的值移动到空缺处了：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/09-binary-heap-remove-4.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/09-binary-heap-remove-4.png"/>
 </figure>
 
 <p>整个删除过程完毕。这种删除策略称为下沉或<strong>向下渗透</strong>(percolate down)。它的原理并不会比插入复杂多少，不过考虑的细节较多。以下展示了删除的代码实现：</p>
 
-<div class="vscode-block"><div><span token="type">elemtype</span> <span style="color: #82aaff;">BinHeap_RemoveMin</span>(<span token="type">binheap</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">heap</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #82aaff;">BinHeap_IsEmpty</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">heap</span><span style="color: #82aaff;">)</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="number">0</span>];<span style="color: #637777;"> &#160; </span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> empty priority queue</span></div><div>&#160; &#160; <span token="type">elemtype</span> <span token="variable">minimum</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="number">1</span>];</div><div>&#160; &#160; <span token="type">elemtype</span> <span token="variable">last</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[<span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">length</span><span style="color: #7fdbca;">--</span>];</div><div>&#160; &#160; <span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">1</span>;</div><div>&#160; &#160; <span token="keyword">while</span> (<span token="variable">i</span> <span style="color: #7fdbca;">*</span> <span token="number">2</span> <span style="color: #c792ea;">&lt;=</span> <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">size</span>) {</div><div>&#160; &#160; &#160; &#160; <span token="keyword">int</span> <span token="variable">child</span> <span style="color: #c792ea;">=</span> <span token="variable">i</span> <span style="color: #7fdbca;">*</span> <span token="number">2</span>;<span style="color: #637777;"> &#160; &#160; &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> find smaller child</span></div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">child</span> <span style="color: #c792ea;">!=</span> <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">length</span> <span style="color: #c792ea;">&amp;&amp;</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">child</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span>] <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">child</span>])</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="variable">child</span><span style="color: #c792ea;">++</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span token="variable">last</span> <span style="color: #c792ea;">&gt;</span> <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">child</span>])</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">i</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">child</span>];</div><div>&#160; &#160; &#160; &#160; <span token="keyword">else</span></div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span token="keyword">break</span>;</div><div>&#160; &#160; &#160; &#160; <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="variable">child</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">i</span>] <span style="color: #c792ea;">=</span> <span token="variable">last</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span token="variable">minimum</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">elemtype</span> <span style="color: #82aaff;">BinHeap_RemoveMin</span>(<span token="type">binheap</span><span style="color: #7fdbca;">*</span> <span style="color: #d7dbe0;">heap</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #82aaff;">BinHeap_IsEmpty</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">heap</span><span style="color: #82aaff;">)</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="number">0</span>];<span style="color: #637777;"> &nbsp; </span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> empty priority queue</span></div><div>&nbsp; &nbsp; <span token="type">elemtype</span> <span token="variable">minimum</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="number">1</span>];</div><div>&nbsp; &nbsp; <span token="type">elemtype</span> <span token="variable">last</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[<span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">length</span><span style="color: #7fdbca;">--</span>];</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="number">1</span>;</div><div>&nbsp; &nbsp; <span token="keyword">while</span> (<span token="variable">i</span> <span style="color: #7fdbca;">*</span> <span token="number">2</span> <span style="color: #c792ea;">&lt;=</span> <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">size</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">int</span> <span token="variable">child</span> <span style="color: #c792ea;">=</span> <span token="variable">i</span> <span style="color: #7fdbca;">*</span> <span token="number">2</span>;<span style="color: #637777;"> &nbsp; &nbsp; &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> find smaller child</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">child</span> <span style="color: #c792ea;">!=</span> <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">length</span> <span style="color: #c792ea;">&amp;&amp;</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">child</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span>] <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">child</span>])</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">child</span><span style="color: #c792ea;">++</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">last</span> <span style="color: #c792ea;">&gt;</span> <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">child</span>])</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">i</span>] <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">child</span>];</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">else</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">break</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="variable">i</span> <span style="color: #c792ea;">=</span> <span token="variable">child</span>;</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">body</span>[<span token="variable">i</span>] <span style="color: #c792ea;">=</span> <span token="variable">last</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span token="variable">minimum</span>;</div><div>}</div></div>
 
 <p>删除过程中需要考虑一个节点可能未必都会有两个子节点，还可能出现只有一个子节点的情况。不过如果只存在一个子节点，那么此时已经到达了数组的结尾。</p>
 
@@ -433,9 +433,9 @@ var _hmt = _hmt || [];
     <div class="math">
     \\[
         \begin{aligned}
-        T(N) &= 0 \cdot 1/2 + 1 \cdot 1/4 + 2 \cdot 1/8 + \cdots\\
-            &= 1 \\
-            &= O(1)
+        T(N) &amp;= 0 \cdot 1/2 + 1 \cdot 1/4 + 2 \cdot 1/8 + \cdots\\
+            &amp;= 1 \\
+            &amp;= O(1)
         \end{aligned}
     \\]
     </div>
@@ -452,7 +452,7 @@ var _hmt = _hmt || [];
 <p>下图展示了一个 3-堆的结构：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/09-3-heap.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/09-3-heap.png"/>
 </figure>
 
 <p>二叉堆实质就是一个 2-堆。d-堆的深度随着 d 的增大而快速减小，插入操作的时间为 <span class="math">\\( O(\log_d N) \\)</span> 。</p>
@@ -477,24 +477,24 @@ var _hmt = _hmt || [];
 
 <p>使用如下方式定义左式堆：</p>
 
-<div class="vscode-block"><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">leftheap_node</span> {</div><div>&#160; &#160; <span token="type">elemtype</span> <span style="color: #7fdbca;">elem</span>;</div><div>&#160; &#160; <span token="keyword">struct</span> <span token="type">leftheap_node</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">left</span>;</div><div>&#160; &#160; <span token="keyword">struct</span> <span token="type">leftheap_node</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">right</span>;</div><div>&#160; &#160; <span token="keyword">int</span> <span style="color: #7fdbca;">Npl</span>;</div><div>} <span token="type">leftheap_node</span>, <span style="color: #7fdbca;">*</span> <span token="type">leftheap</span>;</div></div>
+<div class="vscode-block"><div><span style="color: #c792ea;">typedef</span> <span token="keyword">struct</span> <span token="type">leftheap_node</span> {</div><div>&nbsp; &nbsp; <span token="type">elemtype</span> <span style="color: #7fdbca;">elem</span>;</div><div>&nbsp; &nbsp; <span token="keyword">struct</span> <span token="type">leftheap_node</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">left</span>;</div><div>&nbsp; &nbsp; <span token="keyword">struct</span> <span token="type">leftheap_node</span><span style="color: #7fdbca;">*</span> <span style="color: #7fdbca;">right</span>;</div><div>&nbsp; &nbsp; <span token="keyword">int</span> <span style="color: #7fdbca;">Npl</span>;</div><div>} <span token="type">leftheap_node</span>, <span style="color: #7fdbca;">*</span> <span token="type">leftheap</span>;</div></div>
 
 <p>下图展示了一棵合理的左式堆，每个节点的 <span class="math">\\( Npl \\)</span> 标注在节点内：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/09-leftist-heap-example.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/09-leftist-heap-example.png"/>
 </figure>
 
 <p>由此可见，左式堆很不平衡，总有向左生长的特性。左式堆的元素排布和二叉堆一样，都是上小下大。接下来看看这些特性是如何使左式堆可以快速合并的。假设需要合并如下两个左式堆：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/09-leftist-heap-merge-1.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/09-leftist-heap-merge-1.png"/>
 </figure>
 
 <p>那么首先需要比较两个堆树根的大小，以确定哪个根将作为新根。由于 <span class="math">\\( H_1 \\)</span> 的根部更小，因此将 <span class="math">\\( H_2 \\)</span> 和 <span class="math">\\( H_1 \\)</span> 的右子树做合并：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/09-leftist-heap-merge-2.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/09-leftist-heap-merge-2.png"/>
 </figure>
 
 <p>注意到合并破坏了左式堆的性质。不过由于 <span class="math">\\( H_2 \\)</span> 和 <span class="math">\\( H_1 \\)</span> 的左子树保持左式堆不变，只需要将 <span class="math">\\( H_1 \\)</span> 的两个子节点做交换即可重新变为左式堆。</p>
@@ -502,36 +502,36 @@ var _hmt = _hmt || [];
 <p>以上合并还没有完成，因为 <span class="math">\\( H_1 \\)</span> 的右子树还没有合并进去，还需要将这一部分与 <span class="math">\\( H_2 \\)</span> 做合并：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/09-leftist-heap-merge-3.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/09-leftist-heap-merge-3.png"/>
 </figure>
 
 <p>合并仍然是朝右子树方向。同样地，接下来还需要对 <span class="math">\\( H_2 \\)</span> 的右子树做合并：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/09-leftist-heap-merge-4.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/09-leftist-heap-merge-4.png"/>
 </figure>
 
 <p>不过，合并破坏了 <span class="math">\\( H_2 \\)</span> 的左式堆性质，需要交换子节点元素做调整：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/09-leftist-heap-merge-5.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/09-leftist-heap-merge-5.png"/>
 </figure>
 
 <p>调整完成后，总体看一下 <span class="math">\\( H_1 \\)</span> ，两个左式堆确实完美地合并了：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@data-structure/09-leftist-heap-merge-6.png" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@data-structure/09-leftist-heap-merge-6.png"/>
 </figure>
 
 <p>左式堆的合并代码比较难以编写，因为各种循环需要考虑的条件有点多。使用递归是一种比较简洁的实现方式。首先需要一个入口函数，判断两个堆的合成主被动关系：</p>
 
-<div class="vscode-block"><div><span token="type">leftheap</span> <span style="color: #82aaff;">LeftHeap_Merge</span>(<span token="type">leftheap</span> <span style="color: #d7dbe0;">heap_A</span>, <span token="type">leftheap</span> <span style="color: #d7dbe0;">heap_B</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">heap_A</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>) <span token="keyword">return</span> <span style="color: #d7dbe0;">heap_B</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">heap_B</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>) <span token="keyword">return</span> <span style="color: #d7dbe0;">heap_A</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">heap_A</span>-&gt;<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">heap_B</span>-&gt;<span style="color: #7fdbca;">elem</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #82aaff;">_LeftHeap_Merge</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">heap_A</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">heap_B</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">else</span></div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #82aaff;">_LeftHeap_Merge</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">heap_B</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">heap_A</span><span style="color: #82aaff;">)</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">leftheap</span> <span style="color: #82aaff;">LeftHeap_Merge</span>(<span token="type">leftheap</span> <span style="color: #d7dbe0;">heap_A</span>, <span token="type">leftheap</span> <span style="color: #d7dbe0;">heap_B</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">heap_A</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>) <span token="keyword">return</span> <span style="color: #d7dbe0;">heap_B</span>;</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">heap_B</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>) <span token="keyword">return</span> <span style="color: #d7dbe0;">heap_A</span>;</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">heap_A</span>-&gt;<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">heap_B</span>-&gt;<span style="color: #7fdbca;">elem</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #82aaff;">_LeftHeap_Merge</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">heap_A</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">heap_B</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; <span token="keyword">else</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #82aaff;">_LeftHeap_Merge</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">heap_B</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">heap_A</span><span style="color: #82aaff;">)</span>;</div><div>}</div></div>
 
 <p>如果需要将 <span class="math">\\( H_2 \\)</span> 合并到 <span class="math">\\( H_1 \\)</span> ，首先需要检查 <span class="math">\\( H_1 \\)</span> 的左侧是否有元素；如果有，那么可以立即插入左侧位置，无需额外调整；否则，将右侧的节点递归地与 <span class="math">\\( H_2 \\)</span> 合并，然后根据节点的 <span class="math">\\( Npl \\)</span> 判断左式堆的性质是否发生了改变，适当做一些调整。</p>
 
 <p>合并的实际代码实现如下：</p>
 
-<div class="vscode-block"><div><span token="keyword">static</span> <span token="type">leftheap</span> <span style="color: #82aaff;">_LeftHeap_Merge</span>(<span token="type">leftheap</span> <span style="color: #d7dbe0;">heap_A</span>, <span token="type">leftheap</span> <span style="color: #d7dbe0;">heap_B</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">heap_A</span>-&gt;<span style="color: #7fdbca;">left</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">heap_A</span>-&gt;<span style="color: #7fdbca;">left</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">heap_B</span>;</div><div>&#160; &#160; <span token="keyword">else</span> {</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">heap_A</span>-&gt;<span style="color: #7fdbca;">right</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">LeftHeap_Merge</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">heap_A</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">right</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">heap_B</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span token="keyword">if</span> (<span style="color: #d7dbe0;">heap_A</span>-&gt;<span style="color: #7fdbca;">left</span>-&gt;<span style="color: #7fdbca;">Npl</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">heap_A</span>-&gt;<span style="color: #7fdbca;">right</span>-&gt;<span style="color: #7fdbca;">Npl</span>)</div><div>&#160; &#160; &#160; &#160; &#160; &#160; <span style="color: #82aaff;">LeftHeap_SwapChildren</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">heap_A</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; &#160; &#160; <span style="color: #d7dbe0;">heap_A</span>-&gt;<span style="color: #7fdbca;">Npl</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">heap_A</span>-&gt;<span style="color: #7fdbca;">right</span>-&gt;<span style="color: #7fdbca;">Npl</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span>;</div><div>&#160; &#160; }</div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">heap_A</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="keyword">static</span> <span token="type">leftheap</span> <span style="color: #82aaff;">_LeftHeap_Merge</span>(<span token="type">leftheap</span> <span style="color: #d7dbe0;">heap_A</span>, <span token="type">leftheap</span> <span style="color: #d7dbe0;">heap_B</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">heap_A</span>-&gt;<span style="color: #7fdbca;">left</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">heap_A</span>-&gt;<span style="color: #7fdbca;">left</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">heap_B</span>;</div><div>&nbsp; &nbsp; <span token="keyword">else</span> {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">heap_A</span>-&gt;<span style="color: #7fdbca;">right</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">LeftHeap_Merge</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">heap_A</span><span style="color: #82aaff;">-&gt;</span><span style="color: #7fdbca;">right</span><span style="color: #82aaff;">, </span><span style="color: #d7dbe0;">heap_B</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #d7dbe0;">heap_A</span>-&gt;<span style="color: #7fdbca;">left</span>-&gt;<span style="color: #7fdbca;">Npl</span> <span style="color: #c792ea;">&lt;</span> <span style="color: #d7dbe0;">heap_A</span>-&gt;<span style="color: #7fdbca;">right</span>-&gt;<span style="color: #7fdbca;">Npl</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #82aaff;">LeftHeap_SwapChildren</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">heap_A</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #d7dbe0;">heap_A</span>-&gt;<span style="color: #7fdbca;">Npl</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">heap_A</span>-&gt;<span style="color: #7fdbca;">right</span>-&gt;<span style="color: #7fdbca;">Npl</span> <span style="color: #7fdbca;">+</span> <span token="number">1</span>;</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #d7dbe0;">heap_A</span>;</div><div>}</div></div>
 
 <p>注意，两个函数间相互调用，由此形式一种递归的关系。</p>
 
@@ -541,17 +541,17 @@ var _hmt = _hmt || [];
 
 <p>例如，插入可以视为一棵只有树根的树与一个左式堆合并：</p>
 
-<div class="vscode-block"><div><span token="type">leftheap</span> <span style="color: #82aaff;">LeftHeap_Insert</span>(<span token="type">leftheap</span> <span style="color: #d7dbe0;">heap</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">elem</span>) {</div><div>&#160; &#160; <span token="type">leftheap_node</span><span style="color: #7fdbca;">*</span> <span token="variable">node</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">leftheap_node</span><span style="color: #82aaff;">))</span>;</div><div>&#160; &#160; <span token="keyword">if</span> (<span token="variable">node</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #82aaff;">NULL</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of space</span></div><div>&#160; &#160; <span token="variable">node</span>-&gt;<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">elem</span>;</div><div>&#160; &#160; <span token="variable">node</span>-&gt;<span style="color: #7fdbca;">left</span> <span style="color: #c792ea;">=</span> <span token="variable">node</span>-&gt;<span style="color: #7fdbca;">right</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">NULL</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #82aaff;">LeftHeap_Merge</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">heap</span><span style="color: #82aaff;">, </span><span token="variable">node</span><span style="color: #82aaff;">)</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">leftheap</span> <span style="color: #82aaff;">LeftHeap_Insert</span>(<span token="type">leftheap</span> <span style="color: #d7dbe0;">heap</span>, <span token="type">elemtype</span> <span style="color: #d7dbe0;">elem</span>) {</div><div>&nbsp; &nbsp; <span token="type">leftheap_node</span><span style="color: #7fdbca;">*</span> <span token="variable">node</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">malloc</span><span style="color: #82aaff;">(</span><span style="color: #7fdbca;">sizeof</span><span style="color: #82aaff;">(</span><span style="color: #82aaff;text-decoration: underline;">leftheap_node</span><span style="color: #82aaff;">))</span>;</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span token="variable">node</span> <span style="color: #c792ea;">==</span> <span style="color: #82aaff;">NULL</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #82aaff;">NULL</span>;<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> out of space</span></div><div>&nbsp; &nbsp; <span token="variable">node</span>-&gt;<span style="color: #7fdbca;">elem</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">elem</span>;</div><div>&nbsp; &nbsp; <span token="variable">node</span>-&gt;<span style="color: #7fdbca;">left</span> <span style="color: #c792ea;">=</span> <span token="variable">node</span>-&gt;<span style="color: #7fdbca;">right</span> <span style="color: #c792ea;">=</span> <span style="color: #82aaff;">NULL</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #82aaff;">LeftHeap_Merge</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">heap</span><span style="color: #82aaff;">, </span><span token="variable">node</span><span style="color: #82aaff;">)</span>;</div><div>}</div></div>
 
 <p>那么插入的时间复杂度也为 <span class="math">\\( O(\log N) \\)</span> 。这也是左式堆的一个弊端：为了实现较快的合并，它不得不牺牲插入的速度。</p>
 
 <p>左式堆的删除可以通过去除树根元素后，将其左右子节点合并成一个新堆实现：</p>
 
-<div class="vscode-block"><div><span token="type">leftheap</span> <span style="color: #82aaff;">LeftHeap_RemoveMin</span>(<span token="type">leftheap</span> <span style="color: #d7dbe0;">heap</span>) {</div><div>&#160; &#160; <span token="keyword">if</span> (<span style="color: #82aaff;">LeftHeap_IsEmpty</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">heap</span><span style="color: #82aaff;">)</span>)</div><div>&#160; &#160; &#160; &#160; <span token="keyword">return</span> <span style="color: #d7dbe0;">heap</span>;<span style="color: #637777;"> &#160;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> empty heap</span></div><div>&#160; &#160; <span token="type">leftheap</span> <span token="variable">left</span> &#160;<span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">left</span>;</div><div>&#160; &#160; <span token="type">leftheap</span> <span token="variable">right</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">right</span>;</div><div>&#160; &#160; <span style="color: #82aaff;">free</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">heap</span><span style="color: #82aaff;">)</span>;</div><div>&#160; &#160; <span token="keyword">return</span> <span style="color: #82aaff;">LeftHeap_Merge</span><span style="color: #82aaff;">(</span><span token="variable">left</span><span style="color: #82aaff;">, </span><span token="variable">right</span><span style="color: #82aaff;">)</span>;</div><div>}</div></div>
+<div class="vscode-block"><div><span token="type">leftheap</span> <span style="color: #82aaff;">LeftHeap_RemoveMin</span>(<span token="type">leftheap</span> <span style="color: #d7dbe0;">heap</span>) {</div><div>&nbsp; &nbsp; <span token="keyword">if</span> (<span style="color: #82aaff;">LeftHeap_IsEmpty</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">heap</span><span style="color: #82aaff;">)</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #d7dbe0;">heap</span>;<span style="color: #637777;"> &nbsp;</span><span style="color: #a8a8a8;">//</span><span style="color: #637777;"> empty heap</span></div><div>&nbsp; &nbsp; <span token="type">leftheap</span> <span token="variable">left</span> &nbsp;<span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">left</span>;</div><div>&nbsp; &nbsp; <span token="type">leftheap</span> <span token="variable">right</span> <span style="color: #c792ea;">=</span> <span style="color: #d7dbe0;">heap</span>-&gt;<span style="color: #7fdbca;">right</span>;</div><div>&nbsp; &nbsp; <span style="color: #82aaff;">free</span><span style="color: #82aaff;">(</span><span style="color: #d7dbe0;">heap</span><span style="color: #82aaff;">)</span>;</div><div>&nbsp; &nbsp; <span token="keyword">return</span> <span style="color: #82aaff;">LeftHeap_Merge</span><span style="color: #82aaff;">(</span><span token="variable">left</span><span style="color: #82aaff;">, </span><span token="variable">right</span><span style="color: #82aaff;">)</span>;</div><div>}</div></div>
 
 <p>此过程的时间复杂度也为 <span class="math">\\( O(\log N) \\)</span> 。</p>
 
-<p>优先队列作为一种比较实用的数据类型，在许多队列的改进应用场景都能看到。本节介绍优先队列，主要是为下一节介绍排序算法做基础，堆与一种特别的排序算法“堆排序”密切相关。</p>
+<p>优先队列作为一种比较实用的数据类型，在许多队列的改进应用场景都能看到。本节介绍优先队列，主要是为下一节介绍排序算法做基础，堆与一种特别的排序算法&ldquo;堆排序&rdquo;密切相关。</p>
 
 <!-- finished:2022-08-21 -->
 
@@ -577,14 +577,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/computer-science/data-structure/05-hash/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/08/数据结构05-散列-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/08/数据结构05-散列-520x293.jpg 520w, /wp-content/uploads/2022/08/数据结构05-散列-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/data-science/via-python/pandas03-the-index/">
+											<img width="520" height="293" src="/wp-content/uploads/2023/03/Python数据分析-pandas03索引-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2023/03/Python数据分析-pandas03索引-520x293.jpg 520w, /wp-content/uploads/2023/03/Python数据分析-pandas03索引-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/computer-science/data-structure/05-hash/" rel="bookmark">数据结构05-散列</a>
+					<a href="/data-science/via-python/pandas03-the-index/" rel="bookmark">pandas03:深入认识索引</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -595,14 +595,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/data-science/via-python/04-numpy-universal-functions/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/10/Python数据分析-numpy04通用函数与广播规则-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/10/Python数据分析-numpy04通用函数与广播规则-520x293.jpg 520w, /wp-content/uploads/2022/10/Python数据分析-numpy04通用函数与广播规则-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/computer-science/computer-networking/05-transmission-control-protocol/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/计算机网络05-面向连接的运输：TCP-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/07/计算机网络05-面向连接的运输：TCP-520x293.jpg 520w, /wp-content/uploads/2022/07/计算机网络05-面向连接的运输：TCP-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/data-science/via-python/04-numpy-universal-functions/" rel="bookmark">numpy04:通用函数与广播规则</a>
+					<a href="/computer-science/computer-networking/05-transmission-control-protocol/" rel="bookmark">计算机网络05-面向连接的运输：TCP</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -613,14 +613,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/computer-science/computer-networking/02-the-application-layer/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/06/计算机网络02-应用层概览-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/计算机网络02-应用层概览-520x293.jpg 520w, /wp-content/uploads/2022/06/计算机网络02-应用层概览-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/programming/other/regular-expression-tutorial/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/02/Skyrim-River-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/02/Skyrim-River-520x293.jpg 520w, /wp-content/uploads/2022/02/Skyrim-River-300x169.jpg 300w, /wp-content/uploads/2022/02/Skyrim-River-1024x576.jpg 1024w, /wp-content/uploads/2022/02/Skyrim-River-768x432.jpg 768w, /wp-content/uploads/2022/02/Skyrim-River-1536x864.jpg 1536w, /wp-content/uploads/2022/02/Skyrim-River-2048x1152.jpg 2048w, /wp-content/uploads/2022/02/Skyrim-River-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/computer-science/computer-networking/02-the-application-layer/" rel="bookmark">计算机网络02-应用层概览与SMTP电子邮件发送</a>
+					<a href="/programming/other/regular-expression-tutorial/" rel="bookmark">正则表达式简单入门</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -657,6 +657,14 @@ var _hmt = _hmt || [];
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
 											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
 					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
 											<span class="post-date">2023年6月19日</span>
 									</li>
@@ -676,14 +684,6 @@ var _hmt = _hmt || [];
 					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
 											<span class="post-date">2023年3月6日</span>
 									</li>
-											<li>
-					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
-											<span class="post-date">2023年2月27日</span>
-									</li>
-											<li>
-					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
-											<span class="post-date">2023年2月8日</span>
-									</li>
 					</ul>
 
 		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
@@ -696,9 +696,11 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (1)
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
 <ul class='children'>
 	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
 </li>
 </ul>
 </li>
@@ -720,7 +722,7 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (20)
 <ul class='children'>
 	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
 </li>
@@ -746,7 +748,9 @@ var _hmt = _hmt || [];
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(1)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
 	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
 	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
 	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
@@ -811,7 +815,7 @@ var _hmt = _hmt || [];
 					
 										
 					<div id="copyright">
-													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
 											</div><!--/#copyright-->
 					
 										

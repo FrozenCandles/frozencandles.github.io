@@ -12,7 +12,7 @@
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 
-	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
 	<title>机器学习-支持向量机 - 冰封残烛的个人小站</title>
 	<meta name="description" content="支持向量机(Support Vector Machine)是一种可解释性强的分类模型，并可以用作回归。它使用大间隔作为分类依据，在引入核函数后可以处理非线性数据。主要参数只取决于是它的少数支持向量，因此占用内存少，预测速度也较快。" />
 	<link rel="canonical" href="/data-science/machine-learning/04-support-vector-machine/" />
@@ -23,11 +23,12 @@
 	<meta property="og:url" content="/data-science/machine-learning/04-support-vector-machine/" />
 	<meta property="og:site_name" content="冰封残烛的个人小站" />
 	<meta property="article:published_time" content="2023-01-20T03:41:31+00:00" />
-	<meta property="article:modified_time" content="2023-10-06T11:49:29+00:00" />
+	<meta property="article:modified_time" content="2023-10-13T03:51:06+00:00" />
 	<meta property="og:image" content="/wp-content/uploads/2023/01/机器学习-支持向量机.jpg" />
 	<meta property="og:image:width" content="1280" />
 	<meta property="og:image:height" content="904" />
 	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="作者" />
 	<meta name="twitter:data1" content="Hello" />
@@ -37,35 +38,8 @@
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
-	            "@type": "WebSite",
-	            "@id": "/#website",
-	            "url": "/",
-	            "name": "冰封残烛的个人小站",
-	            "description": "FrozenCandle&#039;s Personal Site",
-	            "potentialAction": [
-	                {
-	                    "@type": "SearchAction",
-	                    "target": {
-	                        "@type": "EntryPoint",
-	                        "urlTemplate": "/?s={search_term_string}"
-	                    },
-	                    "query-input": "required name=search_term_string"
-	                }
-	            ],
-	            "inLanguage": "zh-CN"
-	        },
-	        {
-	            "@type": "ImageObject",
-	            "inLanguage": "zh-CN",
-	            "@id": "/data-science/machine-learning/04-support-vector-machine/#primaryimage",
-	            "url": "/wp-content/uploads/2023/01/机器学习-支持向量机.jpg",
-	            "contentUrl": "/wp-content/uploads/2023/01/机器学习-支持向量机.jpg",
-	            "width": 1280,
-	            "height": 904
-	        },
-	        {
 	            "@type": "WebPage",
-	            "@id": "/data-science/machine-learning/04-support-vector-machine/#webpage",
+	            "@id": "/data-science/machine-learning/04-support-vector-machine/",
 	            "url": "/data-science/machine-learning/04-support-vector-machine/",
 	            "name": "机器学习-支持向量机 - 冰封残烛的个人小站",
 	            "isPartOf": {
@@ -74,8 +48,12 @@
 	            "primaryImageOfPage": {
 	                "@id": "/data-science/machine-learning/04-support-vector-machine/#primaryimage"
 	            },
+	            "image": {
+	                "@id": "/data-science/machine-learning/04-support-vector-machine/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2023/01/机器学习-支持向量机.jpg",
 	            "datePublished": "2023-01-20T03:41:31+00:00",
-	            "dateModified": "2023-10-06T11:49:29+00:00",
+	            "dateModified": "2023-10-13T03:51:06+00:00",
 	            "author": {
 	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
 	            },
@@ -94,6 +72,15 @@
 	            ]
 	        },
 	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/data-science/machine-learning/04-support-vector-machine/#primaryimage",
+	            "url": "/wp-content/uploads/2023/01/机器学习-支持向量机.jpg",
+	            "contentUrl": "/wp-content/uploads/2023/01/机器学习-支持向量机.jpg",
+	            "width": 1280,
+	            "height": 904
+	        },
+	        {
 	            "@type": "BreadcrumbList",
 	            "@id": "/data-science/machine-learning/04-support-vector-machine/#breadcrumb",
 	            "itemListElement": [
@@ -109,6 +96,24 @@
 	                    "name": "机器学习-支持向量机"
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
 	        },
 	        {
 	            "@type": "Person",
@@ -158,7 +163,6 @@ body { font-family: "Roboto", Arial, sans-serif; }
 <link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
-<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
 <script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
 <link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/993" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
 <meta name="generator" content="WordPress 6.3.1" />
@@ -324,18 +328,14 @@ var _hmt = _hmt || [];
 				<div class="entry-content">
 					<div class="entry themeform">	
 						
-
-
-
-
 <h2>支持向量机的概念</h2>
 
 <h3>边界问题</h3>
 
-<p>在<a class="link-internal" link="data-science/machine-learning@02-logistic-regression" href="/archives/966">逻辑回归模型</a>中介绍了决策边界的概念，一个好的模型决策边界要将两个类别完全区分开，例如以下这些决策边界都是合理的：</p>
+<p>在<a class="link-internal" href="/data-science/machine-learning/02-logistic-regression">逻辑回归模型</a>中介绍了决策边界的概念，一个好的模型决策边界要将两个类别完全区分开，例如以下这些决策边界都是合理的：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-about-boundary.png" alt="" width="250">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/04-about-boundary.png" width="250"/>
 </figure>
 
 <p>那么这就引出了一个问题，即如何在其中选择最佳的决策边界。在逻辑回归中，这条边界线的参数是通过求代价函数的最小值得到的。但直观上理解，一个好的决策边界应该离每个分类群体都尽可能远，这样在引入新的样本时不至于轻易地落到决策边界的另一边。</p>
@@ -343,7 +343,7 @@ var _hmt = _hmt || [];
 <p><strong>支持向量机</strong>(support vector machine)使用了一种<em>边界(margin)最大化</em>的思路来解决这个问题，具体来说就是确定这样一条决策边界线，使它到两个分类的距离最远，那么它应该落在两个分类最中间的位置，因此这样的决策边界可以很好地分隔开两个分类，就像这样：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-boundary-margin.png" alt="" width="250">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/04-boundary-margin.png" width="250"/>
 </figure>
 
 <h3>支持向量机的参数确定</h3>
@@ -361,8 +361,8 @@ var _hmt = _hmt || [];
 <div class="math">
 \\[
 \begin{align}
-    d &= \frac{|w_nx_n+\cdots+w_2x_2+w_1x_1+b|}{\sqrt{w_n^2+\cdots+w_2^2+w_1^2}}\\
-      &= \frac{|\boldsymbol{w}^T\boldsymbol{x}+b|}{\|\boldsymbol{w}\|}
+    d &amp;= \frac{|w_nx_n+\cdots+w_2x_2+w_1x_1+b|}{\sqrt{w_n^2+\cdots+w_2^2+w_1^2}}\\
+      &amp;= \frac{|\boldsymbol{w}^T\boldsymbol{x}+b|}{\|\boldsymbol{w}\|}
 \end{align}
 \\]
 </div>
@@ -371,7 +371,7 @@ var _hmt = _hmt || [];
 
 <div class="math">
 \\[
-    \text{margin} = \underset{i}{\min} \frac{|\boldsymbol{w}^T\boldsymbol{x}_i+b|}{\|\boldsymbol{w}\|} > 0
+    \text{margin} = \underset{i}{\min} \frac{|\boldsymbol{w}^T\boldsymbol{x}_i+b|}{\|\boldsymbol{w}\|} &gt; 0
 \\]
 </div>
 
@@ -407,11 +407,11 @@ var _hmt = _hmt || [];
     <div class="math">
     \\[
     \begin{align}
-        & \underset{\boldsymbol{w}, b}{\mathrm{argmax}} \quad d \\
-        & \text{s.t.} \quad \frac{|\boldsymbol{w}^T\boldsymbol{x}_i+b|}{\|\boldsymbol{w}\|} \geq d > 0 \quad \text{and} \quad
+        &amp; \underset{\boldsymbol{w}, b}{\mathrm{argmax}} \quad d \\
+        &amp; \text{s.t.} \quad \frac{|\boldsymbol{w}^T\boldsymbol{x}_i+b|}{\|\boldsymbol{w}\|} \geq d &gt; 0 \quad \text{and} \quad
         \begin{cases}
-            \boldsymbol{w}^T\boldsymbol{x}_i+b > 0 \quad y_i = +1 \\
-            \boldsymbol{w}^T\boldsymbol{x}_i+b < 0 \quad y_i = -1
+            \boldsymbol{w}^T\boldsymbol{x}_i+b &gt; 0 \quad y_i = +1 \\
+            \boldsymbol{w}^T\boldsymbol{x}_i+b &lt; 0 \quad y_i = -1
         \end{cases}
     \end{align}
     \\]
@@ -421,7 +421,7 @@ var _hmt = _hmt || [];
 
     <div class="math">
     \\[
-        y_i(\boldsymbol{w}^T\boldsymbol{x}_i+b) > 0
+        y_i(\boldsymbol{w}^T\boldsymbol{x}_i+b) &gt; 0
     \\]
     </div>
 
@@ -438,8 +438,8 @@ var _hmt = _hmt || [];
     <div class="math">
         \\[
         \begin{align}
-            & \underset{\boldsymbol{w}, b}{\mathrm{argmax}} \quad \frac{k}{\|\boldsymbol{w}\|} \\
-            & \text{s.t.} \quad y_i(\boldsymbol{w}^T\boldsymbol{x}_i+b) \geq k
+            &amp; \underset{\boldsymbol{w}, b}{\mathrm{argmax}} \quad \frac{k}{\|\boldsymbol{w}\|} \\
+            &amp; \text{s.t.} \quad y_i(\boldsymbol{w}^T\boldsymbol{x}_i+b) \geq k
         \end{align}
         \\]
     </div>
@@ -452,13 +452,13 @@ var _hmt = _hmt || [];
 <div class="math">
 \\[
     \begin{align}
-        & \underset{\boldsymbol{w}, b}{\mathrm{argmin}} \, \|\boldsymbol{w}\| \\
-        & \text{s.t.} \quad y_i(\boldsymbol{w}^T\boldsymbol{x}_i+b) \geq 1
+        &amp; \underset{\boldsymbol{w}, b}{\mathrm{argmin}} \, \|\boldsymbol{w}\| \\
+        &amp; \text{s.t.} \quad y_i(\boldsymbol{w}^T\boldsymbol{x}_i+b) \geq 1
     \end{align}
 \\]
 </div>
 
-<p>解决带约束的最值问题一般使用的方法是拉格朗日乘子法。在<a href="#refrence">附录</a>中列出几篇文章，里面有更详细的证明。</p>
+<p>解决带约束的最值问题一般使用的方法是拉格朗日乘子法。在<a class="link-internal" href="#reference">附录</a>中列出几篇文章，里面有更详细的证明。</p>
 
 <h3>使用SVM</h3>
 
@@ -483,7 +483,7 @@ var _hmt = _hmt || [];
 <p>之前在介绍模型的原理时介绍过，间距是根据离决策边界最近的样本确定的，这些离决策边界最近的样本称为<strong>支持向量</strong>(support vectors)，所有的支持向量决定了支持向量机所具有的参数。至此可以明白支持向量机的名称由来，这些支持向量一起<em>支撑</em>起了分隔超平面的参数<em>向量</em>。不管模型的样本有多少，只要支持向量不变，那么模型便不发生改变：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-support-vectors.png" alt="" width="640">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/04-output-support-vectors.png" width="640"/>
     <figcaption>支持向量决定了模型的特点</figcaption>
 </figure>
 
@@ -507,7 +507,7 @@ var _hmt = _hmt || [];
 <p>支持向量机作为一种需要计算距离的模型，可能发生不同特征变量因为量纲级别相差过大导致的问题。为了更好地说明这个问题，以下是一个这样的示例：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-scale-affect.jpg" alt="" width="330">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/04-scale-affect.jpg" width="330"/>
 </figure>
 
 <p>直观上看，深绿色的边界应该能更好地区分两组样本，但计算结果却显示紫色是最好的边界。这是由于纵坐标的量纲明显远大于横坐标的量纲，对距离的影响权重也更大。因此在使用 SVM 之前，需要做<strong>数据标准化</strong>处理，主要目的是使不同特征的量纲级别统一，计算距离时拥有相同的权重。</p>
@@ -548,13 +548,13 @@ var _hmt = _hmt || [];
 
 <div class="jupyter codeblock">
     <div class="jupyter-mark-in"></div>
-    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span><span style="color: #90a4ae;"> sklearn</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">preprocessing </span><span style="color: #39adb5;font-weight: bold;">import</span><span style="color: #90a4ae;"> StandardScaler</span></div><br><div><span style="color: #90a4ae;">scalar </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> StandardScaler</span><span style="color: #39adb5;">()</span></div><div><span style="color: #90a4ae;">X_standard </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> scalar</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">fit_transform</span><span style="color: #39adb5;">(</span><span style="color: #90a4ae;">X</span><span style="color: #39adb5;">)</span></div></div>
+    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span><span style="color: #90a4ae;"> sklearn</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">preprocessing </span><span style="color: #39adb5;font-weight: bold;">import</span><span style="color: #90a4ae;"> StandardScaler</span></div><br/><div><span style="color: #90a4ae;">scalar </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> StandardScaler</span><span style="color: #39adb5;">()</span></div><div><span style="color: #90a4ae;">X_standard </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> scalar</span><span style="color: #39adb5;">.</span><span style="color: #90a4ae;">fit_transform</span><span style="color: #39adb5;">(</span><span style="color: #90a4ae;">X</span><span style="color: #39adb5;">)</span></div></div>
 </div>
 
 <p>经过标准化处理得到的数据可以被 SVM 更好地划分了：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-standard-scaled.png" alt="" width="360">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/04-output-standard-scaled.png" width="360"/>
 </figure>
 
 <h3>软间隔</h3>
@@ -565,11 +565,11 @@ var _hmt = _hmt || [];
 
 <figure class="parallel">
     <div>
-        <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-worse-situation.png" alt="" width="340">
+        <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/04-output-worse-situation.png" width="340"/>
         <figcaption>异常样本使边界被不合理地改变</figcaption>
     </div>
     <div>
-        <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-worst-situation.png" alt="" width="370">
+        <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/04-output-worst-situation.png" width="370"/>
         <figcaption>异常样本使边界不存在</figcaption>
     </div>
 </figure>
@@ -579,7 +579,7 @@ var _hmt = _hmt || [];
 <p>为了衡量一个样本与正常分类间隔的偏离程度，需要引入了松弛变量 <span class="math">\\( \xi \\)</span> 。一个样本离它应在的区域越远，则对应的 <span class="math">\\( \xi \\)</span> 也就越大：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-soft-margin-xi.jpg" alt="" width="360">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/04-soft-margin-xi.jpg" width="360"/>
 </figure>
 
 <p>引入松弛变量后，模型的参数需要重新确定，软间隔 SVM 的基本数学形式如下：</p>
@@ -587,8 +587,8 @@ var _hmt = _hmt || [];
 <div class="math">
     \\[
         \begin{align}
-            & \underset{\boldsymbol{w}, b, \xi}{\mathrm{argmin}} \, \|\boldsymbol{w}\| + C \sum_{i=1}^{n}\xi_i \\
-            & \text{s.t.} \quad y_i(\boldsymbol{w}^T\boldsymbol{x}_i+b) \geq 1 - \xi_i , \quad \xi_i \geq 0
+            &amp; \underset{\boldsymbol{w}, b, \xi}{\mathrm{argmin}} \, \|\boldsymbol{w}\| + C \sum_{i=1}^{n}\xi_i \\
+            &amp; \text{s.t.} \quad y_i(\boldsymbol{w}^T\boldsymbol{x}_i+b) \geq 1 - \xi_i , \quad \xi_i \geq 0
         \end{align}
     \\]
 </div>
@@ -598,7 +598,7 @@ var _hmt = _hmt || [];
 <p>在 Scikit-Learn 中，同名超参数 <code><em>C</em></code> 用于控制模型的软硬程度：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-parameter-C.jpg" alt="" width="600">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/04-output-parameter-C.jpg" width="600"/>
     <figcaption>超参数 C 用于控制模型的软硬程度</figcaption>
 </figure>
 
@@ -609,20 +609,20 @@ var _hmt = _hmt || [];
 <p>之前介绍的 SVM 都具有线性边界，但有些时候样本并不能用直线分开，例如：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-poly-boundary-1.png" alt="" width="400">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/04-output-poly-boundary-1.png" width="400"/>
 </figure>
 
-<p>即使将模型设置得足够软，使用直线也无法完全分开两个类别。这时，可以使用在<a href="/archives/966">逻辑回归</a>中提及的方法，为模型添加上非线性特征项，例如多项式特征项：</p>
+<p>即使将模型设置得足够软，使用直线也无法完全分开两个类别。这时，可以使用在<a link="machine-learning@02-logistic-regression">逻辑回归</a>中提及的方法，为模型添加上非线性特征项，例如多项式特征项：</p>
 
 <div class="jupyter codeblock">
     <div class="jupyter-mark-in"></div>
-    <div class="vscode-block"><div><span style="color: #90a4ae;">model </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> make_pipeline</span><span style="color: #39adb5;">(</span><span style="color: #90a4ae;">PolynomialFeatures</span><span style="color: #39adb5;">(</span><span style="color: #e53935;">degree</span><span style="color: #7c4dff;">=</span><span style="color: #f76d47;">2</span><span style="color: #39adb5;">),</span></div><div><span style="color: #90a4ae;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; StandardScaler</span><span style="color: #39adb5;">(),</span><span style="color: #90a4ae;"> </span></div><div><span style="color: #90a4ae;">&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; SVC</span><span style="color: #39adb5;">(</span><span style="color: #e53935;">C</span><span style="color: #7c4dff;">=</span><span style="color: #f76d47;">6</span><span style="color: #39adb5;">))</span></div></div>
+    <div class="vscode-block"><div><span style="color: #90a4ae;">model </span><span style="color: #7c4dff;">=</span><span style="color: #90a4ae;"> make_pipeline</span><span style="color: #39adb5;">(</span><span style="color: #90a4ae;">PolynomialFeatures</span><span style="color: #39adb5;">(</span><span style="color: #e53935;">degree</span><span style="color: #7c4dff;">=</span><span style="color: #f76d47;">2</span><span style="color: #39adb5;">),</span></div><div><span style="color: #90a4ae;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; StandardScaler</span><span style="color: #39adb5;">(),</span><span style="color: #90a4ae;"> </span></div><div><span style="color: #90a4ae;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; SVC</span><span style="color: #39adb5;">(</span><span style="color: #e53935;">C</span><span style="color: #7c4dff;">=</span><span style="color: #f76d47;">6</span><span style="color: #39adb5;">))</span></div></div>
 </div>
 
 <p>此时模型的划分效果为：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-poly-boundary-3.jpg" alt="" width="400">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/04-output-poly-boundary-3.jpg" width="400"/>
 </figure>
 
 <p>添加非线性特征实现简单，但如果添加的特征较多，会在计算 <span class="math">\\( \boldsymbol{x}_i^\mathrm{T}\boldsymbol{x}_j \\)</span>（参见附录 SVM 的求解）向量内积时速度变慢。</p>
@@ -636,7 +636,7 @@ var _hmt = _hmt || [];
 <p>在 <code>SVC</code> 中，通过指定超参数 <code><em>kernel</em></code> 为 <code>"poly"</code> 可以使用多项式核函数。如果使用多项式核函数，通过超参数 <code><em>degree</em></code> 可以控制最高项的次数（默认为三次）；通过超参数 <code><em>gamma</em></code> 可以控制同名系数；通过超参数 <code><em>coef0</em></code> 可以控制常数项。例如，以下是最高项次数为二次的多项式 <code>SVC</code> 分类边界：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-poly-boundary-2.png" alt="" width="400">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/04-output-poly-boundary-2.png" width="400"/>
 </figure>
 
 <p>要注意的是，为数据引入非线性特征的目的并不是为了得到非线性的分隔面，因为点到曲面的距离难以求得。引入非线性特征的实质是将数据变换到高维空间中，使得变换后的数据在高维空间中线性可分。</p>
@@ -644,7 +644,7 @@ var _hmt = _hmt || [];
 <p>为了更好地说明这个问题，接下来看一组示例数据：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-kernelize-explain-1.jpg" alt="" width="400">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/04-output-kernelize-explain-1.jpg" width="400"/>
 </figure>
 
 <p>对于这样的数据，可以采用径向基函数核(Radial Basis Function, RBF，也称高斯核) <span class="math">\\( k(\boldsymbol{x}, \boldsymbol{y}) = \exp(-\gamma\|\boldsymbol{x}-\boldsymbol{y}\|^2) \\)</span> 将其变换到高维空间。高斯核函数的特点是可以映射到无限维的空间中，因此具有很强的表示能力，但是相应的计算速度更慢，也更容易出现过拟合现象。</p>
@@ -653,11 +653,11 @@ var _hmt = _hmt || [];
 
 <figure class="parallel">
     <div>
-        <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-kernelize-explain-2.jpg" alt="" width="370">
+        <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/04-output-kernelize-explain-2.jpg" width="370"/>
         <figcaption>将数据用径向基函数核映射到三维使其线性可分</figcaption>
     </div>
     <div>
-        <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-kernelize-explain-3.png" alt="" width="370">
+        <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/04-output-kernelize-explain-3.png" width="370"/>
         <figcaption>一个更好的视角说明两类样本是如何被线性划分的</figcaption>
     </div>
 </figure>
@@ -667,7 +667,7 @@ var _hmt = _hmt || [];
 <p>高斯核函数的另一个优点是可供调节的参数相比多项式核函数更少。唯一的参数 <span class="math">\\( \gamma \\)</span> 用于控制高斯核的平滑程度：越大的 <span class="math">\\( \gamma \\)</span> 将会使高斯核函数变化更剧烈，虽然能更好的拟合数据但会使过拟合风险增大。这对应于 <code>SVC</code> 的 <code><em>gamma</em></code> 参数，下图展示了不同参数取值情况下的分类边界：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-parameter-gamma.jpg" alt="" width="680">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/04-output-parameter-gamma.jpg" width="680"/>
 </figure>
 
 <h3>支持向量回归</h3>
@@ -675,7 +675,7 @@ var _hmt = _hmt || [];
 <p>支持向量机不仅可以用作分类，还可以用于回归。在用作分类任务时，要求支持向量机规划一条最好的分类边界，使得它尽可能分开两类样本。而用作回归分析时，工作原理则相反：这时要求支持向量机规划一条最好的拟合边界，使得它尽可能包括所有的样本，就像这样：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-svr-concept.png" alt="" width="400">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/04-output-svr-concept.png" width="400"/>
 </figure>
 
 <p>但通过包括所有样本来确定回归直线显然是不合理的，因为受到异常数据的影响很大。为了防止异常值的影响，要求边界不需要包含所有的样本，而是让所有样本都不要偏移边界内太多。</p>
@@ -689,7 +689,7 @@ var _hmt = _hmt || [];
 </div>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-svr-cost.png" alt="" width="310">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/04-svr-cost.png" width="310"/>
 </figure>
 
 <p>如果样本位于边界以内，那么就不算偏离。总的代价函数每一个样本偏离程度的和，再包括正则项：</p>
@@ -713,7 +713,7 @@ var _hmt = _hmt || [];
 <p>下图展示了不同 <code><em>epsilon</em></code> 取值下对数据的拟合程度：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-svr-parameter-epsilon.jpg" alt="" width="610">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/04-output-svr-parameter-epsilon.jpg" width="610"/>
 </figure>
 
 <p>因此一般来说应选用尽量小的 <code><em>epsilon</em></code> 值。<code>SVR</code> 给出的默认值为 0.1 ；而 <code>LinearSVR</code> 给出的默认值为 0.0 ，这时所有数据的偏离程度都需要考虑，支持向量回归退化为和线型回归很相似的模型了。</p>
@@ -725,7 +725,7 @@ var _hmt = _hmt || [];
 <p>下图展示了不同 <code><em>C</em></code> 取值下对数据的拟合程度：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/04-output-svr-parameter-C.jpg" alt="" width="610">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/04-output-svr-parameter-C.jpg" width="610"/>
 </figure>
 
 <p>取值过小时正则化太强，容易发生欠拟合；反之容易发生过拟合。</p>
@@ -738,15 +738,15 @@ var _hmt = _hmt || [];
 
 <h3>SVM求解</h3>
 
-<p>本节简单介绍 SVM 目标问题的求解方法。在<a href="#refrence">参考文献</a>中列出几篇文章，里面有更详细的证明。</p>
+<p>本节简单介绍 SVM 目标问题的求解方法。在<a class="link-internal" href="#refrence">参考文献</a>中列出几篇文章，里面有更详细的证明。</p>
 
 <p>首先回顾优化目标：</p>
 
 <div class="math">
 \\[
     \begin{align}
-        & \underset{\boldsymbol{w}, b}{\mathrm{min}} \, \frac 1 2 \boldsymbol{w}^\mathrm{T}\boldsymbol{w} \\
-        & \text{s.t.} \quad 1 - y_i(\boldsymbol{w}^T\boldsymbol{x}_i+b) \leq 0
+        &amp; \underset{\boldsymbol{w}, b}{\mathrm{min}} \, \frac 1 2 \boldsymbol{w}^\mathrm{T}\boldsymbol{w} \\
+        &amp; \text{s.t.} \quad 1 - y_i(\boldsymbol{w}^T\boldsymbol{x}_i+b) \leq 0
     \end{align}
 \\]
 </div>
@@ -774,8 +774,8 @@ var _hmt = _hmt || [];
 <div class="math">
 \\[
     \begin{align}
-        \frac {\partial L}{\partial w} &= 0 \Rightarrow w = \sum_{i=1}^{n} \lambda_i y_i \boldsymbol{x_i} \\
-        \frac {\partial L}{\partial b} &= 0 \Rightarrow 0 = \sum_{i=1}^{n} \lambda_i y_i
+        \frac {\partial L}{\partial w} &amp;= 0 \Rightarrow w = \sum_{i=1}^{n} \lambda_i y_i \boldsymbol{x_i} \\
+        \frac {\partial L}{\partial b} &amp;= 0 \Rightarrow 0 = \sum_{i=1}^{n} \lambda_i y_i
     \end{align}
 \\]
 </div>
@@ -787,8 +787,8 @@ var _hmt = _hmt || [];
 <div class="math">
 \\[
     \begin{align}
-        & \underset{\lambda}{\max} \quad L(\boldsymbol{w}, b, \lambda) = \sum_{i=1}^{n}\lambda_i - \frac 1 2 \sum_{i=1}^{n} \sum_{j=1}^{n} \lambda_i \lambda_j y_i y_j \boldsymbol{x}_i^\mathrm{T}\boldsymbol{x}_j \\
-        & \text{s.t.} \quad \sum_{i=1}^{n} \lambda_i y_i = 0 \quad \text{and} \quad \lambda_i \geq 0
+        &amp; \underset{\lambda}{\max} \quad L(\boldsymbol{w}, b, \lambda) = \sum_{i=1}^{n}\lambda_i - \frac 1 2 \sum_{i=1}^{n} \sum_{j=1}^{n} \lambda_i \lambda_j y_i y_j \boldsymbol{x}_i^\mathrm{T}\boldsymbol{x}_j \\
+        &amp; \text{s.t.} \quad \sum_{i=1}^{n} \lambda_i y_i = 0 \quad \text{and} \quad \lambda_i \geq 0
     \end{align}
 \\]
 </div>
@@ -797,17 +797,19 @@ var _hmt = _hmt || [];
 
 <p>根据得到的 <span class="math">\\( \lambda_i \\)</span> ，代入之前公式就可以计算 <span class="math">\\( \boldsymbol{w} \\)</span> ，而再利用一个支持向量就可以计算参数 <span class="math">\\( b \\)</span> 。</p>
 
-<h3 id="refrence">参考资料/延伸阅读</h3>
+<h3 id="reference">参考资料/延伸阅读</h3>
 
 <p>
-    <a href="https://zhuanlan.zhihu.com/p/480302399">https://zhuanlan.zhihu.com/p/480302399</a><br>
+    <a class="link-reference" href="https://zhuanlan.zhihu.com/p/480302399">https://zhuanlan.zhihu.com/p/480302399</a><br/>
     一份非常非常详细的 SVM 从零推导过程
 </p>
 
 <p>
-    <a href="https://zhuanlan.zhihu.com/p/24638007">https://zhuanlan.zhihu.com/p/24638007</a><br>
+    <a class="link-reference" href="https://zhuanlan.zhihu.com/p/24638007">https://zhuanlan.zhihu.com/p/24638007</a><br/>
     一篇不错的关于 SVM 原理推导的文章
 </p>
+
+
 
 
 												<div class="clear"></div>				
@@ -831,14 +833,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/programming/python-fp/03-functional-programming/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/embedded/stm32/esp8266-introduction/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/STM32与物联网01-ESP8266基本操作-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/07/STM32与物联网01-ESP8266基本操作-520x293.jpg 520w, /wp-content/uploads/2022/07/STM32与物联网01-ESP8266基本操作-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/programming/python-fp/03-functional-programming/" rel="bookmark">Python函数式编程03 高阶函数与匿名函数</a>
+					<a href="/embedded/stm32/esp8266-introduction/" rel="bookmark">STM32与物联网01-ESP8266基本操作</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -849,14 +851,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/data-science/via-python/numpy06-advanced-data-types/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/10/Python数据分析-numpy06高级数据类型-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/10/Python数据分析-numpy06高级数据类型-520x293.jpg 520w, /wp-content/uploads/2022/10/Python数据分析-numpy06高级数据类型-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/data-science/machine-learning/03-naive-bayes/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/12/机器学习-朴素贝叶斯-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/12/机器学习-朴素贝叶斯-520x293.jpg 520w, /wp-content/uploads/2022/12/机器学习-朴素贝叶斯-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/data-science/via-python/numpy06-advanced-data-types/" rel="bookmark">numpy06:高级数据类型</a>
+					<a href="/data-science/machine-learning/03-naive-bayes/" rel="bookmark">机器学习-朴素贝叶斯</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -867,14 +869,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/web/web-scraping/xpath-tutorial/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/11/XPath简单入门-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/11/XPath简单入门-520x293.jpg 520w, /wp-content/uploads/2022/11/XPath简单入门-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/programming/python-fp/05-recursions/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程05-函数的递归-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/05/Python函数式编程05-函数的递归-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-300x169.jpg 300w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-1024x576.jpg 1024w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-768x432.jpg 768w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-1536x864.jpg 1536w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-950x534.jpg 950w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/web/web-scraping/xpath-tutorial/" rel="bookmark">XPath简单入门</a>
+					<a href="/programming/python-fp/05-recursions/" rel="bookmark">Python函数式编程05 函数的递归</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -911,6 +913,14 @@ var _hmt = _hmt || [];
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
 											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
 					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
 											<span class="post-date">2023年6月19日</span>
 									</li>
@@ -930,14 +940,6 @@ var _hmt = _hmt || [];
 					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
 											<span class="post-date">2023年3月6日</span>
 									</li>
-											<li>
-					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
-											<span class="post-date">2023年2月27日</span>
-									</li>
-											<li>
-					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
-											<span class="post-date">2023年2月8日</span>
-									</li>
 					</ul>
 
 		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
@@ -950,9 +952,11 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (1)
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
 <ul class='children'>
 	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
 </li>
 </ul>
 </li>
@@ -974,7 +978,7 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (20)
 <ul class='children'>
 	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
 </li>
@@ -1000,7 +1004,9 @@ var _hmt = _hmt || [];
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(1)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
 	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
 	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
 	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
@@ -1065,7 +1071,7 @@ var _hmt = _hmt || [];
 					
 										
 					<div id="copyright">
-													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
 											</div><!--/#copyright-->
 					
 										

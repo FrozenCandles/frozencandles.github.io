@@ -12,7 +12,7 @@
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 
-	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
 	<title>Python函数式编程10 functools模块：高阶函数工具 - 冰封残烛的个人小站</title>
 	<meta name="description" content="functools 库包含许多实用的函数操作工具，并且它们都是高阶函数。lru_cache 装饰器能保存已有计算结果；partial 可以将函数的部分参数固定，得到一个新的函数。singledispatch 装饰器可以根据参数的类型指定不同的函数，可以在一定程度上使用泛型。" />
 	<link rel="canonical" href="/programming/python-fp/10-library-functools/" />
@@ -23,11 +23,12 @@
 	<meta property="og:url" content="/programming/python-fp/10-library-functools/" />
 	<meta property="og:site_name" content="冰封残烛的个人小站" />
 	<meta property="article:published_time" content="2022-06-07T05:53:18+00:00" />
-	<meta property="article:modified_time" content="2023-10-07T01:08:22+00:00" />
+	<meta property="article:modified_time" content="2023-10-14T02:57:58+00:00" />
 	<meta property="og:image" content="/wp-content/uploads/2022/06/Python函数式编程10-functools模块：更多高阶函数.jpg" />
 	<meta property="og:image:width" content="1920" />
 	<meta property="og:image:height" content="1080" />
 	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="作者" />
 	<meta name="twitter:data1" content="Hello" />
@@ -37,35 +38,8 @@
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
-	            "@type": "WebSite",
-	            "@id": "/#website",
-	            "url": "/",
-	            "name": "冰封残烛的个人小站",
-	            "description": "FrozenCandle&#039;s Personal Site",
-	            "potentialAction": [
-	                {
-	                    "@type": "SearchAction",
-	                    "target": {
-	                        "@type": "EntryPoint",
-	                        "urlTemplate": "/?s={search_term_string}"
-	                    },
-	                    "query-input": "required name=search_term_string"
-	                }
-	            ],
-	            "inLanguage": "zh-CN"
-	        },
-	        {
-	            "@type": "ImageObject",
-	            "inLanguage": "zh-CN",
-	            "@id": "/programming/python-fp/10-library-functools/#primaryimage",
-	            "url": "/wp-content/uploads/2022/06/Python函数式编程10-functools模块：更多高阶函数.jpg",
-	            "contentUrl": "/wp-content/uploads/2022/06/Python函数式编程10-functools模块：更多高阶函数.jpg",
-	            "width": 1920,
-	            "height": 1080
-	        },
-	        {
 	            "@type": "WebPage",
-	            "@id": "/programming/python-fp/10-library-functools/#webpage",
+	            "@id": "/programming/python-fp/10-library-functools/",
 	            "url": "/programming/python-fp/10-library-functools/",
 	            "name": "Python函数式编程10 functools模块：高阶函数工具 - 冰封残烛的个人小站",
 	            "isPartOf": {
@@ -74,8 +48,12 @@
 	            "primaryImageOfPage": {
 	                "@id": "/programming/python-fp/10-library-functools/#primaryimage"
 	            },
+	            "image": {
+	                "@id": "/programming/python-fp/10-library-functools/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2022/06/Python函数式编程10-functools模块：更多高阶函数.jpg",
 	            "datePublished": "2022-06-07T05:53:18+00:00",
-	            "dateModified": "2023-10-07T01:08:22+00:00",
+	            "dateModified": "2023-10-14T02:57:58+00:00",
 	            "author": {
 	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
 	            },
@@ -94,6 +72,15 @@
 	            ]
 	        },
 	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/programming/python-fp/10-library-functools/#primaryimage",
+	            "url": "/wp-content/uploads/2022/06/Python函数式编程10-functools模块：更多高阶函数.jpg",
+	            "contentUrl": "/wp-content/uploads/2022/06/Python函数式编程10-functools模块：更多高阶函数.jpg",
+	            "width": 1920,
+	            "height": 1080
+	        },
+	        {
 	            "@type": "BreadcrumbList",
 	            "@id": "/programming/python-fp/10-library-functools/#breadcrumb",
 	            "itemListElement": [
@@ -109,6 +96,24 @@
 	                    "name": "Python函数式编程10 functools模块：高阶函数工具"
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
 	        },
 	        {
 	            "@type": "Person",
@@ -158,7 +163,6 @@ body { font-family: "Roboto", Arial, sans-serif; }
 <link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
-<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
 <script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
 <link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/296" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
 <meta name="generator" content="WordPress 6.3.1" />
@@ -295,9 +299,6 @@ var _hmt = _hmt || [];
 				<div class="entry-content">
 					<div class="entry themeform">	
 						
-
-
-
 <p><code>functools</code> 库包含许多实用的函数操作工具，并且它们都是高阶函数。</p>
 
 <h2>常用函数</h2>
@@ -308,7 +309,7 @@ var _hmt = _hmt || [];
 
 <p>例如，以下是使用缓存改进后的递归形式的斐波那契数列函数：</p>
 
-<div class="vscode-block"><div><span style="color: #405c79;">@</span><span style="color: #8b56bf;">lru_cache</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">maxsize</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">1024</span><span style="color: #405c79;">)</span></div><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">fibonacci_cached</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">n</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> n &lt; </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> n</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">else</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&#160; &#160; &#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> fibonacci_cached(n - </span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">) + fibonacci_cached(n - </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">)</span></div></div>
+<div class="vscode-block"><div><span style="color: #405c79;">@</span><span style="color: #8b56bf;">lru_cache</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">maxsize</span><span style="color: #405c79;">=</span><span style="color: #bf8b56;">1024</span><span style="color: #405c79;">)</span></div><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">fibonacci_cached</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">n</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">if</span><span style="color: #405c79;"> n &lt; </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> n</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">else</span><span style="color: #405c79;">:</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> fibonacci_cached(n - </span><span style="color: #bf8b56;">1</span><span style="color: #405c79;">) + fibonacci_cached(n - </span><span style="color: #bf8b56;">2</span><span style="color: #405c79;">)</span></div></div>
 
 <p>接下来在 IPython 环境中对有无缓存的情况测试执行效率，结果为：</p>
 
@@ -318,9 +319,9 @@ var _hmt = _hmt || [];
    ...:     fibonacci_cached.cache_clear()
    ...:     return fibonacci_cached(34)
 <span class="codetoken ipython-in">In [2]:</span> %timeit fibonacci_without_cache
-2.12 s ± 7.21 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+2.12 s &plusmn; 7.21 ms per loop (mean &plusmn; std. dev. of 7 runs, 1 loop each)
 <span class="codetoken ipython-in">In [3]:</span> %timeit fibonacci_with_cache
-12.6 µs ± 67.8 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)</div>
+12.6 &micro;s &plusmn; 67.8 ns per loop (mean &plusmn; std. dev. of 7 runs, 100000 loops each)</div>
 
 <p>注意，不能直接使用 <code>%timeit</code> 命令测试函数，因为它会多次执行取平均时间，而第一次执行后由于缓存的存在使后续结果直接从缓存中获取，干扰测试效果。因此，每次测试后都通过装饰器的 <code>.cache_clear()</code> 方法清空缓存。</p>
 
@@ -336,15 +337,15 @@ var _hmt = _hmt || [];
 
 <p>这样每次确保都是以 UTF-8 编码对文件操作的：</p>
 
-<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">with</span><span style="color: #405c79;"> uopen(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">demo.txt</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">w</span><span style="color: #405c79;">'</span><span style="color: #405c79;">) </span><span style="color: #bf568b;font-weight: bold;">as</span><span style="color: #405c79;"> f:</span></div><div><span style="color: #405c79;">&#160; &#160; f.write(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">🙁✯⛈⚝☂☁︎😶</span><span style="color: #405c79;">'</span><span style="color: #405c79;">)</span></div></div>
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">with</span><span style="color: #405c79;"> uopen(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">demo.txt</span><span style="color: #405c79;">'</span><span style="color: #405c79;">, </span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">w</span><span style="color: #405c79;">'</span><span style="color: #405c79;">) </span><span style="color: #bf568b;font-weight: bold;">as</span><span style="color: #405c79;"> f:</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; f.write(</span><span style="color: #405c79;">'</span><span style="color: #56bf8b;">🙁✯⛈⚝☂☁︎😶</span><span style="color: #405c79;">'</span><span style="color: #405c79;">)</span></div></div>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@python-fp/10-unicode-txt.jpg" alt="" width="150">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@python-fp/10-unicode-txt.jpg" width="150"/>
 </figure>
 
 <p><code>partial()</code> 非常适用于冻结高阶函数的函数参数，这种情况下，可以提前写好一个函数，从而让一个比较泛化的高阶函数具有更具体的功能，例如：</p>
 
-<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">from</span><span style="color: #405c79;"> operator </span><span style="color: #bf568b;font-weight: bold;">import</span><span style="color: #405c79;"> add, mul</span></div><br><div><span style="color: #8b56bf;">sum</span><span style="color: #405c79;"> = partial(reduce, add) </span></div><div><span style="color: #405c79;">prod = partial(reduce, mul) </span></div></div>
+<div class="vscode-block"><div><span style="color: #bf568b;font-weight: bold;">from</span><span style="color: #405c79;"> operator </span><span style="color: #bf568b;font-weight: bold;">import</span><span style="color: #405c79;"> add, mul</span></div><br/><div><span style="color: #8b56bf;">sum</span><span style="color: #405c79;"> = partial(reduce, add) </span></div><div><span style="color: #405c79;">prod = partial(reduce, mul) </span></div></div>
 
 <p>该装饰器的本质就是给一部分参数提前赋值，也可以使用匿名函数实现类似的效果。</p>
 
@@ -356,11 +357,11 @@ var _hmt = _hmt || [];
 
 <p><code>@singledispatch</code> 装饰器则可以简化判断的流程，它可以根据参数类型的不同，指定调用不同的函数。为了实现这一点，需要先将目标函数装饰起来：</p>
 
-<div class="vscode-block"><div><span style="color: #405c79;">@</span><span style="color: #8b56bf;">singledispatch</span></div><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">scale</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">data</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">scalar</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf8b56;">...</span></div></div>
+<div class="vscode-block"><div><span style="color: #405c79;">@</span><span style="color: #8b56bf;">singledispatch</span></div><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">scale</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">data</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">scalar</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf8b56;">...</span></div></div>
 
 <p>然后调用目标函数的 <em>@.register(<em>type</em>)</em> 方法作为装饰器，将不同类型的参数导向不同的函数：</p>
 
-<div class="vscode-block"><div><span style="color: #405c79;">@</span><span style="color: #8b56bf;">scale</span><span style="color: #405c79;">.</span><span style="color: #8b56bf;">register</span><span style="color: #405c79;">(</span><span style="color: #bf568b;">float</span><span style="color: #405c79;">)</span></div><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">_scale</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">data</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">float</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">scalar</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> data * scalar</span></div><br><div><span style="color: #405c79;">@</span><span style="color: #8b56bf;">scale</span><span style="color: #405c79;">.</span><span style="color: #8b56bf;">register</span><span style="color: #405c79;">(</span><span style="color: #bf568b;">list</span><span style="color: #405c79;">)</span></div><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">_scale</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">data</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">list</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">scalar</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&#160; &#160; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #bf568b;">list</span><span style="color: #405c79;">(</span><span style="color: #8b56bf;">map</span><span style="color: #405c79;">(</span><span style="color: #bf568b;font-weight: bold;">lambda</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">x</span><span style="color: #405c79;">: x * scalar, data))</span></div></div>
+<div class="vscode-block"><div><span style="color: #405c79;">@</span><span style="color: #8b56bf;">scale</span><span style="color: #405c79;">.</span><span style="color: #8b56bf;">register</span><span style="color: #405c79;">(</span><span style="color: #bf568b;">float</span><span style="color: #405c79;">)</span></div><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">_scale</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">data</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">float</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">scalar</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> data * scalar</span></div><br/><div><span style="color: #405c79;">@</span><span style="color: #8b56bf;">scale</span><span style="color: #405c79;">.</span><span style="color: #8b56bf;">register</span><span style="color: #405c79;">(</span><span style="color: #bf568b;">list</span><span style="color: #405c79;">)</span></div><div><span style="color: #bf568b;font-weight: bold;">def</span><span style="color: #405c79;"> </span><span style="color: #8b56bf;">_scale</span><span style="color: #405c79;">(</span><span style="color: #bf8b56;">data</span><span style="color: #405c79;">: </span><span style="color: #bf568b;">list</span><span style="color: #405c79;">, </span><span style="color: #bf8b56;">scalar</span><span style="color: #405c79;">):</span></div><div><span style="color: #405c79;">&nbsp; &nbsp; </span><span style="color: #bf568b;font-weight: bold;">return</span><span style="color: #405c79;"> </span><span style="color: #bf568b;">list</span><span style="color: #405c79;">(</span><span style="color: #8b56bf;">map</span><span style="color: #405c79;">(</span><span style="color: #bf568b;font-weight: bold;">lambda</span><span style="color: #405c79;"> </span><span style="color: #bf8b56;">x</span><span style="color: #405c79;">: x * scalar, data))</span></div></div>
 
 <p>此时，如果传入的参数类型不同，那么就会被不同的函数调用了：</p>
 
@@ -377,11 +378,11 @@ var _hmt = _hmt || [];
 
 <p>这种单分派函数可以在一定程度上实现函数签名效果，但可惜的是它只支持一个参数。</p>
 
-<p>除此之外，functools 还包含一系列其它的高阶函数，例如<a href="/archives/239">第 4 节</a>中介绍到的 <code>reduce()</code> 函数、在介绍面向对象编程时装饰类的 <code>@total_ordering</code> 装饰器、Python3.9 新增的 <code>@cache</code> 装饰器，以及以上提到的装饰器都有用于方法的改版。更多标准库的介绍可以参阅 Python 标准库官方文档。</p>
+<p>除此之外，functools 还包含一系列其它的高阶函数，例如<a class="link-internal" href="/programming/python-fp/04-builtin-functions">第 4 节</a>中介绍到的 <code>reduce()</code> 函数、在介绍面向对象编程时装饰类的 <code>@total_ordering</code> 装饰器、Python3.9 新增的 <code>@cache</code> 装饰器，以及以上提到的装饰器都有用于方法的改版。更多标准库的介绍可以参阅 Python 标准库官方文档。</p>
 
 <h2>参考资料</h2>
 
-<p><a href="https://docs.python.org/3/library/functools.html">https://docs.python.org/3/library/functools.html</a></p>
+<p><a class="link-reference" href="https://docs.python.org/3/library/functools.html">https://docs.python.org/3/library/functools.html</a></p>
 
 <p>Python3 标准库 <code>functools</code> 官方文档</p>
 
@@ -408,14 +409,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/data-science/machine-learning/01-linear-regression/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/12/机器学习-线性回归-520x293.png" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/12/机器学习-线性回归-520x293.png 520w, /wp-content/uploads/2022/12/机器学习-线性回归-950x534.png 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/computer-science/data-structure/02-linked-list/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/08/数据结构02-链表-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/08/数据结构02-链表-520x293.jpg 520w, /wp-content/uploads/2022/08/数据结构02-链表-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/data-science/machine-learning/01-linear-regression/" rel="bookmark">机器学习-线性回归</a>
+					<a href="/computer-science/data-structure/02-linked-list/" rel="bookmark">数据结构02-链表</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -444,14 +445,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/programming/python/library-re/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/03/Python3标准库re-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/03/Python3标准库re-520x293.jpg 520w, /wp-content/uploads/2022/03/Python3标准库re-300x169.jpg 300w, /wp-content/uploads/2022/03/Python3标准库re-1024x576.jpg 1024w, /wp-content/uploads/2022/03/Python3标准库re-768x432.jpg 768w, /wp-content/uploads/2022/03/Python3标准库re-1536x864.jpg 1536w, /wp-content/uploads/2022/03/Python3标准库re-950x534.jpg 950w, /wp-content/uploads/2022/03/Python3标准库re.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/data-science/via-python/pandas03-the-index/">
+											<img width="520" height="293" src="/wp-content/uploads/2023/03/Python数据分析-pandas03索引-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2023/03/Python数据分析-pandas03索引-520x293.jpg 520w, /wp-content/uploads/2023/03/Python数据分析-pandas03索引-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/programming/python/library-re/" rel="bookmark">Python标准库re：使用正则表达式</a>
+					<a href="/data-science/via-python/pandas03-the-index/" rel="bookmark">pandas03:深入认识索引</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -488,6 +489,14 @@ var _hmt = _hmt || [];
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
 											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
 					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
 											<span class="post-date">2023年6月19日</span>
 									</li>
@@ -507,14 +516,6 @@ var _hmt = _hmt || [];
 					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
 											<span class="post-date">2023年3月6日</span>
 									</li>
-											<li>
-					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
-											<span class="post-date">2023年2月27日</span>
-									</li>
-											<li>
-					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
-											<span class="post-date">2023年2月8日</span>
-									</li>
 					</ul>
 
 		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
@@ -527,9 +528,11 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (1)
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
 <ul class='children'>
 	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
 </li>
 </ul>
 </li>
@@ -551,7 +554,7 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (20)
 <ul class='children'>
 	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
 </li>
@@ -577,7 +580,9 @@ var _hmt = _hmt || [];
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(1)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
 	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
 	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
 	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
@@ -642,7 +647,7 @@ var _hmt = _hmt || [];
 					
 										
 					<div id="copyright">
-													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
 											</div><!--/#copyright-->
 					
 										

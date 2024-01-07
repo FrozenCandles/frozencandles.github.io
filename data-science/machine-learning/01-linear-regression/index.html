@@ -12,7 +12,7 @@
 	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 <script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
 
-	<!-- This site is optimized with the Yoast SEO plugin v19.1 - https://yoast.com/wordpress/plugins/seo/ -->
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
 	<title>机器学习-线性回归 - 冰封残烛的个人小站</title>
 	<meta name="description" content="线性回归(linear regression)根据特征变量来预测因变量。只有一个特征变量的线性回归模型称为一元线性回归，多个特征变量则称为多元线性回归。多项式的曲线数据可以通过基函数变换为多元线性回归的情况。为了防止多项式次数过大出现过拟合，可以加上正则化项约束模型。" />
 	<link rel="canonical" href="/data-science/machine-learning/01-linear-regression/" />
@@ -23,11 +23,12 @@
 	<meta property="og:url" content="/data-science/machine-learning/01-linear-regression/" />
 	<meta property="og:site_name" content="冰封残烛的个人小站" />
 	<meta property="article:published_time" content="2022-12-03T13:09:02+00:00" />
-	<meta property="article:modified_time" content="2023-10-06T11:36:26+00:00" />
+	<meta property="article:modified_time" content="2023-10-13T03:43:46+00:00" />
 	<meta property="og:image" content="/wp-content/uploads/2022/12/机器学习-线性回归.png" />
 	<meta property="og:image:width" content="1920" />
 	<meta property="og:image:height" content="1357" />
 	<meta property="og:image:type" content="image/png" />
+	<meta name="author" content="Hello" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="作者" />
 	<meta name="twitter:data1" content="Hello" />
@@ -37,35 +38,8 @@
 	    "@context": "https://schema.org",
 	    "@graph": [
 	        {
-	            "@type": "WebSite",
-	            "@id": "/#website",
-	            "url": "/",
-	            "name": "冰封残烛的个人小站",
-	            "description": "FrozenCandle&#039;s Personal Site",
-	            "potentialAction": [
-	                {
-	                    "@type": "SearchAction",
-	                    "target": {
-	                        "@type": "EntryPoint",
-	                        "urlTemplate": "/?s={search_term_string}"
-	                    },
-	                    "query-input": "required name=search_term_string"
-	                }
-	            ],
-	            "inLanguage": "zh-CN"
-	        },
-	        {
-	            "@type": "ImageObject",
-	            "inLanguage": "zh-CN",
-	            "@id": "/data-science/machine-learning/01-linear-regression/#primaryimage",
-	            "url": "/wp-content/uploads/2022/12/机器学习-线性回归.png",
-	            "contentUrl": "/wp-content/uploads/2022/12/机器学习-线性回归.png",
-	            "width": 1920,
-	            "height": 1357
-	        },
-	        {
 	            "@type": "WebPage",
-	            "@id": "/data-science/machine-learning/01-linear-regression/#webpage",
+	            "@id": "/data-science/machine-learning/01-linear-regression/",
 	            "url": "/data-science/machine-learning/01-linear-regression/",
 	            "name": "机器学习-线性回归 - 冰封残烛的个人小站",
 	            "isPartOf": {
@@ -74,8 +48,12 @@
 	            "primaryImageOfPage": {
 	                "@id": "/data-science/machine-learning/01-linear-regression/#primaryimage"
 	            },
+	            "image": {
+	                "@id": "/data-science/machine-learning/01-linear-regression/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2022/12/机器学习-线性回归.png",
 	            "datePublished": "2022-12-03T13:09:02+00:00",
-	            "dateModified": "2023-10-06T11:36:26+00:00",
+	            "dateModified": "2023-10-13T03:43:46+00:00",
 	            "author": {
 	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
 	            },
@@ -94,6 +72,15 @@
 	            ]
 	        },
 	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/data-science/machine-learning/01-linear-regression/#primaryimage",
+	            "url": "/wp-content/uploads/2022/12/机器学习-线性回归.png",
+	            "contentUrl": "/wp-content/uploads/2022/12/机器学习-线性回归.png",
+	            "width": 1920,
+	            "height": 1357
+	        },
+	        {
 	            "@type": "BreadcrumbList",
 	            "@id": "/data-science/machine-learning/01-linear-regression/#breadcrumb",
 	            "itemListElement": [
@@ -109,6 +96,24 @@
 	                    "name": "机器学习-线性回归"
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
 	        },
 	        {
 	            "@type": "Person",
@@ -158,7 +163,6 @@ body { font-family: "Roboto", Arial, sans-serif; }
 <link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
 <script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
-<script type='text/javascript' src='/wp-content/plugins/alx-extensions/js/jquery.sharrre.min.js?ver=1.0.1' id='alx-ext-sharrre-js'></script>
 <script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
 <link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/880" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
 <meta name="generator" content="WordPress 6.3.1" />
@@ -324,17 +328,13 @@ var _hmt = _hmt || [];
 				<div class="entry-content">
 					<div class="entry themeform">	
 						
-
-
-
-
 <h2>一元线性回归</h2>
 
 <p><strong>线性回归</strong>(linear regression)应该是最简单的机器学习模型了。例如，以下是 1965~2021 年一次能源消耗量变化：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/01-output-linear-data.png" alt="" width="480">
-    <figcaption>数据来源：<a href="https://www.bp.com/">bp company</a></figcaption>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/01-output-linear-data.png" width="480"/>
+    <figcaption>数据来源：<a class="link-external" href="https://www.bp.com/">bp company</a></figcaption>
 </figure>
 
 <p>容易看出自变量（年份）与因变量（一次能源消耗量）之间大致沿一条直线分布。线性回归模型就是利用线性拟合的方式，寻找自变量与因变量背后的<strong>回归直线</strong>（趋势线），再利用回归直线做简单的分析和预测。</p>
@@ -375,7 +375,7 @@ var _hmt = _hmt || [];
 
 <h3>代码实现：使用Scikit-Learn工具包</h3>
 
-<p>Python 有许多提供各种机器学习算法的第三方库，<a href="http://scikit-learn.org">Scikit-Learn</a> 是使用最广泛的一个。相比其它的机器学习库，它具有以下优点：</p>
+<p>Python 有许多提供各种机器学习算法的第三方库，<a class="link-external" href="http://scikit-learn.org">Scikit-Learn</a> 是使用最广泛的一个。相比其它的机器学习库，它具有以下优点：</p>
 
 <ul>
     <li>模型广泛，涵盖目前各种主流机器学习算法</li>
@@ -386,12 +386,12 @@ var _hmt = _hmt || [];
  
 <p>通过 Scikit-Learn 库可以便捷地调用一元线性回归模型。该库可以直接通过 <code>pip</code> 命令安装：</p>
 
-<div class="codeblock code-console"><span class="token-venv">(sci)</span> PS D:\MachineLearning\demo> <span class="token-comd">pip</span> install sklearn</div>
+<div class="codeblock code-console"><span class="token-venv">(sci)</span> PS D:\MachineLearning\demo&gt; <span class="token-comd">pip</span> install sklearn</div>
 
 <p>然后可以在命令行中导入并检查安装的版本：</p>
 
-<div class="codeblock code-console">>>> import sklearn
->>> sklearn.__version__
+<div class="codeblock code-console">&gt;&gt;&gt; import sklearn
+&gt;&gt;&gt; sklearn.__version__
 '1.1.3' 
 </div>
 
@@ -464,7 +464,7 @@ var _hmt = _hmt || [];
     <div class="jupyter-mark-in"></div>
     <div class="vscode-block"><div>X_fit <span style="color: #7c4dff;">=</span> np<span style="color: #39adb5;">.</span>linspace<span style="color: #39adb5;">(</span><span style="color: #f76d47;">10</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">20</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">1000</span><span style="color: #39adb5;">).</span>reshape<span style="color: #39adb5;">((</span><span style="color: #7c4dff;">-</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">1</span><span style="color: #39adb5;">))</span></div><div>y_fit <span style="color: #7c4dff;">=</span> model<span style="color: #39adb5;">.</span>predict<span style="color: #39adb5;">(</span>X_fit<span style="color: #39adb5;">)</span></div><div>plt<span style="color: #39adb5;">.</span>plot<span style="color: #39adb5;">(</span>X_fit<span style="color: #39adb5;">,</span> y_fit<span style="color: #39adb5;">)</span></div><div>plt<span style="color: #39adb5;">.</span>scatter<span style="color: #39adb5;">(</span>x<span style="color: #39adb5;">,</span> y<span style="color: #39adb5;">,</span> <span style="color: #e53935;">s</span><span style="color: #7c4dff;">=</span><span style="color: #f76d47;">30</span><span style="color: #39adb5;">)</span></div></div>
     <div class="jupyter-mark-out"></div>
-    <div class="jupyter-output"><img decoding="async" class="matplotlib-output" src="/wp-content/uploads/image/category@machine-learning/01-output-linear-predict.png" alt=""></div>
+    <div class="jupyter-output"><img decoding="async" alt="" class="matplotlib-output" src="/wp-content/uploads/image/category@machine-learning/01-output-linear-predict.png"/></div>
 </div>
 
 <p>可以看到模型中 <code>.predict()</code> 依据的原理就是从趋势线上选择对应的点。</p>
@@ -476,7 +476,7 @@ var _hmt = _hmt || [];
 <p>首要的问题是数据能否应用与线性回归模型。以上的数据较为清晰地呈现出一条直线，但很多时候却未必。例如，以下是一个对看似为线性的数据应用线性回归模型的结果：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/01-output-linear-uncertain.png" alt="" width="460">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/01-output-linear-uncertain.png" width="460"/>
     <figcaption>一个可能呈现为直线的数据</figcaption>
 </figure>
 
@@ -485,7 +485,7 @@ var _hmt = _hmt || [];
 <p>设 <span class="math">\\( Y_\text{i} \\)</span> 为实际值，<span class="math">\\( Y_{\text{fitted}} \\)</span> 为预测值，<span class="math">\\( Y_{\text{mean}} \\)</span> 为所有散点的平均值，则数据的整体平方和 <span class="math">\\( \text{TSS} \\)</span> 、残差平方和 <span class="math">\\( \text{RSS} \\)</span> 以及解释平方和 <span class="math">\\( \text{ESS} \\)</span> 可以根据以下公式计算：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/01-linear-R-square.png" alt="" width="500">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/01-linear-R-square.png" width="500"/>
 </figure>
 
 <p>对 <span class="math">\\( R^2 \\)</span> ，有如下计算公式：</p>
@@ -509,9 +509,9 @@ var _hmt = _hmt || [];
 
 <p><code>metrics</code> 是 Scikit-Learn 包含的一个模块，里面有各种计算用的函数。为了后续分析其它指标的方便，接下来再介绍一个用于分析模型的工具。</p>
 
-<p><a href="https://www.statsmodels.org/stable/index.html">statsmodels</a> 是一个探究数据统计模型的 Python 第三方库。可以通过 <code>pip</code> 直接安装它：</p>
+<p><a class="link-external" href="https://www.statsmodels.org/stable/index.html">statsmodels</a> 是一个探究数据统计模型的 Python 第三方库。可以通过 <code>pip</code> 直接安装它：</p>
 
-<div class="codeblock code-console"><span class="token-venv">(sci)</span> PS D:\MachineLearning\demo> <span class="token-comd">pip</span> install statsmodels</div>
+<div class="codeblock code-console"><span class="token-venv">(sci)</span> PS D:\MachineLearning\demo&gt; <span class="token-comd">pip</span> install statsmodels</div>
 
 <p>然后可以通过以下代码分析搭建回归模型的各种数据信息：</p>
 
@@ -521,7 +521,7 @@ var _hmt = _hmt || [];
     <div class="jupyter-mark-out"></div>
     <div class="jupyter-output"><table class="pandas-dataframe">
         <caption>OLS Regression Results</caption>
-        <tr>
+        <tbody><tr>
             <th>Dep. Variable:</th><td>consumption</td><th class="emphasis">R-squared:</th><td class="emphasis">0.986</td>
         </tr>
         <tr>
@@ -533,9 +533,9 @@ var _hmt = _hmt || [];
         <tr>
             <th>Date:</th><td>Sat, 26 Nov 2022</td><th>Prob (F-statistic):</th><td>6.12e-53</td>
         </tr>
-    </table><table class="pandas-dataframe">
-        <tr>
-            <th></th><th class="emphasis">coef</th><th>std err</th><th>t</th><th class="emphasis">P>|t|</th><th>[0.025</th><th>0.975]</th>
+    </tbody></table><table class="pandas-dataframe">
+        <tbody><tr>
+            <th></th><th class="emphasis">coef</th><th>std err</th><th>t</th><th class="emphasis">P&gt;|t|</th><th>[0.025</th><th>0.975]</th>
         </tr>
         <tr>
             <td>const</td><td class="emphasis">-1.473e+04</td><td>239.859</td><td>-61.398</td><td class="emphasis">0.000</td><td>-1.52e+04</td><td>-1.42e+04</td>
@@ -543,14 +543,14 @@ var _hmt = _hmt || [];
         <tr>
             <td>year</td><td class="emphasis">7.5747</td><td>0.120</td><td>62.941</td><td class="emphasis">0.000</td><td>7.333</td><td>7.816</td>
         </tr>
-    </table><table class="pandas-dataframe">
-        <tr>
+    </tbody></table><table class="pandas-dataframe">
+        <tbody><tr>
             <th>Skew:</th><td>-0.436</td><th>Prob(JB):</th><td>0.151</td>
         </tr>
         <tr>
             <th>Kurtosis:</th><td>2.087</td><th>Cond. No.</th><td>2.41e+05</td>
         </tr>
-    </table><span class="notes">Notes:</span>
+    </tbody></table><span class="notes">Notes:</span>
 <span class="notes">[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</span>
 <span class="notes">[2] The condition number is large, 2.41e+05. This might indicate that there are strong multicollinearity or other numerical problems.</span></div>
 </div>
@@ -600,7 +600,7 @@ var _hmt = _hmt || [];
 <p>接下来通过一个具体的示例介绍多元线性回归的分析。假设某公司不同时期的利润（因变量）与各成本（自变量）之间的关系为：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/01-output-multilinear-factors.png" width="460" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/01-output-multilinear-factors.png" width="460"/>
     <figcaption>（数据是瞎编的）</figcaption>
 </figure>
 
@@ -633,7 +633,7 @@ var _hmt = _hmt || [];
     <div class="jupyter-mark-out"></div>
     <div class="jupyter-output"><table class="pandas-dataframe">
         <caption>OLS Regression Results</caption>
-        <tr>
+        <tbody><tr>
             <th>Dep. Variable:</th><td>Profit</td><th class="emphasis">R-squared:</th><td class="emphasis">0.952</td>
         </tr>
         <tr>
@@ -642,15 +642,15 @@ var _hmt = _hmt || [];
         <tr>
             <th>Method:</th><td>Least Squares</td><th>F-statistic:</th><td>222.3</td>
         </tr>
-    </table><table class="pandas-dataframe">
-        <tr>
-            <th></th><th>coef</th><th>std err</th><th>t</th><th class="emphasis">P>|t|</th><th>[0.025</th><th>0.975]</th>
+    </tbody></table><table class="pandas-dataframe">
+        <tbody><tr>
+            <th></th><th>coef</th><th>std err</th><th>t</th><th class="emphasis">P&gt;|t|</th><th>[0.025</th><th>0.975]</th>
         </tr>
         <tr>
             <td>const</td><td>5.009e+04</td><td>6571.034</td><td>7.622</td><td class="emphasis">0.000</td><td>3.69e+04</td><td>6.33e+04</td>
         </tr>
         <tr>
-            <td>R&D Spend</td><td>0.7762</td><td>0.054</td><td>14.442</td><td class="emphasis">0.000</td><td>0.668</td><td>0.885</td>
+            <td>R&amp;D Spend</td><td>0.7762</td><td>0.054</td><td>14.442</td><td class="emphasis">0.000</td><td>0.668</td><td>0.885</td>
         </tr>
         <tr>
             <td>Administration</td><td>-0.0280</td><td>0.051</td><td>-0.548</td><td class="emphasis">0.586</td><td>-0.131</td><td>0.075</td>
@@ -661,10 +661,10 @@ var _hmt = _hmt || [];
         <tr>
             <td>Production</td><td>1.2157</td><td>1.204</td><td>1.010</td><td class="emphasis">0.318</td><td>-1.209</td><td>3.641</td>
         </tr>
-    </table></div>
+    </tbody></table></div>
 </div>
 
-<p>在以上结果中，R-square 和 Adj. R-square 都达到了 0.9 以上，说明模型的线性拟合程度很好。在几个特征变量内，只有 R&D Spend 的 <span class="math">\\( P \\)</span> 值达到了阈值 0.05 以内，说明利润与研发费用具有很强的线性相关性；产量和管理费用的 <span class="math">\\( P \\)</span> 值都很大，说明它们与利润不太可能有线性相关性，在建立回归模型时可以忽略它们。</p>
+<p>在以上结果中，R-square 和 Adj. R-square 都达到了 0.9 以上，说明模型的线性拟合程度很好。在几个特征变量内，只有 R&amp;D Spend 的 <span class="math">\\( P \\)</span> 值达到了阈值 0.05 以内，说明利润与研发费用具有很强的线性相关性；产量和管理费用的 <span class="math">\\( P \\)</span> 值都很大，说明它们与利润不太可能有线性相关性，在建立回归模型时可以忽略它们。</p>
 
 <!-- 
 有一个可以直接得出结果的数学方程：
@@ -683,7 +683,7 @@ var _hmt = _hmt || [];
 <p>很多时候数据在散点图中未必表现为一条直线，那么就不能使用直线的方程去描述它，否则会产生<strong>欠拟合</strong>：模型没有捕捉到数据的特征，不能用于拟合数据，如图所示：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/01-output-polynomial-bad.png" width="440" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/01-output-polynomial-bad.png" width="440"/>
     <figcaption>曲线数据不能用直线拟合</figcaption>
 </figure>
 
@@ -710,14 +710,14 @@ var _hmt = _hmt || [];
 <p>这样得到的回归趋势线就是一条拟合程度较好的曲线了：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/01-output-polynomial-good.png" width="440" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/01-output-polynomial-good.png" width="440"/>
 </figure>
 
 <p>除此之外，还可以将预处理和建立模型结合起来，使用 Scikit-Learn 提供的管道操作组合成一个模型，这样便无需频繁处理数据了：</p>
 
 <div class="jupyter codeblock">
     <div class="jupyter-mark-in"></div>
-    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span> sklearn<span style="color: #39adb5;">.</span>pipeline <span style="color: #39adb5;font-weight: bold;">import</span> make_pipeline</div><br><div>model <span style="color: #7c4dff;">=</span> make_pipeline<span style="color: #39adb5;">(</span>PolynomialFeatures<span style="color: #39adb5;">(</span><span style="color: #f76d47;">3</span><span style="color: #39adb5;">),</span> </div><div>&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; LinearRegression<span style="color: #39adb5;">())</span></div><div>model<span style="color: #39adb5;">.</span>fit<span style="color: #39adb5;">(</span>x<span style="color: #39adb5;">.</span>reshape<span style="color: #39adb5;">(</span><span style="color: #7c4dff;">-</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">1</span><span style="color: #39adb5;">),</span> y<span style="color: #39adb5;">)</span></div></div>
+    <div class="vscode-block"><div><span style="color: #39adb5;font-weight: bold;">from</span> sklearn<span style="color: #39adb5;">.</span>pipeline <span style="color: #39adb5;font-weight: bold;">import</span> make_pipeline</div><br/><div>model <span style="color: #7c4dff;">=</span> make_pipeline<span style="color: #39adb5;">(</span>PolynomialFeatures<span style="color: #39adb5;">(</span><span style="color: #f76d47;">3</span><span style="color: #39adb5;">),</span> </div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; LinearRegression<span style="color: #39adb5;">())</span></div><div>model<span style="color: #39adb5;">.</span>fit<span style="color: #39adb5;">(</span>x<span style="color: #39adb5;">.</span>reshape<span style="color: #39adb5;">(</span><span style="color: #7c4dff;">-</span><span style="color: #f76d47;">1</span><span style="color: #39adb5;">,</span> <span style="color: #f76d47;">1</span><span style="color: #39adb5;">),</span> y<span style="color: #39adb5;">)</span></div></div>
 </div>
 
 <h3>正则化线性模型</h3>
@@ -728,11 +728,11 @@ var _hmt = _hmt || [];
 
 <figure class="parallel">
     <div>
-        <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/01-output-polynomial-uncertain.png" width="370" alt="">
+        <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/01-output-polynomial-uncertain.png" width="370"/>
         <figcaption>3 次多项式的拟合结果</figcaption>
     </div>
     <div>
-        <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/01-output-polynomial-worse.png" width="370" alt="">
+        <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/01-output-polynomial-worse.png" width="370"/>
         <figcaption>16 次多项式的拟合结果</figcaption>
     </div>
 </figure>
@@ -773,7 +773,7 @@ var _hmt = _hmt || [];
 <p>下图展示了不同参数下岭回归的结果：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/01-output-ridge-results.png" width="440" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/01-output-ridge-results.png" width="440"/>
 </figure>
 
 <p>另一种常用的正则化是 Lasso 正则化，它的约束项为：</p>
@@ -787,18 +787,16 @@ var _hmt = _hmt || [];
 <p>从公式上看，Lasso 回归与岭回归差别不大，但 Lasso 回归在数学上更倾向于将特征系数设置为 0 。假设有两个特征变量，那么 Lasso 回归在降低正则化项的和时，更容易接近坐标轴而使某个系数趋近 0 ，如下图所示：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/01-lasso-losses-zero.png" width="780" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/01-lasso-losses-zero.png" width="780"/>
 </figure>
 
 <p>可以从同样的地方导入 <code>Lasso</code> 类建立模型。下图展示了不同参数下 Lasso 回归的结果，可以看到都比较趋近于 3 次多项式：</p>
 
 <figure>
-    <img decoding="async" src="/wp-content/uploads/image/category@machine-learning/01-output-lasso-results.png" width="440" alt="">
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@machine-learning/01-output-lasso-results.png" width="440"/>
 </figure>
 
 <p>总的来说，线性回归作为统计学中常用的一个工具，它的数学原理已经被研究得很透彻了，因此模型的可解释性很强，且计算速度快，对于线性数据的预测结果很好。但是线性回归不适用于非线性数据，且无法处理分类问题，因此需要提前判断数据是否有线性关系。</p>
-
-
 												<div class="clear"></div>				
 					</div><!--/.entry-->
 				</div>
@@ -820,14 +818,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/programming/python-oop/04-methods/">
-											<img width="520" height="293" src="/wp-content/uploads/2023/03/Python面向对象编程04-类与实例的方法-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2023/03/Python面向对象编程04-类与实例的方法-520x293.jpg 520w, /wp-content/uploads/2023/03/Python面向对象编程04-类与实例的方法-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/data-science/via-python/numpy03-slices/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/10/Python数据分析-numpy03数组索引与切片-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/10/Python数据分析-numpy03数组索引与切片-520x293.jpg 520w, /wp-content/uploads/2022/10/Python数据分析-numpy03数组索引与切片-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/programming/python-oop/04-methods/" rel="bookmark">Python面向对象编程04-类与实例的方法</a>
+					<a href="/data-science/via-python/numpy03-slices/" rel="bookmark">numpy03:数组索引与切片</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -838,14 +836,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/data-science/via-python/pandas03-the-index/">
-											<img width="520" height="293" src="/wp-content/uploads/2023/03/Python数据分析-pandas03索引-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2023/03/Python数据分析-pandas03索引-520x293.jpg 520w, /wp-content/uploads/2023/03/Python数据分析-pandas03索引-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/programming/python-fp/03-functional-programming/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/data-science/via-python/pandas03-the-index/" rel="bookmark">pandas03:深入认识索引</a>
+					<a href="/programming/python-fp/03-functional-programming/" rel="bookmark">Python函数式编程03 高阶函数与匿名函数</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -856,14 +854,14 @@ var _hmt = _hmt || [];
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/computer-science/data-structure/03-stack-and-queue/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/08/数据结构03-栈和队列-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/08/数据结构03-栈和队列-520x293.jpg 520w, /wp-content/uploads/2022/08/数据结构03-栈和队列-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/embedded/mcu-application/stm32-u8g2-library/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/U8g2图形库与STM32移植-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/U8g2图形库与STM32移植-520x293.jpg 520w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植-300x169.jpg 300w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植-1024x576.jpg 1024w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植-768x432.jpg 768w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植-1536x864.jpg 1536w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植-950x534.jpg 950w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/computer-science/data-structure/03-stack-and-queue/" rel="bookmark">数据结构03-栈和队列</a>
+					<a href="/embedded/mcu-application/stm32-u8g2-library/" rel="bookmark">U8g2图形库与STM32移植</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -900,6 +898,14 @@ var _hmt = _hmt || [];
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
 											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
 					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
 											<span class="post-date">2023年6月19日</span>
 									</li>
@@ -919,14 +925,6 @@ var _hmt = _hmt || [];
 					<a href="/data-science/via-python/pandas03-the-index/">pandas03:深入认识索引</a>
 											<span class="post-date">2023年3月6日</span>
 									</li>
-											<li>
-					<a href="/data-science/via-python/pandas01-data-types/">pandas01:基本数据类型</a>
-											<span class="post-date">2023年2月27日</span>
-									</li>
-											<li>
-					<a href="/data-science/machine-learning/05-decision-tree/">机器学习-决策树</a>
-											<span class="post-date">2023年2月8日</span>
-									</li>
 					</ul>
 
 		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
@@ -939,9 +937,11 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (1)
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
 <ul class='children'>
 	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
 </li>
 </ul>
 </li>
@@ -963,7 +963,7 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (19)
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (20)
 <ul class='children'>
 	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (4)
 </li>
@@ -989,7 +989,9 @@ var _hmt = _hmt || [];
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(1)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
 	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
 	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
 	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
@@ -1054,7 +1056,7 @@ var _hmt = _hmt || [];
 					
 										
 					<div id="copyright">
-													<p>冰封残烛的个人小站 &copy; 2023. All Rights Reserved.</p>
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
 											</div><!--/#copyright-->
 					
 										
