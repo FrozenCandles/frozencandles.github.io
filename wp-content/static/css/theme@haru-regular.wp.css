@@ -1,0 +1,435 @@
+
+/* 和 haru 差不多，但字体使用的是标准的 Consolas */
+
+
+:root {
+    --main-color: rgba(128, 30, 255, 1);
+    --shadow-color : rgb(178, 80, 255);
+    --transplate-color : rgba(128, 30, 255, 0.1);
+    --dark-color : rgb(70, 18, 137);
+    --light-color : rgb(248, 242, 255);
+    --font-color : rgb(12, 12, 12);
+    --base-font : "Glow Sans", "Microsoft YaHei", serif;
+    --title-font: inherit /*"Roboto Slab", "Times", serif*/;
+    --blockquote-font : inherit /*"Times", "Roboto Slab", serif*/;
+    --blockquote-color : rgba(117, 117, 117, 0.9);
+    --monospace: Consolas, "Courier New", monospace; 
+
+    --quote-title-font-size : 0.9em;
+    --quote-tag-font-size : 1.1em;
+}
+
+
+
+
+.entry h1, h2, h3, h4, h5, h6 {
+    color: var(--font-color);
+    font-family: var(--title-font);
+    font-weight: 800;
+    line-height: 1.5;
+    margin: 0 0 1em 0;
+}
+
+.entry h1 {
+    font-size: 40px;
+    margin: 0 0 1.0em 0;
+    line-height: 1.3; 
+    border-bottom: solid 3px var(--main-color);
+    width: fit-content;
+}
+
+.entry h2 {
+    font-size: 28px;
+    border-radius: .5em;
+}
+
+.entry h2::before {
+    content: "H2";
+    border-radius: .3em;
+    font-size: .8em;
+    padding: 3px 7px;
+    margin-right: 15px;
+    background-color: var(--main-color);
+    color: white;
+}
+
+.entry h3 {
+    font-size: 24px;
+    border-radius: .3em; 
+}
+
+.entry h3::before {
+    content: "H3";
+    color : white;
+    font-size: 0.8em;
+    background-color: var(--main-color);
+    border-radius: .3em;
+    margin-right: 12px;
+    padding: 4px 7px;
+}
+
+.entry h4 {
+    font-size: 20px;
+}
+
+.entry h5 {
+    font-size: 16px;
+}
+
+.entry hr {
+    width: 60%;
+    text-align:center;
+    border-bottom: solid 1.8px var(--main-color);
+    margin: 1.5em auto;
+}
+
+.entry figure {
+    text-align: center;
+}
+
+.entry figure img {
+    /* border-radius: 1.5em !important; */
+    box-shadow: 0 0 10px 3px rgba(134, 136, 137, 0.8);
+    transition: all 0.3s linear;
+    -moz-transition: all 0.3s linear;
+    -webkit-transition: all 0.3s linear;
+}
+
+/* .entry img:hover {
+    box-shadow: 0 0 10px 5px var(--shadow-color);
+    transition: all 0.3s linear;
+    -moz-transition: all 0.3s linear;
+    -webkit-transition: all 0.3s linear;
+} */
+
+
+.entry blockquote {
+    padding: 10px 10px;
+    font-size: var(--quote-title-font-size);
+    color: var(--blockquote-color);
+    border-left: 6px solid var(--main-color);
+    background: var(--light-color);
+    border-radius : 0.5em;
+    font-family: var(--blockquote-font);
+    line-height: 35px;
+}
+
+.entry blockquote:before {
+    content: " ";
+}
+
+.entry blockquote span {
+    word-break: break-all;
+}
+
+.entry blockquote h1 {
+    font-weight: 200;
+    font-size: var(--quote-tag-font-size);
+    border-bottom: none;
+    font-family: var(--base-font);
+    line-height: 35px;
+}
+
+.entry blockquote h1::before {
+    content: "Tips";
+    background-color: var(--main-color);
+    font-family: var(--title-font);
+    color: white;
+    font-size: var(--quote-tag-font-size);
+    border-radius: .3em;
+    padding: 3px 7px;
+    margin-right: 15px;
+}
+
+.entry blockquote h2 {
+    font-weight: 200;
+    font-size: var(--quote-tag-font-size);
+    font-family: var(--base-font);
+    line-height: 35px;
+}
+
+.entry blockquote h2::before {
+    content: "Warning";
+    background-color: rgb(207, 210, 16);
+    font-family: var(--title-font);
+    color: white;
+    font-size: var(--quote-tag-font-size);
+    border-radius: .3em;
+    padding: 3px 7px;
+    margin-right: 15px;
+}
+
+.entry blockquote h3 {
+    font-weight: 200;
+    font-size: var(--quote-tag-font-size);
+    font-family: var(--base-font);
+    line-height: 35px;
+}
+
+.entry blockquote h3::before {
+    content: "Error";
+    background-color: rgb(224, 66, 66);
+    font-family: var(--title-font);
+    color: white;
+    font-size: var(--quote-tag-font-size);
+    border-radius: .3em;
+    padding: 3px 7px;
+    margin-right: 15px;
+    float: none;
+    position: relative;
+    top: 0;
+    left: 0;
+    vertical-align: baseline;
+    border-width: 0;
+}
+
+.entry blockquote h4 {
+    font-weight: 200;
+    font-size: var(--quote-tag-font-size);
+    font-family: var(--base-font);
+    line-height: 35px;
+}
+
+.entry blockquote h4::before {
+    content: "Remind";
+    background-color: var(--shadow-color);
+    font-family: var(--title-font);
+    color: white;
+    font-size: var(--quote-tag-font-size);
+    border-radius: .3em;
+    padding: 3px 7px;
+    margin-right: 15px;
+    float: none;
+    position: relative;
+    top: 0;
+    left: 0;
+    vertical-align: baseline;
+    border-width: 0;
+}
+
+.entry blockquote h5 {
+    font-weight: 200;
+    font-size: var(--quote-tag-font-size);
+    font-family: var(--base-font);
+    line-height: 35px;
+}
+
+.entry blockquote h5::before {
+    content: "Remind";
+    background-color: var(--shadow-color);
+    font-family: var(--title-font);
+    color: white;
+    font-size: var(--quote-tag-font-size);
+    border-radius: .3em;
+    padding: 3px 7px;
+    margin-right: 15px;
+    float: none;
+    position: relative;
+    top: 0;
+    left: 0;
+    vertical-align: baseline;
+    border-width: 0;
+}
+
+/* inline code */
+.entry code {
+    font-family: var(--monospace);
+    font-size: 14px;
+    margin: 0 2px;
+    padding: 4px 6px;
+    color: #666363;
+    white-space: pre-wrap;
+    background: var(--light-color);
+    border-radius: 8px;
+}
+
+.entry blockquote code {
+    margin: 0 2px;
+    padding: 4px 6px;
+    color: white;
+    white-space: pre-wrap;
+    background: var(--main-color);
+    border-radius: 8px;
+}
+
+div.codeblock,
+div.vscode-block {
+    font-family: var(--monospace);
+    line-height: 19px;
+    font-size: 14px;
+    padding: 5px;
+    margin-bottom: 15px; 
+    overflow-wrap: anywhere;
+}
+
+div.codeblock.code-console span.codetoken.command { color: rgb(202, 133, 255); }
+div.codeblock.code-console span.codetoken.prompt  { color: rgb(121, 228, 160); }
+
+div.code-highlight,
+div.vscode-block {
+    border: 1px solid gray;
+    margin: 20px auto;
+}
+
+div.codeblock.code-console {
+    color:rgb(248, 242, 255);
+    background-color: rgb(27, 27, 27);
+    white-space: pre-wrap;
+}
+
+.entry kbd,
+.entry samp,
+.entry tt,
+.entry var {
+    font-style: normal;
+	font-family: var(--monospace);
+}
+
+.entry var[type] {
+    color: var(--main-color);
+}
+
+
+/* table */
+.entry table {
+    width: 95%;
+    border-collapse: collapse;
+    text-align: center;
+    /* font-family: var(--monospace); */
+    margin: 20px;
+}
+.entry table td, table th {
+    border: 1px solid transparent;
+    color: rgb(18, 18, 18);
+    /* height: 30px; */
+    padding: 8px;
+    border-radius: .5em;
+    transition: all 0.3s linear;
+    -moz-transition: all 0.3s linear;
+    -webkit-transition: all 0.3s linear;
+}
+
+.entry table td {
+    font-family: var(--title-font);
+}
+.entry table td.code-font {
+    font-family: var(--monospace);
+}
+
+
+.entry table thead th {
+    background-color: var(--shadow-color);
+    font-size: 20px;
+    color: white;
+    font-weight: bolder;
+    width: 100px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px;
+}
+
+.entry > table tr:nth-child(odd) {
+    background: white;
+}
+
+.entry > table tr:nth-child(even) {
+    background: var(--light-color);
+}
+
+.entry div.section.command table tr:nth-child(odd),
+.entry div.section.command table tr:nth-child(even) {
+    background: inherit;
+    background-color: inherit;
+}
+
+.entry span.cell-code,
+.entry div.section.command table td.cell-code {
+    color: var(--main-color)
+}
+
+.entry span.cell-code { font-family: Consolas, 'Courier New', monospace; }
+
+
+/* table td:hover {
+  background-color: var(--shadow-color) !important;
+  color: white !important;
+  box-shadow: 0 0 10px 5px var(--shadow-color);
+  transition: all 0.3s linear;
+  -moz-transition: all 0.3s linear;
+  -webkit-transition: all 0.3s linear;
+} */
+
+
+/* main element consisting of your text */
+.entry p {
+    color: var(--font-color);
+    margin: 1em 0;  
+    font-weight: 500;
+    line-height: 1.6;
+    font-family: var(--base-font);
+}
+
+.entry a {
+    color: var(--main-color);
+    font-weight: 500;
+    text-decoration: none;
+    text-decoration-style: none;
+    cursor: pointer;
+    padding: 0 3px 0 3px;
+}
+
+
+/* list */
+
+.entry ol,
+.entry ul {
+  padding-left: 2em;
+  line-height: 2;
+}
+
+.entry ol li::marker,
+.entry ul li::marker {
+    color: var(--shadow-color);
+}
+
+.entry ul>li>ul>li {
+    list-style-type: circle;
+}
+  
+.entry ul>li>ul>li>ul>li {
+    list-style-type: square;
+}
+
+.entry iframe {
+    border-radius: 1.2em;
+    box-shadow: 0 0 8px 3px rgba(181, 181, 182, 0.9);
+}
+
+/* bg color when text is selected */
+div::selection, div::-moz-selection, div::-webkit-selection,
+blockquote::selection, blockquote::-moz-selection, blockquote::-webkit-selection,
+p::selection, p::-moz-selection, p::-webkit-selection,
+label::selection, label::-moz-selection, label::-webkit-selection ,
+span::selection, span::-moz-selection, span::-webkit-selection ,
+h1::selection, h1::-moz-selection, h1::-webkit-selection,
+h2::selection, h2::-moz-selection, h2::-webkit-selection,
+h3::selection, h3::-moz-selection, h3::-webkit-selection,
+h4::selection, h4::-moz-selection, h4::-webkit-selection,
+h5::selection, h5::-moz-selection, h5::-webkit-selection,
+code::selection, code::-moz-selection, code::-webkit-selection { 
+    background: var(--main-color); color: white; 
+}
+
+.math { color: rgb(208, 0, 255); font-size: 14px; }
+
+.symbol {
+    font-family: var(--monospace);
+}
+
+.symbol-hex {
+    color: var(--shadow-color);
+}
+
+.symbol-register {
+    background-color: rgb(245, 232, 255);
+}

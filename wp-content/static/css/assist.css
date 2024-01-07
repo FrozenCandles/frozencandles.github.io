@@ -28,9 +28,11 @@ body {
 
 
 #assist {
+    width: fit-content;
     position: sticky;
     left: 30px;
     top: 50px;
+    float: left;
 }
 
 #assist button {

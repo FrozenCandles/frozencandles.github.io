@@ -21,6 +21,17 @@
     line-height: 19px;
 }
 
+div.code-highlight {
+    margin-bottom: 15px;
+    padding: 5px;
+    border: 1px solid silver;
+    font-family: Consolas, 'Courier New', monospace;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    white-space: pre-wrap;
+}
+
 div.code-template {
     color: black;
     font-family: Consolas, 'Courier New', monospace;
@@ -30,6 +41,7 @@ div.code-template {
     font-size: 14px;
     line-height: 18px;
 }
+div.code-template span.token-comment { color: gray; }
 
 div.code-console {
     color: white;
@@ -53,7 +65,15 @@ div.code-console span.token-label { color: skyblue; }
 
 
 
+
 .entry figure.parallel div { 
+    display: inline-block; 
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+
+.entry figure.figure-sidebyside > * { 
     display: inline-block; 
     margin-left: 15px;
     margin-right: 15px;
@@ -101,6 +121,17 @@ div.code-console span.token-label { color: skyblue; }
     border-spacing: 10px;
 }
 .codeblock.compare > * {
+    width: 50%;
+    display: table-cell;
+}
+
+.codeblock-compare {
+    display: table;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+.codeblock-compare > * {
     width: 50%;
     display: table-cell;
 }

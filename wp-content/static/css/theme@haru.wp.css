@@ -263,6 +263,7 @@ div.vscode-block {
 div.codeblock.code-console span.codetoken.command { color: rgb(202, 133, 255); }
 div.codeblock.code-console span.codetoken.prompt  { color: rgb(121, 228, 160); }
 
+div.code-highlight,
 div.vscode-block {
     border: 1px solid gray;
     margin: 20px auto;

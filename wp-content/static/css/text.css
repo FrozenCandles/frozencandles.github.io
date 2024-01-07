@@ -42,8 +42,34 @@ body:not(.heimu_toggle_on) .new:hover .heimu.off {
 
 
 .math {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
     font-size: 15px;
+    --scroll-bar-color: #c5c5c5;
+    --scroll-bar-bg-color: #f6f6f6;
 }
+
+.math::-webkit-scrollbar-corner { background: rgba(0,0,0,0.5); }
+
+.math {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scroll-bar-color) var(--scroll-bar-bg-color);
+}
+/* Works on Chrome, Edge, and Safari */
+.math::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+.math::-webkit-scrollbar-track {
+    background: var(--scroll-bar-bg-color);
+}
+.math::-webkit-scrollbar-thumb {
+    background-color: var(--scroll-bar-color);
+    border-radius: 20px;
+    border: 3px solid var(--scroll-bar-bg-color);
+}
+
 
 code {
     font-family: Consolas, 'Courier New', monospace;
@@ -104,6 +130,10 @@ div.code-template {
 span.has-inline-color.text-keyword-green     { color: #22ac00; }
 span.has-inline-color.has-vivid-purple-color { color: violet; } 
 */
+
+.entry blockquote {
+    font-style: normal;
+}
 
 
 /* 
@@ -182,6 +212,9 @@ span.inline-color.violet { color: violet; }
     font-family: Consolas, 'Courier New', monospace;
 }
 
+.code-font { 
+    font-family: Consolas, 'Courier New', monospace;
+}
 
 .entry .text-indent {
     padding-left: 2em;
