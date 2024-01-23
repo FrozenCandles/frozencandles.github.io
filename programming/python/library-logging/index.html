@@ -1,0 +1,912 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Python标准库logging：日志记录 - 冰封残烛的个人小站</title>
+	<meta name="description" content="日志指的是对程序在运行过程中所发生的一些情况或行为的记录，方便于定位错误的位置并追踪错误产生的原因。logging 是 Python 内置的日志模块，本文介绍 logging 库的常见用法，包括日志的输出、日志的等级、日志的格式和日志的配置等内容。" />
+	<link rel="canonical" href="/programming/python/library-logging/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Python标准库logging：日志记录 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="日志指的是对程序在运行过程中所发生的一些情况或行为的记录，方便于定位错误的位置并追踪错误产生的原因。logging 是 Python 内置的日志模块，本文介绍 logging 库的常见用法，包括日志的输出、日志的等级、日志的格式和日志的配置等内容。" />
+	<meta property="og:url" content="/programming/python/library-logging/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2024-01-23T12:19:44+00:00" />
+	<meta property="article:modified_time" content="2024-01-23T14:55:22+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2024/01/library-logging.jpg" />
+	<meta property="og:image:width" content="1920" />
+	<meta property="og:image:height" content="1080" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="5分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebPage",
+	            "@id": "/programming/python/library-logging/",
+	            "url": "/programming/python/library-logging/",
+	            "name": "Python标准库logging：日志记录 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/programming/python/library-logging/#primaryimage"
+	            },
+	            "image": {
+	                "@id": "/programming/python/library-logging/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2024/01/library-logging.jpg",
+	            "datePublished": "2024-01-23T12:19:44+00:00",
+	            "dateModified": "2024-01-23T14:55:22+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "日志指的是对程序在运行过程中所发生的一些情况或行为的记录，方便于定位错误的位置并追踪错误产生的原因。logging 是 Python 内置的日志模块，本文介绍 logging 库的常见用法，包括日志的输出、日志的等级、日志的格式和日志的配置等内容。",
+	            "breadcrumb": {
+	                "@id": "/programming/python/library-logging/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/programming/python/library-logging/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/programming/python/library-logging/#primaryimage",
+	            "url": "/wp-content/uploads/2024/01/library-logging.jpg",
+	            "contentUrl": "/wp-content/uploads/2024/01/library-logging.jpg",
+	            "width": 1920,
+	            "height": 1080
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/programming/python/library-logging/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "Python标准库logging：日志记录"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/1342" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=1342' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython%2Flibrary-logging%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython%2Flibrary-logging%2F&#038;format=xml" />
+<style>
+    .math { color:blue; font-size: 13px; }
+    div.vscode-block { color: #405C79; background-color: #F7F9FB; }
+    div.vscode-block span[token="kwd"] { color: #bf568b; font-weight: bold; }
+
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?432b66336cb23bd6712cecabe6d808eb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<link rel="stylesheet" href="/wp-content/static/css/theme@pie.wp.css">
+<style>
+    .math { color:blue; font-size: 13px; }
+    div.vscode-block { color: #405C79; background-color: #F7F9FB; }
+    /*div.code-console { white-space: normal; }*/
+</style>
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-1342 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/all/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-1342" class="post-1342 post type-post status-publish format-standard has-post-thumbnail hentry category-python">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">Python标准库logging：日志记录</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/programming/python/" rel="category tag">Python</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2024年1月23日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+<p></p>
+
+
+
+<h2>日志的基本配置</h2>
+
+<h3>日志的概念</h3>
+
+<p><strong>日志</strong>(log)指的是对程序在运行过程中所发生的一些情况或行为的记录。在平时 debug 中，并不是所有错误都容易调试。有一些错误是不容易复现的，可能会在软件运行很久后才产生，但这个错误可能是由很早之前的某个事件引发的。这个时候就需要一种方式监控并不断反馈程序运行的状况。日志则专门用于实现此功能，日志的存在方便于定位错误的位置并追踪错误产生的原因。</p>
+
+<p>相比与简单的 <code>print()</code> ，日志输出的信息更加完善且规范，便于筛选与定位，并且可以通过简单的配置更改日志的各种输出需求。</p>
+
+<h3>日志的级别</h3>
+
+<p>对于日志记录，其中有一个非常重要的概念就是日志信息的<strong>级别</strong>(level)。级别用于区分信息的重要性，在检查日志时方便筛选重要信息。</p>
+
+<p>在 Python 内，日志基本上分为以下 5 种级别：</p>
+
+<div class="codeblock code-template">
+    debug<br/>
+    info<br/>
+    warning<br/>
+    error<br/>
+    critical
+</div>
+
+<p>级别等级从上到下是依次提高。因此，如果日志中出现了 <span class="code-font">error</span> 和 <span class="code-font">critical</span> 级别的信息，那么表明程序中出现了意料之外的错误，这个错误很可能是引起程序崩溃的原因。而 <span class="code-font">warning</span> 只是正常的警告，可能是某些功能使用不当引起的。<span class="code-font">info</span> 和 <span class="code-font">debug</span> 则是软件运行过程中正常打印出来的一些信息，标识软件运行过程中的一些状态。</p>
+
+<p>一般来说，<span class="code-font">debug</span> 只用于调试，会记录一些无关紧要的辅助信息，输出信息的重要性最低，因此输出的信息较多，而级别越往上信息量一般会减少。如果日志中 <span class="code-font">error</span> 和 <span class="code-font">critical</span> 信息比较多的话，说明软件的运行是不正常的，软件的设计可能有较大问题。</p>
+
+<p><code>logging</code> 是 Python 内置的日志模块。在 <code>logging</code> 库中，调用同名的函数即可生成对应等级的一条日志：</p>
+
+<div class="vscode-block"><div><span token="kwd">import</span> logging</div><br/><div>logging.debug('<span style="color: #56bf8b;">This is debug</span>')</div><div>logging.info('<span style="color: #56bf8b;">This is info</span>')</div><div>logging.warning('<span style="color: #56bf8b;">This is warning</span>')</div><div>logging.error('<span style="color: #56bf8b;">This is error</span>')</div><div>logging.critical('<span style="color: #56bf8b;">This is critical</span>')</div></div>
+
+<p>执行结果为：</p>
+
+<div class="codeblock code-console">$ python logging-demo.py
+WARNING:root:This is warning
+ERROR:root:This is error
+CRITICAL:root:This is critical</div>
+
+<p><code>logging</code> 的打印和 <code>print()</code> 的打印不同，它并不只显示日志消息，而是具有特定格式，这样方便筛选得到合适的日志记录。</p>
+
+<p>另外注意一点，<span class="code-font">debug</span> 和 <span class="code-font">info</span> 级别的日志没有打印，这是因为 <code>logging</code> 模块有一个默认的配置，这个配置包含了日志的输出级别：只有日志的级别大于等于配置的输出级别时，这条日志才会输出到控制台中显示。默认的输出级别是 <span class="code-font">warning</span> ，也就说只有高于或等于 <span class="code-font">warning</span> 级别的日志才会打印。</p>
+
+<p>可以通过 <code>basicConfig()</code> 函数对日志做一些简单的配置，该函数需要放在输出第一条日志的语句前，否则配置将不会生效。<code>basicConfig()</code> 有一个参数 <code><em>level</em></code> 用于控制日志的输出级别。如果更改日志级别为 <span class="code-font">info</span> ：</p>
+
+<div class="vscode-block"><div>logging.basicConfig(<span style="color: #bf8b56;">level</span>=logging.<span style="color: #bf8b56;">INFO</span>)</div></div>
+
+<p>重新执行后，显示的日志信息就会包含 <span class="code-font">info</span> 以及更高级别的日志信息：</p>
+
+<div class="codeblock code-console">$ python logging-demo.py
+INFO:root:This is info
+WARNING:root:This is warning
+ERROR:root:This is error
+CRITICAL:root:This is critical</div>
+
+<blockquote>
+    <p><code>logging</code> 中的等级实际上使用整数表示，数值越高则等级越高。例如最低的 <code>NOTSET</code> 为 <code>0</code> ，然后 <code>DEBUG</code> 为 <code>10</code> ，最高的 <code>CRITICAL</code> 为 <code>50</code> 。除此之外，<code>logging</code> 还提供了 <code>log(<em>level</em>, <em>msg</em>)</code> 函数，可以通过第一个参数提供日志的等级。</p>
+    
+    <p>因此，如果对 <code>logging</code> 提供的等级划分不满意，也可以自行添加等级，例如：</p>
+
+    <div class="vscode-block"><div><span style="color: #bf8b56;">SUCCESS</span> = <span style="color: #bf8b56;">35</span></div><div><span token="kwd">def</span> <span style="color: #8b56bf;">success</span>(<span style="color: #bf8b56;">msg</span>, *<span style="color: #bf8b56;">args</span>, **<span style="color: #bf8b56;">kwargs</span>):</div><div>&nbsp; &nbsp; logging.log(<span style="color: #bf8b56;">SUCCESS</span>, msg, *args, **kwargs)</div></div>
+
+    <p>定义后最好通过 <code>addLevelName</code> 注册这个等级的信息，这样输出时才能得到正确的等级名：</p>
+
+    <div class="vscode-block"><div>logging.addLevelName(<span style="color: #bf8b56;">SUCCESS</span>, '<span style="color: #56bf8b;">SUCCESS</span>')</div></div>
+</blockquote>
+
+<p>在开发阶段，需要记录尽可能详细的内容，方便查找各种问题；而到了部署阶段，由于软件功能已经基本稳定，只需要记录比较重要的信息即可，这样在可以快速发现一些关键的问题。日志的等级便提供了这样的功能，只需要简单修改配置即可实现内容的过滤。</p>
+
+<h3>日志的文件记录</h3>
+
+<p><code>logging</code> 中的 <code>basicConfig()</code> 除了可以设置 <code><em>level</em></code> 以外，还可以做一些其它的配置。例如，默认情况下日志将被打印到控制台中，这样既不利于回看日志，也不便于检索信息。<code><em>filename</em></code> 参数允许将日志保存到文件中，例如：</p>
+
+<div class="vscode-block"><div>logging.basicConfig(<span style="color: #bf8b56;">level</span>=logging.<span style="color: #bf8b56;">ERROR</span>,</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #bf8b56;">filename</span>='<span style="color: #56bf8b;">demo.log</span>')</div></div>
+
+<p>重新执行后，就可以在当前目录下生成一个新文件 <code>demo.log</code> ，其中的内容为：</p>
+
+<div class="codeblock code-console">$ python logging-demo.py
+$ cat demo.log
+ERROR:root:This is error
+CRITICAL:root:This is critical</div>
+
+<p>如果再次执行代码，文件中的内容会增加，而不是覆盖：</p>
+
+<div class="codeblock code-console">$ python logging-demo.py
+$ cat demo.log
+ERROR:root:This is error
+CRITICAL:root:This is critical
+ERROR:root:This is error
+CRITICAL:root:This is critical</div>
+
+<p>这是由于在打开日志文件时，使用的读写方式是 <code>'a'</code> ，也就是在末尾追加内容的方式。可以通过 <code>basicConfig()</code> 的 <code><em>filemode</em></code> 参数改变文件的打开方式，例如用表示覆盖的写方式 <code>"w"</code> ：</p>
+
+<div class="vscode-block"><div>logging.basicConfig(<span style="color: #bf8b56;">level</span>=logging.<span style="color: #bf8b56;">ERROR</span>,</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #bf8b56;">filename</span>='<span style="color: #56bf8b;">demo.log</span>',</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #bf8b56;">filemode</span>='<span style="color: #56bf8b;">w</span>')</div></div>
+
+<p>此时多次运行该程序，可以看到日志文件中的内容将会被覆盖：</p>
+
+<div class="codeblock code-console">$ python logging-demo.py
+$ python logging-demo.py
+$ cat demo.log
+ERROR:root:This is error
+CRITICAL:root:This is critical</div>
+
+<p>除此之外，打开文件时还有一个比较重要的参数 <code><em>encoding</em></code> ，代表打开文件的编码。如果要在日志信息中包含中文，那么就需要指定编码，否则可能会产生乱码。</p>
+
+<h3>日志的格式</h3>
+
+<p>在使用 <code>logging</code> 模块的时候，它打印出的日志信息前还有通过冒号隔开的 <span class="code-font"><em>LEVEL</em></span> 和 <span class="code-font">root</span>，而不只包括提示的信息，这表明日志应该有一个默认的格式。</p>
+
+<p>默认的格式可以通过检查 <code>logging</code> 模块的 <code>BASIC_FORMAT</code> 常量得知：</p>
+
+<div class="vscode-block"><div><span style="color: #bf8b56;">BASIC_FORMAT</span> = "<span style="color: #bf8b56;">%(levelname)s</span><span style="color: #56bf8b;">:</span><span style="color: #bf8b56;">%(name)s</span><span style="color: #56bf8b;">:</span><span style="color: #bf8b56;">%(message)s</span>"</div></div>
+
+<p>不难看出，日志的格式就是使用 Python 中的百分号形式的格式字符串表示的，<code>logging</code> 会使用对应的内容填充格式字符串的对应字段，因此只需要自行提供一个格式字符串，其中包含 <code>logging</code> 支持的字段名即可：</p>
+
+<div class="vscode-block"><div>logging_format = '<span style="color: #56bf8b;">[</span><span style="color: #bf8b56;">%(asctime)s</span><span style="color: #56bf8b;"> - </span><span style="color: #bf8b56;">%(levelname)s</span><span style="color: #56bf8b;">] </span><span style="color: #bf8b56;">%(message)s</span>'</div></div>
+
+<p>然后将其传入 <code>basicConfig()</code> 的 <code><em>format</em></code> 参数中：</p>
+
+<div class="vscode-block"><div>logging.basicConfig(<span style="color: #bf8b56;">level</span>=logging.<span style="color: #bf8b56;">WARNING</span>,</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #bf8b56;">format</span>=logging_format)</div></div>
+
+<p>这样日志显示的内容为：</p>
+
+<div class="codeblock code-console">$ python logging-demo.py
+[2023-03-31 17:00:34,290 - WARNING] This is warning
+[2023-03-31 17:00:34,290 - ERROR] This is error
+[2023-03-31 17:00:34,291 - CRITICAL] This is critical</div>
+
+<p><code>logging</code> 支持的完整字段名可以查阅<a class="link-external" href="https://docs.python.org/3/library/logging.html#logrecord-attributes">官方文档</a>，可以根据实际需求创建合适的日志格式。</p>
+
+<p>此外，如果不想使用默认的日期时间表示格式，可以通过 <code>basicConfig()</code> 的 <code><em>datefmt</em></code> 参数提供日期时间格式，它和 <a class="link-internal" href="/programming/python/library-time">Python 标准库 <code>time</code></a> 的 <code>strftime()</code> 所用的日期时间表示法相同，详见<a href="https://docs.python.org/3/library/time.html#time.strftime">官方文档</a>。</p>
+
+<h2>日志的高级使用</h2>
+
+<h3>创建新的日志对象</h3>
+
+<p>之前一直都是直接使用 <code>logging</code> 模块提供的日志函数，然后使用 <code>basicConfig()</code> 统一所有日志函数的格式、输出和过滤方式。但是这样做有一个问题：程序的不同模块可能需要将日志输出到不同的位置，或是具有不同的输出格式或过滤等级，但不可能在程序中频繁地通过 <code>basicConfig()</code> 切换日志形式。如果该程序需要作为一个第三方库在其它位置被使用，两者的日志处理也应该是隔离的。这就要求创建不同的日志处理对象。</p>
+
+<p><code>logging</code> 模块中，<code>Logger</code> 对象实现了组件化日志记录接口。可以通过 <code>getLogger(<em>name</em>)</code> 函数创建一个 <code>Logger</code> 对象：</p>
+
+<div class="vscode-block"><div>logger = logging.getLogger('<span style="color: #56bf8b;">demo</span>')</div></div>
+
+<blockquote>
+    <p>以相同 <code><em>name</em></code> 调用的 <code>getLogger()</code> 将会返回相同的日志对象。</p>
+
+    <p>此外，日志对象有一个层级的概念：日志对象可以像模块一样通过在 <code><em>name</em></code> 中使用点号 <code>.</code> 表示层级结构，每个点号 <code>.</code> 后面的日志对象是前面日志对象的子类。例如 <code>"demo.test"</code> 是 <code>"demo"</code> 的子类。</p>
+</blockquote>
+
+<p>每个 <code>Logger</code> 对象也提供了同名的方法创建日志记录：</p>
+
+<div class="vscode-block"><div>logger.debug('<span style="color: #56bf8b;">This is debug</span>')</div><div>logger.info('<span style="color: #56bf8b;">This is info</span>')</div><div>logger.warning('<span style="color: #56bf8b;">This is warning</span>')</div><div>logger.error('<span style="color: #56bf8b;">This is error</span>')</div><div>logger.critical('<span style="color: #56bf8b;">This is critical</span>')</div></div>
+
+<p>这时，默认的运行效果为：</p>
+
+<div class="codeblock code-console">$ python logging-demo.py
+This is warning
+This is error
+This is critical</div>
+
+<p>可以看到，<code>Logger</code> 对象默认打印格式只有消息本身，并且默认只打印等级为 <code>warning</code> 及以上等级的日志。</p>
+
+<p>为了配置一个 <code>Logger</code> 对象，接下来要引入 <code>Handler</code> 对象的概念。<code>Handler</code> 对象决定一条日志应该如何输出，包括将日志记录输出到合适的位置，以及采用合适的输出格式。</p>
+
+<p><code>logging</code> 模块提供了多种 <code>Handler</code> ，每种 <code>Handler</code> 分别用于不同的工作方式。以下创建了两个 <code>Handler</code> 对象，<code>StreamHandler</code> 用于将日志输出到指定的<em>流</em>中（默认是标准错误流 <code>sys.stderr</code> ），而 <code>FileHandler</code> 则将日志输出到指定的文件对象：</p>
+
+<div class="vscode-block"><div>handler_s = logging.StreamHandler()</div><div>handler_f = logging.FileHandler('<span style="color: #56bf8b;">demo.log</span>', <span style="color: #bf8b56;">mode</span>='<span style="color: #56bf8b;">w</span>')</div></div>
+
+<blockquote>
+    <p>日志的层级使得日志处理时有一个向上传播的机制：某一级日志对象在处理日志记录后，会将该记录传给上一级日志对象处理，上一级日志对象也会继续这样。</p>
+    
+    <p>因为是 <code>Logger</code> 对象具有层级，但真正处理日志的是 <code>Handler</code> 对象，因此在具有层级的情况下，只需要为顶级的 <code>Logger</code> 对象提供 <code>Handler</code> 即可，否则一条日志会被多次处理。</p>
+    
+    <p>可以通过将一个 <code>Logger</code> 对象的 <code>.propagate</code> 属性设置为 <code>False</code> 来关闭这种传播机制。</p>
+</blockquote>
+
+<p>一个 <code>Logger</code> 对象可以有多个 <code>Handler</code> ，通过 <code>Logger</code> 对象的 <code>.addHandler()</code> 方法可以添加一个 <code>Handler</code> ：</p>
+
+<div class="vscode-block"><div>logger.addHandler(handler_s)</div><div>logger.addHandler(handler_f)</div></div>
+
+<p>这时再运行代码，<code>logger</code> 通过这两个 <code>Handler</code> 对象，分别将日志信息发送到了控制台和 <code>demo.log</code> 文件中。更多实用的 <code>Handler</code> 可以查看<a class="link-external" href="https://docs.python.org/3/howto/logging.html#useful-handlers">官方文档</a>。</p>
+
+<h3>格式化和过滤记录</h3>
+
+<p>如果要自定义日志信息的最终输出格式，需要自定义 <code>Formatter</code> 对象。</p>
+
+<p>例如，以下创建了两个 <code>Formatter</code> 对象，分别给它们提供不同的格式。<code>Formatter</code> 对象还支持在格式化字符串中使用不同格式的占位符：</p>
+
+<div class="vscode-block"><div>formatter_s = logging.Formatter('<span style="color: #56bf8b;">[</span><span style="color: #bf8b56;">%(asctime)s</span><span style="color: #56bf8b;"> - </span><span style="color: #bf8b56;">%(levelname)s</span><span style="color: #56bf8b;">] </span><span style="color: #bf8b56;">%(message)s</span>')</div><div>formatter_f = logging.Formatter('<span style="color: #56bf8b;">(</span><span style="color: #bf8b56;">{name}</span><span style="color: #56bf8b;">) [</span><span style="color: #bf8b56;">{asctime}</span><span style="color: #56bf8b;"> - </span><span style="color: #bf8b56;">{levelname}</span><span style="color: #56bf8b;">] </span><span style="color: #bf8b56;">{message}</span>', </div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #bf8b56;">datefmt</span>='<span style="color: #56bf8b;">%Y/%m/%d %H:%M:%S</span>', <span style="color: #bf8b56;">style</span>='<span style="color: #56bf8b;">{</span>')</div></div>
+
+<p>然后通过 <code>Handler</code> 对象的 <code>.setFormatter()</code> 方法设置输出格式：</p>
+
+<div class="vscode-block"><div>handler_f.setFormatter(formatter_f)</div><div>handler_s.setFormatter(formatter_s)</div></div>
+
+<blockquote>
+    <p><code>Logger</code> 和 <code>Handler</code> 对象是多对多的关系，一个日志对象可以拥有多个输出方式；但是 <code>Handler</code> 和 <code>Formatter</code> 对象是多对一的关系，一个输出渠道只能拥有一种格式。所以为 <code>Handler</code> 添加 <code>Formatter</code> 用到的方法以 <span class="code-font">set</span> 开头。</p>
+</blockquote>
+
+<p>现在运行程序，可以看到两路不同的输出有着不同的输出格式：</p>
+
+<div class="codeblock code-console">$ python logging-demo.py
+[2023-04-01 15:58:33,678 - WARNING] This is warning
+[2023-04-01 15:58:33,679 - ERROR] This is error
+[2023-04-01 15:58:33,679 - CRITICAL] This is critical
+$ cat demo.log
+(demo) [2023/04/01 16:02:02 - WARNING] This is warning
+(demo) [2023/04/01 16:02:02 - ERROR] This is error
+(demo) [2023/04/01 16:02:02 - CRITICAL] This is critical</div>
+
+<p>最后一个话题是关于信息的过滤。在前文中，使用 <code>basicConfig()</code> 的 <code><em>level</em></code> 参数实现了对日志输出级别的控制。如果只是要根据等级过滤日志，可以使用 <code>.setLevel(<em>level</em>)</code> 方法实现。</p>
+
+<p>不过要注意的是，<code>Logger</code> 和 <code>Handler</code> 都提供了 <code>.setLevel()</code> 方法，也就是说每条日志会被处理两次：当 <code>Logger</code> 对象接收一条日志记录时，它会先根据自己的等级决定是否要过滤该记录，交给 <code>Handler</code> 处理后，<code>Handler</code> 再根据自身的等级确定是否要过滤记录。因此，以下等级设置：</p>
+
+<div class="vscode-block"><div>logger.setLevel(logging.<span style="color: #bf8b56;">INFO</span>)</div><div>handler_s.setLevel(logging.<span style="color: #bf8b56;">ERROR</span>)</div><div>handler_f.setLevel(logging.<span style="color: #bf8b56;">DEBUG</span>)</div></div>
+
+<p>在控制台会输出 <code>info</code> 及以上等级的日志，在文件中会写入 <code>error</code> 及以上等级的日志。</p>
+
+<p>除了默认的按等级过滤的方式外，<code>logging</code> 还提供了自定义过滤器的方式：通过继承 <code>Filter</code> 类并重写 <code>.filter()</code> 方法，可以实现更复杂的过滤逻辑。</p>
+
+<p><code>.filter()</code> 方法在记录可以产生时返回 <code>True</code> ，在记录需要被过滤时返回 <code>False</code> 。该方法只接收一个参数 <code>record</code> ，它是一个特别的 <code>LogRecord</code> 对象，其中包含了表示运行状况的一些属性，它的属性名和 <code>Formatter</code> 的字段名其实是一样的。以下实现了这样一个示例，可以过滤某些特别函数中的日志记录：</p>
+
+<div class="vscode-block"><div><span token="kwd">class</span> <span style="color: #568bbf;">FuncFilter</span>(<span style="color: #56bf8b;">logging</span>.<span style="color: #56bf8b;">Filter</span>):</div><div>&nbsp; &nbsp; <span token="kwd">def</span> <span style="color: #8b56bf;">__init__</span>(<span style="color: #bf8b56;">self</span>, <span style="color: #bf8b56;">funcName</span>, <span style="color: #bf8b56;">filename</span>=<span style="color: #bf8b56;">None</span>):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #bfbf56;">self</span>.funcName = funcName</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #bfbf56;">self</span>.filename = filename</div><div>&nbsp; &nbsp; <span token="kwd">def</span> <span style="color: #8b56bf;">filter</span>(<span style="color: #bf8b56;">self</span>, <span style="color: #bf8b56;">record</span>):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="kwd">if</span> ((<span style="color: #bfbf56;">self</span>.filename is <span style="color: #bf8b56;">None</span> or </div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #bfbf56;">self</span>.filename == record.filename)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and record.funcName == <span style="color: #bfbf56;">self</span>.funcName):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="kwd">return</span> <span style="color: #bf8b56;">False</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="kwd">else</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="kwd">return</span> <span style="color: #bf8b56;">True</span></div></div>
+
+<blockquote>
+    <p><code>Filter</code> 还有一个作用，就是可以在过滤时顺便向日志记录添加一些额外的上下文信息，详见<a href="https://docs.python.org/3/howto/logging-cookbook.html#context-info">官方文档</a>。</p>
+</blockquote>
+
+<p><code>Logger</code> 和 <code>Handler</code> 都可以添加一个和多个过滤器，它们的规则也是一样的：<code>Logger</code> 的过滤器先发挥作用，剩余的日志再交给 <code>Handler</code> 的过滤器处理。例如：</p>
+
+<div class="vscode-block"><div>filter_main = FuncFilter(<span style="color: #8b56bf;">__file__</span>, '<span style="color: #56bf8b;">main</span>')</div><div>handler_s.addFilter(filter_main)</div></div>
+
+<p>这样会过滤掉当前文件 <code>main()</code> 函数的所有日志。</p>
+
+<hr/>
+
+<p>最后再总结一下日志的完整工作流程：</p>
+
+<ol>
+    <li><code>Logger</code> 对象被用户调用，产生一条日志</li>
+    <li>根据 <code>.setLevel()</code> 和 <code>Filter</code> 决定日志是否被过滤</li>
+    <li>未被过滤的日志将发送给 <code>Handler</code> 处理，它根据自己的 <code>.setLevel()</code> 和 <code>Filter</code> 再次决定日志是否被过滤</li>
+    <li>未被过滤的日志在被 <code>Formatter</code> 格式化后发送到合适的位置被记录</li>
+</ol>
+
+<blockquote>
+    <p>对于有层级的 <code>Logger</code> 对象，它同时还会将记录发送给上一级处理。</p>
+</blockquote>
+
+<p>官方文档提供了这样一张图片，非常详细地说明了日志处理的完整流程：</p>
+
+<figure>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@python-basic/library-logging-flow.png"/>
+</figure>
+
+<p>实际上，之前通过 <code>basicConfig()</code> 的基本使用方式和上述流程也是相同的，只不过它默认生成了一个名为 <code>'root'</code> 的 <code>Logger</code> 对象，并且自动为其准备了 <code>Handler</code> 和 <code>Formatter</code> 。</p>
+
+<h3>通过文件配置日志</h3>
+
+<p>之前已经完整地介绍了 <code>logging</code> 模块的完整使用流程，但是这一过程其实十分公式化，每次都要按部就班地创建一系列对象再逐个绑定不免有些麻烦。好在 <code>logging</code> 提供了文件配置的方式，可以通过配置文件快速生成一系列对象以及它们之间的关系。</p>
+
+<p><code>logging</code> 的标准配置文件是 <code>.conf</code> 文件，实质上是 <span class="code-font">ini</span> 格式。接下来通过一个示例说明该配置文件的写法。</p>
+
+<p>首先，该配置文件需要提供 <code>loggers</code> 、<code>handlers</code> 和 <code>formatters</code> 字段表示日志所用到的所有对象，其中使用 <code>keys</code> 键名表示这些对象的名字：</p>
+
+<div class="vscode-block"><div><span style="color: #8b56bf;font-weight: bold;">[</span><span token="kwd">loggers</span><span style="color: #8b56bf;font-weight: bold;">]</span></div><div><span style="color: #bf568b;">keys</span>=root</div><br/><div><span style="color: #8b56bf;font-weight: bold;">[</span><span token="kwd">handlers</span><span style="color: #8b56bf;font-weight: bold;">]</span></div><div><span style="color: #bf568b;">keys</span>=stream_handler,file_handler</div><br/><div><span style="color: #8b56bf;font-weight: bold;">[</span><span token="kwd">formatters</span><span style="color: #8b56bf;font-weight: bold;">]</span></div><div><span style="color: #bf568b;">keys</span>=simple_formatter,fancy_formatter</div></div>
+
+<blockquote>
+    <p>注意：通过文件形式配置的日志必须要提供名为 <code>"root"</code> 的日志对象。并且通过文件似乎无法同时配置 <code>Filter</code> 对象，解决方法是使用后面介绍的字典形式配置。</p>
+</blockquote>
+
+<p>接下来，使用 <code>logger_<em>name</em></code> 字段表示要配置 <code><em>name</em></code> 代表的 <code>Logger</code> 对象：</p>
+
+<div class="vscode-block"><div><span style="color: #8b56bf;font-weight: bold;">[</span><span token="kwd">logger_root</span><span style="color: #8b56bf;font-weight: bold;">]</span></div><div><span style="color: #bf568b;">level</span>=INFO</div><div><span style="color: #bf568b;">handlers</span>=stream_handler,file_handler</div></div>
+
+<p><code>level</code> 键表示该 <code>Logger</code> 对象要过滤的等级，<code>handlers</code> 键表示需要给它添加的 <code>Handler</code> 对象，它们的配置形式相同：</p>
+
+<div class="vscode-block"><div><span style="color: #8b56bf;font-weight: bold;">[</span><span token="kwd">handler_stream_handler</span><span style="color: #8b56bf;font-weight: bold;">]</span></div><div><span style="color: #bf568b;">class</span>=StreamHandler</div><div><span style="color: #bf568b;">level</span>=ERROR</div><div><span style="color: #bf568b;">formatter</span>=simple_formatter</div><div><span style="color: #bf568b;">args</span>=(sys.stderr,)</div><br/><div><span style="color: #8b56bf;font-weight: bold;">[</span><span token="kwd">handler_file_handler</span><span style="color: #8b56bf;font-weight: bold;">]</span></div><div><span style="color: #bf568b;">class</span>=FileHandler</div><div><span style="color: #bf568b;">level</span>=DEBUG</div><div><span style="color: #bf568b;">formatter</span>=fancy_formatter</div><div><span style="color: #bf568b;">args</span>=('<span style="color: #56bf8b;">demo.log</span>', '<span style="color: #56bf8b;">w</span>', '<span style="color: #56bf8b;">utf-8</span>')</div></div>
+
+<p>同样通过 <code>handle_</code> 加上 <code>Handler</code> 名称表示的字段名代表要配置该 <code>Handler</code> 对象，<code>class</code> 代表所属的 <code>Handler</code> 类。由于不同的 <code>Handler</code> 类在构造时具有不同的参数，因此 <code>args</code> 键需要对应元组形式的值。</p>
+
+<p>最后 <code>formatter</code> 的写法也类似：</p>
+
+<div class="vscode-block"><div><span style="color: #8b56bf;font-weight: bold;">[</span><span token="kwd">formatter_simple_formatter</span><span style="color: #8b56bf;font-weight: bold;">]</span></div><div><span style="color: #bf568b;">format</span>=[%(asctime)s - %(levelname)s] %(message)s</div><br/><div><span style="color: #8b56bf;font-weight: bold;">[</span><span token="kwd">formatter_fancy_formatter</span><span style="color: #8b56bf;font-weight: bold;">]</span></div><div><span style="color: #bf568b;">format</span>=({name}) [{asctime} - {levelname}] {message}</div><div><span style="color: #bf568b;">datefmt</span>=%Y/%m/%d %H:%M:%S</div><div><span style="color: #bf568b;">style</span>={</div></div>
+
+<p>在编写完成 <code>.conf</code> 文件的基础上，导入文件的配置是非常简单的：</p>
+
+<div class="vscode-block"><div><span token="kwd">from</span> logging.config <span token="kwd">import</span> fileConfig</div><br/><div>fileConfig('<span style="color: #56bf8b;">logging.conf</span>')</div></div>
+
+<p>然后就可以直接使用 <code>Logger</code> 对象，而无需再接触 <code>Handler</code> 、<code>Formatter</code> 之类的对象：</p>
+
+<div class="vscode-block"><div>logger = logging.getLogger('<span style="color: #56bf8b;">root</span>')</div><br/><div>logger.debug('<span style="color: #56bf8b;">This is debug</span>')</div><div>logger.info('<span style="color: #56bf8b;">This is info</span>')</div></div>
+
+<p>另外一种配置方法是使用 Python 的字典，实际上任何能对应到 Python 字典的配置文件都可以使用这种配置方式，例如 JSON 。不管如何，只需要在将其解析为字典后，通过以下代码完成配置：</p>
+
+<div class="vscode-block"><div><span token="kwd">from</span> logging.config <span token="kwd">import</span> dictConfig</div><br/><div>dictConfig(config)</div></div>
+
+<p>Python 官方推荐的配置文件是 YAML 格式，不过需要先安装解析 YAML 的第三方库：</p>
+
+<div class="codeblock code-console">$ py -m pip install PyYaml</div>
+
+<p>它的基本使用方式为：</p>
+
+<div class="vscode-block"><div><span token="kwd">import</span> yaml</div><br/><div><span token="kwd">with</span> <span style="color: #8b56bf;">open</span>('<span style="color: #56bf8b;">logging.yaml</span>') <span token="kwd">as</span> yf:</div><div>&nbsp; &nbsp; config = yaml.load(<span style="color: #bf8b56;">stream</span>=yf.read(), <span style="color: #bf8b56;">Loader</span>=yaml.FullLoader)</div></div>
+
+<p>这种配置方式和 <span class="code-font">ini</span> 格式很像，除去 <code>Filter</code> 外其它内容一个写法示例如下：</p>
+
+<div class="vscode-block"><div><span style="color: #bf8b56;">version</span>: <span style="color: #bf8b56;">1</span></div><div><span style="color: #bf8b56;">formatters</span>:</div><div>&nbsp; <span style="color: #bf8b56;">simple</span>:</div><div>&nbsp; &nbsp; <span style="color: #bf8b56;">format</span>: '<span style="color: #56bf8b;">[%(asctime)s - %(levelname)s] %(message)s</span>'</div><div>&nbsp; <span style="color: #bf8b56;">fancy</span>:</div><div>&nbsp; &nbsp; <span style="color: #bf8b56;">format</span>: '<span style="color: #56bf8b;">({name}) [{asctime} - {levelname}] {message}</span>'</div><div>&nbsp; &nbsp; <span style="color: #bf8b56;">datefmt</span>: '<span style="color: #56bf8b;">%Y/%m/%d %H:%M:%S</span>'</div><div>&nbsp; &nbsp; <span style="color: #bf8b56;">style</span>: '<span style="color: #56bf8b;">{</span>'</div><div><span style="color: #bf8b56;">handlers</span>:</div><div>&nbsp; <span style="color: #bf8b56;">console</span>:</div><div>&nbsp; &nbsp; <span style="color: #bf8b56;">class</span>: <span style="color: #56bf8b;">logging.StreamHandler</span></div><div>&nbsp; &nbsp; <span style="color: #bf8b56;">level</span>: <span style="color: #56bf8b;">DEBUG</span></div><div>&nbsp; &nbsp; <span style="color: #bf8b56;">formatter</span>: <span style="color: #56bf8b;">simple</span></div><div>&nbsp; &nbsp; <span style="color: #bf8b56;">filters</span>: [<span style="color: #56bf8b;">func_main</span>]</div><div>&nbsp; <span style="color: #bf8b56;">file</span>:</div><div>&nbsp; &nbsp; <span style="color: #bf8b56;">class</span>: <span style="color: #56bf8b;">logging.FileHandler</span></div><div>&nbsp; &nbsp; <span style="color: #bf8b56;">level</span>: <span style="color: #56bf8b;">DEBUG</span></div><div>&nbsp; &nbsp; <span style="color: #bf8b56;">formatter</span>: <span style="color: #56bf8b;">fancy</span></div><div>&nbsp; &nbsp; <span style="color: #bf8b56;">filename</span>: '<span style="color: #56bf8b;">demo.log</span>'</div><div>&nbsp; &nbsp; <span style="color: #bf8b56;">mode</span>: '<span style="color: #56bf8b;">w</span>'</div><div>&nbsp; &nbsp; <span style="color: #bf8b56;">encoding</span>: '<span style="color: #56bf8b;">utf-8</span>'</div><div><span style="color: #bf8b56;">loggers</span>:</div><div>&nbsp; <span style="color: #bf8b56;">root</span>:</div><div>&nbsp; &nbsp; <span style="color: #bf8b56;">level</span>: <span style="color: #56bf8b;">INFO</span></div><div>&nbsp; &nbsp; <span style="color: #bf8b56;">handlers</span>: [<span style="color: #56bf8b;">console</span>, <span style="color: #56bf8b;">file</span>]</div></div>
+
+<p>两者的一些区别为：字典格式的配置不再需要提前书写对象名，而是通过二级属性提供，并且生成对象需要通过关键字形式传递参数。<code>Filter</code> 的一个写法如下：</p>
+
+<div class="vscode-block"><div><span style="color: #bf8b56;">filters</span>:</div><div>&nbsp; <span style="color: #bf8b56;">func_main</span>:</div><div>&nbsp; &nbsp; <span style="color: #bf8b56;">()</span>: <span style="color: #56bf8b;">__main__.FuncFilter</span></div><div>&nbsp; &nbsp; <span style="color: #bf8b56;">funcName</span>: <span style="color: #56bf8b;">main</span></div><div>&nbsp; &nbsp; <span style="color: #bf8b56;">filename</span>: <span style="color: #56bf8b;">yamlconfig.py</span></div></div>
+
+<h2>参考资料/延伸阅读</h2>
+
+<p><a class="link-reference" href="https://docs.python.org/3/library/logging.html">Python 标准库 logging 官方文档</a></p>
+
+<p><a class="link-reference" href="https://docs.python.org/3/howto/logging.html">logging HOWTO 文档</a></p>
+
+<p><a class="link-reference" href="https://docs.python.org/3/howto/logging-cookbook.html">logging cookbook 文档</a>，其中包含一些更高级的内容，例如日志的多线程和异常处理、更多 <code>Handler</code> 的用法等。</p>
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/computer-science/computer-networking/05-transmission-control-protocol/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/计算机网络05-面向连接的运输：TCP-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/07/计算机网络05-面向连接的运输：TCP-520x293.jpg 520w, /wp-content/uploads/2022/07/计算机网络05-面向连接的运输：TCP-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/computer-science/computer-networking/05-transmission-control-protocol/" rel="bookmark">计算机网络05-面向连接的运输：TCP</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/computer-science/data-structure/04-trees/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/08/数据结构04-树与二叉树-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/08/数据结构04-树与二叉树-520x293.jpg 520w, /wp-content/uploads/2022/08/数据结构04-树与二叉树-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/computer-science/data-structure/04-trees/" rel="bookmark">数据结构04-树与二叉树</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-fp/04-builtin-functions/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-300x169.jpg 300w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-1024x576.jpg 1024w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-768x432.jpg 768w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-1536x864.jpg 1536w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数-950x534.jpg 950w, /wp-content/uploads/2022/05/Python函数式编程04-常用内置函数.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-fp/04-builtin-functions/" rel="bookmark">Python函数式编程04 常用内置函数</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"></li>
+		<li class="previous"><a href="/programming/c-macro/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>C语言-宏定义完全指南</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/programming/python/library-logging/" aria-current="page">Python标准库logging：日志记录</a>
+											<span class="post-date">2024年1月23日</span>
+									</li>
+											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
+					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
+											<span class="post-date">2023年6月19日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+											<li>
+					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
+											<span class="post-date">2023年3月17日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (21)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (5)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2024/01/'> 2024年1月 &nbsp;(2)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>
