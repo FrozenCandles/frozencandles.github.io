@@ -5,22 +5,21 @@
     <title>{{ title }}</title>
     <!-- [private] -->
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="icon" type="image/x-icon" href="static/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/wp-content/static/favicon.ico">
 
-    <link rel="stylesheet" href="https://frozencandles.fun/wp-content/themes/instorm/style.css">
-    <link rel="stylesheet" href="https://frozencandles.fun/wp-content/themes/instorm-child-theme/style.css">
+    <link rel="stylesheet" href="/wp-content/themes/instorm/style.css">
+    <link rel="stylesheet" href="/wp-content/themes/instorm-child-theme/style.css">
     <!-- [/private] -->
 
-    <link rel="stylesheet" href="static/css/text.css">
-    <link rel="stylesheet" href="static/css/note.css">
+    <link rel="stylesheet" href="/wp-content/static/css/text.css">
+    <link rel="stylesheet" href="/wp-content/static/css/note.css">
 
+    <link rel="stylesheet" href="/wp-content/static/css/assist.css">
+    <link rel="stylesheet" href="/wp-content/static/css/math.css">
 
-    <link rel="stylesheet" href="static/css/assist.css">
-    <link rel="stylesheet" href="static/css/math.css">
-
-    <script src="static/js/note.js"></script>
-    <script src="static/js/assist.js"></script>
-    <script src="static/js/math.js"></script>
+    <script src="/wp-content/static/js/note.js"></script>
+    <script src="/wp-content/static/js/assist.js"></script>
+    <script src="/wp-content/static/js/math.js"></script>
 
     {% autoescape off %}{{ header }}{% endautoescape %}
 </head>
@@ -33,17 +32,21 @@
 <div class="entry">{% autoescape off %}{{ content }}{% endautoescape %}</div>
 
 <script>
-    //addImageScalar();
+    addImageScalar();
     addTableOfContents("toc");
     //checkArticle();
 
     addAssistButton('Check Article', onCheckArticle);
+    addAssistButton('Add Image Scalar', addImageScalar);
     addAssistButton('Close Image Scalar', function() {
         for (let elem of document.getElementsByClassName('imagescalar-content')) {
             elem.style.display = 'none';
 
         }
     });
+
+    adjustImageSize();
+    //document.addEventListener('DOMContentLoaded', adjustImageSize);
 
     document.title = document.getElementsByTagName('H1')[0].innerHTML
 </script>

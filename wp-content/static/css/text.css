@@ -41,7 +41,7 @@ body:not(.heimu_toggle_on) .new:hover .heimu.off {
 }
 
 
-.math {
+div.math {
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
@@ -93,11 +93,13 @@ code.traditional {
     font-size: 15px;
 }
 
+var.error,
 code.error {
     font-family: Consolas, 'Courier New', monospace;
     word-break: break-word;
     color:red;
     font-size: 15px;
+    font-style: normal;
 }
 
 
@@ -218,7 +220,14 @@ span.inline-color.violet { color: violet; }
 
 .entry .text-indent {
     padding-left: 2em;
-} 
+}
+.entry .text-framed {
+    border: 1px solid #222;
+    padding: 4px;
+}
+.entry .text-center {
+    text-align: center;
+}
 
 /* 
 .entry .text-indent {

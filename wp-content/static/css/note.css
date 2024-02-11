@@ -11,6 +11,7 @@
     z-index: 9900;
 }
 
+.codeblock,
 .vscode-block {
     margin-bottom: 15px;
     padding: 5px;
@@ -63,6 +64,31 @@ div.code-console span.token-label { color: skyblue; }
 
 
 
+@media screen and (min-width: 768px) {
+    
+    div.codeblock-sidebyside {
+        display: table;
+        width: 100%;
+        margin: 16px auto;
+    }
+    div.codeblock-sidebyside > * {
+        display: table-cell;
+        width: 50%;
+    }
+}
+@media  screen and (max-width: 768px) {
+    div.codeblock-sidebyside {
+        display: block;
+        width: 100%;
+        margin: 16px 0;
+    }
+    div.codeblock-sidebyside > * {
+        margin-bottom: 2px;
+    }
+    div.codeblock-sidebyside > *:last-child {
+        margin-bottom: 15px;
+    }
+}
 
 
 
@@ -257,6 +283,45 @@ section.codeblock.compare > *:last-child {
     border: 1px solid grey;
     font-family: monospace; font-size: 13px;
     line-height: 1.5em;
+}
+
+
+
+/* Attribute Table Widget */
+.attribute-table {
+    width: 100%;
+    border: 1px solid #aaa;
+    border-radius: 6px; 
+    padding: 5px 10px; 
+    margin: 12px 4px;
+    line-height: 1.5em;
+    box-shadow: 0 5px 5px #ccc;
+}
+.attribute-table__body {
+    display: table;
+    table-layout: auto;
+}
+.attribute-table .attribute-table__title {
+    font-size: 22px; 
+    padding: 6px 3em;
+    display: block; 
+}
+.attribute-table .attribute-table__item {
+    display: table-row;
+}
+.attribute-table .attribute-table__name {
+    display: table-cell;
+    width: fit-content;
+}
+.attribute-table .attribute-table__value {
+    display: table-cell;
+}
+.attribute-table .attribute-table__value .code-font {
+    font-size: 14px;
+}
+.attribute-table .attribute-table__title::before {
+    content: 'CSS属性 ';
+    font-size: 18px; 
 }
 
 

@@ -24,6 +24,22 @@ function renderFormula() {
 }
 
 
+
+function addScollbarForMath() {
+    // 获取数学公式容器和内容元素
+    let [mathContainer] = document.getElementsByClassName('entry');
+    let mathContents = document.getElementsByClassName('math');
+
+    for (let mathContent of mathContents)
+        // 检测是否需要滚动条
+        if (mathContent.offsetWidth > mathContainer.offsetWidth) {
+            // 如果容器宽度小于内容宽度，显示滚动条
+            mathContainer.style.overflowX = 'auto';
+        }
+}
+
+
+
 function addReadingProgressBar(backgroundColor) {
 
     let progressBar = document.getElementById('reading-progress');
@@ -45,6 +61,18 @@ function addReadingProgressBar(backgroundColor) {
     window.onresize = () => ReadingProgressBarUpdater();
     ReadingProgressBarUpdater();
 }
+
+/**
+ * 
+ */
+function adjustImageSize() {
+    for (let elem of document.querySelectorAll('.entry figure img')) {
+        if (!elem.hasAttribute('width') || !elem.hasAttribute('height'))
+            elem.width = elem.naturalWidth / window.devicePixelRatio;
+    }
+}
+
+
 
 /**
  * Add table of contents to `#toc`

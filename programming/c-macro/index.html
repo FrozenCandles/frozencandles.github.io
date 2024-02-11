@@ -23,7 +23,7 @@
 	<meta property="og:url" content="/programming/c-macro/" />
 	<meta property="og:site_name" content="冰封残烛的个人小站" />
 	<meta property="article:published_time" content="2024-01-07T07:00:19+00:00" />
-	<meta property="article:modified_time" content="2024-01-07T07:19:36+00:00" />
+	<meta property="article:modified_time" content="2024-01-24T03:34:56+00:00" />
 	<meta property="og:image" content="/wp-content/uploads/2024/01/c-macro.jpg" />
 	<meta property="og:image:width" content="1500" />
 	<meta property="og:image:height" content="844" />
@@ -53,7 +53,7 @@
 	            },
 	            "thumbnailUrl": "/wp-content/uploads/2024/01/c-macro.jpg",
 	            "datePublished": "2024-01-07T07:00:19+00:00",
-	            "dateModified": "2024-01-07T07:19:36+00:00",
+	            "dateModified": "2024-01-24T03:34:56+00:00",
 	            "author": {
 	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
 	            },
@@ -504,7 +504,7 @@ assert(arg1 > 0, "error: invalid argument") <br>
     <div class="code-highlight language-c">#define assert(expr, format, ...) \
     ((expr) ? : fprintf(stderr, format, ## __VA_ARGS__))</div>
 
-    <p>如果 <code>__VA_ARGS__</code> 为空，那么逗号将被忽略。不过这只是 GCC 提供的一种语言扩展，只有 GCC 等少部分编译器实现了这个特性。</p>
+    <p>如果 <code>__VA_ARGS__</code> 为空，那么逗号将被忽略。不过这只是 GCC 提供的一种语言扩展，只有 GCC 等少部分编译器实现了这个特性。关于 <code>##</code> 预处理运算符的内容马上就会介绍。</p>
 </blockquote>
 
 
@@ -514,7 +514,7 @@ assert(arg1 > 0, "error: invalid argument") <br>
 
 <p>如果先定义了一个宏，但在该文件中又定义了相同名字的宏，这个过程称为重定义。标准规定只有新定义和旧定义完全相同才允许重定义，大多数编译器在宏发生重定义时也会给出警告。</p>
 
-<p>当源文件中包含了很多头文件时，难以确定到底定义了哪些宏，也就很可能发生宏的重定义。<code>#undef</code> 指令用于取消已定义的 #define 指令。假设有以下定义：</p>
+<p>当源文件中包含了很多头文件时，难以确定到底定义了哪些宏，也就很可能发生宏的重定义。<code>#undef</code> 指令用于取消已定义的 <code>#define</code> 指令。假设有以下定义：</p>
 
 <div class="code-highlight language-c">#define MAX(a, b) ((a) > (b) ? (a) : (b))</div>
 
@@ -680,7 +680,7 @@ printf("the value of " "5 * 6" " is %d.\n", 5 * 6);</div>
 <p>那么调用 <code>NAMED_X(3)</code> 会展开为一个完整的记号 <code>x3</code> ，可以像使用一个标识符一样使用它，例如：</p>
 
 <div class="code-highlight language-c">int NAMED_X(3) = 3;
-printf(XSTR(NAMED_X(3)) " is %d.\n", NAMED_X(3));</div>
+printf("x3 is %d.\n", NAMED_X(3));</div>
 
 <p>程序运行结果会输出信息 <code>x3 is 3</code> 。</p>
 
@@ -780,7 +780,7 @@ double dec = MUL(double, 1.2, 2.4);</div>
 <div class="code-highlight language-c">#define SIX (2*3)
 #define SIX() (2 * 3)</div>
 
-此外，<code>##</code> 运算符执行的是记号拼接而不是文本拼接，它会将两侧的记号拼接成一个记号。但如果两个记号不知道如何拼接为一个记号，或无法拼接成一个有效的记号，那么结果是未定义的，有些预处理器在这种场景下会给结果两侧增加空白符。例如，对于以下宏：
+<p>此外，<code>##</code> 运算符执行的是记号拼接而不是文本拼接，它会将两侧的记号拼接成一个记号。但如果两个记号不知道如何拼接为一个记号，或无法拼接成一个有效的记号，那么结果是未定义的，有些预处理器在这种场景下会给结果两侧增加空白符。例如，对于以下宏：</p>
 
 <div class="code-highlight language-c">#define CAT2(x, y) x ## y</div>
 
@@ -792,7 +792,7 @@ double dec = MUL(double, 1.2, 2.4);</div>
 
 <div class="code-highlight language-c">double f1 = CAT2(1.23, e-1);</div>
 
-<p>是有问题的，因为 <code>1.23</code> 是一个有效的数字形式的记号，但 <code>e-1</code> 不知道如何与数字形式的记号拼接，这时会产生不可知的结果（例如 gcc 8.1.0 会将其展开为 <code>1.23e -1</code> ，但这不是一个合法的字符串字面量）。</p>
+<p>是有问题的，因为 <code>1.23</code> 是一个有效的数字形式的记号，但 <code>e-1</code> 不知道如何与数字形式的记号拼接，这时会产生不可知的结果（例如 gcc 8.1.0 会将其展开为 <code>1.23e -1</code> ，但这不是一个合法的浮点数字面量）。</p>
 
 <p>不过这种形式的用法是可以的：</p>
 
@@ -850,7 +850,7 @@ foreach (i in arr) {
 
 <div class="code-highlight language-c">ADD(f(2, 3), 4)</div>
 
-<p>实际上会展开为 <code>f(2, 3) + 4</code> ，而不是 <code>f(2 + 3), 4</code> ，更不会被视为三个参数 <code>f(2</code> 、<code>3),</code> 和 <code>4</code> 。</p>
+<p>实际上会展开为 <code>f(2, 3) + 4</code> ，而不是 <code>f(2 + 3), 4</code> ，更不会被视为三个参数 <code>f(2</code> 、<code>3)</code> 和 <code>4</code> 。</p>
 
 <hr>
 
@@ -959,7 +959,7 @@ ECHO(in_buf);</div>
 
 <h3>宏与Generic</h3>
 
-<p>C11 新增了泛型选择表达式(generic selection expression) <code>_Generic</code> ，可根据表达式的类型（即表达式的类型是 int 、double 还是其它类型）选择一个值。泛型选择表达式不是预处理器指令，但是在一些泛型编程中它常用作宏定义的一部分。</p>
+<p>C11 新增了泛型选择表达式(generic selection expression) <code>_Generic</code> ，可根据表达式的类型（即表达式的类型是 <code>int</code> 、<code>double</code> 还是其它类型）选择一个值。泛型选择表达式不是预处理器指令，但是在一些泛型编程中它常用作宏定义的一部分。</p>
 
 <p><code>_Generic</code> 是一个关键字，它后面的圆括号中包含多个用逗号分隔的项：第 1 个项是一个表达式，后面的每个项都由类似 <code>float: 1</code>  的一个类型、一个冒号和一个值组成。下面是一个泛型选择表达式的示例：</p>
 
@@ -996,7 +996,7 @@ printv(data);       // val of data: 00000000009B2430</div>
 
 <h3>更高级的变参宏</h3>
 
-<p>变参宏有个使用技巧：通过背后定义一系列辅助作用的宏，变参宏不仅能接收任意个参数，还能在接收不同参数时生成完全不同的代码。</p>
+<p>变参宏有个使用技巧：通过背后定义一系列辅助作用的宏，变参宏不仅能接收任意个参数，还能在接收不同个数参数时生成完全不同的代码。</p>
 
 <p>首先需要定义一个这样的宏：</p>
 
@@ -1117,14 +1117,14 @@ MAKE_COLORS</div>
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/data-science/via-python/numpy05-statistics/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/10/Python数据分析-numpy05数组统计与排序-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/10/Python数据分析-numpy05数组统计与排序-520x293.jpg 520w, /wp-content/uploads/2022/10/Python数据分析-numpy05数组统计与排序-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/data-science/via-python/numpy06-advanced-data-types/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/10/Python数据分析-numpy06高级数据类型-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/10/Python数据分析-numpy06高级数据类型-520x293.jpg 520w, /wp-content/uploads/2022/10/Python数据分析-numpy06高级数据类型-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/data-science/via-python/numpy05-statistics/" rel="bookmark">numpy05:数组统计与排序</a>
+					<a href="/data-science/via-python/numpy06-advanced-data-types/" rel="bookmark">numpy06:高级数据类型</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -1135,14 +1135,14 @@ MAKE_COLORS</div>
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/programming/python-fp/10-library-functools/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/06/Python函数式编程10-functools模块：更多高阶函数-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/Python函数式编程10-functools模块：更多高阶函数-520x293.jpg 520w, /wp-content/uploads/2022/06/Python函数式编程10-functools模块：更多高阶函数-300x169.jpg 300w, /wp-content/uploads/2022/06/Python函数式编程10-functools模块：更多高阶函数-1024x576.jpg 1024w, /wp-content/uploads/2022/06/Python函数式编程10-functools模块：更多高阶函数-768x432.jpg 768w, /wp-content/uploads/2022/06/Python函数式编程10-functools模块：更多高阶函数-1536x864.jpg 1536w, /wp-content/uploads/2022/06/Python函数式编程10-functools模块：更多高阶函数-950x534.jpg 950w, /wp-content/uploads/2022/06/Python函数式编程10-functools模块：更多高阶函数.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/embedded/esp32/01-setting-up-development/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-520x293.jpg 520w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-300x169.jpg 300w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-1024x576.jpg 1024w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-768x432.jpg 768w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-1536x864.jpg 1536w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境-950x534.jpg 950w, /wp-content/uploads/2022/08/ESP32与MicroPython入门-01-搭建开发环境.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/programming/python-fp/10-library-functools/" rel="bookmark">Python函数式编程10 functools模块：高阶函数工具</a>
+					<a href="/embedded/esp32/01-setting-up-development/" rel="bookmark">ESP32与MicroPython入门-01 搭建开发环境</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -1153,14 +1153,14 @@ MAKE_COLORS</div>
 		<article class="related-post">
 
 			<div class="related-thumbnail">
-				<a href="/computer-science/data-structure/03-stack-and-queue/">
-											<img width="520" height="293" src="/wp-content/uploads/2022/08/数据结构03-栈和队列-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/08/数据结构03-栈和队列-520x293.jpg 520w, /wp-content/uploads/2022/08/数据结构03-栈和队列-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+				<a href="/programming/python-fp/05-recursions/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程05-函数的递归-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/05/Python函数式编程05-函数的递归-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-300x169.jpg 300w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-1024x576.jpg 1024w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-768x432.jpg 768w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-1536x864.jpg 1536w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归-950x534.jpg 950w, /wp-content/uploads/2022/05/Python函数式编程05-函数的递归.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
 			</div><!--/.post-thumbnail-->
 			
 			<div class="related-inner">
 				
 				<h4 class="related-title">
-					<a href="/computer-science/data-structure/03-stack-and-queue/" rel="bookmark">数据结构03-栈和队列</a>
+					<a href="/programming/python-fp/05-recursions/" rel="bookmark">Python函数式编程05 函数的递归</a>
 				</h4><!--/.post-title-->
 			
 			</div><!--/.related-inner-->
@@ -1197,6 +1197,10 @@ MAKE_COLORS</div>
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
 											<li>
+					<a href="/programming/python-oop/05-custom-types/">Python面向对象编程05-特殊方法与自定义类</a>
+											<span class="post-date">2024年2月9日</span>
+									</li>
+											<li>
 					<a href="/programming/python/library-logging/">Python标准库logging：日志记录</a>
 											<span class="post-date">2024年1月23日</span>
 									</li>
@@ -1219,10 +1223,6 @@ MAKE_COLORS</div>
 											<li>
 					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
 											<span class="post-date">2023年3月27日</span>
-									</li>
-											<li>
-					<a href="/data-science/via-python/pandas04-missing-values/">Python数据分析-pandas04:索引与缺失值</a>
-											<span class="post-date">2023年3月17日</span>
 									</li>
 					</ul>
 
@@ -1262,13 +1262,13 @@ MAKE_COLORS</div>
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (21)
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (22)
 <ul class='children'>
 	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (5)
 </li>
 	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
 </li>
-	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (4)
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (5)
 </li>
 	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
 </li>
@@ -1288,7 +1288,8 @@ MAKE_COLORS</div>
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2024/01/'> 2024年1月 &nbsp;(2)</option>
+				<option value='/2024/02/'> 2024年2月 &nbsp;(1)</option>
+	<option value='/2024/01/'> 2024年1月 &nbsp;(2)</option>
 	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
 	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
 	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>

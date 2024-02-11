@@ -1,0 +1,889 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Python面向对象编程05-特殊方法与自定义类 - 冰封残烛的个人小站</title>
+	<meta name="description" content="本节介绍更多的特殊方法，包括使用 __str__ 和 __repr__ 提供字符串表示形式，通过 __bool__ 提供布尔值判据等，通过特殊属性 __dict__ 研究属性的存储方式，最后提出使用 __slots__ 节约对象的存储。本节还讨论属性操作的特殊方法，明白鸭子类型的意义。" />
+	<link rel="canonical" href="/programming/python-oop/05-custom-types/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Python面向对象编程05-特殊方法与自定义类 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="本节介绍更多的特殊方法，包括使用 __str__ 和 __repr__ 提供字符串表示形式，通过 __bool__ 提供布尔值判据等，通过特殊属性 __dict__ 研究属性的存储方式，最后提出使用 __slots__ 节约对象的存储。本节还讨论属性操作的特殊方法，明白鸭子类型的意义。" />
+	<meta property="og:url" content="/programming/python-oop/05-custom-types/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2024-02-09T15:33:41+00:00" />
+	<meta property="article:modified_time" content="2024-02-10T13:18:09+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2024/02/python-oop@05-custom-types.jpg" />
+	<meta property="og:image:width" content="1920" />
+	<meta property="og:image:height" content="1080" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="6分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebPage",
+	            "@id": "/programming/python-oop/05-custom-types/",
+	            "url": "/programming/python-oop/05-custom-types/",
+	            "name": "Python面向对象编程05-特殊方法与自定义类 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/programming/python-oop/05-custom-types/#primaryimage"
+	            },
+	            "image": {
+	                "@id": "/programming/python-oop/05-custom-types/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2024/02/python-oop@05-custom-types.jpg",
+	            "datePublished": "2024-02-09T15:33:41+00:00",
+	            "dateModified": "2024-02-10T13:18:09+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "本节介绍更多的特殊方法，包括使用 __str__ 和 __repr__ 提供字符串表示形式，通过 __bool__ 提供布尔值判据等，通过特殊属性 __dict__ 研究属性的存储方式，最后提出使用 __slots__ 节约对象的存储。本节还讨论属性操作的特殊方法，明白鸭子类型的意义。",
+	            "breadcrumb": {
+	                "@id": "/programming/python-oop/05-custom-types/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/programming/python-oop/05-custom-types/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/programming/python-oop/05-custom-types/#primaryimage",
+	            "url": "/wp-content/uploads/2024/02/python-oop@05-custom-types.jpg",
+	            "contentUrl": "/wp-content/uploads/2024/02/python-oop@05-custom-types.jpg",
+	            "width": 1920,
+	            "height": 1080
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/programming/python-oop/05-custom-types/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "Python面向对象编程05-特殊方法与自定义类"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/1349" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=1349' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython-oop%2F05-custom-types%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython-oop%2F05-custom-types%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?432b66336cb23bd6712cecabe6d808eb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<link rel="stylesheet" href="/wp-content/static/css/theme@evernote.wp.css">
+
+<style>
+    div.vscode-block { color: #657B83; background-color: #FDF6E3; }
+</style>
+
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-1349 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/all/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-1349" class="post-1349 post type-post status-publish format-standard has-post-thumbnail hentry category-python-oop">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">Python面向对象编程05-特殊方法与自定义类</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/programming/python-oop/" rel="category tag">Python面向对象编程</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2024年2月9日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+<p>在<a class="link-internal" href="/programming/python-oop/04-methods">上一节</a>中，已经介绍了几个基本的自定义类的方法：<code>.__new__()</code> 、<code>.__init__()</code> 和 <code>.__del__()</code> 。本节介绍更多的特殊方法，以此了解一个自定义类是如何工作的。</p>
+
+<h2>自定义基础类</h2>
+
+<h3>字符串表示：__str__</h3>
+
+<p>在<a class="link-internal" href="/programming/python-oop/01-class-and-instance">之前</a>介绍类的实例化时，第一步就是尝试使用 <code>print()</code> 打印实例，观察它是什么东西。例如，对于以下自定义类和实例：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">C</span>:</div><div>&nbsp; &nbsp; <span style="color: #cb4b16;">...</span></div><div><span style="color: #268bd2;">c</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">C</span>()</div><div><span style="color: #268bd2;">print</span>(<span style="color: #268bd2;">c</span>)</div></div>
+
+<p>它的打印结果为：</p>
+
+<div class="codeblock code-console">$ python page05.py
+&lt;__main__.C object at 0x000001D2D0FED080&gt;</div>
+
+<p>得到的结果是一串位于尖括号内的奇怪信息，信息中似乎包含类名和内存地址之类的东西。</p>
+
+<p>之所以会打印这一段信息，是因为 <code>print()</code> 函数会将需要打印的内容转换成字符串，再将这个字符串显示在输出中。如果使用 <code>str()</code> 将实例转换为字符串，得到的也是这个结果：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; str(c)
+&lt;__main__.C object at 0x000001D2D0FED080&gt;</div>
+
+<p>这种奇怪的表示并没用展示有价值的信息。之所以会输出以上的结果，这是因为类有一个特殊方法 <code>.__str__()</code> 该方法是一个实例方法，用来获得实例的字符串表达方式。在调用内置函数 <code>str()</code> 、<code>format()</code> 和 <code>print()</code> 时，都是通过该方法的返回值将对象转换为字符串。</p>
+
+<p>在创建一个类时，它会自动继承父类 <code>object</code> 的 <code>.__str__()</code> 特殊方法，而 <code>object</code> 可用到的信息十分有限，因此默认输出的会是这样一个结果。</p>
+
+<p>可以编写一个自定义的类，重写 <code>object</code> 方法，给实例一个更好的描述，使 <code>print()</code> 等函数可以更好地展示它，例如：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Student</span>:</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__init__</span>(self, name, scores):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">name</span>, <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">scores</span> <span style="color: #859900;">=</span> name, scores</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__str__</span>(self):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">name</span></div><div>&nbsp; &nbsp;</div><div><span style="color: #268bd2;">s01</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">Student</span>(<span style="color: #2aa198;">'Tom'</span>, {<span style="color: #2aa198;">'math'</span>: <span style="color: #d33682;">92</span>, <span style="color: #2aa198;">'English'</span>: <span style="color: #d33682;">89</span>})</div><div><span style="color: #268bd2;">print</span>(<span style="color: #268bd2;">s01</span>)</div><div><span style="color: #268bd2;">print</span>(<span style="color: #586e75;font-weight: bold;">f</span><span style="color: #2aa198;">'He is </span><span style="color: #cb4b16;">{</span><span style="color: #268bd2;">s01</span><span style="color: #cb4b16;">}</span><span style="color: #2aa198;">'</span>)</div></div>
+
+<p>这样得到的结果明显易读多了：</p>
+
+<div class="codeblock code-console">$ python page05.py
+Tom
+He is Tom</div>
+
+<p><code>.__str__()</code> 方法等价于许多编程语言的 <code>to_string</code> 方法。它在 Python 内置语法中相当常见，几乎所有的 Python 内置数据类型都重写了该方法，使得打印结果更易读。另一个典型的例子就是 Python 的异常，它使用 <code>.__str__()</code> 方法描述引起该类异常时携带的信息，当使用 <code>except ... as</code> 捕捉到异常实例后，直接打印这个异常实例就可以打印出引起异常的信息。</p>
+
+<h3>对象描述：__repr__</h3>
+
+<p>以上的 <code>.__str__()</code> 方法是针对字符串表示的，它们与内置的一些函数相关联。如果在交互式控制台中检查对象，结果为：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; class Test:
+...     def __str__(self):
+...         return 'This is a test'
+&gt;&gt;&gt; t = Test()
+&gt;&gt;&gt; t
+&lt;__main__.Test object at 0x00000223597407B8&gt;</div>
+
+<p>得到的结果仍然是一串 <span class="code-font">... object at ...</span> 的信息。</p>
+
+<p>实际上，在控制台中检查对象，得到的信息是由特殊方法 <code>.__repr__()</code> 给出的。<code>.__repr__()</code> 是一个实例方法，它返回的结果是对象的规范字符串表示(canonical string representation)，内置函数 <code>repr()</code> 实际上也调用的是它。</p>
+
+<p>从表达含义上说，<code>.__repr__()</code> 与 <code>.__str__()</code> 的区别在于，<code>.__repr__()</code> 是用来调试的，它应该表达尽量多且明确的信息，而 <code>.__str__()</code> 主要用于格式化，它应该提供简洁美观的结果（例如尽可能在一行内表达清楚）。</p>
+
+<p>可以重写类的 <code>.__repr__()</code> 方法展示实例的更多细节。一般来说，自定义类 <code>.__repr__()</code> 与 <code>.__str__()</code> 展示的信息差别不大，它们的实现往往可能是相同的。相比重复的定义，在定义了其中一个方法后，可以通过赋值让另外一个方法作为它的引用，就像这样：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Student</span>:</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__str__</span>(self): <span style="color: #cb4b16;">...</span></div><div>&nbsp; &nbsp; <span style="color: #268bd2;">__repr__</span> <span style="color: #859900;">=</span> <span style="color: #268bd2;">__str__</span></div></div>
+
+<h3>格式化：__format__</h3>
+
+<p>该方法可以被内置函数 <code>format()</code> 或类似的字符串格式化应用中调用。关于格式字符串的更多信息参见 <a class="link-internal" href="/programming/python/python3-format-string">Python3 字符串格式化</a>。</p>
+
+<h3>布尔等价：__bool__</h3>
+
+<p>在 Python 中，整数值 <code>0</code> 代表布尔值 <code>False</code> ，数字 1 代表布尔值 <code>True</code> ，这是因为 <code>bool</code> 类继承自 <code>int</code> 。但是浮点数 <code>0.0</code> 和复数 <code>0 + 0j</code> 在判断时也被当做布尔值 <code>False</code> ，而其余很小的浮点数和复数均被当做 <code>True</code> 处理，这说明浮点数在用作判断时并没有被转换为整数处理。</p>
+
+<p>布尔的等价关系是由实例的特殊方法 <code>.__bool__()</code> 决定的，它的返回结果是一个布尔值，该布尔值将被用作判断。如果该方法返回的不是布尔值，在判断时将会引发 <code class="error">TypeError</code> 异常。</p>
+
+<p>一个空字符串 <code>""</code> 、空列表 <code>[]</code> 、空字典 <code>{}</code> 等也代表布尔值 <code>False</code> ，而一旦它们不为空时，便代表布尔值 <code>True</code> 。但尝试调用会发现，它们并没有提供 <code>.__bool__()</code> 方法。这是由于当类没有定义 <code>.__bool__()</code> 方法时，判断语句会根据 <code>.__len__()</code> 方法来决定实例的布尔的等价关系。不难看出，这个特殊方法与内置函数 <code>len()</code> 有关系：它用于计算一个对象所包含的元素个数，如果该方法的返回值非零，那么对象将被视为 <code>True</code> ，否则将视为 <code>False</code> 。如果一个类既没有实现 <code>.__len__()</code> 也没有实现 <code>.__bool__()</code>（ <code>object</code> 不提供这两个方法），那么对象将永远被视为 <code>True</code> 。</p>
+
+<p>也就是说，一个实例对应的布尔值可能为：</p>
+
+<table>
+    <tbody><tr>
+        <th>特征</th>
+        <th>结果</th>
+    </tr>
+    <tr><td><code>__bool__()</code> returns True</td><td class="code-font">True</td></tr>
+    <tr><td><code>__bool__()</code> returns False</td><td class="code-font">False</td></tr>
+    <tr><td><code>__bool__()</code> returns non-boolean value</td><td class="code-font">TypeError</td></tr>
+    <tr><td><code>__bool__()</code> undefined, but <code>__len__()</code> returns 0</td><td class="code-font">False</td></tr>
+    <tr><td><code>__bool__()</code> undefined, but <code>__len__()</code> returns non-zero value</td><td class="code-font">True</td></tr>
+    <tr><td><code>__len__()</code> returns non-integer value</td><td class="code-font">TypeError</td></tr>
+    <tr><td>both <code>__bool__()</code> and <code>__len__()</code> are undefined</td><td class="code-font">True</td></tr>
+</tbody></table>
+
+<h3>其它类型转换</h3>
+
+<p>除了以上提到的关于类型转换的特殊方法外，一个类还可以定义 <code>.__bytes__()</code> 、<code>.__int__()</code> 、<code>.__float__()</code> 和 <code>.__complex__()</code> 特殊方法，它们分别被内置类 <code>bytes()</code> 、<code>int()</code> 、<code>float()</code> 和 <code>complex()</code> 的构造方法调用，获取对应类型的表示方式。这些方法应该返回对应类型的对象，以实现向对应类型的转换。</p>
+
+<h3>列举属性：__dir__</h3>
+
+<p>在之前编程程序中，有时会使用 <code>dir()</code> 函数来查看类实现的属性及方法。例如，以下是查看 <code>object</code> 类的属性及方法：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; dir(object)
+['__class__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__']</div>
+
+<p>可以看到结果还不少，有一部分是前面已经介绍的，有一部分需要留到后面才介绍。在其中，可以看到一个名为 <code>'__dir__'</code> 的方法，它是类使用 <code>dir()</code> 查找的依据。<code>.__dir__()</code> 是一个实例方法，方法的返回值应该是一个可迭代对象，并且最好是一个列表。不管如何，Python 都会将它的返回值转换为一个列表并排序：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; class Test:
+...     def __dir__(self):
+...         return 'sort'
+&gt;&gt;&gt; dir(Test())
+['o', 'r', 's', 't']</div>
+
+<p>尽管 <code>dir()</code> 函数也可以直接查看类，但是 <code>.__dir__()</code> 方法却是一个实例方法，重写该方法只能影响到使用 <code>dir()</code> 查看实例的属性与方法。不管怎么样，一般情况下都没有必要重写该方法。</p>
+
+<h2>实例与类的特殊属性</h2>
+
+<p>除了特殊方法外，类也具有一些特殊属性，它们也由双下划线开始，双下划线结束，负责记录类的基本信息，一般只需要查看即可。其中一部分特殊属性甚至不在 <code>dir()</code> 的结果列表中。</p>
+
+<h3>类的__name__</h3>
+
+<p>类最基本的属性就是它的 <code>.__name__</code> 了。类的 <code>.__name__</code> 就是它的名称，<code>.__name__</code> 属性可以获取字符串形式的类名，这个值在，可以用在调试和元编程等场合。</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; {cls.__name__: cls for cls in [float, Exception, list, enum.Enum]}
+{'float': &lt;class 'float'&gt;, 'Exception': &lt;class 'Exception'&gt;, 'list': &lt;class 'list'&gt;, 'Enum': &lt;enum 'Enum'&gt;}</div>
+
+<p>注意，只有类、函数和模块才具有这个属性，普通的实例是没有这个属性的。因此定义一个变量后，无法获取一个普通变量的字符串形式的名称（除非使用一些复杂的技术）。</p>
+
+<h3>实例的__class__</h3>
+
+<p>实例的 <code>.__class__</code> 保存了它的类型，等价于对其使用 <code>type()</code> 返回的结果。例如 <code>[1, 2].__class__</code> 是 Python 内置数据类型 <code>list</code> 。它等价于对实例调用 <code>type()</code></p>
+
+<p><code>__class__</code> 也用在类内部通过 <code>self.__class__</code> 来指代自身的类，与直接使用类名相比，<code>.__class__</code> 可能指代的是子类，这样做更方便该类的继承。</p>
+
+<h3>类的__bases__</h3>
+
+<p>以元组的形式返回该类继承的所有基类。除此之外，类还有一个 <code>__base__</code> 属性，它只会返回类的第一个基类。</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; class MyDict(dict, object): ...
+&gt;&gt;&gt; print(MyDict.__base__)
+&lt;class 'dict'&gt;
+&gt;&gt;&gt; print(MyDict.__bases__)
+(&lt;class 'dict'&gt;, &lt;class 'object'&gt;)</div>
+
+<h3>类的__subclasses__()</h3>
+
+<p>它是一个方法，用于返回该类的子类。事实上，每一个类在创建时，都会生成一个 <code>.__weakref__</code> 属性，它用于对所有直接继承它的子类产生一个<a>弱引用</a>(weak reference)，而该方法的作用就是以列表的形式返回所有仍然存在的引用，并以类定义的先后排序。例如：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; object.__subclasses__()
+[&lt;class 'type'&gt;, &lt;class 'weakref'&gt;, ..., &lt;class 'MultibyteStreamWriter'&gt;]
+</div>
+
+<p>结果有点多，因为它还包含了 Python 内置模块中的一些类。</p>
+
+<h3>类与实例的__dict__</h3>
+
+<p>接下来的这个属性非常重要。Python 是一门动态的编程语言，实例的属性也是可以动态添加的。假设有如下的类定义：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Point</span>:</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__init__</span>(self, x, y):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">x</span>, <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">y</span> <span style="color: #859900;">=</span> x, y</div><br/><div><span style="color: #268bd2;">p</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">Point</span>(<span style="color: #d33682;">10</span>, <span style="color: #d33682;">4</span>)</div></div>
+
+<p>虽然在定义时，看起来类只使用了两个属性，但在后续的代码中随时都可以这样动态地为实例赋予一个新的属性：</p>
+
+<div class="vscode-block"><div><span style="color: #268bd2;">p</span>.z <span style="color: #859900;">=</span> <span style="color: #d33682;">4</span></div><div><span style="color: #268bd2;">p</span>.z &nbsp;<span style="color: #a8a8a8;"># 4</span></div></div>
+
+<p>一些静态的编程语言（如 C++ 和 Java ）在创建实例时就为它们的属性分配了内存空间，每个属性的值都保存在固定的位置，因此无法直接为实例动态添加属性。但Python 既然允许动态添加属性，就需要一种动态分配空间的机制。实际上，Python 采用字典来存储对象的属性。每一个基本的 Python 类或者实例都有一个 <code>.__dict__</code> 属性，它的键保存着属性名，值保存着属性对应的值：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; Point.__dict__
+{'__module__': '__main__', '__init__': &lt;function Point.__init__ at 0x00000268758D7E50&gt;, '__dict__': &lt;attribute '__dict__' of 'Point' objects&gt;, '__weakref__': &lt;attribute '__weakref__' of 'Point' objects&gt;, '__doc__': None}
+&gt;&gt;&gt; p.__dict__
+{'x': 10, 'y': 4, 'z': 4}</div>
+
+<p>当 Python 要取用或创建属性时，它就会去到类或者实例的 <code>.__dict__</code> 字典中查找或添加。字典保存着类与实例的属性，所以是 Python 中非常重要的数据类型。</p>
+
+<p><code>.__dict__</code> 属性也为类的继承带来了方便，子类的 <code>__dict__</code> 并没有包含继承的方法和属性；当子类需要时，就会到父类的 <code>__dict__</code> 中寻找。而 <a class="link-internal" href="/programming/python-oop/03-inheritances">MRO 机制</a>的存在也使得这一套流程不易出错。</p>
+
+<p><code>.__dict__</code> 可以用于快速合并属性。例如，一些复杂的类的构造方法有很多不必要的参数，它们可能会被放在 <code>**kwargs</code> 可变参数内，初始化可能会这么写：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Window</span>:</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__init__</span>(self, x, y, width, height, <span style="color: #859900;">**</span>kwargs):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a8a8a8;"># ...</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">parent</span> <span style="color: #859900;">=</span> kwargs.<span style="color: #268bd2;">get</span>(<span style="color: #2aa198;">'parent'</span>, <span style="color: #b58900;">None</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">visible</span> <span style="color: #859900;">=</span> kwargs.<span style="color: #268bd2;">get</span>(<span style="color: #2aa198;">'visible'</span>, <span style="color: #b58900;">None</span>)</div></div>
+
+<p>这样逐个操作较为麻烦，那么就可以借助字典的 <code>.update()</code> 方法快速合并：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Window</span>:</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__init__</span>(self, x, y, width, height, <span style="color: #859900;">**</span>kwargs):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a8a8a8;"># ...</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">__dict__</span>.<span style="color: #268bd2;">update</span>(kwargs)</div></div>
+
+<p>通过 <code>.__dict__</code> 属性可以检查类提供的接口，它比 <code>__dir__</code> 更加灵活，能筛选不同的对象。例如，以下通过 <code>.__dict__</code> 检查 <code>list</code> 的可调用的方法，并筛去了以双下划线开头的特殊方法：</p>
+
+<div class="vscode-block"><div><span style="color: #268bd2;">print</span>(</div><div>&nbsp; &nbsp; <span style="color: #859900;">*</span>[<span style="color: #268bd2;">attr</span>[<span style="color: #d33682;">0</span>] <span style="color: #859900;font-weight: bold;">for</span> <span style="color: #268bd2;">attr</span> <span style="color: #859900;font-weight: bold;">in</span> <span style="color: #cb4b16;">dict</span>.<span style="color: #268bd2;">__dict__</span>.<span style="color: #268bd2;">items</span>()</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">if</span> <span style="color: #268bd2;">callable</span>(<span style="color: #268bd2;">attr</span>[<span style="color: #d33682;">1</span>])</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;">and</span> <span style="color: #859900;">not</span> <span style="color: #268bd2;">attr</span>[<span style="color: #d33682;">0</span>].<span style="color: #268bd2;">startswith</span>(<span style="color: #2aa198;">'__'</span>)]</div><div>)</div><div><span style="color: #a8a8a8;"># clear copy append insert extend pop remove index count reverse sort </span></div></div>
+
+<h3>使用类的__slots__</h3>
+
+<p>字典赋予了 Python 强大的动态运行机制，但要认识到的是，字典是一种非常耗费存储空间的数据类型。哪怕 Python3 对保存属性的字典做了一定优化，存储仅仅 3 个属性还是耗费了 104 字节的空间：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; import sys
+&gt;&gt;&gt; sys.getsizeof(p.__dict__)
+104 
+</div>
+
+<p>这在创建很多小对象时会占用大量内存。要解决这个问题，可以采用 <code>.__slots__</code> 属性。<code>.__slots__</code> 属性是用来限制实例属性成员的。它是一个类属性，可以为其赋予一个字符串或含有字符串的可迭代对象，例如：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Point</span>:</div><div>&nbsp; &nbsp; <span style="color: #268bd2;">__slots__</span> <span style="color: #859900;">=</span> [<span style="color: #2aa198;">'x'</span>, <span style="color: #2aa198;">'y'</span>, <span style="color: #2aa198;">'z'</span>]</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__init__</span>(self, x, y, z):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">x</span>, <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">y</span>, <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">z</span> <span style="color: #859900;">=</span> x, y, z</div></div>
+
+<p><code>.__slots__</code> 是一种编译时的特性：一旦 <code>.__slots__</code> 被创建出来，那么该类所具有的实例属性只能为 <code>.__slots__</code> 所表示或包含的字符串对应的实例属性。对于以上定义的 <code>Point</code> 类，它的实例属性只能包含 <code>.x</code> 、<code>.y</code> 和 <code>.z</code> ，如果要为它添加不在以上范围中的属性，会引发 <var class="error">AttributeError</var> 异常。</p>
+
+<p>也就是说，<code>.__slots__</code> 限定了实例允许创建的属性。它的本质就是在创建实例时不向它添加 <code>.__dict__</code> ，而是仅分配够用的空间，从而使实例不能拥有动态增加属性的能力。</p>
+
+<p>合理使用 <code>.__slots__</code> 属性不仅可以节省一个对象所消耗的空间，也可以防止添加无意义的属性，并增加实例查找属性的速度。</p>
+
+<p>使用 <code>.__slots__</code> 属性需要注意以下几点：</p>
+
+<ul>
+    <li><code>.__slots__</code> 限制实例属性的根本原因在于实例缺少 <code>.__dict__</code> 属性。如果在 <code>.__slots__</code> 属性内添加 <code>"__dict__"</code> 项，那么实例又恢复动态修改属性的能力，不过这样的话使用 <code>.__slots__</code> 的意义就没有了。</li>
+    <li>可以为 <code>.__slots__</code> 添加一个非字符串的数据，不过目前这么做还没有意义。</li>
+    <li><code>.__slots__</code> 声明只在创建类时有效，且只对它所处的类有效，而对继承的子类无效，因此，含有 <code>.__slots__</code> 的子类仍然会自动创建 <code>.__dict__</code> ，除非在子类中也声明一个 <code>.__slots__</code> 。如果父类和子类都有 <code>.__slots__</code> 属性，那么子类实例对象允许使用的属性是它们的并集。</li>
+    <li>除了 <code>.__dict__</code> 外，<code>.__slots__</code> 同时也会阻止实例创建 <code>.__weakref__</code> 属性，使得对实例的<a class="link-external" href="https://docs.python.org/zh-cn/3/library/weakref.html#module-weakref">弱引用</a>将失效。</li>
+</ul>
+
+<h2>特殊方法与属性操作</h2>
+
+<p>之前看到了 <code>__dict__</code> 和 <code>__slots__</code> 是如何影响实例的属性存储方式的。但不管使用什么方式存储，都可以采用点号 <code>.</code> 访问一个对象的属性。本文已经多次看到了特殊方法是如何影响一个对象的行为的，显然也有一类特殊方法决定对象如何查找属性。</p>
+
+<h3>修改属性访问行为</h3>
+
+<p><code>.__getattribute__(self, <em>name</em>)</code> 特殊方法决定了属性查找的基本行为，当一个实例 <code><em>instance</em></code> 尝试使用点号 <code>.</code> 访问属性 <code><em>instance</em>.<em>attribute</em></code> 时，便会调用其 <code>.__getattribute__()</code> 方法，其中参数 <code>self</code> 代表准备查找属性的实例，<code><em>name</em></code> 代表了查找属性的名称，是一个字符串。</p>
+
+<p>基类 <code>object</code> 的 <code>.__getattribute__()</code> 方法实现了通用的属性查找行为。它会得到两种结果：如果实例属性存在，便会返回该实例属性。如果实例属性不存在，便会引发 <var class="error">AttributeError</var> 异常。</p>
+
+<p>一般情况下，不要重写对象的 <code>.__getattribute__()</code> 方法。如果想要稍微改变对象的属性访问行为，可以重写 <code>.__getattr__(self, <em>name</em>)</code> 方法。这个方法也影响实例的属性访问行为，它是 <code>.__getattribute__()</code> 方法的一种 fallback 机制：当 <code>.__getattribute__()</code> 方法找不到实例的属性（即引起 <var class="error">AttributeError</var> ）时，就会调用实例的 <code>.__getattr__()</code> 方法。</p>
+
+<p>例如，以下通过继承字典实现了一个 <code>RecordDict</code> 类，可以通过属性访问的方式获取字典的值：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">RecordDict</span>(<span style="color: #cb4b16;">dict</span>):</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__getattr__</span>(self, name):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">try</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">self</span>[name]</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">except</span> <span style="color: #cb4b16;">KeyError</span> <span style="color: #859900;font-weight: bold;">as</span> <span style="color: #268bd2;">e</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">raise</span> <span style="color: #cb4b16;">AttributeError</span>(</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">f</span><span style="color: #2aa198;">'</span><span style="color: #cb4b16;">{</span><span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">__class__</span>.<span style="color: #268bd2;">__name__</span><span style="color: #586e75;font-weight: bold;">!r</span><span style="color: #cb4b16;">}</span><span style="color: #2aa198;"> object'</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">f</span><span style="color: #2aa198;">' has no attribute </span><span style="color: #cb4b16;">{</span>name<span style="color: #586e75;font-weight: bold;">!r</span><span style="color: #cb4b16;">}</span><span style="color: #2aa198;">'</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ) <span style="color: #859900;font-weight: bold;">from</span> <span style="color: #b58900;">None</span></div></div>
+
+<p>如果确实访问的是一个存在的属性，那么 <code>.__getattr__()</code> 方法就不会被调用，防止影响到使用字典的方法。<code>.__getattr__()</code> 方法在没有得到合适的结果时也应该抛出 <var class="error">AttributeError</var> 异常，从而便于统一捕获：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; rec = RecordDict(name='record', type=dict, default=100)
+&gt;&gt;&gt; rec.name
+record
+&gt;&gt;&gt; rec.default
+100
+&gt;&gt;&gt; rec.defaults
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+AttributeError: 'RecordDict' object has no attribute 'defaults'
+</div>
+
+<p>需要特别注意的是，如果确实要重写 <code>.__getattribute__()</code> 方法，该方法内不能使用任何形如 <code>self.<em>attribute</em></code> 的点号运算符，包括直接查找实例的 <code>.__dict__</code> ；否则，该过程又会调用实例的 <code>.__getattribute__()</code> 方法，造成无限递归，并且这种形式的递归是很难正常退出的。访问属性应该使用超类没有重写的 <code>.__getattribute__()</code> 方法完成此操作：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">RecordDict</span>(<span style="color: #cb4b16;">dict</span>):</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__getattribute__</span>(self, name):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">try</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #cb4b16;">super</span>().<span style="color: #268bd2;">__getattribute__</span>(name)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">except</span> <span style="color: #cb4b16;">AttributeError</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #cb4b16;">...</span></div></div>
+
+<p>但是这种写法显然很不优雅，还会使得异常变得很复杂。因此，<code>.__getattr__()</code> 方法一般被视为点号运算符的重载而不是获取属性的途径。</p>
+
+<p>有 get 就会有 set ，但是严格来说 <code>.__setattr__()</code> 是和 <code>.__getattribute__()</code> 配对使用的。<code>__setattr__(self, name, value)</code> 是实例属性的赋值 <em>instance</em>.<em>name</em> = <code>value</code> 的底层方法。例如，以下扩展了 <code>RecordDict</code> ，支持通过添加属性的方式添加键值对：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">RecordDict</span>(<span style="color: #cb4b16;">dict</span>):</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__setattr__</span>(self, name, value):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>[name] <span style="color: #859900;">=</span> value</div></div>
+
+<p>类似于 <code>.__getattribute__()</code> ，在 __setattr__() 方法内注意不能使用 <code>instance.name = value</code> 这种语句，否则会造成无限递归。</p>
+
+<p>最后，还有一个 <code>.__delattr__(self, name)</code> 方法用来删除实例的属性，在使用 <code>del</code> 关键字删除实例属性时，便会调用该方法。同样注意该方法要防止无限递归的情况。</p>
+
+<p>注意区分这几个特殊方法和 <code>property</code> 属性的 <code>getter</code> 、<code>setter</code> 和 <code>deleter</code> ，它们也是用于类似的数据访问之中，区别在于 <code>property</code> 属性只是改变了单个属性的行为，而这些特殊方法是用于类的所有属性之中。因此 <code>property</code> 使用时考虑的因素会少一些，一般情况下都是创建额外的私有属性与它交互，只要不访问自身，不用考虑递归的发生。</p>
+
+<h3>反射和鸭子类型</h3>
+
+<p>反射(reflection)是面向对象编程语言的一个术语，指程序在运行时能够访问、检测和修改其本身状态或行为的一种能力。反射使得程序能够动态地获取类、对象、方法、属性等信息，并能在运行时操作和调整它们。反射使得在编程时可以创建通用代码、实现动态框架等。但是滥用反射也会导致安全漏洞、性能问题和可维护性降低等问题。</p>
+
+<p>由于 Python 特殊的动态性质，可以将值、方法、实例、类统一视为对象，并且在运行时可以直接通过 <code>__dict__</code> 像使用字典一样操作对象的属性和方法，因此在 Python 中很少强调&ldquo;反射&rdquo;这一概念。</p>
+
+<blockquote>
+    <p>如果要操作多种类型，最好使用内置函数 <code>vars(<em>obj</em>)</code> ，它会返回 <code><em>obj</em></code> 对象的 <code>__dict__</code> 属性，相当于直接使用点号。不过它会在对象没有 <code>__dict__</code> 属性（例如类中使用了 <code>__slots__</code> ）时引发 <var class="error">TypeError</var> 异常。</p>
+
+    <p>不带参数的 <code>vars()</code> 也可以用于获取当前命名空间（如类和模块）的所有变量，等效于访问当前作用域的 <code>locals()</code> 。</p>
+</blockquote>
+
+<p>Python 还提供了以下内置函数，使得反射的使用更为简单：</p>
+
+<p><code>getattr(<em>object</em>, <em>name</em>, <em>default</em>=None)</code> 函数用于返回 <code><em>object</em></code> 对象的 <code><em>name</em></code> 属性，其中 <code><em>name</em></code> 应该为一个字符串，表示 <code><em>object</em></code> 对应的类属性或实例属性。</p>
+
+<p><code>getattr(<em>object</em>, "<em>name</em>")</code> 等价于 <code><em>object</em>.<em>name</em></code> ，结果也由 <code>__getattribute__</code> 和 <code>__getattr__</code> 决定。但可以向 <code>getattr()</code> 传入第三个参数 <code><em>default</em></code> ，那么当访问的属性不存在时，便会返回该值而不是引起 <var class="error">AttributeError</var> 异常。</p>
+
+<p><code>setattr(<em>object</em>, <em>name</em>, <em>value</em>)</code> 是一个配套的函数，用来设置对象的属性，<code><em>name</em></code> 需要是一个代表需要设置的属性名，同样需要是一个字符串；<code><em>value</em></code> 可以是任意合理的值。<code>setattr(<em>object</em>, "<em>name</em>", <em>value</em>)</code> 等价于 <code><em>object</em>.<em>name</em> = <em>value</em></code> 。但是 <code>setattr()</code> 函数允许为一个对象设置不是合法标识符的属性名，通过点号就无法做到：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; class C: pass
+&gt;&gt;&gt; o = C()
+&gt;&gt;&gt; setattr(o, 'this is (an) attribute!', 123)
+&gt;&gt;&gt; vars(o)
+{'this is (an) attribute!': 123}
+</div>
+
+<p>当然还有对应的 <code>delattr(<em>object</em>, <em>name</em>)</code> 。</p>
+
+<p>不过除此之外还有一个 <code>hasattr(<em>object</em>, <em>name</em>)</code> 用于判断对象是否存在 <code><em>name</em></code> 属性，返回的结果是布尔值。它的实质是通过调用 <code>getattr(object, name)</code> 并检查是否引发 <var class="error">AttributeError</var> 来实现的。</p>
+
+<hr/>
+
+<p>在前文中，看到了特殊属性和特殊方法是如何决定对象的行为的，在 Python 的设计理念中，对象的行为不是靠继承了什么类或实现了什么接口决定的，而是靠拥有什么属性、实现了什么方法。这种设计理念称为<strong>鸭子类型</strong>(duck typing)，来源于一句俚语&ldquo;如果它走起路来像鸭子，叫起来也像鸭子，那么它就是一只鸭子(If it walks like a duck and it quacks like a duck, then it must be a duck)&rdquo;，只要一个对象实现了特定的方法或拥有特定的属性，就可以视为具有某种类型，而无需显式地继承该类型或使用特定的类型声明。</p>
+
+<p>在编程中，鸭子类型表达了这样一种思想：只需要关注对象是否具有执行特定操作的能力，而不关心对象的实际类型。例如，以下实现了一个函数 <code>close_object()</code> ，它的作用就是将某个对象&ldquo;关闭&rdquo;：</p>
+
+<div class="vscode-block"><div><span style="color: #859900;font-weight: bold;">from</span> <span style="color: #cb4b16;">typing</span> <span style="color: #859900;font-weight: bold;">import</span> <span style="color: #268bd2;">Any</span></div><br/><div><span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">close_object</span>(obj: <span style="color: #268bd2;">Any</span>):</div><div>&nbsp; &nbsp; obj.close()</div></div>
+
+<p>这个类型标注并没有写错，因为只需要关注它有没有实现 <code>.close()</code> 方法，而不是是否继承了类似 <code>IClosable</code> 的接口。至于这个对象是文件对象，还是套接字对象，又或者是什么书籍类，并且它的 <code>.close()</code> 方法是修改对象状态还是执行一些计算，这并不是函数关心的内容。</p>
+
+<p>因此，Python 中的特殊方法为一个对象的通用行为提供了统一的接口。在后续的章节中，还会看到更多类似本节的&ldquo;特殊方法决定对象行为&rdquo;的情况，这也就是为什么研究特殊方法对认识 Python 语言具有重要意义。</p>
+
+<h2>参考资料/延伸阅读</h2>
+
+<p><a class="link-reference" href="https://docs.python.org/3/library/stdtypes.html#special-attributes">Python3 内置类型官方文档对特殊属性的介绍</a></p>
+
+<p><a class="link-reference" href="https://docs.python.org/3/reference/datamodel.html#special-method-names">Python3 DataModel 官方文档对特殊方法的介绍</a><br/></p>
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python/python3-with-statement-context-manager/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/07/Python-with语句和上下文管理器-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/07/Python-with语句和上下文管理器-520x293.jpg 520w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-300x169.jpg 300w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-1024x576.jpg 1024w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-768x432.jpg 768w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-1536x864.jpg 1536w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器-950x534.jpg 950w, /wp-content/uploads/2022/07/Python-with语句和上下文管理器.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python/python3-with-statement-context-manager/" rel="bookmark">Python3 with语句和上下文管理器</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/computer-science/computer-networking/02-the-application-layer/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/计算机网络02-应用层概览-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/计算机网络02-应用层概览-520x293.jpg 520w, /wp-content/uploads/2022/06/计算机网络02-应用层概览-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/computer-science/computer-networking/02-the-application-layer/" rel="bookmark">计算机网络02-应用层概览与SMTP电子邮件发送</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/embedded/mcu-application/stm32-u8g2-library/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/06/U8g2图形库与STM32移植-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/06/U8g2图形库与STM32移植-520x293.jpg 520w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植-300x169.jpg 300w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植-1024x576.jpg 1024w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植-768x432.jpg 768w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植-1536x864.jpg 1536w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植-950x534.jpg 950w, /wp-content/uploads/2022/06/U8g2图形库与STM32移植.jpg 1920w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/embedded/mcu-application/stm32-u8g2-library/" rel="bookmark">U8g2图形库与STM32移植</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"></li>
+		<li class="previous"><a href="/programming/python/library-logging/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>Python标准库logging：日志记录</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/programming/python-oop/05-custom-types/" aria-current="page">Python面向对象编程05-特殊方法与自定义类</a>
+											<span class="post-date">2024年2月9日</span>
+									</li>
+											<li>
+					<a href="/programming/python/library-logging/">Python标准库logging：日志记录</a>
+											<span class="post-date">2024年1月23日</span>
+									</li>
+											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
+					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
+											<span class="post-date">2023年6月19日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/04-methods/">Python面向对象编程04-类与实例的方法</a>
+											<span class="post-date">2023年3月27日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (22)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (5)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (5)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2024/02/'> 2024年2月 &nbsp;(1)</option>
+	<option value='/2024/01/'> 2024年1月 &nbsp;(2)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

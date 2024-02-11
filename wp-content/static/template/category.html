@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <!-- [private] -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="icon" type="image/x-icon" href="static/favicon.ico">
+
+    <link rel="stylesheet" href="/wp-content/themes/instorm/style.css">
+    <link rel="stylesheet" href="/wp-content/themes/instorm-child-theme/style.css">
+    <!-- [/private] -->
+
+    <link rel="stylesheet" href="/wp-content/static/css/text.css">
+    <link rel="stylesheet" href="/wp-content/static/css/note.css">
+
+    <link rel="stylesheet" href="/wp-content/static/css/assist.css">
+
+    <link rel="stylesheet" href="/wp-content/static/css/category.css">
+
+</head>
+<body>
+
+<div id="assist">
+    <div id="toc"></div>
+</div>
+
+<div class="entry">{% autoescape off %}{{ content }}{% endautoescape %}</div>
+
+
+</body>
+</html>

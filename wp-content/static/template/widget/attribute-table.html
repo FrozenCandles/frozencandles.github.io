@@ -1,0 +1,44 @@
+{#
+    expect values:
+#}
+
+<div class="attribute-table">
+    <div class="attribute-table__title">{{ title }}</div>
+    <div class="attribute-table__body">
+        {% for item in items %}<div class="attribute-table__item">
+            <div class="attribute-table__name">{{ item.name }}</div>
+            <div class="attribute-table__value">{{ item.value }}</div>
+        </div>{% endfor %}
+    </div>
+</div>
+
+
+{#
+example:
+
+<div class="attribute-table" rendered="raw">
+    <div class="attribute-table__title">display</div>
+    <div class="attribute-table__body">
+        <div class="attribute-table__item">
+            <div class="attribute-table__name">值：</div>
+            <div class="attribute-table__value">与显示方式相关的所有值</div>
+        </div>
+        <div class="attribute-table__item">
+            <div class="attribute-table__name">默认值：</div>
+            <div class="attribute-table__value"><span class="code-font">inline</span></div>
+        </div>
+        <div class="attribute-table__item">
+            <div class="attribute-table__name">计算值：</div>
+            <div class="attribute-table__value">指定的值</div>
+        </div>
+        <div class="attribute-table__item">
+            <div class="attribute-table__name">应用于：</div>
+            <div class="attribute-table__value">所有元素</div>
+        </div>
+        <div class="attribute-table__item">
+            <div class="attribute-table__name">继承性：</div>
+            <div class="attribute-table__value">无</div>
+        </div>
+    </div>
+</div>
+#}

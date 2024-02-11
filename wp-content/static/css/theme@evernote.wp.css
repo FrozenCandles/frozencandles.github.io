@@ -10,10 +10,6 @@
 
 /* @include-when-export url(https://raw.githubusercontent.com/slashfoo/lmweb/master/style/latinmodern-mono-light.css); */
 
-/* html {
-    font-size: 12pt;
-} */
-
 .entry { 
     font-size: 15px; 
     font-weight: 400;
@@ -93,7 +89,8 @@
 } */
 
 .entry mark {
-    background: #fff387;
+    background: #fcff9e;
+    padding: 2px 4px;
 }
 
 .entry table {
@@ -143,7 +140,8 @@
 
 .entry li { margin: 0; }
 
-.entry ol, ul { padding-left: 30px; }
+.entry ol, 
+.entry ul { padding-left: 30px; }
 
 .entry ol ol li > *    { font-weight: normal; }
 .entry ol ol ol li > * { font-weight: normal; }

@@ -24,7 +24,7 @@ function onCheckArticle(checkConfig) {
     const [article] = document.getElementsByClassName('entry')
 
     for (let elem of article.getElementsByTagName('A')) {
-        if (!elem.hasAttribute('href')) {
+        if (!elem.hasAttribute('href') && !elem.hasAttribute('link')) {
             alert(`Link "${elem.textContent}" does not have a href attribute.`);
         }
     }
