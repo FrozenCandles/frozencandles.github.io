@@ -67,7 +67,7 @@ function addReadingProgressBar(backgroundColor) {
  */
 function adjustImageSize() {
     for (let elem of document.querySelectorAll('.entry figure img')) {
-        if (!elem.hasAttribute('width') || !elem.hasAttribute('height'))
+        if (!elem.hasAttribute('width') && !elem.hasAttribute('height'))
             elem.width = elem.naturalWidth / window.devicePixelRatio;
     }
 }

@@ -1,0 +1,813 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Python面向对象编程07-可调用对象与装饰器 - 冰封残烛的个人小站</title>
+	<meta name="description" content="在 Python 中，函数、匿名函数和类都是可以使用圆括号调用，可以使用 callable() 函数判断可调用对象。之所以它们能够被调用，这是因为它们实现了 .__call__() 特殊方法，调用一个对象等价于应用对象的 .__call__() 方法。" />
+	<link rel="canonical" href="/programming/python-oop/07-callable-objects/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Python面向对象编程07-可调用对象与装饰器 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="在 Python 中，函数、匿名函数和类都是可以使用圆括号调用，可以使用 callable() 函数判断可调用对象。之所以它们能够被调用，这是因为它们实现了 .__call__() 特殊方法，调用一个对象等价于应用对象的 .__call__() 方法。" />
+	<meta property="og:url" content="/programming/python-oop/07-callable-objects/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2024-03-01T11:46:30+00:00" />
+	<meta property="article:modified_time" content="2024-03-01T12:21:17+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2024/02/python-oop@07-callable-objects.jpg" />
+	<meta property="og:image:width" content="1920" />
+	<meta property="og:image:height" content="1080" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="7分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebPage",
+	            "@id": "/programming/python-oop/07-callable-objects/",
+	            "url": "/programming/python-oop/07-callable-objects/",
+	            "name": "Python面向对象编程07-可调用对象与装饰器 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/programming/python-oop/07-callable-objects/#primaryimage"
+	            },
+	            "image": {
+	                "@id": "/programming/python-oop/07-callable-objects/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2024/02/python-oop@07-callable-objects.jpg",
+	            "datePublished": "2024-03-01T11:46:30+00:00",
+	            "dateModified": "2024-03-01T12:21:17+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "在 Python 中，函数、匿名函数和类都是可以使用圆括号调用，可以使用 callable() 函数判断可调用对象。之所以它们能够被调用，这是因为它们实现了 .__call__() 特殊方法，调用一个对象等价于应用对象的 .__call__() 方法。",
+	            "breadcrumb": {
+	                "@id": "/programming/python-oop/07-callable-objects/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/programming/python-oop/07-callable-objects/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/programming/python-oop/07-callable-objects/#primaryimage",
+	            "url": "/wp-content/uploads/2024/02/python-oop@07-callable-objects.jpg",
+	            "contentUrl": "/wp-content/uploads/2024/02/python-oop@07-callable-objects.jpg",
+	            "width": 1920,
+	            "height": 1080
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/programming/python-oop/07-callable-objects/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "Python面向对象编程07-可调用对象与装饰器"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/1352" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=1352' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython-oop%2F07-callable-objects%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython-oop%2F07-callable-objects%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?432b66336cb23bd6712cecabe6d808eb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<link rel="stylesheet" href="/wp-content/static/css/theme@evernote.wp.css">
+
+<style>
+    div.vscode-block { color: #657B83; background-color: #FDF6E3; }
+    div.vscode-block span[token="var"] { color: #268bd2; }
+</style>
+
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-1352 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/all/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-1352" class="post-1352 post type-post status-publish format-standard has-post-thumbnail hentry category-python-oop">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">Python面向对象编程07-可调用对象与装饰器</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/programming/python-oop/" rel="category tag">Python面向对象编程</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2024年3月1日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+<h2>可调用对象</h2>
+
+<h3>可调用对象的概念</h3>
+
+<p>在 Python 中，将表达式 <code>( )</code> 应用于一个对象称为调用(call)对象。例如，函数是一个可调用对象，它可以被一对括号调用：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; def func():
+...     return 'hello'
+&gt;&gt;&gt; func
+&lt;function func at 0x000001C56E18BBF8&gt;
+&gt;&gt;&gt; func()
+'hello'</div>
+
+<p>但 Python 中的可调用对象不只有函数。一个 <code>lambda</code> 表达式也是一个可调用对象，它也可以被调用：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; add = lambda x, y: x + y
+&gt;&gt;&gt; add
+&lt;function &lt;lambda&gt; at 0x0000020D959D2E18&gt;
+&gt;&gt;&gt; add(2, 3)
+5</div>
+
+<p>除此之外，一个类也能被调用，类调用的结果是返回一个构造的实例：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; class Type: ...
+... 
+&gt;&gt;&gt; Type()
+&lt;__main__.Type object at 0x0000015BFE72D400&gt;
+</div>
+ 
+<p>之所以它们能够被调用，这是因为它们实现了 <code>.__call__()</code> 方法。实现了 <code>.__call__()</code> 方法的对象是可调用对象，对该对象应用 <code>()</code> 表达式等价于应用对象的 <code>.__call__()</code> 方法。</p>
+
+<p>该方法是一个实例方法，除了第一个参数 <code>self</code> 表示被调用的对象之外，其余参数都代表需要调用实例时需要传入的参数。也就是说，考虑以下类：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span><span style="color: #657b83;"> </span><span style="color: #cb4b16;">TestCall</span><span style="color: #657b83;">:</span></div><div><span style="color: #657b83;">&nbsp; &nbsp; </span><span style="color: #586e75;font-weight: bold;">def</span><span style="color: #657b83;"> </span><span style="color: #268bd2;">__call__</span><span style="color: #657b83;">(</span><span style="color: #657b83;">self</span><span style="color: #657b83;">, </span><span style="color: #859900;">*</span><span style="color: #657b83;">args</span><span style="color: #657b83;">):</span></div><div><span style="color: #657b83;">&nbsp; &nbsp; &nbsp; &nbsp; </span><span style="color: #268bd2;">print</span><span style="color: #657b83;">(</span><span style="color: #586e75;font-weight: bold;">f</span><span style="color: #2aa198;">'method called with arguments </span><span style="color: #cb4b16;">{</span><span style="color: #657b83;">args</span><span style="color: #cb4b16;">}</span><span style="color: #2aa198;">'</span><span style="color: #657b83;">)</span></div></div>
+
+<p>那么，可以通过以下语句实例化该类，并使用圆括号调用该实例：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; test = TestCall()
+&gt;&gt;&gt; test(1, 'a', [10])
+method called with arguments (1, 'a', [10])
+</div>
+
+<p>可调用对象相比直接定义函数，更适合处理一些<em>有状态</em>的调用行为，即使用两组相同参数的调用可能会得到不同的结果。</p>
+
+<p>在<a class="link-internal" href="/programming/python-fp/09-decorators">介绍闭包</a>时曾经编写了一个求累积平均值的函数，历史结果将会影响新传入值的累积平均值。然而使用闭包编写的函数，需要通过局部变量和 <code>nonlocal</code> 声明来保存每一组数据的历史信息。这种情况就很适合使用可调用对象实现，可以采用实例属性代替局部变量保存信息：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">CumulativeAverage</span>:</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span token="var">__init__</span>(self):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">history_count</span> <span style="color: #859900;">=</span> <span style="color: #d33682;">0</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">history_sum</span> <span style="color: #859900;">=</span> <span style="color: #d33682;">0</span></div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span token="var">__call__</span>(self, <span style="color: #859900;">*</span>new_data):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">history_count</span> <span style="color: #859900;">+=</span> <span token="var">len</span>(new_data)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">history_sum</span> <span style="color: #859900;">+=</span> <span token="var">sum</span>(new_data)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span token="var">self</span>.<span token="var">history_sum</span> <span style="color: #859900;">/</span> <span token="var">self</span>.<span token="var">history_count</span></div></div>
+
+<h3>判断可调用对象</h3>
+
+<p>Python 有一个内置函数 <code>callable()</code> ，用于判断一个对象是否是可调用对象：如果是，则返回 <code>True</code> ，否则返回 <code>False</code> ：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; callable('abc'.upper)
+True
+&gt;&gt;&gt; callable([1, 2])   
+False
+&gt;&gt;&gt; callable(set)
+True
+</div>
+ 
+<p>该函数的本质就是判断对象中是否含有 <code>.__call__()</code> 方法。例如，可以使用该函数，查看内置的所有函数和类（它们都是可调用对象）：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; [name for name, value in __builtins__.__dict__.items() if callable(value)]
+['__loader__', '__build_class__', '__import__', 'abs', 'all', 'any', 'ascii', 'bin', 'callable', ..., 'staticmethod', 'str', 'super', 'tuple', 'type', 'zip', 'BaseException', 'Exception', 'TypeError', ...'TimeoutError', 'open', 'quit', 'exit', 'copyright', 'credits', 'license', 'help']
+</div>
+
+<p>结果有点多，因为异常相关的类就占了一大半。</p>
+
+<h2>类与装饰器</h2>
+
+<h3>类作为装饰器</h3>
+
+<p>既然可调用对象可以处理闭包的问题，就不能不提起<a class="link-internal" href="/programming/python-fp/09-decorators">装饰器</a>。回顾一下，一个装饰器的结构大致如下所示：</p>
+
+<div class="codeblock code-template">
+    <strong>def</strong> decorator(<em>func</em>): <br/>
+    &nbsp; &nbsp; <strong>def</strong> wrapper(*args, **kwargs): <br/>
+    &nbsp; &nbsp; &nbsp; &nbsp; do_something(<em>func</em>, *args, **kwargs) <br/>
+    &nbsp; &nbsp; &nbsp; &nbsp; <strong>return</strong> <em>func</em>(*args, **kwargs) <br/>
+    &nbsp; &nbsp; <strong>return</strong> wrapper
+</div>
+
+<p>当 <code>@decorator</code> 作用于 <code>func</code> 函数的定义时，它实际上是在执行 <code>func = decorator(func)</code> 。<code>decorator</code> 函数作为一个装饰器，它接受一个函数 <code>func</code> 作为输入，将其包装为一个新的函数 <code>wrapper</code> 返回。当 <code>func</code> 函数被调用时，实际上是调用了 <code>wrapper</code> 函数：在使用者看来，<code>wrapper</code> 函数与原始的 <code>func</code> 函数的参数和返回值用法都一致，但 <code>wrapper</code> 函数内部还执行了一些额外的操作，就像原来的函数被&ldquo;包装&rdquo;了一样。</p>
+
+<p>既然装饰器只影响函数的调用行为，而函数、类和自定义的对象都可以是可调用对象，那么类应该也可以作为装饰器。下面从调用角度分析一下将类作为装饰器会是什么结果：</p>
+
+<p>假设 Decorator 是一个类，首先调用装饰器 <code>@Decorate</code> 的实质是调用 <code>func = Decorator(func)</code> 。<code>Decorator(func)</code> 是实例化一个类，因此 <code>func</code> 经过装饰后，变成了一个类的实例。而 <code>func</code> 装饰后不能改变它的调用行为，获得的 <code>Decorator()</code> 实例也必须可以被调用才行。因此，<code>Decorator</code> 对象还应该是一个可调用对象，需要实现 <code>.__call__()</code> 方法，并且调用时的实质是执行被装饰函数。</p>
+
+<p>也就是说，这个装饰器需要实现以下几点：</p>
+
+<ol>
+    <li>包含 <code>.__init__()</code> 方法，并且该方法只有一个代表传入被装饰函数的参数</li>
+    <li>包含 <code>.__call__()</code> 方法，并且该方法的实质就是在执行被装饰函数</li>
+</ol>
+
+<p>以下通过类实现了一个装饰器，用于追踪函数的调用情况：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Trace</span>:</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span token="var">__init__</span>(self, func):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">func</span> <span style="color: #859900;">=</span> func</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span token="var">__call__</span>(self, <span style="color: #859900;">*</span>args, <span style="color: #859900;">**</span>kwargs):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">result</span> <span style="color: #859900;">=</span> <span style="color: #b58900;">None</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">try</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="var">result</span> <span style="color: #859900;">=</span> <span token="var">self</span>.<span token="var">func</span>(<span style="color: #859900;">*</span>args, <span style="color: #859900;">**</span>kwargs)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">except</span> <span style="color: #cb4b16;">Exception</span> <span style="color: #859900;font-weight: bold;">as</span> <span token="var">e</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="var">result</span> <span style="color: #859900;">=</span> <span token="var">e</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">print</span>(<span style="color: #586e75;font-weight: bold;">f</span><span style="color: #2aa198;">'</span><span style="color: #cb4b16;">{</span><span token="var">self</span>.<span token="var">func</span>.__name__<span style="color: #cb4b16;">}{</span>args, kwargs<span style="color: #586e75;font-weight: bold;">!r</span><span style="color: #cb4b16;">}</span><span style="color: #2aa198;"> -&gt; </span><span style="color: #cb4b16;">{</span><span token="var">result</span><span style="color: #586e75;font-weight: bold;">!r</span><span style="color: #cb4b16;">}</span><span style="color: #2aa198;">'</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span token="var">result</span></div></div>
+
+<p>以下是一个使用示例：</p>
+
+<div class="vscode-block"><div><span token="var">@</span><span style="color: #cb4b16;">Trace</span></div><div><span style="color: #586e75;font-weight: bold;">def</span> <span token="var">calc</span>(x, y, z):</div><div>&nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> x <span style="color: #859900;">+</span> y <span style="color: #859900;">/</span> z</div><br/><div><span token="var">calc</span>(<span style="color: #d33682;">1</span>, <span style="color: #d33682;">3</span>, <span style="color: #d33682;">2</span>)</div><div><span token="var">calc</span>(<span style="color: #d33682;">1</span>, z<span style="color: #859900;">=</span><span style="color: #d33682;">0</span>, y<span style="color: #859900;">=</span><span style="color: #d33682;">3</span>)</div></div>
+
+<div class="codeblock code-console">$ python decorator.py
+calc((1, 3, 2), {}) -&gt; 2.5
+calc((1,), {'z': 0, 'y': 3}) -&gt; ZeroDivisionError('division by zero')
+</div>
+
+<p>通过类实现的装饰器相比通过函数实现的装饰器，同样<mark class="text-highlight">更适合处理一些具有状态的</mark>装饰任务，这个时候就不用处理变量的作用域问题。除此之外，因为类作为装饰器会将函数变为一个可调用对象，可以为该对象编写其它方法提供更复杂的功能。例如，内置的 <code>property</code> 其实就是一个类，所以被装饰的对象就可以使用 <code>.setter</code> 和 <code>.deleter</code> 接口处理该属性的写与删除的逻辑。</p>
+
+<p>以下通过类实现了一个简单的缓存装饰器，它可以将相同参数下的第一次运行结果保存起来，随后每一次调用被装饰函数时都返回相同结果，避免重复计算的开销：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Cache</span>:</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span token="var">__init__</span>(self, func):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">func</span> <span style="color: #859900;">=</span> func</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">cache</span> <span style="color: #859900;">=</span> {}</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span token="var">__call__</span>(self, <span style="color: #859900;">*</span>args, <span style="color: #859900;">**</span>kwargs):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">try</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="var">params</span> <span style="color: #859900;">=</span> (args, <span style="color: #cb4b16;">frozenset</span>(kwargs.<span token="var">items</span>()))</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span token="var">self</span>.<span token="var">cache</span>[<span token="var">params</span>]</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">except</span> <span style="color: #cb4b16;">KeyError</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="var">result</span> <span style="color: #859900;">=</span> <span token="var">self</span>.<span token="var">func</span>(<span style="color: #859900;">*</span>args, <span style="color: #859900;">**</span>kwargs)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">cache</span>[<span token="var">params</span>] <span style="color: #859900;">=</span> <span token="var">result</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span token="var">result</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">except</span> <span style="color: #cb4b16;">TypeError</span>: &nbsp;<span style="color: #93a1a1;"># unhashable params</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span token="var">self</span>.<span token="var">func</span>(<span style="color: #859900;">*</span>args, <span style="color: #859900;">**</span>kwargs)</div></div>
+
+<p>下面给出了一个使用示例，读者可以自行运行该代码并观察输出变化：</p>
+
+<div class="vscode-block"><div><span style="color: #859900;font-weight: bold;">from</span> <span style="color: #cb4b16;">time</span> <span style="color: #859900;font-weight: bold;">import</span> <span token="var">sleep</span></div><br/><div><span token="var">@</span><span style="color: #cb4b16;">Cache</span></div><div><span style="color: #586e75;font-weight: bold;">def</span> <span token="var">huge_add</span>(a, b):</div><div>&nbsp; &nbsp; <span token="var">sleep</span>(<span style="color: #d33682;">2</span>)</div><div>&nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> a <span style="color: #859900;">+</span> b</div><br/><div><span token="var">huge_add</span>(<span style="color: #d33682;">1</span>, <span style="color: #d33682;">2</span>) &nbsp;<span style="color: #93a1a1;"># wait for a moment and print result</span></div><div><span token="var">huge_add</span>(<span style="color: #d33682;">1</span>, <span style="color: #d33682;">2</span>) &nbsp;<span style="color: #93a1a1;"># immediately print result</span></div><div><span token="var">huge_add</span>(a<span style="color: #859900;">=</span><span style="color: #2aa198;">'hello'</span>, b<span style="color: #859900;">=</span><span style="color: #2aa198;">' world'</span>) &nbsp;<span style="color: #93a1a1;"># wait for a moment and print result</span></div><div><span token="var">huge_add</span>(b<span style="color: #859900;">=</span><span style="color: #2aa198;">' world'</span>, a<span style="color: #859900;">=</span><span style="color: #2aa198;">'hello'</span>) &nbsp;<span style="color: #93a1a1;"># immediately print result</span></div><div><span token="var">huge_add</span>(<span style="color: #2aa198;">'hello'</span>, b<span style="color: #859900;">=</span><span style="color: #2aa198;">' world'</span>) &nbsp;<span style="color: #93a1a1;"># wait for a moment and print result</span></div><div><span token="var">huge_add</span>([<span style="color: #d33682;">1</span>, <span style="color: #d33682;">2</span>], [<span style="color: #d33682;">2</span>, <span style="color: #d33682;">3</span>]) &nbsp;<span style="color: #93a1a1;"># wait for a moment and print result</span></div><div><span token="var">huge_add</span>([<span style="color: #d33682;">1</span>, <span style="color: #d33682;">2</span>], [<span style="color: #d33682;">2</span>, <span style="color: #d33682;">3</span>]) &nbsp;<span style="color: #93a1a1;"># wait for a moment and print result</span></div></div>
+
+<p>如果将函数对象也看作一个类，那么实现一个自己的类作为装饰器可扩展性便更强，可以在一个空白的类模板上实现自己的处理逻辑。</p>
+
+<p>不过以上实现的装饰器还有一个小问题：使用类实现的装饰器会将函数变为一个类的实例，这意味着它们的性质变得完全不同了；如果给被装饰的函数添加文档：</p>
+
+<div class="vscode-block"><div><span token="var">@</span><span style="color: #cb4b16;">Cache</span></div><div><span style="color: #586e75;font-weight: bold;">def</span> <span token="var">huge_add</span>(a, b):</div><div>&nbsp; &nbsp; <span style="color: #2aa198;">"""Perform complex addition operations"""</span></div><div>&nbsp; &nbsp; <span style="color: #cb4b16;">...</span></div></div>
+
+<p>如果在控制台检查该函数的文档，会发现经过装饰后，函数的文档被装饰器类的文档覆盖了；不仅如此，函数的变成其它实例后，<code>__name__</code> 等属性也都丢失了：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; help(huge_add)
+Help on Cache in module __main__ object:
+
+class Cache(builtins.object)
+ |  Cache(func)
+ |
+ |  Methods defined here:
+...
+&gt;&gt;&gt; huge_add.__name__
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+AttributeError: 'Cache' object has no attribute '__name__'
+</div>
+
+<p>对于函数形式的装饰器，处理方法是使用 <code>functools</code> 模块提供的 <code>@wraps</code> 装饰器将原函数的信息迁移到被装饰函数上；但通过类实现的装饰器却无法这样处理，因为 <code>wraps</code> 是用来处理函数。</p>
+
+<p>实际上，<code>functools</code> 模块还提供了另一个函数 <code>update_wrapper(<em>wrapper</em>, <em>wrapped</em>)</code> ，它可以将 <code>wrapped</code> 函数的信息更新到 <code>wrapper</code> 对象上。装饰器类就可以在初始化方法内这样更新自身的信息：</p>
+
+<div class="vscode-block"><div><span style="color: #859900;font-weight: bold;">from</span> <span style="color: #cb4b16;">functools</span> <span style="color: #859900;font-weight: bold;">import</span> <span token="var">update_wrapper</span></div><br/><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Cache</span>:</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span token="var">__init__</span>(self, func):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">func</span> <span style="color: #859900;">=</span> func</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">update_wrapper</span>(<span token="var">self</span>, <span token="var">self</span>.<span token="var">func</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #cb4b16;">...</span></div></div>
+
+<p>现在装饰后的对象就具有 <code>.__name__</code> 属性，也可以正确表示它的帮助信息了：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; huge_add.__name__ 
+'huge_add'
+&gt;&gt;&gt; help(huge_add)
+Help on Cache in module __main__:
+
+huge_add = &lt;__main__.Cache object&gt;
+    Perform complex addition operations
+</div>
+
+<p>实际上，<code>@wraps</code> 装饰器就是 <code>update_wrapper()</code> 函数的一个包装版本。但即便如此，<code>update_wrapper</code> 也只是更新了一些基本信息，并不能使装饰结果和被装饰函数完全一样。例如，装饰过的函数不再能使用 <code>FunctionType</code> 做类型判断了。</p>
+
+<h3>带参数的装饰器类</h3>
+
+<p>装饰器经常会带参数。在使用函数处理带参数的装饰器时，需要通过三层嵌套函数完成装饰，其中最外层的函数负责处理参数。接下来从实现角度分析带参数的装饰器类应该如何实现。</p>
+
+<p>首先，带参数的装饰器 <code>@Decorator(...)</code> 装饰实质是 <code>func = Decorator(...)(func)</code> 。由于调用运算符自左向右结合，首先 <code>Decorator(...)</code> 生成了一个实例 <code>deco</code> ，装饰变成了 <code>deco(func)</code> ，本质是在调用该实例。调用过程中，被装饰函数作为参数传入，又将其返回结果作为装饰后的函数使用。</p>
+
+<p>根据以上分析，带参数的装饰器实现要点有：</p>
+
+<ol>
+    <li>实现了 <code>.__init__()</code> 方法，用于接受装饰时的参数</li>
+    <li>实现了 <code>.__call__()</code> 方法，实质上就是一个普通的装饰器</li>
+</ol>
+
+<p>以下实现了一个 <code>@Retry</code> 装饰器，它可以使得被装饰的函数在执行失败时自动重试。<code>@Retry</code> 装饰器接收两个参数 <code>maxnum</code> 和 <code>interval</code> ，分别指定重试的最大次数和重试的间隔：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Retry</span>:</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span token="var">__init__</span>(self, maxnum<span style="color: #859900;">=</span><span style="color: #d33682;">5</span>, interval<span style="color: #859900;">=</span><span style="color: #d33682;">1.0</span>):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">maxnum</span> <span style="color: #859900;">=</span> maxnum</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">interval</span> <span style="color: #859900;">=</span> interval</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span token="var">__call__</span>(self, func):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">@</span><span token="var">wraps</span>(func)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span token="var">wrapper</span>(<span style="color: #859900;">*</span>args, <span style="color: #859900;">**</span>kwargs):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="var">retries</span> <span style="color: #859900;">=</span> <span style="color: #d33682;">0</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">while</span> <span token="var">retries</span> <span style="color: #859900;">&lt;</span> <span token="var">self</span>.<span token="var">maxnum</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">try</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="var">result</span> <span style="color: #859900;">=</span> func(<span style="color: #859900;">*</span>args, <span style="color: #859900;">**</span>kwargs)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span token="var">result</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">except</span> <span style="color: #cb4b16;">Exception</span> <span style="color: #859900;font-weight: bold;">as</span> <span token="var">e</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="var">retries</span> <span style="color: #859900;">+=</span> <span style="color: #d33682;">1</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="var">print</span>(<span style="color: #586e75;font-weight: bold;">f</span><span style="color: #2aa198;">"Exception caught: </span><span style="color: #cb4b16;">{</span><span token="var">e</span><span style="color: #cb4b16;">}</span><span style="color: #2aa198;">. Retrying (</span><span style="color: #cb4b16;">{</span><span token="var">retries</span><span style="color: #cb4b16;">}</span><span style="color: #2aa198;">/</span><span style="color: #cb4b16;">{</span><span token="var">self</span>.<span token="var">maxnum</span><span style="color: #cb4b16;">}</span><span style="color: #2aa198;">)..."</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="var">sleep</span>(<span token="var">self</span>.<span token="var">interval</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">raise</span> <span style="color: #cb4b16;">RuntimeError</span>(<span style="color: #586e75;font-weight: bold;">f</span><span style="color: #2aa198;">"Failed after </span><span style="color: #cb4b16;">{</span><span token="var">self</span>.<span token="var">maxnum</span><span style="color: #cb4b16;">}</span><span style="color: #2aa198;"> retries"</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span token="var">wrapper</span></div></div>
+    
+<p>以下是该装饰器的一个使用示例：</p>
+
+<div class="vscode-block"><div><span style="color: #859900;font-weight: bold;">from</span> <span style="color: #cb4b16;">random</span> <span style="color: #859900;font-weight: bold;">import</span> <span token="var">random</span></div><br/><div><span token="var">@</span><span style="color: #cb4b16;">Retry</span>(maxnum<span style="color: #859900;">=</span><span style="color: #d33682;">3</span>, interval<span style="color: #859900;">=</span><span style="color: #d33682;">0.5</span>)</div><div><span style="color: #586e75;font-weight: bold;">def</span> <span token="var">send_message</span>():</div><div>&nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">if</span> <span token="var">random</span>() <span style="color: #859900;">&lt;</span> <span style="color: #d33682;">0.8</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">raise</span> <span style="color: #cb4b16;">ValueError</span>(<span style="color: #2aa198;">"Network failure"</span>)</div><div>&nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #2aa198;">"Success"</span></div><br/><div><span token="var">status</span> <span style="color: #859900;">=</span> <span token="var">send_message</span>()</div><div><span token="var">print</span>(<span style="color: #2aa198;">"Status:"</span>, <span token="var">status</span>)</div></div>
+
+<div class="codeblock code-console">$ python decorator.py
+Exception caught: Network failure. Retrying (1/3)...
+Exception caught: Network failure. Retrying (2/3)...
+Status: Success
+</div>
+
+<h3>装饰类的装饰器</h3>
+
+<p>实际上，Python 中的装饰器不仅可以装饰函数，还可以装饰一个类。也就是说，装饰器还可以这样使用：</p>
+
+<div class="codeblock code-template">
+    @<em>decorator</em> <br/>
+    <strong>class</strong> <em>SomeType</em>: <br/>
+    &nbsp; &nbsp; ...
+</div>
+
+<p>装饰类的装饰器和装饰函数的装饰器本质是一样的：假设 <code>decorator</code> 是一个装饰器，那么装饰该类的实质也是 <code>Type = decorator(Type)</code> 。这也就意味着如果使用函数作为装饰器，则类在被装饰完成之后变成一个普通的函数了。但是在调用装饰完成的函数时，它返回的结果实际上是这个类构造的实例。换句话说，函数作为装饰器，实际上是装饰了类的构造方法。</p>
+
+<p>因此，装饰类的装饰器处理方式有一些不同：装饰类的装饰器一般用于处理这个类属性和方法相关的问题（例如为该类添加上一些规范的方法，或者为某些特定方法做装饰）；并且它在处理完后直接返回该类，避免改变这个类的基本属性。</p>
+
+<p>以下实现了一个 <code>@trace</code> 装饰器，它会为该类的每个公有方法添加上追踪信息：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">def</span> <span token="var">trace</span>(cls):</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span token="var">traced_func</span>(func):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">if</span> <span token="var">hasattr</span>(func, <span style="color: #2aa198;">'tracing'</span>): &nbsp;<span style="color: #93a1a1;"># Only decorate once</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> func</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">@</span><span token="var">wraps</span>(func)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span token="var">wrapper</span>(<span style="color: #859900;">*</span>args, <span style="color: #859900;">**</span>kwargs):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="var">result</span> <span style="color: #859900;">=</span> <span style="color: #b58900;">None</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">try</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="var">result</span> <span style="color: #859900;">=</span> func(<span style="color: #859900;">*</span>args, <span style="color: #859900;">**</span>kwargs)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">except</span> <span style="color: #cb4b16;">Exception</span> <span style="color: #859900;font-weight: bold;">as</span> <span token="var">e</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="var">result</span> <span style="color: #859900;">=</span> <span token="var">e</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="var">print</span>(<span style="color: #586e75;font-weight: bold;">f</span><span style="color: #2aa198;">'</span><span style="color: #cb4b16;">{</span>func.__name__<span style="color: #cb4b16;">}{</span>args, kwargs<span style="color: #586e75;font-weight: bold;">!r</span><span style="color: #cb4b16;">}</span><span style="color: #2aa198;"> -&gt; </span><span style="color: #cb4b16;">{</span><span token="var">result</span><span style="color: #586e75;font-weight: bold;">!r</span><span style="color: #cb4b16;">}</span><span style="color: #2aa198;">'</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span token="var">result</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">setattr</span>(<span token="var">wrapper</span>, <span style="color: #2aa198;">'tracing'</span>, <span style="color: #b58900;">True</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span token="var">wrapper</span></div><div>&nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">for</span> <span token="var">attr_name</span> <span style="color: #859900;font-weight: bold;">in</span> <span token="var">dir</span>(<span token="var">cls</span>):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">attr</span> <span style="color: #859900;">=</span> <span token="var">getattr</span>(<span token="var">cls</span>, <span token="var">attr_name</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">if</span> <span style="color: #859900;">not</span> <span token="var">attr_name</span>.<span token="var">startswith</span>(<span style="color: #2aa198;">'_'</span>) <span style="color: #859900;">and</span> <span token="var">callable</span>(<span token="var">attr</span>):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="var">setattr</span>(<span token="var">cls</span>, <span token="var">attr_name</span>, <span token="var">traced_func</span>(<span token="var">attr</span>))</div><div>&nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span token="var">cls</span></div></div>
+
+<p>实际上这个函数可以看作一个嵌套的装饰器：它本身用于装饰一个类，而它内部的函数用于装饰方法。从以上示例也可以看出类和函数被装饰的特点：因为不能直接修改函数的代码，所以装饰函数的装饰器只能重新提供一个函数提供额外的代码；而类的属性和方法本身就可以访问或修改，所以装饰类的装饰器就可以直接改动类，而无需定义一个新的类。</p>
+
+<p>一个更复杂的情况涉及到装饰类的装饰器还带有参数的时候。在有了这么多装饰器的处理经验后，处理这种问题就很简单了。例如，如果要给以上实现的装饰器加一个参数指定结果输出到哪个文件中，那么装饰器的实现只要再包裹一层函数接收这个参数即可：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">def</span> <span token="var">trace_to</span>(fp):</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span token="var">trace</span>(cls):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span token="var">traced_func</span>(func):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #cb4b16;">...</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span token="var">wrapper</span>(<span style="color: #859900;">*</span>args, <span style="color: #859900;">**</span>kwargs):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #cb4b16;">...</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; fp.write(<span style="color: #586e75;font-weight: bold;">f</span><span style="color: #2aa198;">'</span><span style="color: #cb4b16;">{</span>func.__name__<span style="color: #cb4b16;">}{</span>args, kwargs<span style="color: #586e75;font-weight: bold;">!r</span><span style="color: #cb4b16;">}</span><span style="color: #2aa198;"> -&gt; </span><span style="color: #cb4b16;">{</span>result<span style="color: #586e75;font-weight: bold;">!r</span><span style="color: #cb4b16;">}\n</span><span style="color: #2aa198;">'</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span token="var">wrapper</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #cb4b16;">...</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span token="var">cls</span></div><div>&nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span token="var">trace</span></div></div>
+
+<p>这个装饰器可以说是目前看到的最复杂的函数了，它是一个整整嵌套了四层的嵌套函数，并且第一层函数的参数直到第四层才被用到。在定义了一个如此复杂装饰器的同时，这个装饰器也非常强大，它可以在不重写方法的同时，批量为类的方法添加上额外的功能：</p>
+
+<div class="vscode-block"><div><span token="var">log_file</span> <span style="color: #859900;">=</span> <span token="var">open</span>(<span style="color: #2aa198;">'trace.log'</span>, <span style="color: #2aa198;">'a'</span>, encoding<span style="color: #859900;">=</span><span style="color: #2aa198;">'utf8'</span>)</div><br/><div><span token="var">@</span><span token="var">trace_to</span>(<span token="var">log_file</span>)</div><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">TracedList</span>(<span style="color: #cb4b16;">list</span>):</div><div>&nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">pass</span></div><br/><div><span token="var">ls</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">TracedList</span>(<span style="color: #cb4b16;">range</span>(<span style="color: #d33682;">5</span>))</div><div><span token="var">ls</span>.<span token="var">append</span>(<span style="color: #d33682;">10</span>)</div><div><span token="var">ls</span>.<span token="var">extend</span>(<span token="var">ls</span>.<span token="var">copy</span>())</div><div><span token="var">ls</span>.<span token="var">pop</span>()</div><div><span token="var">ls</span>.<span token="var">sort</span>(key<span style="color: #859900;">=</span><span style="color: #586e75;font-weight: bold;">lambda</span> e: <span token="var">abs</span>(e<span style="color: #859900;">-</span><span style="color: #d33682;">5</span>), reverse<span style="color: #859900;">=</span><span style="color: #b58900;">True</span>)</div></div>
+
+<div class="codeblock code-console">$ python decorator.py
+$ cat trace.log
+append(([0, 1, 2, 3, 4, 10], 10), {}) -&gt; None
+copy(([0, 1, 2, 3, 4, 10],), {}) -&gt; [0, 1, 2, 3, 4, 10]
+extend(([0, 1, 2, 3, 4, 10, 0, 1, 2, 3, 4, 10], [0, 1, 2, 3, 4, 10]), {}) -&gt; None
+pop(([0, 1, 2, 3, 4, 10, 0, 1, 2, 3, 4],), {}) -&gt; 10
+sort(([0, 10, 0, 1, 1, 2, 2, 3, 3, 4, 4],), {'key': &lt;function &lt;lambda&gt; at 0x0000015FCBCAB8B0&gt;, 'reverse': True}) -&gt; None
+</div>
+
+<p>一般情况下不用定义如此复杂的装饰器，直接对函数使用装饰器也会让代码的可读性更高。不过在<a>下一节</a>中，会看到 <code>functools</code> 模块提供的一个装饰类的装饰器，以及它是如何简化类的实现的。</p>
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+					
+
+<h4 class="heading">
+	<i class="fas fa-hand-point-right"></i>You may also like...</h4>
+
+<ul class="related-posts group">
+	
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/web/web-scraping/xpath-tutorial/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/11/XPath简单入门-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" fetchpriority="high" srcset="/wp-content/uploads/2022/11/XPath简单入门-520x293.jpg 520w, /wp-content/uploads/2022/11/XPath简单入门-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/web/web-scraping/xpath-tutorial/" rel="bookmark">XPath简单入门</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/programming/python-fp/03-functional-programming/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-520x293.jpg 520w, /wp-content/uploads/2022/05/Python函数式编程03-高阶函数与匿名函数-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/programming/python-fp/03-functional-programming/" rel="bookmark">Python函数式编程03 高阶函数与匿名函数</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		<li class="related">
+		<article class="related-post">
+
+			<div class="related-thumbnail">
+				<a href="/data-science/via-python/numpy02-reshape-arrays/">
+											<img width="520" height="293" src="/wp-content/uploads/2022/10/Python数据分析-numpy02数组变形与组合-520x293.jpg" class="attachment-instorm-medium size-instorm-medium wp-post-image" alt="" decoding="async" srcset="/wp-content/uploads/2022/10/Python数据分析-numpy02数组变形与组合-520x293.jpg 520w, /wp-content/uploads/2022/10/Python数据分析-numpy02数组变形与组合-950x534.jpg 950w" sizes="(max-width: 520px) 100vw, 520px" />																								</a>
+			</div><!--/.post-thumbnail-->
+			
+			<div class="related-inner">
+				
+				<h4 class="related-title">
+					<a href="/data-science/via-python/numpy02-reshape-arrays/" rel="bookmark">numpy02:数组变形与组合</a>
+				</h4><!--/.post-title-->
+			
+			</div><!--/.related-inner-->
+
+		</article>
+	</li><!--/.related-->
+		
+</ul><!--/.post-related-->
+
+					
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"></li>
+		<li class="previous"><a href="/programming/python-oop/05-custom-types/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>Python面向对象编程05-特殊方法与自定义类</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/programming/python-oop/07-callable-objects/" aria-current="page">Python面向对象编程07-可调用对象与装饰器</a>
+											<span class="post-date">2024年3月1日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/05-custom-types/">Python面向对象编程05-特殊方法与自定义类</a>
+											<span class="post-date">2024年2月9日</span>
+									</li>
+											<li>
+					<a href="/programming/python/library-logging/">Python标准库logging：日志记录</a>
+											<span class="post-date">2024年1月23日</span>
+									</li>
+											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
+					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
+											<span class="post-date">2023年6月19日</span>
+									</li>
+											<li>
+					<a href="/data-science/machine-learning/06-module-validation/">机器学习-参数选择与模型验证</a>
+											<span class="post-date">2023年4月15日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (23)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (5)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (6)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2024/03/'> 2024年3月 &nbsp;(1)</option>
+	<option value='/2024/02/'> 2024年2月 &nbsp;(1)</option>
+	<option value='/2024/01/'> 2024年1月 &nbsp;(2)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

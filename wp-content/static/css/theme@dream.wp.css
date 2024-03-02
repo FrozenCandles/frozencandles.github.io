@@ -1,5 +1,7 @@
 
-
+table tr.row-emphasis {
+    background-color: #ddd;
+}
 
 .entry code {
     font-family: Consolas, 'Courier New', monospace;
@@ -42,4 +44,7 @@ blockquote p {
 
 
 
-
+.codeblock,
+.codeblock-sidebyside {
+    border: 1px solid silver;
+}
