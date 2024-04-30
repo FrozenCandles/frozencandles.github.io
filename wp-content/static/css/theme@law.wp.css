@@ -134,7 +134,8 @@
 
 .entry li { margin: 0; }
 
-.entry ol, ul { padding-left: 30px; }
+.entry ol, 
+.entry ul { padding-left: 30px; }
 
 .entry ol ol li > *    { font-weight: normal; }
 .entry ol ol ol li > * { font-weight: normal; }

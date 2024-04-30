@@ -1,6 +1,5 @@
 
 
-
 #reading-progress {
     position: fixed;
     left: 0;
@@ -16,7 +15,7 @@
 .codeblock,
 .vscode-block {
     margin-bottom: 15px;
-    font-family: Consolas, 'Courier New', monospace;
+    font-family: var(--font-code);
     font-weight: normal;
     font-size: 14px;
     line-height: 19px;
@@ -36,11 +35,15 @@ div.codeblock-sidebyside > * {
     white-space: pre-wrap;
 }
 
+.code-nowrap {
+    white-space: nowrap;
+}
+
 /* div.code-highlight {
     margin-bottom: 15px;
     padding: 5px;
     border: 1px solid silver;
-    font-family: Consolas, 'Courier New', monospace;
+    font-family: var(--font-code);
     font-weight: normal;
     font-size: 14px;
     line-height: 19px;
@@ -49,7 +52,7 @@ div.codeblock-sidebyside > * {
 
 div.code-template {
     color: black;
-    font-family: Consolas, 'Courier New', monospace;
+    font-family: var(--font-code);
     padding: 5px;
     border: 1px solid black;
     margin-bottom: 15px;
@@ -61,7 +64,7 @@ div.code-template span.token-comment { color: gray; }
 div.code-console {
     color: white;
     background-color: black;
-    font-family: Consolas, 'Courier New', monospace;
+    font-family: var(--font-code);
     padding: 5px;
     margin-bottom: 15px; 
     font-size: 14px;
@@ -72,7 +75,6 @@ div.code-console span.token-venv { color: lightgreen; }
 div.code-console span.token-succ { color: lightgreen; }
 div.code-console span.token-comd { color: yellow;     }
 div.code-console span.token-label { color: skyblue; }
-
 .token-file  { color: rgb(0, 119, 255); }
 .token-error { color: red; }
 
@@ -229,12 +231,14 @@ section.codeblock.compare > *:last-child {
     float: left;
     /* background-color: white; */
     color: rgb(97, 97, 97);
-    font-family: Consolas, 'Courier New', monospace; font-size: 14px; font-style: normal;
+    font-family: var(--font-code);
+    font-size: 14px; font-style: normal;
     line-height: 19px;
 }
 .jupyter .jupyter-output {
     color: rgb(97, 97, 97);
-    font-family: Consolas, 'Courier New', monospace; font-size: 14px; font-style: normal;
+    font-family: var(--font-code);
+    font-size: 14px; font-style: normal;
     line-height: 19px;
     /* margin-bottom: 15px;  */
     padding-left: 70px;
@@ -336,10 +340,10 @@ section.codeblock.compare > *:last-child {
 .attribute-table .attribute-table__value .code-font {
     font-size: 14px;
 }
-.attribute-table .attribute-table__title::before {
+/*.attribute-table .attribute-table__title::before {
     content: 'CSS属性 ';
     font-size: 18px; 
-}
+}*/
 
 
 div.widget.widget_custom_html div#tableofcontents h4 { font-weight: bold; font-size: 18px; text-align: center; margin-bottom: 10px; }

@@ -37,9 +37,18 @@ category = {
 <div class="wrapper">
 
     <div id="assist">
-        <div id="toc"></div>
+        <div class="assist-toggle-button">≡</div>
+        <div class="assist-widget">
+            <h5>操作</h5>
+            <div id="assist-button-group"></div>
+        </div>
+        <div class="assist-widget">
+            <h5>Table of Contents</h5>
+            <div id="toc"></div>
+        </div>
         {% if category %}
         <div class="assist-widget">
+            <h5>系列文章</h5>
             <ul>
                 {% for page in category.pages %}
                 <li><a href="{{ page.href }}">{{ page.title }}</a></li>
@@ -53,24 +62,27 @@ category = {
 
 </div>
 
-<script>
-    addImageScalar();
+<script id="script-assist">
     addTableOfContents("toc");
-    //checkArticle();
 
     addAssistButton('Check Article', onCheckArticle);
     addAssistButton('Add Image Scalar', addImageScalar);
     addAssistButton('Close Image Scalar', function() {
         for (let elem of document.getElementsByClassName('imagescalar-content')) {
             elem.style.display = 'none';
-
         }
     });
-
+    addImageScalar();
     adjustImageSize();
+
     //document.addEventListener('DOMContentLoaded', adjustImageSize);
 
-    document.title = document.getElementsByTagName('H1')[0].innerHTML
+    const titleNode = document.querySelector('h1')
+    document.title = titleNode ? titleNode.innerHTML : 'Document';
+
+    document.querySelector('.assist-toggle-button').addEventListener('click', function() {
+        document.getElementById('assist').classList.toggle('selection-toggle');
+    });
 </script>
 </body>
 </html>

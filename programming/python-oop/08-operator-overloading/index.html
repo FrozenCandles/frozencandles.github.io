@@ -1,0 +1,1101 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Python面向对象编程08-运算符重载 - 冰封残烛的个人小站</title>
+	<meta name="description" content="本节介绍 Python 中运算符重载(operator overload)的概念，Python 可以通过为对象实现运算符相关的特殊方法，使用运算符就是在调用这些特殊方法，从而使对象操作更加优雅。除此之外，本文还介绍运算符反向重载、赋值运算符重载、关系运算符重载时需要注意的问题。" />
+	<link rel="canonical" href="/programming/python-oop/08-operator-overloading/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Python面向对象编程08-运算符重载 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="本节介绍 Python 中运算符重载(operator overload)的概念，Python 可以通过为对象实现运算符相关的特殊方法，使用运算符就是在调用这些特殊方法，从而使对象操作更加优雅。除此之外，本文还介绍运算符反向重载、赋值运算符重载、关系运算符重载时需要注意的问题。" />
+	<meta property="og:url" content="/programming/python-oop/08-operator-overloading/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2024-04-07T05:29:28+00:00" />
+	<meta property="article:modified_time" content="2024-04-30T08:03:22+00:00" />
+	<meta property="og:image" content="/wp-content/uploads/2024/04/python-oop@08-operator-overloading.jpg" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="720" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta name="author" content="Hello" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="6分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebPage",
+	            "@id": "/programming/python-oop/08-operator-overloading/",
+	            "url": "/programming/python-oop/08-operator-overloading/",
+	            "name": "Python面向对象编程08-运算符重载 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/programming/python-oop/08-operator-overloading/#primaryimage"
+	            },
+	            "image": {
+	                "@id": "/programming/python-oop/08-operator-overloading/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/2024/04/python-oop@08-operator-overloading.jpg",
+	            "datePublished": "2024-04-07T05:29:28+00:00",
+	            "dateModified": "2024-04-30T08:03:22+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "本节介绍 Python 中运算符重载(operator overload)的概念，Python 可以通过为对象实现运算符相关的特殊方法，使用运算符就是在调用这些特殊方法，从而使对象操作更加优雅。除此之外，本文还介绍运算符反向重载、赋值运算符重载、关系运算符重载时需要注意的问题。",
+	            "breadcrumb": {
+	                "@id": "/programming/python-oop/08-operator-overloading/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/programming/python-oop/08-operator-overloading/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/programming/python-oop/08-operator-overloading/#primaryimage",
+	            "url": "/wp-content/uploads/2024/04/python-oop@08-operator-overloading.jpg",
+	            "contentUrl": "/wp-content/uploads/2024/04/python-oop@08-operator-overloading.jpg",
+	            "width": 1200,
+	            "height": 720
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/programming/python-oop/08-operator-overloading/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "Python面向对象编程08-运算符重载"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/1357" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=1357' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython-oop%2F08-operator-overloading%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython-oop%2F08-operator-overloading%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?432b66336cb23bd6712cecabe6d808eb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<link rel="stylesheet" href="/wp-content/static/css/theme@evernote.wp.css">
+
+<style>
+    div.vscode-block { color: #657B83; background-color: #FDF6E3; }
+    div.vscode-block span[token="var"] { color: #268bd2; }
+</style>
+
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-1357 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/all/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-1357" class="post-1357 post type-post status-publish format-standard has-post-thumbnail hentry category-python-oop">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">Python面向对象编程08-运算符重载</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/programming/python-oop/" rel="category tag">Python面向对象编程</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2024年4月7日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+<h2>运算符重载</h2>
+
+<h3>运算符重载的概念</h3>
+
+<p>在 Python 中，可以对两个列表使用加法运算符 <code>+</code> ，例如：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; [1, 2] + [5, 6]
+[1, 2, 5, 6]
+</div>
+
+<p>结果显示，加法运算符可以拼接两个序列。还可以对序列和整数使用乘法运算符 <code>*</code> 例如：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; (2, 3) * 3
+(2, 3, 2, 3, 2, 3)
+</div>
+
+<p>结果显示，序列和整数的&ldquo;乘法运算&rdquo;表示重复序列。</p>
+
+<p>这种设计虽然方便了序列的操作，但是看起来完全背离了运算符的数学本义：为什么对两个序列使用加法运算符的结果不是序列内的元素对应相加？为什么对序列和整数使用乘法运算符的结果不是序列内的元素和整数相乘？实际上，Python 有一个第三方库 NumPy 就是这样设计的：NumPy 中的两个数组相加就是将数组的元素相加，数组和数值相乘就是将元素和数值相乘：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; import numpy as np
+&gt;&gt;&gt; np.array([1, 2]) + np.array([5, 6])
+array([6, 8])
+&gt;&gt;&gt; np.array([2, 3, 4]) * 3            
+array([ 6,  9, 12])
+</div>
+
+<p><a class="link-internal" href="/programming/python-oop/05-custom-types">前几节</a>介绍了 <code>property</code> 和 <code>__getattr__</code> 等特殊方法，既然它们都可以彻底改变对象的属性查找行为，那么显然也有类似的特殊方法决定了一个对象面对运算符的行为。这就是<strong>运算符重载</strong>的概念，Python 可以对特定的对象实现运算符重载，使用运算符来表示对象的一些操作方式，从而使对象操作更加优雅。</p>
+
+<p>对于 Python 用的不多的数据类型 <code>set</code> ，其支持的运算符操作更多。例如，按位与运算符 <code>&amp;</code> 表示对两个集合取交集（同时属于两个集合的元素）：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; {1, 2, 4, 5} &amp; {2, 3, 5, 7}
+{2, 5}
+</div>
+
+<p>或者使用按位或 <code>|</code> 运算符表示两个集合的并集：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; {1, 2, 4, 5} | {2, 3, 5, 7} 
+{1, 2, 3, 4, 5, 7}
+</div>
+
+<p>除此之外，减法运算符 <code>-</code> 表示差集，异或运算符 <code>^</code> 表示对称差集。这种表达方式既便于书写，也便于阅读。</p>
+
+<p>有了运算符重载的概念后，接下来介绍运算符重载的方法。</p>
+
+<h3>如何重载运算符</h3>
+
+<p>下面以最简单的加法运算符 <code>+</code> 来说明运算符是如何完成重载的。</p>
+
+<p>Python 的运算符实质上是通过调用对象的特殊方法来实现的。对于加法运算符来说，对应的重载方法是 <code>.__add__()</code> 。</p>
+
+<p>接下来先介绍的都是二元运算符。在这种情况下，运算符操作的都是两个对象：左操作数和右操作数。因此，对应运算符的特殊方法也需要拥有两个参数： 一个是 <code>self</code> ，代表用于引出运算的左操作数；另一个参数常记为 <code>other</code> ，代表用于参与运算的右操作数。因此，该方法的完整参数列表为 <code>.__add__(self, other)</code> ，最后只需要在该方法内返回一个合适的值，该值便作为运算符运算后的结果。</p>
+
+<p>这里需要注意，<code>.__add__()</code> 重载方法会被运算左侧操作数调用，也就是说需要由左操作数实现这个方法。因此参数 <code>self</code> 就代表左操作数实例本身，而右操作数仅仅是作为第二个参数传入，即运算 <code>x + y</code> 的实质是调用 <code>x.__add__(y)</code> 。</p>
+
+<p>下表列出了所有的二元运算符及其重载方法：</p>
+
+<table>
+    <tbody><tr>
+        <th>运算符</th>
+        <th>对应方法</th>
+        <th>本义</th>
+        <th>说明</th>
+    </tr>
+    <tr>
+        <td class="code-font">+</td>
+        <td class="code-font">__add__()</td>
+        <td>加法</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class="code-font">-</td>
+        <td class="code-font">__sub__()</td>
+        <td>减法</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class="code-font">*</td>
+        <td class="code-font">__mul__()</td>
+        <td>乘法</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class="code-font">@</td>
+        <td class="code-font">__matmul__()</td>
+        <td>矩阵相乘</td>
+        <td>Python3.5 开始支持</td>
+    </tr>
+    <tr>
+        <td class="code-font">/</td>
+        <td class="code-font">__truediv__()</td>
+        <td>除法</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class="code-font">//</td>
+        <td class="code-font">__floordiv__()</td>
+        <td>整数相除</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class="code-font">%</td>
+        <td class="code-font">__mod__()</td>
+        <td>取余</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class="code-font">divmod()</td>
+        <td class="code-font">__divmod__()</td>
+        <td>除法并取余</td>
+        <td>由函数支持实现，而非运算符</td>
+    </tr>
+    <tr>
+        <td><span class="code-font">**</span> 或 <span class="code-font">pow()</span></td>
+        <td class="code-font">__pow__()</td>
+        <td>乘方</td>
+        <td>由于 <code>pow()</code> 函数支持第三个参数，该方法需要支持第三个参数 <code><em>modulo</em></code> 。详见<a>对 <code>pow()</code> 函数的描述</a>。</td>
+    </tr>
+    <tr>
+        <td class="code-font">&lt;&lt;</td>
+        <td class="code-font">__lshift__()</td>
+        <td>左移位</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class="code-font">&gt;&gt;</td>
+        <td class="code-font">__rshift__()</td>
+        <td>右移位</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class="code-font">&amp;</td>
+        <td class="code-font">__and__()</td>
+        <td>按位与</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class="code-font">|</td>
+        <td class="code-font">__or__()</td>
+        <td>按位或</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class="code-font">^</td>
+        <td class="code-font">__xor__()</td>
+        <td>按位异或</td>
+        <td></td>
+    </tr>
+</tbody></table>
+
+<p>例如，以下实现了一个针对<a class="link-internal" href="/math/linear-algebra/01-vectors">三维向量</a>运算的 <code>Vector3D</code> 类，针对向量加法、减法和叉乘实现了运算符重载，并使用 <code>__str__</code> 特殊方法让结果更清晰：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Vector3D</span>:</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__add__</span>(self, other):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #cb4b16;">Vector3D</span>(<span style="color: #268bd2;">self</span>.x <span style="color: #859900;">+</span> other.x, <span style="color: #268bd2;">self</span>.y <span style="color: #859900;">+</span> other.y, <span style="color: #268bd2;">self</span>.z <span style="color: #859900;">+</span> other.z)</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__sub__</span>(self, other):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #cb4b16;">Vector3D</span>(<span style="color: #268bd2;">self</span>.x <span style="color: #859900;">-</span> other.x, <span style="color: #268bd2;">self</span>.y <span style="color: #859900;">-</span> other.y, <span style="color: #268bd2;">self</span>.z <span style="color: #859900;">-</span> other.z)</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__matmul__</span>(self, other):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #cb4b16;">Vector3D</span>(<span style="color: #268bd2;">self</span>.y <span style="color: #859900;">*</span> other.z <span style="color: #859900;">-</span> <span style="color: #268bd2;">self</span>.z <span style="color: #859900;">*</span> other.y, </div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.z <span style="color: #859900;">*</span> other.x <span style="color: #859900;">-</span> <span style="color: #268bd2;">self</span>.x <span style="color: #859900;">*</span> other.z, </div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.x <span style="color: #859900;">*</span> other.y <span style="color: #859900;">-</span> <span style="color: #268bd2;">self</span>.y <span style="color: #859900;">*</span> other.x)</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__str__</span>(self):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #586e75;font-weight: bold;">f</span><span style="color: #2aa198;">'Vector(</span><span style="color: #cb4b16;">{</span><span style="color: #268bd2;">self</span>.x<span style="color: #cb4b16;">}</span><span style="color: #2aa198;">, </span><span style="color: #cb4b16;">{</span><span style="color: #268bd2;">self</span>.y<span style="color: #cb4b16;">}</span><span style="color: #2aa198;">, </span><span style="color: #cb4b16;">{</span><span style="color: #268bd2;">self</span>.z<span style="color: #cb4b16;">}</span><span style="color: #2aa198;">)'</span></div><div>&nbsp; &nbsp; <span style="color: #268bd2;">__repr__</span> <span style="color: #859900;">=</span> <span style="color: #268bd2;">__str__</span></div></div>
+
+<p>这样就可以直接用运算符操作向量实例了：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; v01 = Vector3D(3, 5, 1)
+&gt;&gt;&gt; v02 = Vector3D(2, 4, 3)
+&gt;&gt;&gt; v01 + v02
+Vector(5, 9, 4)
+&gt;&gt;&gt; v01 - v02
+Vector(1, 1, -2)
+&gt;&gt;&gt; v01 @ v02
+Vector(11, -7, 2)
+</div>
+
+<p>重载运算符时，它的运算对象可能是不同类型的数据。例如向量的乘法，和它相乘的对象可能是一个数值，也可能是另一个向量。这时就需要在方法内使用 <code>isinstance()</code> 函数判断另一个对象的类型，并使用不同的计算方式：</p>
+
+<div class="vscode-block"><div><span style="color: #859900;font-weight: bold;">from</span> <span style="color: #cb4b16;">numbers</span> <span style="color: #859900;font-weight: bold;">import</span> <span style="color: #cb4b16;">Real</span></div><div>&nbsp; &nbsp; </div><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Vector3D</span>:</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__mul__</span>(self, other):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">if</span> <span style="color: #268bd2;">isinstance</span>(other, <span style="color: #cb4b16;">Real</span>):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #cb4b16;">Vector3D</span>(<span style="color: #268bd2;">self</span>.x <span style="color: #859900;">*</span> other, <span style="color: #268bd2;">self</span>.y <span style="color: #859900;">*</span> other, <span style="color: #268bd2;">self</span>.z <span style="color: #859900;">*</span> other)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">elif</span> <span style="color: #268bd2;">isinstance</span>(other, <span style="color: #cb4b16;">Vector3D</span>):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">self</span>.x <span style="color: #859900;">*</span> other.x <span style="color: #859900;">+</span> <span style="color: #268bd2;">self</span>.y <span style="color: #859900;">*</span> other.y <span style="color: #859900;">+</span> <span style="color: #268bd2;">self</span>.z <span style="color: #859900;">*</span> other.z</div></div>
+
+<p>这样，在应用 <code>*</code> 运算符时，<code>Vector3D</code> 可以根据右侧操作数的类型采用不同的计算方式：向量乘向量则返回点积，向量乘以一个数则返回标量积：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; v01 * v02
+29
+&gt;&gt;&gt; v01 * 2
+Vector(6, 10, 2)
+</div>
+
+<p>Python 还对运算符重载过程中的一个细节作了规定：如果一个对象不知道该如何处理右侧操作数，那么它应该返回一个特殊的对象 <code>NotImplemented</code> 。Python 解释器在接收到这个特殊的对象后，就会自动对这次运算结果抛出 <var class="error">TypeError</var> 异常，并自动生成合适的异常信息。因此，以上实现的 <code>.__mul__()</code> 最后还需要加上这么一句：</p>
+
+<div class="vscode-block"><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">else</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">NotImplemented</span></div></div>
+
+<p>这样程序就能处理不合理的乘法操作了：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; v01 * [2, 3, 4]
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+TypeError: can't multiply sequence by non-int of type 'Vector3D'
+</div>
+
+<blockquote>
+    <p>注意区分 <code>NotImplemented</code> 对象和 <var class="error">NotImplementedError</var> 异常，后者用在函数或方法中，提示使用者该函数并未实现，或者方法必须要被重写。</p>
+</blockquote>
+
+<p>如果一个重载的运算符可以参与对许多类型的运算，那么就需要写很多 <code>elif</code> 条件。这种情况下，可以使用<a class="link-internal" href="/programming/python-fp/10-library-functools"> <code>functools</code> 模块</a>中的单分派函数 <code>singledispatchmethod</code>（因为运算符重载只有一个额外参数，非常适合单分派的应用场合）。</p>
+
+<p>使用单分派函数时，在方法内部只需要简单返回一个 <code>NotImplemented</code> ，作为所有类型匹配失败之后的 fallback 机制：</p>
+
+<div class="vscode-block"><div><span style="color: #859900;font-weight: bold;">from</span> <span style="color: #cb4b16;">functools</span> <span style="color: #859900;font-weight: bold;">import</span> <span style="color: #cb4b16;">singledispatchmethod</span></div><div>&nbsp; &nbsp; </div><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Vector3D</span>:</div><div>&nbsp; &nbsp; <span style="color: #268bd2;">@</span><span style="color: #cb4b16;">singledispatchmethod</span></div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__mul__</span>(self, other):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">NotImplemented</span></div></div>
+
+<p>然后在附近找个地方注册一下不同类型对应的分派函数：</p>
+
+<div class="vscode-block"><div><span style="color: #859900;font-weight: bold;">from</span> <span style="color: #cb4b16;">collections</span>.<span style="color: #cb4b16;">abc</span> <span style="color: #859900;font-weight: bold;">import</span> <span style="color: #cb4b16;">Sequence</span></div><br/><div><span style="color: #268bd2;">@</span><span style="color: #cb4b16;">Vector3D</span><span style="color: #268bd2;">.</span><span style="color: #268bd2;">__mul__</span><span style="color: #268bd2;">.register</span></div><div><span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__dispatch</span>(self, other: <span style="color: #cb4b16;">Real</span>):</div><div>&nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #cb4b16;">Vector3D</span>(<span style="color: #268bd2;">self</span>.x <span style="color: #859900;">*</span> other, <span style="color: #268bd2;">self</span>.y <span style="color: #859900;">*</span> other, <span style="color: #268bd2;">self</span>.z <span style="color: #859900;">*</span> other)</div><div><span style="color: #268bd2;">@</span><span style="color: #cb4b16;">Vector3D</span><span style="color: #268bd2;">.</span><span style="color: #268bd2;">__mul__</span><span style="color: #268bd2;">.register</span></div><div><span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__dispatch</span>(self, other: <span style="color: #cb4b16;">Vector3D</span>):</div><div>&nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">self</span>.x <span style="color: #859900;">*</span> other.x <span style="color: #859900;">+</span> <span style="color: #268bd2;">self</span>.y <span style="color: #859900;">*</span> other.y <span style="color: #859900;">+</span> <span style="color: #268bd2;">self</span>.z <span style="color: #859900;">*</span> other.z</div><div><span style="color: #268bd2;">@</span><span style="color: #cb4b16;">Vector3D</span><span style="color: #268bd2;">.</span><span style="color: #268bd2;">__mul__</span><span style="color: #268bd2;">.register</span></div><div><span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__dispatch</span>(self, other: <span style="color: #cb4b16;">Sequence</span>):</div><div>&nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">self</span>.x <span style="color: #859900;">*</span> other[<span style="color: #d33682;">0</span>] <span style="color: #859900;">+</span> <span style="color: #268bd2;">self</span>.y <span style="color: #859900;">*</span> other[<span style="color: #d33682;">1</span>] <span style="color: #859900;">+</span> <span style="color: #268bd2;">self</span>.z <span style="color: #859900;">*</span> other[<span style="color: #d33682;">2</span>]</div></div>
+
+<p>现在这个向量类不仅支持和序列相乘（将序列看作一个向量），而且以后如果还需要继续扩展支持的类型也会方便得多。</p>
+
+<h3>反向重载运算符</h3>
+
+<p>在有了运算符重载的知识以后，就可以明白为什么同样是乘以一个整数，Python 内置的列表和一些第三方库的数组结果完全不同，原因是列表和数值实现了不同的 <code>.__mul__()</code> 方法，它们分别实现了不同的处理逻辑。</p>
+
+<p>但是还有一个问题没有解决：之前实现的重载运算符调用的都是由左操作数实现相应的方法，这就意味着交换两个操作数的位置，运算符可能会不满足交换律，甚至直接出现错误：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; 2 * v01
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+TypeError: unsupported operand type(s) for *: 'int' and 'Vector3D'
+</div>
+
+<p>为了使运算符满足交换律，每针对两种不同类型重载一次运算符，就需要在左右操作数两侧类型都补充针对这种操作符的处理逻辑。但很显然，这种方法不仅费时费力，而且效率低下，尤其是对内置类型不好处理。</p>
+
+<p>这就涉及到 Python 运算符的反向重载问题了：当一个对象通过运算符与右侧操作数运算时，如果发现该对象没有重载对应的运算符，那么会尝试调用右侧操作数对象的反向重载运算符方法。下表列出了所有运算符对应的反向重载运算符方法：</p>
+
+<table>
+    <tbody><tr>
+        <th>运算符</th>
+        <th>对应反向重载方法</th>
+        <th>运算符</th>
+        <th>对应反向重载方法</th>
+    </tr>
+    <tr>
+        <td class="code-font">+</td>
+        <td class="code-font">__radd__()</td>
+        <td class="code-font">divmod()</td>
+        <td class="code-font">__rdivmod__()</td>
+    </tr>
+    <tr>
+        <td class="code-font">-</td>
+        <td class="code-font">__rsub__()</td>
+        <td><span class="code-font">**</span> 或 <span class="code-font">pow()</span></td>
+        <td class="code-font">__rpow__()</td>
+    </tr>
+    <tr>
+        <td class="code-font">*</td>
+        <td class="code-font">__rmul__()</td>
+        <td class="code-font">&lt;&lt;</td>
+        <td class="code-font">__rlshift__()</td>
+    </tr>
+    <tr>
+        <td class="code-font">@</td>
+        <td class="code-font">__rmatmul__()</td>
+        <td class="code-font">&gt;&gt;</td>
+        <td class="code-font">__rrshift__()</td>
+    </tr>
+    <tr>
+        <td class="code-font">/</td>
+        <td class="code-font">__rtruediv__()</td>
+        <td class="code-font">&amp;</td>
+        <td class="code-font">__rand__()</td>
+    </tr>
+    <tr>
+        <td class="code-font">//</td>
+        <td class="code-font">__rfloordiv__()</td>
+        <td class="code-font">^</td>
+        <td class="code-font">__rxor__()</td>
+    </tr>
+    <tr>
+        <td class="code-font">%</td>
+        <td class="code-font">__rmod__()</td>
+        <td class="code-font">|</td>
+        <td class="code-font">__ror__()</td>
+    </tr>
+</tbody></table>
+
+<p>可以看出，运算符对应的反向重载方法就是相比起普通重载方法的名称多了一个 <span class="code-font">r</span>（代表 reflected ，也可以理解为 reversed 或 right ）。</p>
+
+<p>假设进行运算 <code>x + y</code>（或者任意的二元运算符），首先会尝试调用运算方法 <code>x.__add__(y)</code> ；如果发现 <code>x</code> 没有实现方法 <code>.__add__()</code> 或者该方法返回了 <code>NotImplemented</code> ，那么会继续尝试调用 <code>y</code> 的反向重载方法 <code>.__radd__()</code> ，计算 <code>y.__radd__(x)</code> 。如果 <code>y</code> 类型的 <code>.__radd__()</code> 也不存在或返回了 <code>NotImplemented</code> ，那就确实不支持两者的运算了。</p>
+
+<p>所以，重载运算符返回 <code>NotImplemented</code> 的意义就在于触发反向重载机制。如果直接抛出 <var class="error">TypeError</var> 异常，就不会触发反向重载机制了。</p>
+
+
+
+<p>一般来说，满足运算交换律的类可以简单地将反向重载方法作为重载方法的一个引用：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Vector3D</span>: &nbsp; &nbsp;</div><div>&nbsp; &nbsp; <span style="color: #268bd2;">__radd__</span> <span style="color: #859900;">=</span> <span style="color: #268bd2;">__add__</span></div><div>&nbsp; &nbsp; <span style="color: #268bd2;">__rmul__</span> <span style="color: #859900;">=</span> <span style="color: #268bd2;">__mul__</span></div></div>
+
+<p>现在任意顺序的运算都能正常处理了：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; 2 * v01
+Vector(6, 10, 2)
+</div>
+
+<p>Python 解释器在处理反向运算符重载时还有一些比较有意思的细节：</p>
+
+<ul>
+    <li>传入了三个参数的 <code>pow()</code> 函数不会试图调用反向重载的 <code>.__rpow__()</code> 方法（官方文档说这样处理逻辑太复杂了）</li>
+    <li>显式调用运算对象的重载方法会因为方法不存在而引起 <var class="error">AttributeError</var> ，或者在不支持运算时直接得到变量 <code>NotImplemented</code> ，也不会发生任何反向计算过程</li>
+    <li>如果右侧运算对象的类型是左侧运算对象的子类，并且子类实现了反向运算符重载运算方法，那么右侧运算对象的反向重载方法会优先于左侧的重载方法调用</li>
+</ul>
+
+<p>最后一点的意义是，继承的子类可以通过反向重载运算符覆盖父类的运算方法。例如，假设要让 Python 列表的相加就表示对应元素相加而不是列表拼接，那么只需要继承内置的 <code>list</code> 并重写两个加法方法，这样在任何顺序下都以子类的重载方法为准：</p>
+
+<div class="vscode-block"><div><span style="color: #859900;font-weight: bold;">from</span> <span style="color: #cb4b16;">operator</span> <span style="color: #859900;font-weight: bold;">import</span> <span style="color: #268bd2;">add</span></div><div><span style="color: #859900;font-weight: bold;">from</span> <span style="color: #cb4b16;">itertools</span> <span style="color: #859900;font-weight: bold;">import</span> <span style="color: #cb4b16;">starmap</span></div><br/><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">ArithmeticList</span>(<span style="color: #cb4b16;">list</span>):</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__add__</span>(self, other: <span style="color: #cb4b16;">Sequence</span>):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #cb4b16;">ArithmeticList</span>(<span style="color: #cb4b16;">starmap</span>(<span style="color: #268bd2;">add</span>, <span style="color: #cb4b16;">zip</span>(<span style="color: #268bd2;">self</span>, other)))</div><div>&nbsp; &nbsp; <span style="color: #268bd2;">__radd__</span> <span style="color: #859900;">=</span> <span style="color: #268bd2;">__add__</span></div></div>
+
+<p>效果为：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; [3, 4, 6] + ArithmeticList([1, 5, 2])
+[4, 9, 8]
+&gt;&gt;&gt; ArithmeticList([1, 5, 2]) + [3, 4, 6]
+[4, 9, 8]
+</div>
+
+<h3>赋值运算符的重载</h3>
+
+<p>不管是运算符方法还是反向运算符方法，它们都不应该修改调用者自身（即 <code>self</code> ）的属性，而是应该返回一个新的对象。如果要修改自身，程序应该明确使用赋值运算符，例如使用 <code>+=</code> 代替 <code>+</code> 。</p>
+
+<p>尽管从理论上来说，二元赋值运算符如 <code>x += y</code> 的实质就是 <code>x = x + y</code> ，两者的区别在于 <code>+=</code> 可以只修改自身而不创建新的对象，因此 Python 也支持重载这些二元赋值运算符。</p>
+
+<p>下表列出了所有的二元赋值运算符及其重载方法：</p>
+
+<table>
+    <tbody><tr>
+        <th>运算符</th>
+        <th>对应重载方法</th>
+        <th>运算符</th>
+        <th>对应重载方法</th>
+    </tr>
+    <tr>
+        <td class="code-font">+=</td>
+        <td class="code-font">__iadd__()</td>
+        <td class="code-font">**=</td>
+        <td class="code-font">__ipow__()</td>
+    </tr>
+    <tr>
+        <td class="code-font">-=</td>
+        <td class="code-font">__isub__()</td>
+        <td class="code-font">&lt;&lt;=</td>
+        <td class="code-font">__ilshift__()</td>
+    </tr>
+    <tr>
+        <td class="code-font">*=</td>
+        <td class="code-font">__imul__()</td>
+        <td class="code-font">&gt;&gt;=</td>
+        <td class="code-font">__irshift__()</td>
+    </tr>
+    <tr>
+        <td class="code-font">@=</td>
+        <td class="code-font">__imatmul__()</td>
+        <td class="code-font">&amp;=</td>
+        <td class="code-font">__iand__()</td>
+    </tr>
+    <tr>
+        <td class="code-font">/=</td>
+        <td class="code-font">__itruediv__()</td>
+        <td class="code-font">^=</td>
+        <td class="code-font">__ixor__()</td>
+    </tr>
+    <tr>
+        <td class="code-font">//=</td>
+        <td class="code-font">__ifloordiv__()</td>
+        <td class="code-font">|=</td>
+        <td class="code-font">__ior__()</td>
+    </tr>
+    <tr>
+        <td class="code-font">%=</td>
+        <td class="code-font">__imod__()</td>
+        <td></td>
+        <td></td>
+    </tr>
+</tbody></table>
+
+<p>这些二元赋值运算符对应的重载方法实际上就是在对应的二元运算符名称前加上了一个 <span class="code-font">i</span> 。</p>
+
+<p>一般来说，二元赋值运算 <code>x += y</code> 会尝试调用对应的重载方法 <code>x.__iadd__(y)</code> ，如果该类没有实现赋值运算符的重载方法，或者该重载方法返回了 <code>NotImplemented</code> 那么会尝试将二元赋值表达式展开成 <code>x = x + y</code> ，对 <code>x + y</code> 尝试依次调用 <code>x.__add__(y)</code> 与 <code>y.__radd__(x)</code> 。（注意：由于一个小 bug ，二元赋值运算符 <code>**=</code> 对应的方法 <code>.__ipow__()</code> 如果返回了 <code>NotImplemented</code> ，不会试图调用 <code>.__pow__()</code> 和 <code>.__rpow__()</code> ，这个小 bug 直到 Python3.10 才修复）</p>
+
+<p>注意，虽然上文说的是赋值运算符应该在方法内修改自身，但是因为有些对象是不可变类型，所以 <code>.__iadd__()</code> 等方法还需要提供返回值，这个返回值才是左操作符最终的赋值结果。例如，以下是对 <code>Vector3D</code> 重载赋值运算的示例：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Vector3D</span>: &nbsp; &nbsp;</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__iadd__</span>(self, other):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.x <span style="color: #859900;">+=</span> other.x</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.y <span style="color: #859900;">+=</span> other.y</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.z <span style="color: #859900;">+=</span> other.z</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">self</span></div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__imul__</span>(self, other: <span style="color: #cb4b16;">Real</span>):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.x <span style="color: #859900;">*=</span> other</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.y <span style="color: #859900;">*=</span> other</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.z <span style="color: #859900;">*=</span> other</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">self</span></div></div>
+
+<p>效果为：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; v01 *= 2
+&gt;&gt;&gt; v01
+Vector(2, 2, -4)
+</div>
+
+<p>这一过程实际上可能存在一些奇怪的现象，Python 的<a class="link-external" href="https://docs.python.org/3/faq/programming.html#faq-augmented-assignment-tuple-error">官方文档</a>也着重说明了这个问题。考虑以下元组：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; tup = ([1, 2], 3)
+</div>
+
+<p>元组是不可变类型，但列表是可变类型，这为赋值运算符的问题埋下了伏笔。尝试对元组内的列表应用赋值运算符：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; tup[0] += [4]
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+TypeError: 'tuple' object does not support item assignment
+</div>
+
+<p>明明是对列表应用的赋值运算符，但元组却产生了错误。不仅如此，再次查看元组会发现即便产生了错误，列表也确实被修改了：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; tup
+([1, 2, 4], 3)
+</div>
+
+<p>这个现象的原因是 <code>tup[0] += [4]</code> 实际调用的应该是 <code>tup[0].__iadd__([4])</code> ，<code>tup[0]</code> 是一个列表，它使用 <code>.__iadd__()</code> 方法相当于使用 <code>.extend()</code> 扩充另一个列表。问题就在于调用完成 <code>.__iadd__()</code> 后，会试图将返回值赋值给 <code>tup[0]</code> 元素，而元组元素是不能直接赋值的，这就产生了错误。如果不是使用赋值运算符，而是直接调用 <code>.entend()</code> 方法就不会出现错误了：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; tup[0].extend([5, 6])
+&gt;&gt;&gt; tup
+([1, 2, 4, 5, 6], 3)
+</div>
+
+<h3>一元运算符的重载</h3>
+
+<p>除了二元运算符外，一元运算符也可以重载。可以重载的一元运算符和它们的重载方法如下表所示：</p>
+
+<table>
+    <tbody><tr>
+        <th>运算符</th>
+        <th>对应方法</th>
+        <th>本义</th>
+        <th>说明</th>
+    </tr>
+    <tr>
+        <td class="code-font">-</td>
+        <td class="code-font">__neg__()</td>
+        <td>取负</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class="code-font">+</td>
+        <td class="code-font">__pos__()</td>
+        <td>取正</td>
+        <td>由于该方法可以被重载，所以有些对象可能会发生 <code>x != +x</code> 的情况</td>
+    </tr>
+    <tr>
+        <td class="code-font">abs()</td>
+        <td class="code-font">__abs__()</td>
+        <td>取绝对值</td>
+        <td>由函数而不是运算符实现</td>
+    </tr>
+    <tr>
+        <td class="code-font">~</td>
+        <td class="code-font">__invert__()</td>
+        <td>按位非（按位取反）</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class="code-font">round(<em>ndigits</em>)</td>
+        <td class="code-font">__round__()</td>
+        <td>舍入</td>
+        <td>由函数而不是运算符实现</td>
+    </tr>
+    <tr>
+        <td class="code-font">math.floor()</td>
+        <td class="code-font">__floor__()</td>
+        <td>向上取整</td>
+        <td>由标准库中的函数而不是运算符实现</td>
+    </tr>
+    <tr>
+        <td class="code-font">math.ceil()</td>
+        <td class="code-font">__ceil__()</td>
+        <td>向下取整</td>
+        <td>由标准库中的函数而不是运算符实现</td>
+    </tr>
+</tbody></table>
+
+<p>像 <code>__int__</code> 这类被 <code>int()</code> 等构造函数调用，实现向对应类型转换的特殊方法，其实也可以归为这一类，不过它们均在前面的章节介绍过了。</p>
+
+<p>一元运算符相应的特殊方法只有一个参数 <code>self</code> ，并且一元运算符重载时，也不应该修改自身，而要创建并返回适合类型的新实例。以下是对 <code>Vector3D</code> 进一步支持一元运算符的相关代码：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Vector3D</span>: &nbsp; &nbsp;</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__abs__</span>(self):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">sqrt</span>(<span style="color: #268bd2;">self</span>.x <span style="color: #859900;">**</span> <span style="color: #d33682;">2</span> <span style="color: #859900;">+</span> <span style="color: #268bd2;">self</span>.y <span style="color: #859900;">**</span> <span style="color: #d33682;">2</span> <span style="color: #859900;">+</span> <span style="color: #268bd2;">self</span>.z <span style="color: #859900;">**</span> <span style="color: #d33682;">2</span>)</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__pos__</span>(self):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #cb4b16;">Vector3D</span>(<span style="color: #268bd2;">self</span>.x, <span style="color: #268bd2;">self</span>.y, <span style="color: #268bd2;">self</span>.z)</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__neg__</span>(self):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #cb4b16;">Vector3D</span>(<span style="color: #859900;">-</span><span style="color: #268bd2;">self</span>.x, <span style="color: #859900;">-</span><span style="color: #268bd2;">self</span>.y, <span style="color: #859900;">-</span><span style="color: #268bd2;">self</span>.z)</div></div>
+
+<p>以及使用示例：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; -v01
+Vector(-2, -2, 4)
+&gt;&gt;&gt; abs(v01)
+4.898979485566356
+</div>
+
+<h3>关系运算符的重载</h3>
+
+<p>除了算术和赋值，二元关系运算符也支持重载。下表列出了二元关系运算符及其对应的重载方法：</p>
+
+<table>
+    <tbody><tr>
+        <th>运算符</th>
+        <th>对应重载方法</th>
+        <th>含义</th>
+    </tr>
+    <tr>
+        <td class="code-font">==</td>
+        <td class="code-font">__eq__()</td>
+        <td>相等</td>
+    </tr>
+    <tr>
+        <td class="code-font">!=</td>
+        <td class="code-font">__ne__()</td>
+        <td>不相等</td>
+    </tr>
+    <tr>
+        <td class="code-font">&gt;=</td>
+        <td class="code-font">__ge__()</td>
+        <td>大于等于</td>
+    </tr>
+    <tr>
+        <td class="code-font">&lt;=</td>
+        <td class="code-font">__le__()</td>
+        <td>小于等于</td>
+    </tr>
+    <tr>
+        <td class="code-font">&gt;</td>
+        <td class="code-font">__gt__()</td>
+        <td>大于</td>
+    </tr>
+    <tr>
+        <td class="code-font">&lt;</td>
+        <td class="code-font">__lt__()</td>
+        <td>小于</td>
+    </tr>
+</tbody></table>
+
+<p>注意：Python 不允许重载 <code>is</code> 运算符，也不允许重载 <code>not</code> 、<code>and</code> 和 <code>or</code> 这类布尔运算符。<code>is</code> 只用于判断两个变量指向的是否为同一个对象，而对象之间的相等判断可以通过重载 <code>==</code> 运算符实现。如果要改变布尔运算符的结果，可以通过 <code>__bool__()</code> 方法改变对象的布尔行为，或者使用 <code>~</code> 、<code>&amp;</code> 和 <code>|</code> 这三个运算符代替。</p>
+
+<p>这些关系运算符没有所谓的&ldquo;赋值&rdquo;版本，甚至也没有所谓的&ldquo;反向&rdquo;版本；不过，<code>__eq__()</code> 和 <code>__ne__()</code> 其实就是自身的反向版本，而 <code>__lt__()</code> 和 <code>__gt__()</code> 、<code>__le__()</code> 和 <code>__ge__()</code> 是彼此的反向版本：当 <code>x.__eq__(y)</code> 或 <code>x.__lt__(y)</code> 不存在或返回了 <code>NotImplemented</code> ，就会尝试从右操作数调用 <code>y.__eq__(x)</code> 和 <code>y.__gt__(x)</code> 。</p>
+
+<p>基类 <code>object</code> 实现了 <code>__eq__()</code> 方法，不过它的判断逻辑非常简单：如果两者使用 <code>is</code> 测试相等，就返回 <code>True</code> ，否则返回 <code>NotImplemented</code> 。<code>object</code> 也实现了 <code>__ne__()</code> 方法，它的逻辑就是对 <code>__eq__()</code> 的结果取反。</p>
+
+<p>可以重载 <code>Vector3D</code> 类的相等比较运算符，实现向量相等的比较逻辑：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Vector3D</span>: &nbsp; &nbsp;</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__eq__</span>(self, other):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">self</span>.x <span style="color: #859900;">==</span> other.x <span style="color: #859900;">and</span> <span style="color: #268bd2;">self</span>.y <span style="color: #859900;">==</span> other.y <span style="color: #859900;">and</span> <span style="color: #268bd2;">self</span>.z <span style="color: #859900;">==</span> other.z</div></div>
+
+<div class="codeblock code-console">&gt;&gt;&gt; Vector3D(1.0, 2.0, 3.0) == Vector3D(1, 2, 3)
+True
+&gt;&gt;&gt; Vector3D(1.01, 2.0, 3.0) == Vector3D(1, 2, 3)
+False
+</div>
+
+<p>一般情况下不需要重载 <code>!=</code> 运算符，让它自己取反就行了。同时重载 <code>==</code> 和 <code>!=</code> 运算符可能会使两种判断结果都返回 <code>True</code> ，违背了数学直觉。</p>
+
+<p>更复杂的情况发生在关系运算符上：Python3 并没有在基类上实现关系运算符的处理（其实是有这些方法，只不过它们直接返回 <code>NotImplemented</code> ），也不会将 <code>&gt;=</code> 运算符视为 <code>&gt;</code> 和 <code>==</code> 的组合。为了使两个对象能够参与比较，至少要在类中实现相等的判断，以及不带等号的比较和带等号的比较各一个；如果两个对象属于不同的类，可能要将这四个比较运算符全部实现。</p>
+
+<p>但其实，如果返回结果是符合数学直觉的，那么一个类只要实现 <code>==</code> 运算符以及四个比较运算符的其中一个，其它结果是可以根据它们推导出来的。例如，实现了大于运算符 <code>&gt;</code> 后，剩下运算符的处理方式为：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Comparable</span>:</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__ge__</span>(self, other):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">self</span> <span style="color: #859900;">&gt;</span> other <span style="color: #859900;">or</span> <span style="color: #268bd2;">self</span> <span style="color: #859900;">==</span> other</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__lt__</span>(self, other):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #859900;">not</span> <span style="color: #268bd2;">self</span> <span style="color: #859900;">&gt;=</span> other</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__le__</span>(self, other):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #859900;">not</span> <span style="color: #268bd2;">self</span> <span style="color: #859900;">&gt;</span> other</div></div>
+
+<p>但是，一个类究竟应该实现这四个方法中的哪一个？不同的人可能会有不同的习惯，但不知道一个类实现了哪个方法，其余方法的实现也就无从下手。为此，Python3.2 在 <code>functools</code> 标准库中引入了一个特殊的装饰类的装饰器 <code>total_ordering</code> ，只要类实现了 <code>==</code> 以及四个关系运算符中的一个，它就可以自动添加剩余的关系运算符方法：</p>
+
+<div class="vscode-block"><div><span style="color: #859900;font-weight: bold;">from</span> <span style="color: #cb4b16;">functools</span> <span style="color: #859900;font-weight: bold;">import</span> <span style="color: #268bd2;">total_ordering</span></div><br/><div><span style="color: #268bd2;">@</span><span style="color: #268bd2;">total_ordering</span></div><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">StudentScore</span>:</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__init__</span>(self, math, physics, chemistry):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">math</span> <span style="color: #859900;">=</span> math</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">physics</span> <span style="color: #859900;">=</span> physics</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">chemistry</span> <span style="color: #859900;">=</span> chemistry</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__eq__</span>(self, other):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">if</span> <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">_has_score</span>(other):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> (<span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">math</span> <span style="color: #859900;">==</span> other.math <span style="color: #859900;">and</span> <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">physics</span> <span style="color: #859900;">==</span> other </div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;">and</span> <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">chemistry</span> <span style="color: #859900;">==</span> other.chemistry)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">else</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">NotImplemented</span></div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__gt__</span>(self, other):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">if</span> <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">_has_score</span>(other):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> ((<span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">math</span>, <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">physics</span>, <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">chemistry</span>) <span style="color: #859900;">&gt;</span> </div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (other.math, other.physics, other.chemistry))</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">else</span>:</div></div>
+
+<p>这样，<code>StudentScore</code> 类就可以支持与其它类型对象的比较行为了：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; bob = StudentScore(94, 82, 87)
+&gt;&gt;&gt; alice = StudentScore(89, 92, 97)
+&gt;&gt;&gt; tom = StudentScore(89, 80, 86)
+&gt;&gt;&gt; bob &gt; alice
+True
+&gt;&gt;&gt; alice &lt; tom
+False
+&gt;&gt;&gt; class Colledge: ...
+&gt;&gt;&gt; entrance_line = Colledge()
+&gt;&gt;&gt; entrance_line.math = 70
+&gt;&gt;&gt; entrance_line.physics = 70
+&gt;&gt;&gt; entrance_line.chemistry = 70
+&gt;&gt;&gt; alice &gt; entrance_line
+True
+&gt;&gt;&gt; entrance_line &lt;= tom
+True
+</div>
+
+<h2>参考资料/延伸阅读</h2>
+
+<p><a class="link-reference" href="https://docs.python.org/3/reference/datamodel.html#emulating-numeric-types">Python3 DataModel 官方文档对运算符重载的介绍</a></p>
+
+<p><a class="link-reference" href="https://docs.python.org/3/library/functools.html#functools.total_ordering">Python3 标准库 functools 官方文档</a></p>
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+										
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"></li>
+		<li class="previous"><a href="/programming/python-oop/07-callable-objects/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>Python面向对象编程07-可调用对象与装饰器</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/programming/python-oop/08-operator-overloading/" aria-current="page">Python面向对象编程08-运算符重载</a>
+											<span class="post-date">2024年4月7日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/07-callable-objects/">Python面向对象编程07-可调用对象与装饰器</a>
+											<span class="post-date">2024年3月1日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/05-custom-types/">Python面向对象编程05-特殊方法与自定义类</a>
+											<span class="post-date">2024年2月9日</span>
+									</li>
+											<li>
+					<a href="/programming/python/library-logging/">Python标准库logging：日志记录</a>
+											<span class="post-date">2024年1月23日</span>
+									</li>
+											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+											<li>
+					<a href="/math/numerical-analysis/03-interpolating/">数值分析-插值</a>
+											<span class="post-date">2023年6月19日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (24)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (5)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (7)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2024/04/'> 2024年4月 &nbsp;(1)</option>
+	<option value='/2024/03/'> 2024年3月 &nbsp;(1)</option>
+	<option value='/2024/02/'> 2024年2月 &nbsp;(1)</option>
+	<option value='/2024/01/'> 2024年1月 &nbsp;(2)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

@@ -28,20 +28,7 @@ root variables including colors, font-familys and a shadow style
 	--block-shadow: 0.15rem 0.15rem 0.5rem rgb(150, 150, 150);
 	--sans-serif-font: "Noto Sans SC Medium", "Noto Sans SC", sans-serif;
 	--monospace-font: "Source Code Pro Regular", "Source Code Pro", monospace;
-}
-
-
-/*
-yaml header settings
-*/
-div.entry pre.md-meta-block {
-	font-family: var(--monospace-font);
-	font-size: 1rem;
-	text-align: left;
-	padding: 0.6rem;
-	color: rgb(134, 134, 134);
-	background-color: var(--code-bg-color);
-	border-radius: 0.4rem;
+	--font-code: "Source Code Pro Regular", "Source Code Pro", monospace;
 }
 
 /*
@@ -96,40 +83,6 @@ div.entry table tr:hover {
 }
 
 /*
-checkboxes settings
-*/
-div.entry .task-list-item input[type = "checkbox"] {
-	width: 0;
-	height: 0;
-}
-div.entry .task-list-item input[type = "checkbox"]::before, div.entry input[type = "checkbox"]:checked::before {
-	content: "";
-	display: inline-block;
-	vertical-align: middle;
-	position: relative;
-	left: -0.15rem;
-	top: -0.41rem;
-	width: 0.8rem;
-	height: 0.8rem;
-	border: 0.08rem solid var(--del-color);
-	border-radius: 50%;
-	transition: all 0.2s;
-}
-div.entry .task-list-item input[type = "checkbox"]:checked::before {
-	padding: 0.12rem;
-	background-clip: content-box;
-	background-color: black;
-}
-div.entry .task-list-item input[type = "checkbox"]:checked + p {
-	text-decoration: line-through;
-	color: var(--del-color);
-}
-div.entry input[type='checkbox']:hover::before {
-	transition: all 0.2s;
-	background-color: rgb(228, 228, 228);
-}
-
-/*
 blockquotes settings
 */
 div.entry blockquote {
@@ -161,20 +114,6 @@ div.entry p {
 	line-height: 1.6rem;
 }
 
-/*
-code blocks settings
-*/
-div.entry .md-fences {
-	font-family: var(--monospace-font);
-	font-size: 1rem;
-	padding: 0.6rem;
-	background-color: var(--code-bg-color);
-	border-radius: 0.4rem;
-	box-shadow: var(--block-shadow);
-}
-div.entry .cm-s-inner .CodeMirror-gutters {
-	border: none;
-}
 div.entry .cm-s-inner .CodeMirror-linenumber {
 	color: rgb(212, 212, 212);
 }
@@ -190,60 +129,17 @@ div.entry .cm-s-inner .cm-def {
 div.entry .cm-s-inner .cm-operator {
 	color: rgb(204, 35, 35);
 }
-div.entry .cm-s-inner .cm-variable2 {
-	color: rgb(38, 129, 219);
-}
 div.entry .cm-s-inner .cm-variable3 {
 	color: rgb(204, 35, 35);
 }
-div.entry .cm-s-inner .cm-comment {
-	color: rgb(18, 129, 18);
-}
 div.entry .cm-s-inner .cm-string {
 	color: rgb(18, 129, 18);
-}
-div.entry .cm-s-inner .cm-builtin {
-	color: rgb(218, 135, 12);
 }
 div.entry .cm-tag {
 	color: rgb(139, 10, 10);
 }
 
-/*
-formulas settings
-*/
-div.entry mjx-container {
-	font-size: 1.1rem;
-}
-
-/*
-tooltips settings
-*/
-div.entry .code-tooltip {
-	box-shadow: 0.1rem 0.1rem 0.2rem rgb(150, 150, 150);
-	border-radius: 0.2rem;
-	margin-top: 0.3rem;
-}
-
-/*
-selected texts in code blocks settings
-*/
-div.entry .CodeMirror-selected, div.entry .CodeMirror-selectedtext, div.entry .in-text-selection {
-	background-color: var(--selection-bg-color) !important;
-}
-
-/*
-diagrams settings
-*/
-div.entry pre[lang=’sequence’], div.entry pre[lang=’flow’], div.entry pre[lang=’mermaid’] {
-	background-color: var(--code-bg-color);
-	border-radius: 0.4rem;
-	box-shadow: var(--block-shadow);
-}
-
-/*
-inline codes settings
-*/
+/* inline codes settings */
 div.entry code {
 	font-family: var(--monospace-font);
 	margin-left: 0.25rem;
@@ -252,11 +148,13 @@ div.entry code {
 	background-color: var(--code-bg-color);
 	border-radius: 0.4rem;
 	box-shadow: 0.13rem 0.13rem 0.26rem rgb(197, 197, 197);
+	font-size: 14px;
 }
 
 div.entry var {
 	font-family: var(--monospace-font);
 	font-style: normal;
+	font-size: 14px;
 }
 
 /*
@@ -267,6 +165,10 @@ div.entry a {
 }
 div.entry a:hover {
 	color: rgb(108, 164, 255);
+}
+
+.entry strong {
+	color: #22ac00;
 }
 
 /*
@@ -303,15 +205,7 @@ div.entry ::selection {
 
 div.codeblock,
 div.vscode-block {
-	font-family: Consolas, 'Courier New', monospace;
-	font-weight: normal;
-	font-size: 14px;
-	line-height: 19px;
-	/* white-space: pre; */
-	border: 1px solid black;
-	padding: 5px;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	border-color: black;
 }
 
 div.codeblock.code-console {
@@ -319,3 +213,10 @@ div.codeblock.code-console {
     background-color: rgb(27, 27, 27);
     white-space: pre-wrap;
 }
+
+var[type] {
+	padding: 0.05rem 0.3rem;
+	border-radius: 0.4rem;
+}
+var[type="register"] { color: rgb(38, 129, 219); background-color: rgb(245, 249, 255); }
+var[type="instruction"] { color: rgb(218, 135, 12); background-color: rgb(253, 247, 236); }

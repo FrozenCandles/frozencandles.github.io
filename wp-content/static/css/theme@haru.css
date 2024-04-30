@@ -117,6 +117,8 @@
     font-family: var(--blockquote-font);
     line-height: 35px;
 }
+.entry blockquote::before { content: ''; }
+
 
 .entry blockquote span {
     word-break: break-all;
@@ -243,6 +245,7 @@
     border-radius: 8px;
 }
 
+
 .entry blockquote code {
     margin: 0 2px;
     padding: 4px 6px;
@@ -282,7 +285,10 @@ div.codeblock.code-console {
 .entry var {
     font-style: normal;
 	font-family: var(--monospace);
+    font-size: 14px;
+    font-weight: 400;
 }
+.entry var[type="file"] { color: var(--main-color); }
 
 .entry var[type] {
     color: var(--main-color);

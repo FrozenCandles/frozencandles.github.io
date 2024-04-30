@@ -41,12 +41,12 @@ function onCheckArticle(checkConfig) {
 
 
 function addAssistButton(title, action) {
-    const assist_elem = document.getElementById('assist');
+    const assist_elem = document.getElementById('assist-button-group');
     if (assist_elem === null) 
         return;
     const button = document.createElement('button');
     button.style.display = 'block';
-    button.className = 'button action';
+    button.className = 'button assist-button';
     button.style.margin = '5px 15px';
 
     button.innerHTML = title;
@@ -76,7 +76,7 @@ function addImageScalar() {
 
     for (let elem of document.getElementsByTagName('FIGURE')) {
 
-        if (['parallel'].includes(elem.className))
+        if (['figure-sidebyside'].includes(elem.className))
             continue;
 
         elem.innerHTML += '<div style="width: 500px; height: 80px; margin: 40px auto; position: relative;" class="imagescalar-content">' +
@@ -89,8 +89,9 @@ function addImageScalar() {
         let progress = elem.getElementsByClassName('imagescalar-progress')[0];
         let dot = elem.getElementsByClassName('imagescalar-dot')[0];
         let p = elem.getElementsByClassName('imagescalar-scale')[0];
-        let image = elem.getElementsByTagName('IMG')[0];
-
+        let image = elem.querySelector('img');
+        if (image === undefined)
+            continue;
         
         let bili = image.width / 1000;
         p.innerHTML = image.width + 'px';

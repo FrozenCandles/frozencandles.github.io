@@ -1,24 +1,35 @@
 
-
-.entry > h2 {
-    font-size: 24px;
-    font-weight: normal;
+@media screen and (min-width: 0px) and (max-width: 768px) {
+    .post-item-wrap {
+        --items-per-row: 1;
+    }
 }
 
-.entry > h3 {
-    font-size: 18px;
-    font-weight: bold;
-}
 
+.post-item-wrap {
+    --length-margin: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 26px 30px;;
+}
+@media screen and (min-width: 1px) and (max-width: 768px) {
+    .post-item-wrap {
+        --items-per-row: 2;
+    }
+}
+@media screen and (min-width: 768px) {
+    .post-item-wrap {
+        --items-per-row: 3;
+    }
+}
 article.post-item-card {
+    box-sizing: border-box;
     overflow: hidden;
     border-radius: 20px;
-
     box-shadow: 5px 5px 10px rgb(194, 204, 207);
-    display: inline-block;
-    vertical-align: top;
-    margin: 15px;
-
+    display: block;
+    margin: var(--length-margin);
+    width: calc((100% / var(--items-per-row)) - var(--length-margin) * 2);
 }
 
 article.post-item-card h4 {
@@ -44,7 +55,7 @@ article.post-item-card div.post-item-card-image img {
 
 article.post-item-card,
 article.post-item-card div.post-item-card-image img {
-    max-width: 220px;
+    /*width: 20%;*/
 }
 
 div.post-item-card-detail {
@@ -66,11 +77,11 @@ article.post-item-card *:link {
 }
 
 
-
-
+.entry div a.post-category,
 div.post-category__wrapper a:link,
 div.post-category__wrapper a:active,
 div.post-category__wrapper a:visited,
+div.post-category__wrapper a:hover,
 div.post-category__wrapper a {
     color: inherit;
     text-decoration: none;
@@ -83,6 +94,7 @@ div.post-category__wrapper a {
     display: inline-block;
 }
 div.post-category__item {
+    display: inline-block;
     transition: all 0.2s ease 0s;
 }
 div.post-category__item:hover {
@@ -108,6 +120,8 @@ div.post-category__item {
 div.post-category__item div.post-category__logo img {
     display: block;
     max-width: 70px;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
 }
 div.post-category__item div.post-category__logo {
     display: table-cell;

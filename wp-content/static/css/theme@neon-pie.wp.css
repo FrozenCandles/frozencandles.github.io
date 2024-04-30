@@ -436,3 +436,6 @@ div.codeblock.code-console {
     background-color: rgb(27, 27, 27);
     white-space: pre-wrap;
 }
+.code-template strong { color: black; }
+.code-template strong,
+.code-template em { padding: 0; }

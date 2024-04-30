@@ -31,17 +31,17 @@ table tr.row-emphasis {
     color: rgb(0, 119, 255); 
 }
 
-blockquote {
+.entry blockquote {
     border-left: 4px solid lightgrey;
     padding-left: 15px;
     margin-inline-start: 0;
     margin-inline-end: 0;
     color: grey;
 }
-blockquote p {
+.entry blockquote p {
     color: grey
 }
-
+.entry blockquote::before { content: ''; }
 
 
 .codeblock,

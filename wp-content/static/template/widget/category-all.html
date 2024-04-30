@@ -1,0 +1,51 @@
+
+{% if full %}
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <link rel="stylesheet" href="/wp-content/themes/instorm/style.css">
+    <link rel="stylesheet" href="/wp-content/themes/instorm-child-theme/style.css">
+
+    <link rel="stylesheet" href="/wp-content/static/css/text.css">
+    <link rel="stylesheet" href="/wp-content/static/css/note.css">
+    <link rel="stylesheet" href="/wp-content/static/css/category.css">
+</head>
+
+<body>
+
+<div class="entry">
+{% endif %}
+
+{% for category in categories %}
+<a href="{{ category.link }}">
+    <div class="post-category__item">
+        <div class="post-category__logo">
+            <img src="{{ category.logo }}" alt="">
+        </div>
+        <div class="post-category__content">
+            <h4>{{ category.title }}</h4>
+            <p>{{ category.desc }}</p>
+        </div>
+    </div>
+</a>
+<!--
+<article class="post-item-card">
+    <div class="post-item-card-image">
+        <a href="https://frozencandles.fun/archives/{post}"><img
+                src="{cover}" alt=""></a>
+    </div>
+    <div class="post-item-card-detail">
+        <h4><a href="https://frozencandles.fun/archives/{post}">{title}</a></h4>
+        <p>{desc}</p>
+    </div>
+</article>
+-->
+{% endfor %}
+
+{% if full %}
+</div>
+
+</body>
+</html>
+{% endif %}

@@ -1,5 +1,10 @@
 
 
+:root {
+    --font-code: Consolas, 'Courier New', monospace
+}
+
+
 /* https://xie.infoq.cn/article/2ca9d08537559565e593b5efa 
  * 黑幕 - 隐藏文字 
  */
@@ -71,8 +76,12 @@ div.math {
 }
 
 
-code {
-    font-family: Consolas, 'Courier New', monospace;
+var,
+code,
+.code-template,
+.code-font,
+.entry td.cell-code {
+    font-family: var(--font-code);
     word-break: break-word;
 }
 
@@ -87,15 +96,12 @@ code.classic {
 }
 
 code.traditional {
-    font-family: Consolas, 'Courier New', monospace;
-    word-break: break-word;
     color:#870000;
     font-size: 15px;
 }
 
 var.error,
 code.error {
-    font-family: Consolas, 'Courier New', monospace;
     word-break: break-word;
     color:red;
     font-size: 15px;
@@ -120,7 +126,6 @@ blockquote.classic {
 
 div.code-template {
     color: black;
-    font-family: Consolas, 'Courier New', monospace;
     padding: 5px;
     border: 1px solid black;
     margin-bottom: 15px;
@@ -139,16 +144,6 @@ span.has-inline-color.has-vivid-purple-color { color: violet; }
 
 
 /* 
-span.inline-symbol-register {
-    background-color: rgb(235, 246, 255);
-    font-family: Consolas, monospace;
-}
-
-span.inline-symbol-instruction {
-    background-color: rgb(243, 233, 220);
-    font-family: Consolas, monospace;
-}
-
 table.plain td,
 table.plain th {
     padding: 0.4em;
@@ -210,13 +205,7 @@ span.inline-color.violet { color: violet; }
 */
 
 
-.entry td.cell-code {
-    font-family: Consolas, 'Courier New', monospace;
-}
 
-.code-font { 
-    font-family: Consolas, 'Courier New', monospace;
-}
 
 .entry .text-indent {
     padding-left: 2em;
