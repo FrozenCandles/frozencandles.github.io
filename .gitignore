@@ -3,6 +3,7 @@ wp-content/plugins
 !wp-content/plugins/wordpress-seo
 wp-content/static/font
 wp-content/static/.git
+wp-content/static/dev
 wp-content/static/highlight
 !wp-content/static/highlight/styles
 dist

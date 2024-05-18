@@ -1,0 +1,812 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Python面向对象编程09-描述符 - 冰封残烛的个人小站</title>
+	<meta name="description" content="本文介绍 Python 中的描述符(descriptor)机制。描述符是一种特殊类，可以管理一类属性的检索、存储和删除，是可以复用的 property 属性。描述符也是 Python 中非常重要的属性，它与对象属性和方法的底层实现密不可分。" />
+	<link rel="canonical" href="/programming/python-oop/09-descriptors/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Python面向对象编程09-描述符 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="本文介绍 Python 中的描述符(descriptor)机制。描述符是一种特殊类，可以管理一类属性的检索、存储和删除，是可以复用的 property 属性。描述符也是 Python 中非常重要的属性，它与对象属性和方法的底层实现密不可分。" />
+	<meta property="og:url" content="/programming/python-oop/09-descriptors/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2024-04-30T08:43:54+00:00" />
+	<meta property="article:modified_time" content="2024-05-18T08:10:17+00:00" />
+	<meta name="author" content="Hello" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="8分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebPage",
+	            "@id": "/programming/python-oop/09-descriptors/",
+	            "url": "/programming/python-oop/09-descriptors/",
+	            "name": "Python面向对象编程09-描述符 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/programming/python-oop/09-descriptors/#primaryimage"
+	            },
+	            "image": {
+	                "@id": "/programming/python-oop/09-descriptors/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/cover/python-oop@09-descriptors.jpg",
+	            "datePublished": "2024-04-30T08:43:54+00:00",
+	            "dateModified": "2024-05-18T08:10:17+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "本文介绍 Python 中的描述符(descriptor)机制。描述符是一种特殊类，可以管理一类属性的检索、存储和删除，是可以复用的 property 属性。描述符也是 Python 中非常重要的属性，它与对象属性和方法的底层实现密不可分。",
+	            "breadcrumb": {
+	                "@id": "/programming/python-oop/09-descriptors/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/programming/python-oop/09-descriptors/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/programming/python-oop/09-descriptors/#primaryimage",
+	            "url": "/wp-content/uploads/cover/python-oop@09-descriptors.jpg",
+	            "contentUrl": "/wp-content/uploads/cover/python-oop@09-descriptors.jpg"
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/programming/python-oop/09-descriptors/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "Python面向对象编程09-描述符"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/1364" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=1364' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython-oop%2F09-descriptors%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython-oop%2F09-descriptors%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?432b66336cb23bd6712cecabe6d808eb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<link rel="stylesheet" href="/wp-content/static/css/theme@evernote.wp.css">
+
+<style>
+    div.vscode-block { color: #657B83; background-color: #FDF6E3; }
+    div.vscode-block span[token="var"] { color: #268bd2; }
+</style>
+
+
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-1364 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/all/embedded/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-1364" class="post-1364 post type-post status-publish format-standard has-post-thumbnail hentry category-python-oop">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">Python面向对象编程09-描述符</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/programming/python-oop/" rel="category tag">Python面向对象编程</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2024年4月30日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+<h2>描述符简介</h2>
+
+<h3>为什么需要描述符</h3>
+
+<p>在介绍<a class="link-internal" href="/programming/python-oop/02-attributes">对象的属性</a>时，介绍了 <code>property</code> 属性。<code>property</code> 属性为一大堆 getter 和 setter 方法提供了一个完美的封装方式，使用者可以像操作普通属性一样操作 <code>property</code> 属性，同时隐藏了底层相应的 getter 和 setter 方法的实现细节，实现了对属性的透明访问和控制，使得代码更加清晰、灵活，并提高了封装性。</p>
+
+<p><code>property</code> 最大的缺点在于它无法复用：每定义一个 <code>property</code> 属性，就需要编写 3 个方法，并且通过 <code>property</code> 定义的属性只能被该类以及它的子类使用。在类之间甚至同一个类内都可能存在一些处理方式类似的属性，如果要为它们逐个编写 <code>property</code> 就会显得有些麻烦。</p>
+
+<p>例如，以下实现了一个文章类，并提供了一个 <code>published_at</code> 属性管理发布的时间：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Article</span>:</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__init__</span>(self):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">__published_at</span> <span style="color: #859900;">=</span> <span style="color: #b58900;">None</span></div><div>&nbsp; &nbsp; <span style="color: #268bd2;">@</span><span style="color: #cb4b16;">property</span></div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">published_at</span>(self):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">if</span> <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">__published_at</span> <span style="color: #859900;">is</span> <span style="color: #b58900;">None</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">__published_at</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">datetime</span>.<span style="color: #268bd2;">now</span>()</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">__published_at</span></div><div>&nbsp; &nbsp; <span style="color: #268bd2;">@</span><span style="color: #268bd2;">published_at</span><span style="color: #268bd2;">.setter</span></div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">published_at</span>(self, value):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">__published_at</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">datetime</span>.<span style="color: #268bd2;">fromisoformat</span>(value)</div><div>&nbsp; &nbsp; <span style="color: #268bd2;">@</span><span style="color: #268bd2;">published_at</span><span style="color: #268bd2;">.deleter</span></div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">published_at</span>(self):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">__published_at</span> <span style="color: #859900;">=</span> <span style="color: #b58900;">None</span></div></div>
+
+<p><code>property</code> 为 <code>published_at</code> 属性隐藏了实现细节，并提供了一个更加易用的借口：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; article = Article()
+&gt;&gt;&gt; article.published_at
+2023-01-24 16:58:50.365764
+&gt;&gt;&gt; article.published_at = '2023-01-22 12:00'
+&gt;&gt;&gt; article.published_at
+2023-01-26 12:00:00    
+</div>
+
+<p>但是，如果这个类中还有其它类似的日期时间属性如更新时间，或者其它类似的类如评论类也会有类似属性，那就需要为每个属性编写相似的方法，这还是显得有些复杂且不便维护。</p>
+
+<p>为此，Python 提供了一种称为 <strong>描述符</strong>(descriptor) 的特殊类，一个描述符类可以管理一类属性的检索、存储和删除，使用了描述符的类可以共用实现描述符的逻辑而无需重写一遍。</p>
+
+<p>描述符的应用非常广泛，实际上之前也曾经接触过描述符，不是别的，正是 <code>property</code> 对象。<code>property</code> 对象的原始形式用法是这样的：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Article</span>:</div><div>&nbsp; &nbsp; <span style="color: #268bd2;">updated_at</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">property</span>(<span style="color: #268bd2;">updated_at_getter</span>, </div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">updated_at_setter</span>, </div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">updated_at_deleter</span>, </div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #2aa198;">"Datetime that article was updated"</span>)</div></div>
+
+<p>这么做看起来有一个问题：通过 <code>property</code> 得到的似乎是一个类属性，而不是实例属性，这里并不是通过 <code>self.updated_at = property(...)</code> 的形式添加实例属性，而是直接写在类的定义中。但是通过这样形式创建的属性，用起来却像一个实例属性。</p>
+
+<p>这并没用违背 Python 的语法，也不是 Python 为 <code>property</code> 开了特例，而是底层的描述符在起作用。在深究它的底层原理之前，需要对描述符有一个清晰的认识。</p>
+
+<h3>创建并使用描述符</h3>
+
+<p>在 Python 中，存在这样三个特殊方法：</p>
+
+<div class="codeblock code-template">
+    __get__(self, <em>instance</em>, <em>owner</em>=None) <br/>
+    __set__(self, <em>instance</em>, <em>value</em>) <br/>
+    __delete__(self, <em>instance</em>)
+</div>
+
+<p>这三个特殊方法称为<strong>描述符协议</strong>(descriptor protocol)，实现了描述符协议的对象称为描述器。描述符对实例属性的管理，从 <code><em>instance</em></code> 参数就可以窥见。</p>
+
+<p>首先介绍 <code>.__get__()</code> 方法，它是一个实例方法。<code>.__get__()</code> 方法定义对象的属性读取行为，并控制对象在访问属性时应该返回的值。</p>
+
+<p>因为描述符有些复杂，接下来通过一个简单的测试类来说明它的使用，也更好地说明它参数的含义：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Descriptor</span>:</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__get__</span>(self, instance, owner<span style="color: #859900;">=</span><span style="color: #b58900;">None</span>):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">print</span>(instance, owner)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #2aa198;">'return value from __get__()'</span></div></div>
+
+<p>注意，描述符对象都是充当类属性而不是实例属性的，这个问题会在后续说明。所以，描述符用起来都像这样：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Test</span>:</div><div>&nbsp; &nbsp; <span style="color: #268bd2;">desc</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">Descriptor</span>()</div></div>
+
+<p>首先看看直接以类属性形式访问描述符对象会怎样：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; Test.desc
+None &lt;class '__main__.Test'&gt;
+'return value from __get__()'
+</div>
+
+<p>结果显示，直接访问类属性经过描述符对象的 <code>.__get__()</code> 取到了值，而不是直接访问得到描述符对象。<code>.__get__()</code> 方法的参数 <code><em>owner</em></code> 代表描述符所绑定的类。因为不同的描述符实例将作为不同类的属性，这时参数 <code><em>owner</em></code> 随之改变。</p>
+
+<p>由于实例也可以访问类属性，也可以从实例的角度尝试访问描述符对象：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; Test().desc
+&lt;__main__.Test object at 0x000002B05DB50898&gt; &lt;class '__main__.Test'&gt;
+'return value from __get__()'
+</div>
+
+<p>当通过描述符绑定的类的实例来访问描述符类属性时，参数 <code>instance</code> 代表该实例，否则通过类访问类属性时，该参数为 <code>None</code> 。注意区分 <code>self</code> 参数和 <code>instance</code> 参数。它们都代表实例，但是 <code>self</code> 代表的是描述符类的实例，而 <code>instance</code> 代表的是描述符绑定类的实例。</p>
+
+<p>可以看出，描述符的特点首先体现在属性访问上：当通过点号表达式去访问对象的属性时，如果 Python 发现这个属性是一个描述符，那么就转而调用这个描述符的 <code>.__get__()</code> 方法，并将该方法的返回值作为属性访问的结果。</p>
+
+<p>换句话说，描述符为对象的属性访问添加了一个新的步骤，通过这一步骤提供的额外信息，描述符可以在属性访问时实现更复杂的功能。例如，通过检查 <code>instance</code> 参数是否为 <code>None</code> ，就可以知道是否通过实例访问该属性，如果是的话，还可以通过 <code>instance</code> 参数读取实例的其它属性。</p>
+
+<p>事实上，之前的章节已经见过了利用这一过程实现的功能：<code>classmethod</code> 和 <code>staticmethod</code> 类就是利用这一过程实现的描述符（虽然它们底层源码是用 C 语言编写的，但是它们的行为和描述符是一致的，检查它们可以发现确实拥有 <code>__get__</code> 方法），所以它们的第一个参数可以不为 <code>self</code> 。以 <code>staticmethod</code> 为例，用纯 Python 模拟它的实现非常简单：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">StaticMethod</span>:</div><div>&nbsp; &nbsp; <span style="color: #2aa198;">"Emulate PyStaticMethod_Type() in Objects/funcobject.c"</span></div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__init__</span>(self, f):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">f</span> <span style="color: #859900;">=</span> f</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__get__</span>(self, instance, owner<span style="color: #859900;">=</span><span style="color: #b58900;">None</span>):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">f</span></div></div>
+
+<p>因为 <code>StaticMethod</code> 作为装饰器的本质就是创建了一个类属性 <code>method = StaticMethod(StaticMethod)</code> 。它首先被实例或类访问，发现这是一个描述符而不是方法，走的是普通属性访问而不是方法调用的路线，因此 Python 并不会将实例作为第一个位置参数传入。</p>
+
+<p>利用这个特点，可以进一步扩展 <code>classmethod</code> 类，实现一个只能由类调用的类方法：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">classonlymethod</span>(<span style="color: #cb4b16;">classmethod</span>):</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__get__</span>(self, instance, cls<span style="color: #859900;">=</span><span style="color: #b58900;">None</span>):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">if</span> instance <span style="color: #859900;">is</span> <span style="color: #859900;">not</span> <span style="color: #b58900;">None</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">raise</span> <span style="color: #cb4b16;">AttributeError</span>(</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #2aa198;">"This method is available only on the class, not on instances."</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #cb4b16;">super</span>().<span style="color: #268bd2;">__get__</span>(instance, <span style="color: #268bd2;">cls</span>)</div></div>
+
+<p>顺便一提，这段代码来自著名的 Python 框架 Django 。除了直接抛出错误外，自定义的操作还可以执行更加复杂的功能，例如对属性进行计算、验证或惰性加载等，从而实现更灵活、可控的属性管理。不过在介绍这些用法之前，还需要认识描述符的另外两个方法。</p>
+
+<h3>数据描述符</h3>
+
+<p>在认识了 <code>.__get__()</code> 方法的基础上，便不难理解 .__set__() 和 <code>.__delete__()</code> 的用法了：</p>
+
+<p>当一个描述符绑定类的实例尝试为描述符充当的类属性赋值，即 <code>ins.desc = val</code> 时，便会调用 <code>.__set__()</code> 方法，参数 <code><em>instance</em></code> 就代表通过来修改描述符类属性的实例，而参数 <code><em>value</em></code> 就代表试图赋予的新值。该方法通过拦截属性的赋值行为，使得在赋值前可以对值做一些检查或修改。</p>
+
+<p>同样地，当一个描述符绑定类的实例尝试使用 <code>del</code> 语句删除描述符类属性时，便会调用 <code>.__delete__()</code> 方法。在这种情况下，参数 <code>instance</code> 同样代表通过来删除描述符类属性的实例。该方法通过拦截属性的删除行为，使得可以使用清零、恢复初始值等操作代替实际删除属性的行为。</p>
+
+<p>如果一个对象同时实现了这三个方法，那么该描述符被称为<strong>数据描述符</strong>(data descriptor)。注意，这些方法有一定联系，但同时也可能会造成混淆，理清这些方法的区别有助于理解它们的用法：</p>
+
+<ul>
+    <li><code>property</code> 、<code>property.setter</code> 、<code>property.deleter</code> 可以拦截对属性的操作，并添加自定义的行为，实现对属性的封装</li>
+    <li><code>__get__</code> 、<code>__set__</code> 、<code>__delete__</code> 也可以拦截对属性的操作，但它可以应用到不同类当中。记住这句话就等于学会了描述符：<mark class="text-highlight">描述符是可以复用的 <code>property</code> 属性</mark>，<code><em>instance</em></code> 参数实现了对复用时用在哪的支持。所以当不知道应该使用描述符还是 <code>property</code> 时，只需要想清楚这个属性到底要不要复用</li>
+    <li><code>__getattr__</code> 、<code>__setattr__</code> 、<code>__delattr__</code> 同样可以拦截对属性的操作，但它是针对所有属性的，而其它两类方法只是针对单一属性。如果不需要更改所有属性的表现行为，一般不要重写该方法</li>
+</ul>
+
+<p>所以，回到本文最开始的问题：存储日期时间的字段在获取、设置、删除时都需要一些操作来规范它们的行为，所以需要 <code>property</code> 提供统一的属性接口；但表示文章、评论等结构的各个日期时间字段的行为都是类似的，这时就出现了<em>复用</em>的问题，可以考虑使用描述符来处理。</p>
+
+<p>针对这一过程，将 <code>property</code> 的各个行为提取为以下描述符类：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">DateTimeField</span>:</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__init__</span>(self, field_name):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">field_name</span> <span style="color: #859900;">=</span> <span style="color: #2aa198;">'_'</span> <span style="color: #859900;">+</span> field_name</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__get__</span>(self, instance, owner<span style="color: #859900;">=</span><span style="color: #b58900;">None</span>):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">if</span> <span style="color: #268bd2;">hasattr</span>(instance, <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">field_name</span>):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">field</span> <span style="color: #859900;">=</span> <span style="color: #268bd2;">getattr</span>(instance, <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">field_name</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">if</span> <span style="color: #268bd2;">field</span> <span style="color: #859900;">is</span> <span style="color: #859900;">not</span> <span style="color: #b58900;">None</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">field</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">now</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">datetime</span>.<span style="color: #268bd2;">now</span>()</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">setattr</span>(instance, <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">field_name</span>, <span style="color: #268bd2;">now</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">now</span></div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__set__</span>(self, instance, value):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">setattr</span>(instance, <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">field_name</span>, <span style="color: #cb4b16;">datetime</span>.<span style="color: #268bd2;">fromisoformat</span>(value))</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__delete__</span>(self, instance):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">setattr</span>(instance, <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">field_name</span>, <span style="color: #b58900;">None</span>)</div></div>
+
+<p>注意使用描述符相比 <code>property</code> 的区别：为了考虑复用，具体用到的属性不能写的太死，这就需要动态添加和获取属性。而且由于缺少了初始化环节，还需要使用 <code>hasattr</code> 做必要的初始化。</p>
+
+<p>封装了这样一个描述符对象后，批量生成属性就方便多了：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Article</span>:</div><div>&nbsp; &nbsp; <span style="color: #268bd2;">published_at</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">DateTimeField</span>(<span style="color: #2aa198;">'published_at'</span>)</div><div>&nbsp; &nbsp; <span style="color: #268bd2;">updated_at</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">DateTimeField</span>(<span style="color: #2aa198;">'updated_at'</span>)</div><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Comment</span>:</div><div>&nbsp; &nbsp; <span style="color: #268bd2;">published_at</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">DateTimeField</span>(<span style="color: #2aa198;">'published_at'</span>)</div></div>
+
+<p>这样生成的属性和通过 <code>property</code> 定义的属性用起来是一样的。</p>
+
+<h3>完善描述符</h3>
+
+<p>虽然以上定义的描述符已经解决了属性复用的问题了，但它还有一个小问题。注意到之前描述符都是这样使用的：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Article</span>:</div><div>&nbsp; &nbsp; <span style="color: #268bd2;">published_at</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">DateTimeField</span>(<span style="color: #2aa198;">'published_at'</span>)</div></div>
+
+<p>在使用描述符时，需要将这个字段名写两遍：创建类属性时要给出它的名称，描述符也要通过初始化函数知道这个名称，不然描述符不知道自己绑定给了哪个属性。但 Python 需要先创建描述符，再将其赋值给属性，在创建描述符时它不可能得知自己将被绑定到哪个属性上，只能借助初始化方法。</p>
+
+<p>这可能会导致一些潜在的问题。例如，描述符在使用时，也存在之前说过的无限递归的问题：访问描述符绑定的属性会触发描述符的 <code>.__get__()</code> 方法获取值，如果在该方法内又一次访问了这个属性，就会造成无限递归。例如，对于以下这个描述符：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Desc</span>:</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__get__</span>(self, instance, owner<span style="color: #859900;">=</span><span style="color: #b58900;">None</span>):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">print</span>(<span style="color: #268bd2;">getattr</span>(instance, <span style="color: #2aa198;">'desc'</span>))</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #d33682;">10</span></div></div>
+
+<p>如果这个描述符被绑定到了 <code>.desc</code> 属性上：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Demo</span>:</div><div>&nbsp; &nbsp; <span style="color: #268bd2;">desc</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">Desc</span>()</div></div>
+
+<p>那么通过实例访问 <code>.desc</code> 属性立刻就会造成无限递归：</p>
+
+<div class="vscode-block"><div><span style="color: #268bd2;">d</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">Demo</span>()</div><div><span style="color: #268bd2;">d</span>.<span style="color: #268bd2;">desc</span> &nbsp;<span style="color: #93a1a1;"># RecursionError</span></div></div>
+
+<p>这个问题是无法避免的，因为递归发生在描述符内部：只要描述符的实现需要访问属性，就有可能发生这个问题。</p>
+
+<p>好在 Python3.6 引入了另一个与描述符有关的特殊方法，解决了这个名称问题：</p>
+
+<div class="codeblock code-template">
+    __set_name__(self, <em>owner</em>, <em>name</em>)
+</div>
+
+<p>该方法是一个实例方法，会在描述符绑定类被创建（类属性赋值了一个描述符实例）时调用，通过 <code>name</code> 参数通知描述符绑定属性的变量名称。</p>
+
+<p>如果以上示例的 <code>Desc</code> 类实现了 <code>__set_name__</code> 方法，那么在创建描述符 <code>desc = Desc()</code> 时，就会自动调用 <code>desc.__set_name__(Demo, 'desc')</code> 。<code>__set_name__</code> 方法为描述符引入了一个专门用于设置字段名的额外初始化环节，这样初始化方法就可以用作其它用途了。</p>
+
+<p>因此，以上示例的日期时间字段类只需要将初始化方法改成 <code>__set_name__</code> 方法：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">DateTimeField</span>:</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__set_name__</span>(self, owner, name):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">field_name</span> <span style="color: #859900;">=</span> <span style="color: #2aa198;">'_'</span> <span style="color: #859900;">+</span> name</div></div>
+
+<p>这样字段名就不用写两遍了：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Article</span>:</div><div>&nbsp; &nbsp; <span style="color: #268bd2;">published_at</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">DateTimeField</span>()</div><div>&nbsp; &nbsp; <span style="color: #268bd2;">updated_at</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">DateTimeField</span>()</div><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Comment</span>:</div><div>&nbsp; &nbsp; <span style="color: #268bd2;">published_at</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">DateTimeField</span>()</div></div>
+
+<p>不过有些时候也会利用递归调用的特性实现一些功能。例如缓存属性：如果 <code>__get__</code> 方法需要执行一些耗时的操作才能返回结果（例如从某个大型文件中读出配置，或者从网络下载数据），但不希望每次访问属性时都执行这一耗时操作，就可以在第一次调用获取结果后，将描述符替换为该结果：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">CachedProperty</span>:</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__init__</span>(self, meth):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">meth</span> <span style="color: #859900;">=</span> meth</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">name</span> <span style="color: #859900;">=</span> meth.__name__</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__get__</span>(self, instance, owner<span style="color: #859900;">=</span><span style="color: #b58900;">None</span>):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">setattr</span>(instance, <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">name</span>, <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">meth</span>(instance))</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">getattr</span>(instance, <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">name</span>)</div></div>
+
+<p>这个描述符可以作为装饰器使用：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">SomeTask</span>:</div><div>&nbsp; &nbsp; <span style="color: #268bd2;">@</span><span style="color: #cb4b16;">CachedProperty</span></div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">config</span>(self):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">sleep</span>(<span style="color: #d33682;">3</span>) &nbsp;<span style="color: #93a1a1;"># time-consuming operation</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> {<span style="color: #2aa198;">'procedure'</span>: <span style="color: #2aa198;">'...'</span>}</div><br/><div><span style="color: #268bd2;">task</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">SomeTask</span>()</div><div><span style="color: #268bd2;">print</span>(<span style="color: #268bd2;">task</span>.<span style="color: #268bd2;">config</span>) &nbsp;<span style="color: #93a1a1;"># wait for a moment and print result</span></div><div><span style="color: #268bd2;">print</span>(<span style="color: #268bd2;">task</span>.<span style="color: #268bd2;">config</span>) &nbsp;<span style="color: #93a1a1;"># immediately print result</span></div><div><span style="color: #268bd2;">print</span>(<span style="color: #268bd2;">task</span>.<span style="color: #268bd2;">config</span>) &nbsp;<span style="color: #93a1a1;"># immediately print result</span></div></div>
+
+<p>最后再看一个更复杂的示例。由于描述符本身是一个类，可以通过继承实现更广泛的用途，并隐藏基类的实现细节。以下是一个校验器类，它可以在赋值前检查这个值是否合理：</p>
+
+<div class="vscode-block"><div><span style="color: #859900;font-weight: bold;">from</span> <span style="color: #cb4b16;">abc</span> <span style="color: #859900;font-weight: bold;">import</span> <span style="color: #cb4b16;">ABC</span>, <span style="color: #268bd2;">abstractmethod</span></div><br/><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Validator</span>(<span style="color: #cb4b16;">ABC</span>):</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__set_name__</span>(self, owner, name):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">private_name</span> <span style="color: #859900;">=</span> <span style="color: #2aa198;">'_'</span> <span style="color: #859900;">+</span> name</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__get__</span>(self, instance, owner<span style="color: #859900;">=</span><span style="color: #b58900;">None</span>):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #268bd2;">getattr</span>(instance, <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">private_name</span>)</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__set__</span>(self, instance, value):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">validate</span>(value)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">setattr</span>(instance, <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">private_name</span>, value)</div><div>&nbsp; &nbsp; <span style="color: #268bd2;">@</span><span style="color: #268bd2;">abstractmethod</span></div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">validate</span>(self, value):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">pass</span></div></div>
+
+<p>通过继承这个抽象类并重写 <code>.validate()</code> 方法，可以实现自定义的校验逻辑，例如限制属性的字符串长度：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">VarChar</span>(<span style="color: #cb4b16;">Validator</span>):</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__init__</span>(self, max_length<span style="color: #859900;">=</span><span style="color: #d33682;">1024</span>):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">max_length</span> <span style="color: #859900;">=</span> max_length</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">validate</span>(self, value):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">if</span> <span style="color: #859900;">not</span> <span style="color: #268bd2;">isinstance</span>(value, <span style="color: #cb4b16;">str</span>):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">raise</span> <span style="color: #cb4b16;">TypeError</span>(<span style="color: #586e75;font-weight: bold;">f</span><span style="color: #2aa198;">'Expected </span><span style="color: #cb4b16;">{</span>value<span style="color: #586e75;font-weight: bold;">!r</span><span style="color: #cb4b16;">}</span><span style="color: #2aa198;"> to be an str'</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">if</span> <span style="color: #268bd2;">len</span>(value) <span style="color: #859900;">&gt;</span> <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">max_length</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">raise</span> <span style="color: #cb4b16;">ValueError</span>(</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">f</span><span style="color: #2aa198;">'Expected </span><span style="color: #cb4b16;">{</span>value<span style="color: #586e75;font-weight: bold;">!r</span><span style="color: #cb4b16;">}</span><span style="color: #2aa198;"> to be no bigger than </span><span style="color: #cb4b16;">{</span><span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">max_length</span><span style="color: #586e75;font-weight: bold;">!r</span><span style="color: #cb4b16;">}</span><span style="color: #2aa198;">'</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; )</div></div>
+
+<p>又或是限制属性只能为某些特定值之一：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Choice</span>(<span style="color: #cb4b16;">Validator</span>):</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__init__</span>(self, <span style="color: #859900;">*</span>options):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">options</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">set</span>(options)</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">validate</span>(self, value):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">if</span> value <span style="color: #859900;">not</span> <span style="color: #859900;">in</span> <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">options</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">raise</span> <span style="color: #cb4b16;">ValueError</span>(<span style="color: #586e75;font-weight: bold;">f</span><span style="color: #2aa198;">'Expected </span><span style="color: #cb4b16;">{</span>value<span style="color: #586e75;font-weight: bold;">!r</span><span style="color: #cb4b16;">}</span><span style="color: #2aa198;"> to be one of </span><span style="color: #cb4b16;">{</span><span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">options</span><span style="color: #586e75;font-weight: bold;">!r</span><span style="color: #cb4b16;">}</span><span style="color: #2aa198;">'</span>)</div></div>
+
+<p>这些自定义的校验器可以应用于属性之中，并对不规范的赋值行为报错：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">ArticleModel</span>:</div><div>&nbsp; &nbsp; <span style="color: #268bd2;">title</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">VarChar</span>(max_length<span style="color: #859900;">=</span><span style="color: #d33682;">128</span>)</div><div>&nbsp; &nbsp; <span style="color: #268bd2;">status</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">Choice</span>(<span style="color: #2aa198;">'published'</span>, <span style="color: #2aa198;">'draft'</span>, <span style="color: #2aa198;">'deleted'</span>)</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__init__</span>(self, title, status):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">title</span> <span style="color: #859900;">=</span> title</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">status</span> <span style="color: #859900;">=</span> status</div><div>&nbsp; &nbsp; &nbsp; &nbsp; </div><div><span style="color: #268bd2;">article</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">ArticleModel</span>(<span style="color: #2aa198;">'Implementing Descriptors'</span>, <span style="color: #2aa198;">'draft'</span>)</div></div>
+
+<p>这项技术被用在很多对象关系映射(ORM)的数据库中，ORM 可以把编程语言（特别是面向对象的编程语言）里面的一个对象映射成数据库里面的一个表，通过操作对象代替直接操作数据库中的表实现增删改查的操作，在增加了可读性的同时也有效减少了注入的风险。</p>
+
+<p>SQLAlchemy 是 Python 的一个关于 SQL 类数据库的 ORM 框架。使用 SQLAlchemy ，可以通过定义一个类的方式创建一张表：</p>
+
+<div class="vscode-block"><div><span style="color: #859900;font-weight: bold;">import</span> <span style="color: #cb4b16;">sqlalchemy</span> <span style="color: #859900;font-weight: bold;">as</span> <span style="color: #cb4b16;">sa</span></div><div><span style="color: #859900;font-weight: bold;">from</span> <span style="color: #cb4b16;">sqlalchemy</span>.<span style="color: #cb4b16;">ext</span>.<span style="color: #cb4b16;">declarative</span> <span style="color: #859900;font-weight: bold;">import</span> <span style="color: #268bd2;">declarative_base</span></div><br/><div><span style="color: #268bd2;">BASE</span> <span style="color: #859900;">=</span> <span style="color: #268bd2;">declarative_base</span>()</div><br/><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">User</span>(<span style="color: #268bd2;">BASE</span>):</div><div>&nbsp; &nbsp; <span style="color: #268bd2;">__tablename__</span> <span style="color: #859900;">=</span> <span style="color: #2aa198;">'user'</span></div><div>&nbsp; &nbsp; <span style="color: #268bd2;">id</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">sa</span>.<span style="color: #cb4b16;">Column</span>(<span style="color: #cb4b16;">sa</span>.<span style="color: #cb4b16;">Integer</span>, primary_key<span style="color: #859900;">=</span><span style="color: #b58900;">True</span>, autoincrement<span style="color: #859900;">=</span><span style="color: #b58900;">True</span>)</div><div>&nbsp; &nbsp; <span style="color: #268bd2;">username</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">sa</span>.<span style="color: #cb4b16;">Column</span>(<span style="color: #cb4b16;">sa</span>.<span style="color: #cb4b16;">String</span>(<span style="color: #d33682;">64</span>), unique<span style="color: #859900;">=</span><span style="color: #b58900;">True</span>) </div><div>&nbsp; &nbsp; <span style="color: #268bd2;">password</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">sa</span>.<span style="color: #cb4b16;">Column</span>(<span style="color: #cb4b16;">sa</span>.<span style="color: #cb4b16;">String</span>(<span style="color: #d33682;">64</span>)) </div><div>&nbsp; &nbsp; <span style="color: #268bd2;">email</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">sa</span>.<span style="color: #cb4b16;">Column</span>(<span style="color: #cb4b16;">sa</span>.<span style="color: #cb4b16;">String</span>(<span style="color: #d33682;">128</span>), unique<span style="color: #859900;">=</span><span style="color: #b58900;">True</span>)</div><div>&nbsp; &nbsp; <span style="color: #268bd2;">create_at</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">sa</span>.<span style="color: #cb4b16;">Column</span>(<span style="color: #cb4b16;">sa</span>.<span style="color: #cb4b16;">DateTime</span>, default<span style="color: #859900;">=</span><span style="color: #cb4b16;">datetime</span>.<span style="color: #268bd2;">now</span>)</div></div>
+
+<p>可以看出，这里的 <code>sa.Column</code> 就是一个描述符，它负责管理属性的行为。只需要在类定义时引入 <code>sa.Column</code> ，它就能自动将属性映射到数据库中的字段，并处理自增、默认值等相关的工作。并且数据库中关于字段的创建、查找、过滤、排序等功能，都可以对应到 Python 中关于属性的操作：</p>
+
+<div class="vscode-block"><div><span style="color: #93a1a1;"># create users</span></div><div><span style="color: #268bd2;">user1</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">User</span>(username<span style="color: #859900;">=</span><span style="color: #2aa198;">'admin'</span>, password<span style="color: #859900;">=</span><span style="color: #2aa198;">'admin123456'</span>, email<span style="color: #859900;">=</span><span style="color: #2aa198;">'admin@test.com'</span>)</div><div><span style="color: #268bd2;">user2</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">User</span>(username<span style="color: #859900;">=</span><span style="color: #2aa198;">'assistant'</span>, password<span style="color: #859900;">=</span><span style="color: #2aa198;">'assist654321'</span>, email<span style="color: #859900;">=</span><span style="color: #2aa198;">'assist@test.com'</span>)</div><div><span style="color: #93a1a1;"># query users</span></div><div><span style="color: #268bd2;">users</span> <span style="color: #859900;">=</span> <span style="color: #268bd2;">session</span>.query(<span style="color: #cb4b16;">User</span>).filter(<span style="color: #cb4b16;">User</span>.<span style="color: #268bd2;">level</span> <span style="color: #859900;">&gt;</span> <span style="color: #d33682;">100</span>).order_by(<span style="color: #cb4b16;">User</span>.<span style="color: #268bd2;">create_at</span>)</div></div>
+
+<h2>其它话题</h2>
+
+<h3>关于属性</h3>
+
+<p>在之前介绍属性时，曾经将属性粗略地划分为实例属性和类属性，并指出查找属性时先查找实例属性，再查找类属性。实际上这个表述是不对的，特别是在上文中看到了描述符作为类属性是如何影响实例属性的行为的。在认识了描述符这一概念后，便可以介绍 Python 属性查找的完整逻辑了。</p>
+
+<p><a class="link-internal" href="/programming/python-oop/05-custom-types">之前</a>说过，假设 <code>obj</code> 是一个类或实例，在使用 <code>obj.attr</code> 查找属性时，会先调用 <code>.__getattribute__()</code> 方法查找。如果查找失败，再调用 <code>.__getattr__()</code> 方法查找。基类 <code>object</code> 规范了标准的属性查找方式，它的 <code>.__getattribute__()</code> 方法实现细节是这样的：</p>
+
+<ol>
+    <li>首先查找属性在类中是否是一个描述符</li>
+    <li>如果是描述符，并且是数据描述符，则尝试调用数据描述符的 <code>__get__()</code> 方法，其调用细节为：</li>
+    <ul>
+        <li>如果 <code>obj</code> 是实例，那么尝试调用 <code>type(obj).__dict__['attr'].__get__(obj, type(obj))</code></li>
+        <li>如果 <code>Obj</code> 是类，那么直接调用 <code>Obj.__dict__['attr'].__get__(None, Obj)</code></li>
+    </ul>
+    <li>如果不是数据描述符，则从实例的 <code>__dict__</code> 中查找（在这一步，可以查找到实例属性）</li>
+    <li>如果 <code>__dict__</code> 中查找不到，再检查它是否是一个非数据描述符；如果是，则调用非数据描述符的 <code>__get__()</code> 方法</li>
+    <li>如果也不是一个非数据描述符，则从类属性中查找（包括类的 <code>__dict__</code> 和父类的 <code>__dict__</code> ）</li>
+    <li>如果还是找不到，则抛出 <var class="error">AttributeError</var> 异常</li>
+</ol>
+
+<p>当类中提供了 <code>__slots__</code> 属性后，情况有点特殊：Python 解释器会自动为 <code>__slots__</code> 中的每个名称创建一个特殊的描述符对象，这也就是为什么 <code>__slots__</code> 声明的属性不能设置默认值（否则默认值会覆盖自动创建的描述符）。</p>
+
+<p>这也就是为什么描述符需要定义为类属性。因为一个描述符就可以用于处理所有实例的属性，将描述符定义为类属性可以使一个类型只保存一份描述符对象，而不需要每个实例都保存一个副本。</p>
+
+<h3>关于方法</h3>
+
+<p>在之前介绍方法时，曾经将&ldquo;在类中定义的函数&rdquo;称为&ldquo;方法&rdquo;，并指出实例调用方法时，Python 解释器会自动将实例作为第一个位置参数传入。实际上这个表述也是有一定偏差的，但在有了描述符相关知识后，就可以明白 Python 的方法究竟是什么。</p>
+
+<p>接下来定义一个很简单的类作为示例：</p>
+
+<div class="vscode-block"><div><span style="color: #586e75;font-weight: bold;">class</span> <span style="color: #cb4b16;">Student</span>:</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__init__</span>(self, name, age):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">name</span> <span style="color: #859900;">=</span> name</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">age</span> <span style="color: #859900;">=</span> age</div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">__repr__</span>(self):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #859900;font-weight: bold;">return</span> <span style="color: #586e75;font-weight: bold;">f</span><span style="color: #2aa198;">'Hello, I</span><span style="color: #cb4b16;">\'</span><span style="color: #2aa198;">m </span><span style="color: #cb4b16;">{</span><span style="color: #268bd2;">self</span>.<span style="color: #268bd2;">name</span><span style="color: #cb4b16;">}</span><span style="color: #2aa198;">'</span></div><div>&nbsp; &nbsp; <span style="color: #586e75;font-weight: bold;">def</span> <span style="color: #268bd2;">say_hello</span>(self):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #268bd2;">print</span>(<span style="color: #268bd2;">repr</span>(<span style="color: #268bd2;">self</span>))</div></div>
+
+<p>如果直接通过类查看定义的方法，会发现它其实就是一个函数：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; Student.say_hello       
+&lt;function Student.say_hello at 0x000002511BDB7940&gt;
+</div>
+
+<p>但通过实例检查方法时，结果又不同了：它是一个称为&ldquo;bound method&rdquo;的对象：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; someone.say_hello  
+&lt;bound method Student.say_hello of &lt;__main__.Student object at 0x000002511BBD7220&gt;&gt;
+</div>
+
+<p>细心的读者可能会发现两者的地址似乎不同，这说明它们应该是不同的函数/方法。使用 <code>is</code> 运算符可以得出它们确实不是同一个对象，并且不同实例得到的实例方法也不是同一个对象：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; Student.say_hello is someone.say_hello
+False
+&gt;&gt;&gt; someone.say_hello is Student('Alice', 16).say_hello
+False
+</div>
+
+<p>在有了对描述符的认识后，应该就可以反应过来：<code>say_hello</code> 就是一个描述符。不仅如此，实际上任何使用 <code>def</code> 关键字定义的所谓&ldquo;函数&rdquo;都是一个描述符，不管它们是在类内部还是外部定义的，它们都提供了一个 <code>__get__</code> 方法：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; def func(*args, **kwargs): print(args, kwargs)
+&gt;&gt;&gt; dir(func)
+['__annotations__', '__call__', ..., '__ge__', '__get__', '__getattribute__', ..., '__str__', '__subclasshook__']
+</div>
+
+<p>当使用实例调用类属性后，函数的 <code>__get__</code> 方法就发挥用途了，它将函数包装成了一个类似 <code>functools.partial</code> 的偏函数，这一过程中实例永远作为第一个位置参数，所以被称为&ldquo;绑定&rdquo;的方法。它们的 <code>.__self__</code> 属性指示了绑定的对象：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; someone.say_hello.__self__
+Hello, I'm Tom
+</div>
+
+<p>还可以通过 <code>.__func__</code> 属性获取原本的函数：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; someone.say_hello.__func__ is Student.say_hello
+True
+</div>
+
+<p>所以，描述符在 Python 中无处不在，只是一般情况下没有意识到它的作用。完全可以将一个函数动态地添加为方法，并将它的第一个参数作为 <code>self</code> 。只不过为了发挥它的描述符功能，要添加到类上：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; def introduce(student):
+...     print(f'He is {student.name}, {student.age} years old')
+&gt;&gt;&gt; Student.introduce = introduce
+&gt;&gt;&gt; someone.introduce()
+He is Tom, 17 years old
+</div>
+
+<p>如果要深究下去的话，其实这些所谓的&ldquo;函数&rdquo;也分为很多类型。例如，有些方法的返回结果是&ldquo;slot wrapper&rdquo;、&ldquo;method-wrapper&rdquo;：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; object.__eq__
+&lt;slot wrapper '__eq__' of 'object' objects&gt;
+&gt;&gt;&gt; object().__eq__ 
+&lt;method-wrapper '__eq__' of object object at 0x000002511B6084F0&gt;
+</div>
+
+<p>这些奇怪的类名只是因为它们是用 C 语言实现的，总的来说它们都可以被归为函数和绑定方法这两类。</p>
+
+<p>所以，Python 的类其实并没有什么特殊的，它只是为一些函数提供了统一的命名空间，外加提供了一个生产实例的接口。而实例也没什么特殊的，它只不过访问了一个可调用的属性，再使用这个属性的 <code>__call__</code> 方法。真正特殊的是 Python 的描述符机制，它会自动发生函数向绑定方法的偏函数转换，并在这一过程中自动发生绑定的机制。</p>
+
+<h2>参考资料/延伸阅读</h2>
+
+<p><a class="link-reference" href="https://docs.python.org/3/reference/datamodel.html#implementing-descriptors">Python 官方文档对描述符的介绍</a></p>
+
+<p><a class="link-reference" href="https://docs.python.org/3/howto/descriptor.html">Python 官方文档&mdash;&mdash;描述器使用指南</a>，本文中的部分示例代码改编<span class="heimu">或直接搬</span>自该文档。</p>
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+										
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"></li>
+		<li class="previous"><a href="/programming/python-oop/08-operator-overloading/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>Python面向对象编程08-运算符重载</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/programming/python-oop/09-descriptors/" aria-current="page">Python面向对象编程09-描述符</a>
+											<span class="post-date">2024年4月30日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/08-operator-overloading/">Python面向对象编程08-运算符重载</a>
+											<span class="post-date">2024年4月7日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/07-callable-objects/">Python面向对象编程07-可调用对象与装饰器</a>
+											<span class="post-date">2024年3月1日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/05-custom-types/">Python面向对象编程05-特殊方法与自定义类</a>
+											<span class="post-date">2024年2月9日</span>
+									</li>
+											<li>
+					<a href="/programming/python/library-logging/">Python标准库logging：日志记录</a>
+											<span class="post-date">2024年1月23日</span>
+									</li>
+											<li>
+					<a href="/programming/c-macro/">C语言-宏定义完全指南</a>
+											<span class="post-date">2024年1月7日</span>
+									</li>
+											<li>
+					<a href="/math/linear-algebra/01-vectors/">向量及其运算</a>
+											<span class="post-date">2023年7月2日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (11)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (25)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (5)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (8)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2024/04/'> 2024年4月 &nbsp;(2)</option>
+	<option value='/2024/03/'> 2024年3月 &nbsp;(1)</option>
+	<option value='/2024/02/'> 2024年2月 &nbsp;(1)</option>
+	<option value='/2024/01/'> 2024年1月 &nbsp;(2)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>
