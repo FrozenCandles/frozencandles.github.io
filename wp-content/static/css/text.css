@@ -1,9 +1,7 @@
-
-
+@charset "UTF-8";
 :root {
-    --font-code: Consolas, 'Courier New', monospace
+  --font-code: Consolas, "Courier New", monospace;
 }
-
 
 /* https://xie.infoq.cn/article/2ca9d08537559565e593b5efa 
  * 黑幕 - 隐藏文字 
@@ -12,136 +10,134 @@ span.heimu a.external,
 span.heimu a.external:visited,
 span.heimu a.extiw,
 span.heimu a.extiw:visited {
-    color: #252525;
+  color: #252525;
 }
+
 .heimu,
 .heimu a,
 a .heimu,
 .heimu a.new {
-    background-color: #252525;
-    color: #252525;
-    text-shadow: none;
+  background-color: #252525;
+  color: #252525;
+  text-shadow: none;
 }
+
 body:not(.heimu_toggle_on) .heimu:hover,
 body:not(.heimu_toggle_on) .heimu:active,
 body:not(.heimu_toggle_on) .heimu.off {
-    transition: color .13s linear;
-    color: white;
+  transition: color 0.13s linear;
+  color: white;
 }
+
 body:not(.heimu_toggle_on) .heimu:hover a,
 body:not(.heimu_toggle_on) a:hover .heimu,
 body:not(.heimu_toggle_on) .heimu.off a,
 body:not(.heimu_toggle_on) a:hover .heimu.off {
-    transition: color .13s linear;
-    color: lightblue;
+  transition: color 0.13s linear;
+  color: lightblue;
 }
+
 body:not(.heimu_toggle_on) .heimu.off .new,
 body:not(.heimu_toggle_on) .heimu.off .new:hover,
 body:not(.heimu_toggle_on) .new:hover .heimu.off,
 body:not(.heimu_toggle_on) .heimu.off .new,
 body:not(.heimu_toggle_on) .heimu.off .new:hover,
 body:not(.heimu_toggle_on) .new:hover .heimu.off {
-    transition: color .13s linear;
-    color: #BA0000;
+  transition: color 0.13s linear;
+  color: #BA0000;
 }
-
 
 div.math {
-    width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    font-size: 15px;
-    --scroll-bar-color: #c5c5c5;
-    --scroll-bar-bg-color: #f6f6f6;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  font-size: 15px;
+  --scroll-bar-color: #c5c5c5;
+  --scroll-bar-bg-color: #f6f6f6;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-bar-color) var(--scroll-bar-bg-color);
+  /* Works on Chrome, Edge, and Safari */
 }
-
-.math::-webkit-scrollbar-corner { background: rgba(0,0,0,0.5); }
-
-.math {
-    scrollbar-width: thin;
-    scrollbar-color: var(--scroll-bar-color) var(--scroll-bar-bg-color);
+div.math::-webkit-scrollbar-corner {
+  background: rgba(0, 0, 0, 0.5);
 }
-/* Works on Chrome, Edge, and Safari */
-.math::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
+div.math::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
 }
-.math::-webkit-scrollbar-track {
-    background: var(--scroll-bar-bg-color);
+div.math::-webkit-scrollbar-track {
+  background: var(--scroll-bar-bg-color);
 }
-.math::-webkit-scrollbar-thumb {
-    background-color: var(--scroll-bar-color);
-    border-radius: 20px;
-    border: 3px solid var(--scroll-bar-bg-color);
+div.math::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-bar-color);
+  border-radius: 20px;
+  border: 3px solid var(--scroll-bar-bg-color);
 }
-
 
 var,
 code,
 .code-template,
-.code-font,
-.entry td.cell-code {
-    font-family: var(--font-code);
-    word-break: break-word;
+.code-highlight,
+.code .code-font,
+.entry .cell-code {
+  font-family: var(--font-code);
+  word-break: break-word;
 }
 
 code.classic {
-    background-color: rgb(246, 246, 246);
-    border-radius: 3px;
-    color: rgb(18, 18, 18);
-    font-size: 14px;
-    margin-left: 4px;
-    margin-right: 4px;
-    padding: 3px 4px;
+  background-color: #f6f6f6;
+  border-radius: 3px;
+  color: #121212;
+  font-size: 14px;
+  margin-left: 4px;
+  margin-right: 4px;
+  padding: 3px 4px;
 }
 
 code.traditional {
-    color:#870000;
-    font-size: 15px;
+  color: #870000;
+  font-size: 15px;
 }
 
 var.error,
 code.error {
-    word-break: break-word;
-    color:red;
-    font-size: 15px;
-    font-style: normal;
+  word-break: break-word;
+  color: red;
+  font-size: 15px;
+  font-style: normal;
 }
 
-
 blockquote.classic {
-    border-left: 4px solid lightgrey;
-    padding-left: 15px;
-    margin-inline-start: 0;
-    margin-inline-end: 0;
-    color: grey;
+  border-left: 4px solid lightgrey;
+  padding-left: 15px;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  color: grey;
 }
 
 .vscode-block {
-    margin-bottom: 15px;
-    padding: 5px;
-    border: 1px solid silver;
-    /* border-radius: 3px; */
+  margin-bottom: 15px;
+  padding: 5px;
+  border: 1px solid silver;
+  /* border-radius: 3px; */
 }
 
 div.code-template {
-    color: black;
-    padding: 5px;
-    border: 1px solid black;
-    margin-bottom: 15px;
-    font-size: 14px;
-    line-height: 18px;
+  color: black;
+  padding: 5px;
+  border: 1px solid black;
+  margin-bottom: 15px;
+  font-size: 14px;
+  line-height: 18px;
 }
 
 /* 
 span.has-inline-color.text-keyword-green     { color: #22ac00; }
 span.has-inline-color.has-vivid-purple-color { color: violet; } 
 */
-
 .entry blockquote {
-    font-style: normal;
+  font-style: normal;
 }
-
 
 /* 
 table.plain td,
@@ -155,40 +151,39 @@ table.plain {
     border-collapse: collapse;
 }
 table.plain th { background-color: gainsboro; } */
-
 kbd.stack {
-    display: inline-block;
-    margin: 0 .1em;
-    padding: .1em .6em;
-    font-family: "Segoe UI", "Liberation Sans", sans-serif;
-    font-size: 11px;
-    line-height: 1.5;
-    color: rgb(35, 38, 41);
-    text-shadow: rgb(255, 255, 255) 0px 1px 0px;
-    background-color: rgb(227, 230, 232);
-    border: 1px solid rgb(159, 166, 173);
-    border-radius: 3px;
-    box-shadow: 0 1px 1px hsla(210,8%,5%,0.15),inset 0 1px 0 0 hsl(0,0%,100%);
-    overflow-wrap: break-word;
+  display: inline-block;
+  margin: 0 0.1em;
+  padding: 0.1em 0.6em;
+  font-family: "Segoe UI", "Liberation Sans", sans-serif;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #232629;
+  text-shadow: white 0px 1px 0px;
+  background-color: #e3e6e8;
+  border: 1px solid #9fa6ad;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px rgba(12, 13, 14, 0.15), inset 0 1px 0 0 white;
+  overflow-wrap: break-word;
 }
 
 kbd.quartz {
-    background-color: #f8f9fa;
-    color: #222;
-    font-size: 80%;
-    font-family: inherit;
-    font-weight: bold;
-    border: 1px solid #c8ccd1;
-    border-radius: 2px;
-    box-shadow: 0 1px 0 rgb(0 0 0 / 20%), 0 0 0 2px #fff inset;
-    padding: 0.1em 0.4em;
-    text-shadow: 0 1px 0 #fff;
-    text-align: center;
+  background-color: #f8f9fa;
+  color: #222;
+  font-size: 80%;
+  font-family: inherit;
+  font-weight: bold;
+  border: 1px solid #c8ccd1;
+  border-radius: 2px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px #fff inset;
+  padding: 0.1em 0.4em;
+  text-shadow: 0 1px 0 #fff;
+  text-align: center;
 }
 
 strong.green {
-    color: #22ac00;
-    font-weight: normal;
+  color: #22ac00;
+  font-weight: normal;
 }
 
 /* 
@@ -203,19 +198,17 @@ var.instruction { background-color: rgb(243, 233, 220); }
 
 span.inline-color.violet { color: violet; } 
 */
-
-
-
-
 .entry .text-indent {
-    padding-left: 2em;
+  padding-left: 2em;
 }
+
 .entry .text-framed {
-    border: 1px solid #222;
-    padding: 4px;
+  border: 1px solid #222;
+  padding: 4px;
 }
+
 .entry .text-center {
-    text-align: center;
+  text-align: center;
 }
 
 /* 
@@ -223,6 +216,3 @@ span.inline-color.violet { color: violet; }
     padding-left: attr(css-text-indent);
 } 
  */
-
-
-
