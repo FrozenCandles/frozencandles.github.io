@@ -1,0 +1,825 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>STM32的中断系统与外部中断 - 冰封残烛的个人小站</title>
+	<meta name="description" content="介绍 STM32 中断(interrupt)系统的整体概念，包括中断源、优先级以及负责调度整个芯片中断相关的功能的嵌套向量中断控制器 NVIC 。然后，以外部中断为核心介绍了中断的处理流程，包括外部中断的概念、中断与事件的区别、中断服务函数的编写示例。" />
+	<link rel="canonical" href="/embedded/stm32/03-interrupt-system/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="STM32的中断系统与外部中断 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="介绍 STM32 中断(interrupt)系统的整体概念，包括中断源、优先级以及负责调度整个芯片中断相关的功能的嵌套向量中断控制器 NVIC 。然后，以外部中断为核心介绍了中断的处理流程，包括外部中断的概念、中断与事件的区别、中断服务函数的编写示例。" />
+	<meta property="og:url" content="/embedded/stm32/03-interrupt-system/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2024-06-02T08:19:15+00:00" />
+	<meta property="article:modified_time" content="2024-06-02T08:38:25+00:00" />
+	<meta name="author" content="Hello" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="2分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebPage",
+	            "@id": "/embedded/stm32/03-interrupt-system/",
+	            "url": "/embedded/stm32/03-interrupt-system/",
+	            "name": "STM32的中断系统与外部中断 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/embedded/stm32/03-interrupt-system/#primaryimage"
+	            },
+	            "image": {
+	                "@id": "/embedded/stm32/03-interrupt-system/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/cover/stm32@03-interrupt-system.jpg",
+	            "datePublished": "2024-06-02T08:19:15+00:00",
+	            "dateModified": "2024-06-02T08:38:25+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "介绍 STM32 中断(interrupt)系统的整体概念，包括中断源、优先级以及负责调度整个芯片中断相关的功能的嵌套向量中断控制器 NVIC 。然后，以外部中断为核心介绍了中断的处理流程，包括外部中断的概念、中断与事件的区别、中断服务函数的编写示例。",
+	            "breadcrumb": {
+	                "@id": "/embedded/stm32/03-interrupt-system/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/embedded/stm32/03-interrupt-system/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/embedded/stm32/03-interrupt-system/#primaryimage",
+	            "url": "/wp-content/uploads/cover/stm32@03-interrupt-system.jpg",
+	            "contentUrl": "/wp-content/uploads/cover/stm32@03-interrupt-system.jpg"
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/embedded/stm32/03-interrupt-system/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "STM32的中断系统与外部中断"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/1380" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=1380' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fembedded%2Fstm32%2F03-interrupt-system%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fembedded%2Fstm32%2F03-interrupt-system%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?432b66336cb23bd6712cecabe6d808eb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="stylesheet" href="/wp-content/static/css/theme@haru.wp.min.css">
+<link rel="stylesheet" href="/wp-content/static/css/hljs@night-owl-light.css">
+
+<style>
+    .vscode-block {
+        color: #403f53;
+        background-color: #FBFBFB;
+    }
+    .vscode-block span[token="var"] { color: #4876d6; }
+</style><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-1380 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-1390" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1390"><span class="menu-item-wrapper"><a href="/all/embedded/">电子电路与嵌入式</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/all/embedded-application/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-1380" class="post-1380 post type-post status-publish format-standard has-post-thumbnail hentry category-stm32">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">STM32的中断系统与外部中断</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/embedded/stm32/" rel="category tag">STM32</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2024年6月2日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+<h2>STM32的中断系统</h2>
+
+<h3>STM32中断概览</h3>
+
+<p>几乎所有单片机都具有中断系统，中断允许单片机能实时处理外界发生的随机事件。Cortex 内核设计了一套完善的中断系统，它将暂停当前代码执行流程的事件分为系统<strong>异常</strong>(exception)和外部<strong>中断</strong>(interrupt)。</p>
+
+<p>STM32 的中断源很多，并且每一个类型芯片包含的的中断源都不完全一样。可以在 <var>stm32f10x.h</var> 的以下枚举类型中找到当前芯片的所有中断源：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;">typedef</span> <span style="color: #994cc3;font-weight: bold;">enum</span> <span token="var">IRQn</span> {<span style="color: #989fb1;"> /* ... */</span> } <span token="var">IRQn_Type</span>;</div></div>
+
+<p>在使用到具体的中断类型时，再介绍对应的中断源。</p>
+
+<p>STM32 的中断源有优先级之分，在遇到<em>中断嵌套</em>，即一个中断执行时又发生一个中断时，会根据优先级处理这种嵌套的情况。</p>
+
+<p>Cortex-M 具有一个完整的中断向量表，而 STM32 对该表重新编排了顺序，除了少数几个系统异常外，大部分中断的优先级都是可以调整的。</p>
+
+<p>优先级又分为<strong>抢占优先级</strong>(preemption priority)和<strong>子优先级</strong>(subpriority)。当一个中断执行时，如果有更高抢占优先级的中断发生，那么可以直接转到处理这个抢占优先级更高的中断。即，STM32 支持中断的嵌套。</p>
+
+<p>当两个中断源的抢占式优先级相同时，那么后到达的中断需要等到前一个中断处理完之后才会被处理。如果有多个中断同时响应，抢占优先级高的就会先于较低的得到执行；如果抢占优先级相同，就比较子优先级的高低；如果抢占优先级和子优先级都相同，则比较中断源的硬件中断编号。对于这些优先级编号来说，数值越小意味着优先级越高。</p>
+
+<h3 id="section-NVIC">NVIC结构</h3>
+
+<p>在使用 STM32 的中断功能前，必须要了解 NVIC 这一结构。NVIC 是 Cortex-M 系列芯片的<strong>嵌套向量中断控制器</strong>(Nested Vectored Interrupt Controller)，它是内核里面的一个结构，负责调度整个芯片中断相关的功能，并发送给内核处理。</p>
+
+<p>STM32 的外设很多，引起中断的中断源也很多，这会导致中断的处理很麻烦，如果什么事情都交给 CPU 处理，那么 CPU 的负担会比较大。这个时候就需要 NVIC 登场了：NVIC 就像 CPU 在中断管理方面的一位&ldquo;秘书&rdquo;，负责处理中断优先级、中断向量表以及中断使能和禁用等琐碎的问题，帮 CPU 安排中断程序的处理顺序，减轻了 CPU 的工作量。</p>
+
+<figure>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@stm32/03-NVIC-structure.png" width="330"/>
+</figure>
+
+<p>Cortex-M3 的 NVIC 功能非常强大，以至于 STM32 只用到了其中的一部分功能，它的 NVIC 是 Cortex-M3 的 NVIC 的一个子集。</p>
+
+
+
+<p>接下来先介绍中断<em>优先级管理</em>的问题。Cortex-M 内核的中断优先级又可以分为<strong>抢占优先级</strong>(pre-emption priority)和<strong>子优先级</strong>(subpriority)：</p>
+
+<ul>
+    <li>抢占优先级决定了中断是否可以嵌套：抢占优先级高的中断，可以在低抢占优先级的中断处理过程中被响应，或者说高抢占优先级的中断将被优先被处理；如果两个中断的抢占优先级相同，那么后到达的中断就要等待当前的中断被处理完后才能被处理</li>
+    <li>子优先级决定了中断的处理顺序：如果两个中断同时到达，则先处理子优先级高的中断。如果两个中断的抢占式优先级和子优先级都相同的话，则根据它们在中断向量表中的顺序决定处理顺序</li>
+</ul>
+
+<p>中断源优先级的编号越小，表明它的优先级别越高。例如，假设有以下三个中断源和对应的优先级：</p>
+
+<table class="table-compact">
+    <tbody><tr>
+        <th>中断源</th>
+        <th>抢占优先级</th>
+        <th>子优先级</th>
+    </tr>
+    <tr>
+        <td>A</td>
+        <td>0</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>B</td>
+        <td>1</td>
+        <td>1</td>
+    </tr>
+    <tr>
+        <td>C</td>
+        <td>1</td>
+        <td>0</td>
+    </tr>
+</tbody></table>
+
+<p>若内核正在执行 B 的中断服务函数，则它能被抢占优先级更高的中断 A 打断，由于 B 和 C 的抢占优先级相同，所以 B 不能被 C 打断。但如果 B 和 C 中断是同时到达的，内核就会首先响应响应优先级别更高的 C 中断。</p>
+
+
+<p>NVIC 上有若干个<strong>中断优先级寄存器</strong> <var type="register">IPRx</var> ，用来配置每个中断的优先级。这些寄存器都是以字节为单位起效的，因此原则上每个中断可配置的优先级编号为 0-255 。但是 STM32 并没有用到这么多中断，它只使用了高 4 位表达优先级，因此最多只能设置 16 个中断优先级。STM32 根据对这 4 个比特位的不同划分方式，将优先级分为 5 组，每组抢占优先级和子优先级占用的比特位数都不尽相同。这个分组方式被记录在内核的系统控制块(system control block)中的<strong>应用程序中断及复位控制寄存器</strong> <var type="register">AIRCR</var> 中的第 8~10 位 <var type="register">PRIGROUP</var> ，具体每个优先级分组的方式如下：</p>
+
+<table>
+    <tbody><tr>
+        <th>分组编号</th><th>PRIGROUP 的实际值</th><th>IPRx 的分组方式</th><th>说明</th>
+    </tr>
+    <tr>
+        <td>0</td><td class="code-font">0b011</td><td class="code-font">0b yyyy</td><td>抢占优先级占 0 位共 1 级；子优先级占 4 位共 16 级</td>
+    </tr>
+    <tr>
+        <td>1</td><td class="code-font">0b100</td><td class="code-font">0b x.yyy</td><td>抢占优先级占 1 位共 2 级；子优先级占 3 位共 8 级</td>
+    </tr>
+    <tr>
+        <td>2</td><td class="code-font">0b101</td><td class="code-font">0b xx.yy</td><td>抢占优先级占 2 位共 4 级；子优先级占 2 位共 4 级</td>
+    </tr>
+    <tr>
+        <td>3</td><td class="code-font">0b110</td><td class="code-font">0b xxx.y</td><td>抢占优先级占 3 位共 8 级；子优先级占 1 位共 2 级</td>
+    </tr>
+    <tr>
+        <td>4</td><td class="code-font">0b111</td><td class="code-font">0b xxxx</td><td>抢占优先级占 4 位共 16 级；子优先级占 1 位共 0 级</td>
+    </tr>
+</tbody></table>
+
+<p>与 NVIC 中断系统配置有关的函数和定义都在 <var type="file">misc.h</var> 头文件中。设置优先级分组可以通过调用以下函数实现：</p>
+
+<ul>
+    <li class="code"><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">NVIC_PriorityGroupConfig</span>(<span style="color: #4876d6;font-weight: bold;">uint32_t</span> NVIC_PriorityGroup);</li>
+</ul>
+
+<p>该函数参数的可用值已经被定义为了 <code>NVIC_PriorityGroup_*</code> 一系列宏。例如需要 4 级抢占优先级和 4 级子优先级，可以设置优先级分组为分组 2 ：</p>
+
+<div class="vscode-block"><div><span token="var">NVIC_PriorityGroupConfig</span><span token="var">(</span><span token="var">NVIC_PriorityGroup_2</span><span token="var">)</span>;</div></div>
+
+<p>除了配置整体的优先级分组外，在使用中断前还需要为每个用到的中断源设置优先级。设置优先级所需要的信息由 <code>NVIC_InitTypeDef</code> 结构提供。该结构的定义为：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;">typedef</span> <span style="color: #994cc3;font-weight: bold;">struct</span> {</div><div>&nbsp; &nbsp; <span style="color: #4876d6;font-weight: bold;">uint8_t</span> <span style="color: #0c969b;">NVIC_IRQChannel</span>;</div><div>&nbsp; &nbsp; <span style="color: #4876d6;font-weight: bold;">uint8_t</span> <span style="color: #0c969b;">NVIC_IRQChannelPreemptionPriority</span>;</div><div>&nbsp; &nbsp; <span style="color: #4876d6;font-weight: bold;">uint8_t</span> <span style="color: #0c969b;">NVIC_IRQChannelSubPriority</span>;</div><div>&nbsp; &nbsp; <span token="var">FunctionalState</span> <span style="color: #0c969b;">NVIC_IRQChannelCmd</span>;</div><div>} <span token="var">NVIC_InitTypeDef</span>;</div></div>
+
+<p>成员 <code>NVIC_IROChannel</code> 用来设置中断源，可用的中断源包含在之前提到的 <code>IRQn_Type</code> 定义的枚举常量里。</p>
+
+<p>成员 <code>NVIC_IRQChannelPreemptionPriority</code> 和 <code>NVIC_IRQChannelSubPriority</code> 分别指定抢占优先级和子优先级，具体的值要根据优先级分组来确定。</p>
+
+<p>最后一个成员 <code>NVIC_IRQChannelCmd</code> 自然是控制启用还是禁用中断。</p>
+
+<p>例如，如果要让 GPIO 接收到的外界信号产生一个中断，需要使用外部中断，对应的中断源可以是 <code>EXTI0_IRQn</code> ，那么配置 NVIC 的代码为：</p>
+
+<div class="vscode-block"><div><span token="var">NVIC_InitTypeDef</span> <span token="var">NVIC_InitStructure</span> <span style="color: #994cc3;">=</span> {</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">NVIC_IRQChannel</span> <span style="color: #994cc3;">=</span> <span token="var">EXTI0_IRQn</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">NVIC_IRQChannelPreemptionPriority</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">1</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">NVIC_IRQChannelSubPriority</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">1</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">NVIC_IRQChannelCmd</span> <span style="color: #994cc3;">=</span> <span token="var">ENABLE</span></div><div>};</div><div><span token="var">NVIC_Init</span><span token="var">(</span><span style="color: #0c969b;">&amp;</span><span token="var">NVIC_InitStructure</span><span token="var">)</span>;</div></div>
+
+<p>可以看出，<code>NVIC_Init()</code> 这个函数与其说是初始化 NVIC ，倒不如说是初始化<em>中断源</em>（包括开启中断源和分配优先级）更符合它的作用。</p>
+
+<p>接下来以外部中断为例，介绍中断的应用。</p>
+
+<h2>外部中断</h2>
+
+<h3>外部中断/事件控制器</h3>
+
+<p>STM32 有一个外设 EXTI ，全称外部中断/事件控制器(external interrupt/event controller)，它管理了控制器的外部中断和外部事件。</p>
+
+<blockquote>
+    <p>所谓事件(event)，它与中断的概念基本是一致的。事件和中断的产生都是一致的，但是中断信号需要通过 NVIC 进入内核，执行中断服务；而事件不参与内核提供的中断处理流程，而是直接转交给其它外设处理。这样内核可以不用响应事件，从而减少内核的负担。</p>
+</blockquote>
+
+<p>在使用外设前，首先需要初始化外设。根据标准库的编写思路，初始化这个外设需要用到以下函数：</p>
+
+<ul>
+    <li class="code"><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">EXTI_Init</span>(<span token="var">EXTI_InitTypeDef</span><span style="color: #0c969b;">*</span> EXTI_InitStruct);</li>
+</ul>
+
+<p>标准库函数对每个外设都建立了一个初始化结构，并由初始化结构的参数完成寄存器的配置。对于外部中断来说，这个结构体是 <code>EXTI_InitTypeDef</code> ，对应的初始化函数是 <code>EXTI_Init()</code> 。它们的定义在 <var>stm32f10x_exti.h</var> 中，其中初始化结构的定义如下：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;">typedef</span> <span style="color: #994cc3;font-weight: bold;">struct</span> {</div><div>&nbsp; &nbsp; <span style="color: #4876d6;font-weight: bold;">uint32_t</span> <span style="color: #0c969b;">EXTI_Line</span>;</div><div>&nbsp; &nbsp; <span token="var">EXTIMode_TypeDef</span> <span style="color: #0c969b;">EXTI_Mode</span>;</div><div>&nbsp; &nbsp; <span token="var">EXTITrigger_TypeDef</span> <span style="color: #0c969b;">EXTI_Trigger</span>;</div><div>&nbsp; &nbsp; <span token="var">FunctionalState</span> <span style="color: #0c969b;">EXTI_LineCmd</span>;</div><div>} <span token="var">EXTI_InitTypeDef</span>;</div></div>
+
+<p>要明白这个结构每个成员如何取值，以及使用外部中断需要执行哪些步骤，需要结合 EXTI 的结构分析，并了解 STM32 处理外部中断的基本流程。下图展示了 EXTI 的核心结构：</p>
+
+<figure>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@stm32/03-EXTI-structure.png" width="600"/>
+</figure>
+
+<p>图线上的&ldquo;/20&rdquo;代表这样的交互逻辑共有独立的 20 组，每个组都拥有单独的配置。整个处理过程从最右边的输入线接到信号输入开始，经由一系列处理之后到达最左端引起一个中断或事件。</p>
+
+<p>首先是输入线，EXTI 控制器有 20 个独立的中断/事件输入线，换句话说，STM32 可以拥有 20 个外部中断。STM32 的外部中断可以设置为任意一个 GPIO 引脚，甚至也可以是其它外设的输入。</p>
+
+<p>这 20 个外部输入中，前 16 个输入线和 GPIO 相关，但还是有一定限制的：每一个中断/事件输入线 EXTI<em>n</em> 的中断输入源只能接 PX<em>n</em> 。换句话说，GPIO 相同位号的引脚共用一条输入线，如图所示：</p>
+
+<figure>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@stm32/03-EXTI-GPIO-pin-selection.png"/>
+</figure>
+
+<p>所以虽然 STM32 中每个引脚都可以触发外部中断，但是不同外设相同位号的引脚不应该让它们同时触发中断。剩下四个输入线为 PVD 输出、RTC 时钟、USB 唤醒和以太网唤醒。具体初始化哪个输入线，可以通过成员 <code>.EXTI_Line</code> 指定。</p>
+
+<p>接下来信号到达边沿检测电路，它会根据上升沿触发选择寄存器和下降沿触发选择寄存器控制需要检测哪些类型的电平跳变过程，上升沿触发选择寄存器可以开启边沿检测电路检测上升沿触发的功能，下降沿触发选择寄存器可以开启边沿检测电路检测下降沿触发的功能。边沿检测电路以输入线作为信号输入端，如果检测到有边沿跳变就输出有效信号 1 进入下一个环节，否则输出无效信号 0 。初始化结构体中的成员 <code>.EXTI_Trigger</code> 可以配置需要哪种边沿检测，包括上升沿、下降沿以及都触发。</p>
+
+<p>边沿检测电路后的或门电路的用途是可以任意选择来自硬件的中断还是来自软件的中断。软件中断事件寄存器可以通过程序控制，这样就可以直接通过代码直接启动中断。</p>
+
+<p>以上步骤，基本上已经产生了一个完整的中断信号了。接下来，这个中断信号被用在两条支路上：</p>
+
+<p>通向 NVIC 中断控制器的中断信号首先被请求挂起寄存器截获。该寄存器收到这个中断挂起信号后，将某些位设置为 1 ，代表当前正在处理该中断信号。这样，在处理中断请求时，如果又一个中断信号传来，发现对应的位被置 1 了，就明白当前有中断正在处理，就会将新来的中断搁置或丢弃。因此，在处理完中断后，需要将对应的挂起位清 0 ，以恢复接收中断的功能。</p>
+
+<p>如果当前中断功能可用，那么请求挂起寄存器就会将这个中断信号转发到接下来的一个与门电路中。这个与门电路的另外一个输入来自中断屏蔽寄存器。如果中断屏蔽寄存器的值设置为 0 ，那么不管是否有中断信号，最终都无法产生中断，这也是外部中断<em>中断屏蔽</em>的原理，即可以不响应一些中断信号。在编程时，可以通过控制中断屏蔽寄存器来停用一些中断。注意到初始化结构体有一个成员 <code>.EXTI_LineCmd</code> ，它的命名以 <span class="code">Cmd</span> 结尾，说明它可以设置为 <code>ENABLE</code> 和 <code>DISABLE</code> 两种状态：当设置为 <code>DISABLE</code> 时，标准库就会将其屏蔽。</p>
+
+<p>当产生一个中断信号后，中断信号的另一个去处就是产生事件。它会直接到达接下来的一个与门电路中，同样可以通过事件屏蔽寄存器来允许或屏蔽这个事件信号。初始化结构体的成员 <code>.EXTI_Mode</code> 有两个可用值，分别用于配置中断和配置事件。</p>
+
+<p>如果事件不被屏蔽，那信号会继续传递到之后的脉冲发生器电路，并产生一个脉冲，提供给其他外设电路使用，这个脉冲就是事件的实质。如果需要使用事件，一般会提前配置好能够处理这些脉冲的外设来处理事件。</p>
+
+<h3>使用外部中断</h3>
+
+<p>根据以上对 EXTI 的基本介绍，可以着手编写外部中断相关的程序。以下只展示了代码的核心部分，完整的代码可以<a href="https://github.com/FrozenCandles/STM32-Examples/tree/master/Example/02-External-Interrupts">从 GitHub 仓库</a>中获取。</p>
+
+<h4>初始化配置</h4>
+
+<p>EXTI 是位于 APB2 总线上的外设，在使用外设前，需要开启时钟。不过并没有一个叫&ldquo; EXTI &rdquo;的时钟，外部中断对应的是 AFIO 时钟。AFIO(alternate-function I/O) 指 GPIO 端口的复用功能，在使用 GPIO 的外部中断功能时，GPIO 需要通过复用输入线将信号输入到外部中断结构部分，AFIO 负责控制这部分的复用功能。除此之外，也不要忘记开启 GPIO 的时钟：</p>
+
+<div class="vscode-block"><div><span token="var">RCC_APB2PeriphClockCmd</span><span token="var">(</span><span token="var">RCC_APB2Periph_GPIOA</span><span token="var"> </span><span style="color: #0c969b;">|</span><span token="var"> </span><span token="var">RCC_APB2Periph_AFIO</span><span token="var">, </span><span token="var">ENABLE</span><span token="var">)</span>;</div></div>
+
+<p>既然需要使用 GPIO ，那么代码中肯定有一个步骤不能忽略，那就是初始化对应的 GPIO 。这里将 GPIO 的模式配置为浮空输入模式，由外部电路完全决定输入的值:</p>
+
+<div class="vscode-block"><div><span token="var">GPIO_InitTypeDef</span> <span token="var">GPIO_InitStructure</span> <span style="color: #994cc3;">=</span> {</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">GPIO_Mode</span> <span style="color: #994cc3;">=</span> <span token="var">GPIO_Mode_IN_FLOATING</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">GPIO_Pin</span> <span style="color: #994cc3;">=</span> <span token="var">GPIO_Pin_0</span></div><div>};</div><div><span token="var">GPIO_Init</span><span token="var">(</span><span token="var">GPIOA</span><span token="var">, </span><span style="color: #0c969b;">&amp;</span><span token="var">GPIO_InitStructure</span><span token="var">)</span>;</div></div>
+
+<p>接下来就可以初始化外部中断了，这里对初始化结构体的配置为：</p>
+
+<div class="vscode-block"><div><span token="var">EXTI_InitTypeDef</span> <span token="var">EXTI_InitStructure</span> <span style="color: #994cc3;">=</span> {</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">EXTI_Line</span> <span style="color: #994cc3;">=</span> <span token="var">EXTI_Line0</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">EXTI_Mode</span> <span style="color: #994cc3;">=</span> <span token="var">EXTI_Mode_Interrupt</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">EXTI_Trigger</span> <span style="color: #994cc3;">=</span> <span token="var">EXTI_Trigger_Rising</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">EXTI_LineCmd</span> <span style="color: #994cc3;">=</span> <span token="var">ENABLE</span></div><div>};</div><div><span token="var">EXTI_Init</span><span token="var">(</span><span style="color: #0c969b;">&amp;</span><span token="var">EXTI_InitStructure</span><span token="var">)</span>;</div></div>
+
+<p>这里为各个成员选用值的含义为：</p>
+
+<ol>
+    <li>配置的是哪一个中断/事件输入线。由于使用的 GPIO 为 PA0 ，它的位号是 0 ，对应 0 号输入线</li>
+    <li>选择模式，可选为产生中断或事件，这里选择产生中断</li>
+    <li>边沿检测的方式：上升沿、下降沿还是都触发。这里选择仅上升沿触发</li>
+    <li>对中断信号，是放行还是屏蔽，这里当然选择放行</li>
+</ol>
+
+<p>但是，以上还缺少了一个关键的步骤：PA0 、PB0 一直到 PG0 都可以作为 0 号中断输入线，为了指定 PA0 作为 0 号的输入线，需要用到以下函数：</p>
+
+<ul>
+    <li class="code"><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">GPIO_EXTILineConfig</span>(<span style="color: #4876d6;font-weight: bold;">uint8_t</span> GPIO_PortSource, <span style="color: #4876d6;font-weight: bold;">uint8_t</span> GPIO_PinSource);</li>
+</ul>
+
+<p>这是 GPIO 相关的功能，因此该函数的定义在 GPIO 外设库里。为了指定 PA0 作为 0 号的输入线，可以通过如下方法调用函数：</p>
+
+<div class="vscode-block"><div><span token="var">GPIO_EXTILineConfig</span><span token="var">(</span><span token="var">GPIO_PortSourceGPIOA</span><span token="var">, </span><span token="var">GPIO_PinSource0</span><span token="var">)</span>;</div></div>
+
+<p>此时，外设部分的配置已经完毕，不过内核的 NVIC 部分也需要配置。这一部分的代码在<a href="#section-NVIC">上文介绍 NVIC 时</a>已经给出，这里不再重复。</p>
+
+<h3>编写中断服务</h3>
+
+<p>完成以上所有的配置后，中断就可以产生并被处理了。中断在处理时，会根据中断向量表执行特定的函数（中断服务程序）。</p>
+
+<p>在启动文件中，初始化中断向量表时预先为每个中断都写了一个中断服务函数。这些中断函数都为空，需要重新编写。习惯性将中断服务函数统一写在 <var type="file">stm32f10x_it.c</var> 这个库文件中，方便管理。实际上，标准库提供该文件时，已经编写了部分系统级别异常的中断服务函数，只不过它们的实现中基本没怎么处理异常。</p>
+
+<p>中断服务函数的函数名必须跟启动文件里面预先设置的一样。如果函数名和启动文件里设置的不一致，系统在中断向量表中无法找到中断服务函数的入口，那么就无法实现中断。 </p>
+
+<p>检查启动文件的定义可知，启动文件会将外部中断 0 引导到 <code>EXTI0_IRQHandler</code> 代码段中，因此编写的中断函数也需要使用该符号作为函数名。这样，外部中断 0 的函数原型为：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">EXTI0_IRQHandler</span>(<span style="color: #994cc3;font-weight: bold;">void</span>);</div></div>
+
+<p>如果进一步翻阅启动文件可以发现，外部中断 5~9 共用一个中断源 <var>EXTI9_5_IRQn</var> ，这几个外部中断都会引发同一个中断处理函数 <code>EXTI9_5_IRQHandler()</code> ；而外部中断10~15 也共用一个中断源 <var>EXTI15_10_IRQn</var> 和中断函数 <code>EXTI15_10_IRQHandler</code> 。也就是说，这些中断都会调用同一个中断函数。</p>
+
+<p>为了确保中断发生，以下函数可以检查某个输入线是否确实发生了触发请求，并且没有被屏蔽：</p>
+
+<ul>
+    <li class="code"><span token="var">ITStatus</span> <span token="var">EXTI_GetITStatus</span>(<span style="color: #4876d6;font-weight: bold;">uint32_t</span> EXTI_Line);</li>
+</ul>
+
+<p>其中对中断状态枚举的定义为：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;">typedef</span> <span style="color: #994cc3;font-weight: bold;">enum</span> {<span token="var">RESET</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">0</span>, <span token="var">SET</span> <span style="color: #994cc3;">=</span> <span style="color: #994cc3;">!</span><span token="var">RESET</span>} <span token="var">ITStatus</span>;</div></div>
+
+<p><code>SET</code> 代表确实发生了需要处理的中断。</p>
+
+<p>中断结束后，需要清除中断挂起位，使硬件退出中断并恢复中断接收功能。这点可以通过以下函数实现：</p>
+
+<ul>
+    <li class="code"><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">EXTI_ClearITPendingBit</span>(<span style="color: #4876d6;font-weight: bold;">uint32_t</span> EXTI_Line);</li>
+</ul>
+
+<p>因此，一个中断处理函数的完整框架为：（以外部中断 0 为例）</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">EXTI0_IRQHandler</span>(<span style="color: #994cc3;font-weight: bold;">void</span>) {</div><div>&nbsp; &nbsp; <span style="color: #994cc3;font-weight: bold;">if</span> (<span token="var">EXTI_GetITStatus</span><span token="var">(</span><span token="var">EXTI_Line0</span><span token="var">)</span> <span style="color: #994cc3;">!=</span> <span token="var">RESET</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">LED_Toggle(LED_Red)</span>;</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span token="var">EXTI_ClearITPendingBit</span><span token="var">(</span><span token="var">EXTI_Line0</span><span token="var">)</span>;</div><div>}</div></div>
+
+<p>由于程序中会判断单个输入的情况，因此外部中断 5~15 也可以使用这种处理框架。</p>
+
+<blockquote>
+    <p>外部中断提供了软件触发的方式，如果确实有这个需求，可以通过以下函数触发：</p>
+
+    <ul>
+        <li class="code"><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">EXTI_GenerateSWInterrupt</span>(<span style="color: #4876d6;font-weight: bold;">uint32_t</span> EXTI_Line);</li>
+    </ul>
+</blockquote>
+
+<h2>其它话题</h2>
+
+<h3>中断屏蔽与系统的软复位</h3>
+
+<p>中断的屏蔽在 STM32 中也是一个重要的话题。有些时候为了确保指令能够快速响应，或者保证指令执行的连续性，需要暂时屏蔽中断。Cortex-M3 有以下 3 个寄存器，可以处理和中断屏蔽相关的事项：</p>
+
+<table>
+    <tbody><tr>
+        <th>寄存器</th>
+        <th>用途</th>
+    </tr>
+    <tr>
+        <td><var type="register">PRIMASK</var></td>
+        <td>该寄存器只用到了一个比特，置 1 表示关闭所有可屏蔽的异常，只剩下不可屏蔽中断和硬件 FAULT 可以响应。默认值 0 表示不关中断</td>
+    </tr>
+    <tr>
+        <td><var type="register">FAULTMASK</var></td>
+        <td>该寄存器同样只用到了一个比特，置 1 后会关闭包括硬 FAULT 在内的所有中断，只有不可屏蔽中断才能响应。默认值 0 表示不关中断</td>
+    </tr>
+    <tr>
+        <td><var type="register">BASEPRI</var></td>
+        <td>该寄存器定义了被屏蔽优先级的阈值。它的有效位数由表达优先级的位数决定，最多 9 位。当它被设成某个值后，会屏蔽所有优先级大于等于此值的中断。默认值 0 表示则不关闭任何中断</td>
+    </tr>
+</tbody></table>
+
+<p><var type="register">core_cm3.h</var> 文件里直接提供了相关函数设置这几个寄存器的值：</p>
+
+<ul>
+    <li class="code"><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">__set_PRIMASK</span>(<span style="color: #4876d6;font-weight: bold;">uint32_t</span> priMask);</li>
+    <li class="code"><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">__set_FAULTMASK</span>(<span style="color: #4876d6;font-weight: bold;">uint32_t</span> faultMask);</li>
+    <li class="code"><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">__set_BASEPRI</span>(<span style="color: #4876d6;font-weight: bold;">uint32_t</span> value);</li>
+</ul>
+
+<hr/>
+
+<p>NVIC 除了提供中断调度相关的功能外，还提供了系统软复位的函数：（在 <var type="file">core_cm3.h</var> 文件里）</p>
+
+
+
+<ul>
+    <li class="code"><span style="color: #994cc3;font-weight: bold;">static</span> <span style="color: #994cc3;font-weight: bold;">inline</span> <span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">NVIC_SystemReset</span>(<span style="color: #994cc3;font-weight: bold;">void</span>);</li>
+</ul>
+
+<p>要注意的是，从调用该函数到硬件正式执行复位命令期间会有一个间隔，此时处理器仍然可以响应中断请求而暂停复位操作，所以最好在发出复位请求前调用 <code>__disable_irq()</code> 禁用所有中断，这个函数在编译后会被内联为一条汇编指令，确保操作的原子化。</p>
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+										
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"></li>
+		<li class="previous"><a href="/programming/python-oop/python%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e7%bc%96%e7%a8%8b06-%e5%ae%b9%e5%99%a8%e5%af%b9%e8%b1%a1%e4%b8%8e%e8%bf%ad%e4%bb%a3/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>Python面向对象编程06-容器对象与迭代</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/embedded/stm32/03-interrupt-system/" aria-current="page">STM32的中断系统与外部中断</a>
+											<span class="post-date">2024年6月2日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/python%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e7%bc%96%e7%a8%8b06-%e5%ae%b9%e5%99%a8%e5%af%b9%e8%b1%a1%e4%b8%8e%e8%bf%ad%e4%bb%a3/">Python面向对象编程06-容器对象与迭代</a>
+											<span class="post-date">2024年5月19日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/09-descriptors/">Python面向对象编程09-描述符</a>
+											<span class="post-date">2024年4月30日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/08-operator-overloading/">Python面向对象编程08-运算符重载</a>
+											<span class="post-date">2024年4月7日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/07-callable-objects/">Python面向对象编程07-可调用对象与装饰器</a>
+											<span class="post-date">2024年3月1日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/05-custom-types/">Python面向对象编程05-特殊方法与自定义类</a>
+											<span class="post-date">2024年2月9日</span>
+									</li>
+											<li>
+					<a href="/programming/python/library-logging/">Python标准库logging：日志记录</a>
+											<span class="post-date">2024年1月23日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (12)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (3)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (26)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (5)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (9)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2024/06/'> 2024年6月 &nbsp;(1)</option>
+	<option value='/2024/05/'> 2024年5月 &nbsp;(1)</option>
+	<option value='/2024/04/'> 2024年4月 &nbsp;(2)</option>
+	<option value='/2024/03/'> 2024年3月 &nbsp;(1)</option>
+	<option value='/2024/02/'> 2024年2月 &nbsp;(1)</option>
+	<option value='/2024/01/'> 2024年1月 &nbsp;(2)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

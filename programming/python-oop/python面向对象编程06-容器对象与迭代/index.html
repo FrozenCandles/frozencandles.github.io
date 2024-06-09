@@ -1,0 +1,927 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Python面向对象编程06-容器对象与迭代 - 冰封残烛的个人小站</title>
+	<meta name="description" content="本节介绍和 Python 中容器(container)和迭代器(iterator)的概念和用于它们的语法，并介绍和容器与迭代器相关的特殊方法和内置函数。文中编写了两个具有 Python 风格的容器示例：链表和二叉树。" />
+	<link rel="canonical" href="/programming/python-oop/python面向对象编程06-容器对象与迭代/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Python面向对象编程06-容器对象与迭代 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="本节介绍和 Python 中容器(container)和迭代器(iterator)的概念和用于它们的语法，并介绍和容器与迭代器相关的特殊方法和内置函数。文中编写了两个具有 Python 风格的容器示例：链表和二叉树。" />
+	<meta property="og:url" content="/programming/python-oop/python面向对象编程06-容器对象与迭代/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2024-05-19T14:07:29+00:00" />
+	<meta property="article:modified_time" content="2024-05-19T14:10:45+00:00" />
+	<meta name="author" content="Hello" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="11分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebPage",
+	            "@id": "/programming/python-oop/python%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e7%bc%96%e7%a8%8b06-%e5%ae%b9%e5%99%a8%e5%af%b9%e8%b1%a1%e4%b8%8e%e8%bf%ad%e4%bb%a3/",
+	            "url": "/programming/python-oop/python%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e7%bc%96%e7%a8%8b06-%e5%ae%b9%e5%99%a8%e5%af%b9%e8%b1%a1%e4%b8%8e%e8%bf%ad%e4%bb%a3/",
+	            "name": "Python面向对象编程06-容器对象与迭代 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/programming/python-oop/python%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e7%bc%96%e7%a8%8b06-%e5%ae%b9%e5%99%a8%e5%af%b9%e8%b1%a1%e4%b8%8e%e8%bf%ad%e4%bb%a3/#primaryimage"
+	            },
+	            "image": {
+	                "@id": "/programming/python-oop/python%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e7%bc%96%e7%a8%8b06-%e5%ae%b9%e5%99%a8%e5%af%b9%e8%b1%a1%e4%b8%8e%e8%bf%ad%e4%bb%a3/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/cover/python-oop@06-containers-and-iterators.jpg",
+	            "datePublished": "2024-05-19T14:07:29+00:00",
+	            "dateModified": "2024-05-19T14:10:45+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "本节介绍和 Python 中容器(container)和迭代器(iterator)的概念和用于它们的语法，并介绍和容器与迭代器相关的特殊方法和内置函数。文中编写了两个具有 Python 风格的容器示例：链表和二叉树。",
+	            "breadcrumb": {
+	                "@id": "/programming/python-oop/python%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e7%bc%96%e7%a8%8b06-%e5%ae%b9%e5%99%a8%e5%af%b9%e8%b1%a1%e4%b8%8e%e8%bf%ad%e4%bb%a3/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/programming/python-oop/python%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e7%bc%96%e7%a8%8b06-%e5%ae%b9%e5%99%a8%e5%af%b9%e8%b1%a1%e4%b8%8e%e8%bf%ad%e4%bb%a3/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/programming/python-oop/python%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e7%bc%96%e7%a8%8b06-%e5%ae%b9%e5%99%a8%e5%af%b9%e8%b1%a1%e4%b8%8e%e8%bf%ad%e4%bb%a3/#primaryimage",
+	            "url": "/wp-content/uploads/cover/python-oop@06-containers-and-iterators.jpg",
+	            "contentUrl": "/wp-content/uploads/cover/python-oop@06-containers-and-iterators.jpg"
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/programming/python-oop/python%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e7%bc%96%e7%a8%8b06-%e5%ae%b9%e5%99%a8%e5%af%b9%e8%b1%a1%e4%b8%8e%e8%bf%ad%e4%bb%a3/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "Python面向对象编程06-容器对象与迭代"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/1375" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=1375' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython-oop%2Fpython%25e9%259d%25a2%25e5%2590%2591%25e5%25af%25b9%25e8%25b1%25a1%25e7%25bc%2596%25e7%25a8%258b06-%25e5%25ae%25b9%25e5%2599%25a8%25e5%25af%25b9%25e8%25b1%25a1%25e4%25b8%258e%25e8%25bf%25ad%25e4%25bb%25a3%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fpython-oop%2Fpython%25e9%259d%25a2%25e5%2590%2591%25e5%25af%25b9%25e8%25b1%25a1%25e7%25bc%2596%25e7%25a8%258b06-%25e5%25ae%25b9%25e5%2599%25a8%25e5%25af%25b9%25e8%25b1%25a1%25e4%25b8%258e%25e8%25bf%25ad%25e4%25bb%25a3%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?432b66336cb23bd6712cecabe6d808eb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="stylesheet" href="/wp-content/static/css/theme@evernote.wp.css">
+
+<style>
+    div.vscode-block { color: #657B83; background-color: #FDF6E3; }
+    div.vscode-block span[token="var"] { color: #268bd2; }
+    div.vscode-block span[token="defkwd"]  { color: #586e75; font-weight: bold; }
+    div.vscode-block span[token="flowkwd"] { color: #859900; font-weight: bold; }
+</style><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-1375 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-1390" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1390"><span class="menu-item-wrapper"><a href="/all/embedded/">电子电路与嵌入式</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/all/embedded-application/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-1375" class="post-1375 post type-post status-publish format-standard has-post-thumbnail hentry category-python-oop">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">Python面向对象编程06-容器对象与迭代</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/programming/python-oop/" rel="category tag">Python面向对象编程</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2024年5月19日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+<p><a class="link-internal" href="/programming/python-oop/05-custom-types">前文</a>已经介绍了许多特殊方法，通过重写或实现这些特殊方法，自定义的类越来越融入 Python 的语法，成为一个合格的 Python 对象了。本节重点介绍容器和迭代相关的特殊方法。</p>
+
+<h2>Python中的容器</h2>
+
+<p>编程语言中的数据类型大多都可以分为简单类型和复杂类型，复杂类型一般是处理多个值的。Python 中的容器(container)表示一类存储一系列值的数据类型，例如序列（如元组、列表）以及映射（如字典）。</p>
+
+<p>容器类型这个概念在 Python 中非常重要，因为 Python 的许多语法都是针对容器设置的，相应地也有一些关于容器的特殊方法。本节以两种典型数据结构<a class="link-internal" href="/computer-science/data-structure-02-linked-list">链表</a>和<a class="link-internal" href="/computer-science/data-structure-04-trees">二叉树</a>为例介绍容器相关的特殊方法。不过本文并不是为了介绍这些数据结构，而是通过这些示例介绍如何在 Python 中使用特殊方法为容器提供一致的接口。</p>
+
+<p>首先给出这些数据类型最基本的定义：</p>
+
+<div class="vscode-block"><div><span token="defkwd">class</span> <span style="color: #cb4b16;">LinkedListNode</span>:</div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">__init__</span>(self, value):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">value</span> <span style="color: #859900;">=</span> value</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">prev</span> <span style="color: #859900;">=</span> <span style="color: #b58900;">None</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">next</span> <span style="color: #859900;">=</span> <span style="color: #b58900;">None</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp;</div><div><span token="defkwd">class</span> <span style="color: #cb4b16;">LinkedList</span>:</div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">__init__</span>(self):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">head</span> <span style="color: #859900;">=</span> <span style="color: #b58900;">None</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">tail</span> <span style="color: #859900;">=</span> <span style="color: #b58900;">None</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">_length</span> <span style="color: #859900;">=</span> <span style="color: #d33682;">0</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; </div><div><span token="defkwd">class</span> <span style="color: #cb4b16;">BinaryTreeNode</span>:</div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">__init__</span>(self, key, value):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">key</span> <span style="color: #859900;">=</span> key</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">value</span> <span style="color: #859900;">=</span> value</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">left</span> <span style="color: #859900;">=</span> <span style="color: #b58900;">None</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">right</span> <span style="color: #859900;">=</span> <span style="color: #b58900;">None</span></div><br/><div><span token="defkwd">class</span> <span style="color: #cb4b16;">BinarySearchTree</span>:</div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">__init__</span>(self):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">root</span> <span style="color: #859900;">=</span> <span style="color: #b58900;">None</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">_length</span> <span style="color: #859900;">=</span> <span style="color: #d33682;">0</span></div></div>
+
+<h3>处理索引</h3>
+
+<p>在 Python 中，可以使用方括号的形式从容器中取值：对于序列，方括号根据索引值从序列中获取元素；对于映射，方括号根据键从映射中获取值：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; l = [50, 100, 200, 300]
+&gt;&gt;&gt; d = {'this': 50, 'that': 100, 'those': [1, 2, 3]}
+&gt;&gt;&gt; l[1]
+100
+&gt;&gt;&gt; d['this']
+50
+</div>
+
+<p><code>.__getitem__()</code> 特殊方法提供了对方括号语法的支持。该方法需要一个额外的参数 <code>key</code> ，代表向方括号内传入的值。</p>
+
+<p>对于 <code>LinkedList</code> 类，它的 <code>.__getitem__()</code> 需要根据索引获得值，那么这个方法就可以这样编写：</p>
+
+<div class="vscode-block"><div><span token="defkwd">class</span> <span style="color: #cb4b16;">LinkedList</span>:</div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">__getitem__</span>(self, index):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">if</span> <span style="color: #859900;">not</span> <span style="color: #d33682;">0</span> <span style="color: #859900;">&lt;=</span> index <span style="color: #859900;">&lt;</span> <span token="var">self</span>.<span token="var">_length</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">raise</span> <span style="color: #cb4b16;">IndexError</span>(<span style="color: #2aa198;">'index out of range'</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">current</span> <span style="color: #859900;">=</span> <span token="var">self</span>.<span token="var">head</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">for</span> <span token="var">_</span> <span token="flowkwd">in</span> <span style="color: #cb4b16;">range</span>(index):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="var">current</span> <span style="color: #859900;">=</span> <span token="var">current</span>.next</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">return</span> <span token="var">current</span></div></div>
+
+<p>接下来先编写一个辅助方法，批量为链表添加值：</p>
+
+<div class="vscode-block"><div><span token="defkwd">class</span> <span style="color: #cb4b16;">LinkedList</span>:</div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">append</span>(self, value):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">new_node</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">LinkedListNode</span>(value)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>._length <span style="color: #859900;">+=</span> <span style="color: #d33682;">1</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">if</span> <span token="var">self</span>.<span token="var">tail</span> <span style="color: #859900;">is</span> <span style="color: #b58900;">None</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">head</span> <span style="color: #859900;">=</span> <span token="var">new_node</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">tail</span> <span style="color: #859900;">=</span> <span token="var">new_node</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">return</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">tail</span>.<span token="var">next</span> <span style="color: #859900;">=</span> <span token="var">new_node</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">new_node</span>.<span token="var">prev</span> <span style="color: #859900;">=</span> <span token="var">self</span>.<span token="var">tail</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">tail</span> <span style="color: #859900;">=</span> <span token="var">new_node</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; </div><div><span token="var">ls</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">LinkedList</span>()</div><div><span token="flowkwd">for</span> <span token="var">_</span> <span token="flowkwd">in</span> <span style="color: #cb4b16;">range</span>(<span style="color: #d33682;">10</span>):</div><div>&nbsp; &nbsp; <span token="var">ls</span>.<span token="var">append</span>(<span style="color: #cb4b16;">random</span>.<span token="var">randint</span>(<span style="color: #d33682;">0</span>, <span style="color: #d33682;">100</span>))</div></div>
+
+<p>可以看到，现在的链表实例便支持使用方括号的索引了，并且对于不合适的索引值会自动抛出错误：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; ls[0]
+LinkedListNode(72)
+&gt;&gt;&gt; ls[9]  
+LinkedListNode(9) 
+&gt;&gt;&gt; ls[10]
+Traceback (most recent call last):
+  File ".../container.py", line 169, in __getitem__
+IndexError: index out of range
+</div>
+
+<p>但目前的 <code>.__getitem__()</code> 方法还远不够完善。例如，在 Python 中，索引可能是负值，代表从尾部倒数的位置：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; l[-1]
+300
+</div>
+
+<p>所以序列的 <code>.__getitem__()</code> 方法最好添加对负数索引的支持：</p>
+
+<div class="vscode-block"><div><span token="defkwd">class</span> <span style="color: #cb4b16;">LinkedList</span>:</div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">__getitem__</span>(self, index):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">if</span> <span style="color: #859900;">not</span> <span style="color: #859900;">-</span><span token="var">self</span>.<span token="var">_length</span> <span style="color: #859900;">&lt;=</span> index <span style="color: #859900;">&lt;</span> <span token="var">self</span>.<span token="var">_length</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">raise</span> <span style="color: #cb4b16;">IndexError</span>(<span style="color: #2aa198;">'index out of range'</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">if</span> index <span style="color: #859900;">&lt;</span> <span style="color: #d33682;">0</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; index <span style="color: #859900;">=</span> <span token="var">self</span>.<span token="var">_length</span> <span style="color: #859900;">+</span> index</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #93a1a1;"># ...</span></div></div>
+
+<p>映射的 <code>.__getitem__()</code> 方法处理起来则简单得多，它是根据键获取值，并且在键不存在时应该抛出 <var class="error">KeyError</var> 异常：</p>
+
+<div class="vscode-block"><div><span token="defkwd">class</span> <span style="color: #cb4b16;">BinarySearchTree</span>:</div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">_get</span>(self, node, key):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">if</span> node <span style="color: #859900;">is</span> <span style="color: #b58900;">None</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">return</span> <span style="color: #b58900;">None</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">if</span> key <span style="color: #859900;">&lt;</span> node.key:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">return</span> <span token="var">self</span>.<span token="var">_get</span>(node.left, key)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">elif</span> key <span style="color: #859900;">&gt;</span> node.key:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">return</span> <span token="var">self</span>.<span token="var">_get</span>(node.right, key)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">else</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">return</span> node</div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">__getitem__</span>(self, key):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">node</span> <span style="color: #859900;">=</span> <span token="var">self</span>.<span token="var">_get</span>(<span token="var">self</span>.<span token="var">root</span>, key)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">if</span> <span token="var">node</span> <span style="color: #859900;">is</span> <span style="color: #b58900;">None</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">raise</span> <span style="color: #cb4b16;">KeyError</span>(<span token="defkwd">f</span><span style="color: #2aa198;">'</span><span style="color: #cb4b16;">{</span>key<span token="defkwd">!r</span><span style="color: #cb4b16;">}</span><span style="color: #2aa198;"> not found.'</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">return</span> <span token="var">node</span>.value</div></div>
+
+<h3>内置类型slice</h3>
+
+<p>方括号除了需要处理索引外，别忘了 Python 中还有一种特殊的语法<em>切片</em>。切片是专门针对序列的；回顾一下，Python 切片的语法为：</p>
+
+<div class="codeblock code-template">
+    <em>container</em>[<em>start</em>:<em>stop</em>:<em>step</em>]
+</div>
+
+<p>其中 <code><em>start</em></code> 表示起始位置的索引，<code><em>stop</em></code> 表示结束位置的索引，<code><em>step</em></code> 表示步长。切片的结果会包含起始位置的元素，但不会包含结束位置的元素：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; ls = list(range(10))
+&gt;&gt;&gt; ls
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+&gt;&gt;&gt; ls[1:-1:2]
+[1, 3, 5, 7]
+</div>
+
+<p>内置类型 <code>slice</code> 提供了对切片的支持。在平时使用切片时，Python 会自动将冒号表示的切片转换为 <code>slice</code> 对象，<code>list</code> 等序列也会自动处理 <code>slice</code> 对象，所以不会直接接触 <code>slice</code> 。但在自定义的类中，就需要处理 <code>slice</code> 对象了。</p>
+
+<p><code>slice</code> 对象有 3 个属性：<code>start</code> 、<code>stop</code> 和 <code>step</code> ，它们和切片语法的记号一一对应。不过拿到了这几个属性之后不要直接通过这几个值计算每个元素的位置，因为 Python 的切片规则比想象中的要复杂。例如，当步长为负的时候，切片会从后往前获取元素：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; ls[3:9:-1]  
+[]
+&gt;&gt;&gt; ls[9:3:-1] 
+[9, 8, 7, 6, 5, 4]
+</div>
+
+<p>这个时候可以借助内置的 <code>range</code> 处理实际位置的元素。别忘了 <code>range</code> 函数同样接收 <code>start</code> 、<code>stop</code> 和 <code>step</code> 这三个参数，而且它的生成结果就可以作为索引值。因此代码可以这样编写：</p>
+
+<div class="vscode-block"><div><span token="defkwd">class</span> <span style="color: #cb4b16;">LinkedList</span>:</div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">__getitem__</span>(self, index):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">if</span> <span token="var">isinstance</span>(index, <span style="color: #cb4b16;">slice</span>):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">return</span> <span style="color: #cb4b16;">tuple</span>(<span token="var">self</span>[<span token="var">i</span>] <span token="flowkwd">for</span> <span token="var">i</span> <span token="flowkwd">in</span> </div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #cb4b16;">range</span>(index.<span token="var">start</span>, index.<span token="var">stop</span>, index.<span token="var">step</span>))</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #93a1a1;"># ...</span></div></div>
+
+<p>不过直接使用 <code>range</code> 还有一些问题：首先是切片的起止可能是负数，但 <code>range</code> 处理完后还是负数，这点可以通过处理前将起止转化为相对长度的正数解决；其次，切片语法的每个元素都可以省略，省略它们会使得 <code>slice</code> 对象的对应属性被转换为 <code>None</code> ：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; ls[::-1] 
+[9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+&gt;&gt;&gt; ls[:]
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+&gt;&gt;&gt; class DemoType:
+...     def __getitem__(self, index):
+...         print(index, type(index))
+&gt;&gt;&gt; demo = DemoType()
+&gt;&gt;&gt; demo[:3:] 
+slice(None, 3, None) &lt;class 'slice'&gt;
+&gt;&gt;&gt; demo[:]           
+slice(None, None, None) &lt;class 'slice'&gt;
+</div>
+
+<p>所以，程序中还需要对 <code>None</code> 值加以检测，并恢复为合理的默认值：</p>
+
+<ul>
+    <li>如果省略 <code>start</code> ，则默认为序列的开头</li>
+    <li>如果省略 <code>stop</code> ，则默认为序列的结尾</li>
+    <li>如果省略 <code>step</code> ，则默认为 <code>1</code> ，表示单步切片</li>
+</ul>
+
+<p>既要处理负值，还要处理缺失值，这使得切片的处理非常麻烦。不过好在 <code>slice</code> 类提供了一个 <code>.indices()</code> 方法，它专门用于处理序列切片时的索引问题：<code>.indices()</code> 方法接收一个数值，代表序列的长度，它会根据这个长度自动处理切片对象的负值和空值；它的返回结果是一个三元素元组，可以直接解包作为 <code>range</code> 的参数，从而极大简化了索引的问题：</p>
+
+<div class="vscode-block"><div><span token="defkwd">class</span> <span style="color: #cb4b16;">LinkedList</span>:</div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">__getitem__</span>(self, index):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">if</span> <span token="var">isinstance</span>(index, <span style="color: #cb4b16;">slice</span>):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">return</span> <span style="color: #cb4b16;">tuple</span>(<span token="var">self</span>[<span token="var">i</span>] <span token="flowkwd">for</span> <span token="var">i</span> <span token="flowkwd">in</span> <span style="color: #cb4b16;">range</span>(<span style="color: #859900;">*</span>index.<span token="var">indices</span>(<span token="var">self</span>.<span token="var">_length</span>)))</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #93a1a1;"># ...</span></div></div>
+
+<hr/>
+
+<p>实际上，Python 方括号的功能非常强大，甚至平时使用的索引和切片远没有发挥方括号的功能。例如，方括号实际上可以接收多个值：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; demo[2, 3, 4]
+(2, 3, 4) &lt;class 'tuple'&gt;
+</div>
+
+<p>可以看出，Python 会将任意以逗号分隔的值转换为一个元组。不仅如此，这个元组内的每个元素都可以是一个切片字面量：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; demo[:, 2, 3:3:2, 2] 
+(slice(None, None, None), 2, slice(3, 3, 2), 2) &lt;class 'tuple'&gt;
+</div>
+
+<p>这样索引和切片便可以处理更复杂的数据。Python 专门处理多维数组的第三方库 <var>numpy</var> 和它在数据处理方面的增强版本 <var>pandas</var> 几乎将 Python 的索引和切片用到了极致，它们不仅使用元组处理多维数组的索引，还在多维数组中引入了 <code>None</code> 和 <code>Ellipsis</code> 的作用，分别表示单个坐标轴的升维和多个连续维度的切片：</p>
+
+<div class="vscode-block"><div><span token="flowkwd">import</span> <span style="color: #cb4b16;">numpy</span> <span token="flowkwd">as</span> <span style="color: #cb4b16;">np</span></div><div><span token="var">arr</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">np</span>.<span token="var">arange</span>(<span style="color: #d33682;">10</span> <span style="color: #859900;">**</span> <span style="color: #d33682;">5</span>).<span token="var">reshape</span>((<span style="color: #d33682;">10</span>,) <span style="color: #859900;">*</span> <span style="color: #d33682;">5</span>)</div><div><span token="var">arr</span>[<span style="color: #d33682;">0</span>, :, <span style="color: #b58900;">None</span>, <span style="color: #cb4b16;">...</span>]</div></div>
+
+<p><var>pandas</var> 更是提供了非数值形式的索引和层级索引，可以表示并处理任意复杂的表格数据：</p>
+
+<div class="vscode-block"><div><span token="flowkwd">import</span> <span style="color: #cb4b16;">pandas</span> <span token="flowkwd">as</span> <span style="color: #cb4b16;">pd</span></div><div><span token="var">df</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">pd</span>.<span style="color: #cb4b16;">DataFrame</span>(<span token="var">rand</span>.<span token="var">randint</span>(<span style="color: #d33682;">50</span>, <span style="color: #d33682;">95</span>, size<span style="color: #859900;">=</span>(<span style="color: #d33682;">4</span>, <span style="color: #d33682;">6</span>)),</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; index<span style="color: #859900;">=</span><span style="color: #cb4b16;">pd</span>.<span style="color: #cb4b16;">MultiIndex</span>.<span token="var">from_product</span>([[<span style="color: #d33682;">2020</span>, <span style="color: #d33682;">2021</span>], [<span style="color: #d33682;">1</span>, <span style="color: #d33682;">2</span>]],</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;names<span style="color: #859900;">=</span>[<span style="color: #2aa198;">'year'</span>, <span style="color: #2aa198;">'term'</span>]),</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; columns<span style="color: #859900;">=</span><span style="color: #cb4b16;">pd</span>.<span style="color: #cb4b16;">MultiIndex</span>.<span token="var">from_product</span>([[<span style="color: #2aa198;">'Tim'</span>, <span style="color: #2aa198;">'Mary'</span>, <span style="color: #2aa198;">'John'</span>],</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [<span style="color: #2aa198;">'math'</span>, <span style="color: #2aa198;">'physics'</span>]],</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;names<span style="color: #859900;">=</span>[<span style="color: #2aa198;">'name'</span>, <span style="color: #2aa198;">'subject'</span>]))</div><div><span token="var">df</span>.<span token="var">loc</span>[<span style="color: #cb4b16;">pd</span>.<span token="var">IndexSlice</span>[:, <span style="color: #d33682;">1</span>], <span style="color: #cb4b16;">pd</span>.<span token="var">IndexSlice</span>[:, <span style="color: #2aa198;">'math'</span>]]</div></div>
+
+
+
+<h3>其它容器方法</h3>
+
+<p>以上只介绍了针对获取元素的 <code>__getitem__</code> ，显然有 get 就有对应的 set 和 delete ，它们分别用于以 <code><em>object</em>[<em>key</em>] = <em>value</em></code> 与 <code><strong>del</strong> <em>object</em>[<em>key</em>]</code> 的方式添加值和删除值，例如：</p>
+
+<div class="vscode-block"><div><span token="defkwd">class</span> <span style="color: #cb4b16;">BinarySearchTree</span>:</div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">__delitem__</span>(self, key):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">root</span> <span style="color: #859900;">=</span> <span token="var">self</span>.<span token="var">_delete</span>(<span token="var">self</span>.<span token="var">root</span>, key)</div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">__setitem__</span>(self, key, value):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">root</span> <span style="color: #859900;">=</span> <span token="var">self</span>.<span token="var">_insert</span>(<span token="var">self</span>.<span token="var">root</span>, key, value)</div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">_insert</span>(self, node, key, value):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">if</span> node <span style="color: #859900;">is</span> <span style="color: #b58900;">None</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">_length</span> <span style="color: #859900;">+=</span> <span style="color: #d33682;">1</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">return</span> <span style="color: #cb4b16;">BinaryTreeNode</span>(key, value)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">if</span> key <span style="color: #859900;">&lt;</span> node.key:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; node.left <span style="color: #859900;">=</span> <span token="var">self</span>.<span token="var">_insert</span>(node.left, key, value)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #cb4b16;">...</span></div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">_delete</span>(self, node, key):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">if</span> node <span style="color: #859900;">is</span> <span style="color: #b58900;">None</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">raise</span> <span style="color: #cb4b16;">KeyError</span>(<span token="defkwd">f</span><span style="color: #2aa198;">'Key </span><span style="color: #cb4b16;">{</span>key<span style="color: #cb4b16;">}</span><span style="color: #2aa198;"> not found.'</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">if</span> key <span style="color: #859900;">&lt;</span> node.key:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; node.left <span style="color: #859900;">=</span> <span token="var">self</span>.<span token="var">_delete</span>(node.left, key)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #cb4b16;">...</span></div></div>
+
+<p>那么 <code>BinarySearchTree</code> 对象就可以使用这两种语法添加或删除键值对了：</p>
+
+<div class="vscode-block"><div><span token="var">tree</span>[<span style="color: #d33682;">50</span>] <span style="color: #859900;">=</span> <span style="color: #2aa198;">'Added'</span></div><div><span token="flowkwd">del</span> <span token="var">tree</span>[<span style="color: #d33682;">50</span>]</div></div>
+
+<p>除此之外，还有一些方法也是针对序列的：</p>
+
+<p>Python 中为容器提供了一个操作符 <code>in</code> ，用于检查特定元素或键是否存在于容器中。该操作符将返回一个布尔值：如果元素或键存在于容器中，返回 <code>True</code> ，否则返回 <code>False</code> ：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; 100 in l
+True
+&gt;&gt;&gt; 150 in l
+False
+&gt;&gt;&gt; 'that' in d 
+True
+</div>
+
+<p><code>.__contains__(self, key)</code> 提供了对自定义容器类型使用 <code>in</code> 操作符的支持。如果想让自定义的容器支持 <code>in</code> 操作符，就需要编写自己的 <code>.__contains__()</code> 方法：</p>
+
+<div class="vscode-block"><div><span token="defkwd">class</span> <span style="color: #cb4b16;">LinkedList</span>:</div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">__contains__</span>(self, key):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">for</span> <span token="var">node</span> <span token="flowkwd">in</span> <span token="var">self</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">if</span> <span token="var">node</span>.<span token="var">value</span> <span style="color: #859900;">==</span> key:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">return</span> <span style="color: #b58900;">True</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">return</span> <span style="color: #b58900;">False</span></div></div>
+
+<p>现在 <code>LinkedList</code> 就可以使用 <code>in</code> 操作符检查元素的存在性了：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; ls
+LinkedList[19, 21, 96, 75, 50, 56, 91, 100, 46, 8]
+&gt;&gt;&gt; 21 in ls
+True
+&gt;&gt;&gt; 24 in ls
+False
+</div>
+
+<p>最后，Python 还为容器提供了一个 <code>.__len__()</code> 特殊方法，它会被内置函数 <code>len()</code> 调用以获取容器内元素的个数。<a class="link-internal" href="/programming/python-oop/05-custom-types">之前</a>还说过，如果容器实现了 <code>.__len__()</code> 特殊方法，那么它不用实现 <code>.__bool__()</code> 方法就可以正确转换为布尔值了。</p>
+
+<div class="vscode-block"><div><span token="defkwd">class</span> <span style="color: #cb4b16;">LinkedList</span>:</div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">__len__</span>(self):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">return</span> <span token="var">self</span>.<span token="var">_length</span></div></div>
+
+<h3>序列协议</h3>
+
+<p>在 Python 中，序列是一种很特殊的容器类型：它可以看作是索引到元素的一种映射，但索引只能是小于 <code>.__len__()</code> 的整数。这时类的定义可以简化。</p>
+
+<p>在 Python 中，如果想要让一个对象模拟容器类型（如列表或元组），只需要实现以下两个方法：</p>
+
+<ul>
+    <li><code>.__len__(self)</code> ：这个方法应该返回序列中元素的数量</li>
+    <li><code>__getitem__(self, key)</code> ：这个方法应该通过索引或切片获取序列中的元素</li>
+</ul>
+
+<p>只要实现了这两个方法，该类的实例就可以作为 <code>for</code> 循环的循环对象，Python 会尝试使用 0 到 <code>.__len__()</code> 的整数作为索引，尝试应用 <code>.__getitem__()</code> 方法从对象中取值。并且在使用 <code>in</code> 运算符时，Python 可以通过这种行为检查序列的所有元素，从而判断是否包含了指定的元素，而不需要实现 <code>.__contains__()</code> 方法。</p>
+
+<p>这种特殊的行为在 Python 中称为&ldquo;序列协议&rdquo;。&ldquo;协议(protocol)&rdquo;通常是指非正式的接口，这些接口不是由正式的接口或抽象基类定义的，而是由类实现的方法和属性集合，使得实例能够按照一定的方式工作。上一节介绍的鸭子类型是协议的一个典型表现：如果一个对象执行了所需要的方法，它就可以被用在任何期望这些方法的地方，不必严格继承某个特定的类或实现一个特定的接口。如果一个类实现了序列协议的特殊方法，它的实例就能表现得像一个序列，可以实现索引、切片、迭代等序列操作。</p>
+
+<p>不仅如此，Python 的协议甚至可以用于 <code>issubclass()</code> 和 <code>isinstance()</code> 。例如，在 <code>collections.abc</code> 中提供了一些容器的抽象基类，只要实现了这些抽象基类支持的协议方法，就可以用作子类的判据，例如：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; from collections.abc import Container
+&gt;&gt;&gt; help(Container)
+Help on class Container in module collections.abc:
+    
+class Container(builtins.object)
+ |  Methods defined here:
+ |
+ |  __contains__(self, x)
+...
+</div>
+
+<p>这说明，任何实现了 <code>.__contains__()</code> 方法的类，都可以视为 <code>Container</code> 的子类，而无需显式继承它，哪怕这个子类并不打算作为容器使用：</p>
+
+<div class="vscode-block"><div><span token="defkwd">class</span> <span style="color: #cb4b16;">Interval</span>:</div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">__init__</span>(self, low, high, low_inc<span style="color: #859900;">=</span><span style="color: #b58900;">True</span>, high_inc<span style="color: #859900;">=</span><span style="color: #b58900;">True</span>):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">low</span>, <span token="var">self</span>.<span token="var">high</span> <span style="color: #859900;">=</span> low, high</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">low_inc</span>, <span token="var">self</span>.<span token="var">high_inc</span> <span style="color: #859900;">=</span> low_inc, high_inc</div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">__contains__</span>(self, value):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">if</span> <span token="var">self</span>.<span token="var">low_inc</span> <span style="color: #859900;">and</span> <span token="var">self</span>.<span token="var">high_inc</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">return</span> <span token="var">self</span>.<span token="var">low</span> <span style="color: #859900;">&lt;=</span> value <span style="color: #859900;">&lt;=</span> <span token="var">self</span>.<span token="var">high</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">elif</span> <span token="var">self</span>.<span token="var">low_inc</span> <span style="color: #859900;">and</span> <span style="color: #859900;">not</span> <span token="var">self</span>.<span token="var">high_inc</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">return</span> <span token="var">self</span>.<span token="var">low</span> <span style="color: #859900;">&lt;=</span> value <span style="color: #859900;">&lt;</span> <span token="var">self</span>.<span token="var">high</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #93a1a1;"># ...</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; </div><div><span token="var">print</span>(<span token="var">issubclass</span>(<span style="color: #cb4b16;">Interval</span>, Container)) &nbsp;<span style="color: #93a1a1;"># True</span></div></div>
+
+<p>不过，显式继承这些抽象基类的好处在于，这些抽象基类通常会对子类的方法做检查，以确保它们实现了关键的特殊方法：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; from collections.abc import Sequence
+&gt;&gt;&gt; class LinkedList(Sequence): pass
+&gt;&gt;&gt; from collections.abc import MutableMapping
+&gt;&gt;&gt; class BinarySearchTree(MutableMapping): pass
+&gt;&gt;&gt; LinkedList()
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+TypeError: Can't instantiate abstract class LinkedList with abstract methods __getitem__, __len__
+&gt;&gt;&gt; BinarySearchTree() 
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+TypeError: Can't instantiate abstract class BinarySearchTree with abstract methods __delitem__, __getitem__, __iter__, __len__, __setitem__
+</div>
+
+<h2>可迭代对象</h2>
+
+<h3>迭代的概念</h3>
+
+<p>Python 中的 <code>for</code> 语句比较特殊，它是一种&ldquo;遍历&rdquo;类型的循环而不是计数循环，类似其它语言提供的 <code>foreach</code> 形式的循环，它的语法为：</p>
+
+<div class="codeblock code-template">
+    <strong>for</strong> <em>var</em> <strong>in</strong> <em>list</em>: <br/>
+    &nbsp; &nbsp; ...
+</div>
+
+<p><code>for</code> 循环从 <code><em>list</em></code> 中逐个取值，并赋值给循环变量 <code><em>var</em></code> 。
+</p>
+
+<p>使用 <code>for</code> 循环获取一个对象所有元素的过程称为<strong>迭代</strong>(iteration)。迭代过程可以是隐式的，在没有直接使用 <code>for</code> 时也发生了对一系列成员的遍历，例如 <code>list</code> 类的构造函数：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; d = {'a': 1, 'b': 2, 'c': 3}
+&gt;&gt;&gt; list(d)
+['a', 'b', 'c']
+</div>
+
+<p>这就涉及到 Python 的可迭代对象与迭代器的概念，它们规定一个对象应该如何迭代、每次迭代返回什么结果，并在什么时候停止迭代。</p>
+
+<h3>可迭代对象</h3>
+
+<p>可以显式或隐式地应用 <code>for</code> 循环，遍历每个成员的对象称为<strong>可迭代对象</strong>，迭代器和生成器都是可迭代对象。生成器的讨论见<a class="link-internal" href="/programming/python-fp/07-generators">函数式编程的相关章节</a>，本节重点讨论迭代器。</p>
+
+<p>可迭代对象的特点和生成器的特点是一样的，它们都<mark class="text-highlight">通过提供过程而不是结果消除重复计算的开销</mark>，具体表现在以下方面：</p>
+
+<ul>
+    <li>可迭代对象通过惰性生成数据的方式，在一次循环内就可以同时生产值和使用值，因此可以节约时间</li>
+    <li>相对于一般的序列，可迭代对象仅在当前迭代时产生数据，一旦离开当前迭代，本次迭代产生的数据就被销毁，因此可以节约空间</li>
+</ul>
+
+<p>在 Python 中，实现了 <code>__iter__()</code> 特殊方法的对象是可迭代对象。<code>collections.abc</code> 模块中定义了抽象基类 <code>Iterable</code> ，配合内置的 <code>isinstance()</code> 函数可以快速判断一个对象是否是可迭代对象。内置的序列对象都是可迭代对象，生成器函数和生成器表达式也都是可迭代对象：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; from collections.abc import Iterable
+&gt;&gt;&gt; isinstance(123, Iterable)
+False
+&gt;&gt;&gt; isinstance('123', Iterable)
+True
+&gt;&gt;&gt; def gen(): yield 1
+&gt;&gt;&gt; isinstance(gen, Iterable)   
+False
+&gt;&gt;&gt; isinstance(gen(), Iterable) 
+True
+&gt;&gt;&gt; class Gen:
+...     def __iter__(self): pass
+&gt;&gt;&gt; isinstance(Gen(), Iterable) 
+True
+</div>
+
+<p>如果要想自己实现的类也是可迭代对象，需要在类内实现 <code>__iter__()</code> 特殊方法。该方法是一个实例方法，除了 <code>self</code> 不需要任何参数。该方法需要返回一个可以被 <code>for</code> 循环使用的对象，例如列表或生成器。由于树的遍历使用递归实现比较简单，因此这里采用递归形式的生成器实现迭代：</p>
+
+<div class="vscode-block"><div><span token="defkwd">class</span> <span style="color: #cb4b16;">BinarySearchTree</span>:</div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">_inorder_traversal</span>(self, node):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">if</span> node <span style="color: #859900;">is</span> <span style="color: #859900;">not</span> <span style="color: #b58900;">None</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">yield from</span> <span token="var">self</span>.<span token="var">_inorder_traversal</span>(node.left)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">yield</span> node</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">yield from</span> <span token="var">self</span>.<span token="var">_inorder_traversal</span>(node.right)</div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">__iter__</span>(self):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">return</span> <span token="var">self</span>.<span token="var">_inorder_traversal</span>(<span token="var">self</span>.<span token="var">root</span>)</div></div>
+
+<p>这样 <code>BinarySearchTree</code> 类就可以被 <code>for</code> 循环使用，从而实现迭代：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; from random import randint
+&gt;&gt;&gt; tree = BinarySearchTree()
+&gt;&gt;&gt; for _ in range(5):
+...     tree[randint(0, 100)] = f'item {randint(1, 1000)}'
+&gt;&gt;&gt; for node in tree:  
+...     print(node)
+5: item 646
+51: item 867
+64: item 199
+95: item 795
+98: item 405
+</div>
+
+<p>虽然 <code>BinarySearchTree</code> 类已经是可迭代对象，但它还不是迭代器，因为它只是返回了一个生成器对象，这个类本身并没有给出每次产出值的具体步骤。接下来介绍迭代器的概念。</p>
+
+<h3>迭代器和迭代器协议</h3>
+
+<p>迭代器对象必须要实现两个方法：<code>.__iter__()</code> 和 <code>.__next__()</code> ，二者合称迭代器协议。<code>collections.abc</code> 模块中同样定义了抽象基类 <code>Iterator</code> 。可以用其判断一个实例是不是迭代器：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; from collections.abc import Iterator
+&gt;&gt;&gt; genexp = (i ** 2 for i in range(10) if i % 2)
+&gt;&gt;&gt; isinstance(genexp, Iterator)
+True
+</div>
+
+<p>通过 <code>help()</code> 函数检查 <code>Iterator</code> ，就可以知道迭代器的实现细节：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; help(collections.abc.Iterator)
+...
+|  Methods defined here:
+|
+|  __iter__(self)
+|
+|  __next__(self)
+|      Return the next item from the iterator. When exhausted, raise StopIteration
+...
+</div>
+
+<p>特殊方法 <code>.__next__()</code> 是一个实例方法，在每次循环迭代时，该方法依次返回下一个项目值，类型生成器的 <code>yield</code> 语句。如果没有新项目，该函数应该抛出 <var class="error">StopIteration</var> 异常，以作为迭代结束的依据。</p>
+
+<p>如果一个对象实现了 <code>.__next__()</code> 方法，那么它就可以在 <code>for</code> 循环中产出值，这时它的 <code>.__iter__()</code> 可以简单地返回 <code>self</code> ，告诉 <code>for</code> 语句自身就支持迭代。</p>
+
+<p>实现了迭代器协议的对象，既是可迭代对象，又是迭代器。以下实现了一个迭代器示例，使用迭代器来输出斐波那契数列的项：</p>
+
+<div class="vscode-block"><div><span token="defkwd">class</span> <span style="color: #cb4b16;">Fibonacci</span>:</div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">__init__</span>(self, max_value):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">_max</span> <span style="color: #859900;">=</span> max_value</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">_n</span>, <span token="var">self</span>.<span token="var">_a</span> <span style="color: #859900;">=</span> <span style="color: #d33682;">0</span>, <span style="color: #d33682;">1</span></div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">__iter__</span>(self):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">return</span> <span token="var">self</span></div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">__next__</span>(self):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">_n</span>, <span token="var">self</span>.<span token="var">_a</span> <span style="color: #859900;">=</span> <span token="var">self</span>.<span token="var">_a</span>, <span token="var">self</span>.<span token="var">_n</span> <span style="color: #859900;">+</span> <span token="var">self</span>.<span token="var">_a</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">if</span> <span token="var">self</span>.<span token="var">_n</span> <span style="color: #859900;">&lt;</span> <span token="var">self</span>.<span token="var">_max</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">return</span> <span token="var">self</span>.<span token="var">_n</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">else</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">raise</span> <span style="color: #cb4b16;">StopIteration</span></div></div>
+
+<p>在理解了生成器的原理后，应该就很容易理解 <code>.__next__()</code> 方法的用途了。以下是一个使用示例：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; series = Fibonacci(200)
+&gt;&gt;&gt; for i in series:
+...     print(i, end=' ')
+1 1 2 3 5 8 13 21 34 55 89 144
+</div>
+
+<p>在该例中，<code>.__iter__()</code> 和 <code>.__next__()</code> 缺一不可，因为 <code>.__iter__()</code> 告诉 <code>for</code> 循环从哪个迭代器取值，并不是所有对象自身都是迭代器；而 <code>.__next__()</code> 是如何迭代的依据，迭代循环根据 <code>.__next__()</code> 来逐一获得每次迭代产生的值。</p>
+
+<p><code>.__next__()</code> 方法的 <code>raise StopIteration</code> 异常用作结束迭代的标志，它会使 <code>for</code> 循环停止迭代而不是抛出错误。可以认为 <code>StopIteration</code> 异常相当于执行了一个循环的 <code>break</code> 。</p>
+
+<p>虽然以上示例的 <code>.__iter__()</code> 方法只是简单返回了自身，但是对于复杂一些的迭代器，<code>.__iter__()</code> 方法在迭代前可能还需要做一些必要的初始化工作，例如链表的迭代可以这样处理：</p>
+
+<div class="vscode-block"><div><span token="defkwd">class</span> <span style="color: #cb4b16;">LinkedList</span>:</div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">__iter__</span>(self):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">_iter_node</span> <span style="color: #859900;">=</span> <span token="var">self</span>.<span token="var">head</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">return</span> <span token="var">self</span></div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">__next__</span>(self):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">if</span> <span token="var">self</span>.<span token="var">_iter_node</span> <span style="color: #859900;">is</span> <span style="color: #b58900;">None</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">raise</span> <span style="color: #cb4b16;">StopIteration</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">current</span> <span style="color: #859900;">=</span> <span token="var">self</span>.<span token="var">_iter_node</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">self</span>.<span token="var">_iter_node</span> <span style="color: #859900;">=</span> <span token="var">self</span>.<span token="var">_iter_node</span>.<span token="var">next</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">return</span> <span token="var">current</span></div></div>
+
+<p>除此之外，有些容器对象可能还需要提供对逆序迭代的支持。如果一个类实现了 <code>.__reversed__(self)</code> 方法，那么它可以被内置函数 <code>reversed()</code> 调用，以实现逆序的迭代。因此，该方法应该返回一个新的迭代器，例如：</p>
+
+<div class="vscode-block"><div><span token="defkwd">class</span> <span style="color: #cb4b16;">LinkedList</span>:</div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">__reversed__</span>(self):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">return</span> <span token="var">self</span>.<span token="var">_reversed_iter</span>()</div><div>&nbsp; &nbsp; <span token="defkwd">def</span> <span token="var">_reversed_iter</span>(self):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">current</span> <span style="color: #859900;">=</span> <span token="var">self</span>.<span token="var">tail</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">while</span> <span token="var">current</span> <span style="color: #859900;">is</span> <span style="color: #859900;">not</span> <span style="color: #b58900;">None</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">yield</span> <span token="var">current</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="var">current</span> <span style="color: #859900;">=</span> <span token="var">current</span>.<span token="var">prev</span></div></div>
+
+<p>使用迭代器可以实现对象的迭代循环，迭代器让程序更加通用、高效。对于大量项目的迭代，使用迭代器可以避免列表等占用太多内存的问题。Python <a class="link-internal" href="/programming/python-fp/04-builtin-functions">内置了一些可迭代对象</a>如 <code>map</code> 、<code>filter</code>，在<a class="link-internal" href="/programming/python-fp/08-library-itertools">标准库 itertools 中</a>提供了各种迭代器，这些迭代器非常高效，且内存消耗也很少。</p>
+
+<h3>可迭代对象与迭代</h3>
+
+<p>可迭代对象最简单的迭代方法就是使用 <code>for</code> 循环遍历这个对象，它会自动处理 <code>.__iter__()</code> 和 <code>.__next__()</code> 。这里的 <code>for</code> 也可以是列表解析、生成器表达式等用到的 <code>for</code> 。</p>
+
+<p>如果不使用 <code>for</code> 循环，也可以通过以下方式模拟迭代的过程：</p>
+
+<div class="vscode-block"><div><span token="var">series</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">Fibonacci</span>(<span style="color: #d33682;">200</span>)</div><div><span token="var">iter_obj</span> <span style="color: #859900;">=</span> <span token="var">series</span>.<span token="var">__iter__</span>()</div><div><span token="flowkwd">while</span> <span style="color: #b58900;">True</span>:</div><div>&nbsp; &nbsp; <span token="flowkwd">try</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">i</span> <span style="color: #859900;">=</span> <span token="var">iter_obj</span>.<span token="var">__next__</span>()</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">print</span>(<span token="var">i</span>, end<span style="color: #859900;">=</span><span style="color: #2aa198;">' '</span>)</div><div>&nbsp; &nbsp; <span token="flowkwd">except</span> <span style="color: #cb4b16;">StopIteration</span>:</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="flowkwd">break</span></div></div>
+
+<p>但一般情况下，不要直接调用私有的特殊方法。Python 内置了两个函数 <code>iter()</code> 和 <code>next()</code> ，是迭代器协议相关的两个特殊方法的相关函数。前者用于获取实例代表的可迭代对象，后者用于手动迭代对象。</p>
+
+<p><code>iter(<em>object</em>)</code> 函数需要传入一个对象，其实质就是调用对象的 <code>.__iter__()</code> 方法，从而返回一个迭代器用于迭代：</p>
+
+<div class="codeblock code-console">&gt;&gt;&gt; ls = [1, 2, 3]
+&gt;&gt;&gt; iter(ls)
+&lt;list_iterator object at 0x000002037B3E9A20&gt;
+&gt;&gt;&gt; isinstance(ls, Iterator)
+False
+&gt;&gt;&gt; iter(series) is series
+True
+</div>
+
+<p>可以看到列表本身并不是迭代器，不过它会被 <code>iter()</code> 调用而返回一个特殊的列表迭代器。而由于之前实现的 <code>Fibonacci</code> 类其 <code>.__iter__()</code> 方法返回的就算实例本身，因此其对应的可迭代对象就是本身，本身便作为迭代器使用。</p>
+
+<p>该函数还可以传入第二个参数 <code><em>sentinel</em></code> ，这种情况下，<code><em>object</em></code> 必须是一个可调用对象（例如函数或方法，有关可调用对象的内容将在<a>下节</a>介绍），这时调用 <code>iter()</code> 会返回一个特殊的 callable iterator 对象，这个对象在每次迭代时，都会调用 <code><em>object</em></code> 一次，直到其返回值与 <code><em>sentinel</em></code> 相等时就停止迭代。</p>
+
+<p><a class="link-external" href="https://docs.python.org/3/library/functions.html#iter">Python 官方文档</a>演示了 <code><em>sentinel</em></code> 参数的一个用法，它将文件变成一个特别的二进制块迭代器，每次读取 64 字节，直到读到文件末尾（不再读出任何内容）为止：</p>
+
+<div class="vscode-block"><div><span token="flowkwd">from</span> <span style="color: #cb4b16;">functools</span> <span token="flowkwd">import</span> <span style="color: #cb4b16;">partial</span></div><br/><div><span token="flowkwd">with</span> <span token="var">open</span>(<span style="color: #2aa198;">'mydata.db'</span>, <span style="color: #2aa198;">'rb'</span>) <span token="flowkwd">as</span> <span token="var">f</span>:</div><div>&nbsp; &nbsp; <span token="var">read_block</span> <span style="color: #859900;">=</span> <span style="color: #cb4b16;">partial</span>(<span token="var">f</span>.<span token="var">read</span>, <span style="color: #d33682;">64</span>)</div><div>&nbsp; &nbsp; <span token="flowkwd">for</span> <span token="var">block</span> <span token="flowkwd">in</span> <span token="var">iter</span>(<span token="var">read_block</span>, <span token="defkwd">b</span><span style="color: #2aa198;">''</span>):</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">process_block</span>(<span token="var">block</span>)</div></div>
+
+<p>在有第二个参数时，自动调用 <code><em>object</em></code> 并不会传入任何参数，所以需要使用 <code>partial</code> 将其变成一个偏函数；并且 <code><em>object</em></code> 本身并不需要实现迭代器协议中的任意一个方法，相当于 <code>iter()</code> 为不断调用函数的行为创建了一个迭代器。</p>
+
+<p>另一个内置函数 <code>next(<em>iterator</em>)</code> 需要传入一个迭代器，它等价于调用迭代器的 <code>.__next__()</code> 方法。<code>next()</code> 还可以传入第二个参数 <code><em>default</em></code> ，表示迭代器触发 <var class="error">StopIteration</var> 时，返回的默认值。</p>
+
+<p>在 Python 中，使用 <code>open()</code> 打开的文件对象是可迭代对象，每次迭代它都会从文件中读取一行，这样就可以避免文件过大在内存中无法存放的情况。如果只是想读取文件的第一行获取一些元信息，那么就可以使用 <code>next()</code> 函数：</p>
+
+<div class="vscode-block"><div><span token="flowkwd">with</span> <span token="var">open</span>(<span style="color: #2aa198;">'demo.csv'</span>, <span style="color: #2aa198;">'r'</span>) <span token="flowkwd">as</span> <span token="var">f</span>:</div><div>&nbsp; &nbsp; <span token="var">head</span> <span style="color: #859900;">=</span> <span token="var">next</span>(<span token="var">f</span>)</div><div>&nbsp; &nbsp; <span token="var">fields</span> <span style="color: #859900;">=</span> <span token="var">head</span>[:<span style="color: #859900;">-</span><span style="color: #d33682;">1</span>].<span token="var">split</span>(<span style="color: #2aa198;">','</span>)</div></div>
+
+<h2>参考资料/延伸阅读</h2>
+
+<p>
+    <a href="https://docs.python.org/3/reference/datamodel.html#emulating-container-types">https://docs.python.org/3/reference/datamodel.html#emulating-container-types</a><br/>
+    Python3 官方文档对容器类型的描述
+</p>
+
+<p>
+    <a href="https://docs.python.org/3/library/stdtypes.html#iterator-types">https://docs.python.org/3/library/stdtypes.html#iterator-types</a><br/>
+    Python3 官方文档对迭代器类型的描述
+</p>
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+										
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/embedded/stm32/03-interrupt-system/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>STM32的中断系统与外部中断</span></a></li>
+		<li class="previous"><a href="/programming/python-oop/09-descriptors/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>Python面向对象编程09-描述符</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/embedded/stm32/03-interrupt-system/">STM32的中断系统与外部中断</a>
+											<span class="post-date">2024年6月2日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/python%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e7%bc%96%e7%a8%8b06-%e5%ae%b9%e5%99%a8%e5%af%b9%e8%b1%a1%e4%b8%8e%e8%bf%ad%e4%bb%a3/" aria-current="page">Python面向对象编程06-容器对象与迭代</a>
+											<span class="post-date">2024年5月19日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/09-descriptors/">Python面向对象编程09-描述符</a>
+											<span class="post-date">2024年4月30日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/08-operator-overloading/">Python面向对象编程08-运算符重载</a>
+											<span class="post-date">2024年4月7日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/07-callable-objects/">Python面向对象编程07-可调用对象与装饰器</a>
+											<span class="post-date">2024年3月1日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/05-custom-types/">Python面向对象编程05-特殊方法与自定义类</a>
+											<span class="post-date">2024年2月9日</span>
+									</li>
+											<li>
+					<a href="/programming/python/library-logging/">Python标准库logging：日志记录</a>
+											<span class="post-date">2024年1月23日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (12)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (3)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (26)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (5)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (9)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2024/06/'> 2024年6月 &nbsp;(1)</option>
+	<option value='/2024/05/'> 2024年5月 &nbsp;(1)</option>
+	<option value='/2024/04/'> 2024年4月 &nbsp;(2)</option>
+	<option value='/2024/03/'> 2024年3月 &nbsp;(1)</option>
+	<option value='/2024/02/'> 2024年2月 &nbsp;(1)</option>
+	<option value='/2024/01/'> 2024年1月 &nbsp;(2)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

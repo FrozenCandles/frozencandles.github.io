@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cortex-M3 存储器映像</title>
+
+    <style>
+        details {
+            border: 1px solid #aaa;
+            padding: 0;
+        }
+        summary {
+            margin: 0;
+            padding: 0.5em;
+        }
+        summary small { float: right; }
+        details[open] summary {
+            border-bottom: 1px solid #aaa;
+        }
+        details p {
+            margin: 0;
+            padding: 0 0.5em;
+            position: relative;
+            min-height: 2em;
+        }
+        details p + p {
+            border-top: 1px solid #aaa;
+        }
+        .high {
+            position: absolute;
+            top: 0;
+        }
+        .low {
+            position: absolute;
+            bottom: 0;
+        }
+        .cap {
+            position: absolute;
+            bottom: calc(50% - 0.5em);
+            right: 16ex;
+        }
+        .high,
+        .low {
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 14px;
+            right: 0.5em;
+        }
+        .reserved {
+            background-color: #555;
+            color: white;
+        }
+        div.reserved + div.reserved {
+            border-top: 1px solid #eee;
+        }
+        #seg-1 { background-color: #FFD478;}
+        #seg-2 { background-color: #BCFDC7;}
+        #seg-3 { background-color: #4D53FF; color:white; }
+        #seg-4 { background-color: #FEA4FB; }
+    </style>
+</head>
+<body>
+
+<details id="seg-4">
+    <summary>内核区<small>0.5GB</small></summary>
+    <p class="reserved"><span class="high">0xFFFF FFFF</span> <span class="low">0xE010 0000</span></p>
+    <p>Cortex-M3 内核外设 <span class="high">0xE00F FFFF</span> <span class="low">0xE000 0000</span></p>
+</details>
+<div class="reserved" style="height: 2.5em">
+    <summary> <small>0.5GB</small></summary>
+</div>
+<div class="reserved" style="height: 2.5em">
+    <summary> <small>0.5GB</small></summary>
+</div>
+<div class="reserved" style="height: 2.5em">
+    <summary> <small>0.5GB</small></summary>
+</div>
+<div class="reserved" style="height: 2.5em">
+    <summary> <small>0.5GB</small></summary>
+</div>
+<details id="seg-3">
+    <summary>外设区<small>0.5GB</small></summary>
+    <p>位带别名区 <small class="cap">32 MB</small> <span class="high">0x43FF FFFF</span> <span class="low">0x4200 0000</span></p>
+    <p class="reserved"><small class="cap">31 MB</small> <span class="high">0x400F FFFF</span> <span class="low">0x4010 0000</span></p>
+    <p>位带区 <small class="cap">1 MB</small> <span class="high">0x400F FFFF</span> <span class="low">0x4000 0000</span></p>
+</details>
+<details id="seg-2">
+    <summary>SRAM区<small>0.5GB</small></summary>
+    <p>位带别名区 <small class="cap">32 MB</small> <span class="high">0x23FF FFFF</span> <span class="low">0x2200 0000</span></p>
+    <p class="reserved"><small class="cap">31 MB</small> <span class="high">0x200F FFFF</span> <span class="low">0x2010 0000</span></p>
+    <p>位带区 <small class="cap">1 MB</small> <span class="high">0x200F FFFF</span> <span class="low">0x2000 0000</span></p>
+</details>
+<details id="seg-1">
+    <summary>代码区<small>0.5GB</small></summary>
+    <p class="reserved"><span class="high">0x1FFF FFFF</span> <span class="low">0x1FFF F80F</span></p>
+    <p>选项字节 <span class="high">0x1FFF F80E</span> <span class="low">0x1FFF F800</span></p>
+    <p>系统存储器 <span class="high">0x1FFF F7FF</span> <span class="low">0x1FFF F000</span></p>
+    <p class="reserved" style="height:4em"><span class="high">0x1FFF EFFF</span> <span class="low">0x0802 0000</span></p>
+    <p>Flash 闪存 <small class="cap">128 KB</small> <span class="high">0x0801 FFFF</span> <span class="low">0x0800 0000</span></p>
+    <p>SRAM 或 Flash 的别名<br> 取决于启动方式 <small class="cap">128 MB</small> <span class="high">0x07FF FFFF</span> <span class="low">0x0000 0000</span></p>
+</details>
+
+
+
+</body>
+</html>

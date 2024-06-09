@@ -74,13 +74,15 @@ div.math::-webkit-scrollbar-thumb {
   border: 3px solid var(--scroll-bar-bg-color);
 }
 
-var,
-code,
+.entry var,
+.entry code,
 .code-template,
 .code-highlight,
-.code .code-font,
+.code,
+.code-font,
 .entry .cell-code {
   font-family: var(--font-code);
+  font-size: 14px;
   word-break: break-word;
 }
 
