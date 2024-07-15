@@ -4,12 +4,12 @@
 
 <div class="attribute-table">
     <div class="attribute-table__title">{{ title }}</div>
-    <div class="attribute-table__body">
-        {% for item in items %}<div class="attribute-table__item">
-            <div class="attribute-table__name">{{ item.name }}</div>
-            <div class="attribute-table__value">{{ item.value }}</div>
-        </div>{% endfor %}
+    {% for item in items %}
+    <div class="attribute-table__item">
+        <div class="attribute-table__name">{{ item.name }}</div>
+        <div class="attribute-table__value">{{ item.value }}</div>
     </div>
+    {% endfor %}
 </div>
 
 

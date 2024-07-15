@@ -1,0 +1,133 @@
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em
+}
+code.hljs {
+  padding: 3px 5px
+}
+
+.hljs {
+  color: 	#236EBF;
+}
+.hljs-emphasis {
+  font-style: italic
+}
+.hljs-keyword,
+.hljs-strong {
+  font-weight: bold
+}
+.hljs-keyword { color: #0991B6; }
+.hljs-number { color: #174781; }
+.hljs-comment { color: #357B42; }
+.hljs-params { color: #B1108E; }
+
+/* JavaScript `this` */
+.hljs-variable.language_ {
+  color: #0991B6;
+}
+
+
+.hljs-property {
+  color: 	#7FDBCA;
+}
+
+.hljs-selector-class,
+.hljs-selector-pseudo,
+.hljs-selector-attr,
+
+.hljs.language-xml .hljs-attr {
+  color: #DF8618;
+}
+
+/* INFO: HTML tag name, CSS tag selector */
+.hljs-selector-tag,
+.hljs-name {
+  color: #0444AC;
+}
+
+/* class name */
+.language-python .hljs-title.class_ { color: #0444AC; }
+/* builtin functions */
+.language-python .hljs-built_in { color: #08134A; }
+/* format strings */
+.language-python .hljs-subst { color: #236EBF; } 
+/* decorators */
+.language-python .hljs-meta { color: #DC3EB7; }
+
+/* INFO:  	Function parameters, Regex character sets, Terminal Yellow */
+.hljs-built_in,
+.hljs-attribute,
+.hljs-title,
+.hljs-title.class_,
+.hljs-title.class_.inherited__ {
+  color: #DC3EB7;
+}
+
+.hljs-literal {
+  color: #174781;
+}
+/*INFO: This keyword, HTML elements, Regex group symbol, CSS units, Terminal Red */
+.hljs-tag,
+.hljs-doctag,
+.hljs-selector-id,
+.hljs-regexp,
+.hljs-template-tag,
+.hljs-deletion {
+  color: #0991B6;
+}
+
+/*INFO: Number and Boolean constants, Language support constants */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-link {
+  color: #B1108E;
+}
+
+
+
+
+.hljs-title.function_,
+.hljs-subst {
+  color: #B1108E;
+}
+
+
+/* INFO: Object literal keys, Markdown links, Terminal Green */
+.hljs-selector-tag {
+  color: #33635c
+}
+
+/* INFO: Strings, CSS class names */
+.hljs-quote,
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+  color: #A44185;
+}
+/* Blue */
+/* INFO:  	Function names, CSS property names, Terminal Blue */
+.hljs-code,
+.hljs-formula,
+.hljs-section {
+  color: #34548a
+}
+/* Magenta */
+/*INFO: Control Keywords, Storage Types, Regex symbols and operators, HTML Attributes, Terminal Magenta */
+
+.hljs-operator,
+.hljs-char.escape_,
+
+.hljs-attr {
+  color: #C792EA;
+}
+
+
+
+/* white*/
+/* INFO: Variables, Class names, Terminal White */
+.hljs-punctuation {
+  color: #343b58
+}

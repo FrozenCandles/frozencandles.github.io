@@ -1,4 +1,3 @@
-@charset "UTF-8";
 #reading-progress {
   position: fixed;
   left: 0;
@@ -17,16 +16,13 @@
   font-weight: normal;
   font-size: 14px;
   line-height: 19px;
+  padding: 6px;
 }
 
+.codeblock,
+.codeblock-sidebyside,
 .vscode-block {
   border: 1px solid silver;
-}
-
-.vscode-block,
-.codeblock,
-div.codeblock-sidebyside > * {
-  padding: 6px;
 }
 
 .code-highlight {
@@ -124,6 +120,10 @@ div.code-console span.token-label {
     margin-bottom: 15px;
   }
 }
+table.compact {
+  width: fit-content;
+}
+
 .entry figure.parallel div {
   display: inline-block;
   margin-left: 15px;
@@ -356,42 +356,42 @@ section.codeblock.compare > *:last-child {
 
 /* Attribute Table Widget */
 .attribute-table {
+  max-width: 600px;
   width: 100%;
-  border: 1px solid #aaa;
-  border-radius: 6px;
-  padding: 5px 10px;
-  margin: 12px 4px;
-  line-height: 1.5em;
-  box-shadow: 0 5px 5px #ccc;
-}
-.attribute-table .attribute-table__title {
-  font-size: 22px;
-  padding: 6px 3em;
-  display: block;
-}
-.attribute-table .attribute-table__item {
-  display: table-row;
-}
-.attribute-table .attribute-table__name {
-  display: table-cell;
-  width: fit-content;
-}
-.attribute-table .attribute-table__value {
-  display: table-cell;
-}
-.attribute-table .attribute-table__value .code-font {
-  font-size: 14px;
+  border: 1px solid #ccc;
+  padding: 16px;
+  background-color: #fff;
 }
 
-.attribute-table__body {
-  display: table;
-  table-layout: auto;
+.attribute-table__title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 0.5em;
+  font-weight: bold;
 }
 
-/*.attribute-table .attribute-table__title::before {
-    content: 'CSS属性 ';
-    font-size: 18px; 
-}*/
+.attribute-table__item {
+  display: flex;
+}
+.attribute-table__item:last-child {
+  margin-bottom: 0;
+}
+
+.attribute-table__name {
+  font-weight: bold;
+  white-space: nowrap;
+  margin-right: 10px;
+  flex-shrink: 0;
+  width: 6em;
+}
+
+.attribute-table__value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex-grow: 1;
+}
+
 .article-link-card {
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -438,10 +438,6 @@ section.codeblock.compare > *:last-child {
 .article-link-card .article-link-card__content .article-link-card__category {
   font-weight: bold;
   color: #5e59be;
-  background-clip: text;
-  background-image: linear-gradient(to right, #5e59be, #d42121);
-  -webkit-text-fill-color: rgba(255, 255, 255, 0);
-  padding-right: 10px;
 }
 .article-link-card .article-link-card__content .article-link-card__time {
   color: #999999;

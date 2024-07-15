@@ -1,20 +1,20 @@
 /* global setting */
-
 html {
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    text-rendering: optimizelegibility;
-    -webkit-font-smoothing: initial;
-
-    scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: initial;
+  scroll-behavior: smooth;
 }
-
 
 body {
-    background: #fff;
+  background: #fff;
 }
 
-
+.entry {
+  max-width: 820px;
+  margin: auto;
+}
 
 /* .entry {
     position: relative;
@@ -26,117 +26,110 @@ body {
     caret-color: var(--main-color);
 } 
 */
-
-
 #assist {
-    width: 270px;
-    position: fixed;
-    left: 30px;
-    top: 50px;
-    /* float: left; */
-    transition: all 0.6s ease-in-out;
+  width: 270px;
+  position: fixed;
+  left: 30px;
+  top: 50px;
+  /* float: left; */
+  transition: all 0.6s ease-in-out;
 }
-
 #assist.selection-toggle {
-    transform: translateX(-302px);
+  transform: translateX(-302px);
 }
-
 #assist .assist-widget {
-    padding: 12px;
+  padding: 12px;
 }
-
 #assist .assist-widget + .assist-widget {
-    border-top: 1px solid #232323;
+  border-top: 1px solid #232323;
 }
-
 #assist .assist-widget h5 {
-    margin-bottom: 6px;
+  margin-bottom: 6px;
 }
 
 #assist button {
-    appearance: none;
-    background-color: #FAFBFC;
-    border: 1px solid rgba(27, 31, 35, 0.15);
-    border-radius: 6px;
-    box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
-    box-sizing: border-box;
-    color: #24292E;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 20px;
-    list-style: none;
-    padding: 6px 16px;
-    position: relative;
-    transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    vertical-align: middle;
-    white-space: nowrap;
-    word-wrap: break-word;
+  appearance: none;
+  background-color: #FAFBFC;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292E;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  padding: 6px 16px;
+  position: relative;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
 }
-
 #assist button:hover {
   background-color: #F3F4F6;
   text-decoration: none;
   transition-duration: 0.1s;
 }
-
 #assist button:disabled {
   background-color: #FAFBFC;
   border-color: rgba(27, 31, 35, 0.15);
   color: #959DA5;
   cursor: default;
 }
-
 #assist button:active {
   background-color: #EDEFF2;
   box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
   transition: none 0s;
 }
-
 #assist button:focus {
   outline: 1px transparent;
 }
-
-#assist button:before { display: none; }
-#assist button:-webkit-details-marker { display: none; }
-
-.assist-toggle-button {
-    --button-size: 26px; 
-    position: absolute;
-    right: -32px;
-    top: 0;
-    font-size: 20px;
-    display: inline-block;
-    width: var(--button-size);
-    height: var(--button-size);
-    line-height: var(--button-size);
-    border: 1px solid #ccc;
-    text-align: center;
-    border-radius: 6px;
-    user-select: none;
-    background-color: #fff;
-    cursor: pointer;
+#assist button:before {
+  display: none;
+}
+#assist button:-webkit-details-marker {
+  display: none;
 }
 
+.assist-toggle-button {
+  --button-size: 26px;
+  position: absolute;
+  right: -32px;
+  top: 0;
+  font-size: 20px;
+  display: inline-block;
+  width: var(--button-size);
+  height: var(--button-size);
+  line-height: var(--button-size);
+  border: 1px solid #ccc;
+  text-align: center;
+  border-radius: 6px;
+  user-select: none;
+  background-color: #fff;
+  cursor: pointer;
+}
 
 #toc ul,
 #toc ol {
-    counter-reset: nested-ordered;
-    list-style-type: none;
+  counter-reset: nested-ordered;
+  list-style-type: none;
 }
 
 #toc li:before {
-    counter-increment: nested-ordered;
-    content: counters(nested-ordered, ".") ": ";
+  counter-increment: nested-ordered;
+  content: counters(nested-ordered, ".") ": ";
 }
 
 #toc li li {
-    padding-left: 30px;
+  padding-left: 30px;
 }
+
 #toc > ul > li {
-    padding-left: 20px;
+  padding-left: 20px;
 }

@@ -1,0 +1,880 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>STM32的模拟数字转换器 - 冰封残烛的个人小站</title>
+	<link rel="canonical" href="/embedded/stm32/analog-digital-converter/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="STM32的模拟数字转换器 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="ADC(Analog to Digital Conv&#046;&#046;&#046;" />
+	<meta property="og:url" content="/embedded/stm32/analog-digital-converter/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2024-07-14T14:36:44+00:00" />
+	<meta property="article:modified_time" content="2024-07-15T06:36:05+00:00" />
+	<meta name="author" content="Hello" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:image" content="/wp-content/uploads/cover/thumb/stm32@08-Analog-Digital-Converter.jpg" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="4分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebPage",
+	            "@id": "/embedded/stm32/analog-digital-converter/",
+	            "url": "/embedded/stm32/analog-digital-converter/",
+	            "name": "STM32的模拟数字转换器 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/embedded/stm32/analog-digital-converter/#primaryimage"
+	            },
+	            "image": {
+	                "@id": "/embedded/stm32/analog-digital-converter/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/cover/thumb/stm32@08-Analog-Digital-Converter.jpg",
+	            "datePublished": "2024-07-14T14:36:44+00:00",
+	            "dateModified": "2024-07-15T06:36:05+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "breadcrumb": {
+	                "@id": "/embedded/stm32/analog-digital-converter/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/embedded/stm32/analog-digital-converter/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/embedded/stm32/analog-digital-converter/#primaryimage",
+	            "url": "/wp-content/uploads/cover/thumb/stm32@08-Analog-Digital-Converter.jpg",
+	            "contentUrl": "/wp-content/uploads/cover/thumb/stm32@08-Analog-Digital-Converter.jpg"
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/embedded/stm32/analog-digital-converter/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "STM32的模拟数字转换器"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/1398" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=1398' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fembedded%2Fstm32%2Fanalog-digital-converter%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fembedded%2Fstm32%2Fanalog-digital-converter%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?432b66336cb23bd6712cecabe6d808eb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="stylesheet" href="/wp-content/static/css/theme@haru.wp.min.css">
+<link rel="stylesheet" href="/wp-content/static/css/hljs@night-owl-light.css">
+
+<style>
+    .vscode-block {
+        color: #403f53;
+        background-color: #FBFBFB;
+    }
+    .vscode-block span[token="var"] { color: #4876d6; }
+</style><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-1398 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-1390" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1390"><span class="menu-item-wrapper"><a href="/all/embedded/">电子电路与嵌入式</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/all/embedded-application/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-1398" class="post-1398 post type-post status-publish format-standard has-post-thumbnail hentry category-stm32">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">STM32的模拟数字转换器</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/embedded/stm32/" rel="category tag">STM32</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2024年7月14日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+<p>ADC(Analog to Digital Converter)。即<strong>模拟/数字转换器</strong>，在模拟信号需要以数字形式处理、存储或传输时，就需要模/数转换器将模拟量转换为数字量。</p>
+
+<h2>STM32的ADC外设</h2>
+
+<p>STM32 内置了 ADC 外设，不需要辅助 IC 就可以直接将模拟信号转换为数字信号，以便内核处理数字量。STM32 的 ADC 外设非常强大，STM32F103x8 等中容量产品具有 2 个 ADC 外设，STM32F103xC 等大容量产品具有 3 个 ADC 。每个 ADC 都可以采集一个或多个外部输入的模拟量，各个 ADC 还可以通过采集同一个通道而提高对输入信号的采样速率。</p>
+
+
+
+<p>ADC 的类型决定了其精度和性能的极限，STM32 的 ADC 是 12 位<a>逐次逼近型模拟数字转换器</a>，因此它的转换结果是一个介于 0~4095 的整数值，最小量化单位 LSB 为输入电压范围的 1/2<sup>12</sup> 。</p>
+
+<h3>STM32的ADC结构</h3>
+
+<p>在使用标准外设库操作 STM32 的 ADC 时，第一步就是配置外设的一些通用参数（也就是初始化该外设）。和其它外设的初始化方式一样，ADC 也通过结构体的形式提供初始化参数，它的初始化结构体具有以下成员：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;">typedef</span> <span style="color: #994cc3;font-weight: bold;">struct</span> {</div><div>&nbsp; &nbsp; <span style="color: #4876d6;font-weight: bold;">uint32_t</span> <span style="color: #0c969b;">ADC_Mode</span>;</div><div>&nbsp; &nbsp; <span token="var">FunctionalState</span> <span style="color: #0c969b;">ADC_ScanConvMode</span>;</div><div>&nbsp; &nbsp; <span token="var">FunctionalState</span> <span style="color: #0c969b;">ADC_ContinuousConvMode</span>;</div><div>&nbsp; &nbsp; <span style="color: #4876d6;font-weight: bold;">uint32_t</span> <span style="color: #0c969b;">ADC_ExternalTrigConv</span>;</div><div>&nbsp; &nbsp; <span style="color: #4876d6;font-weight: bold;">uint32_t</span> <span style="color: #0c969b;">ADC_DataAlign</span>;</div><div>&nbsp; &nbsp; <span style="color: #4876d6;font-weight: bold;">uint8_t</span> <span style="color: #0c969b;">ADC_NbrOfChannel</span>;</div><div>} <span token="var">ADC_InitTypeDef</span>;</div></div>
+
+<p>为了明白每个成员的作用以及可以设置的值，同样需要结合 STM32 的 ADC 结构框图来理解。以下展示了 ADC 的结构框图的主要部分：</p>
+
+<figure>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@stm32/09-ADC-structure-main.png" width="650"/>
+    <figcaption>未展示的部分是 ADC 的触发源结构，这部分结构将在下文介绍</figcaption>
+</figure>
+
+<p>这个结构可以拆分为以下几个部分理解：</p>
+
+<h4>参考电压范围</h4>
+
+<p>STM32F103 芯片都有两个引脚 V<sub>REF+</sub> 和 V<sub>REF-</sub> ，表示 STM32 的模拟参考电压，只有这个范围内的电压才能被正确读取。V<sub>DDA</sub> 和 V<sub>VSSA</sub> 在介绍 STM32 最小系统时介绍过，它们是为 ADC 外设供电的模拟电源和模拟地引脚。对于 F103C8T6 这种小型设备，V<sub>REF+</sub> 和 V<sub>DDA</sub> 一般直接连接、V<sub>REF-</sub> 和 V<sub>SSA</sub> 一般也直接连接，因此 STM32 ADC 的电压输入范围为 0~3.3V 。</p>
+
+<p>如果需要使输入的电压范围变宽，从而可以测量负电压或者更高的正电压，可以在外部加一个电压转换电路，把需要转换的电压抬升或者降压到 0~3.3V 。</p>
+
+<h4>通道</h4>
+
+<p>当确定了参考电压以后，ADC 就可以读取模拟信号了。但下一个问题是，ADC 从哪里读取这些模拟信号。通常，将可供 ADC 读取的模拟信号称为<strong>通道</strong>(channel)，这些通道既可以是由 GPIO 读取的外部电压，也可以是内部一些元件产生的电压信号。</p>
+
+<p>STM32F1 的每个 ADC 最多有 18 个输入通道，可测量 16 个外部和 2 个内部信号源。STM32F103x8 只有 ADC1 和 ADC2 两个 ADC 外设，以下是它每个通道对应的输入：</p>
+
+<table class="table-compact">
+    <caption>STM32F103x8 的 ADC 输入通道</caption>
+    <tbody><tr>
+        <th>ADC1 通道</th><th>对应 IO</th><th>ADC2 通道</th><th>对应 IO</th>
+    </tr>
+    <tr>
+        <td>通道 0</td><td><var>PA0</var></td><td>通道 0</td><td><var>PA0</var></td>
+    </tr>
+    <tr>
+        <td>通道 1</td><td><var>PA1</var></td><td>通道 1</td><td><var>PA1</var></td>
+    </tr>
+    <tr>
+        <td>通道 2</td><td><var>PA2</var></td><td>通道 2</td><td><var>PA2</var></td>
+    </tr>
+    <tr>
+        <td>通道 3</td><td><var>PA3</var></td><td>通道 3</td><td><var>PA3</var></td>
+    </tr>
+    <tr>
+        <td>通道 4</td><td><var>PA4</var></td><td>通道 4</td><td><var>PA4</var></td>
+    </tr>
+    <tr>
+        <td>通道 5</td><td><var>PA5</var></td><td>通道 5</td><td><var>PA5</var></td>
+    </tr>
+    <tr>
+        <td>通道 6</td><td><var>PA6</var></td><td>通道 6</td><td><var>PA6</var></td>
+    </tr>
+    <tr>
+        <td>通道 7</td><td><var>PA7</var></td><td>通道 7</td><td><var>PA7</var></td>
+    </tr>
+    <tr>
+        <td>通道 8</td><td><var>PB0</var></td><td>通道 8</td><td><var>PB0</var></td>
+    </tr>
+    <tr>
+        <td>通道 9</td><td><var>PB1</var></td><td>通道 9</td><td><var>PB1</var></td>
+    </tr>
+    <tr>
+        <td>通道 10</td><td><var>PC0</var></td><td>通道 10</td><td><var>PC0</var></td>
+    </tr>
+    <tr>
+        <td>通道 11</td><td><var>PC1</var></td><td>通道 11</td><td><var>PC1</var></td>
+    </tr>
+    <tr>
+        <td>通道 12</td><td><var>PC2</var></td><td>通道 12</td><td><var>PC2</var></td>
+    </tr>
+    <tr>
+        <td>通道 13</td><td><var>PC3</var></td><td>通道 13</td><td><var>PC3</var></td>
+    </tr>
+    <tr>
+        <td>通道 14</td><td><var>PC4</var></td><td>通道 14</td><td><var>PC4</var></td>
+    </tr>
+    <tr>
+        <td>通道 15</td><td><var>PC5</var></td><td>通道 15</td><td><var>PC5</var></td>
+    </tr>
+    <tr>
+        <td>通道 16</td><td>连接内部温度传感器</td><td>通道 16</td><td>连接内部 V<sub>SS</sub></td>
+    </tr>
+    <tr>
+        <td>通道 17</td><td>连接内部 V<sub>REFINT</sub></td><td>通道 17</td><td>连接内部 V<sub>SS</sub></td>
+    </tr>
+</tbody></table>
+
+<blockquote>
+    <p>V<sub>REFINT</sub> 是 STM32 内部的参考电压(Reference Internal)，值恒定为 1.2V ，不随外部供电电压而变化。如果不确定模拟输入的参考正电压是否为 3.3V ，就可以读取该内部参考电压并用于校准。</p>
+</blockquote>
+
+<blockquote>
+    <p>如果使用的是 STM32F103C8 的芯片，由于 PC0 及后续的引脚都没有引出，所以外部真正能用到的只有 10 个通道。</p>
+</blockquote>
+
+<p>看起来 ADC1 和 ADC2 的通道基本相同，那么 STM32 为何要提供两个 ADC 外设呢？这是由于某些时候一个 ADC 的采样效率不能满足需求，这时候就可以让两个 ADC 一起对同一个通道采用，从而提升采样效率。</p>
+
+<p>ADC 初始化结构体的成员 <code>.ADC_Mode</code> 配置的 ADC 模式就和 ADC 的使用数量有关，当使用一个 ADC 时可以配置为独立模式 <code>ADC_Mode_Independent</code> ，使用两个 ADC 时可以配置为双模式，在双模式下还有很多细分模式可选。如果不是特别关注采样效率，一般使用一个 ADC 的独立模式即可。</p>
+
+<h4>转换组</h4>
+
+<p>STM32 的 ADC 还有一个特点：它允许用户配置一组要转换的 ADC 通道，每轮转换自动按照顺序转换组里的每个通道，这样在<mark>读取的模拟量不止一个</mark>时，就无需手动逐个切换要转换的通道了。这就是 ADC 的扫描模式(Scan mode)，如果需要使用扫描模式，需要在初始化结构体中将 <code>.ADC_ScanConvMode</code> 设置为 <code>ENABLE</code> 。</p>
+
+<p>STM32 的转换组可以分为<strong>规则组</strong>(Regular Group)和<strong>注入组</strong>(Injected Group)，规则组是最常用的 ADC 转换组，用于执行常规的 ADC 转换。注入组是相对规则组而言的，它可以在规则组转换的时候强行插入转换：如果在规则组转换过程中，有注入组插队，那么就要先转换完注入组，再回到规则组的转换流程。这点跟中断程序很像，注入组通常用于快速响应某些事件的转换需求。</p>
+
+<figure>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@stm32/09-ADC-structure-conversion.png"/>
+</figure>
+
+<p>STM32F1 的规则组最多拥有 16 个待转换通道，注入组最多拥有 4 个待转换通道。在 ADC 的初始化结构体中，需要通过 <code>.ADC_NbrOfChannel</code> 成员指明规则组的通道数量。注入组的通道数配置不在初始化结构体中，除此之外转换组的配置也不在初始化结构体中，它们都是单独调用其它函数，这部分内容将在接下来应用部分说明。</p>
+
+<blockquote>
+    <p>转换组的底层原理是，ADC 中存在若干规则序列寄存器 <var type="register">SQRx</var> 和注入序列寄存器 <var type="register">JSQR</var> ，这些寄存器在初始化时将依次填入序列的长度和序列每个位置的通道号，转换时硬件自动扫描这些寄存器中的每个通道号并依次转换。</p>
+</blockquote>
+
+<blockquote>
+    <p>转换组的通道是可以重复的，如果想提高转换组中某个通道的采样率，可以将该通道在组内适当重复几个，在读入转换数据时注意对应上即可。</p>
+</blockquote>
+
+<p>转换组还允许使用者选择单次转换或连续转换(Continuous conversion)模式，如果设置为连续转换模式，则 ADC 完成上一个通道的转换后会马上自动地启动下一个通道的转换，不需要再次触发；而单次转换模式每次转换都需要触发才能开始。是否需要连续转换可由 ADC 初始化结构体的 <code>.ADC_ContinuousConvMode</code> 成员配置。</p>
+
+<p>扫描还是非扫描、单次转换还是连续转换，这两个组合起来一共有四种模式，下图对比了这四种模式的差别：</p>
+
+<figure>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@stm32/09-ADC-sequence-modes.png" width="720"/>
+    <figcaption>ADC序列相关的四种工作方式</figcaption>
+</figure>
+
+<h4 id="section-convert-trigger">触发源</h4>
+
+<p>为了开始 ADC 的转换，需要提供一个触发源。比较常规的使 ADC 开始转换的方式是软件开启，即通过软件向控制寄存器的某个位写入特定值，那么 ADC 就开始转换了。</p>
+
+<p>除此之外，STM32 的 ADC 也提供了其它触发转换的触发源，包括外部引脚上的信号（例如定时器输出、外部中断等）和内部事件（例如定时器溢出、比较器输出等）。通过硬件的触发可以不经过内核处理，从而减轻内核压力并提高响应速度。</p>
+
+<h4 id="section-convert-data">数据存储</h4>
+
+<p>ADC 转换完成后，得到的结果将会存放在寄存器中供读取。不同转换组数据存放的位置也不同，规则组的数据存放在规则数据寄存器，注入组的数据存放在注入数据寄存器。 </p>
+
+<p>不过规则组只有一个规则数据寄存器 <var type="register">DR</var> ，这就意味着如果规则序列包含两个或以上的通道的话，转换过程中后面通道的转换结果都会覆盖前面通道的转换结果，因此需要及时从寄存器中读出数据。而注入组的每个通道都拥有一个注入数据寄存器 <var type="register">JDRx</var> ，就没有这样的问题了。</p>
+
+<p>ADC 的数据寄存器都是 32 位的寄存器，其中规则数据寄存器的低 16 位保存 ADC1 转换的数据，高 16 位在双模式下保存 ADC2 转换的数据；而注入组的四个注入数据寄存器都只用到低 16 位保存注入转换的数据。</p>
+
+<p>既然 ADC 的数据寄存器使用 16 位保存转换的数据，而 ADC 的精度只有 12 位，无法放满这 16 位空间，这时就涉及到数据对齐的概念了：ADC 的转换结果可以右对齐（即高位对齐），也可以左对齐（即低位对齐），但左对齐与通常整数的表示方式不符，使用时需要再加以移位处理；左对齐一般适用于需要将数据传输给其它也使用左对齐处理的元器件的情况。</p>
+
+<p>除此之外，规则数据寄存器和注入数据寄存器对其它四个空位的处理方式也不同：规则数据寄存器直接将空位填 0 ，而注入数据寄存器会在高位添加额外的符号位，这样使得注入组可以测量比负参考电压还低的负值电压数据，如下所示：</p>
+
+<figure>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@stm32/09-ADC-data-align.png"/>
+</figure>
+
+<p>ADC 初始化结构体的成员 <code>.ADC_DataAlign</code> 控制结果数据的对齐方式。一般来说只需要使用右对齐 <code>ADC_DataAlign_Right</code> 即可。</p>
+
+<h4 id="section-convert-speed">转换效率</h4>
+
+<p>在使用 ADC 时，转换速度也是一个值得考虑的指标。一些高频的模拟输入源要求 ADC 结构的转换速度足够短，才能准确地反映输入的信号。</p>
+
+<p>STM32F1 的转换时间是可以通过编程调整的，但转换一次至少需要 14 个 ADC 时钟周期，而 ADC 外设的时钟频率最高不能超过 14 MHz ，因此 STM32F1 的 ADC 转换时间最短为 1&mu;s ，足以胜任中低频示波器的采样工作。</p>
+
+<p>不过这里要注意的是，如果 STM32 的系统频率为 72MHz 的话，不管如何分频都无法达到 14 MHz 的最大频率，当 ADC 时钟为 PCLK2 的 6 分频时，ADC 的最大频率只能达到 12MHz ，因此最低转换时间为 1.17&mu;s ，可以参见时钟树：</p>
+
+<figure>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@stm32/09-ADC-clock-tree.png"/>
+</figure>
+
+<p>只有在 STM32 使用的系统频率为 56MHz 时，从 PCLK2 再取 4 分频才能达到 14 MHz 的最大频率。</p>
+
+<hr/>
+
+<p>制约 ADC 转换效率的另一个因素是 ADC 的采样时间。STM32 模拟量的读取由采样和转换两部分组成，ADC 在进行转换之前需要对模拟信号进行采样和保持，以确保在转换过程中模拟信号的稳定性。采样时间是可以通过编程调节的，采样时间越长，输入信号的测量稳定性也就越高，但相应地转换速度也就越慢。STM32 提供的转换时间可以参见 <code>ADC_SampleTime_*</code> 一系列宏，从最短的 1.5 个时钟周期到 239.5 周期不等。因此总的转换时间 T<sub>CONV</sub> = 采样时间 + 12.5 个 ADC 时钟周期（固定时间），最快 14 个周期。</p>
+
+<h2>ADC转换程序</h2>
+
+<h3>单通道ADC转换</h3>
+
+<p>接下来的程序说明了实现单通道 ADC 转换所需要编写的最基本的代码，编写的思路和步骤为：</p>
+
+<ol start="1">
+    <li>开始外设时钟</li>
+</ol>
+
+<p>在外设初始化前，需要启用 ADC 外设和 GPIO 端口的时钟。STM32F103 系列的 ADC 和 GPIO 外设都挂载在 APB2 总线上：</p>
+
+<div class="vscode-block"><div><span token="var">RCC_APB2PeriphClockCmd</span><span token="var">(</span><span token="var">RCC_APB2Periph_GPIOA</span><span token="var"> </span><span style="color: #0c969b;">|</span><span token="var"> </span><span token="var">RCC_APB2Periph_ADC1</span><span token="var">, </span><span token="var">ENABLE</span><span token="var">)</span>;</div></div>
+
+<p>除此之外，如果还需要配置 ADC 的时钟分频，可以调用以下函数完成：</p>
+
+<div class="vscode-block"><div><span token="var">RCC_ADCCLKConfig</span><span token="var">(</span><span token="var">RCC_PCLK2_Div6</span><span token="var">)</span>;</div></div>
+
+<ol start="2">
+    <li>初始化 GPIO 引脚</li>
+</ol>
+
+<p>在通过 GPIO 读取模拟输入时，需要将输入引脚配置为模拟输入模式 <code>GPIO_Mode_AIN</code> ：</p>
+
+<div class="vscode-block"><div><span style="color: #939dbb;">// 2. Initialize GPIO</span></div><div><span token="var">GPIO_InitTypeDef</span> <span token="var">GPIO_InitStructure</span>;</div><div><span token="var">GPIO_InitStructure</span>.<span style="color: #0c969b;">GPIO_Pin</span> <span style="color: #994cc3;">=</span> <span token="var">GPIO_Pin_5</span>;</div><div><span token="var">GPIO_InitStructure</span>.<span style="color: #0c969b;">GPIO_Mode</span> <span style="color: #994cc3;">=</span> <span token="var">GPIO_Mode_AIN</span>;</div><div><span token="var">GPIO_Init</span><span token="var">(</span><span token="var">GPIOA</span><span token="var">, </span><span style="color: #0c969b;">&amp;</span><span token="var">GPIO_InitStructure</span><span token="var">)</span>;</div></div>
+
+<ol start="3">
+    <li>初始化 ADC 外设</li>
+</ol>
+
+<p>ADC 外设的初始化和其它外设是一样的。在该程序中，需要提供初始化结构体如下的值：</p>
+
+<div class="vscode-block"><div><span token="var">ADC_InitTypeDef</span> <span token="var">ADC_InitStructure</span> <span style="color: #994cc3;">=</span> {</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">ADC_Mode</span> <span style="color: #994cc3;">=</span> <span token="var">ADC_Mode_Independent</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">ADC_NbrOfChannel</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">1</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">ADC_ScanConvMode</span> <span style="color: #994cc3;">=</span> <span token="var">DISABLE</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">ADC_ContinuousConvMode</span> <span style="color: #994cc3;">=</span> <span token="var">DISABLE</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">ADC_ExternalTrigConv</span> <span style="color: #994cc3;">=</span> <span token="var">ADC_ExternalTrigConv_None</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">ADC_DataAlign</span> <span style="color: #994cc3;">=</span> <span token="var">ADC_DataAlign_Right</span></div><div>};</div><div><span token="var">ADC_Init</span><span token="var">(</span><span token="var">ADC1</span><span token="var">, </span><span style="color: #0c969b;">&amp;</span><span token="var">ADC_InitStructure</span><span token="var">)</span>;</div></div>
+
+<p>该初始化结构体做了如下配置：</p>
+
+<ul>
+    <li>只使用一个 ADC ，属于独立模式</li>
+    <li>转换通道 1 个</li>
+    <li>单通道情况下，不需要扫描模式</li>
+    <li>单次转换模式，需要数据时再启动转换即可</li>
+    <li>不用外部触发转换，由软件开启即可</li>
+    <li>转换结果右对齐</li>
+</ul>
+
+<ol start="4">
+    <li>配置 ADC 各通道</li>
+</ol>
+
+<p>初始化了 ADC 一些通用的参数后，接下来可以配置 ADC 的转换组的细节，主要包括转换组各个序列位置对应的通道，以及每个通道的采样时间。这一过程主要由以下函数完成：</p>
+
+<ul>
+    <li class="code-inline"><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">ADC_RegularChannelConfig</span>(<span token="var">ADC_TypeDef</span><span style="color: #0c969b;">*</span> ADCx, <span style="color: #4876d6;font-weight: bold;">uint8_t</span> ADC_Channel, <span style="color: #4876d6;font-weight: bold;">uint8_t</span> Rank, <span style="color: #4876d6;font-weight: bold;">uint8_t</span> ADC_SampleTime);</li>
+</ul>
+
+<p>其中 <code>Rank</code> 表示转换序列的位号，<code>ADC_SampleTime</code> 是通道的采样时间。由于本次只需要转换 1 个通道的数据，因此只需要配置位号为 1 的通道即可：</p>
+
+<div class="vscode-block"><div><span token="var">ADC_RegularChannelConfig</span><span token="var">(</span><span token="var">ADC1</span><span token="var">, </span><span token="var">ADC_Channel_5</span><span token="var">, </span><span style="color: #aa0982;">1</span><span token="var">, </span></div><div><span token="var">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span token="var">ADC_SampleTime_55Cycles5</span><span token="var">)</span>;</div></div>
+
+<p>类似地，如果要配置注入组，可以调用 <code>ADC_InjectedChannelConfig()</code> 函数，它们的用法类似。</p>
+
+<ol start="5">
+    <li>启用 ADC</li>
+</ol>
+
+<p>这一步没有什么好说的，和其它外设类似，启用 ADC 调用的是 <code>ADC_Cmd()</code> 函数：</p>
+
+<div class="vscode-block"><div><span token="var">ADC_Cmd</span><span token="var">(</span><span token="var">ADC1</span><span token="var">, </span><span token="var">ENABLE</span><span token="var">)</span>;</div></div>
+
+<ol start="6">
+    <li>自校准</li>
+</ol>
+
+<p>在使用 STM32 的 ADC 前，还有一个可选的步骤是校准 ADC ，校准可以大幅减少因内部电容器组的变化而产生的精度误差。STM32 的 ADC 具有内置的自校准功能，在校准期间，每个电容器上都会计算出一个误差修正码（数字值），可以用于消除在随后的转换中电容器产生的误差。</p>
+
+<p>ADC 的校准可以通过以下代码完成，建议在每次上电时执行一次校准即可：</p>
+
+<div class="vscode-block"><div><span style="color: #939dbb;">// 初始化 ADC 校准寄存器 &nbsp;</span></div><div><span token="var">ADC_ResetCalibration</span><span token="var">(</span><span token="var">ADC1</span><span token="var">)</span>;</div><div><span style="color: #939dbb;">// 等待校准寄存器初始化完成</span></div><div><span style="color: #994cc3;font-weight: bold;">while</span> (<span token="var">ADC_GetResetCalibrationStatus</span><span token="var">(</span><span token="var">ADC1</span><span token="var">)</span>);</div><div><span style="color: #939dbb;">// 开始校准 ADC</span></div><div><span token="var">ADC_StartCalibration</span><span token="var">(</span><span token="var">ADC1</span><span token="var">)</span>;</div><div><span style="color: #939dbb;">// 等待校准完成</span></div><div><span style="color: #994cc3;font-weight: bold;">while</span> (<span token="var">ADC_GetCalibrationStatus</span><span token="var">(</span><span token="var">ADC1</span><span token="var">)</span>);</div></div>
+
+<ol start="7">
+    <li>触发转换并读取转换数据</li>
+</ol>
+
+<p>经过以上步骤，ADC 已经配置完毕，随时可以读取外部模拟输入。由于以上配置 ADC 为软件触发中断，因此需要使用以下函数开始 ADC 的转换：</p>
+
+<div class="vscode-block"><div><span token="var">ADC_SoftwareStartConvCmd</span><span token="var">(</span><span token="var">ADC1</span><span token="var">, </span><span token="var">ENABLE</span><span token="var">)</span>;</div></div>
+
+<p>如果以上配置 ADC 为连续转换模式，那么该函数只需要在配置时调用一次即可；如果配置 ADC 为单次转换模式，那么每次转换前都需要调用该函数。</p>
+
+<p>ADC 在转换结束时，状态寄存器的转换结束(End of Conversion, EOT)标志位会被挂起，可以通过读取该标志位判断是否转换完毕：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">while</span> (<span token="var">ADC_GetFlagStatus</span><span token="var">(</span><span token="var">ADC1</span><span token="var">, </span><span token="var">ADC_FLAG_EOC</span><span token="var">)</span> <span style="color: #994cc3;">!=</span> <span token="var">SET</span>);</div></div>
+
+<p>转换结束后，就可以从数据寄存器中读取转换结果。在标准外设库中，可以通过以下函数实现这一点：</p>
+
+<div class="vscode-block"><div><span style="color: #4876d6;font-weight: bold;">uint16_t</span> <span token="var">ADC_Value</span> <span style="color: #994cc3;">=</span> <span token="var">ADC_GetConversionValue</span><span token="var">(</span><span token="var">ADC1</span><span token="var">)</span>;</div></div>
+
+<p><code>ADC_GetConversionValue()</code> 函数中会读取数据寄存器，读取数据寄存器同时会自动清除 <var>EOC</var> 标志位，无需再手动清除标志位了。</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">static</span> <span style="color: #994cc3;font-weight: bold;">inline</span> <span style="color: #994cc3;font-weight: bold;">float</span> <span token="var">ToLocalVoltage</span>(<span style="color: #4876d6;font-weight: bold;">uint16_t</span> RawValue) {</div><div>&nbsp; &nbsp; <span style="color: #994cc3;font-weight: bold;">return</span> ((<span style="color: #994cc3;font-weight: bold;">float</span>)(RawValue <span style="color: #0c969b;">*</span> <span style="color: #aa0982;">3.3</span> <span style="color: #0c969b;">/</span> <span style="color: #aa0982;">4095</span>));</div><div>}</div></div>
+
+<p>以上触发转换并读取转换数据的程序可以合并为一个函数，在需要采集外部输入时只需要通过调用该函数就可以获取结果。</p>
+
+<h3>ADC转换中断</h3>
+
+<p>以上使用同步方式等待读取的实现有一个问题，那就是 ADC 的转换时间并不算短，程序会在此处暂停一段时间，特别是当采用连续转换模式时，程序会因为暂停而发生堵塞。此时可以采用中断的形式等待读取数据。</p>
+
+<p>从 ADC 的结构图中可以看出，当数据转换结束、保存到数据寄存器后，可以产生三种类型的中断：规则通道转换结束中断、注入转换通道转换结束中断、模拟看门狗中断。其中转换结束中断比较简单：在转换结束时发出中断信号，可以在中断服务程序中读取转换的数据。</p>
+
+<p>为了使用 ADC 转换中断功能，需要在 NVIC 中启用中断并配置中断优先级。注意，ADC 的所有类型中断、以及 ADC1 和 ADC2 的中断都共用一个中断源 <code>ADC1_2_IRQn</code> ：</p>
+
+<div class="vscode-block"><div><span token="var">NVIC_InitTypeDef</span> <span token="var">NVIC_InitStructure</span> <span style="color: #994cc3;">=</span> {</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">NVIC_IRQChannel</span> <span style="color: #994cc3;">=</span> <span token="var">ADC1_2_IRQn</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">NVIC_IRQChannelPreemptionPriority</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">1</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">NVIC_IRQChannelSubPriority</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">1</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">NVIC_IRQChannelCmd</span> <span style="color: #994cc3;">=</span> <span token="var">ENABLE</span>,</div><div>};</div><div><span token="var">NVIC_Init</span><span token="var">(</span><span style="color: #0c969b;">&amp;</span><span token="var">NVIC_InitStructure</span><span token="var">)</span>;</div></div>
+
+<p>和 STM32 的其它中断一样，ADC 的每种类型的中断都有各自的中断使能位和中断标志位，因此启用 ADC 转换中断功能还需要使能对应的标志位：</p>
+
+<div class="vscode-block"><div><span token="var">ADC_ITConfig</span><span token="var">(</span><span token="var">ADC1</span><span token="var">, </span><span token="var">ADC_IT_EOC</span><span token="var">, </span><span token="var">ENABLE</span><span token="var">)</span>;</div></div>
+
+<p>在中断服务程序中，可以根据中断类型写相应配套的数据处理代码（为了在中断服务函数和其它函数之间共享转换结果，这里 <code>ADC_Value</code> 被实现为全局变量）：</p>
+
+<div class="vscode-block"><div><span style="color: #4876d6;font-weight: bold;">uint16_t</span> <span token="var">ADC_Value</span>;</div><br/><div><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">ADC1_2_IRQHandler</span>(<span style="color: #994cc3;font-weight: bold;">void</span>) {</div><div>&nbsp; &nbsp; <span style="color: #994cc3;font-weight: bold;">if</span> (<span token="var">ADC_GetITStatus</span><span token="var">(</span><span token="var">ADC1</span><span token="var">, </span><span token="var">ADC_IT_EOC</span><span token="var">)</span> <span style="color: #994cc3;">!=</span> <span token="var">RESET</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">ADC_Value</span> <span style="color: #994cc3;">=</span> <span token="var">ADC_GetConversionValue</span><span token="var">(</span><span token="var">ADC1</span><span token="var">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">ADC_ClearITPendingBit</span><span token="var">(</span><span token="var">ADC1</span><span token="var">, </span><span token="var">ADC_IT_EOC</span><span token="var">)</span>;</div><div>&nbsp; &nbsp; }</div><div>}</div></div>
+
+<p>一旦编写完成这些程序，在主函数中调用 <code>ADC_SoftwareStartConvCmd()</code> 后，在转换结束前程序就可以执行其它任务了，中断服务程序会自动处理数据。</p>
+
+<h3>多通道ADC采集</h3>
+
+<p>STM32 的 ADC 支持采集多个通道的模拟量，但是由于规则数据寄存器只有一个，仅将以上代码改为多通道会带来数据丢失的问题：不管是同步读取还是中断读取，<var>EOC</var> 只会发生在所有通道的数据全部采集结束之后，而此时规则数据寄存器只保留着最后一个通道的数据。</p>
+
+<p>有一种迂回的方法解决这个问题：只使用单通道模式，但在每次转换前，修改序号为 1 的通道号为后一个准备读取的通道号。这样虽然一次只采集一个通道的数据，但是由于每次采集时通道都在改变，就间接地实现了多通道的数据采集。</p>
+
+<p>如果要采集的通道数据不超过 4 个，另一种解决方法是作为注入通道采集。注入序列具有 4 个数据寄存器，不会发生通道间数据互相覆盖的问题。</p>
+
+<blockquote>
+    <p>在下一节中将介绍 STM32 的 DMA ，它提供了规则通道的多通道采集方案。</p>
+</blockquote>
+
+<p>接下来的程序将采集以下 4 个通道的模拟量：</p>
+
+<ul>
+    <li><var>PC0</var>：外部模拟输入量</li>
+    <li><var>PC1</var>：连接到 V<sub>CC</sub> 上，采集电源电压值</li>
+    <li>内部温度传感器</li>
+    <li>内部 V<sub>REFINT</sub> 值</li>
+</ul>
+
+<p>在读取内部温度传感器和 V<sub>REFINT</sub> 的值前，需要先使能这两个通道，使能的方式为：</p>
+
+<div class="vscode-block"><div><span token="var">ADC_TempSensorVrefintCmd</span><span token="var">(</span><span token="var">ENABLE</span><span token="var">)</span>;</div></div>
+
+<p>由于不使用规则通道，因此在初始化 ADC 时，不需要配置规则通道数，但仍然需要开启扫描模式：</p>
+
+<div class="vscode-block"><div><span token="var">ADC_InitTypeDef</span> <span token="var">ADC_InitStructure</span> <span style="color: #994cc3;">=</span> {</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">ADC_Mode</span> <span style="color: #994cc3;">=</span> <span token="var">ADC_Mode_Independent</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">ADC_ScanConvMode</span> <span style="color: #994cc3;">=</span> <span token="var">ENABLE</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">ADC_ContinuousConvMode</span> <span style="color: #994cc3;">=</span> <span token="var">ENABLE</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">ADC_ExternalTrigConv</span> <span style="color: #994cc3;">=</span> <span token="var">ADC_ExternalTrigConv_None</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">ADC_DataAlign</span> <span style="color: #994cc3;">=</span> <span token="var">ADC_DataAlign_Right</span></div><div>};</div><div><span token="var">ADC_Init</span><span token="var">(</span><span token="var">ADC1</span><span token="var">, </span><span style="color: #0c969b;">&amp;</span><span token="var">ADC_InitStructure</span><span token="var">)</span>;</div></div>
+
+<p>注入通道的配置则需要通过一些单独的函数来完成，包括注入序列的长度、是否需要外部触发、是否夹杂在规则序列中自动转换：</p>
+
+<div class="vscode-block"><div><span token="var">ADC_InjectedSequencerLengthConfig</span><span token="var">(</span><span token="var">ADC1</span><span token="var">, </span><span style="color: #aa0982;">4</span><span token="var">)</span>;</div><div><span token="var">ADC_ExternalTrigInjectedConvConfig</span><span token="var">(</span><span token="var">ADC1</span><span token="var">, </span><span token="var">ADC_ExternalTrigInjecConv_None</span><span token="var">)</span>;</div><div><span token="var">ADC_AutoInjectedConvCmd</span><span token="var">(</span><span token="var">ADC1</span><span token="var">, </span><span token="var">ENABLE</span><span token="var">)</span>;</div></div>
+
+<p>每个注入通道的安排通过 <code>ADC_InjectedChannelConfig()</code> 函数实现，这点和规则序列倒是非常相似的：</p>
+
+<div class="vscode-block"><div><span token="var">ADC_InjectedChannelConfig</span><span token="var">(</span><span token="var">ADC1</span><span token="var">, </span><span token="var">ADC_Channel_11</span><span token="var">, </span><span style="color: #aa0982;">1</span><span token="var">, </span><span token="var">ADC_SampleTime_55Cycles5</span><span token="var">)</span>;</div><div><span token="var">ADC_InjectedChannelConfig</span><span token="var">(</span><span token="var">ADC1</span><span token="var">, </span><span token="var">ADC_Channel_10</span><span token="var">, </span><span style="color: #aa0982;">2</span><span token="var">, </span><span token="var">ADC_SampleTime_55Cycles5</span><span token="var">)</span>;</div><div><span token="var">ADC_InjectedChannelConfig</span><span token="var">(</span><span token="var">ADC1</span><span token="var">, </span><span token="var">ADC_Channel_16</span><span token="var">, </span><span style="color: #aa0982;">3</span><span token="var">, </span><span token="var">ADC_SampleTime_55Cycles5</span><span token="var">)</span>;</div><div><span token="var">ADC_InjectedChannelConfig</span><span token="var">(</span><span token="var">ADC1</span><span token="var">, </span><span token="var">ADC_Channel_17</span><span token="var">, </span><span style="color: #aa0982;">4</span><span token="var">, </span><span token="var">ADC_SampleTime_55Cycles5</span><span token="var">)</span>;</div></div>
+
+<p>配置完成之后，就可以编写中断服务函数了。注入序列数据寄存器的读取可以借助 <code>ADC_GetInjectedConversionValue()</code> 函数完成，不过由于注入序列数据寄存器不止一个，所以该函数还需要一个额外的参数指明读取的是哪个注入通道的数据：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">ADC1_2_IRQHandler</span>(<span style="color: #994cc3;font-weight: bold;">void</span>) {</div><div>&nbsp; &nbsp; <span style="color: #994cc3;font-weight: bold;">if</span> (<span token="var">ADC_GetITStatus(</span><span token="var">ADC1</span><span token="var">, </span><span token="var">ADC_IT_EOC</span><span token="var">)</span> <span style="color: #994cc3;">!=</span> RESET) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">ADC_Values</span>[<span style="color: #aa0982;">0</span>] <span style="color: #994cc3;">=</span> <span token="var">ADC_GetInjectedConversionValue(</span><span token="var">ADC1</span><span token="var">, </span><span token="var">ADC_InjectedChannel_1</span><span token="var">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">ADC_Values</span>[<span style="color: #aa0982;">1</span>] <span style="color: #994cc3;">=</span> <span token="var">ADC_GetInjectedConversionValue(</span><span token="var">ADC1</span><span token="var">, </span><span token="var">ADC_InjectedChannel_2</span><span token="var">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">ADC_Values</span>[<span style="color: #aa0982;">2</span>] <span style="color: #994cc3;">=</span> <span token="var">ADC_GetInjectedConversionValue(</span><span token="var">ADC1</span><span token="var">, </span><span token="var">ADC_InjectedChannel_3</span><span token="var">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">ADC_Values</span>[<span style="color: #aa0982;">3</span>] <span style="color: #994cc3;">=</span> <span token="var">ADC_GetInjectedConversionValue(</span><span token="var">ADC1</span><span token="var">, </span><span token="var">ADC_InjectedChannel_4</span><span token="var">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">ADC_ClearITPendingBit(</span><span token="var">ADC1</span><span token="var">, </span><span token="var">ADC_IT_EOC</span><span token="var">)</span>;</div><div>&nbsp; &nbsp; }</div><div>}</div></div>
+
+<blockquote>
+    <p>ADC 的结构框图表明，当注入序列转换完成后，既会产生 <var>JEOC</var> 标志/中断，也会产生 <var>EOC</var> 标志/中断。由于当前程序不需要区分是规则序列还是注入序列完成，所以判断哪个标志位都可以。</p>
+</blockquote>
+
+
+
+
+
+
+
+
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+										
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"></li>
+		<li class="previous"><a href="/embedded/stm32/05-clock-system/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>STM32的时钟系统</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/embedded/stm32/analog-digital-converter/" aria-current="page">STM32的模拟数字转换器</a>
+											<span class="post-date">2024年7月14日</span>
+									</li>
+											<li>
+					<a href="/embedded/stm32/05-clock-system/">STM32的时钟系统</a>
+											<span class="post-date">2024年6月26日</span>
+									</li>
+											<li>
+					<a href="/embedded/stm32/03-interrupt-system/">STM32的中断系统与外部中断</a>
+											<span class="post-date">2024年6月2日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/python%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e7%bc%96%e7%a8%8b06-%e5%ae%b9%e5%99%a8%e5%af%b9%e8%b1%a1%e4%b8%8e%e8%bf%ad%e4%bb%a3/">Python面向对象编程06-容器对象与迭代</a>
+											<span class="post-date">2024年5月19日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/09-descriptors/">Python面向对象编程09-描述符</a>
+											<span class="post-date">2024年4月30日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/08-operator-overloading/">Python面向对象编程08-运算符重载</a>
+											<span class="post-date">2024年4月7日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/07-callable-objects/">Python面向对象编程07-可调用对象与装饰器</a>
+											<span class="post-date">2024年3月1日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (14)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (5)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (26)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (5)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (9)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2024/07/'> 2024年7月 &nbsp;(1)</option>
+	<option value='/2024/06/'> 2024年6月 &nbsp;(2)</option>
+	<option value='/2024/05/'> 2024年5月 &nbsp;(1)</option>
+	<option value='/2024/04/'> 2024年4月 &nbsp;(2)</option>
+	<option value='/2024/03/'> 2024年3月 &nbsp;(1)</option>
+	<option value='/2024/02/'> 2024年2月 &nbsp;(1)</option>
+	<option value='/2024/01/'> 2024年1月 &nbsp;(2)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>
