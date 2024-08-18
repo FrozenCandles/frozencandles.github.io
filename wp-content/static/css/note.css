@@ -120,7 +120,7 @@ div.code-console span.token-label {
     margin-bottom: 15px;
   }
 }
-table.compact {
+.entry table.table-compact {
   width: fit-content;
 }
 

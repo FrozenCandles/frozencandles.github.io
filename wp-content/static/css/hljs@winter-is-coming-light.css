@@ -35,6 +35,7 @@ code.hljs {
 .hljs-selector-class,
 .hljs-selector-pseudo,
 .hljs-selector-attr,
+.hljs-selector-id,
 
 .hljs.language-xml .hljs-attr {
   color: #DF8618;
@@ -70,7 +71,6 @@ code.hljs {
 /*INFO: This keyword, HTML elements, Regex group symbol, CSS units, Terminal Red */
 .hljs-tag,
 .hljs-doctag,
-.hljs-selector-id,
 .hljs-regexp,
 .hljs-template-tag,
 .hljs-deletion {

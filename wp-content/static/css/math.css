@@ -1,60 +1,55 @@
-
 :root {
-    --mathbook-main-color: #486eb4;
+  --mathbook-color-primary: #486eb4;
 }
 
 .entry img {
-    height: revert-layer;
+  height: revert-layer;
 }
-
 
 /* mathbook */
+.mathbook-def {
+  padding: 0 0 10px 0;
+  margin: 1em 0;
+}
 
-.mathbook-widget-def {
+.mathbook-def__title {
+  border: 3px solid var(--mathbook-color-primary);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  background-color: var(--mathbook-color-primary);
+  padding: 3px 12px;
+}
+.mathbook-def__title h5 {
+  color: whitesmoke;
+  margin: 0;
+}
+.mathbook-def__title h5 .math {
+  color: inherit;
+}
 
-    padding: 0 0 10px 0; margin: 1em 0;
+.mathbook-def__content {
+  border: 3px solid var(--mathbook-color-primary);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding: 0 12px;
 }
-.mathbook-widget-def__title {
-    border: 3px solid var(--mathbook-main-color);
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    background-color: var(--mathbook-main-color);
-    padding: 3px 12px;
-}
-.mathbook-widget-def__title h5 {
-    color: whitesmoke;
-}
-.mathbook-widget-def__content {
-    border: 3px solid var(--mathbook-main-color);
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-    padding: 0 12px;
-}
+
 /*.mathbook-widget-def > * { margin-left: 12px; margin-right: 12px; }*/
-
-.mathbook-widget-def h5 {
-    margin-block-start: 0;
-    margin-block-end: 0;
-}
-
-
 .mathbook-example__no {
-    color: var(--mathbook-main-color);
-    font-weight: bold;
+  color: var(--mathbook-color-primary);
+  font-weight: bold;
 }
 
 .mathbook-example__solve {
-    color: var(--mathbook-main-color);
-    font-weight: bold;
+  color: var(--mathbook-color-primary);
+  font-weight: bold;
 }
 
 .math-firstline-align {
-    vertical-align: top;
+  vertical-align: top;
 }
 
-
-
-
+/*
 @import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro&display=swap');
 .math-widget-definition {
     border: 2px solid #94c8ff;
@@ -73,3 +68,4 @@
     border: 1px rgb(34, 142, 200) solid;
     border-radius: 3px;
 }
+*/

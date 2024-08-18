@@ -2,7 +2,7 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
 		<loc>/</loc>
-		<lastmod>2024-07-15T06:36:05+00:00</lastmod>
+		<lastmod>2024-08-18T05:19:10+00:00</lastmod>
 	</url>
 	<url>
 		<loc>/programming/other/regular-expression-tutorial/</loc>
@@ -1713,6 +1713,41 @@
 		</image:image>
 		<image:image>
 			<image:loc>/wp-content/uploads/image/category@stm32/09-ADC-clock-tree.png</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>/embedded/stm32/09-direct-memory-access/</loc>
+		<lastmod>2024-08-04T01:23:41+00:00</lastmod>
+		<image:image>
+			<image:loc>/wp-content/uploads/image/category@stm32/09-DMA-structure.jpg</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>/wp-content/uploads/image/category@stm32/09-DMA-handling.jpg</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>/embedded/stm32/06-timers/</loc>
+		<lastmod>2024-08-18T05:19:10+00:00</lastmod>
+		<image:image>
+			<image:loc>/wp-content/uploads/image/category@./06-basic-timer-structure.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>/wp-content/uploads/image/category@./06-general-timer-functions-description.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>/wp-content/uploads/image/category@./06-general-timer-structure.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>/wp-content/uploads/image/category@./06-general-timer-structure-counter.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>/wp-content/uploads/image/category@./06-general-timer-modes.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>/wp-content/uploads/image/category@./06-general-timer-input-clocks.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>/wp-content/uploads/image/category@./06-general-timer-cascade.png</image:loc>
 		</image:image>
 	</url>
 </urlset>

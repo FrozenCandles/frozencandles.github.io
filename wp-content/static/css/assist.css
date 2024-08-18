@@ -26,6 +26,11 @@ body {
     caret-color: var(--main-color);
 } 
 */
+@media print {
+  #assist {
+    display: none;
+  }
+}
 #assist {
   width: 270px;
   position: fixed;

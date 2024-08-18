@@ -1,0 +1,807 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>STM32的直接存储器访问 - 冰封残烛的个人小站</title>
+	<meta name="description" content="直接存储器访问(Direct Memory Access, DMA)可以在内存间或内存与外设间以流水线方式传输数据。STM32 内置了 DMA 控制器，它是内核外一个类似外设的结构，可以在没有 CPU 介入的情况下，自行处理数据转移的任务大大提高了系统的运行效率。" />
+	<link rel="canonical" href="/embedded/stm32/09-direct-memory-access/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="STM32的直接存储器访问 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="直接存储器访问(Direct Memory Access, DMA)可以在内存间或内存与外设间以流水线方式传输数据。STM32 内置了 DMA 控制器，它是内核外一个类似外设的结构，可以在没有 CPU 介入的情况下，自行处理数据转移的任务大大提高了系统的运行效率。" />
+	<meta property="og:url" content="/embedded/stm32/09-direct-memory-access/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2024-08-04T01:20:17+00:00" />
+	<meta property="article:modified_time" content="2024-08-04T01:23:41+00:00" />
+	<meta name="author" content="Hello" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="3分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebPage",
+	            "@id": "/embedded/stm32/09-direct-memory-access/",
+	            "url": "/embedded/stm32/09-direct-memory-access/",
+	            "name": "STM32的直接存储器访问 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/embedded/stm32/09-direct-memory-access/#primaryimage"
+	            },
+	            "image": {
+	                "@id": "/embedded/stm32/09-direct-memory-access/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/cover/thumb/stm32@09-Direct-Memory-Access.jpg",
+	            "datePublished": "2024-08-04T01:20:17+00:00",
+	            "dateModified": "2024-08-04T01:23:41+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "直接存储器访问(Direct Memory Access, DMA)可以在内存间或内存与外设间以流水线方式传输数据。STM32 内置了 DMA 控制器，它是内核外一个类似外设的结构，可以在没有 CPU 介入的情况下，自行处理数据转移的任务大大提高了系统的运行效率。",
+	            "breadcrumb": {
+	                "@id": "/embedded/stm32/09-direct-memory-access/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/embedded/stm32/09-direct-memory-access/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/embedded/stm32/09-direct-memory-access/#primaryimage",
+	            "url": "/wp-content/uploads/cover/thumb/stm32@09-Direct-Memory-Access.jpg",
+	            "contentUrl": "/wp-content/uploads/cover/thumb/stm32@09-Direct-Memory-Access.jpg"
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/embedded/stm32/09-direct-memory-access/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "STM32的直接存储器访问"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/1400" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=1400' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fembedded%2Fstm32%2F09-direct-memory-access%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fembedded%2Fstm32%2F09-direct-memory-access%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><meta name="msvalidate.01" content="084A9AC6B25A93ADB00E8FA388E70B8F" /><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?432b66336cb23bd6712cecabe6d808eb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="stylesheet" href="/wp-content/static/css/theme@haru.wp.min.css">
+<link rel="stylesheet" href="/wp-content/static/css/hljs@night-owl-light.css">
+
+<style>
+    .vscode-block {
+        color: #403f53;
+        background-color: #FBFBFB;
+    }
+    .vscode-block span[token="var"] { color: #4876d6; }
+</style><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-1400 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-1390" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1390"><span class="menu-item-wrapper"><a href="/all/embedded/">电子电路与嵌入式</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/all/embedded-application/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-1400" class="post-1400 post type-post status-publish format-standard has-post-thumbnail hentry category-stm32">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">STM32的直接存储器访问</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/embedded/stm32/" rel="category tag">STM32</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2024年8月4日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+<h2>STM32的DMA</h2>
+
+<h3>DMA的概念</h3>
+
+<p>DMA(Direct Memory Access, 直接存储器访问)是在内存的两个区域，或内存与外设之间以流水线方式传输数据的方式。</p>
+
+<p>在需要转移大量数据的情况下，如果使用 CPU 处理，那么每传输一个字节，都需要将数据读入 CPU 中，CPU 计算出目标地址后再移到目标区域，这一过程需要占用 CPU 大量资源，从而影响 CPU 正常的工作流程。</p>
+
+<p>STM32 内置了 DMA 控制器，它是内核外一个类似外设的结构，可以在没有 CPU 介入的情况下，自行处理数据转移的任务，使 CPU 的资源能用于其它的工作，大大提高了系统的运行效率。SRAM、Flash 闪存、APB1、APB2 和 AHB 外设的数据寄存器均可作为访问的源和目标。</p>
+
+<p>STM32F1 至少有一个 DMA1 ，大容量的型号还有 DMA2 。</p>
+
+<h3>STM32的DMA控制器</h3>
+
+<p>DMA 的用途非常纯粹，就是转移数据。下图展示了 STM32 的 DMA 结构：</p>
+
+<figure>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@stm32/09-DMA-structure.jpg"/>
+</figure>
+
+<p>DMA 控制器作为一个类似外设结构，它挂载在 AHB 系统总线上。因此，如果要配置 DMA 的寄存器，同样要先通过 RCC 打开 DMA 的时钟。</p>
+
+<p>DMA 控制器通过系统数据总线读取存储器和外设寄存器的数据。当内核和 DMA 同时访问相同的目标时，总线上的控制器也会通过循环调度的方式让 DMA 控制器拥有一部分的总线带宽。</p>
+
+<p>虽然 DMA 的用途很简单，就是数据传输，但是 DMA 初始化结构体的成员却非常多，有多达 11 个成员：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;">typedef</span> <span style="color: #994cc3;font-weight: bold;">struct</span> {</div><div>&nbsp; &nbsp; <span style="color: #4876d6;font-weight: bold;">uint32_t</span> <span style="color: #0c969b;">DMA_PeripheralBaseAddr</span>;</div><div>&nbsp; &nbsp; <span style="color: #4876d6;font-weight: bold;">uint32_t</span> <span style="color: #0c969b;">DMA_MemoryBaseAddr</span>;</div><div>&nbsp; &nbsp; <span style="color: #4876d6;font-weight: bold;">uint32_t</span> <span style="color: #0c969b;">DMA_DIR</span>;</div><div>&nbsp; &nbsp; <span style="color: #4876d6;font-weight: bold;">uint32_t</span> <span style="color: #0c969b;">DMA_BufferSize</span>;</div><div>&nbsp; &nbsp; <span style="color: #4876d6;font-weight: bold;">uint32_t</span> <span style="color: #0c969b;">DMA_PeripheralInc</span>;</div><div>&nbsp; &nbsp; <span style="color: #4876d6;font-weight: bold;">uint32_t</span> <span style="color: #0c969b;">DMA_MemoryInc</span>;</div><div>&nbsp; &nbsp; <span style="color: #4876d6;font-weight: bold;">uint32_t</span> <span style="color: #0c969b;">DMA_PeripheralDataSize</span>;</div><div>&nbsp; &nbsp; <span style="color: #4876d6;font-weight: bold;">uint32_t</span> <span style="color: #0c969b;">DMA_MemoryDataSize</span>;</div><div>&nbsp; &nbsp; <span style="color: #4876d6;font-weight: bold;">uint32_t</span> <span style="color: #0c969b;">DMA_Mode</span>;</div><div>&nbsp; &nbsp; <span style="color: #4876d6;font-weight: bold;">uint32_t</span> <span style="color: #0c969b;">DMA_Priority</span>;</div><div>&nbsp; &nbsp; <span style="color: #4876d6;font-weight: bold;">uint32_t</span> <span style="color: #0c969b;">DMA_M2M</span>;</div><div>} <span token="var">DMA_InitTypeDef</span>;</div></div>
+
+<p>为了更好地了解这 11 个成员如何取值，需要更详细地研究 DMA 的处理过程。</p>
+
+<h4>DMA请求</h4>
+
+<p>如果想让 DMA 开始转运数据，就需要给 DMA 发生一个信号。这个信号可以是通过软件向配置寄存器的使能位写入值触发，也可以是其它外设通过硬件向 DMA 发出。通过硬件发生 DMA 信号的优点是外设可以自动处理收发的时机。例如 ADC 采集完毕以后直接发送信号给 DMA ，DMA 自动执行转换结果的搬运，这一过程完全不需要内核处理，实现硬件流程的自动化。</p>
+
+<p>DMA 的配置寄存器中有一个设置位可以选择是硬件触发还是软件触发。在标准库编程中，可以通过 <code>.DMA_M2M</code> 位切换触发方式。</p>
+
+<p>在 STM32 中，许多外设（如 USART、TIM、ADC 等）都可以向 DMA 发送传输数据的<strong>请求</strong>。每个请求都标识了数据传输的需求，当 DMA 控制器接收到请求后，会根据配置开始数据传输。</p>
+
+<h4>DMA通道</h4>
+
+<p>STM32 的 DMA 允许提前准备多个数据传输的配置，每个这样的配置都包括数据的源地址、目标地址、数据个数等属性，每组这样的配置称为<strong>通道</strong>，可以将不同的通道用作不同的数据传输任务。其中 DMA1 有 7 个通道， DMA2 有 5 个通道。</p>
+
+<p>所以，DMA 的初始化、使能等相关操作时，操作的对象是 DMA 的通道而不是外设本身。例如，DMA 在初始化时，函数应该这样调用：</p>
+
+<div class="vscode-block"><div><span token="var">DMA_Init</span><span token="var">(</span><span token="var">DMA1_Channel6</span><span token="var">, </span><span style="color: #0c969b;">&amp;</span><span token="var">DMA_InitStructure</span><span token="var">)</span>;</div></div>
+
+<p>此外，每个外设可能发起的请求与通道的对应关系是固定的，因此如果想让 DMA 处理某个特定的请求，那么就必须提前配置对应的通道。DMA1 包含的 7 个通道可以响应的请求如下表所示：</p>
+
+<table class="table-compact">
+    <tbody><tr>
+        <th>外设</th><th>通道1</th><th>通道2</th><th>通道3</th><th>通道4</th><th>通道5</th><th>通道6</th><th>通道7</th>
+    </tr>
+    <tr>
+        <td>ADC1</td><td>ADC1</td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td>SPI/I<sup>2</sup>S</td><td></td><td>SPI1_RX</td><td>SPI1_TX</td><td>SPI/I2S2_RX</td><td>SPI/I2S2_TX</td><td></td><td></td>
+    </tr>
+    <tr>
+        <td>USART</td><td></td><td>USART3_TX</td><td>USART3_RX</td><td>USART1_TX</td><td>USART1_RX</td><td>USART2_RX</td><td>USART2_TX</td>
+    </tr>
+    <tr>
+        <td>I<sup>2</sup>C</td><td></td><td></td><td></td><td>I2C2_TX</td><td>I2C2_RX</td><td>I2C1_TX</td><td>I2C1_RX</td>
+    </tr>
+    <tr>
+        <td>TIM1</td><td></td><td>TIM1_CH1</td><td>TIM1_CH2</td><td>TIM1_TX4<br/>TIM1_TRIG<br/>TIM1_COM</td><td>TIM1_UP</td><td>TIM1_CH3</td><td></td>
+    </tr>
+    <tr>
+        <td>TIM2</td><td>TIM2_CH3</td><td>TIM2_UP</td><td></td><td></td><td>TIM2_CH1</td><td></td><td>TIM2_CH2<br/>TIM2_CH4</td>
+    </tr>
+    <tr>
+        <td>TIM3</td><td></td><td>TIM3_CH3</td><td>TIM3_CH4<br/>TIM3_UP</td><td></td><td></td><td>TIM3_CH1<br/>TIM3_TRIG</td><td></td>
+    </tr>
+    <tr>
+        <td>TIM4</td><td>TIM4_CH1</td><td></td><td></td><td>TIM4_CH2</td><td>TIM4_CH3</td><td></td><td>TIM4_UP</td>
+    </tr>
+</tbody></table>
+
+<p>同一个通道可以接收多个外设的请求，但是同一时间只能接收一个，其余请求会被忽略。因此一般情况下尽量只启用其中一个外设的请求。</p>
+
+<h4>优先级与仲裁</h4>
+
+<p>DMA 同一时间只能执行一项数据传输的工作，但是当 DMA 的多个通道同时接收请求时，就出现了和中断一样的优先级问题。DMA 每个通道都有一个可编程的软件优先级，这个软件优先级有 4 个等级：低、中、高和非常高，可以通过初始化结构体的成员 <code>.DMA_Priority</code> 设置这个优先级。</p>
+
+<p>DMA 内有一个结构<strong>仲裁器</strong>负责处理响应的顺序问题。仲裁器首先判断软件优先级，如果两个或以上通道的软件优先级一样，则它们的优先级取决于通道编号，编号越低优先权越高。</p>
+
+<blockquote>
+    <p>在大容量产品中，DMA1 的优先级高于 DMA2 。</p>
+</blockquote>
+
+<p>综合这些结构，就可以得到 DMA 处理的基本流程：首先，外设向对应的 DMA 通道发出请求。如果想要处理该请求，就需要配置并使能对应的通道。同时，每个通道也都支持软件触发，在软件触发的情况下，通道之间没有任何区别。然后，请求进入仲裁器，经由优先级判断后进入 DMA 内部的执行器，执行器读取通道配置寄存器的配置并执行，如下图所示：</p>
+
+<figure>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@stm32/09-DMA-handling.jpg"/>
+</figure>
+
+<h4>DMA中断</h4>
+
+<p>STM32 中的 DMA 可以产生中断，并且有 3 种不同类型的中断类型：</p>
+
+<ol>
+    <li>传输完成(TC)</li>
+    <li>传输进度过半(HT)</li>
+    <li>传输错误(TE)</li>
+</ol>
+
+<p>DMA1 的每个通道都有独立的中断向量，可以在中断服务函数内判断以上中断的标志位以确定当前通道的工作状态。</p>
+
+<blockquote>
+    <p>在使用 DMA 转运数据时，如果传输的目标地址是只读寄存器或 Flash 存储器，它们都不支持总线直接写入，就会出现错误。</p>
+</blockquote>
+
+<h3>通道的数据配置</h3>
+
+<p>DMA 的作用是数据传输，最核心就是配置要传输的数据，包括数据源地址和目标地址、传输数据的数量、是单次传输还是循环传输等。</p>
+
+<h4>数据的源和目标</h4>
+
+<p>每个通道都有一个外设地址寄存器和存储器地址寄存器，分别保存传输数据的源地址和目标地址，反映在初始化结构体上就是 <code>.DMA_PeripheralBaseAddr</code> 和 <code>.DMA_MemoryBaseAddr</code> 这两个成员的配置。</p>
+
+<p>但其实外设地址寄存器不必非得保存外设地址，存储器地址寄存器也不必非得保存存储器地址，甚至反过来填写也没有问题；这样命名的主要是用于区分传输方向：成员 <code>.DMA_DIR</code> 用于设置传输方向，它有两个可用的值：<code>DMA_DIR_PeripheralSRC</code> 和 <code>DMA_DIR_PeripheralDST</code> ，如果使用前者，那就是将 <code>.DMA_PeripheralBaseAddr</code> 地址的数据搬到 <code>.DMA_MemoryBaseAddr</code> 地址上，使用后者就是反向搬运。在后续编写存储器之间数据复制的程序时，就需要注意这种方向的表示。</p>
+
+<h4>数据的量</h4>
+
+<p>当配置了数据的源和目标之后，还需要配置数据传输的量。DMA 内部有一个传输数量计数器，每搬运一次数据，传输数量计数器的值就向下减一，可以通过 <code>.DMA_BufferSize</code> 成员配置传输数量计数器的值，也就是数据传输的个数。通过 DMA 发送的数据理论上没有长度限制，但由于传输数量计数器只有 16 位有效，因此一次最多只能传输 65535 个数据。</p>
+
+<p>在 DMA 中，传输数量计数器还有一个自动重装载器，它可以在传输数量计数器减到零后将其重装为初始值，它允许将 DMA 配置为循环传输模式，可以通过 <code>.DMA_Mode</code> 成员设置。</p>
+
+<p>要传输的数据可能未必都是 32 位的，例如 ADC 的数据寄存器只有 16 位有效，而 USART 的数据寄存器更是只有 8 位有效。可以使用 <code>.DMA_PeripheralDataSize</code> 和 <code>.DMA_MemoryDataSize</code> 配置数据传输的<em>单位</em> ，可以是字节、半字(16 位)和字(32 位)。不过，为了能接收到正确的数据，应该要使源地址和目标地址存储的数据位数保持一致。</p>
+
+<blockquote>
+    <p>在源地址和目标地址数据位数不一致的情况下，会有一个数据对齐的问题。简单来说，在源数据位数小于目标数据位数的情况下，会在结果的高位补 0 ；大于的情况下会发生高位的数据丢失。</p>
+</blockquote>
+
+<p>在处理存储器的数据时，会涉及地址的递增问题：将一块数据转移到存储器之后，下一次转移可能要将数据移到到存储器的下一个位置，但处理外设时，寄存器的地址就没必要递增。初始化结构体的成员 <code>.DMA_PeripheralInc</code> 和 <code>.DMA_MemoryInc</code> 用于处理源地址和目标地址的递增问题，它们应该根据实际填写地址指向的位置选择合适的处理方式。</p>
+
+<hr/>
+
+<p>最后，通道可能要选择软件触发或硬件触发的方式，具体的触发方式可以通过成员 <code>.DMA_M2M</code> 切换。这个成员的本意是 memory to memory ，如果要使用 DMA 将存储器的数据转移到存储器中，就需要将其配置为 <code>DMA_M2M_Enable</code> ，并允许软件触发。此外，软件触发和循环模式不能同时使用。</p>
+
+<p>至此，DMA 的初始化部分已经介绍完毕，可以被触发并开始工作。下面以 DMA1 为例，介绍 DMA 使用的一般步骤。</p>
+
+<h2>DMA程序示例</h2>
+
+<h3>使用DMA向串口发送数据</h3>
+
+<p>在本节中完成一个很简单的任务：使用 DMA 将缓冲区中的数据发给 USART 。在发送的同时，CPU 也可以执行其它任务。</p>
+
+<p>首先，DMA 作为 AHB 总线上的外设，需要使能其时钟：</p>
+
+<div class="vscode-block"><div><span token="var">RCC_AHBPeriphClockCmd</span><span token="var">(</span><span token="var">RCC_AHBPeriph_DMA1</span><span token="var">, </span><span token="var">ENABLE</span><span token="var">)</span>;</div></div>
+
+<p>然后需要初始化 DMA 通道。首先是数据的源地址为缓冲区数组，目标地址为 USART 的数据寄存器 <var type="register">DR</var> ，那么就可以通过如下形式配置：</p>
+
+<div class="vscode-block"><div><span token="var">DMA_InitStructure</span>.<span style="color: #0c969b;">DMA_PeripheralBaseAddr</span> <span style="color: #994cc3;">=</span> (<span style="color: #4876d6;font-weight: bold;">uint32_t</span>) <span style="color: #0c969b;">&amp;</span>(<span token="var">USART1</span>-&gt;<span style="color: #0c969b;">DR</span>);</div><div><span token="var">DMA_InitStructure</span>.<span style="color: #0c969b;">DMA_MemoryBaseAddr</span> <span style="color: #994cc3;">=</span> (<span style="color: #4876d6;font-weight: bold;">uint32_t</span>) <span token="var">SendBuffer</span>;</div><div><span token="var">DMA_InitStructure</span>.<span style="color: #0c969b;">DMA_DIR</span> <span style="color: #994cc3;">=</span> <span token="var">DMA_DIR_PeripheralDST</span>;</div></div>
+
+<p>然后是数据的量，由于 USART 的串口发送寄存器只有 8 位有效，那么数据的传输单位为字节，数量的数量就是缓冲区的字节数，可以使用 <code>sizeof</code> 操作符得到。发送时，缓冲区的地址需要递增，但外设寄存器的地址不应递增。最后，程序中只要发生一次即可。那么这些配置对应的代码就是：</p>
+
+<div class="vscode-block"><div><span token="var">DMA_InitStructure</span>.<span style="color: #0c969b;">DMA_PeripheralDataSize</span> <span style="color: #994cc3;">=</span> <span token="var">DMA_PeripheralDataSize_Byte</span>;</div><div><span token="var">DMA_InitStructure</span>.<span style="color: #0c969b;">DMA_MemoryDataSize</span> <span style="color: #994cc3;">=</span> <span token="var">DMA_MemoryDataSize_Byte</span>;</div><div><span token="var">DMA_InitStructure</span>.<span style="color: #0c969b;">DMA_BufferSize</span> <span style="color: #994cc3;">=</span> <span style="color: #0c969b;">sizeof</span>(<span token="var">SendBuffer</span>);</div><div><span token="var">DMA_InitStructure</span>.<span style="color: #0c969b;">DMA_PeripheralInc</span> <span style="color: #994cc3;">=</span> <span token="var">DMA_PeripheralInc_Disable</span>;</div><div><span token="var">DMA_InitStructure</span>.<span style="color: #0c969b;">DMA_MemoryInc</span> <span style="color: #994cc3;">=</span> <span token="var">DMA_MemoryInc_Enable</span>;</div><div><span token="var">DMA_InitStructure</span>.<span style="color: #0c969b;">DMA_Mode</span> <span style="color: #994cc3;">=</span> <span token="var">DMA_Mode_Normal</span>;</div></div>
+
+<p>最后，通道使用硬件触发的方式，并设置通道的优先级设置为中。</p>
+
+<div class="vscode-block"><div><span token="var">DMA_InitStructure</span>.<span style="color: #0c969b;">DMA_Priority</span> <span style="color: #994cc3;">=</span> <span token="var">DMA_Priority_Medium</span>;</div><div><span token="var">DMA_InitStructure</span>.<span style="color: #0c969b;">DMA_M2M</span> <span style="color: #994cc3;">=</span> <span token="var">DMA_M2M_Disable</span>;</div></div>
+
+<p>查阅上表可知，USART1 发送对应的通道是通道 4 ，那么这个结构就需要用于初始化通道 4 ：</p>
+
+<div class="vscode-block"><div><span token="var">DMA_Init</span><span token="var">(</span><span token="var">DMA1_Channel4</span><span token="var">, </span><span style="color: #0c969b;">&amp;</span><span token="var">DMA_InitStructure</span><span token="var">)</span>;</div></div>
+
+<p>在初始化完成后，自然还要使能该通道：</p>
+
+<div class="vscode-block"><div><span token="var">DMA_Cmd</span><span token="var">(</span><span token="var">DMA1_Channel4</span><span token="var">, </span><span token="var">ENABLE</span><span token="var">)</span>;</div></div>
+
+<p>现在，DMA 已经准备就绪，就等 USART1 发送端的 DMA 请求了。为了使能该发送请求，对应的外设需要启用 DMA 请求。STM32 的标准外设库为各个与 DMA 有关联的外设都提供了一个 <code>*_DMACmd</code> 函数，对于 USART 来说，对应的函数是 <code>USART_DMACmd()</code> ，通过这个函数即可启用 USART 的 DMA 请求。</p>
+
+<p>对于 USART 来说，每个外设都可以产生两个 DMA 请求（收/发），因此还需要通过第二个参数指定具体使能哪一个请求，具体的调用方式为：</p>
+
+<div class="vscode-block"><div><span token="var">USART_DMACmd</span><span token="var">(</span><span token="var">USART1</span><span token="var">, </span><span token="var">USART_DMAReq_Tx</span><span token="var">, </span><span token="var">ENABLE</span><span token="var">)</span>;</div></div>
+
+<p>一旦调用了该函数后，USART 就会触发 DMA 请求。根据配置，DMA 会将缓存区中的数据搬到 USART 的数据寄存器中，并通过 USART 发送出去。</p>
+
+<h3>使用DMA读取ADC采集数据</h3>
+
+<p>接下来再看一个类似的应用，使用 DMA 将 ADC 采集的数据搬运到缓存中。在<a class="link-internal" href="/embedded/stm32/08-Analog-Digital-Converter">介绍 ADC 时</a>曾提到一个关键的问题：在使用 ADC 采集多通道的数据时，由于 ADC 只会在采集完所有通道的数据时才发出信号，因此如果使用内核处理，不管是通过轮询还是中断的方式都无法及时转运数据。</p>
+
+<p>这个问题的标准解决方案就是使用 DMA 转运数据：如果 ADC 使能了 DMA 请求，那么它会在每采集一个通道的数据后就会立即触发一次 DMA 请求，DMA 就可以及时将数据转运走。</p>
+
+<p>ADC 对应的 DMA 通道是通道 1 ，相关的初始化结构的定义为：</p>
+
+<div class="vscode-block"><div><span token="var">DMA_InitTypeDef</span> <span token="var">DMA_InitStructure</span> <span style="color: #994cc3;">=</span> {</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">DMA_PeripheralBaseAddr</span> <span style="color: #994cc3;">=</span> (<span style="color: #4876d6;font-weight: bold;">uint32_t</span>) <span style="color: #0c969b;">&amp;</span>(<span token="var">ADC1</span>-&gt;<span style="color: #0c969b;">DR</span>),</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">DMA_MemoryBaseAddr</span> <span style="color: #994cc3;">=</span> (<span style="color: #4876d6;font-weight: bold;">uint32_t</span>) <span token="var">ADC_Values</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">DMA_DIR</span> <span style="color: #994cc3;">=</span> <span token="var">DMA_DIR_PeripheralSRC</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">DMA_PeripheralDataSize</span> <span style="color: #994cc3;">=</span> <span token="var">DMA_PeripheralDataSize_HalfWord</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">DMA_MemoryDataSize</span> <span style="color: #994cc3;">=</span> <span token="var">DMA_MemoryDataSize_HalfWord</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">DMA_BufferSize</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">4</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">DMA_PeripheralInc</span> <span style="color: #994cc3;">=</span> <span token="var">DMA_PeripheralInc_Disable</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">DMA_MemoryInc</span> <span style="color: #994cc3;">=</span> <span token="var">DMA_MemoryInc_Enable</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">DMA_Mode</span> <span style="color: #994cc3;">=</span> <span token="var">DMA_Mode_Circular</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">DMA_Priority</span> <span style="color: #994cc3;">=</span> <span token="var">DMA_Priority_High</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">DMA_M2M</span> <span style="color: #994cc3;">=</span> <span token="var">DMA_M2M_Disable</span></div><div>};</div><div><span token="var">DMA_Init</span><span token="var">(</span><span token="var">DMA1_Channel1</span><span token="var">, </span><span style="color: #0c969b;">&amp;</span><span token="var">DMA_InitStructure</span><span token="var">)</span>;</div></div>
+
+<p>该初始化结构将通道配置为：</p>
+
+<p>数据的源和目标</p>
+
+<ul>
+    <li>外设地址为 ADC 的数据寄存器 <var type="register">DR</var> 地址</li>
+    <li>内存地址为数据缓冲区的地址</li>
+    <li>传输方向为外设到存储器</li>
+</ul>
+
+<p>数据的量</p>
+
+<ul>
+    <li>ADC 的数据寄存器是 16 位起效，因此配置外设和内存数据单位均为半字</li>
+    <li>数据的个数为 ADC 采集的通道数，当然缓存也需要预留相同的长度</li>
+    <li>外设地址不变，内存地址递增</li>
+    <li>因为 ADC 是连续采集的，因此设置 DMA 也循环传输。传输一轮后，DMA 重新开始搬运 ADC 采集的第一个通道的数据，两者正好同步</li>
+</ul>
+
+<p>通道的其它参数</p>
+
+<ul>
+    <li>设置优先级为高</li>
+    <li>不需要内存到内存的传输，设置触发方式为硬件触发</li>
+</ul>
+
+<p>然后，在 ADC 配置完毕后，通过 <code>ADC_DMACmd(ADC1, ENABLE)</code> 使能 ADC 的 DMA 请求，DMA 便可将采集得到的数据搬运到缓冲区的位置，留待进一步处理了。</p>
+
+<hr/>
+
+<p>在转移 ADC 采集的数据时，数量是固定的，DMA 的配置比较清晰。但如果用 DMA 转移 USART 读取的数据时，由于接受数据的量并不是固定的，就需要换一种方式得到实际接收的数据：DMA 内部有一个传输计数器，每接收一个数据，传输计数器的值就递减。那么可以在串口数据传输完成后，通过读取传输计数器并计算递减值来得到实际接收的数据长度。</p>
+
+<p>首先，在初始化 DMA 时，可以通过初始化成员配置传输计数器的值：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;">#</span><span style="color: #994cc3;font-weight: bold;">define</span> <span token="var">ReceiveBufferSize</span> <span style="color: #aa0982;">512</span></div><div><span style="color: #4876d6;font-weight: bold;">uint8_t</span> <span token="var">ReceiveBuffer</span>[<span token="var">ReceiveBufferSize</span>];</div><div><span token="var">DMA_InitStructure</span>.<span style="color: #0c969b;">DMA_BufferSize</span> <span style="color: #994cc3;">=</span> <span token="var">ReceiveBufferSize</span>;</div></div>
+
+<p>传输完成的标志可以通过串口的空闲中断标志判断。标准库提供了一个函数，可以用于读取传输计数器的值：</p>
+
+<ul>
+    <li class="code-inline"><span style="color: #4876d6;font-weight: bold;">uint16_t</span> <span token="var">DMA_GetCurrDataCounter</span>(<span token="var">DMA_Channel_TypeDef</span> <span style="color: #0c969b;">*</span>DMAy_Channelx);</li>
+</ul>
+
+<p>但是注意在读写传输计数器时，需要先关闭 DMA 。这样实际接收的数据长度可以通过类似如下代码获取：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">USART1_IRQHandler</span>(<span style="color: #994cc3;font-weight: bold;">void</span>) {</div><div>&nbsp; &nbsp; <span style="color: #994cc3;font-weight: bold;">if</span> (<span token="var">USART_GetITStatus</span><span token="var">(</span><span token="var">USART1</span><span token="var">, </span><span token="var">USART_IT_IDLE</span><span token="var">)</span> <span style="color: #994cc3;">==</span> <span token="var">SET</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">DMA_Cmd</span><span token="var">(</span><span token="var">DMA1_Channel5</span><span token="var">, </span><span token="var">DISABLE</span><span token="var">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #4876d6;font-weight: bold;">uint16_t</span> <span token="var">CurrCount</span> <span style="color: #994cc3;">=</span> <span token="var">DMA_GetCurrDataCounter</span><span token="var">(</span><span token="var">DMA1_Channel5</span><span token="var">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #4876d6;font-weight: bold;">uint16_t</span> <span token="var">ReceivedDataSize</span> <span style="color: #994cc3;">=</span> <span token="var">ReceiveBufferSize</span> <span style="color: #0c969b;">-</span> <span token="var">CurrCount</span>;</div><div>&nbsp; &nbsp; <span style="color: #939dbb;">// ...</span></div><div>&nbsp; &nbsp; }</div><div>}</div></div>
+
+<p>在读取完成后，应该重新向传输计数器写入初始值，用于下一次的串口接收：</p>
+
+<div class="vscode-block"><div><span token="var">DMA_SetCurrDataCounter</span><span token="var">(</span><span token="var">DMA1_Channel5</span><span token="var">, </span><span token="var">ReceiveBufferSize</span><span token="var">)</span>;</div><div><span token="var">DMA_Cmd</span><span token="var">(</span><span token="var">DMA1_Channel5</span><span token="var">, </span><span token="var">ENABLE</span><span token="var">)</span>;</div></div>
+
+
+
+<h3>使用DMA复制存储器数据</h3>
+
+<p>DMA 可以在存储器和存储器之间传输数据，由此可以用于实现类似 <code>memcpy()</code> 的功能。</p>
+
+<p>使用 DMA 在存储器之间传输数据时，关键的配置在于将 <code>.DMA_M2M</code> 设置为使能模式：</p>
+
+<div class="vscode-block"><div><span token="var">DMA_InitStructure</span>.<span style="color: #0c969b;">DMA_Mode</span> <span style="color: #994cc3;">=</span> <span token="var">DMA_Mode_Normal</span>;</div><div><span token="var">DMA_InitStructure</span>.<span style="color: #0c969b;">DMA_M2M</span> <span style="color: #994cc3;">=</span> <span token="var">DMA_M2M_Enable</span>;</div></div>
+
+<p>当使用存储器到存储器模式时候，软件触发情况下选择哪一个通道都是一样的，因此可以随便选一个当前没有用到的通道：</p>
+
+<div class="vscode-block"><div><span token="var">DMA_Init</span><span token="var">(</span><span token="var">DMA1_Channel6</span><span token="var">, </span><span style="color: #0c969b;">&amp;</span><span token="var">DMA_InitStructure</span><span token="var">)</span>;</div><div><span token="var">DMA_Cmd</span><span token="var">(</span><span token="var">DMA1_Channel6</span><span token="var">, </span><span token="var">ENABLE</span><span token="var">)</span>;</div></div>
+
+<p>在软件触发模式下，一旦 DMA 使能后，软件触发就会立即发生，DMA 也就会立即开始转移数据，并一次性将所有的数据转运完成。因此 DMA 不能应用循环传输模式。</p>
+
+<p>最后，可以通过判断传输完成标志位检查 DMA 是否完成。在数据量较大的情况下，也可以通过中断的形式等待 DMA 完成。</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">while</span> (<span token="var">DMA_GetFlagStatus</span><span token="var">(</span><span token="var">DMA1_FLAG_TC6</span><span token="var">)</span> <span style="color: #994cc3;">==</span> <span token="var">RESET</span>);</div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+										
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"><a href="/embedded/stm32/06-timers/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>STM32的定时器</span></a></li>
+		<li class="previous"><a href="/embedded/stm32/analog-digital-converter/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>STM32的模拟数字转换器</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/embedded/stm32/06-timers/">STM32的定时器</a>
+											<span class="post-date">2024年8月18日</span>
+									</li>
+											<li>
+					<a href="/embedded/stm32/09-direct-memory-access/" aria-current="page">STM32的直接存储器访问</a>
+											<span class="post-date">2024年8月4日</span>
+									</li>
+											<li>
+					<a href="/embedded/stm32/analog-digital-converter/">STM32的模拟数字转换器</a>
+											<span class="post-date">2024年7月14日</span>
+									</li>
+											<li>
+					<a href="/embedded/stm32/05-clock-system/">STM32的时钟系统</a>
+											<span class="post-date">2024年6月26日</span>
+									</li>
+											<li>
+					<a href="/embedded/stm32/03-interrupt-system/">STM32的中断系统与外部中断</a>
+											<span class="post-date">2024年6月2日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/python%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e7%bc%96%e7%a8%8b06-%e5%ae%b9%e5%99%a8%e5%af%b9%e8%b1%a1%e4%b8%8e%e8%bf%ad%e4%bb%a3/">Python面向对象编程06-容器对象与迭代</a>
+											<span class="post-date">2024年5月19日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/09-descriptors/">Python面向对象编程09-描述符</a>
+											<span class="post-date">2024年4月30日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (16)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (7)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (26)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (5)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (9)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2024/08/'> 2024年8月 &nbsp;(2)</option>
+	<option value='/2024/07/'> 2024年7月 &nbsp;(1)</option>
+	<option value='/2024/06/'> 2024年6月 &nbsp;(2)</option>
+	<option value='/2024/05/'> 2024年5月 &nbsp;(1)</option>
+	<option value='/2024/04/'> 2024年4月 &nbsp;(2)</option>
+	<option value='/2024/03/'> 2024年3月 &nbsp;(1)</option>
+	<option value='/2024/02/'> 2024年2月 &nbsp;(1)</option>
+	<option value='/2024/01/'> 2024年1月 &nbsp;(2)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,847 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>STM32的定时器 - 冰封残烛的个人小站</title>
+	<meta name="description" content="STM32 有若干个定时器(timer)，按结构和功能可以分为基本定时器、通用定时器和高级定时器三类。基本定时只有基本的定时功能；通用定时器额则增加了时钟源选择等处理其它时间相关任务的功能；高级定时器则进一步在通用定时器的基础上多出了更专业性的功能" />
+	<link rel="canonical" href="/embedded/stm32/06-timers/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="STM32的定时器 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="STM32 有若干个定时器(timer)，按结构和功能可以分为基本定时器、通用定时器和高级定时器三类。基本定时只有基本的定时功能；通用定时器额则增加了时钟源选择等处理其它时间相关任务的功能；高级定时器则进一步在通用定时器的基础上多出了更专业性的功能" />
+	<meta property="og:url" content="/embedded/stm32/06-timers/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2024-08-18T05:19:09+00:00" />
+	<meta property="article:modified_time" content="2024-08-18T05:19:10+00:00" />
+	<meta name="author" content="Hello" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="2分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebPage",
+	            "@id": "/embedded/stm32/06-timers/",
+	            "url": "/embedded/stm32/06-timers/",
+	            "name": "STM32的定时器 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "datePublished": "2024-08-18T05:19:09+00:00",
+	            "dateModified": "2024-08-18T05:19:10+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "STM32 有若干个定时器(timer)，按结构和功能可以分为基本定时器、通用定时器和高级定时器三类。基本定时只有基本的定时功能；通用定时器额则增加了时钟源选择等处理其它时间相关任务的功能；高级定时器则进一步在通用定时器的基础上多出了更专业性的功能",
+	            "breadcrumb": {
+	                "@id": "/embedded/stm32/06-timers/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/embedded/stm32/06-timers/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/embedded/stm32/06-timers/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "STM32的定时器"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/1404" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=1404' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fembedded%2Fstm32%2F06-timers%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fembedded%2Fstm32%2F06-timers%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><meta name="msvalidate.01" content="084A9AC6B25A93ADB00E8FA388E70B8F" /><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?432b66336cb23bd6712cecabe6d808eb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="stylesheet" href="/wp-content/static/css/theme@haru.wp.min.css">
+<link rel="stylesheet" href="/wp-content/static/css/hljs@night-owl-light.css">
+
+<style>
+    .vscode-block {
+        color: #403f53;
+        background-color: #FBFBFB;
+    }
+    .vscode-block span[token="var"] { color: #4876d6; }
+</style><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-1404 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-1390" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1390"><span class="menu-item-wrapper"><a href="/all/embedded/">电子电路与嵌入式</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/all/embedded-application/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-1404" class="post-1404 post type-post status-publish format-standard hentry category-stm32">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">STM32的定时器</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/embedded/stm32/" rel="category tag">STM32</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2024年8月18日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+<h2>STM32的定时器概述</h2>
+
+<p>STM32F1 系列的定时器资源十分丰富，除了<a class="link-internal" href="/embedded/stm32/05-clock-system">上一节</a>介绍过的系统定时器外，还有若干外设的定时器，本章继续介绍这些外设的定时器。</p>
+
+<p>在 STM32F103 系列中，最多可以有 8 个外设定时器，这 8 个定时器一般被编号为 TIM1 ~ TIM8 ，TIM 即 timer 的缩写。</p>
+
+<p>这 8 个定时器并不完全一样，按结构和功能可以分为基本定时器、通用定时器和高级定时器三类。其中基本定时器最简单，只有定时的功能；通用定时器在基本定时器的基础上多了很多处理其它时间相关任务的功能；高级定时器则进一步在通用定时器的基础上多出了更专业性的功能。这 8 个定时器中，TIM6 和 TIM7 为基本定时器，TIM2 ~ TIM5 为通用定时器，TIM1 和 TIM8 为高级定时器。</p>
+
+<blockquote>
+    <p>对于 STM32F103x8 等小容量设备，只有 TIM1 ~ TIM4 这 1 个高级定时器和 3 个通用定时器。没有通用定时器 TIM5 、高级定时器 TIM8 和基本定时器。</p>
+
+    <p>除此之外，在标准库中还出现了 TIM9 以后的定时器，它们是互联型产品 STM32F105 、STM32F107 的通用定时器。</p>
+</blockquote>
+
+<p>由于 STM32 定时器的功能很复杂，因此这里从基本定时器的功能开始，逐步向上介绍定时器的应用。</p>
+
+<h2 id="section-basic-timer">基本定时器</h2>
+
+<h3>基本定时器的功能概述</h3>
+
+<p>基本定时器的结构非常简单，只有最基本的部分，如下图所示：</p>
+
+<figure>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@./06-basic-timer-structure.png" width="620"/>
+</figure>
+
+<p>不论多高级还是低级的定时器，都有和这个结构类似的基本定时单元，称为<strong>时基</strong>(time base)单元。</p>
+
+<p>在 STM32 的标准库中，定时器的初始化被拆分为了多个初始化函数和初始化结构体。基本定时器只用到了其中用于初始化时基部分的结构体和函数，并且只用到了其中的两个成员：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;">typedef</span> <span style="color: #994cc3;font-weight: bold;">struct</span> {</div><div>&nbsp; &nbsp; <span style="color: #4876d6;font-weight: bold;">uint16_t</span> <span style="color: #0c969b;">TIM_Prescaler</span>;</div><div>&nbsp; &nbsp; <span style="color: #4876d6;font-weight: bold;">uint32_t</span> <span style="color: #0c969b;">TIM_Period</span>;</div><div>&nbsp; &nbsp; <span style="color: #939dbb;">// ...</span></div><div>} <span token="var">TIM_TimeBaseInitTypeDef</span>;</div></div>
+
+<p>为了理解这两个成员的含义，需要理解基本定时器时基单元的工作原理。</p>
+
+<ul>
+    <li>计数器</li>
+</ul>
+
+<p>基本定时器的核心就是计数器 <var type="register">CNT</var> ，它是一个 16 位的计数器，只能往上计数，最大计数值为 65535 。</p>
+
+<p>自动重装载寄存器 <var type="register">ARR</var> 是一个 16 位的寄存器，这里面装着计数器能计数的最大数值。当 <var type="register">CNT</var> 的计数达到 <var type="register">ARR</var> 值的时候，清零并产生更新事件，开始新一轮的计数。</p>
+
+<p>可以通过 TIM 时基初始化结构体成员 <code>.TIM_Period</code> 配置这个计数值。这里要注意一个细节问题，因为定时器在装载到最大值后，它还需要一个时钟周期来将计数器清 0 ，这导致实际的计数周期会比预想的多 1 。所以如果想要使计数器每 100 个时钟周期产生 1 次中断，那么应该设置重装载值为 99 。</p>
+
+<ul>
+    <li>时钟来源</li>
+</ul>
+
+<p>基本定时器和通用定时器的时钟都由 APB1 总线时钟提供，具体规则为：如果 APB1 预分频系数为 1 ，则频率不变，否则频率为 APB1 时钟的 2 倍。一般情况下，设置系统时钟为 72MHz ，APB1 预分频系数为 2 ，则 APB1 时钟为 36MHz ，定时器时钟翻倍为 72MHz 。</p>
+
+<p>基本定时器时钟还会经过一个 PSC 预分频器。PSC 是一个 16 位的预分频器，可以再次对定时器时钟以 1~65536 之间的任何一个数为系数的分频。</p>
+
+<p>TIM 时基初始化结构体成员 <code>.TIM_Prescaler</code> 用于配置这个预分频器。不过要注意的是，向预分频寄存器内写入 0 ，实际上得到的是 1 分频（不分频），写入 1 得到的是 2 分频，也就是说实际的分频系数会比写入的值多 1 。标准库在初始化时并没有考虑到这方面的问题，所以如果期望对输入时钟实现 72 分频，那么应该将这个成员赋值为 71 。</p>
+
+
+
+<ul>
+    <li>定时时间的计算</li>
+</ul>
+
+<p>定时器的定时时间等于计数器的计数间隔乘以计数个数。计数间隔即时钟的倒数，等于 1 / (TIMxCLK / (PSC+1)) ；计数个数等于 (ARR+1) 。在最大的预分频系数和最大的自动重装值的情况下，定时器的最大定时时间约为 59.65 秒。</p>
+
+<blockquote>
+    <h5>关于触发控制</h5>
+
+    <p>STM32 的定时器都有一个触发控制的功能，它可以在定时器定时完毕时，产生事件直接输出到其它外设上，这样可以通过硬件直接控制另一个硬件，这一过程不需要内核的参与，实现了硬件流程的自动化。</p>
+</blockquote>
+
+<h3>基本定时器程序</h3>
+
+<p>有了以上知识以后，就可以编写基本定时器的定时程序了。以下只展示了程序的核心部分代码，完整的程序可以<a href="https://github.com/FrozenCandles/STM32-Examples/tree/master/Example/06-General-Timer">在 GitHub 仓库</a>获取。</p>
+
+<h4>定时任务</h4>
+
+<p>本节介绍基本定时器最简单的用法，通过使定时器定时产生中断，实现每隔固定时间执行一段程序。</p>
+
+<p>为了使用基本定时器，首先需要通过 RCC 打开外设时钟。注意，基本定时器和通用定时器挂载在 APB1 总线上，而高级定时器挂载在频率更高的 APB2 总线上。</p>
+
+<div class="vscode-block"><div><span token="var">RCC_APB1PeriphClockCmd</span><span token="var">(</span><span token="var">RCC_APB1Periph_TIM6</span><span token="var">, </span><span token="var">ENABLE</span><span token="var">)</span>;</div></div>
+
+<p>然后需要初始化定时器。在使用基本定时器时，只需要初始化时基单元就可以了：</p>
+
+<div class="vscode-block"><div><span token="var">TIM_TimeBaseInitTypeDef</span> <span token="var">TIM_TimeBaseStructure</span> <span style="color: #994cc3;">=</span> {</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">TIM_Prescaler</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">72</span> <span style="color: #0c969b;">-</span> <span style="color: #aa0982;">1</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">TIM_Period</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">1000</span> <span style="color: #0c969b;">-</span> <span style="color: #aa0982;">1</span>,</div><div>};</div><div><span token="var">TIM_TimeBaseInit</span><span token="var">(</span><span token="var">TIM6</span><span token="var">, </span><span style="color: #0c969b;">&amp;</span><span token="var">TIM_TimeBaseStructure</span><span token="var">)</span>;</div></div>
+
+<p>以上初始化结构体表示将 TIM6 的输入时钟 72 分频，由于 TIM6 的输入时钟为 72MHz ，分频之后计数器的时钟为 1MHz ，即每 1&mu;s 输入一个脉冲；同时，定时器的重装载值为 999 ，这样它会在输入 1000 个脉冲后产生更新中断；即每隔 1ms ，产生一次中断。</p>
+
+<p>为了使定时器能产生中断，需要使能定时器 6 和它的更新中断：（然后还需要在 NVIC 中使能中断源 <code>TIM6_IRQn</code> ）</p>
+
+<div class="vscode-block"><div><span token="var">TIM_ITConfig</span><span token="var">(</span><span token="var">TIM6</span><span token="var">, </span><span token="var">TIM_IT_Update</span><span token="var">, </span><span token="var">ENABLE</span><span token="var">)</span>;</div><div><span token="var">TIM_Cmd</span><span token="var">(</span><span token="var">TIM6</span><span token="var">, </span><span token="var">ENABLE</span><span token="var">)</span>;</div></div>
+
+<p>然后，在中断服务函数的更新中断内执行指定的定时任务。这里任务执行的周期为 1ms ，如果要适当延长任务执行的周期，可以通过增大预分频器的分频系数或增加重装载值。</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">TIM6_IRQHandler</span>(<span style="color: #994cc3;font-weight: bold;">void</span>) {</div><div>&nbsp; &nbsp; <span style="color: #994cc3;font-weight: bold;">if</span> (<span token="var">TIM_GetITStatus</span><span token="var">(</span><span token="var">TIM6</span><span token="var">, </span><span token="var">TIM_IT_Update</span><span token="var">)</span> <span style="color: #994cc3;">!=</span> <span token="var">RESET</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #939dbb;">// user task</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">TIM_ClearITPendingBit</span><span token="var">(</span><span token="var">TIM6</span><span token="var">, </span><span token="var">TIM_IT_Update</span><span token="var">)</span>;</div><div>&nbsp; &nbsp; }</div><div>}</div></div>
+
+<blockquote>
+    <p>这种中断函数在执行时有一个细节上的问题：STM32 定时器的预分频器和重装寄存器是有缓存的，在向预分频器和重装寄存器写入新的值后，它不会立即生效，而是在发生一次更新事件后，这些新的值才会生效。</p>
+
+    <p>为此，<code>TIM_TimeBaseInit()</code> 函数在配置完成后，会主动触发一次更新事件，以使预分频器和重装寄存器能够立即生效。但是，这样做的副作用就是定时器使能后，发现更新标志位存在，会立即进入更新中断内执行任务。</p>
+
+    <p>这个副作用的解决方法也非常简单，只需要在定时器使能前，调用</p>
+
+    <div class="vscode-block"><div><span token="var">TIM_ClearFlag</span><span token="var">(</span><span token="var">TIM6</span><span token="var">, </span><span token="var">TIM_FLAG_Update</span><span token="var">)</span>;</div></div>
+
+    <p>清除中断状态标志位，就可以避免这个一开始就执行的定时任务。</p>
+</blockquote>
+
+<h4>测量时间</h4>
+
+<p>接下来的示例使用定时器完成复杂一些的任务：使用定时器测量某个事件的持续时间，例如某个引脚输入高电平的维持时间。</p>
+
+<p>使用定时器测量时间有许多处理思路，这里提供一种比较简单的：在程序中，维护一个全局变量用于记录当前定时器的更新次数：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">volatile</span> <span style="color: #4876d6;font-weight: bold;">uint32_t</span> <span token="var">TimerCount</span>;</div></div>
+
+<p>这样，程序中通过计算事件开始与结束两个时刻定时器更新次数之差，再结合定时器更新的周期，就可以计算出事件的持续时间了。同时，这个更新次数使用 32 位无符号整型，可以避免定时器的计数器只有 16 位不够用的问题。</p>
+
+<p>为此，在初始化时基单元时，可以将更新周期减小一些，至少应该满足测量的精度要求。例如，以下时基配置的更新周期为 10us ，只要被测量事件的持续时间大于 10us ，程序就能检测出来：</p>
+
+<div class="vscode-block"><div><span token="var">TIM_TimeBaseInitTypeDef</span> <span token="var">TIM_TimeBaseStructure</span> <span style="color: #994cc3;">=</span> {</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">TIM_Prescaler</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">72</span> <span style="color: #0c969b;">-</span> <span style="color: #aa0982;">1</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">TIM_Period</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">10</span> <span style="color: #0c969b;">-</span> <span style="color: #aa0982;">1</span>,</div><div>};</div><div><span token="var">TIM_TimeBaseInit</span><span token="var">(</span><span token="var">TIM6</span><span token="var">, </span><span style="color: #0c969b;">&amp;</span><span token="var">TIM_TimeBaseStructure</span><span token="var">)</span>;</div></div>
+
+<p>在定时器的更新中断内，只需要递增更新次数变量即可：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">TIM6_IRQHandler</span>(<span style="color: #994cc3;font-weight: bold;">void</span>) {</div><div>&nbsp; &nbsp; <span style="color: #994cc3;font-weight: bold;">if</span> (<span token="var">TIM_GetITStatus</span><span token="var">(</span><span token="var">TIM6</span><span token="var">, </span><span token="var">TIM_IT_Update</span><span token="var">)</span> <span style="color: #994cc3;">!=</span> <span token="var">RESET</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">TimerCount</span><span style="color: #994cc3;">++</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">TIM_ClearITPendingBit</span><span token="var">(</span><span token="var">TIM6</span><span token="var">, </span><span token="var">TIM_IT_Update</span><span token="var">)</span>;</div><div>&nbsp; &nbsp; }</div><div>}</div></div>
+
+<p>因为这里只有一个测量任务，所以可以在高电平开始时归零更新次数，那么在高电平结束时更新变量的值就是高电平期间定时器的更新次数，再结合定时器的更新间隔就可以计算出高电平的持续时间：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">while</span> (<span token="var">GPIO_READ(HCSR04_ECHO)</span> <span style="color: #994cc3;">==</span> <span style="color: #aa0982;">0</span>);</div><div><span token="var">TimerCount</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">0</span>;</div><div><span style="color: #994cc3;font-weight: bold;">while</span> (<span token="var">GPIO_READ(HCSR04_ECHO)</span> <span style="color: #994cc3;">==</span> <span style="color: #aa0982;">1</span>);</div><div><span token="var">CalcFromCounter(</span><span token="var">TimerCount</span><span token="var">)</span>;</div></div>
+
+<h2 id="section-general-timer">通用定时器</h2>
+
+<h3>通用定时器的结构</h3>
+
+<p>通用定时器的功能相比基本定时器强大很多。在 STM32F1 官方参考手册中，对通用定时器的功能描述足足编排了 16 个小节：</p>
+
+<figure>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@./06-general-timer-functions-description.png"/>
+</figure>
+
+<p>同时，通用定时器的结构相比基本定时器也复杂得多，以下展示了通用定时器的完整结构：</p>
+
+<figure>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@./06-general-timer-structure.png" width="680"/>
+</figure>
+
+<p>这个结构主要可以分为时基单元、时钟选择、定时器输入和定时器输入这四个关键部分理解。</p>
+
+<h4>基本的时基单元</h4>
+
+<p>通用定时器的核心时基单元和基本定时器一样，输入的时钟由预分频器实现 1~65536 的分频，驱动计数器改变计数值。当计数值达到自动重装载值时，清零计数器并产生更新中断/事件：</p>
+
+<figure>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@./06-general-timer-structure-counter.png"/>
+</figure>
+
+<p>不过，通用定时器相比基本定时器，增加了几种新的计数模式。在基本定时器中，只有一个向上计数模式，计数值从 0 计数到 <var type="register">ARR</var> 的自动重装载值时发生中断，同时重新从 0 开始计数。而通用定时器还拥有以下几种计数模式：</p>
+
+<ul>
+    <li>向下计数模式：该模式中，计数器从 <var type="register">ARR</var> 的自动重装载值开始，向下计数到 0 时发生中断，同时重新装入 <var type="register">ARR</var> 开始计数</li>
+    <li>中央对齐模式：计数器从 0 开始计数到 <var type="register">ARR-1</var> 值时发生中断，产生上溢事件；然后从 <var type="register">ARR</var> 值向下计数到 1 并产生下溢事件；接着再从 0 开始新一轮循环</li>
+</ul>
+
+<p>这三种模式中，计数值的可视化变化过程如下图所示：</p>
+
+<figure>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@./06-general-timer-modes.png"/>
+</figure>
+
+<p>通用定时器的时基单元相比基本定时器，可以在初始化结构体中通过成员 <code>.TIM_CounterMode</code> 选择不同的计数方式。</p>
+
+<h4>定时器时钟</h4>
+
+<p>基本定时器的时钟源只能是 RCC 的内部时钟，而通用定时器的一大特点是，可以选择不同的时钟源。</p>
+
+<p>通用定时器的时钟源不仅仅可以是 APB1 系统总线的时钟，还可以是外部时钟：可以在定时器指定的外部引脚上输入一个方波信号，作为定时器的输入脉冲。这称为定时器的<strong>外部触发</strong>(ETR)。除此之外，定时器的时钟甚至还可以是另一个定时器的输出，这称为定时器的<strong>内部触发</strong>(ITR)：通过内部触发，可以实现定时器的级联，使定时器指数型地延长所能定时的时长。</p>
+
+<p>下图展示了通用定时器时钟选择部分的结构：</p>
+
+<figure>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@./06-general-timer-input-clocks.png"/>
+</figure>
+
+<p>通用定时器的时钟可以是以下几个时钟：</p>
+
+<ul>
+    <li>内部时钟</li>
+</ul>
+
+<p>来自 RCC 的时钟由 APB1 总线提供，通常工作频率为 72MHz 。</p>
+
+<ul>
+    <li>外部触发输入</li>
+</ul>
+
+<p>通用定时器的时钟可以是定时器指定的外部引脚上输入的方波信号。每个定时器的外部触发(ETR)输入引脚都是固定的，ETR 引脚的对应关系可以参考下表：</p>
+
+
+
+<table class="table-compact">
+    <tbody><tr>
+        <th>定时器</th>
+        <th>ETR 引脚</th>
+    </tr>
+    <tr>
+        <td>TIM1</td>
+        <td>PA12</td>
+    </tr>
+    <tr>
+        <td>TIM2</td>
+        <td>PA0</td>
+    </tr>
+    <tr>
+        <td>TIM3</td>
+        <td>PD2</td>
+    </tr>
+    <tr>
+        <td>TIM4</td>
+        <td>PE0</td>
+    </tr>
+</tbody></table>
+
+<p>外部输入首先经由极性选择、边沿检测和输入滤波。极性选择的作用是选择高电平作为输入脉冲还是低电平作为输入脉冲；边沿检测和输入滤波使输入信号变为清晰的方波。这一过程中还可以提前对外部输入信号分频，但分频系数只能选择为 1/2/4/8 。</p>
+
+<blockquote>
+    <p>通用定时器使用数字滤波器来滤除外部引脚的高频信号。数字滤波器通过对输入数字信号采样，并使用一定数量的连续相同状态来评估信号状态是否改变（只有当输入信号在较长的时间内保持稳定状态时，滤波器才会认为这不是噪声）。由此可见，数字滤波器的采样频率越慢，对短暂噪声干扰的判断越准确。</p>
+
+    <p>通用定时器将来自 RCC 的输入时钟提供给数字滤波器工作。初始化结构体的成员 <code>.TIM_ClockDivision</code> 用于控制数字滤波器的分频系数，它的分频系数可以是 1/2/4 。如果使用的外部触发信号有噪声，使用 <code>TIM_CKD_DIV2</code> 或 <code>TIM_CKD_DIV4</code> 可以降低滤波器的采样频率，帮助滤波器更有效地抑制噪声。</p>
+</blockquote>
+
+<p>外部输入可以直接进入控制器并作为定时器的时钟，这就是外部时钟模式 2 ；也可以经由另一条会产生触发信号的路径进入控制器，但是这一条路径会和其它输入时钟重合，需要提前通过开关切换，这就是外部时钟模式 1 。两种模式的主要区别就在于有无触发事件 TRGI(Trigger Input) 的产生。</p>
+
+<ul>
+    <li>内部触发输入</li>
+</ul>
+
+<p>可以产生触发输入的时钟还可以是内部输入。通用定时器都可以通过触发控制器产生触发信号，这个触发信号可以进入另一个定时器，作为另一个定时器的输入。这种输入方式称为内部触发输入。内部触发输入模式和外部时钟模式 1 作用相同，只不过时钟源一个在内部一个在外部。</p>
+
+<ul>
+    <li>外部捕获输入</li>
+</ul>
+
+<p>可以产生触发输入的时钟还可以是定时器的输入捕获通道。有关输入捕获的内容将在下一节介绍。</p>
+
+
+
+<p>接下来通过具体的代码介绍通用定时器时钟选择的方式。</p>
+
+<h3>通用定时器时钟选择</h3>
+
+<h4>使用外部输入计数输入脉冲</h4>
+
+<p>在本节中，使用外部输入作为定时器的时钟：外部引脚上每产生一个方波，定时器的计数值就增加 1 ，这样便可以将定时器用作外部信号的计数功能。</p>
+
+<p>将外部时钟作为定时器时钟的关键代码在于调用以下函数：</p>
+
+<ul>
+    <li class="code"><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">TIM_ETRClockMode2Config</span>(<span token="var">TIM_TypeDef</span> <span style="color: #0c969b;">*</span>TIMx, <span style="color: #4876d6;font-weight: bold;">uint16_t</span> TIM_ExtTRGPrescaler, <span style="color: #4876d6;font-weight: bold;">uint16_t</span> TIM_ExtTRGPolarity, <span style="color: #4876d6;font-weight: bold;">uint16_t</span> ExtTRGFilter);</li>
+</ul>
+
+<p>该函数可以将外部触发输入以外部时钟模式 2 的方式作为定时器时钟。它的参数有：</p>
+
+<ol>
+    <li><code>TIM_ExtTRGPrescaler</code> 可以对外部输入信号提前分频</li>
+    <li><code>TIM_ExtTRGPolarity</code> 可以配置输入信号的极性，如果是 <code>TIM_ExtTRGPolarity_NonInverted</code> ，那就是从低电平到高电平的上升沿会作为输入脉冲；而 <code>TIM_ExtTRGPolarity_Inverted</code> 则将下降沿作为输入脉冲</li>
+    <li><code>ExtTRGFilter</code> 则配置数字滤波器采样时，多少个连续相同状态会作为稳定的判别。它的取值可以是 <code>0x00</code> 到 <code>0x0F</code> 的数值</li>
+</ol>
+
+<p>在调用了以上函数后，外部时钟便成为了通用定时器的输入时钟。在配置定时器的时基时，如果还是不分频，那么外部每输入一个脉冲，定时器的计数值就增加 1 ：</p>
+
+<div class="vscode-block"><div><span token="var">TIM_TimeBaseInitTypeDef</span> <span token="var">TIM_TimeBaseStructure</span> <span style="color: #994cc3;">=</span> {</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">TIM_Prescaler</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">1</span> <span style="color: #0c969b;">-</span> <span style="color: #aa0982;">1</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">TIM_Period</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">65535</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">TIM_ClockDivision</span> <span style="color: #994cc3;">=</span> <span token="var">TIM_CKD_DIV1</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">TIM_CounterMode</span> <span style="color: #994cc3;">=</span> <span token="var">TIM_CounterMode_Up</span>,</div><div>};</div><div><span token="var">TIM_TimeBaseInit</span><span token="var">(</span><span token="var">TIM2</span><span token="var">, </span><span style="color: #0c969b;">&amp;</span><span token="var">TIM_TimeBaseStructure</span><span token="var">)</span>;</div></div>
+
+<p>在纯粹作为输入计数的情况下，定时器不怎么需要重装载和更新中断功能，因此可以将重装载值增大一些。在程序中，如果要获取当前计数器的计数值，可以通过以下函数：</p>
+
+<ul>
+    <li class="code"><span style="color: #4876d6;font-weight: bold;">uint16_t</span> <span token="var">TIM_GetCounter</span><span token="var">(</span><span token="var">TIM_TypeDef</span><span token="var"> </span><span style="color: #0c969b;">*</span>TIMx<span token="var">)</span>;</li>
+</ul>
+
+<p>这样就实现了外部脉冲的计数个数测量。</p>
+
+<h4>使用内部输入实现定时器级联</h4>
+
+<p>STM32 的定时器还支持内部触发的功能，可以将一个定时器更新事件产生的触发事件作为另一个定时器的输入，也就是定时器的级联。</p>
+
+<p>在两个定时器级联的情况下，第一个定时器的输入时钟会经过两次分频和两次更新中断，并由第二个定时器输出。级联的定时器定时时间的调整范围呈指数级的增长，在 72MHz 的输入下，最多可以拥有约 8123 年的定时时长。</p>
+
+<p>如果要将 TIM2 和 TIM3 级联，需要先打开 TIM2 的输出触发功能，使 TIM2 定时完毕时，产生的更新事件直接输出到其它外设上。使用输出触发功能可以通过调用以下函数实现：</p>
+
+<ul>
+    <li class="code"><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">TIM_SelectOutputTrigger</span><span token="var">(</span><span token="var">TIM_TypeDef</span><span token="var"> </span><span style="color: #0c969b;">*</span>TIMx<span token="var">, </span><span style="color: #4876d6;font-weight: bold;">uint16_t</span><span token="var"> </span>TIM_TRGOSource<span token="var">)</span>;</li>
+</ul>
+
+<p>例如，如果要将 TIM2 的更新事件作为输出触发，可以这样调用该函数：</p>
+
+<div class="vscode-block"><div><span token="var">TIM_SelectOutputTrigger</span><span token="var">(</span><span token="var">TIM2</span><span token="var">, </span><span token="var">TIM_TRGOSource_Update</span><span token="var">)</span>;</div></div>
+
+<p>然后，还需要配置 TIM3 的输入时钟为 TIM2 更新事件产生的内部触发。和外部触发一样，输入时钟的配置也是通过类似的函数实现的：</p>
+
+<ul>
+    <li class="code"><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">TIM_ITRxExternalClockConfig</span>(<span token="var">TIM_TypeDef</span> <span style="color: #0c969b;">*</span>TIMx, <span style="color: #4876d6;font-weight: bold;">uint16_t</span> TIM_InputTriggerSource);</li>
+</ul>
+
+<p>这里选择 ITR1 通道（对应 TIM2 ，ITR2 则对应 TIM3 ，ITR3 对应 TIM4 ）通过外部时钟模式 1 作为时钟源，对应的函数调用为：</p>
+
+<div class="vscode-block"><div><span token="var">TIM_ITRxExternalClockConfig</span><span token="var">(</span><span token="var">TIM3</span><span token="var">, </span><span token="var">TIM_TS_ITR1</span><span token="var">)</span>;</div></div>
+
+<p>这就完成了 TIM2 到 TIM3 的级联。然后可以分别配置两个定时器的时基来得到合适的更新周期。首先配置 TIM2 的时基，使其更新周期为 10ms ：</p>
+
+<div class="vscode-block"><div><span token="var">TIM_TimeBaseInitTypeDef</span> <span token="var">TIM_TimeBaseStructure</span> <span style="color: #994cc3;">=</span> {</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">TIM_Prescaler</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">720</span> <span style="color: #0c969b;">-</span> <span style="color: #aa0982;">1</span>,</div><div>&nbsp; &nbsp; .<span style="color: #0c969b;">TIM_Period</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">1000</span> <span style="color: #0c969b;">-</span> <span style="color: #aa0982;">1</span>,</div><div>};</div><div><span token="var">TIM_TimeBaseInit</span><span token="var">(</span><span token="var">TIM2</span><span token="var">, </span><span style="color: #0c969b;">&amp;</span><span token="var">TIM_TimeBaseStructure</span><span token="var">)</span>;</div></div>
+
+<p>这样 TIM3 输入时钟的间隔就为 10ms 。然后再给 TIM3 提供合适的分频系数和重装载值，就可以实现更长的定时周期。在以下的时基配置下，TIM3 每 600s 产生一次更新事件：</p>
+
+<div class="vscode-block"><div><span token="var">TIM_TimeBaseStructure</span>.<span style="color: #0c969b;">TIM_Prescaler</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">100</span> <span style="color: #0c969b;">-</span> <span style="color: #aa0982;">1</span>;</div><div><span token="var">TIM_TimeBaseStructure</span>.<span style="color: #0c969b;">TIM_Period</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">600</span> <span style="color: #0c969b;">-</span> <span style="color: #aa0982;">1</span>;</div><div><span token="var">TIM_TimeBaseInit</span><span token="var">(</span><span token="var">TIM3</span><span token="var">, </span><span style="color: #0c969b;">&amp;</span><span token="var">TIM_TimeBaseStructure</span><span token="var">)</span>;</div></div>
+
+<p>以上配置过程可以通过下图描述：</p>
+
+<figure>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@./06-general-timer-cascade.png"/>
+</figure>
+
+<hr/>
+
+<p>在标准外设库中，定时器在时钟选择时，只需要调用相关的函数即可。除了以上介绍的两种时钟选择外，定时器有以下时钟选择相关函数：</p>
+
+<ul>
+    <li><span class="code"><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">TIM_InternalClockConfig</span>(<span token="var">TIM_TypeDef</span> <span style="color: #0c969b;">*</span>TIMx);</span><br/>
+        配置定时器时钟为 RCC 内部时钟。这个是默认的配置
+    </li>
+    <li><span class="code"><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">TIM_ETRClockMode1Config</span>(<span token="var">TIM_TypeDef</span><span style="color: #0c969b;">*</span> TIMx, <span style="color: #4876d6;font-weight: bold;">uint16_t</span> TIM_ExtTRGPrescaler, <span style="color: #4876d6;font-weight: bold;">uint16_t</span> TIM_ExtTRGPolarity, <span style="color: #4876d6;font-weight: bold;">uint16_t</span> ExtTRGFilter);</span><br/>
+        配置定时器时钟为外部时钟模式 1 的外部时钟，该模式下包含触发输入功能。如果不需要触发输入的功能，可以换成上文模式 2 的外部时钟，两者的参数完全一样
+    </li>
+    <li><span class="code"><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">TIM_TIxExternalClockConfig</span>(<span token="var">TIM_TypeDef</span><span style="color: #0c969b;">*</span> TIMx, <span style="color: #4876d6;font-weight: bold;">uint16_t</span> TIM_TIxExternalCLKSource, <span style="color: #4876d6;font-weight: bold;">uint16_t</span> TIM_ICPolarity, <span style="color: #4876d6;font-weight: bold;">uint16_t</span> ICFilter);</span><br/>
+        使用 TIx 捕获通道的时钟，按前文这里还可以进行极性选择和滤波器
+    </li>
+</ul>
+
+<p>除了时钟选择外，通用定时器还有很多强大的功能，例如它可以和输入输出功能交互，来处理更复杂的时间相关任务。受限于篇幅，这些功能将在下一节详细介绍。</p>
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+										
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"></li>
+		<li class="previous"><a href="/embedded/stm32/09-direct-memory-access/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>STM32的直接存储器访问</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/embedded/stm32/06-timers/" aria-current="page">STM32的定时器</a>
+											<span class="post-date">2024年8月18日</span>
+									</li>
+											<li>
+					<a href="/embedded/stm32/09-direct-memory-access/">STM32的直接存储器访问</a>
+											<span class="post-date">2024年8月4日</span>
+									</li>
+											<li>
+					<a href="/embedded/stm32/analog-digital-converter/">STM32的模拟数字转换器</a>
+											<span class="post-date">2024年7月14日</span>
+									</li>
+											<li>
+					<a href="/embedded/stm32/05-clock-system/">STM32的时钟系统</a>
+											<span class="post-date">2024年6月26日</span>
+									</li>
+											<li>
+					<a href="/embedded/stm32/03-interrupt-system/">STM32的中断系统与外部中断</a>
+											<span class="post-date">2024年6月2日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/python%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e7%bc%96%e7%a8%8b06-%e5%ae%b9%e5%99%a8%e5%af%b9%e8%b1%a1%e4%b8%8e%e8%bf%ad%e4%bb%a3/">Python面向对象编程06-容器对象与迭代</a>
+											<span class="post-date">2024年5月19日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/09-descriptors/">Python面向对象编程09-描述符</a>
+											<span class="post-date">2024年4月30日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (16)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (7)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (26)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (5)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (9)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2024/08/'> 2024年8月 &nbsp;(2)</option>
+	<option value='/2024/07/'> 2024年7月 &nbsp;(1)</option>
+	<option value='/2024/06/'> 2024年6月 &nbsp;(2)</option>
+	<option value='/2024/05/'> 2024年5月 &nbsp;(1)</option>
+	<option value='/2024/04/'> 2024年4月 &nbsp;(2)</option>
+	<option value='/2024/03/'> 2024年3月 &nbsp;(1)</option>
+	<option value='/2024/02/'> 2024年2月 &nbsp;(1)</option>
+	<option value='/2024/01/'> 2024年1月 &nbsp;(2)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>
