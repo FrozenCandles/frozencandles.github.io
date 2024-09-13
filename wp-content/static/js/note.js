@@ -76,6 +76,7 @@ function adjustImageSize() {
 
 /**
  * Add table of contents to `#toc`
+ * @param {string} targetId
  * @returns null
  */
 function addTableOfContents(targetId) {
@@ -139,4 +140,8 @@ function addTableOfContents(targetId) {
 }
 
 
-
+(function() {
+    window.addEventListener('DOMContentLoaded', function() {
+        adjustImageSize();
+    })
+})()

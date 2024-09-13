@@ -23,7 +23,7 @@
 	<meta property="og:url" content="/embedded/stm32/06-timers/" />
 	<meta property="og:site_name" content="冰封残烛的个人小站" />
 	<meta property="article:published_time" content="2024-08-18T05:19:09+00:00" />
-	<meta property="article:modified_time" content="2024-08-18T05:19:10+00:00" />
+	<meta property="article:modified_time" content="2024-08-18T06:18:49+00:00" />
 	<meta name="author" content="Hello" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:label1" content="作者" />
@@ -41,8 +41,15 @@
 	            "isPartOf": {
 	                "@id": "/#website"
 	            },
+	            "primaryImageOfPage": {
+	                "@id": "/embedded/stm32/06-timers/#primaryimage"
+	            },
+	            "image": {
+	                "@id": "/embedded/stm32/06-timers/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/cover/stm32@06-Timers.jpg",
 	            "datePublished": "2024-08-18T05:19:09+00:00",
-	            "dateModified": "2024-08-18T05:19:10+00:00",
+	            "dateModified": "2024-08-18T06:18:49+00:00",
 	            "author": {
 	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
 	            },
@@ -59,6 +66,13 @@
 	                    ]
 	                }
 	            ]
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/embedded/stm32/06-timers/#primaryimage",
+	            "url": "/wp-content/uploads/cover/stm32@06-Timers.jpg",
+	            "contentUrl": "/wp-content/uploads/cover/stm32@06-Timers.jpg"
 	        },
 	        {
 	            "@type": "BreadcrumbList",
@@ -157,7 +171,7 @@ body { font-family: "Roboto", Arial, sans-serif; }
   gtag('js', new Date());
 
   gtag('config', 'G-SZV4B5M0NK');
-</script><meta name="msvalidate.01" content="084A9AC6B25A93ADB00E8FA388E70B8F" /><script>
+</script><script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
@@ -167,7 +181,9 @@ var _hmt = _hmt || [];
 })();
 </script>
 <link rel="stylesheet" href="/wp-content/static/css/text.css">
-<link rel="stylesheet" href="/wp-content/static/css/note.css"><link rel="stylesheet" href="/wp-content/static/css/theme@haru.wp.min.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css">
+<script src="/wp-content/static/js/note.js"></script>
+<link rel="stylesheet" href="/wp-content/static/css/theme@haru.wp.min.css">
 <link rel="stylesheet" href="/wp-content/static/css/hljs@night-owl-light.css">
 
 <style>
@@ -254,7 +270,7 @@ var _hmt = _hmt || [];
 				<div class="main-inner group">
 <div class="content">
 	
-			<article id="post-1404" class="post-1404 post type-post status-publish format-standard hentry category-stm32">	
+			<article id="post-1404" class="post-1404 post type-post status-publish format-standard has-post-thumbnail hentry category-stm32">	
 			
 			<div class="post-wrapper group">
 				<header class="entry-header group">
@@ -297,7 +313,7 @@ var _hmt = _hmt || [];
 <p>基本定时器的结构非常简单，只有最基本的部分，如下图所示：</p>
 
 <figure>
-    <img decoding="async" alt="" src="/wp-content/uploads/image/category@./06-basic-timer-structure.png" width="620"/>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@stm32/06-basic-timer-structure.png" width="620"/>
 </figure>
 
 <p>不论多高级还是低级的定时器，都有和这个结构类似的基本定时单元，称为<strong>时基</strong>(time base)单元。</p>
@@ -409,13 +425,13 @@ var _hmt = _hmt || [];
 <p>通用定时器的功能相比基本定时器强大很多。在 STM32F1 官方参考手册中，对通用定时器的功能描述足足编排了 16 个小节：</p>
 
 <figure>
-    <img decoding="async" alt="" src="/wp-content/uploads/image/category@./06-general-timer-functions-description.png"/>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@stm32/06-general-timer-functions-description.png" width="320"/>
 </figure>
 
 <p>同时，通用定时器的结构相比基本定时器也复杂得多，以下展示了通用定时器的完整结构：</p>
 
 <figure>
-    <img decoding="async" alt="" src="/wp-content/uploads/image/category@./06-general-timer-structure.png" width="680"/>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@stm32/06-general-timer-structure.png" width="680"/>
 </figure>
 
 <p>这个结构主要可以分为时基单元、时钟选择、定时器输入和定时器输入这四个关键部分理解。</p>
@@ -425,7 +441,7 @@ var _hmt = _hmt || [];
 <p>通用定时器的核心时基单元和基本定时器一样，输入的时钟由预分频器实现 1~65536 的分频，驱动计数器改变计数值。当计数值达到自动重装载值时，清零计数器并产生更新中断/事件：</p>
 
 <figure>
-    <img decoding="async" alt="" src="/wp-content/uploads/image/category@./06-general-timer-structure-counter.png"/>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@stm32/06-general-timer-structure-counter.png" width="440"/>
 </figure>
 
 <p>不过，通用定时器相比基本定时器，增加了几种新的计数模式。在基本定时器中，只有一个向上计数模式，计数值从 0 计数到 <var type="register">ARR</var> 的自动重装载值时发生中断，同时重新从 0 开始计数。而通用定时器还拥有以下几种计数模式：</p>
@@ -438,7 +454,7 @@ var _hmt = _hmt || [];
 <p>这三种模式中，计数值的可视化变化过程如下图所示：</p>
 
 <figure>
-    <img decoding="async" alt="" src="/wp-content/uploads/image/category@./06-general-timer-modes.png"/>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@stm32/06-general-timer-modes.png" width="520"/>
 </figure>
 
 <p>通用定时器的时基单元相比基本定时器，可以在初始化结构体中通过成员 <code>.TIM_CounterMode</code> 选择不同的计数方式。</p>
@@ -452,7 +468,7 @@ var _hmt = _hmt || [];
 <p>下图展示了通用定时器时钟选择部分的结构：</p>
 
 <figure>
-    <img decoding="async" alt="" src="/wp-content/uploads/image/category@./06-general-timer-input-clocks.png"/>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@stm32/06-general-timer-input-clocks.png" width="600"/>
 </figure>
 
 <p>通用定时器的时钟可以是以下几个时钟：</p>
@@ -589,7 +605,7 @@ var _hmt = _hmt || [];
 <p>以上配置过程可以通过下图描述：</p>
 
 <figure>
-    <img decoding="async" alt="" src="/wp-content/uploads/image/category@./06-general-timer-cascade.png"/>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@stm32/06-general-timer-cascade.png" width="640"/>
 </figure>
 
 <hr/>
@@ -609,6 +625,9 @@ var _hmt = _hmt || [];
 </ul>
 
 <p>除了时钟选择外，通用定时器还有很多强大的功能，例如它可以和输入输出功能交互，来处理更复杂的时间相关任务。受限于篇幅，这些功能将在下一节详细介绍。</p>
+
+
+
 												<div class="clear"></div>				
 					</div><!--/.entry-->
 				</div>
@@ -637,7 +656,7 @@ var _hmt = _hmt || [];
 			
 						
 				<ul class="post-nav group">
-		<li class="next"></li>
+		<li class="next"><a href="/embedded/stm32/i2c-introduction/" rel="next"><i class="fas fa-chevron-right"></i><strong>Next</strong> <span>集成电路总线I2C</span></a></li>
 		<li class="previous"><a href="/embedded/stm32/09-direct-memory-access/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>STM32的直接存储器访问</span></a></li>
 	</ul>
 			
@@ -645,6 +664,10 @@ var _hmt = _hmt || [];
 		<div id="recent-posts-4" class="widget widget_recent_entries">
 		<h3 class="group"><span>近期文章</span></h3>
 		<ul>
+											<li>
+					<a href="/embedded/stm32/i2c-introduction/">集成电路总线I2C</a>
+											<span class="post-date">2024年9月11日</span>
+									</li>
 											<li>
 					<a href="/embedded/stm32/06-timers/" aria-current="page">STM32的定时器</a>
 											<span class="post-date">2024年8月18日</span>
@@ -668,10 +691,6 @@ var _hmt = _hmt || [];
 											<li>
 					<a href="/programming/python-oop/python%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e7%bc%96%e7%a8%8b06-%e5%ae%b9%e5%99%a8%e5%af%b9%e8%b1%a1%e4%b8%8e%e8%bf%ad%e4%bb%a3/">Python面向对象编程06-容器对象与迭代</a>
 											<span class="post-date">2024年5月19日</span>
-									</li>
-											<li>
-					<a href="/programming/python-oop/09-descriptors/">Python面向对象编程09-描述符</a>
-											<span class="post-date">2024年4月30日</span>
 									</li>
 					</ul>
 
@@ -701,11 +720,11 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 </li>
-	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (16)
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (17)
 <ul class='children'>
 	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
 </li>
-	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (7)
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (8)
 </li>
 	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
 </li>
@@ -737,7 +756,8 @@ var _hmt = _hmt || [];
 		<select id="archives-dropdown-2" name="archive-dropdown">
 			
 			<option value="">选择月份</option>
-				<option value='/2024/08/'> 2024年8月 &nbsp;(2)</option>
+				<option value='/2024/09/'> 2024年9月 &nbsp;(1)</option>
+	<option value='/2024/08/'> 2024年8月 &nbsp;(2)</option>
 	<option value='/2024/07/'> 2024年7月 &nbsp;(1)</option>
 	<option value='/2024/06/'> 2024年6月 &nbsp;(2)</option>
 	<option value='/2024/05/'> 2024年5月 &nbsp;(1)</option>

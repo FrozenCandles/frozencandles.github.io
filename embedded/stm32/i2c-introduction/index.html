@@ -1,0 +1,794 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>集成电路总线I2C - 冰封残烛的个人小站</title>
+	<meta name="description" content="I2C 是一种较为经典的同步串行通信协议，通过一条时钟线和一条数据线即可实现一主多从器件的串行通信。文本介绍 I2C 协议的硬件和时序规范，并通过 STM32 驱动的器件 AT24C02 展示了 I2C 的软件实现和应用。" />
+	<link rel="canonical" href="/embedded/stm32/i2c-introduction/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="集成电路总线I2C - 冰封残烛的个人小站" />
+	<meta property="og:description" content="I2C 是一种较为经典的同步串行通信协议，通过一条时钟线和一条数据线即可实现一主多从器件的串行通信。文本介绍 I2C 协议的硬件和时序规范，并通过 STM32 驱动的器件 AT24C02 展示了 I2C 的软件实现和应用。" />
+	<meta property="og:url" content="/embedded/stm32/i2c-introduction/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2024-09-11T04:36:02+00:00" />
+	<meta property="article:modified_time" content="2024-09-11T04:40:30+00:00" />
+	<meta name="author" content="Hello" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="4分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebPage",
+	            "@id": "/embedded/stm32/i2c-introduction/",
+	            "url": "/embedded/stm32/i2c-introduction/",
+	            "name": "集成电路总线I2C - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "primaryImageOfPage": {
+	                "@id": "/embedded/stm32/i2c-introduction/#primaryimage"
+	            },
+	            "image": {
+	                "@id": "/embedded/stm32/i2c-introduction/#primaryimage"
+	            },
+	            "thumbnailUrl": "/wp-content/uploads/cover/stm32@I2C-introduction.jpg",
+	            "datePublished": "2024-09-11T04:36:02+00:00",
+	            "dateModified": "2024-09-11T04:40:30+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "I2C 是一种较为经典的同步串行通信协议，通过一条时钟线和一条数据线即可实现一主多从器件的串行通信。文本介绍 I2C 协议的硬件和时序规范，并通过 STM32 驱动的器件 AT24C02 展示了 I2C 的软件实现和应用。",
+	            "breadcrumb": {
+	                "@id": "/embedded/stm32/i2c-introduction/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/embedded/stm32/i2c-introduction/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "ImageObject",
+	            "inLanguage": "zh-CN",
+	            "@id": "/embedded/stm32/i2c-introduction/#primaryimage",
+	            "url": "/wp-content/uploads/cover/stm32@I2C-introduction.jpg",
+	            "contentUrl": "/wp-content/uploads/cover/stm32@I2C-introduction.jpg"
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/embedded/stm32/i2c-introduction/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "集成电路总线I2C"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/1412" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=1412' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fembedded%2Fstm32%2Fi2c-introduction%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fembedded%2Fstm32%2Fi2c-introduction%2F&#038;format=xml" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?432b66336cb23bd6712cecabe6d808eb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css">
+<script src="/wp-content/static/js/note.js"></script>
+<link rel="stylesheet" href="/wp-content/static/css/theme@haru.wp.min.css">
+<link rel="stylesheet" href="/wp-content/static/css/hljs@night-owl-light.css">
+
+<style>
+    .vscode-block {
+        color: #403f53;
+        background-color: #FBFBFB;
+    }
+    .vscode-block span[token="var"] { color: #4876d6; }
+</style><link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-1412 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-1390" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1390"><span class="menu-item-wrapper"><a href="/all/embedded/">电子电路与嵌入式</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/all/embedded-application/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-1412" class="post-1412 post type-post status-publish format-standard has-post-thumbnail hentry category-stm32">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">集成电路总线I2C</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/embedded/stm32/" rel="category tag">STM32</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2024年9月11日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+<h2>I2C总线</h2>
+
+<h3>I2C总线的概念</h3>
+
+<p>UART 作为一种经典的串行通信方式，大部分微处理器都集成了相关的通信外设，因此应用非常广泛。然而，随着硬件的发展，UART 在某些应用场景中的限制也越来越大。</p>
+
+<p>UART 最大的缺点在于，它通常只是点对点的通信，不支持一台设备到多台设备间的通信。如果想通过 UART 实现一对多的通信，那么要么使用多个 UART 外设，要么设计一套复杂的应用层实现多个设备的管理和通信。</p>
+
+<p>除此之外，UART 是一种异步的通信方式，没有时钟信号协调双方的通信速率，无法控制何时发送数据，也无法保证双发按照完全相同的速度接收数据。因此，通信双方必须事先设置相同的通信速率（波特率），还要在发送每个字节时提供额外的起始位和停止位，以帮助接收器在数据到达时进行同步。如果发送端的通信过程中被中断干扰，那么接收端将会接收到完全错误的数据。因此 UART 的发送过程非常依赖硬件外设的支持。</p>
+
+<p>IIC 总线 (Inter-Integrated Circuit, 集成电路总线)，也写作 I<sup>2</sup>C 或 I2C，一般读作 I 方 C ，是 Philips 公司设计出来的一种简单、双向的串行总线。I2C 的最大特点为：<em>同步</em>和<em>多设备</em>。</p>
+
+<p>I2C 只需要使用两根线，即可在连接于总线上的器件之间传送信息：一根是串行数据线(Serial Data Line, SDA)，一根是串行时钟线(Serial Clock Line, SCL)。数据线用来传输数据，时钟线用于同步收发的数据。</p>
+
+<p>I2C 总线是一个多主机的总线，所谓主机就是指负责整个系统的任务协调与分配的设备（一般为单片机或类似功能的处理器）。与之相对的概念是从机，从机一般只能被动接收主机的指令，只有在主机允许的情况下才能主动发送信息。主机和从机之间通过总线连接，实现数据通信。因此 I2C 可以连接多于一个能控制总线的器件到总线。</p>
+
+<p>下图展示了一个 I2C 总线的工作情景示意：</p>
+
+<figure>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@stm32/I2C-concept.png"/>
+</figure>
+
+<p>I2C 协议为半双工通信协议，即总线可以双向传输数据，但任意时刻只能存在单向的传输，需要等待传输结束才可能更换方向。因此同一时刻只能存在一个主机，不过主机和从机的角色可以互换。</p>
+
+
+
+
+
+<h3>I2C物理层内容</h3>
+
+<p>物理层即硬件上的规定，包括硬件如何连接以及输入输出的方式等。</p>
+
+<p>I2C 设备的硬件接线非常简单，只需要将所有设备的 SCL 接在一起、SDA 接在一起即可，就像以上概念图那样。但是这种连接方式有个问题：所有的设备都可能向 SDA 线输出数据，如果一台设备的输出处于高电平状态，另一台设备主动输出低电平时，可能造成输出短路的问题。</p>
+
+<p>为了避免这种状态，I2C 规定连接到 SCL 和 SDA 的设备都需要配置为开漏输出模式，并采用一个阻值较小（一般为 4.7K&Omega; ，总线上设备较多的话可以适当减小这个阻值）的上拉电阻接到外置驱动电源。当 I2C 设备输出为 1 时，并没有直接输出电平，而是处于高阻态，由上拉电阻把总线拉成高电平；当设备输出 0 时，上拉电阻可以防止电源和地直接接触而导致短路：</p>
+
+<figure>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@stm32/I2C-driver.png"/>
+</figure>
+
+
+
+<blockquote>
+    <p>开漏输出的特点是，只有在总线处于低电平时才能保证有设备在主动输出。</p>
+</blockquote>
+
+<p>I2C 具有三种传输模式：标准模式传输速率为 100kb/s ，快速模式为 400kb/s ，高速模式下可达 3.4Mb/s ，但目前大多 I2C 设备尚不支持高速模式。</p>
+
+
+
+<h3>I2C协议层内容</h3>
+
+<p>协议层规定了 I2C 完成物理层连接后，总线上如何产生信号（时序）来表示数据。</p>
+
+<ol start="1">
+    <li>起始和停止</li>
+</ol>
+
+<p>在所有设备初始化后，设备还没有对外输出，因此 SCL 和 SDA 都被上拉电阻拉至高电平。此时，主机可以使时钟线 SCL 保持高电平，同时主动将数据线 SDA 由高电平拉低为低电平，表示起始信号；在所有数据都传输完成后，主机可以先将数据线 SDA 拉低，并将时钟线 SCL 保持为高电平，这期间自然地退出数据线 SDA 的控制，使其恢复为高电平，表示终止传输，回到起始之前的状态，如下图所示：</p>
+
+<figure>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@stm32/I2C-start-stop.png"/>
+    <figcaption>I2C 的开始和结束表示方法</figcaption>
+</figure>
+
+<p>起始和终止信号都是由主机发出的。一次完整的数据传输总是以起始条件开始，终止条件结束。</p>
+
+<ol start="2">
+    <li>传输的数据</li>
+</ol>
+
+<p>在起止信号之间，I2C 总线可以传送数据。当主机主动控制时钟线 SCL ，将其拉低时，主机或从机可以控制数据线 SDA 并准备数据；当主机停止控制 SCL ，恢复为高电平期间，数据线上的数据必须保持稳定，同时主机或从机可以读取数据：</p>
+
+<figure>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@stm32/I2C-data.png"/>
+    <figcaption>I2C 的数据表示方法</figcaption>
+</figure>
+
+<blockquote>
+    <p>总之，SCL 低电平时，发送方可以发送数据；SCL 高电平时，接收方需要接收数据。通过这种时钟同步的设计，收发两方只需要听时钟线的指挥即可，不用预先指定通信速率。</p>
+    
+    <p>同时，如果主机因为某种原因（如进入中断）暂停发送或接受数据，那么时钟线也暂停指挥，从机的动作也将暂停。</p>
+</blockquote>
+
+<p>时钟线每一轮变化，就可以发送一个二进制位，依次循环上述过程就可以发送所有的数据。</p>
+
+<ol start="3">
+    <li>数据帧的构成：地址</li>
+</ol>
+
+<p>通过以上的协议层规定，I2C 总线已经可以发送二进制信息了。不过这些二进制信息并不都是实际的数据。就像 UART 的数据帧还包含了校验位和停止位一样，I2C 的数据帧也包含了额外的信息。</p>
+
+<p>下图展示了 I2C 的数据帧格式，每个数据帧都位于一对起始和终止信号内：</p>
+
+<figure>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@stm32/I2C-data-frame.png"/>
+    <figcaption>I2C 数据帧格式</figcaption>
+</figure>
+
+<p>首先，一个 I2C 总线可能挂载多个设备。为了确定数据发给哪个从机，需要为每个从机编排一个地址。在 I2C 协议中，总线上的每个设备都具有一个地址，I2C 协议标准规定地址可以是 7 位或 10 位的，但目前应用最多的还是 7 位地址。这个地址会在每个 I2C 设备出厂时由厂商分配，因此每个设备的地址都是固定的，通常每种型号设备的地址也都是相同的，可以在对应的 datasheet 里找到。</p>
+
+<blockquote>
+    <p>很多情况下，I2C 器件都会提供一些硬件接口，可以通过修改这些硬件接口（例如通过外部引脚读入电平）来更改设备地址的低几位，从而实现灵活地切换地址，避免因为地址相同造成的冲突。</p>
+</blockquote>
+
+<p>主机在发送起始信号后，第一步需要发送的就是从机的地址，以指定和哪个从机通信，其余的从机判断地址不一致后就无需读取后面的数据了。如果主机需要换一台设备通信，那么可以不产生终止信号，立即再次发出起始信号并发送其它地址指定别的从机。</p>
+
+<ol start="4">
+    <li>数据帧的构成：读写标志</li>
+</ol>
+
+<p>紧跟设备地址的一个二进制位用来表示数据传输方向，它是数据方向位 R/<ruby>W<rt>&mdash;</rt></ruby> ，该位为 0 表示主机向从机写数据，由主机控制 SDA ；为 1 表示主机由从机读数据；由从机控制 SDA 。</p>
+
+<ol start="5">
+    <li>数据帧的构成：应答</li>
+</ol>
+
+<p>I2C 协议规定，每个数据帧的传输都以字节为单位，每次传输的字节数不受限制。但是每当发送器件传输完一个字节的数据后，接收到数据的从机需要控制数据线 SDA 发出一个校验位。这个校验位包括&ldquo;应答(ACK)&rdquo;和&ldquo;非应答(NACK)&rdquo;两种信号，应答时需要由从机主动将 SDA 拉低得到：</p>
+
+<figure>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@stm32/I2C-ack.png"/>
+    <figcaption>从机的应答和非应答</figcaption>
+</figure>
+
+<p>如果从机发送应答(ACK)信号，表示希望对方继续发送字节，主机接到信号后可以继续发送；如果从机发送非应答(NACK)信号，表示接收端希望结束数据传输，主机接收到该信号后应该产生一个停止信号，并结束信号传输。</p>
+
+<blockquote>
+    <p>不管是主机发送数据还是从机发送数据，时钟线 SCL 总是由主机控制，从机根据时钟决定何时发送信号</p>
+</blockquote>
+
+<ol start="6">
+    <li>数据的构成：数据</li>
+</ol>
+
+<p>除了开头的第一个字节表示地址和读写标志以外，其余所有的字节都表示传输的实际数据。当然，这些数据接收方到底应该如何解读，那就是应用层的规定了，I2C 只负责将这些数据交付到位。</p>
+
+<p>别忘了每个字节发送完成后，接收方都需要发送一个应答信号。</p>
+
+<p>还要注意的是，I2C 的数据发生过程是高位先行，所以第一个发送的是一个字节的最高位，第二个发送的是次高位，以此类推。</p>
+
+<blockquote>
+    <p>注意和 UART 相区分，UART 的发送过程中是低位先发送。</p>
+</blockquote>
+
+<p>接下来通过具体的程序实现 I2C 总线通信。</p>
+
+<h2>I2C读写示例</h2>
+
+<h3>软件I2C的实现</h3>
+
+<p>I2C 是同步时序，主机可以自由决定通信的速率，因此控制起来比较轻松。这里介绍通过软件控制 GPIO ，产生 I2C 所需要的时序的基本代码。</p>
+
+<p>首先是 I2C 的起始和终止的信号：SCL 保持高电平期间，将 SDA 从高拉低表示起始信号，将 SDA 从低回高表示终止：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">sI2C_Start</span>(<span style="color: #994cc3;font-weight: bold;">void</span>) {</div><div>&nbsp; &nbsp; <span token="var">SDA_OutMode()</span>;</div><div>&nbsp; &nbsp; <span token="var">SDA</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">1</span>;</div><div>&nbsp; &nbsp; <span token="var">SCL</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">1</span>;</div><div>&nbsp; &nbsp; <span token="var">delay_us</span><span token="var">(</span><span style="color: #aa0982;">10</span><span token="var">)</span>;</div><div>&nbsp; &nbsp; <span token="var">SDA</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">0</span>;</div><div>&nbsp; &nbsp; <span token="var">delay_us</span><span token="var">(</span><span style="color: #aa0982;">10</span><span token="var">)</span>;</div><div>}</div><br/><div><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">sI2C_Stop</span>(<span style="color: #994cc3;font-weight: bold;">void</span>) {</div><div>&nbsp; &nbsp; <span token="var">SDA_OutMode()</span>;</div><div>&nbsp; &nbsp; <span token="var">SDA</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">0</span>;</div><div>&nbsp; &nbsp; <span token="var">SCL</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">1</span>;</div><div>&nbsp; &nbsp; <span token="var">delay_us</span><span token="var">(</span><span style="color: #aa0982;">10</span><span token="var">)</span>;</div><div>&nbsp; &nbsp; <span token="var">SDA</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">1</span>;</div><div>&nbsp; &nbsp; <span token="var">delay_us</span><span token="var">(</span><span style="color: #aa0982;">10</span><span token="var">)</span>;</div><div>}</div></div>
+
+<p>如果是使用 7 位地址的话，可以将这 7 位地址和 1 位读写标志合并为一个字节，并且之后主机发送的单位也都是字节，因此程序只需要统一编写一个发送字节的函数即可。</p>
+
+<p>在发送字节时，需要先发送高位，这点可以通过掩码与左移位实现；在发送二进制位时，可以通过 SCL 确定当前的操作：在 SCL = 0 时，主机准备数据直到确定 SDA 输出，然后让 SCL = 1 ，等待一小段时间让从机读取数据，然后再让 SCL = 0 ，准备下一个数据；在发完所有数据后，不要忘记让 SDA = 1 释放总线的控制权：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">sI2C_SendByte</span>(<span style="color: #4876d6;font-weight: bold;">uint8_t</span> SendData) {</div><div>&nbsp; &nbsp; <span token="var">SDA_OutMode()</span>;</div><div>&nbsp; &nbsp; <span token="var">SCL</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">0</span>;</div><div>&nbsp; &nbsp; <span style="color: #994cc3;font-weight: bold;">for</span> (<span style="color: #4876d6;font-weight: bold;">uint8_t</span> <span token="var">Bit</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">0</span>; <span token="var">Bit</span> <span style="color: #994cc3;">&lt;</span> <span style="color: #aa0982;">8</span>; <span token="var">Bit</span><span style="color: #994cc3;">++</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #994cc3;font-weight: bold;">if</span> ((SendData <span style="color: #0c969b;">&amp;</span> <span style="color: #aa0982;">0x80</span>) <span style="color: #994cc3;">==</span> <span style="color: #aa0982;">0x80</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="var">SDA</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">1</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #994cc3;font-weight: bold;">else</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="var">SDA</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">0</span>;</div><br/><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">SCL</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">1</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">delay_us</span><span token="var">(</span><span style="color: #aa0982;">5</span><span token="var">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">SCL</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">0</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">delay_us</span><span token="var">(</span><span style="color: #aa0982;">5</span><span token="var">)</span>;</div><br/><div>&nbsp; &nbsp; &nbsp; &nbsp; SendData <span style="color: #994cc3;">&lt;&lt;=</span> <span style="color: #aa0982;">1</span>;</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span token="var">SCL</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">1</span>;</div><div>}</div></div>
+
+<p>在发送完成后，需要等待从机的 ACK 信号，同样也是拉低 SCL 准备数据，回高 SCL 读数据，不过要注意读到 1 代表从机为非应答：（在 <code>SendByte()</code> 函数中，发送完成之后有拉低 SCL 准备的行为，在最后一次发送时从机就会产生 ACK 信号了）</p>
+
+<div class="vscode-block"><div><span style="color: #4876d6;font-weight: bold;">bool</span> <span token="var">sI2C_WaitAck</span>(<span style="color: #994cc3;font-weight: bold;">void</span>) {</div><div>&nbsp; &nbsp; <span token="var">SDA_InMode()</span>;</div><div>&nbsp; &nbsp; <span token="var">SCL</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">1</span>;</div><div>&nbsp; &nbsp; <span token="var">delay_us</span><span token="var">(</span><span style="color: #aa0982;">5</span><span token="var">)</span>;</div><br/><div>&nbsp; &nbsp; <span style="color: #4876d6;font-weight: bold;">bool</span> <span token="var">ack</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">1</span>;</div><div>&nbsp; &nbsp; <span style="color: #994cc3;font-weight: bold;">if</span> (<span token="var">SDA</span> <span style="color: #994cc3;">==</span> <span style="color: #aa0982;">0</span>)</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">ack</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">0</span>;</div><div>&nbsp; &nbsp; <span style="color: #994cc3;font-weight: bold;">else</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">ack</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">1</span>;</div><br/><div>&nbsp; &nbsp; <span token="var">SCL</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">0</span>;</div><div>&nbsp; &nbsp; <span token="var">delay_us</span><span token="var">(</span><span style="color: #aa0982;">5</span><span token="var">)</span>;</div><div>&nbsp; &nbsp; <span style="color: #994cc3;font-weight: bold;">return</span> <span token="var">ack</span>;</div><div>}</div></div>
+
+<blockquote>
+    <p>在发送一个字节后，设备需要处理，因此等待应答时，应该预留足够的时间。如果要考虑通用性，此处可以做超时处理。</p>
+</blockquote>
+
+<p>综合以上函数，主机通过 I2C 发送数据的工具已经具备了：主机先通过 <code>Start()</code> 函数产生起始信号，然后逐一通过 <code>SendByte()</code> 发送地址+读写的字节和每个数据字节，每次发送完成后通过 <code>WaitAck()</code> 读取从机应答。最后，主机通过 <code>Stop()</code> 函数结束本次通信。</p>
+
+<p>设备作为主机也可能读取数据，读取数据的方式和发送的方式也是类似的，可以通过 SCL 的状态拆解接收流程：SCL = 0 等待从机准备数据，SCL = 1 读取数据：</p>
+
+<div class="vscode-block"><div><span style="color: #4876d6;font-weight: bold;">uint8_t</span> <span token="var">sI2C_RecvByte</span>(<span style="color: #994cc3;font-weight: bold;">void</span>) {</div><div>&nbsp; &nbsp; <span token="var">SDA_InMode()</span>;</div><div>&nbsp; &nbsp; <span token="var">SCL</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">0</span>;</div><div>&nbsp; &nbsp; <span style="color: #4876d6;font-weight: bold;">uint8_t</span> <span token="var">RecvData</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">0</span>;</div><div>&nbsp; &nbsp; <span style="color: #994cc3;font-weight: bold;">for</span> (<span style="color: #4876d6;font-weight: bold;">uint8_t</span> <span token="var">i</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">0</span>; <span token="var">i</span> <span style="color: #994cc3;">&lt;</span> <span style="color: #aa0982;">8</span>; <span token="var">i</span><span style="color: #994cc3;">++</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">RecvData</span> <span style="color: #994cc3;">&lt;&lt;=</span> <span style="color: #aa0982;">1</span>;</div><br/><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">SCL</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">1</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">delay_us</span><span token="var">(</span><span style="color: #aa0982;">5</span><span token="var">)</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #994cc3;font-weight: bold;">if</span> (<span token="var">SDA</span> <span style="color: #994cc3;">==</span> <span style="color: #aa0982;">1</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span token="var">RecvData</span><span style="color: #994cc3;">++</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; }</div><br/><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">SCL</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">0</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">delay_us</span><span token="var">(</span><span style="color: #aa0982;">5</span><span token="var">)</span>;</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span style="color: #994cc3;font-weight: bold;">return</span> <span token="var">RecvData</span>;</div><div>}</div></div>
+
+<p>设备接收完数据后，可以视情况发送 ACK 和 NACK 应答：ACK 就是在 SCL 为高时拉低 SDA ，NACK 就是让 SCL 和 SDA 都为高：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">sI2C_Ack</span>(<span style="color: #994cc3;font-weight: bold;">void</span>) {</div><div>&nbsp; &nbsp; <span token="var">SDA_OutMode()</span>;</div><div>&nbsp; &nbsp; <span token="var">SCL</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">0</span>;</div><div>&nbsp; &nbsp; <span token="var">SDA</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">0</span>;</div><div>&nbsp; &nbsp; <span token="var">delay_us</span><span token="var">(</span><span style="color: #aa0982;">5</span><span token="var">)</span>;</div><div>&nbsp; &nbsp; <span token="var">SCL</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">1</span>;</div><div>&nbsp; &nbsp; <span token="var">delay_us</span><span token="var">(</span><span style="color: #aa0982;">5</span><span token="var">)</span>;</div><div>&nbsp; &nbsp; <span token="var">SCL</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">0</span>;</div><div>&nbsp; &nbsp; <span token="var">delay_us</span><span token="var">(</span><span style="color: #aa0982;">5</span><span token="var">)</span>;</div><div>}</div><br/><div><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">sI2C_NAck</span>(<span style="color: #994cc3;font-weight: bold;">void</span>) {</div><div>&nbsp; &nbsp; <span token="var">SDA_OutMode()</span>;</div><div>&nbsp; &nbsp; <span token="var">SCL</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">0</span>;</div><div>&nbsp; &nbsp; <span token="var">SDA</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">1</span>;</div><div>&nbsp; &nbsp; <span token="var">delay_us</span><span token="var">(</span><span style="color: #aa0982;">5</span><span token="var">)</span>;</div><div>&nbsp; &nbsp; <span token="var">SCL</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">1</span>;</div><div>&nbsp; &nbsp; <span token="var">delay_us</span><span token="var">(</span><span style="color: #aa0982;">5</span><span token="var">)</span>;</div><div>&nbsp; &nbsp; <span token="var">SCL</span> <span style="color: #994cc3;">=</span> <span style="color: #aa0982;">0</span>;</div><div>&nbsp; &nbsp; <span token="var">delay_us</span><span token="var">(</span><span style="color: #aa0982;">5</span><span token="var">)</span>;</div><div>}</div></div>
+
+<p>现在，主机接收数据的工具也都具备了。主机在 <code>Start()</code> 之后发送带读标志的字节，然后通过 <code>ReadByte()</code> 读读取每个数据字节，每次读取完成后视情况发送合适的应答。</p>
+
+<p>接下来通过一个具体的器件 AT24C02 实现软件 I2C 通信。</p>
+
+<h3>AT24C02器件简介</h3>
+
+<p>本次使用 I2C 读写的示例器件是 AT24C02 ，它是一个 EEPROM 存储器，可以存储 256 bytes 的数据。并且相比 Flash ，它具有很高的稳定性：多达 1 百万次的擦写寿命，并且可以轻松将数据保存 100 年之久。</p>
+
+<p>该器件的典型引脚结构如下图所示：</p>
+
+<figure>
+    <img decoding="async" alt="" src="/wp-content/uploads/image/category@stm32/I2C-AT24C02-device.png"/>
+</figure>
+
+<p>其中，V<sub>CC</sub> 是输入电源，一般为 1.8V 至 5.5V ，V<sub>SS</sub> 接地，SDA 和 SCL 是 I2C 通信接口，这些没什么好说的。</p>
+
+<p>值得注意的是 A0/A1/A2 这三个引脚。在 AT24C02 中，器件的地址是由器件类型号（固有地址）和 A0/A1/A2 这三个输入地址构成。其中器件类型号 4 位固定为 <code>0b1010</code> ，输入地址则由 A0/A1/A2 输入引脚的电平决定。通过 A0/A1/A2 输入引脚的不同接法，At24C02 的器件地址可以是 <code>0b1010000~0b1010111</code> 这 8 个地址，因此同一个 I2C 总线上最多可以挂载 8 台这样的设备。</p>
+
+<p>一般情况下，将 A0/A1/A2 均接地，得到 AT24C02 的设备地址为 <code>0b1010000</code> 即 <code>0x50</code> 。</p>
+
+<p>AT24C02 芯片还有一个写保护引脚 WP ，当该引脚为高电平时，将会禁止数据写入，从而防止数据被意外修改。如果不使用写保护功能，直接将该引脚接地即可。</p>
+
+
+
+<h3>软件I2C读写AT24C02</h3>
+
+<p>AT24C02 的写入有两种方式：一种是按<strong>字节写</strong>(byte write)，字节写要求在发送器件地址和写标志后，发送的第一个字节代表要写入数据的地址，第二个字节代表要写入的数据。如果 AT24C02 对这三个字节都回复 ACK ，代表这个字节写入成功，接着主设备发送停止信号终止本次写入。</p>
+
+<p>AT24C02 还支持按<strong>页写</strong>(page write)，主设备如果在发送要写入的数据后，没有发送停止条件，那么它在接收到 ACK 应答以后，可以继续发送 7 个字节数据，这 8 个字节（一&ldquo;页&rdquo;）都将被写入 EEPROM 中。AT24C02 内部会将会指定的写入地址保存为一个指针，每写入一个字节，这个指针的值就加 1 ，这样下一个字节就可以写入后一个地址位置。不过要注意的是，页写的方式下写入的数据不能超过页的大小（一般为 8 个字节），否则这个指针将会返回一开始指定的位置，并覆盖最先写入的数据。</p>
+
+<blockquote>
+    <p>这么看来，AT24C02 只支持 8 位地址寻址，最多只能读写 255 bytes 的数据。而一条总线上最多挂载 8 台这种型号的设备，使得单个主设备实际最多可以读写 2KB 的数据。AT24C16 利用这种思路，可以通过外部引脚切换读写的块，实现单个设备 2KB 的容量。</p>
+</blockquote>
+
+<p>通过以上的介绍，利用以上提供的工具即可实现 AT24C02 的字节写入。在起始和结束信号前，需要发送 3 个字节，并等待 3 次响应。这 3 个字节的含义分别为：</p>
+
+<ol>
+    <li>AT24C02 地址和读写标志</li>
+    <li>要写入的地址</li>
+    <li>要写入的数据</li>
+</ol>
+
+<p>以上过程对应为函数就是：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">AT24C02_WriteByte</span>(<span style="color: #4876d6;font-weight: bold;">uint8_t</span> Address, <span style="color: #4876d6;font-weight: bold;">uint8_t</span> Data) {</div><div>&nbsp; &nbsp; <span token="var">sI2C_Start</span><span token="var">()</span>;</div><div>&nbsp; &nbsp; <span token="var">sI2C_SendByte</span><span token="var">(</span><span style="color: #aa0982;">0xA0</span><span token="var">)</span>;</div><div>&nbsp; &nbsp; <span token="var">sI2C_WaitAck</span><span token="var">()</span>;</div><div>&nbsp; &nbsp; <span token="var">sI2C_SendByte</span><span token="var">(</span>Address<span token="var">)</span>;</div><div>&nbsp; &nbsp; <span token="var">sI2C_WaitAck</span><span token="var">()</span>;</div><div>&nbsp; &nbsp; <span token="var">sI2C_SendByte</span><span token="var">(</span>Data<span token="var">)</span>;</div><div>&nbsp; &nbsp; <span token="var">sI2C_WaitAck</span><span token="var">()</span>;</div><div>&nbsp; &nbsp; <span token="var">sI2C_Stop</span><span token="var">()</span>;</div><div>}</div></div>
+
+<blockquote>
+    <p>I2C 通信时，常将 7 位地址跟读写方向位合并构成一个 8 位的字节统一发送，因此当 R/W 位为 0（写方向）时，将合并后的字节 <code>0xA0</code> 称为该 I2C 设备的&ldquo;写地址&rdquo;；当 R/W 位为 1（读方向）时，将合并后的字节 <code>0xA1</code> 称为设备的&ldquo;读地址&rdquo;。</p>
+</blockquote>
+
+<p>以上程序并没有对是否应答做判断，如果为了程序的稳定，最好判断应答状态，注意读到 0 才为应答。</p>
+
+<p>按页写入的程序编写非常类似，只要重复发送数据的环节即可。</p>
+
+<p>然后是数据的读取，读操作与写操作类似，注意器件地址中的读/写标志位应为 1 。数据的读取有三种方式，最基本的是<strong>随机读</strong>(random read)，随机读也由这样三个字节构成：</p>
+
+<ol>
+    <li>器件的地址</li>
+    <li>要读出数据的地址</li>
+    <li>读出的数据</li>
+</ol>
+
+<p>由于要读出数据的地址应该由主机发送，而读出的数据应该由主机接收，因此主机需要发送两次器件地址来切换读写标志位，也就是需要产生两次起始信号（中途可以不产生终止信号），相应的实现为：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">AT24C02_ReadByte</span>(<span style="color: #4876d6;font-weight: bold;">uint8_t</span> Address, <span style="color: #4876d6;font-weight: bold;">uint8_t</span><span style="color: #0c969b;">*</span> Data) {</div><div>&nbsp; &nbsp; <span token="var">sI2C_Start</span><span token="var">()</span>;</div><div>&nbsp; &nbsp; <span token="var">sI2C_SendByte</span><span token="var">(</span><span style="color: #aa0982;">0xA0</span><span token="var">)</span>;</div><div>&nbsp; &nbsp; <span token="var">sI2C_WaitAck</span><span token="var">()</span>;</div><div>&nbsp; &nbsp; <span token="var">sI2C_SendByte</span><span token="var">(</span>Address<span token="var">)</span>;</div><div>&nbsp; &nbsp; <span token="var">sI2C_WaitAck</span><span token="var">()</span>;</div><div>&nbsp; &nbsp; </div><div>&nbsp; &nbsp; <span token="var">sI2C_Start</span><span token="var">()</span>;</div><div>&nbsp; &nbsp; <span token="var">sI2C_SendByte</span><span token="var">(</span><span style="color: #aa0982;">0xA1</span><span token="var">)</span>;</div><div>&nbsp; &nbsp; <span token="var">sI2C_WaitAck</span><span token="var">()</span>;</div><div>&nbsp; &nbsp; <span style="color: #0c969b;">*</span>Data <span style="color: #994cc3;">=</span> <span token="var">sI2C_RecvByte</span><span token="var">()</span>; &nbsp; &nbsp; </div><div>&nbsp; &nbsp; <span token="var">sI2C_NAck</span><span token="var">()</span>;</div><div>&nbsp; &nbsp; <span token="var">sI2C_Stop</span><span token="var">()</span>;</div><div>}</div></div>
+
+<p>在发送前两个字节时，AT24C02 都应该应答 ACK ，为了检验数据的有效性，可以考虑在程序中检查是否有 ACK 。在发送读标志后，AT24C02 随时钟送出数据，主机通过非应答 NACK 结束本次读取，并发送停止信号。</p>
+
+<p>AT24C02 还有一种<strong>当前地址读</strong>(current address read)的方式。只要 AT24C02 有电，它的内部会保存着上次访问时最后一个地址 +1 的指针。如果不指定读的地址，那么就会通过该指针继续读取下一个字节。当读到最后一个可用的地址时，指针会绕回 0 重新读取。</p>
+
+<p>除此之外，AT24C02 还可以通过<strong>顺序读</strong>(sequential read)的方式读取多个字节。如果在当前地址读或随机读接收到数据后，应答了 ACK ，AT24C02 将自动增加地址，并继续随时钟发送后面的数据。只要主机一直应答，就可以一直读取数据（若读到最后一个可用的地址，地址自动绕回到 0 ，仍可继续顺序读取数据），相应的程序实现如下：</p>
+
+<div class="vscode-block"><div><span style="color: #994cc3;font-weight: bold;">void</span> <span token="var">AT24C02_Read</span>(<span style="color: #4876d6;font-weight: bold;">uint8_t</span> Address, <span style="color: #4876d6;font-weight: bold;">uint8_t</span><span style="color: #0c969b;">*</span> Buffer, <span style="color: #4876d6;font-weight: bold;">uint8_t</span> Size) {</div><div>&nbsp; &nbsp; <span style="color: #4876d6;font-weight: bold;">uint8_t</span> <span style="color: #0c969b;">*</span><span token="var">p</span> <span style="color: #994cc3;">=</span> Buffer;</div><div>&nbsp; &nbsp; <span token="var">sI2C_Start</span><span token="var">()</span>;</div><div>&nbsp; &nbsp; <span token="var">sI2C_SendByte</span><span token="var">(</span><span style="color: #aa0982;">0xA0</span><span token="var">)</span>; </div><div>&nbsp; &nbsp; <span token="var">sI2C_WaitAck</span><span token="var">()</span>;</div><div>&nbsp; &nbsp; <span token="var">sI2C_SendByte</span><span token="var">(</span>Address<span token="var">)</span>;</div><div>&nbsp; &nbsp; <span token="var">sI2C_WaitAck</span><span token="var">()</span>;</div><div>&nbsp; &nbsp; <span token="var">sI2C_Start</span><span token="var">()</span>;</div><div>&nbsp; &nbsp; <span token="var">sI2C_SendByte</span><span token="var">(</span><span style="color: #aa0982;">0xA1</span><span token="var">)</span>;</div><div>&nbsp; &nbsp; <span token="var">sI2C_WaitAck</span><span token="var">()</span>;</div><div>&nbsp; &nbsp; Size <span style="color: #994cc3;">-=</span> <span style="color: #aa0982;">1</span>;</div><div>&nbsp; &nbsp; <span style="color: #994cc3;font-weight: bold;">while</span> (Size<span style="color: #0c969b;">--</span>) {</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #0c969b;">*</span><span token="var">p</span><span style="color: #994cc3;">++</span> <span style="color: #994cc3;">=</span> <span token="var">sI2C_RecvByte</span><span token="var">()</span>;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; <span token="var">sI2C_Ack</span><span token="var">()</span>;</div><div>&nbsp; &nbsp; }</div><div>&nbsp; &nbsp; <span style="color: #0c969b;">*</span><span token="var">p</span> <span style="color: #994cc3;">=</span> <span token="var">sI2C_RecvByte</span><span token="var">()</span>;</div><div>&nbsp; &nbsp; <span token="var">sI2C_NAck</span><span token="var">()</span>;</div><div>&nbsp; &nbsp; <span token="var">sI2C_Stop</span><span token="var">()</span>;</div><div>}</div></div>
+
+<p>总的来说，I2C 是一种较为经典的同步串行通信协议，本节介绍了该协议物理层和协议层的内容，并通过器件 AT24C02 展示了 I2C 的应用。AT24C02 作为一种经典的 I2C 器件，许多 I2C 设备的读写过程也是类似的器件地址 + 寄存器或存储器地址 + 数据的形式，熟悉了 AT24C02 后就很容易举一反三，因而非常具有研究价值。</p>
+
+<p>由于篇幅限制，本文只介绍了 I2C 协议的部分规定。I2C 协议还包含了很多其它内容，包括 10 位地址的发送方式、多主机的总线仲裁、从机接收的软件处理等。如果想更好地了解 I2C 通信的细节，可以阅读以下的官方文档。</p>
+
+<h2>参考资料/延伸阅读</h2>
+
+<p><a href="https://www.nxp.com/docs/en/user-guide/UM10204.pdf">I2C-bus specification and user manual</a></p>
+
+<p><a href="https://www.nxp.com/docs/en/application-note/AN10216.pdf">I2C Manual</a></p>
+
+<p><a href="https://ww1.microchip.com/downloads/en/devicedoc/doc0180.pdf">AT24C0x datasheet</a></p>
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+										
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"></li>
+		<li class="previous"><a href="/embedded/stm32/06-timers/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>STM32的定时器</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/embedded/stm32/i2c-introduction/" aria-current="page">集成电路总线I2C</a>
+											<span class="post-date">2024年9月11日</span>
+									</li>
+											<li>
+					<a href="/embedded/stm32/06-timers/">STM32的定时器</a>
+											<span class="post-date">2024年8月18日</span>
+									</li>
+											<li>
+					<a href="/embedded/stm32/09-direct-memory-access/">STM32的直接存储器访问</a>
+											<span class="post-date">2024年8月4日</span>
+									</li>
+											<li>
+					<a href="/embedded/stm32/analog-digital-converter/">STM32的模拟数字转换器</a>
+											<span class="post-date">2024年7月14日</span>
+									</li>
+											<li>
+					<a href="/embedded/stm32/05-clock-system/">STM32的时钟系统</a>
+											<span class="post-date">2024年6月26日</span>
+									</li>
+											<li>
+					<a href="/embedded/stm32/03-interrupt-system/">STM32的中断系统与外部中断</a>
+											<span class="post-date">2024年6月2日</span>
+									</li>
+											<li>
+					<a href="/programming/python-oop/python%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e7%bc%96%e7%a8%8b06-%e5%ae%b9%e5%99%a8%e5%af%b9%e8%b1%a1%e4%b8%8e%e8%bf%ad%e4%bb%a3/">Python面向对象编程06-容器对象与迭代</a>
+											<span class="post-date">2024年5月19日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (8)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (26)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (5)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (9)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2024/09/'> 2024年9月 &nbsp;(1)</option>
+	<option value='/2024/08/'> 2024年8月 &nbsp;(2)</option>
+	<option value='/2024/07/'> 2024年7月 &nbsp;(1)</option>
+	<option value='/2024/06/'> 2024年6月 &nbsp;(2)</option>
+	<option value='/2024/05/'> 2024年5月 &nbsp;(1)</option>
+	<option value='/2024/04/'> 2024年4月 &nbsp;(2)</option>
+	<option value='/2024/03/'> 2024年3月 &nbsp;(1)</option>
+	<option value='/2024/02/'> 2024年2月 &nbsp;(1)</option>
+	<option value='/2024/01/'> 2024年1月 &nbsp;(2)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

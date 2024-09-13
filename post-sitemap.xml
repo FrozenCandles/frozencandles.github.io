@@ -2,7 +2,7 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
 		<loc>/</loc>
-		<lastmod>2024-08-18T05:19:10+00:00</lastmod>
+		<lastmod>2024-09-11T04:40:30+00:00</lastmod>
 	</url>
 	<url>
 		<loc>/programming/other/regular-expression-tutorial/</loc>
@@ -1727,27 +1727,52 @@
 	</url>
 	<url>
 		<loc>/embedded/stm32/06-timers/</loc>
-		<lastmod>2024-08-18T05:19:10+00:00</lastmod>
+		<lastmod>2024-08-18T06:18:49+00:00</lastmod>
 		<image:image>
-			<image:loc>/wp-content/uploads/image/category@./06-basic-timer-structure.png</image:loc>
+			<image:loc>/wp-content/uploads/image/category@stm32/06-basic-timer-structure.png</image:loc>
 		</image:image>
 		<image:image>
-			<image:loc>/wp-content/uploads/image/category@./06-general-timer-functions-description.png</image:loc>
+			<image:loc>/wp-content/uploads/image/category@stm32/06-general-timer-functions-description.png</image:loc>
 		</image:image>
 		<image:image>
-			<image:loc>/wp-content/uploads/image/category@./06-general-timer-structure.png</image:loc>
+			<image:loc>/wp-content/uploads/image/category@stm32/06-general-timer-structure.png</image:loc>
 		</image:image>
 		<image:image>
-			<image:loc>/wp-content/uploads/image/category@./06-general-timer-structure-counter.png</image:loc>
+			<image:loc>/wp-content/uploads/image/category@stm32/06-general-timer-structure-counter.png</image:loc>
 		</image:image>
 		<image:image>
-			<image:loc>/wp-content/uploads/image/category@./06-general-timer-modes.png</image:loc>
+			<image:loc>/wp-content/uploads/image/category@stm32/06-general-timer-modes.png</image:loc>
 		</image:image>
 		<image:image>
-			<image:loc>/wp-content/uploads/image/category@./06-general-timer-input-clocks.png</image:loc>
+			<image:loc>/wp-content/uploads/image/category@stm32/06-general-timer-input-clocks.png</image:loc>
 		</image:image>
 		<image:image>
-			<image:loc>/wp-content/uploads/image/category@./06-general-timer-cascade.png</image:loc>
+			<image:loc>/wp-content/uploads/image/category@stm32/06-general-timer-cascade.png</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>/embedded/stm32/i2c-introduction/</loc>
+		<lastmod>2024-09-11T04:40:30+00:00</lastmod>
+		<image:image>
+			<image:loc>/wp-content/uploads/image/category@stm32/I2C-concept.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>/wp-content/uploads/image/category@stm32/I2C-driver.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>/wp-content/uploads/image/category@stm32/I2C-start-stop.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>/wp-content/uploads/image/category@stm32/I2C-data.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>/wp-content/uploads/image/category@stm32/I2C-data-frame.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>/wp-content/uploads/image/category@stm32/I2C-ack.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>/wp-content/uploads/image/category@stm32/I2C-AT24C02-device.png</image:loc>
 		</image:image>
 	</url>
 </urlset>
