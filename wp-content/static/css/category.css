@@ -57,31 +57,49 @@ div.post-item-card-detail {
   margin: 10px 20px;
 }
 
-.entry div a.post-category,
-div.post-category__wrapper a:link,
-div.post-category__wrapper a:active,
-div.post-category__wrapper a:visited,
-div.post-category__wrapper a:hover,
-div.post-category__wrapper a {
+/* ------------------ *\
+| Post Category Widget |
+\* ------------------ */
+.post-category-table {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.post-category {
+  flex: 0 1 50%;
+}
+
+@media (max-width: 768px) {
+  .post-category {
+    flex: 0 1 50%;
+  }
+}
+@media (max-width: 480px) {
+  .post-category {
+    flex: 0 1 100%;
+  }
+}
+.post-category-table a:link,
+.post-category-table a:active,
+.post-category-table a:visited,
+.post-category-table a:hover,
+.post-category-table a {
   color: inherit;
   text-decoration: none;
   box-shadow: none;
 }
 
-div.post-category__wrapper a {
-  display: inline-block;
-}
-div.post-category__wrapper a:hover {
-  box-shadow: none;
+.post-category {
+  display: block;
 }
 
 div.post-category__item {
-  display: inline-block;
   transition: all 0.2s ease 0s;
   box-shadow: 2px 5px 10px 0 #acacac;
   padding-right: 12px;
   margin: 10px;
-  width: 360px;
   height: 84px;
   /* Ho to make gradient border https://segmentfault.com/a/1190000040794056 */
   border: 4px solid transparent;
@@ -103,6 +121,7 @@ div.post-category__item div.post-category__logo {
 }
 div.post-category__item div.post-category__logo img {
   display: block;
+  min-width: 70px;
   max-width: 70px;
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
@@ -112,15 +131,17 @@ div.post-category__item div.post-category__content {
   margin-left: 120px;
 }
 div.post-category__item div.post-category__content h4 {
-  margin-block-start: 8px;
-  margin-block-end: 4px;
+  margin-top: 8px;
+  margin-bottom: 4px;
   font-size: 15px;
 }
 div.post-category__item div.post-category__content p {
-  margin-block-start: 0;
-  margin-block-end: 10px;
-  line-height: 1.4em;
+  margin-top: 0;
+  margin-bottom: 10px;
   font-size: 14px;
+  line-height: 1.4em;
+  height: 2.8em;
+  overflow: hidden;
 }
 
 /* codepen.io */

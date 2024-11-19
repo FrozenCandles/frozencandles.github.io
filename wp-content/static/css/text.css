@@ -74,6 +74,14 @@ div.math::-webkit-scrollbar-thumb {
   border: 3px solid var(--scroll-bar-bg-color);
 }
 
+b {
+  font-weight: bold;
+}
+
+i {
+  font-style: italic;
+}
+
 .entry var,
 .entry code,
 .code-template,
@@ -203,14 +211,17 @@ span.inline-color.violet { color: violet; }
 .entry .text-indent {
   padding-left: 2em;
 }
-
+.entry .text-frame,
 .entry .text-framed {
   border: 1px solid #222;
   padding: 4px;
 }
-
 .entry .text-center {
   text-align: center;
+}
+.entry .text-phantom {
+  opacity: 0;
+  user-select: none;
 }
 
 /* 

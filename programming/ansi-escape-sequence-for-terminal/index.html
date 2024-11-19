@@ -1,0 +1,789 @@
+<!DOCTYPE html> 
+<html class="no-js" lang="zh-CN">
+
+<head>
+        <meta name="baidu-site-verification" content="code-SGwavkDohn" />
+        <meta name="msvalidate.01" content="AEC4B4E62821B2E8571C1B69CF0B3169" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="u8s9zxzJfz1Y_Ffcxplz7BBLeTuxhs66CGFlpNzWbPw" />
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+		
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+<script>document.documentElement.className = document.documentElement.className.replace("no-js","js");</script>
+
+	<!-- This site is optimized with the Yoast SEO plugin v21.3 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>使用ANSI转义码增强控制台输出 - 冰封残烛的个人小站</title>
+	<meta name="description" content="了解为终端设计的 ANSI 转义序列(escape sequence)的历史，以及如何使用控制字符和 ANSI 转义序列增强终端输出效果，包括文本颜色、光标控制、页面控制和文本样式，适用于各种编程语言的终端操作。" />
+	<link rel="canonical" href="/programming/ansi-escape-sequence-for-terminal/" />
+	<meta property="og:locale" content="zh_CN" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="使用ANSI转义码增强控制台输出 - 冰封残烛的个人小站" />
+	<meta property="og:description" content="了解为终端设计的 ANSI 转义序列(escape sequence)的历史，以及如何使用控制字符和 ANSI 转义序列增强终端输出效果，包括文本颜色、光标控制、页面控制和文本样式，适用于各种编程语言的终端操作。" />
+	<meta property="og:url" content="/programming/ansi-escape-sequence-for-terminal/" />
+	<meta property="og:site_name" content="冰封残烛的个人小站" />
+	<meta property="article:published_time" content="2024-11-18T14:32:37+00:00" />
+	<meta property="article:modified_time" content="2024-11-19T04:55:38+00:00" />
+	<meta name="author" content="Hello" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="作者" />
+	<meta name="twitter:data1" content="Hello" />
+	<meta name="twitter:label2" content="预计阅读时间" />
+	<meta name="twitter:data2" content="2分" />
+	<script type="application/ld+json" class="yoast-schema-graph">{
+	    "@context": "https://schema.org",
+	    "@graph": [
+	        {
+	            "@type": "WebPage",
+	            "@id": "/programming/ansi-escape-sequence-for-terminal/",
+	            "url": "/programming/ansi-escape-sequence-for-terminal/",
+	            "name": "使用ANSI转义码增强控制台输出 - 冰封残烛的个人小站",
+	            "isPartOf": {
+	                "@id": "/#website"
+	            },
+	            "datePublished": "2024-11-18T14:32:37+00:00",
+	            "dateModified": "2024-11-19T04:55:38+00:00",
+	            "author": {
+	                "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c"
+	            },
+	            "description": "了解为终端设计的 ANSI 转义序列(escape sequence)的历史，以及如何使用控制字符和 ANSI 转义序列增强终端输出效果，包括文本颜色、光标控制、页面控制和文本样式，适用于各种编程语言的终端操作。",
+	            "breadcrumb": {
+	                "@id": "/programming/ansi-escape-sequence-for-terminal/#breadcrumb"
+	            },
+	            "inLanguage": "zh-CN",
+	            "potentialAction": [
+	                {
+	                    "@type": "ReadAction",
+	                    "target": [
+	                        "/programming/ansi-escape-sequence-for-terminal/"
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "BreadcrumbList",
+	            "@id": "/programming/ansi-escape-sequence-for-terminal/#breadcrumb",
+	            "itemListElement": [
+	                {
+	                    "@type": "ListItem",
+	                    "position": 1,
+	                    "name": "首页",
+	                    "item": "/"
+	                },
+	                {
+	                    "@type": "ListItem",
+	                    "position": 2,
+	                    "name": "使用ANSI转义码增强控制台输出"
+	                }
+	            ]
+	        },
+	        {
+	            "@type": "WebSite",
+	            "@id": "/#website",
+	            "url": "/",
+	            "name": "冰封残烛的个人小站",
+	            "description": "FrozenCandle&#039;s Personal Site",
+	            "potentialAction": [
+	                {
+	                    "@type": "SearchAction",
+	                    "target": {
+	                        "@type": "EntryPoint",
+	                        "urlTemplate": "/?s={search_term_string}"
+	                    },
+	                    "query-input": "required name=search_term_string"
+	                }
+	            ],
+	            "inLanguage": "zh-CN"
+	        },
+	        {
+	            "@type": "Person",
+	            "@id": "/#/schema/person/805995a49645fa933cb6698b7ffd0d7c",
+	            "name": "Hello",
+	            "image": {
+	                "@type": "ImageObject",
+	                "inLanguage": "zh-CN",
+	                "@id": "/#/schema/person/image/",
+	                "url": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "contentUrl": "http://2.gravatar.com/avatar/e1edbd1491f244c1e5cfafed859d4426?s=96&d=mm&r=g",
+	                "caption": "Hello"
+	            },
+	            "sameAs": [
+	                "/wordpress"
+	            ],
+	            "url": "/author/hello/"
+	        }
+	    ]
+	}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel="alternate" type="application/rss+xml" title="冰封残烛的个人小站 &raquo; Feed" href="/feed/" />
+<link rel='stylesheet' id='wp-block-library-css' href='/wp-includes/css/dist/block-library/style.min.css?ver=6.3.1' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}body .is-layout-grid{display: grid;}body .is-layout-grid > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style-css' href='/wp-content/themes/instorm/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='orbisius_ct_instorm_child_theme_parent_style_child_style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-style-css' href='/wp-content/themes/instorm-child-theme/style.css?ver=1.1.1' type='text/css' media='all' />
+<style id='instorm-style-inline-css' type='text/css'>
+body { font-family: "Roboto", Arial, sans-serif; }
+
+</style>
+<link rel='stylesheet' id='instorm-responsive-css' href='/wp-content/themes/instorm/responsive.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='instorm-font-awesome-css' href='/wp-content/themes/instorm/fonts/all.min.css?ver=6.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='roboto-css' href='//fonts.googleapis.com/css?family=Roboto%3A400%2C300italic%2C300%2C400italic%2C700&#038;subset=latin%2Clatin-ext&#038;ver=6.3.1' type='text/css' media='all' />
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery.min.js?ver=3.7.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/slick.min.js?ver=6.3.1' id='instorm-slick-js'></script>
+<link rel="https://api.w.org/" href="/wp-json/" /><link rel="alternate" type="application/json" href="/wp-json/wp/v2/posts/1423" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.3.1" />
+<link rel='shortlink' href='/?p=1423' />
+<link rel="alternate" type="application/json+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fansi-escape-sequence-for-terminal%2F" />
+<link rel="alternate" type="text/xml+oembed" href="/wp-json/oembed/1.0/embed?url=http%3A%2F%2Flocalhost%3A8000%2Fprogramming%2Fansi-escape-sequence-for-terminal%2F&#038;format=xml" />
+<link rel="stylesheet" href="/wp-content/static/css/theme@rainbow.min.css">
+<link rel="stylesheet" href="/wp-content/static/highlight/styles/atom-one-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/languages/python.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        document.querySelectorAll('.code-highlight').forEach((el) => {
+            hljs.highlightElement(el);
+        });
+    });
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SZV4B5M0NK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SZV4B5M0NK');
+</script><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?432b66336cb23bd6712cecabe6d808eb";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<link rel="stylesheet" href="/wp-content/static/css/text.css">
+<link rel="stylesheet" href="/wp-content/static/css/note.css">
+<script src="/wp-content/static/js/note.js"></script>
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-150x150.jpg" sizes="32x32" />
+<link rel="icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" sizes="192x192" />
+<link rel="apple-touch-icon" href="/wp-content/uploads/2022/02/cropped-preview-2-200x200.jpg" />
+<meta name="msapplication-TileImage" content="/wp-content/uploads/2022/02/cropped-preview-2-300x300.jpg" />
+<style id="kirki-inline-styles"></style>	
+
+	
+</head>
+
+<body class="post-template-default single single-post postid-1423 single-format-standard col-2cr full-width skew-active logged-out">
+
+
+<a class="skip-link screen-reader-text" href="#page">Skip to content</a>
+
+<div id="wrapper">
+	
+	<div id="header-sticky">
+		<header id="header" class="hide-on-scroll-down nav-menu-dropdown-left">
+
+			<div class="group">
+				<p class="site-title"><a href="/" rel="home">冰封残烛的个人小站</a></p>
+									<p class="site-description">FrozenCandle&#039;s Personal Site</p>
+								
+									<div class="search-trap-focus">
+						<button class="toggle-search" data-target=".search-trap-focus">
+							<svg class="svg-icon" id="svg-search" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23"><path d="M38.710696,48.0601792 L43,52.3494831 L41.3494831,54 L37.0601792,49.710696 C35.2632422,51.1481185 32.9839107,52.0076499 30.5038249,52.0076499 C24.7027226,52.0076499 20,47.3049272 20,41.5038249 C20,35.7027226 24.7027226,31 30.5038249,31 C36.3049272,31 41.0076499,35.7027226 41.0076499,41.5038249 C41.0076499,43.9839107 40.1481185,46.2632422 38.710696,48.0601792 Z M36.3875844,47.1716785 C37.8030221,45.7026647 38.6734666,43.7048964 38.6734666,41.5038249 C38.6734666,36.9918565 35.0157934,33.3341833 30.5038249,33.3341833 C25.9918565,33.3341833 22.3341833,36.9918565 22.3341833,41.5038249 C22.3341833,46.0157934 25.9918565,49.6734666 30.5038249,49.6734666 C32.7048964,49.6734666 34.7026647,48.8030221 36.1716785,47.3875844 C36.2023931,47.347638 36.2360451,47.3092237 36.2726343,47.2726343 C36.3092237,47.2360451 36.347638,47.2023931 36.3875844,47.1716785 Z" transform="translate(-20 -31)"></path></svg>
+							<svg class="svg-icon" id="svg-close" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 16 16"><polygon fill="" fill-rule="evenodd" points="6.852 7.649 .399 1.195 1.445 .149 7.899 6.602 14.352 .149 15.399 1.195 8.945 7.649 15.399 14.102 14.352 15.149 7.899 8.695 1.445 15.149 .399 14.102"></polygon></svg>
+						</button>
+						<div class="search-expand">
+							<div class="search-expand-inner">
+								<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>							</div>
+						</div>
+					</div>
+								
+									<div id="wrap-nav-header" class="wrap-nav">
+								<nav id="nav-header-nav" class="main-navigation nav-menu">
+			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+				<span class="screen-reader-text">Expand Menu</span><div class="menu-toggle-icon"><span></span><span></span><span></span></div>			</button>
+			<div class="menu-%e4%b8%bb%e8%a6%81%e9%a1%b5%e9%9d%a2-container"><ul id="nav-header" class="menu"><li id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-200"><span class="menu-item-wrapper has-arrow"><a href="/all/">文章汇总</a><button onClick="alxMediaMenu.toggleItem(this)"><span class="screen-reader-text">Toggle Child Menu</span><svg class="svg-icon" aria-hidden="true" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 20 12"><polygon fill="" fill-rule="evenodd" points="1319.899 365.778 1327.678 358 1329.799 360.121 1319.899 370.021 1310 360.121 1312.121 358" transform="translate(-1310 -358)"></polygon></svg></button></span>
+<ul class="sub-menu">
+	<li id="menu-item-198" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-198"><span class="menu-item-wrapper"><a href="/all/python/">Python</a></span></li>
+	<li id="menu-item-876" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-876"><span class="menu-item-wrapper"><a href="/all/data-science/">数据科学与机器学习</a></span></li>
+	<li id="menu-item-576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-576"><span class="menu-item-wrapper"><a href="/all/network/">计算机网络</a></span></li>
+	<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><span class="menu-item-wrapper"><a href="/all/algorithm/">数据结构与算法</a></span></li>
+	<li id="menu-item-1390" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1390"><span class="menu-item-wrapper"><a href="/all/embedded/">电子电路与嵌入式</a></span></li>
+	<li id="menu-item-439" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-439"><span class="menu-item-wrapper"><a href="/all/embedded-application/">嵌入式应用</a></span></li>
+</ul>
+</li>
+<li id="menu-item-1070" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1070"><span class="menu-item-wrapper"><a href="/timeline/">时光轴</a></span></li>
+</ul></div>		</nav>
+							</div>
+								
+								
+			</div>
+			
+		</header><!--/#header-->
+	</div><!--/#header-sticky-->
+	
+	<div class="wrap-content">
+		<div class="wrap-content-top group">
+							<div class="wrap-content-top-search">
+					<form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form>				</div>
+										<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>					</div>
+		<div class="wrap-content-inner">
+	
+		
+			<div class="main" id="page">
+				<div class="main-inner group">
+<div class="content">
+	
+			<article id="post-1423" class="post-1423 post type-post status-publish format-standard hentry category-programming">	
+			
+			<div class="post-wrapper group">
+				<header class="entry-header group">
+					<h1 class="entry-title">使用ANSI转义码增强控制台输出</h1>
+					<div class="entry-meta">
+						<span class="entry-category"><a href="/category/programming/" rel="category tag">编程语言</a></span>
+						<span class="entry-date"><i class="far fa-calendar"></i>2024年11月18日</span>
+						<span class="entry-author"><i class="far fa-user"></i><a href="/author/hello/" title="文章作者 Hello" rel="author">Hello</a></span>
+					</div>
+					
+										
+				</header>
+				
+				<div class="entry-media">
+									</div>
+								
+				<div class="entry-content">
+					<div class="entry themeform">	
+						
+
+<p>在图形界面已经十分发达的今天，许多程序（特别是开发工具）依然采用文本形式的命令行操作。在终端使用命令行和程序交互的时候，有些程序的输出会使用颜色甚至文本装饰来标识输出文本的不同片段以及不同的重要性，就像这样：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@programming-language/ansi-escape-demo.png" alt="">
+</figure>
+
+<p>可能有读者认为这种效果需要用到终端甚至操作系统提供的底层 API 才能实现。但其实不然，现代的终端都允许使用 ANSI 转义序列，任何能在终端输出字符串的编程语言都可以以一种通用的方式控制终端行为，而无需接触底层 API 。</p>
+
+<p>例如，使用任意编程语言运行类似如下的代码，可以在终端输出字体颜色为红色的 Hello World ：</p>
+
+<div class="codeblock code-highlight language-python">print("\033[31mHello World!\033[0m")</div>
+
+<p>ANSI 转义序列是标准规定的内容，任何终端都有理由支持这样做。接下来系统地介绍 ANSI 转义序列的历史与内容。</p>
+
+<h2>ANSI转义码的历史</h2>
+
+<p>ANSI 转义码的历史可以追溯到 20 世纪中叶计算机技术刚开始发展的时期。彼时的计算机使用电传打字机(Teletypewriter, TTY)实现远程文本交流。不过当时各种不同的公司和组织的电传打字机使用各自的编码系统来表示字符，这导致了互操作性的问题。</p>
+
+<p>1963 年，美国国家标准协会(ANSI)发布了 ASCII (American Standard Code for Information Interchange)，这是一个 7 位字符集，能够编码 128 个字符。ASCII 包含大小写英文字母、数字、常用标点符号以及一组控制字符（称为 C0 控制码，范围为 0x00 到 0x1F ），包括熟悉的换行符 LF 、回车符 CR 以及制表符 HT 等。</p>
+
+<p>在 20 世纪 70 年代，随着视频显示技术的发展，出现了视频显示终端。视频显示终端可以实现更复杂的功能（例如使用不同颜色、定位光标、清除屏幕等）。由于视频显示终端依旧使用 ASCII 字符来传输文本，为了实现这些复杂的功能，厂商在设计视频显示终端时，允许在输出中使用特定的字符序列控制终端的行为。但是，不同的厂商在设计终端时采用的控制序列也不尽相同，又导致了互操作性的问题。</p>
+
+<p>1976 年，欧洲信息处理系统标准化组织(ECMA)通过了 ECMA-48 标准，在扩展的 8 位字符集中定义了一系列具有控制功能的字符标准，包括一组扩展的控制字符（称为 C1 控制码，范围为 0x80 到 0x9F），支持更复杂的文本和设备控制功能。同时，为了兼容 7 位字符集的情况，ECMA-48 允许使用 ESC (Escape, 位号为 0x1B ，是 C0 控制码中的一个字符，用作转义功能）加上另一个 7 位字符来表示这组扩展的控制字符。</p>
+
+<p>1978年，数字设备公司(Digital Equipment Corporation, DEC)推出了 VT100 终端，这是一种功能强大的视频显示终端。VT100 在 ECMA-48 的标准上设计了一套字符序列来实现复杂的指令。VT100 的设计非常成功，以至于后续其它厂商的设计的终端也基本兼容它所采用的控制字符序列。随着 VT100 和类似终端的普及，它的控制字符序列成为事实上的行业标准。</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@programming-language/ansi-escape-VT100-terminal.jpg" alt="">
+    <figcaption>VT-100 终端的外观 图片来源于 <a href="https://terminals-wiki.org/wiki/index.php/DEC_VT100">terminals wiki</a></figcaption>
+</figure>
+
+<p>受 VT100 的启发，美国国家标准协会(ANSI)在 1979 年发布了 ANSI X3.64 标准，这个标准定义了一套标准化的转义字符序列，是所有终端共享的指令集，并要求采用 ASCII 的数字字符传递所有的信息，也就是现在所说的“ANSI 转义序列”。后来，ECMA-48 和 ANSI X3.64 在 1992 年被合并为 ISO 6429 国际标准，在国际上统一了视频终端和类似设备的操作方法。</p>
+
+<p>在后来的几十年中，尽管物理终端逐渐被淘汰，但它们的标准被带到了现代的终端仿真器中。现代操作系统自带的终端仿真器(如 Unix/Linux 的 xterm，macOS 的 Terminal，Windows 的 PowerShell 和 Windows Terminal 等)都在不同程度上支持这些标准。</p>
+
+<h2>ANSI转义码的内容</h2>
+
+<h3>ANSI控制字符</h3>
+
+<p>在介绍 ANSI 控制序列前，先简单回顾一下 ANSI 中的控制字符。</p>
+
+<p>在 ASCII 规定的 7 位字符中，一些控制字符（即 C0 控制字符）也可以控制终端的行为，现在还比较常用的有以下几个：</p>
+
+<ul>
+    <li>响铃符 <code>BEL</code> (Bell)：位号 <code>0x07</code> ，可以产生铃声（或者在不能发声的设备上显示相应图案）</li>
+    <li>退格符 <code>BS</code> (Backspace)：位号 <code>0x08</code> ，用于将当前光标回退一个位置（虽然标准规定只是回退而不删除任何内容，但实际上终端执行时都会删除前一个字符）</li>
+    <li>水平制表符 <code>HT</code> (Horizontal Tab)：位号 <code>0x09</code> ，将光标移动到下一个水平制表位</li>
+    <li>换行符 <code>LF</code> (Line Feed)：位号 <code>0x0A</code> ，可以使光标向下移动一行。</li>
+    <li>回车符 <code>CR</code> (Carriage Return)：位号 <code>0x0D</code> ，这里换行符的功能仅仅只是向下移动一行，并不会使光标回到行首的位置，回车符才用于将光标移动到行首的位置（但是在 Linux系统中 <code>LF</code> 同时具有 <code>CR</code> 的作用）</li>
+    <li>转义符 <code>ESC</code> (Escape)：位号 <code>0x1B</code> ，用于得到控制序列，也是本</li>
+</ul>
+
+<blockquote>
+    <p>换行符和回车符的名字和功能在今天看来都有些奇怪，但要注意当时它们是用于打字机的，感兴趣的可以搜索早期打字机的结构。</p>
+</blockquote>
+
+<p>在 <code>0x80</code> 位号以后还有一些终端可用的 C1 控制字符。C1 控制字符最早是设计成 8 位的，但是为了兼容 7 位的情况，它允许使用 <code>ESC</code> 字符外加一个其它的 7 位字符来表示它。现代的很多终端（包括 xterm 和 Windows Terminal ）普遍采用 <code>ESC</code> 开头的 7 位形式来使用它们，而不是直接使用原生的 8 位字符。</p>
+
+<blockquote>
+    <p>在大多数编程语言中，可以在字符串内使用 <code>\033</code> 或 <code>\x1b</code> 表示 ESC 字符，有些编程语言还支持使用 <code>\e</code> 表示它</p>
+</blockquote>
+
+<p>以下列举了常用的 C1 控制字符：</p>
+
+<ul>
+    <li><code>IND</code> (Index)：位号 <code>0x84</code> ，通常使用 <code>ESC 'D'</code> 表示，用于将光标向下移动一行，并且保持当前列的位置不变。它和 C0 控制字符中的 <code>LF</code> 很像，但是由于 <code>LF</code> 在一些系统中同时具有别的功能，所以 <code>IND</code> 用于严格定义这种下移的行为。</li>
+    <li><code>NEL</code> (Next Line)：位号 <code>0x85</code> ，通常使用 <code>ESC 'E'</code> 表示，用于将光标移动到下一行的起始位置，相当于 <code>LF</code> 和 <code>CR</code> 的结合。</li>
+    <li><code>RI</code> (Reverse Index)：位号 <code>0x8D</code> ，通常使用 <code>ESC 'M'</code> 表示，用于将光标向上移动一行，并保持当前列的位置不变，可以看作是 <code>IND</code> 的反向操作。</li>
+    <li><code>HTS</code> (Horizontal Tabulation Set)：位号 <code>0x88</code> ，通常使用 <code>ESC 'H'</code> 表示，用于将当前光标位置设置为制表位，这样在前面位置使用的 <code>HT</code> 就会来到这个位置。</li>
+    <li><code>CSI</code> (Control Sequence Introducer)：位号 <code>0x9B</code> ，通常使用 <code>ESC '['</code> 表示，用于引入控制序列，这是实现文本格式化和光标移动的核心控制字符，下文将详细介绍。</li>
+    <li><code>OSC</code> (Operating System Command)：位号 <code>0x9D</code>，通常使用 <code>ESC ]</code> 表示，一般用于实现特定操作系统支持的功能，兼容性不好，用的比较少。</li>
+</ul>
+
+<h3>控制序列</h3>
+
+<p>以上介绍的控制字符也实现了一些终端控制能力，但控制字符相对终端的功能来说还是太少，远远不够控制终端的各种属性。因此 ANSI 提出使用使用一组特定的字符序列来控制终端，也就是这里说的 <strong>ANSI 转义序列</strong>(ANSI escape sequence)。</p>
+
+<p>所有的转义序列都以 C1 控制字符 CSI（位号 <code>0x9B</code> ，但一般使用 <code>ESC '['</code> 表示）开头。后面接上一组普通字符作为具体的控制命令。终端在接受到 CSI 字符时，会把接下来属于转义序列的字符解释为相应的指令，而不是普通的显示字符。在读取完转义序列后，之后接收到的字符将仍然作为可显示字符显示在屏幕上，除非它们也是控制字符或者属于转义序列的字符。因此转义序列可以方便地嵌入在任何用于输出的字符串内，可以被任何编程语言天然地支持。</p>
+
+<p>转义序列具有不同的长度，但它们都满足以下格式：</p>
+
+<p>所有序列都以 CSI 开头，中间是若干个参数字节(parameter bytes)，参数字节的取值范围是 ASCII <code>0x30-0x3F</code> 的字符（即字符 <code>0–9:;&lt;=&gt;?</code> ），不同的参数使用中间字节(intermediate bytes) 隔开，中间字节是 <code>0x20–0x2F</code> 的 ASCII 字符（即字符 <code>!"#$%&amp;'()*+,-./</code> ，注意包括空格符），最后以一个最终字节(final byte)结束，最终字节范围是 <code>0x40–0x7E</code>（即字符 <code>@A–Z[\]^_`a–z{|}~</code> ）。这样即便有些终端不支持该转义序列，它也能从最终字节判断出转义序列在什么位置结束，从而不会影响正常的输出。</p>
+
+<p>下面列举常见终端都支持的一些转义序列。</p>
+
+<h4>光标相关控制序列</h4>
+
+<p>现代终端都支持通过控制终端的光标来自由决定文本输出的位置。除了控制字符就带有的光标控制字符外，还有以下更强大的光标控制序列：</p>
+
+<ul>
+    <li><code>CSI "<i>n</i>A"</code> ：光标上移(Cursor Up)</li>
+    <li><code>CSI "<i>n</i>B"</code> ：光标下移(Cursor Down)</li>
+    <li><code>CSI "<i>n</i>C"</code> ：光标前移(Cursor Forward)</li>
+    <li><code>CSI "<i>n</i>D"</code> ：光标后移(Cursor Back)</li>
+</ul>
+
+<p>将光标向指定位置移动 <code><i>n</i></code> 格，如果光标已在屏幕边缘，则指令无效。</p>
+
+<ul>
+    <li><code>CSI "<i>n</i>E"</code> ：光标行下移(Cursor Next Line)，将光标移动到下 <code><i>n</i></code> 行的开头</li>
+    <li><code>CSI "<i>n</i>F"</code> ：光标行上移Cursor Previous Line)，将光标移动到上 <code><i>n</i></code> 行的开头</li>
+    <li><code>CSI "<i>n</i>G"</code> ：光标水平移动(Cursor Horizontal Absolute)，将光标移动到第 <code><i>n</i></code> 列</li>
+    <li><code>CSI "<i>n</i>;<i>m</i>H"</code> ：设置光标位置(Cursor Position)：将光标移动到第 <code><i>n</i></code> 行第 <code><i>m</i></code> 列</li>
+</ul>
+
+<p>注意：如果是绝对移动，那么第 1 行第 1 列相当于终端左上角的位置。另外，以上序列的参数 <code><i>n</i></code> 全部可以省略，省略的结果相当于取 1 。</p>
+
+<p><code>CSI "<i>n</i>J"</code> 清除屏幕内容(Erase in Display)，具体清除方式和传入的参数有关：</p>
+
+<ul>
+    <li>如果 <code><i>n</i></code> 是 <code>0</code> 或省略，清除屏幕位于光标以后的所有内容</li>
+    <li>如果 <code><i>n</i></code> 是 <code>1</code> ，清除屏幕位于光标之前的所有内容</li>
+    <li>如果 <code><i>n</i></code> 是 <code>2</code> ，清除屏幕所有内容</li>
+    <li>如果 <code><i>n</i></code> 是 <code>3</code> ，清除屏幕包括之前输出的所有内容</li>
+</ul>
+
+<p><code>CSI "<i>n</i>K"</code> 清除行内容(Erase in Line)，只影响本行内容，除此之外和清屏类似：</p>
+
+<ul>
+    <li>如果 <code><i>n</i></code> 是 <code>0</code> 或省略，清除本行位于光标以后的所有内容</li>
+    <li>如果 <code><i>n</i></code> 是 <code>1</code> ，清除本行位于光标之前的所有内容</li>
+    <li>如果 <code><i>n</i></code> 是 <code>2</code> ，清除本行所有内容</li>
+</ul>
+
+<p>最后需要说明的是，这些清除指令都不改变光标位置。</p>
+
+<p>下面列出的是和制表相关的控制序列：</p>
+
+<ul>
+    <li><code>CSI "<i>n</i>I"</code> 制表命令(Cursor Horizontal/Forward Tab)：将光标移到本行的下 <code><i>n</i></code> 个制表位，或者在没有制表位时移到最后一列，又或者已经在最后一列时移到下一行的起始位置。</li>
+    <li><code>CSI "<i>n</i>Z"</code> 制表回退命令(Cursor Backwards Tab)：将光标移到本行的上 <code><i>n</i></code> 个制表位，或者没有制表位时移到本行的开头。</li>
+    <li><code>CSI "0g"</code> 清除制表位(Tab Clear)：清除当前光标所处位置的制表位。</li>
+    <li><code>CSI "3g"</code> 清除制表位(|Tab Clear)，并且是清除当前存在的所有制表位。</li>
+</ul>
+
+<p>最后是一些其它的控制序列：</p>
+
+<ul>
+    <li><code>CSI "<i>n</i>S"</code> 向上滚动(Scroll Up)：将所有内容向上滚动 <code><i>n</i></code> 行</li>
+    <li><code>CSI "<i>n</i>T"</code> 向下滚动(Scroll Down)：将所有内容向下滚动 <code><i>n</i></code> 行</li>
+    <li><code>CSI 's'</code> 保存当前光标位置(Save Current Cursor Position)</li>
+    <li><code>CSI 'u'</code> 恢复保存的光标位置(Restore Saved Cursor Position)</li>
+</ul>
+
+<h4>选择图形再现</h4>
+
+<p>在所有控制序列中，<code>CSI "<i>n</i>m"</code> 称为“选择图形再现(Select Graphic Rendition, SGR)”，用于设置与显示相关的属性，例如文本颜色、文本装饰、背景颜色等。根据参数 <code><i>n</i></code> 的不同，序列的作用也有所不同，下面介绍列举常用以及广泛支持的 SGR 参数：</p>
+
+<p>0～9 范围内的参数可以设置文本的基本样式：</p>
+
+<table class="table-compact">
+    <tr><th>n</th><th>作用</th></tr>
+    <tr><td>0</td><td>将所有属性重设为默认值</td></tr>
+    <tr><td>1</td><td>设置粗体</td></tr>
+    <tr><td>2</td><td>显示变暗，一般来说终端会将文本颜色设置得更贴近背景颜色</td></tr>
+    <tr><td>3</td><td>设置斜体，不过相当部分终端不支持</td></tr>
+    <tr><td>4</td><td>为文本设置下划线</td></tr>
+    <tr><td>7</td><td>反转文本和背景颜色</td></tr>
+    <tr><td>8</td><td>隐藏输出，支持程度不佳</td></tr>
+    <tr><td>9</td><td>为文本设置删除线</td></tr>
+</table>
+
+<p>如果省略了参数 <code><i>n</i></code> ，相当于取默认值 <code>0</code> ，即重设所有样式。</p>
+
+<p>10～20 范围内的参数用于设置文本字体，现代的终端基本也不再支持了。21 ～ 29 范围内的参数用于取消 1～9 参数的效果：</p>
+
+<table class="table-compact">
+    <tr><th>n</th><th>作用</th></tr>
+    <tr><td>21</td><td>标准允许该参数可用于为文本设置双下划线，也可以用于取消 <code>1</code> 的效果<br>xterm 和 Windows Terminal 采用的是前一种实现</td></tr>
+    <tr><td>22</td><td>取消 <code>1</code> 与 <code>2</code> 的效果</td></tr>
+    <tr><td>23</td><td>取消 <code>3</code> 的效果</td></tr>
+    <tr><td>24</td><td>取消 <code>4</code> 的效果</td></tr>
+    <tr><td>27</td><td>取消 <code>7</code> 的效果</td></tr>
+    <tr><td>28</td><td>取消 <code>8</code> 的效果</td></tr>
+    <tr><td>29</td><td>取消 <code>9</code> 的效果</td></tr>
+</table>
+
+<p>还有几个比较特殊的：</p>
+
+<table class="table-compact">
+    <tr><th><i>n</i></th><th>作用</th></tr>
+    <tr><td>53</td><td>为文本设置上划线</td></tr>
+    <tr><td>55</td><td>取消文本的上划线</td></tr>
+</table>
+
+<p>这里需要特别注意一下，一旦使用了 SGR 命令，它会彻底改变终端接下来所有文本显示的效果，甚至当前程序退出之后也是如此。因此最好在输出完成后立刻清除使用的样式，防止对后续输出造成干扰。</p>
+
+<p>以上介绍的 SRG 相关属性，允许在一个 SRG 序列内组合多个属性，各个属性之间使用分号 <code>;</code> 隔开。例如，如果想要同时得到粗体、斜体、下划线的文本，可以使用这样的转义序列：</p>
+
+<div class="codeblock code-highlight language-python">print("\033[1;3;4mSample Text\033[0m")    
+</div>
+
+<h4>控制显示颜色</h4>
+
+<p>在所有 SRG 序列内，有许多和颜色相关的参数。</p>
+
+<p>当 <code><i>n</i></code> 取值为 <code>30-37</code> 时，可以为文本设置不同的颜色。这个范围一共只有 8 种颜色，因此称为 3 位颜色。不同参数对应的颜色如下：</p>
+
+<div style="text-align:center">
+    <div style="display:flex;">
+        <div style="width:12%">30</div>
+        <div style="width:12%">31</div>
+        <div style="width:12%">32</div>
+        <div style="width:12%">33</div>
+        <div style="width:12%">34</div>
+        <div style="width:12%">35</div>
+        <div style="width:12%">36</div>
+        <div style="width:12%">37</div>
+    </div>
+    <div style="display:flex">
+        <div style="width:12%;background-color:black;color:white">black</div>
+        <div style="width:12%;background-color:red;color:white">red</div>
+        <div style="width:12%;background-color:green;color:white">green</div>
+        <div style="width:12%;background-color:yellow;">yellow</div>
+        <div style="width:12%;background-color:blue;color:white">blue</div>
+        <div style="width:12%;background-color:magenta;color:white">magenta</div>
+        <div style="width:12%;background-color:cyan;">cyan</div>
+        <div style="width:12%;background-color:white;">white</div>
+    </div>
+</div>
+
+<p>标准只给出了颜色名，具体显示的是什么样的颜色随终端不同而有所不同。<a href="https://en.wikipedia.org/wiki/ANSI_escape_code#3-bit_and_4-bit">维基百科</a>给出了所有常见终端颜色名对应的颜色代码，感兴趣的可以进一步了解差异。</p>
+
+<p>现代的终端还支持在 <code>90-97</code> 范围内设置相应颜色“更亮”的版本，这样可以得到 4 位颜色。不支持这些颜色的终端会采用和 <code>30-37</code> 相同的颜色。在 Windows Terminal 内，这些颜色的表现效果为：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@programming-language/ansi-escape-code-color4.png" alt="">
+</figure>
+
+<p>在 <code>40-47</code> 参数范围内，可以设置背景色，它们和 <code>30-37</code> 所使用的颜色是一一对应的。同样地，可以在 <code>100-107</code> 范围内设置“更亮”颜色的背景颜色。例如，要指定黄色的文本以及蓝色的背景，可以使用以下转义序列：</p>
+
+<div class="codeblock code-highlight language-python">print("\033[33;44mYellow Foreground &amp; Blue Background\033[0m")</div>
+
+<p>许多终端在上世纪 90 年代扩展了对 256 色（即所谓的 8 位颜色）的支持。SGR 序列的第 38 和 48 号参数用于扩展更丰富的颜色，可以使用 <code>CSI "38;5;<i>n</i>m"</code> 根据 <code><i>n</i></code> 来选择这 256 色，具体的颜色表可以参照下图：</p>
+
+<figure>
+    <img decoding="async" src="/wp-content/uploads/image/category@programming-language/ansi-escape-code-color8.png" alt="">
+</figure>
+
+<ul>
+    <li><code>0-7</code> 范围内是和 <code>CSI 30–37 m</code> 相同的标准色</li>
+    <li><code>8-15</code> 范围内是和 <code>CSI 90–97 m</code> 相同的“更亮”版颜色</li>
+    <li><code>16-231</code> 范围内是 6 × 6 × 6 的 RGB 颜色，共 216 种彩色</li>
+    <li><code>232-255</code> 是 24 级的灰度颜色</li>
+</ul>
+
+<p>相应地，<code>CSI "48;5;<i>n</i>m"</code> 用于设置 8 位背景颜色。</p>
+
+<p>现代的终端大多都支持 24 位 RGB 真彩色，可以使用 <code>\x1b[38;2;<i>r</i>;<i>g</i>;<i>b</i>m</code> 选择 RGB 前景色；相应地以使用 <code>\x1b[48;2;<i>r</i>;<i>g</i>;<i>b</i>m</code> 选择 RGB 背景色。真彩色的引入丰富了终端的视觉效果，使得现代终端也可以创建非常美观的文本界面。</p>
+
+<h2>参考资料/延伸阅读</h2>
+
+<p><a href="https://en.wikipedia.org/wiki/C0_and_C1_control_codes">C0 and C1 control codes - Wikipedia</a></p>
+
+<p><a href="https://en.wikipedia.org/wiki/ANSI_escape_code">ANSI escape code - Wikipedia</a></p>
+
+<p><a href="https://www.aivosto.com/articles/control-characters.html">Control characters in ASCII and Unicode - aivosto.com</a></p>
+
+<p><a href="https://vt100.net/docs/vt100-ug/chapter3.html">Programmer Information - Digital VT100 User Guide</a></p>
+
+<p><a href="https://invisible-island.net/xterm/ctlseqs/ctlseqs.html">XTerm Control Sequences - Invisible Island</a></p>
+
+<p><a href="https://www.gnu.org/software/screen/manual/html_node/Control-Sequences.html">Control Sequences (Screen User’s Manual) - GNU</a></p>
+
+<p><a href="https://learn.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences">Console Virtual Terminal Sequences - Windows Console | Microsoft Learn</a></p>
+
+<p><a href="https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797">ANSI Escape Codes - GitHub Gist</a></p>
+
+<p>文本的所有内容使用任意编程语言都可以实现，<a href="https://github.com/FrozenCandles/ansi-escape-print">这里</a>给出了一个 C 语言实现的示例。</p>
+
+												<div class="clear"></div>				
+					</div><!--/.entry-->
+				</div>
+				<div class="entry-footer group">
+					
+										
+					<div class="clear"></div>
+					
+										
+										
+										
+					
+										
+				</div>
+			</div>
+
+		</article><!--/.post-->
+
+		
+</div><!--/.content-->
+
+
+	<div class="sidebar s1">
+		
+		<div class="sidebar-content">
+			
+						
+				<ul class="post-nav group">
+		<li class="next"></li>
+		<li class="previous"><a href="/embedded/stm32/i2c-introduction/" rel="prev"><i class="fas fa-chevron-left"></i><strong>Previous</strong> <span>集成电路总线I2C</span></a></li>
+	</ul>
+			
+			
+		<div id="recent-posts-4" class="widget widget_recent_entries">
+		<h3 class="group"><span>近期文章</span></h3>
+		<ul>
+											<li>
+					<a href="/programming/ansi-escape-sequence-for-terminal/" aria-current="page">使用ANSI转义码增强控制台输出</a>
+											<span class="post-date">2024年11月18日</span>
+									</li>
+											<li>
+					<a href="/embedded/stm32/i2c-introduction/">集成电路总线I2C</a>
+											<span class="post-date">2024年9月11日</span>
+									</li>
+											<li>
+					<a href="/embedded/stm32/06-timers/">STM32的定时器</a>
+											<span class="post-date">2024年8月18日</span>
+									</li>
+											<li>
+					<a href="/embedded/stm32/09-direct-memory-access/">STM32的直接存储器访问</a>
+											<span class="post-date">2024年8月4日</span>
+									</li>
+											<li>
+					<a href="/embedded/stm32/analog-digital-converter/">STM32的模拟数字转换器</a>
+											<span class="post-date">2024年7月14日</span>
+									</li>
+											<li>
+					<a href="/embedded/stm32/05-clock-system/">STM32的时钟系统</a>
+											<span class="post-date">2024年6月26日</span>
+									</li>
+											<li>
+					<a href="/embedded/stm32/03-interrupt-system/">STM32的中断系统与外部中断</a>
+											<span class="post-date">2024年6月2日</span>
+									</li>
+					</ul>
+
+		</div><div id="categories-4" class="widget widget_categories"><h3 class="group"><span>分类目录</span></h3>
+			<ul>
+					<li class="cat-item cat-item-64"><a href="/category/web/">Web相关</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-66"><a href="/category/web/django/">Django</a> (1)
+</li>
+	<li class="cat-item cat-item-65"><a href="/category/web/web-scraping/">网络数据采集</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-58"><a href="/category/math/">数学</a> (2)
+<ul class='children'>
+	<li class="cat-item cat-item-67"><a href="/category/math/numerical-analysis/">数值分析</a> (1)
+</li>
+	<li class="cat-item cat-item-68"><a href="/category/math/linear-algebra/">线性代数</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-49"><a href="/category/data-science/">数据科学</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-50"><a href="/category/data-science/via-python/">Python数据处理</a> (10)
+</li>
+	<li class="cat-item cat-item-54"><a href="/category/data-science/machine-learning/">机器学习</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-24"><a href="/category/embedded/">电子电路与嵌入式</a> (17)
+<ul class='children'>
+	<li class="cat-item cat-item-63"><a href="/category/embedded/esp32/">ESP32</a> (2)
+</li>
+	<li class="cat-item cat-item-61"><a href="/category/embedded/stm32/">STM32</a> (8)
+</li>
+	<li class="cat-item cat-item-25"><a href="/category/embedded/mcu-application/">单片机与应用</a> (7)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-13"><a href="/category/programming/">编程语言</a> (27)
+<ul class='children'>
+	<li class="cat-item cat-item-14"><a href="/category/programming/python/">Python</a> (5)
+</li>
+	<li class="cat-item cat-item-60"><a href="/category/programming/python-fp/">Python函数式编程</a> (10)
+</li>
+	<li class="cat-item cat-item-62"><a href="/category/programming/python-oop/">Python面向对象编程</a> (9)
+</li>
+	<li class="cat-item cat-item-17"><a href="/category/programming/other/">其它</a> (1)
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-7"><a href="/category/computer-science/">计算机与编程</a> (15)
+<ul class='children'>
+	<li class="cat-item cat-item-43"><a href="/category/computer-science/data-structure/">数据结构与算法</a> (8)
+</li>
+	<li class="cat-item cat-item-32"><a href="/category/computer-science/computer-networking/">计算机网络</a> (6)
+</li>
+</ul>
+</li>
+			</ul>
+
+			</div><div id="archives-2" class="widget widget_archive"><h3 class="group"><span>归档</span></h3>		<label class="screen-reader-text" for="archives-dropdown-2">归档</label>
+		<select id="archives-dropdown-2" name="archive-dropdown">
+			
+			<option value="">选择月份</option>
+				<option value='/2024/11/'> 2024年11月 &nbsp;(1)</option>
+	<option value='/2024/09/'> 2024年9月 &nbsp;(1)</option>
+	<option value='/2024/08/'> 2024年8月 &nbsp;(2)</option>
+	<option value='/2024/07/'> 2024年7月 &nbsp;(1)</option>
+	<option value='/2024/06/'> 2024年6月 &nbsp;(2)</option>
+	<option value='/2024/05/'> 2024年5月 &nbsp;(1)</option>
+	<option value='/2024/04/'> 2024年4月 &nbsp;(2)</option>
+	<option value='/2024/03/'> 2024年3月 &nbsp;(1)</option>
+	<option value='/2024/02/'> 2024年2月 &nbsp;(1)</option>
+	<option value='/2024/01/'> 2024年1月 &nbsp;(2)</option>
+	<option value='/2023/07/'> 2023年7月 &nbsp;(1)</option>
+	<option value='/2023/06/'> 2023年6月 &nbsp;(1)</option>
+	<option value='/2023/04/'> 2023年4月 &nbsp;(1)</option>
+	<option value='/2023/03/'> 2023年3月 &nbsp;(3)</option>
+	<option value='/2023/02/'> 2023年2月 &nbsp;(2)</option>
+	<option value='/2023/01/'> 2023年1月 &nbsp;(1)</option>
+	<option value='/2022/12/'> 2022年12月 &nbsp;(3)</option>
+	<option value='/2022/11/'> 2022年11月 &nbsp;(2)</option>
+	<option value='/2022/10/'> 2022年10月 &nbsp;(6)</option>
+	<option value='/2022/09/'> 2022年9月 &nbsp;(4)</option>
+	<option value='/2022/08/'> 2022年8月 &nbsp;(7)</option>
+	<option value='/2022/07/'> 2022年7月 &nbsp;(10)</option>
+	<option value='/2022/06/'> 2022年6月 &nbsp;(13)</option>
+	<option value='/2022/05/'> 2022年5月 &nbsp;(7)</option>
+	<option value='/2022/03/'> 2022年3月 &nbsp;(2)</option>
+	<option value='/2022/02/'> 2022年2月 &nbsp;(3)</option>
+
+		</select>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+	var dropdown = document.getElementById( "archives-dropdown-2" );
+	function onSelectChange() {
+		if ( dropdown.options[ dropdown.selectedIndex ].value !== '' ) {
+			document.location.href = this.options[ this.selectedIndex ].value;
+		}
+	}
+	dropdown.onchange = onSelectChange;
+})();
+/* ]]> */
+</script>
+			</div><div id="search-2" class="widget widget_search"><form method="get" class="searchform themeform" action="/">
+	<div>
+		<input type="text" class="search" name="s" onblur="if(this.value=='')this.value='To search type and hit enter';" onfocus="if(this.value=='To search type and hit enter')this.value='';" value="To search type and hit enter" />
+	</div>
+</form></div><div id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><div id="tableofcontents">
+	
+</div></div></div>			
+		</div><!--/.sidebar-content-->
+		
+	</div><!--/.sidebar-->
+	
+
+				</div><!--/.main-inner-->
+			</div><!--/.main-->	
+	
+			<div class="clear"></div>
+	
+		</div><!--/.wrap-content-inner-->
+	</div><!--/.wrap-content-->	
+	
+	<footer id="footer">
+	
+					
+				
+		<div id="footer-bottom">
+			
+			<a id="back-to-top" href="#"><i class="fas fa-angle-up"></i></a>
+				
+			<div class="pad group">
+				
+				<div class="grid one-full">
+					
+										
+					<div id="copyright">
+													<p>冰封残烛的个人小站 &copy; 2024. All Rights Reserved.</p>
+											</div><!--/#copyright-->
+					
+										
+											<ul class="social-links"><li><a rel="nofollow" class="social-tooltip" title="Github" href="https://github.com/FrozenCandles" target="_blank"><i class="fab fa-github" ></i></a></li></ul>										
+				</div>
+							
+			</div><!--/.pad-->
+
+		</div><!--/#footer-bottom-->
+
+	</footer><!--/#footer-->
+	
+</div><!--/#wrapper-->
+
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jquery.fitvids.js?ver=6.3.1' id='instorm-fitvids-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/jq-sticky-anything.min.js?ver=6.3.1' id='instorm-jq-sticky-anything-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/scripts.js?ver=6.3.1' id='instorm-scripts-js'></script>
+<script type='text/javascript' src='/wp-content/themes/instorm/js/nav.js?ver=1644596969' id='instorm-nav-script-js'></script>
+	<script>
+	/(trident|msie)/i.test(navigator.userAgent)&&document.getElementById&&window.addEventListener&&window.addEventListener("hashchange",function(){var t,e=location.hash.substring(1);/^[A-z0-9_-]+$/.test(e)&&(t=document.getElementById(e))&&(/^(?:a|select|input|button|textarea)$/i.test(t.tagName)||(t.tabIndex=-1),t.focus())},!1);
+	</script>
+	
+
+<!-- Powered by Orbisius Child Theme Creator | URL: https://orbisius.com/products/wordpress-plugins/orbisius-child-theme-creator/ -->
+
+
+<div id="my-bottom">
+    <div id="bottom-beian">京ICP备2021034974号</div>
+    <div id="bottom-contact">contact me by hello@frozencandles.fun</div>
+</div>
+
+</body>
+</html>

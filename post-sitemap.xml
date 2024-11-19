@@ -2,7 +2,7 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd http://www.google.com/schemas/sitemap-image/1.1 http://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
 		<loc>/</loc>
-		<lastmod>2024-09-11T04:40:30+00:00</lastmod>
+		<lastmod>2024-11-19T04:55:38+00:00</lastmod>
 	</url>
 	<url>
 		<loc>/programming/other/regular-expression-tutorial/</loc>
@@ -1773,6 +1773,22 @@
 		</image:image>
 		<image:image>
 			<image:loc>/wp-content/uploads/image/category@stm32/I2C-AT24C02-device.png</image:loc>
+		</image:image>
+	</url>
+	<url>
+		<loc>/programming/ansi-escape-sequence-for-terminal/</loc>
+		<lastmod>2024-11-19T04:55:38+00:00</lastmod>
+		<image:image>
+			<image:loc>/wp-content/uploads/image/category@programming-language/ansi-escape-demo.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>/wp-content/uploads/image/category@programming-language/ansi-escape-VT100-terminal.jpg</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>/wp-content/uploads/image/category@programming-language/ansi-escape-code-color4.png</image:loc>
+		</image:image>
+		<image:image>
+			<image:loc>/wp-content/uploads/image/category@programming-language/ansi-escape-code-color8.png</image:loc>
 		</image:image>
 	</url>
 </urlset>
